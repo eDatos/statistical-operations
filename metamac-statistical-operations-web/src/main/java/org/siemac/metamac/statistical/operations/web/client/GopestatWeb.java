@@ -1,6 +1,6 @@
-package org.siemac.metamac.gopestat.web.client;
+package org.siemac.metamac.statistical.operations.web.client;
 
-import org.siemac.metamac.gopestat.web.client.gin.GopestatWebGinjector;
+import org.siemac.metamac.statistical.operations.web.client.gin.GopestatWebGinjector;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

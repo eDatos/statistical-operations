@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client;
+package org.siemac.metamac.statistical.operations.web.client;
 
 public class GopestatLists {
 

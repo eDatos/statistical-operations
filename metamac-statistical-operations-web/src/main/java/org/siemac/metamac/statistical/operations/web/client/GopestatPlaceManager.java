@@ -1,6 +1,6 @@
-package org.siemac.metamac.gopestat.web.client;
+package org.siemac.metamac.statistical.operations.web.client;
 
-import org.siemac.metamac.gopestat.web.client.gin.DefaultPlace;
+import org.siemac.metamac.statistical.operations.web.client.gin.DefaultPlace;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
