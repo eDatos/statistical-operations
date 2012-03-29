@@ -1,8 +1,8 @@
-package org.siemac.metamac.gopestat.web.client.family.view.handlers;
+package org.siemac.metamac.statistical.operations.web.client.family.view.handlers;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

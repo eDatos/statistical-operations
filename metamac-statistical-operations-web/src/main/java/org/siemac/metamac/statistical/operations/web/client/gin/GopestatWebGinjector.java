@@ -1,13 +1,13 @@
-package org.siemac.metamac.gopestat.web.client.gin;
+package org.siemac.metamac.statistical.operations.web.client.gin;
 
-import org.siemac.metamac.gopestat.web.client.GopestatWebConstants;
-import org.siemac.metamac.gopestat.web.client.GopestatWebMessages;
-import org.siemac.metamac.gopestat.web.client.family.presenter.FamilyListPresenter;
-import org.siemac.metamac.gopestat.web.client.family.presenter.FamilyPresenter;
-import org.siemac.metamac.gopestat.web.client.instance.presenter.InstancePresenter;
-import org.siemac.metamac.gopestat.web.client.operation.presenter.OperationListPresenter;
-import org.siemac.metamac.gopestat.web.client.operation.presenter.OperationPresenter;
-import org.siemac.metamac.gopestat.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWebConstants;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWebMessages;
+import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
+import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
+import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
+import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
+import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
+import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;

@@ -1,7 +1,7 @@
-package org.siemac.metamac.gopestat.web.client.instance.view;
+package org.siemac.metamac.statistical.operations.web.client.instance.view;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getConstants;
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getCoreMessages;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getCoreMessages;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.gopestat.web.client.instance.presenter.InstancePresenter;
-import org.siemac.metamac.gopestat.web.client.instance.view.handlers.InstanceUiHandlers;
-import org.siemac.metamac.gopestat.web.client.utils.GopestatListUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.PublishMainFormLayout;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
+import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.utils.GopestatListUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;

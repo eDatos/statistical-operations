@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.model;
+package org.siemac.metamac.statistical.operations.web.client.model;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 

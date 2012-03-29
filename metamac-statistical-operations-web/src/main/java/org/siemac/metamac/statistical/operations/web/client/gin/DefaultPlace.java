@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.gin;
+package org.siemac.metamac.statistical.operations.web.client.gin;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
