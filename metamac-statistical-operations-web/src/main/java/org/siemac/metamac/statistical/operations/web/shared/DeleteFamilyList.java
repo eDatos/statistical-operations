@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.shared;
+package org.siemac.metamac.statistical.operations.web.shared;
 
 import java.util.List;
 

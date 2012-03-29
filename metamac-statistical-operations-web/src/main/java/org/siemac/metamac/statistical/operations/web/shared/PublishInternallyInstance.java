@@ -1,6 +1,6 @@
-package org.siemac.metamac.gopestat.web.shared;
+package org.siemac.metamac.statistical.operations.web.shared;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;

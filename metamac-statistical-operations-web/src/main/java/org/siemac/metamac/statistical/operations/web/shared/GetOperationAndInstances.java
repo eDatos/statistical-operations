@@ -1,10 +1,10 @@
-package org.siemac.metamac.gopestat.web.shared;
+package org.siemac.metamac.statistical.operations.web.shared;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
