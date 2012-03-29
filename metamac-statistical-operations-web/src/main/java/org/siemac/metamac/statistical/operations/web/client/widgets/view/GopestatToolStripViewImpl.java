@@ -1,7 +1,7 @@
-package org.siemac.metamac.gopestat.web.client.widgets.view;
+package org.siemac.metamac.statistical.operations.web.client.widgets.view;
 
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;

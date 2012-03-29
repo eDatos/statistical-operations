@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.server;
+package org.siemac.metamac.statistical.operations.web.server;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 
