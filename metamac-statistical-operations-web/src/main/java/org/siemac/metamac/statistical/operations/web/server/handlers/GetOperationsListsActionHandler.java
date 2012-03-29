@@ -10,36 +10,36 @@ import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourc
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
-import org.siemac.metamac.statistical.operations.web.shared.GetGopestatListsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetGopestatListsResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-public class GetGopestatListsActionHandler extends AbstractActionHandler<GetGopestatListsAction, GetGopestatListsResult> {
+public class GetOperationsListsActionHandler extends AbstractActionHandler<GetOperationsListsAction, GetOperationsListsResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
-    public GetGopestatListsActionHandler() {
-        super(GetGopestatListsAction.class);
+    public GetOperationsListsActionHandler() {
+        super(GetOperationsListsAction.class);
     }
 
     @Override
-    public GetGopestatListsResult execute(GetGopestatListsAction action, ExecutionContext context) throws ActionException {
+    public GetOperationsListsResult execute(GetOperationsListsAction action, ExecutionContext context) throws ActionException {
         List<SurveyTypeDto> surveyTypeDtos = statisticalOperationsServiceFacade.findAllSurveyTypes(ServiceContextHelper.getServiceContext());
         List<InstanceTypeDto> instanceTypeDtos = statisticalOperationsServiceFacade.findAllInstanceTypes(ServiceContextHelper.getServiceContext());
         List<SurveySourceDto> surveySourceDtos = statisticalOperationsServiceFacade.findAllSurveySources(ServiceContextHelper.getServiceContext());
         List<OfficialityTypeDto> officialityTypeDtos = statisticalOperationsServiceFacade.findAllOfficialityTypes(ServiceContextHelper.getServiceContext());
         List<CollMethodDto> collMethodDtos = statisticalOperationsServiceFacade.findAllCollMethods(ServiceContextHelper.getServiceContext());
         List<CostDto> costDtos = statisticalOperationsServiceFacade.findAllCosts(ServiceContextHelper.getServiceContext());
-        return new GetGopestatListsResult(surveyTypeDtos, instanceTypeDtos, surveySourceDtos, officialityTypeDtos, collMethodDtos, costDtos);
+        return new GetOperationsListsResult(surveyTypeDtos, instanceTypeDtos, surveySourceDtos, officialityTypeDtos, collMethodDtos, costDtos);
     }
 
     @Override
-    public void undo(GetGopestatListsAction action, GetGopestatListsResult result, ExecutionContext context) throws ActionException {
+    public void undo(GetOperationsListsAction action, GetOperationsListsResult result, ExecutionContext context) throws ActionException {
 
     }
 

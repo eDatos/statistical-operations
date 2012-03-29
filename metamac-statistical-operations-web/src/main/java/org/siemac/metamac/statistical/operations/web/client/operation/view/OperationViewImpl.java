@@ -918,7 +918,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setGopestatLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos) {
+    public void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos) {
         this.surveyTypeDtos = surveyTypeDtos;
         this.officialityTypeDtos = officialityTypeDtos;
         surveyType.setValueMap(OperationsListUtils.getSurveyTypeHashMap(surveyTypeDtos));

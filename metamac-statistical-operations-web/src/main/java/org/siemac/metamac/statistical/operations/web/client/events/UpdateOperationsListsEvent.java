@@ -13,17 +13,17 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class UpdateGopestatListsEvent extends GwtEvent<UpdateGopestatListsEvent.UpdateGopestatListsHandler> {
+public class UpdateOperationsListsEvent extends GwtEvent<UpdateOperationsListsEvent.UpdateOperationsListsHandler> {
 
-    public interface UpdateGopestatListsHandler extends EventHandler {
+    public interface UpdateOperationsListsHandler extends EventHandler {
 
-        void onUpdateGopestatLists(UpdateGopestatListsEvent event);
+        void onUpdateOperationsLists(UpdateOperationsListsEvent event);
     }
 
-    private static Type<UpdateGopestatListsHandler> TYPE = new Type<UpdateGopestatListsHandler>();
+    private static Type<UpdateOperationsListsHandler> TYPE = new Type<UpdateOperationsListsHandler>();
 
     @Override
-    public com.google.gwt.event.shared.GwtEvent.Type<UpdateGopestatListsHandler> getAssociatedType() {
+    public com.google.gwt.event.shared.GwtEvent.Type<UpdateOperationsListsHandler> getAssociatedType() {
         return TYPE;
     }
 
@@ -31,13 +31,13 @@ public class UpdateGopestatListsEvent extends GwtEvent<UpdateGopestatListsEvent.
     public static void fire(HasHandlers source, List<SurveyTypeDto> surveyTypeDtos, List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos,
             List<OfficialityTypeDto> officialityTypeDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos) {
         if (TYPE != null) {
-            source.fireEvent(new UpdateGopestatListsEvent(surveyTypeDtos, instanceTypeDtos, surveySourceDtos, officialityTypeDtos, collMethodDtos, costDtos));
+            source.fireEvent(new UpdateOperationsListsEvent(surveyTypeDtos, instanceTypeDtos, surveySourceDtos, officialityTypeDtos, collMethodDtos, costDtos));
         }
     }
 
     @Override
-    protected void dispatch(UpdateGopestatListsHandler handler) {
-        handler.onUpdateGopestatLists(this);
+    protected void dispatch(UpdateOperationsListsHandler handler) {
+        handler.onUpdateOperationsLists(this);
     }
 
     private final List<SurveyTypeDto>      surveyTypeDtos;
@@ -47,7 +47,7 @@ public class UpdateGopestatListsEvent extends GwtEvent<UpdateGopestatListsEvent.
     private final List<CollMethodDto>      collMethodDtos;
     private final List<CostDto>            costDtos;
 
-    public UpdateGopestatListsEvent(List<SurveyTypeDto> surveyTypeDtos, List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<OfficialityTypeDto> officialityTypeDtos,
+    public UpdateOperationsListsEvent(List<SurveyTypeDto> surveyTypeDtos, List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<OfficialityTypeDto> officialityTypeDtos,
             List<CollMethodDto> collMethodDtos, List<CostDto> costDtos) {
         this.surveyTypeDtos = surveyTypeDtos;
         this.instanceTypeDtos = instanceTypeDtos;
@@ -81,7 +81,7 @@ public class UpdateGopestatListsEvent extends GwtEvent<UpdateGopestatListsEvent.
         return costDtos;
     }
 
-    public static Type<UpdateGopestatListsHandler> getType() {
+    public static Type<UpdateOperationsListsHandler> getType() {
         return TYPE;
     }
 

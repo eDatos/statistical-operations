@@ -57,7 +57,7 @@ public class OperationsWeb implements EntryPoint {
         return messages;
     }
 
-    public static OperationsWebGinjector getGopestatWebGinjector() {
+    public static OperationsWebGinjector getOperationsWebGinjector() {
         return ginjector;
     }
 

@@ -9,7 +9,7 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategor
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateGopestatListsEvent;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
@@ -26,8 +26,8 @@ import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationS
 import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetGopestatListsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetGopestatListsResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent;
@@ -107,7 +107,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
         loadCategorySchemes();
         loadConceptSchemes();
         loadCommonMetadata();
-        loadGopestatLists();
+        loadOperationsLists();
         loadFrequencyCodes();
     }
 
@@ -250,16 +250,16 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
         });
     }
 
-    private void loadGopestatLists() {
-        dispatcher.execute(new GetGopestatListsAction(), new AsyncCallback<GetGopestatListsResult>() {
+    private void loadOperationsLists() {
+        dispatcher.execute(new GetOperationsListsAction(), new AsyncCallback<GetOperationsListsResult>() {
 
             @Override
             public void onFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetGopestatListsResult result) {
-                UpdateGopestatListsEvent.fire(MainPagePresenter.this, result.getSurveyTypeDtos(), result.getInstanceTypeDtos(), result.getSurveySourceDtos(), result.getOfficialityTypeDtos(),
+            public void onSuccess(GetOperationsListsResult result) {
+                UpdateOperationsListsEvent.fire(MainPagePresenter.this, result.getSurveyTypeDtos(), result.getInstanceTypeDtos(), result.getSurveySourceDtos(), result.getOfficialityTypeDtos(),
                         result.getCollMethodDtos(), result.getCostDtos());
             }
         });

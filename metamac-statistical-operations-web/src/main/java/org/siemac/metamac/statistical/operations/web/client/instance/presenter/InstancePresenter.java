@@ -17,8 +17,8 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeLis
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent.UpdateCodeListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateGopestatListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateGopestatListsEvent.UpdateGopestatListsHandler;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent.UpdateOrganisationSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
@@ -68,7 +68,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             InstanceUiHandlers,
             UpdateCodeListsHandler,
             UpdateOrganisationSchemesHandler,
-            UpdateGopestatListsHandler,
+            UpdateOperationsListsHandler,
             UpdateConceptSchemesHandler,
             UpdateFrequencyCodesHandler {
 
@@ -101,7 +101,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         void onInstanceSaved(InstanceDto instanceDto);
         InstanceDto getInstance(InstanceDto instanceDto);
 
-        void setGopestatLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
+        void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
         void setOrganisationScheme(List<ExternalItemBtDto> schemes);
         void setConceptScheme(List<ExternalItemBtDto> schemes);
         void setCodeLists(List<ExternalItemBtDto> codeLists);
@@ -254,8 +254,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @ProxyEvent
     @Override
-    public void onUpdateGopestatLists(UpdateGopestatListsEvent event) {
-        getView().setGopestatLists(event.getInstanceTypeDtos(), event.getSurveySourceDtos(), event.getCollMethodDtos(), event.getCostDtos());
+    public void onUpdateOperationsLists(UpdateOperationsListsEvent event) {
+        getView().setOperationsLists(event.getInstanceTypeDtos(), event.getSurveySourceDtos(), event.getCollMethodDtos(), event.getCostDtos());
     }
 
     @ProxyEvent

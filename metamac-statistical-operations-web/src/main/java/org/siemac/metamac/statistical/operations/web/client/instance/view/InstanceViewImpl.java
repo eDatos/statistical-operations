@@ -732,7 +732,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     }
 
     @Override
-    public void setGopestatLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos) {
+    public void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos) {
         this.instanceTypeDtos = instanceTypeDtos;
         this.surveySourceDtos = surveySourceDtos;
         this.collMethodDtos = collMethodDtos;

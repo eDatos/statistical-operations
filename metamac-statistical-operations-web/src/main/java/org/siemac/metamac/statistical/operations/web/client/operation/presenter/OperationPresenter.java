@@ -21,8 +21,8 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonM
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent.UpdateCommonMetadataHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateGopestatListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateGopestatListsEvent.UpdateGopestatListsHandler;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent.UpdateOrganisationSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
@@ -86,7 +86,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             OperationUiHandlers,
             UpdateCategorySchemesHandler,
             UpdateOrganisationSchemesHandler,
-            UpdateGopestatListsHandler,
+            UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler,
             UpdateFrequencyCodesHandler {
 
@@ -138,7 +138,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
         void setCommonMetadataList(List<ExternalItemBtDto> commonMetadataList);
 
-        void setGopestatLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
+        void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
         // Instances
         HasRecordClickHandlers getSelectedInstance();
@@ -506,8 +506,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @ProxyEvent
     @Override
-    public void onUpdateGopestatLists(UpdateGopestatListsEvent event) {
-        getView().setGopestatLists(event.getSurveyTypeDtos(), event.getOfficialityTypeDtos());
+    public void onUpdateOperationsLists(UpdateOperationsListsEvent event) {
+        getView().setOperationsLists(event.getSurveyTypeDtos(), event.getOfficialityTypeDtos());
     }
 
     @Override

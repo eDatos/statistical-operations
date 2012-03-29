@@ -15,7 +15,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyAc
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyAndOperationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFrequencyCodesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetGopestatListsActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
@@ -48,7 +48,7 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetGopestatListsAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
@@ -131,8 +131,8 @@ public class ServerModule extends HandlerModule {
     }
 
     @Bean
-    public GetGopestatListsActionHandler getGopestatListsActionHandler() {
-        return new GetGopestatListsActionHandler();
+    public GetOperationsListsActionHandler getOperationsListsActionHandler() {
+        return new GetOperationsListsActionHandler();
     }
 
     @Bean
@@ -264,7 +264,7 @@ public class ServerModule extends HandlerModule {
         bindHandler(SaveOperationAction.class, SaveOperationActionHandler.class);
         bindHandler(GetOperationAndInstancesAction.class, GetOperationAndInstancesActionHandler.class);
         bindHandler(SaveInstanceAction.class, SaveInstanceActionHandler.class);
-        bindHandler(GetGopestatListsAction.class, GetGopestatListsActionHandler.class);
+        bindHandler(GetOperationsListsAction.class, GetOperationsListsActionHandler.class);
         bindHandler(GetInstanceAction.class, GetInstanceActionHandler.class);
         bindHandler(GetOperationListAction.class, GetOperationListActionHandler.class);
         bindHandler(DeleteOperationListAction.class, DeleteOperationListActionHandler.class);
