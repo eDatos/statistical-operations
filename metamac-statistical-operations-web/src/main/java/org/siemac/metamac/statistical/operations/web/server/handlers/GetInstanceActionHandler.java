@@ -1,11 +1,11 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.GetInstanceAction;
-import org.siemac.metamac.gopestat.web.shared.GetInstanceResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class GetInstanceActionHandler extends AbstractActionHandler<GetInstanceAction, GetInstanceResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public GetInstanceActionHandler() {
         super(GetInstanceAction.class);
@@ -27,7 +27,7 @@ public class GetInstanceActionHandler extends AbstractActionHandler<GetInstanceA
     public GetInstanceResult execute(GetInstanceAction action, ExecutionContext context) throws ActionException {
         InstanceDto instanceDto = null;
         try {
-            instanceDto = gopestatServiceFacade.findInstanceById(ServiceContextHelper.getServiceContext(), action.getInstanceId());
+            instanceDto = statisticalOperationsServiceFacade.findInstanceById(ServiceContextHelper.getServiceContext(), action.getInstanceId());
             return new GetInstanceResult(instanceDto);
         } catch (MetamacException e) {
             throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));

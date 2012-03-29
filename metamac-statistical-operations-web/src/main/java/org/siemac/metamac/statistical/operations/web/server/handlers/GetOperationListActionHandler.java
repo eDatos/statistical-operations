@@ -1,13 +1,13 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import java.util.List;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListAction;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class GetOperationListActionHandler extends AbstractActionHandler<GetOperationListAction, GetOperationListResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public GetOperationListActionHandler() {
         super(GetOperationListAction.class);
@@ -28,7 +28,7 @@ public class GetOperationListActionHandler extends AbstractActionHandler<GetOper
     @Override
     public GetOperationListResult execute(GetOperationListAction action, ExecutionContext context) throws ActionException {
         try {
-            List<OperationBaseDto> operationBaseDtos = gopestatServiceFacade.findAllOperations(ServiceContextHelper.getServiceContext());
+            List<OperationBaseDto> operationBaseDtos = statisticalOperationsServiceFacade.findAllOperations(ServiceContextHelper.getServiceContext());
             return new GetOperationListResult(operationBaseDtos);
         } catch (MetamacException e) {
             throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));

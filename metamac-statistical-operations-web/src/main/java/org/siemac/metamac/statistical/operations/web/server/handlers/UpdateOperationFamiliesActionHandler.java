@@ -1,14 +1,14 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.UpdateOperationFamiliesAction;
-import org.siemac.metamac.gopestat.web.shared.UpdateOperationFamiliesResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class UpdateOperationFamiliesActionHandler extends AbstractActionHandler<UpdateOperationFamiliesAction, UpdateOperationFamiliesResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public UpdateOperationFamiliesActionHandler() {
         super(UpdateOperationFamiliesAction.class);
@@ -31,14 +31,14 @@ public class UpdateOperationFamiliesActionHandler extends AbstractActionHandler<
         List<FamilyBaseDto> familyDtos = new ArrayList<FamilyBaseDto>();
         for (Long familyId : action.getFamiliesToAdd()) {
             try {
-                familyDtos = gopestatServiceFacade.addFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
+                familyDtos = statisticalOperationsServiceFacade.addFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
                 throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
             }
         }
         for (Long familyId : action.getFamiliesToRemove()) {
             try {
-                familyDtos = gopestatServiceFacade.removeFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
+                familyDtos = statisticalOperationsServiceFacade.removeFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
                 throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
             }

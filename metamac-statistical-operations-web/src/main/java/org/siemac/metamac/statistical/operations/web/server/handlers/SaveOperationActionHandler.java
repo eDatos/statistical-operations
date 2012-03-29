@@ -1,11 +1,11 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.SaveOperationAction;
-import org.siemac.metamac.gopestat.web.shared.SaveOperationResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class SaveOperationActionHandler extends AbstractActionHandler<SaveOperationAction, SaveOperationResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public SaveOperationActionHandler() {
         super(SaveOperationAction.class);
@@ -29,7 +29,7 @@ public class SaveOperationActionHandler extends AbstractActionHandler<SaveOperat
         if (operationToSave.getId() == null) {
             // Create operation
             try {
-                OperationDto operationDto = gopestatServiceFacade.createOperation(ServiceContextHelper.getServiceContext(), operationToSave);
+                OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(ServiceContextHelper.getServiceContext(), operationToSave);
                 return new SaveOperationResult(operationDto);
             } catch (MetamacException e) {
                 throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
@@ -37,7 +37,7 @@ public class SaveOperationActionHandler extends AbstractActionHandler<SaveOperat
         } else {
             // Update operation
             try {
-                OperationDto operationDto = gopestatServiceFacade.updateOperation(ServiceContextHelper.getServiceContext(), operationToSave);
+                OperationDto operationDto = statisticalOperationsServiceFacade.updateOperation(ServiceContextHelper.getServiceContext(), operationToSave);
                 return new SaveOperationResult(operationDto);
             } catch (MetamacException e) {
                 throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));

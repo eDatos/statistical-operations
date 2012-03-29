@@ -1,11 +1,11 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.PublishInternallyOperationAction;
-import org.siemac.metamac.gopestat.web.shared.PublishInternallyOperationResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class PublishInternallyOperationActionHandler extends AbstractActionHandler<PublishInternallyOperationAction, PublishInternallyOperationResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public PublishInternallyOperationActionHandler() {
         super(PublishInternallyOperationAction.class);
@@ -26,7 +26,7 @@ public class PublishInternallyOperationActionHandler extends AbstractActionHandl
     @Override
     public PublishInternallyOperationResult execute(PublishInternallyOperationAction action, ExecutionContext context) throws ActionException {
         try {
-            OperationDto operationDto = gopestatServiceFacade.publishInternallyOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
+            OperationDto operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
             return new PublishInternallyOperationResult(operationDto);
         } catch (MetamacException e) {
             throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));

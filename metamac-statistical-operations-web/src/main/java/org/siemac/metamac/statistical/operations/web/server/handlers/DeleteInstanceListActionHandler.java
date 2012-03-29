@@ -1,10 +1,10 @@
-package org.siemac.metamac.gopestat.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.gopestat.core.serviceapi.GopestatServiceFacade;
-import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
-import org.siemac.metamac.gopestat.web.shared.DeleteInstanceListAction;
-import org.siemac.metamac.gopestat.web.shared.DeleteInstanceListResult;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class DeleteInstanceListActionHandler extends AbstractActionHandler<DeleteInstanceListAction, DeleteInstanceListResult> {
 
     @Autowired
-    private GopestatServiceFacade gopestatServiceFacade;
+    private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     public DeleteInstanceListActionHandler() {
         super(DeleteInstanceListAction.class);
@@ -26,7 +26,7 @@ public class DeleteInstanceListActionHandler extends AbstractActionHandler<Delet
     public DeleteInstanceListResult execute(DeleteInstanceListAction action, ExecutionContext context) throws ActionException {
         for (Long id : action.getInstanceIds()) {
             try {
-                gopestatServiceFacade.deleteInstance(ServiceContextHelper.getServiceContext(), id);
+                statisticalOperationsServiceFacade.deleteInstance(ServiceContextHelper.getServiceContext(), id);
             } catch (MetamacException e) {
                 throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
             }
