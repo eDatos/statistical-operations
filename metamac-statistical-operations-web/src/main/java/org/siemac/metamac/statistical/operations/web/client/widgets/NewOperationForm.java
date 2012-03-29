@@ -1,13 +1,13 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
 
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
 import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;

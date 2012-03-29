@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.resources;
+package org.siemac.metamac.statistical.operations.web.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;

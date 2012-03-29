@@ -1,6 +1,6 @@
-package org.siemac.metamac.gopestat.web.client.utils;
+package org.siemac.metamac.statistical.operations.web.client.utils;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getCoreMessages;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getCoreMessages;
 
 import java.util.ArrayList;
 import java.util.List;

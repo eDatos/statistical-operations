@@ -1,19 +1,19 @@
-package org.siemac.metamac.gopestat.web.client.operation.view;
+package org.siemac.metamac.statistical.operations.web.client.operation.view;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.model.OperationRecord;
-import org.siemac.metamac.gopestat.web.client.operation.presenter.OperationListPresenter;
-import org.siemac.metamac.gopestat.web.client.operation.view.handlers.OperationListUiHandlers;
-import org.siemac.metamac.gopestat.web.client.utils.RecordUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.ListGridToolStrip;
-import org.siemac.metamac.gopestat.web.client.widgets.ModalWindow;
-import org.siemac.metamac.gopestat.web.client.widgets.NewOperationForm;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
+import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
+import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
+import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperationForm;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 
 import com.google.gwt.user.client.ui.Widget;

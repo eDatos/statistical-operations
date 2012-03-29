@@ -1,11 +1,11 @@
-package org.siemac.metamac.gopestat.web.client.utils;
+package org.siemac.metamac.statistical.operations.web.client.utils;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.siemac.metamac.gopestat.core.enume.domain.StatusEnum;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
 
 public class EnumUtils {
 

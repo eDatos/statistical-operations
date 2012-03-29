@@ -1,10 +1,10 @@
-package org.siemac.metamac.gopestat.web.client.view;
+package org.siemac.metamac.statistical.operations.web.client.view;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.gopestat.web.client.view.handlers.MainPageUiHandlers;
-import org.siemac.metamac.gopestat.web.client.widgets.BreadCrumbsPanel;
+import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.widgets.ErrorMessagePanel;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;

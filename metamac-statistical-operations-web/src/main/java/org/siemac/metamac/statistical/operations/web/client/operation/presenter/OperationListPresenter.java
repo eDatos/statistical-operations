@@ -1,30 +1,30 @@
-package org.siemac.metamac.gopestat.web.client.operation.presenter;
+package org.siemac.metamac.statistical.operations.web.client.operation.presenter;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getConstants;
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getMessages;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getMessages;
 
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.web.client.NameTokens;
-import org.siemac.metamac.gopestat.web.client.PlaceRequestParams;
-import org.siemac.metamac.gopestat.web.client.model.OperationRecord;
-import org.siemac.metamac.gopestat.web.client.operation.view.handlers.OperationListUiHandlers;
-import org.siemac.metamac.gopestat.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.gopestat.web.client.utils.ErrorUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
-import org.siemac.metamac.gopestat.web.shared.DeleteOperationListAction;
-import org.siemac.metamac.gopestat.web.shared.DeleteOperationListResult;
-import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesAction;
-import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesResult;
-import org.siemac.metamac.gopestat.web.shared.GetCategoriesFromSchemeAction;
-import org.siemac.metamac.gopestat.web.shared.GetCategoriesFromSchemeResult;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListAction;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListResult;
-import org.siemac.metamac.gopestat.web.shared.SaveOperationAction;
-import org.siemac.metamac.gopestat.web.shared.SaveOperationResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
+import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesAction;
+import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 

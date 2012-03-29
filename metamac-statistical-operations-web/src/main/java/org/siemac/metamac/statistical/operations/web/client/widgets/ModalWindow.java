@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.CloseClickEvent;

@@ -1,9 +1,9 @@
-package org.siemac.metamac.gopestat.web.client.operation.view.handlers;
+package org.siemac.metamac.statistical.operations.web.client.operation.view.handlers;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

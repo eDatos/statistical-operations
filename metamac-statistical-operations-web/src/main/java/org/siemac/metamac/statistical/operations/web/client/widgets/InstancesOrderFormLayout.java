@@ -1,14 +1,14 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.gopestat.web.client.model.InstanceRecord;
-import org.siemac.metamac.gopestat.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.MainFormLayout;

@@ -1,7 +1,7 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.resources.GlobalResources;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.ClickEvent;

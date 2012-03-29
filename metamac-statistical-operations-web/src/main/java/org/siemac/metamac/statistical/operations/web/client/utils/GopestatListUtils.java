@@ -1,16 +1,16 @@
-package org.siemac.metamac.gopestat.web.client.utils;
+package org.siemac.metamac.statistical.operations.web.client.utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OfficialityTypeDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
 
 public class GopestatListUtils {
 

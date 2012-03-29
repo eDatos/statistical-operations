@@ -1,15 +1,15 @@
-package org.siemac.metamac.gopestat.web.client.utils;
+package org.siemac.metamac.statistical.operations.web.client.utils;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.model.FamilyRecord;
-import org.siemac.metamac.gopestat.web.client.model.InstanceRecord;
-import org.siemac.metamac.gopestat.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 
 public class RecordUtils {

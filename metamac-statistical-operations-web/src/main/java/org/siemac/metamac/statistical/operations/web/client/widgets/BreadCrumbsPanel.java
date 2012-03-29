@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineHyperlink;

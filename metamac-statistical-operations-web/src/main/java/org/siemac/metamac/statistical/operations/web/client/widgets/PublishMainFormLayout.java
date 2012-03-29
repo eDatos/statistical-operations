@@ -1,8 +1,8 @@
-package org.siemac.metamac.gopestat.web.client.widgets;
+package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.gopestat.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.resources.GlobalResources;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.widgets.form.InternationalMainFormLayout;
 
 import com.smartgwt.client.types.Visibility;
