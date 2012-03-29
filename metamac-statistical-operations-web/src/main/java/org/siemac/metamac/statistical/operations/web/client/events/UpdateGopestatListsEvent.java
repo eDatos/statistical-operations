@@ -1,13 +1,13 @@
-package org.siemac.metamac.gopestat.web.client.events;
+package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OfficialityTypeDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;

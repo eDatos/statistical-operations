@@ -1,18 +1,18 @@
-package org.siemac.metamac.gopestat.web.client.family.view;
+package org.siemac.metamac.statistical.operations.web.client.family.view;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.family.presenter.FamilyListPresenter;
-import org.siemac.metamac.gopestat.web.client.family.view.handlers.FamilyListUiHandlers;
-import org.siemac.metamac.gopestat.web.client.model.FamilyRecord;
-import org.siemac.metamac.gopestat.web.client.utils.RecordUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.ListGridToolStrip;
-import org.siemac.metamac.gopestat.web.client.widgets.ModalWindow;
-import org.siemac.metamac.gopestat.web.client.widgets.NewFamilyForm;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
+import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
+import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
+import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 
 import com.google.gwt.user.client.ui.Widget;

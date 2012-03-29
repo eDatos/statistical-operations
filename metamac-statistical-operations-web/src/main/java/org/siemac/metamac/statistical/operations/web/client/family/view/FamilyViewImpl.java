@@ -1,18 +1,18 @@
-package org.siemac.metamac.gopestat.web.client.family.view;
+package org.siemac.metamac.statistical.operations.web.client.family.view;
 
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.web.client.GopestatWeb;
-import org.siemac.metamac.gopestat.web.client.family.presenter.FamilyPresenter;
-import org.siemac.metamac.gopestat.web.client.family.view.handlers.FamilyUiHandlers;
-import org.siemac.metamac.gopestat.web.client.model.OperationRecord;
-import org.siemac.metamac.gopestat.web.client.resources.GlobalResources;
-import org.siemac.metamac.gopestat.web.client.utils.RecordUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.AddOperationsToFamilyForm;
-import org.siemac.metamac.gopestat.web.client.widgets.ModalWindow;
-import org.siemac.metamac.gopestat.web.client.widgets.PublishMainFormLayout;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
+import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
+import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
+import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;

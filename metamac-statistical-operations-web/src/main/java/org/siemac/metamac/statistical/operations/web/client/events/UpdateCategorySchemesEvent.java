@@ -1,4 +1,4 @@
-package org.siemac.metamac.gopestat.web.client.events;
+package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 

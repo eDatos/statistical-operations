@@ -1,32 +1,32 @@
-package org.siemac.metamac.gopestat.web.client.family.presenter;
+package org.siemac.metamac.statistical.operations.web.client.family.presenter;
 
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getConstants;
-import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getMessages;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getMessages;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.gopestat.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.gopestat.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.gopestat.web.client.NameTokens;
-import org.siemac.metamac.gopestat.web.client.PlaceRequestParams;
-import org.siemac.metamac.gopestat.web.client.family.view.handlers.FamilyUiHandlers;
-import org.siemac.metamac.gopestat.web.client.model.OperationRecord;
-import org.siemac.metamac.gopestat.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.gopestat.web.client.utils.ErrorUtils;
-import org.siemac.metamac.gopestat.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
-import org.siemac.metamac.gopestat.web.shared.GetFamilyAndOperationsAction;
-import org.siemac.metamac.gopestat.web.shared.GetFamilyAndOperationsResult;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListAction;
-import org.siemac.metamac.gopestat.web.shared.GetOperationListResult;
-import org.siemac.metamac.gopestat.web.shared.PublishExternallyFamilyAction;
-import org.siemac.metamac.gopestat.web.shared.PublishExternallyFamilyResult;
-import org.siemac.metamac.gopestat.web.shared.PublishInternallyFamilyAction;
-import org.siemac.metamac.gopestat.web.shared.PublishInternallyFamilyResult;
-import org.siemac.metamac.gopestat.web.shared.SaveFamilyAction;
-import org.siemac.metamac.gopestat.web.shared.SaveFamilyResult;
-import org.siemac.metamac.gopestat.web.shared.UpdateFamilyOperationsAction;
-import org.siemac.metamac.gopestat.web.shared.UpdateFamilyOperationsResult;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
+import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyResult;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyFamilyResult;
+import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 
