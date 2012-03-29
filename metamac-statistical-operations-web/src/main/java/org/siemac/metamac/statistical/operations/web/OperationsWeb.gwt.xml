@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='GopestatWeb'>
+<module rename-to='OperationsWeb'>
 
 	<!-- Inherit the core Web Toolkit stuff. -->
 	<inherits name='com.google.gwt.user.User' />
@@ -33,11 +33,11 @@
 	<inherits name="com.smartgwt.SmartGwt" />
 
 	<!-- METAMAC inherits modules -->
-	<inherits name="org.siemac.metamac.gopestat.core.GopestatCore" />
+	<inherits name="org.siemac.metamac.statistical.operations.core.OperationsCore" />
 	<inherits name="org.siemac.metamac.web.common.MetamacWebCommon"/>
 
 	<!-- Specify the app entry point class. -->
-	<entry-point class='org.siemac.metamac.gopestat.web.client.GopestatWeb' />
+	<entry-point class='org.siemac.metamac.statistical.operations.web.client.OperationsWeb' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
@@ -53,6 +53,6 @@
 	
 	<!-- Configure GIN -->
 	<define-configuration-property name="gin.ginjector" is-multi-valued="false" />
-	<set-configuration-property name="gin.ginjector" value="org.siemac.metamac.gopestat.web.client.gin.GopestatWebGinjector" />
+	<set-configuration-property name="gin.ginjector" value="org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector" />
 
 </module>
