@@ -20,6 +20,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/${module}/target/www/WEB-INF/classes"/>
-        <property name="context-root" value="gopestat-web"/>
+        <property name="context-root" value="metamac-statistical-operations-web"/>
   </wb-module>
 </project-modules>
