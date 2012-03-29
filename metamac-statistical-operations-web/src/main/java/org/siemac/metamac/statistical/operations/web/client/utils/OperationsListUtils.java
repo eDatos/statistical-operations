@@ -12,7 +12,7 @@ import org.siemac.metamac.statistical.operations.core.dto.serviceapi.Officiality
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
 
-public class GopestatListUtils {
+public class OperationsListUtils {
 
     /**
      * Returns {@link LinkedHashMap} of {@link SurveyTypeDto}

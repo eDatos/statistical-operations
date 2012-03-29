@@ -13,7 +13,7 @@ import org.siemac.metamac.statistical.operations.web.client.family.view.handlers
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
@@ -50,7 +50,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     private final DispatchAsync              dispatcher;
     private final PlaceManager               placeManager;
 
-    private GopestatToolStripPresenterWidget gopestatToolStripPresenterWidget;
+    private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
     public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
 
@@ -84,11 +84,11 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Inject
     public FamilyListPresenter(EventBus eventBus, FamilyListView familyListView, FamiliesListProxy familyListProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            GopestatToolStripPresenterWidget gopestatToolStripPresenterWidget) {
+            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
         super(eventBus, familyListView, familyListProxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.gopestatToolStripPresenterWidget = gopestatToolStripPresenterWidget;
+        this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
 
@@ -141,7 +141,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().statisticalFamilies());
-        setInSlot(TYPE_SetContextAreaContentToolBar, gopestatToolStripPresenterWidget);
+        setInSlot(TYPE_SetContextAreaContentToolBar, operationsToolStripPresenterWidget);
     }
 
     @Override

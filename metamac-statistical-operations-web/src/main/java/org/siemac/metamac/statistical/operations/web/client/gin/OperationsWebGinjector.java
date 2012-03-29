@@ -18,7 +18,7 @@ import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 @GinModules({DispatchAsyncModule.class, ClientModule.class})
-public interface GopestatWebGinjector extends Ginjector {
+public interface OperationsWebGinjector extends Ginjector {
 
     PlaceManager getPlaceManager();
     EventBus getEventBus();

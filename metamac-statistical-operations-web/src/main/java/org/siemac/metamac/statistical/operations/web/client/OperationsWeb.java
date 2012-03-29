@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client;
 
-import org.siemac.metamac.statistical.operations.web.client.gin.GopestatWebGinjector;
+import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -25,7 +25,7 @@ public class OperationsWeb implements EntryPoint {
     private static OperationsWebCoreMessages   coreMessages;
     private static OperationsWebMessages       messages;
 
-    public static final GopestatWebGinjector ginjector = GWT.create(GopestatWebGinjector.class);
+    public static final OperationsWebGinjector ginjector = GWT.create(OperationsWebGinjector.class);
 
     public void onModuleLoad() {
         // This is required for GWT-Platform proxy's generator.
@@ -57,7 +57,7 @@ public class OperationsWeb implements EntryPoint {
         return messages;
     }
 
-    public static GopestatWebGinjector getGopestatWebGinjector() {
+    public static OperationsWebGinjector getGopestatWebGinjector() {
         return ginjector;
     }
 

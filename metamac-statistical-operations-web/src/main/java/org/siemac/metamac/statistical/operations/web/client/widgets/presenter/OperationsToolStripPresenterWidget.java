@@ -12,19 +12,19 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
 
-public class GopestatToolStripPresenterWidget extends PresenterWidget<GopestatToolStripPresenterWidget.GopestatToolStripView> {
+public class OperationsToolStripPresenterWidget extends PresenterWidget<OperationsToolStripPresenterWidget.OperationsToolStripView> {
 
     private final PlaceManager placeManager;
 
-    public interface GopestatToolStripView extends View {
+    public interface OperationsToolStripView extends View {
 
         HasClickHandlers getGoFamilyList();
         HasClickHandlers getGoOperationList();
     }
 
     @Inject
-    public GopestatToolStripPresenterWidget(EventBus eventBus, GopestatToolStripView gopestatToolStripView, PlaceManager placeManager) {
-        super(eventBus, gopestatToolStripView);
+    public OperationsToolStripPresenterWidget(EventBus eventBus, OperationsToolStripView operationsToolStripView, PlaceManager placeManager) {
+        super(eventBus, operationsToolStripView);
         this.placeManager = placeManager;
     }
 

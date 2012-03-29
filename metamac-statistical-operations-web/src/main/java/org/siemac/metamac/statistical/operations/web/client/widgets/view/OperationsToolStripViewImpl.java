@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.view;
 
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -10,7 +10,7 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
-public class GopestatToolStripViewImpl implements GopestatToolStripPresenterWidget.GopestatToolStripView {
+public class OperationsToolStripViewImpl implements OperationsToolStripPresenterWidget.OperationsToolStripView {
 
     private ToolStrip       toolStrip;
 
@@ -18,7 +18,7 @@ public class GopestatToolStripViewImpl implements GopestatToolStripPresenterWidg
     private ToolStripButton operationsButton;
 
     @Inject
-    public GopestatToolStripViewImpl() {
+    public OperationsToolStripViewImpl() {
         super();
         toolStrip = new ToolStrip();
         toolStrip.setWidth100();

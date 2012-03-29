@@ -21,7 +21,7 @@ import org.siemac.metamac.statistical.operations.web.client.operation.presenter.
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.EnumUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.GopestatListUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
@@ -383,8 +383,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setObjective(objetive.getValue());
 
         // Class Descriptors
-        operationDto.setSurveyType(GopestatListUtils.getSurveyTypeDto(surveyType.getValueAsString(), surveyTypeDtos));
-        operationDto.setOfficialityType(GopestatListUtils.getOfficialityTypeDto(officialityType.getValueAsString(), officialityTypeDtos));
+        operationDto.setSurveyType(OperationsListUtils.getSurveyTypeDto(surveyType.getValueAsString(), surveyTypeDtos));
+        operationDto.setOfficialityType(OperationsListUtils.getOfficialityTypeDto(officialityType.getValueAsString(), officialityTypeDtos));
         operationDto.setIndicatorSystem(indSystem.getValueAsBoolean() == null ? false : indSystem.getValueAsBoolean());
 
         // Production descriptors
@@ -921,8 +921,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     public void setGopestatLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos) {
         this.surveyTypeDtos = surveyTypeDtos;
         this.officialityTypeDtos = officialityTypeDtos;
-        surveyType.setValueMap(GopestatListUtils.getSurveyTypeHashMap(surveyTypeDtos));
-        officialityType.setValueMap(GopestatListUtils.getOfficialityTypeHashMap(officialityTypeDtos));
+        surveyType.setValueMap(OperationsListUtils.getSurveyTypeHashMap(surveyTypeDtos));
+        officialityType.setValueMap(OperationsListUtils.getOfficialityTypeHashMap(officialityTypeDtos));
     }
 
     @Override

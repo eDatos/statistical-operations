@@ -16,8 +16,8 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.Opera
 import org.siemac.metamac.statistical.operations.web.client.operation.view.OperationViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.view.MainPageViewImpl;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
-import org.siemac.metamac.statistical.operations.web.client.widgets.view.GopestatToolStripViewImpl;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.client.widgets.view.OperationsToolStripViewImpl;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -47,7 +47,7 @@ public class ClientModule extends AbstractPresenterModule {
         bindPresenter(InstancePresenter.class, InstancePresenter.InstanceView.class, InstanceViewImpl.class, InstancePresenter.InstanceProxy.class);
 
         // Presenter widgets
-        bindSingletonPresenterWidget(GopestatToolStripPresenterWidget.class, GopestatToolStripPresenterWidget.GopestatToolStripView.class, GopestatToolStripViewImpl.class);
+        bindSingletonPresenterWidget(OperationsToolStripPresenterWidget.class, OperationsToolStripPresenterWidget.OperationsToolStripView.class, OperationsToolStripViewImpl.class);
 
         // Interfaces
         bind(OperationsWebConstants.class).in(Singleton.class);

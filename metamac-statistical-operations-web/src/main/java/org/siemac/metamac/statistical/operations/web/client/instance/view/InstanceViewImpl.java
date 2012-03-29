@@ -16,7 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTyp
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
-import org.siemac.metamac.statistical.operations.web.client.utils.GopestatListUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
@@ -305,13 +305,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getClassSystemList().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(codeLists, classSystemListItem.getValues()));
 
         // Class descriptors
-        instanceDto.setInstanceType(GopestatListUtils.getInstanceTypeDto(instanceTypeItem.getValueAsString(), instanceTypeDtos));
+        instanceDto.setInstanceType(OperationsListUtils.getInstanceTypeDto(instanceTypeItem.getValueAsString(), instanceTypeDtos));
 
         // Production descriptors
         instanceDto.setDocMethod(docMethodItem.getTextValue());
         instanceDto.setDocMethodUrl(docMethodItem.getUrlValue());
-        instanceDto.setSurveySource(GopestatListUtils.getSurveySourceDto(surveySourceItem.getValueAsString(), surveySourceDtos));
-        instanceDto.setCollMethod(GopestatListUtils.getCollMethodDto(collMethodItem.getValueAsString(), collMethodDtos));
+        instanceDto.setSurveySource(OperationsListUtils.getSurveySourceDto(surveySourceItem.getValueAsString(), surveySourceDtos));
+        instanceDto.setCollMethod(OperationsListUtils.getCollMethodDto(collMethodItem.getValueAsString(), collMethodDtos));
         instanceDto.getInformationSuppliers().clear();
         instanceDto.getInformationSuppliers().addAll(infSuppliersOrganItem.getSelectedExternalItems(infSuppliersOrganisations));
         instanceDto.getInformationSuppliers().addAll(infSuppliersConceptsItem.getSelectedExternalItems(infSuppliersConcepts));
@@ -326,7 +326,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setCostBurden(costBurdenItem.getTextValue());
         instanceDto.setCostBurdenUrl(costBurdenItem.getUrlValue());
         instanceDto.getCost().clear();
-        instanceDto.getCost().addAll(GopestatListUtils.getCostDtos(costItem.getValues(), costDtos));
+        instanceDto.getCost().addAll(OperationsListUtils.getCostDtos(costItem.getValues(), costDtos));
 
         // QUALITY DESCRIPTORS
         instanceDto.setQualityDoc(qualityDocItem.getTextValue());
@@ -625,7 +625,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         staticDataCompilationItem.setValue(instanceDto.getDataCompilation(), instanceDto.getDataCompilationUrl());
         staticAdjustmentItem.setValue(instanceDto.getAdjustment(), instanceDto.getAdjustmentUrl());
         staticCostBurdenItem.setValue(instanceDto.getCostBurden(), instanceDto.getCostBurdenUrl());
-        productionViewForm.setValue(IN_COST, GopestatListUtils.getCostDtoListToString(instanceDto.getCost()));
+        productionViewForm.setValue(IN_COST, OperationsListUtils.getCostDtoListToString(instanceDto.getCost()));
 
         // Quality Descriptors
         staticQualityDocItem.setValue(instanceDto.getQualityDoc(), instanceDto.getQualityDocUrl());
@@ -737,10 +737,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         this.surveySourceDtos = surveySourceDtos;
         this.collMethodDtos = collMethodDtos;
         this.costDtos = costDtos;
-        instanceTypeItem.setValueMap(GopestatListUtils.getInstanceTypeHashMap(instanceTypeDtos));
-        surveySourceItem.setValueMap(GopestatListUtils.getSurveySourceHashMap(surveySourceDtos));
-        collMethodItem.setValueMap(GopestatListUtils.getCollMethodsHashMap(collMethodDtos));
-        costItem.setValueMap(GopestatListUtils.getCostHashMap(costDtos));
+        instanceTypeItem.setValueMap(OperationsListUtils.getInstanceTypeHashMap(instanceTypeDtos));
+        surveySourceItem.setValueMap(OperationsListUtils.getSurveySourceHashMap(surveySourceDtos));
+        collMethodItem.setValueMap(OperationsListUtils.getCollMethodsHashMap(collMethodDtos));
+        costItem.setValueMap(OperationsListUtils.getCostHashMap(costDtos));
     }
 
     @Override

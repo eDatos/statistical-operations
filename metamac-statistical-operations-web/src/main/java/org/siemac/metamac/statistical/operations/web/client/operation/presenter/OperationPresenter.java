@@ -30,7 +30,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
@@ -98,7 +98,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     private List<InstanceBaseDto>            instanceBaseDtos;
     private List<FamilyBaseDto>              familyBaseDtos;
 
-    private GopestatToolStripPresenterWidget gopestatToolStripPresenterWidget;
+    private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
     public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
 
@@ -161,11 +161,11 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Inject
     public OperationPresenter(EventBus eventBus, OperationView operationView, OperationProxy operationProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            GopestatToolStripPresenterWidget gopestatToolStripPresenterWidget) {
+            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
         super(eventBus, operationView, operationProxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.gopestatToolStripPresenterWidget = gopestatToolStripPresenterWidget;
+        this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
 
@@ -280,7 +280,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().statisticalOperation());
-        setInSlot(TYPE_SetContextAreaContentToolBar, gopestatToolStripPresenterWidget);
+        setInSlot(TYPE_SetContextAreaContentToolBar, operationsToolStripPresenterWidget);
     }
 
     @Override
