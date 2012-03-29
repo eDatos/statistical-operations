@@ -210,9 +210,9 @@
 					<execution>
 					    <configuration>
               				<servicePattern>**/client/service/**/*Service.java</servicePattern>
-              				<i18nConstantsBundle>org.siemac.metamac.statistical.operations.web.client.GopestatWebConstants</i18nConstantsBundle>
-              				<i18nMessagesBundle>org.siemac.metamac.statistical.operations.web.client.GopestatWebMessages</i18nMessagesBundle>
-                            <i18nConstantsWithLookupBundle>org.siemac.metamac.statistical.operations.web.client.GopestatWebCoreMessages</i18nConstantsWithLookupBundle>
+              				<i18nConstantsBundle>org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants</i18nConstantsBundle>
+              				<i18nMessagesBundle>org.siemac.metamac.statistical.operations.web.client.OperationsWebMessages</i18nMessagesBundle>
+                            <i18nConstantsWithLookupBundle>org.siemac.metamac.statistical.operations.web.client.OperationsWebCoreMessages</i18nConstantsWithLookupBundle>
            				</configuration>
 						<goals>
 							<goal>resources</goal>

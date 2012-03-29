@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
@@ -42,13 +42,13 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         panel = new VLayout();
 
         newFamilyForm = new NewFamilyForm();
-        listGridToolStrip = new ListGridToolStrip(GopestatWeb.getConstants().familyDeleteConfirmation());
+        listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().familyDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
                 window = new ModalWindow();
-                window.setTitle(GopestatWeb.getConstants().actionNewFamily());
+                window.setTitle(OperationsWeb.getConstants().actionNewFamily());
                 window.setAutoSize(true);
                 window.addItem(newFamilyForm);
                 window.show();
@@ -56,10 +56,10 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
 
         familyListGrid = new CustomListGrid();
-        ListGridField codeField = new ListGridField(FamilyRecord.CODE, GopestatWeb.getConstants().familyIdentifier());
-        ListGridField titleField = new ListGridField(FamilyRecord.TITLE, GopestatWeb.getConstants().familyTitle());
-        ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, GopestatWeb.getConstants().familyDescription());
-        ListGridField statusField = new ListGridField(FamilyRecord.STATUS, GopestatWeb.getConstants().familyStatus());
+        ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
+        ListGridField titleField = new ListGridField(FamilyRecord.TITLE, OperationsWeb.getConstants().familyTitle());
+        ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        ListGridField statusField = new ListGridField(FamilyRecord.STATUS, OperationsWeb.getConstants().familyStatus());
         familyListGrid.setFields(codeField, titleField, descriptionField, statusField);
         familyListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 

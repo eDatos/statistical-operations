@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.FormErrorOrientation;
@@ -23,11 +23,11 @@ public class AddFamiliesToOperationForm extends DynamicForm {
     public AddFamiliesToOperationForm() {
         super();
 
-        families = new SelectItem("families", GopestatWeb.getConstants().families());
+        families = new SelectItem("families", OperationsWeb.getConstants().families());
         families.setWidth(300);
         families.setMultiple(true);
 
-        addButton = new ButtonItem("fam-save", GopestatWeb.getConstants().actionAdd());
+        addButton = new ButtonItem("fam-save", OperationsWeb.getConstants().actionAdd());
         addButton.setAlign(Alignment.RIGHT);
         addButton.setWidth(110);
 

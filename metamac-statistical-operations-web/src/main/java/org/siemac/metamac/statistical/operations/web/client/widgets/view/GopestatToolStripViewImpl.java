@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.view;
 
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.GopestatToolStripPresenterWidget;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -24,10 +24,10 @@ public class GopestatToolStripViewImpl implements GopestatToolStripPresenterWidg
         toolStrip.setWidth100();
         toolStrip.setAlign(Alignment.LEFT);
 
-        familiesButton = new ToolStripButton(GopestatWeb.getConstants().statisticalFamilies());
+        familiesButton = new ToolStripButton(OperationsWeb.getConstants().statisticalFamilies());
         familiesButton.setAutoFit(true);
 
-        operationsButton = new ToolStripButton(GopestatWeb.getConstants().statisticalOperations());
+        operationsButton = new ToolStripButton(OperationsWeb.getConstants().statisticalOperations());
         operationsButton.setAutoFit(true);
 
         toolStrip.addButton(familiesButton);

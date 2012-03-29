@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.instance.presenter;
 
-import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
-import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getMessages;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
 import java.util.List;
 

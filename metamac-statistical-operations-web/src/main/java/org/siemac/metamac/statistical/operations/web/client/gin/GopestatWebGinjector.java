@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.gin;
 
-import org.siemac.metamac.statistical.operations.web.client.GopestatWebConstants;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWebMessages;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWebMessages;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
@@ -32,7 +32,7 @@ public interface GopestatWebGinjector extends Ginjector {
     AsyncProvider<InstancePresenter> getInstancePresenter();
 
     // Interfaces
-    public GopestatWebConstants getGopestatWebConstants();
-    public GopestatWebMessages getGopestatWebMessages();
+    public OperationsWebConstants getOperationsWebConstants();
+    public OperationsWebMessages getOperationsWebMessages();
 
 }

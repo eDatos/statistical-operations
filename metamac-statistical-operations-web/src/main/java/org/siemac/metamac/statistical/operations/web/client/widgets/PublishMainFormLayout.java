@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.widgets.form.InternationalMainFormLayout;
 
@@ -18,7 +18,7 @@ public class PublishMainFormLayout extends InternationalMainFormLayout {
 
     public PublishMainFormLayout() {
 
-        publishInternally = new ToolStripButton(GopestatWeb.getConstants().publishInternally());
+        publishInternally = new ToolStripButton(OperationsWeb.getConstants().publishInternally());
         publishInternally.setVisibility(Visibility.HIDDEN);
         publishInternally.setWidth(150);
         publishInternally.setShowRollOver(true);
@@ -27,7 +27,7 @@ public class PublishMainFormLayout extends InternationalMainFormLayout {
         publishInternally.setTitleStyle("publishButton");
         publishInternally.setIcon(GlobalResources.RESOURCE.publishInternally().getURL());
 
-        publishExternally = new ToolStripButton(GopestatWeb.getConstants().publishExternally());
+        publishExternally = new ToolStripButton(OperationsWeb.getConstants().publishExternally());
         publishExternally.setVisibility(Visibility.HIDDEN);
         publishExternally.setWidth(150);
         publishExternally.setShowRollOver(true);

@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 
 import com.smartgwt.client.types.Visibility;
@@ -23,9 +23,9 @@ public class ListGridToolStrip extends ToolStrip {
         deleteConfirmationWindow = new DeleteConfirmationWindow(new String());
         deleteConfirmationWindow.setVisibility(Visibility.HIDDEN);
 
-        newButton = new ToolStripButton(GopestatWeb.getConstants().actionNew(), GlobalResources.RESOURCE.newListGrid().getURL());
+        newButton = new ToolStripButton(OperationsWeb.getConstants().actionNew(), GlobalResources.RESOURCE.newListGrid().getURL());
 
-        deleteButton = new ToolStripButton(GopestatWeb.getConstants().actionDelete(), GlobalResources.RESOURCE.deleteListGrid().getURL());
+        deleteButton = new ToolStripButton(OperationsWeb.getConstants().actionDelete(), GlobalResources.RESOURCE.deleteListGrid().getURL());
         deleteButton.setVisibility(Visibility.HIDDEN);
         deleteButton.addClickHandler(new ClickHandler() {
 

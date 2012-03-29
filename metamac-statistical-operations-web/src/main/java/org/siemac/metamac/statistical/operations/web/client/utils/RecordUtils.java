@@ -6,7 +6,7 @@ import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBas
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
@@ -22,8 +22,8 @@ public class RecordUtils {
      */
     public static FamilyRecord getFamilyRecord(FamilyBaseDto familyBaseDto) {
         FamilyRecord record = new FamilyRecord(familyBaseDto.getId(), familyBaseDto.getCode(), InternationalStringUtils.getLocalisedString(familyBaseDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(familyBaseDto.getDescription()), GopestatWeb.getCoreMessages().getString(
-                        GopestatWeb.getCoreMessages().procStatusEnum() + familyBaseDto.getProcStatus().getName()));
+                InternationalStringUtils.getLocalisedString(familyBaseDto.getDescription()), OperationsWeb.getCoreMessages().getString(
+                        OperationsWeb.getCoreMessages().procStatusEnum() + familyBaseDto.getProcStatus().getName()));
         return record;
     }
 
@@ -35,8 +35,8 @@ public class RecordUtils {
      */
     public static FamilyRecord getFamilyRecord(FamilyDto familyDto) {
         FamilyRecord record = new FamilyRecord(familyDto.getId(), familyDto.getCode(), InternationalStringUtils.getLocalisedString(familyDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(familyDto.getDescription()), GopestatWeb.getCoreMessages().getString(
-                        GopestatWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
+                InternationalStringUtils.getLocalisedString(familyDto.getDescription()), OperationsWeb.getCoreMessages().getString(
+                        OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
         return record;
     }
 
@@ -48,8 +48,8 @@ public class RecordUtils {
      */
     public static OperationRecord getOperationRecord(OperationBaseDto operationBaseDto) {
         OperationRecord record = new OperationRecord(operationBaseDto.getId(), operationBaseDto.getCode(), InternationalStringUtils.getLocalisedString(operationBaseDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(operationBaseDto.getAcronym()), GopestatWeb.getCoreMessages().getString(
-                        GopestatWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()));
+                InternationalStringUtils.getLocalisedString(operationBaseDto.getAcronym()), OperationsWeb.getCoreMessages().getString(
+                        OperationsWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()));
         return record;
     }
 
@@ -61,8 +61,8 @@ public class RecordUtils {
      */
     public static OperationRecord getOperationRecord(OperationDto operationDto) {
         OperationRecord record = new OperationRecord(operationDto.getId(), operationDto.getCode(), InternationalStringUtils.getLocalisedString(operationDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(operationDto.getAcronym()), GopestatWeb.getCoreMessages().getString(
-                        GopestatWeb.getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
+                InternationalStringUtils.getLocalisedString(operationDto.getAcronym()), OperationsWeb.getCoreMessages().getString(
+                        OperationsWeb.getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
         return record;
     }
 
@@ -74,8 +74,8 @@ public class RecordUtils {
      */
     public static InstanceRecord getInstanceRecord(InstanceBaseDto instanceDto) {
         InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(instanceDto.getDescription()), GopestatWeb.getCoreMessages().getString(
-                        GopestatWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
+                InternationalStringUtils.getLocalisedString(instanceDto.getDescription()), OperationsWeb.getCoreMessages().getString(
+                        OperationsWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
         return record;
     }
 
@@ -86,8 +86,8 @@ public class RecordUtils {
      * @return
      */
     public static InstanceRecord getInstanceRecord(InstanceDto instanceDto) {
-        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()), null, GopestatWeb.getCoreMessages()
-                .getString(GopestatWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
+        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()), null, OperationsWeb.getCoreMessages()
+                .getString(OperationsWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
         return record;
     }
 

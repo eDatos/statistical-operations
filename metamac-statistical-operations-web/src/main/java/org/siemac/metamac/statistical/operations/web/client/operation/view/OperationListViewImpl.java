@@ -6,7 +6,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
@@ -55,14 +55,14 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             }
         });
 
-        listGridToolStrip = new ListGridToolStrip(GopestatWeb.getConstants().operationDeleteConfirmation());
+        listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().operationDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
                 getUiHandlers().retrieveCategorySchemes();
                 window = new ModalWindow();
-                window.setTitle(GopestatWeb.getConstants().actionNewOperation());
+                window.setTitle(OperationsWeb.getConstants().actionNewOperation());
                 window.setAutoSize(true);
                 window.addItem(newOperationForm);
                 window.show();
@@ -70,10 +70,10 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
 
         operationListGrid = new CustomListGrid();
-        ListGridField codeField = new ListGridField(OperationRecord.CODE, GopestatWeb.getConstants().operationIdentifier());
-        ListGridField titleField = new ListGridField(OperationRecord.TITLE, GopestatWeb.getConstants().operation());
-        ListGridField descriptionField = new ListGridField(OperationRecord.ACRONYM, GopestatWeb.getConstants().operationAcronym());
-        ListGridField statusField = new ListGridField(OperationRecord.STATUS, GopestatWeb.getConstants().operationStatus());
+        ListGridField codeField = new ListGridField(OperationRecord.CODE, OperationsWeb.getConstants().operationIdentifier());
+        ListGridField titleField = new ListGridField(OperationRecord.TITLE, OperationsWeb.getConstants().operation());
+        ListGridField descriptionField = new ListGridField(OperationRecord.ACRONYM, OperationsWeb.getConstants().operationAcronym());
+        ListGridField statusField = new ListGridField(OperationRecord.STATUS, OperationsWeb.getConstants().operationStatus());
         operationListGrid.setFields(codeField, titleField, descriptionField, statusField);
         operationListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 

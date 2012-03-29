@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 
 public class EnumUtils {
 
@@ -32,7 +32,7 @@ public class EnumUtils {
         if (statusEnumHashMap == null) {
             statusEnumHashMap = new LinkedHashMap<String, String>();
             for (StatusEnum s : getStatusEnums()) {
-                String value = GopestatWeb.getCoreMessages().getString(GopestatWeb.getCoreMessages().statusEnum() + s.getName());
+                String value = OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().statusEnum() + s.getName());
                 statusEnumHashMap.put(s.toString(), value);
             }
         }

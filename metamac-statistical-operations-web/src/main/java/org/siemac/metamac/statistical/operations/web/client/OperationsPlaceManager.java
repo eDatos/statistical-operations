@@ -11,12 +11,12 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 // see ClientModule
 // bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.signInPage);
 
-public class GopestatPlaceManager extends PlaceManagerImpl {
+public class OperationsPlaceManager extends PlaceManagerImpl {
 
     private final PlaceRequest defaultPlaceRequest;
 
     @Inject
-    public GopestatPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter, @DefaultPlace String defaultNameToken) {
+    public OperationsPlaceManager(EventBus eventBus, TokenFormatter tokenFormatter, @DefaultPlace String defaultNameToken) {
         super(eventBus, tokenFormatter);
         this.defaultPlaceRequest = new PlaceRequest(defaultNameToken);
     }

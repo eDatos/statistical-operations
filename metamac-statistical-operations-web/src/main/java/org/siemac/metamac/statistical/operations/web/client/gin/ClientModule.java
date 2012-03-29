@@ -1,8 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.client.gin;
 
-import org.siemac.metamac.statistical.operations.web.client.GopestatPlaceManager;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWebConstants;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWebMessages;
+import org.siemac.metamac.statistical.operations.web.client.OperationsPlaceManager;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWebMessages;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
@@ -33,7 +33,7 @@ public class ClientModule extends AbstractPresenterModule {
         // |_ bind(RootPresenter.class).asEagerSingleton();
         // |_ bind(PlaceManager.class).to(MyPlaceManager.class).in(Singleton.class);
         // |_ bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Singleton.class);
-        install(new DefaultModule(GopestatPlaceManager.class));
+        install(new DefaultModule(OperationsPlaceManager.class));
 
         // Constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.familyListPage);
@@ -50,8 +50,8 @@ public class ClientModule extends AbstractPresenterModule {
         bindSingletonPresenterWidget(GopestatToolStripPresenterWidget.class, GopestatToolStripPresenterWidget.GopestatToolStripView.class, GopestatToolStripViewImpl.class);
 
         // Interfaces
-        bind(GopestatWebConstants.class).in(Singleton.class);
-        bind(GopestatWebMessages.class).in(Singleton.class);
+        bind(OperationsWebConstants.class).in(Singleton.class);
+        bind(OperationsWebMessages.class).in(Singleton.class);
     }
 
 }

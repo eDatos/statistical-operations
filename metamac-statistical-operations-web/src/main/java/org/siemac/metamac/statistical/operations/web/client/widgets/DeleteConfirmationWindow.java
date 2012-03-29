@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 
 import com.smartgwt.client.types.Alignment;
@@ -24,7 +24,7 @@ public class DeleteConfirmationWindow extends Window {
         super();
         setWidth(330);
         setHeight(130);
-        setTitle(GopestatWeb.getConstants().confirmDelete());
+        setTitle(OperationsWeb.getConstants().confirmDelete());
         setShowMinimizeButton(false);
         setIsModal(true);
         setShowModalMask(true);
@@ -43,7 +43,7 @@ public class DeleteConfirmationWindow extends Window {
         label.setIconSize(32);
         label.setIconSpacing(10);
 
-        yesButton = new IButton(GopestatWeb.getConstants().yes());
+        yesButton = new IButton(OperationsWeb.getConstants().yes());
         yesButton.addClickHandler(new ClickHandler() {
 
             @Override
@@ -52,7 +52,7 @@ public class DeleteConfirmationWindow extends Window {
             }
         });
 
-        IButton noButton = new IButton(GopestatWeb.getConstants().no());
+        IButton noButton = new IButton(OperationsWeb.getConstants().no());
         noButton.addClickHandler(new ClickHandler() {
 
             @Override

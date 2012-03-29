@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
@@ -91,13 +91,13 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         addOperationsToFamilyForm = new AddOperationsToFamilyForm();
         operationToolStrip = new ToolStrip();
         operationToolStrip.setWidth100();
-        editToolStripButton = new ToolStripButton(GopestatWeb.getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
+        editToolStripButton = new ToolStripButton(OperationsWeb.getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
         editToolStripButton.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
                 window = new ModalWindow();
-                window.setTitle(GopestatWeb.getConstants().actionAddOperationsToFamily());
+                window.setTitle(OperationsWeb.getConstants().actionAddOperationsToFamily());
                 window.setAutoSize(true);
                 addOperationsToFamilyForm.clearValues();
                 addOperationsToFamilyForm.setOperationsValueMap(allOperations);
@@ -108,15 +108,15 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         });
         operationToolStrip.addButton(editToolStripButton);
 
-        TitleLabel operationsTitleLabel = new TitleLabel(GopestatWeb.getConstants().operations());
+        TitleLabel operationsTitleLabel = new TitleLabel(OperationsWeb.getConstants().operations());
         operationsTitleLabel.setStyleName("sectionTitleLeftMargin");
 
         operationListGrid = new ListGrid();
         operationListGrid.setHeight(150);
-        ListGridField identifierField = new ListGridField(OperationRecord.ID, GopestatWeb.getConstants().familyIdentifier());
-        ListGridField titleField = new ListGridField(OperationRecord.TITLE, GopestatWeb.getConstants().familyTitle());
-        ListGridField titleAlternativeField = new ListGridField(OperationRecord.ACRONYM, GopestatWeb.getConstants().familyAcronym());
-        ListGridField statusField = new ListGridField(OperationRecord.STATUS, GopestatWeb.getConstants().operationStatus());
+        ListGridField identifierField = new ListGridField(OperationRecord.ID, OperationsWeb.getConstants().familyIdentifier());
+        ListGridField titleField = new ListGridField(OperationRecord.TITLE, OperationsWeb.getConstants().familyTitle());
+        ListGridField titleAlternativeField = new ListGridField(OperationRecord.ACRONYM, OperationsWeb.getConstants().familyAcronym());
+        ListGridField statusField = new ListGridField(OperationRecord.STATUS, OperationsWeb.getConstants().operationStatus());
         operationListGrid.setFields(identifierField, titleField, titleAlternativeField, statusField);
 
         VLayout operationsLayout = new VLayout();
@@ -180,7 +180,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         familyViewForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyViewForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
         familyViewForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate() == null ? "" : familyDto.getInternalInventoryDate().toString());
-        familyViewForm.setValue(FAMILY_STATUS, GopestatWeb.getCoreMessages().getString(GopestatWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
+        familyViewForm.setValue(FAMILY_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
         familyViewForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate() == null ? "" : familyDto.getInventoryDate().toString());
     }
 
@@ -191,7 +191,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         familyEditionForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyEditionForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
         familyEditionForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate() == null ? "" : familyDto.getInternalInventoryDate().toString());
-        familyEditionForm.setValue(FAMILY_STATUS, GopestatWeb.getCoreMessages().getString(GopestatWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
+        familyEditionForm.setValue(FAMILY_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
         familyEditionForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate() == null ? "" : familyDto.getInventoryDate().toString());
     }
 
@@ -221,15 +221,15 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private void createViewForm() {
         // Family Form
-        familyViewForm = new GroupDynamicForm(GopestatWeb.getConstants().family());
-        ViewTextItem code = new ViewTextItem(FAMILY_IDENTIFIER, GopestatWeb.getConstants().familyIdentifier());
-        ViewTextItem uri = new ViewTextItem(FAMILY_URI, GopestatWeb.getConstants().familyUri());
-        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FAMILY_TITLE, GopestatWeb.getConstants().familyTitle());
-        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FAMILY_ACRONYM, GopestatWeb.getConstants().familyAcronym());
-        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FAMILY_DESCRIPTION, GopestatWeb.getConstants().familyDescription());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, GopestatWeb.getConstants().familyInternalInventoryDate());
-        ViewTextItem status = new ViewTextItem(FAMILY_STATUS, GopestatWeb.getConstants().familyStatus());
-        ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, GopestatWeb.getConstants().familyInventoryDate());
+        familyViewForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
+        ViewTextItem code = new ViewTextItem(FAMILY_IDENTIFIER, OperationsWeb.getConstants().familyIdentifier());
+        ViewTextItem uri = new ViewTextItem(FAMILY_URI, OperationsWeb.getConstants().familyUri());
+        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FAMILY_TITLE, OperationsWeb.getConstants().familyTitle());
+        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FAMILY_ACRONYM, OperationsWeb.getConstants().familyAcronym());
+        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FAMILY_DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
+        ViewTextItem status = new ViewTextItem(FAMILY_STATUS, OperationsWeb.getConstants().familyStatus());
+        ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
         familyViewForm.setFields(code, uri, title, acronym, description, internalInventoryDate, status, inventoryDate);
         // Add to main layout
         mainFormLayout.addViewCanvas(familyViewForm);
@@ -237,16 +237,16 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private void createEditionForm() {
         // Family Form
-        familyEditionForm = new GroupDynamicForm(GopestatWeb.getConstants().family());
-        RequiredTextItem code = new RequiredTextItem(FAMILY_IDENTIFIER, GopestatWeb.getConstants().familyCode());
-        ViewTextItem uri = new ViewTextItem(FAMILY_URI, GopestatWeb.getConstants().familyUri());
-        titleItem = new MultiLanguageTextItem(FAMILY_TITLE, GopestatWeb.getConstants().familyTitle());
+        familyEditionForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
+        RequiredTextItem code = new RequiredTextItem(FAMILY_IDENTIFIER, OperationsWeb.getConstants().familyCode());
+        ViewTextItem uri = new ViewTextItem(FAMILY_URI, OperationsWeb.getConstants().familyUri());
+        titleItem = new MultiLanguageTextItem(FAMILY_TITLE, OperationsWeb.getConstants().familyTitle());
         titleItem.setRequired(true);
-        acronymItem = new MultiLanguageTextItem(FAMILY_ACRONYM, GopestatWeb.getConstants().familyAcronym());
-        descriptionItem = new MultiLanguageTextItem(FAMILY_DESCRIPTION, GopestatWeb.getConstants().familyDescription());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, GopestatWeb.getConstants().familyInternalInventoryDate());
-        ViewTextItem status = new ViewTextItem(FAMILY_STATUS, GopestatWeb.getConstants().familyStatus());
-        ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, GopestatWeb.getConstants().familyInventoryDate());
+        acronymItem = new MultiLanguageTextItem(FAMILY_ACRONYM, OperationsWeb.getConstants().familyAcronym());
+        descriptionItem = new MultiLanguageTextItem(FAMILY_DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
+        ViewTextItem status = new ViewTextItem(FAMILY_STATUS, OperationsWeb.getConstants().familyStatus());
+        ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
         familyEditionForm.setFields(code, uri, titleItem, acronymItem, descriptionItem, internalInventoryDate, status, inventoryDate);
         // Add to main layout
         mainFormLayout.addEditionCanvas(familyEditionForm);

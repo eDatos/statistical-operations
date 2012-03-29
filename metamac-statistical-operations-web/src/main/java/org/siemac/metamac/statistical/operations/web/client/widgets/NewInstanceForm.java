@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.widgets;
 import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
@@ -23,13 +23,13 @@ public class NewInstanceForm extends DynamicForm {
     public NewInstanceForm() {
         super();
 
-        identifier = new RequiredTextItem("in-id", GopestatWeb.getConstants().instanceIdentifier());
+        identifier = new RequiredTextItem("in-id", OperationsWeb.getConstants().instanceIdentifier());
         identifier.setWidth(200);
 
-        title = new RequiredTextItem("in-title", GopestatWeb.getConstants().instanceTitle());
+        title = new RequiredTextItem("in-title", OperationsWeb.getConstants().instanceTitle());
         title.setWidth(200);
 
-        saveButton = new ButtonItem("op-save", GopestatWeb.getConstants().actionCreateInstance());
+        saveButton = new ButtonItem("op-save", OperationsWeb.getConstants().actionCreateInstance());
         saveButton.setAlign(Alignment.RIGHT);
         saveButton.setWidth(110);
 

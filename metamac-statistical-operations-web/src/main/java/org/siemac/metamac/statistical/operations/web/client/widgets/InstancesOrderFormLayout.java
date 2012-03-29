@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
 import java.util.ArrayList;
 import java.util.List;

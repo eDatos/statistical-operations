@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.widgets;
 import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.GopestatWeb;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
@@ -23,13 +23,13 @@ public class NewFamilyForm extends DynamicForm {
     public NewFamilyForm() {
         super();
 
-        identifier = new RequiredTextItem("fam-id", GopestatWeb.getConstants().familyIdentifier());
+        identifier = new RequiredTextItem("fam-id", OperationsWeb.getConstants().familyIdentifier());
         identifier.setWidth(200);
 
-        title = new RequiredTextItem("fam-title", GopestatWeb.getConstants().familyTitle());
+        title = new RequiredTextItem("fam-title", OperationsWeb.getConstants().familyTitle());
         title.setWidth(200);
 
-        saveButton = new ButtonItem("fam-save", GopestatWeb.getConstants().actionCreateFamily());
+        saveButton = new ButtonItem("fam-save", OperationsWeb.getConstants().actionCreateFamily());
         saveButton.setAlign(Alignment.RIGHT);
         saveButton.setWidth(110);
 

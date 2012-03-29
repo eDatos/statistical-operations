@@ -12,18 +12,18 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class GopestatWeb implements EntryPoint {
+public class OperationsWeb implements EntryPoint {
 
     interface GlobalResources extends ClientBundle {
 
         @NotStrict
-        @Source("GopestatWebStyles.css")
+        @Source("OperationsWebStyles.css")
         CssResource css();
     }
 
-    private static GopestatWebConstants      constants;
-    private static GopestatWebCoreMessages   coreMessages;
-    private static GopestatWebMessages       messages;
+    private static OperationsWebConstants      constants;
+    private static OperationsWebCoreMessages   coreMessages;
+    private static OperationsWebMessages       messages;
 
     public static final GopestatWebGinjector ginjector = GWT.create(GopestatWebGinjector.class);
 
@@ -36,23 +36,23 @@ public class GopestatWeb implements EntryPoint {
         GWT.<GlobalResources> create(GlobalResources.class).css().ensureInjected();
     }
 
-    public static GopestatWebConstants getConstants() {
+    public static OperationsWebConstants getConstants() {
         if (constants == null) {
-            constants = (GopestatWebConstants) GWT.create(GopestatWebConstants.class);
+            constants = (OperationsWebConstants) GWT.create(OperationsWebConstants.class);
         }
         return constants;
     }
 
-    public static GopestatWebCoreMessages getCoreMessages() {
+    public static OperationsWebCoreMessages getCoreMessages() {
         if (coreMessages == null) {
-            coreMessages = (GopestatWebCoreMessages) GWT.create(GopestatWebCoreMessages.class);
+            coreMessages = (OperationsWebCoreMessages) GWT.create(OperationsWebCoreMessages.class);
         }
         return coreMessages;
     }
 
-    public static GopestatWebMessages getMessages() {
+    public static OperationsWebMessages getMessages() {
         if (messages == null) {
-            messages = (GopestatWebMessages) GWT.create(GopestatWebMessages.class);
+            messages = (OperationsWebMessages) GWT.create(OperationsWebMessages.class);
         }
         return messages;
     }

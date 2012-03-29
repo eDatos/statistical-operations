@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.presenter;
 
-import static org.siemac.metamac.statistical.operations.web.client.GopestatWeb.getMessages;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
 import java.util.List;
 
