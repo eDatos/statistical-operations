@@ -70,10 +70,10 @@
 			<ws:service bean="#metamacStatisticalOperationsInternalInterfaceV10">
 					<!-- the primaryWsdl element works like @WebService(wsdlLocation=...). If the primary WSDL is omitted, the runtime will search for WSDL in /WEB-INF/wsdl/ and find one that matches the specified port and service name -->
 <!-- 				<ws:metadata> -->
-<!-- 					<value>META-INF/wsdl/service/metamac-gopestat-internal-service-v1.0.xsd</value> -->
+<!-- 					<value>META-INF/wsdl/service/metamac-statistical-operations-internal-service-v1.0.xsd</value> -->
 <!-- 				</ws:metadata>  				 -->
 <!-- 				<ws:primaryWsdl> -->
-<!--     				<value>META-INF/wsdl/metamac-gopestat-internal-v1.0.wsdl</value> -->
+<!--     				<value>META-INF/wsdl/metamac-statistical-operations-internal-v1.0.wsdl</value> -->
 <!--   				</ws:primaryWsdl> -->
   			</ws:service>
 		</wss:service>
