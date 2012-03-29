@@ -50,7 +50,7 @@
 	</bean>
 	
 	<!-- Spring Beans for side server of GWT -->
-	<bean class="org.siemac.metamac.gopestat.web.server.ServerModule" />
+	<bean class="org.siemac.metamac.statistical.operations.web.server.ServerModule" />
 	
 	<bean id="logger" class="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean">
 		<constructor-arg>
@@ -65,9 +65,9 @@
 	<import resource="classpath:/spring/core/oracle/applicationContext-oracle.xml" />
 
 	<!-- Web services (spring - jaxws) -->
-	<wss:binding url="/ws/gopestat/internal/v1.0/gopestatInternalInterface">
+	<wss:binding url="/ws/statistical/operations/internal/v1.0/statisticalOperationsInternalInterface">
 		<wss:service>
-			<ws:service bean="#metamacGopestatInternalInterfaceV10">
+			<ws:service bean="#metamacStatisticalOperationsInternalInterfaceV10">
 					<!-- the primaryWsdl element works like @WebService(wsdlLocation=...). If the primary WSDL is omitted, the runtime will search for WSDL in /WEB-INF/wsdl/ and find one that matches the specified port and service name -->
 <!-- 				<ws:metadata> -->
 <!-- 					<value>META-INF/wsdl/service/metamac-gopestat-internal-service-v1.0.xsd</value> -->
