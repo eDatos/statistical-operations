@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>    
+  	<groupId>org.siemac.metamac.statistical.operations</groupId>
+  	<artifactId>metamac-statistical-operations</artifactId>
+  	<version>${metamac-statistical-operations.version}</version>
+  	<packaging>pom</packaging>
+	<name>METAMAC :: STATISTICAL :: OPERATIONS</name>
+	<description>METAMAC :: STATISTICAL :: OPERATIONS</description>
+
+    <modules>
+    	<module>metamac-statistical-operations-parent</module>
+        <module>metamac-statistical-operations-core</module>
+        <module>metamac-statistical-operations-ws-api</module>
+        <module>metamac-statistical-operations-web</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='org.siemac.metamac.gopestat.web.gopestat-web'/>
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/GopestatWeb/greet" class="org.siemac.metamac.gopestat.web.server.GeneralWebServiceImpl" />
+
+</module>

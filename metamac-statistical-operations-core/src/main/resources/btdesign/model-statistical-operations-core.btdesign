@@ -1,0 +1,823 @@
+import "classpath:/btdesign/metamac-core-common-dtos.btdesign"
+import "classpath:/btdesign/export/metamac-core-common-basictype.btdesign"
+import "classpath:/btdesign/export/metamac-core-common-vo.btdesign"
+import "classpath:/btdesign/export/metamac-core-common-entity.btdesign"
+
+
+Application StatisticalOperations {
+    basePackage=org.siemac.metamac.statistical.operations
+
+    Module core {
+		basePackage=org.siemac.metamac.statistical.operations.core
+		
+		
+		// ----------------------------------------------------------------
+		// 							FACADE SERVICES
+		// ----------------------------------------------------------------  
+		
+		"Provides access to StatisticalOperationsServiceFacade"
+		Service StatisticalOperationsServiceFacade {
+       		> @StatisticalOperationsBaseService
+       		> @StatisticalOperationsListsService
+       		
+       		"SurveyType"
+       		List<@SurveyTypeDto> findAllSurveyTypes;
+       		@SurveyTypeDto findSurveyTypeById(Long id) throws MetamacException;
+       		
+       		"InstanceType"
+       		List<@InstanceTypeDto> findAllInstanceTypes;
+       		@InstanceTypeDto findInstanceTypeById(Long id) throws MetamacException;
+       		
+       		"SurveySource"
+       		List<@SurveySourceDto> findAllSurveySources;
+       		@SurveySourceDto findSurveySourceById(Long id) throws MetamacException;
+       		
+       		"OfficialityType"
+       		List<@OfficialityTypeDto> findAllOfficialityTypes;
+       		@OfficialityTypeDto findOfficialityTypeById(Long id) throws MetamacException;
+       		
+       		"CollMethod"
+       		List<@CollMethodDto> findAllCollMethods;
+       		@CollMethodDto findCollMethodById(Long id) throws MetamacException;
+       		
+       		"Cost"
+       		List<@CostDto> findAllCosts;
+       		@CostDto findCostById(Long id) throws MetamacException;
+       		
+       		"Families"
+       		@FamilyDto createFamily(@FamilyDto familyDto) throws MetamacException;
+       		@FamilyDto updateFamily(@FamilyDto familyDto) throws MetamacException;
+       		deleteFamily(Long familyId) throws MetamacException;
+       		List<@FamilyBaseDto> findAllFamilies  throws MetamacException;
+       		List<@FamilyBaseDto> findFamilyByCondition(List<ConditionalCriteria> condition)  throws MetamacException;
+       		@FamilyDto findFamilyById(Long id) throws MetamacException;
+       		@FamilyDto publishInternallyFamily(Long familyId) throws MetamacException;
+       		@FamilyDto publishExternallyFamily(Long familyId) throws MetamacException;
+       		List<@OperationBaseDto> findOperationsForFamily(Long familyId) throws MetamacException;
+       		List<@OperationBaseDto> addOperationForFamily(Long familyId, Long operationId) throws MetamacException;
+       		List<@OperationBaseDto> removeOperationForFamily(Long familyId, Long operationId) throws MetamacException;
+       		
+       		
+       		"Operations"
+       		@OperationDto createOperation(@OperationDto operationDto) throws MetamacException;
+       		@OperationDto updateOperation(@OperationDto operationDto) throws MetamacException;
+       		deleteOperation(Long operationId) throws MetamacException;
+       		List<@OperationBaseDto> findAllOperations  throws MetamacException;
+       		List<@OperationBaseDto> findOperationsByCondition(List<ConditionalCriteria> condition)  throws MetamacException;
+       		@OperationDto findOperationById(Long id) throws MetamacException;
+       		@OperationDto publishInternallyOperation(Long operationId) throws MetamacException;
+       		@OperationDto publishExternallyOperation(Long operationId) throws MetamacException;
+       		List<@FamilyBaseDto> findFamiliesForOperation(Long operationId) throws MetamacException;
+       		List<@InstanceBaseDto> findInstancesForOperation(Long operationId) throws MetamacException;
+       		List<@FamilyBaseDto> addFamilyForOperation(Long operationId, Long familyId) throws MetamacException;
+       		List<@FamilyBaseDto> removeFamilyForOperation(Long operationId, Long familyId) throws MetamacException;
+       		
+       		"Instances"
+       		@InstanceDto createInstance(Long operationId, @InstanceDto instanceDto) throws MetamacException;
+       		@InstanceDto updateInstance(@InstanceDto instanceDto) throws MetamacException;
+       		List<@InstanceBaseDto> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;
+       		deleteInstance(Long instanceId) throws MetamacException;
+       		List<@InstanceBaseDto> findAllInstances  throws MetamacException;
+       		List<@InstanceBaseDto> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+       		@InstanceDto findInstanceById(Long id) throws MetamacException;
+       		@InstanceBaseDto findInstanceBaseById(Long id) throws MetamacException;
+       		@InstanceDto publishInternallyInstance(Long instanceId) throws MetamacException;
+       		@InstanceDto publishExternallyInstance(Long instanceId) throws MetamacException;
+       		@OperationBaseDto findOperationForInstance(Long instanceId) throws MetamacException;
+	   }
+		
+		
+		// ----------------------------------------------------------------
+		// 							SERVICES
+		// ----------------------------------------------------------------  
+
+		"Provides access to STATISTICAL OPERAETIONS Base Artefacts"
+ 		Service StatisticalOperationsBaseService {
+ 			> @FamilyRepository
+ 			> @OperationRepository
+ 			> @InstanceRepository
+			
+       		"Family" 
+       		@Family findFamilyById(Long id) throws MetamacException;
+    		@Family createFamily(@Family family) throws MetamacException;
+       		@Family updateFamily(@Family family) throws MetamacException;
+    		deleteFamily(Long familyId) throws MetamacException;
+    		List<@Family> findAllFamilies throws MetamacException;
+    		List<@Family> findFamilyByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+    		@Family publishInternallyFamily(Long familyId) throws MetamacException;
+       		@Family publishExternallyFamily(Long familyId) throws MetamacException;
+       		
+       		addOperationFamilyAssociation(Long familyId, Long operationId) throws MetamacException;
+       		removeOperationFamilyAssociation(Long familyId, Long operationId) throws MetamacException;
+    		
+			"Operation"			
+			@Operation findOperationById(Long id) throws MetamacException;
+			@Operation createOperation(@Operation operation) throws MetamacException;
+       		@Operation updateOperation(@Operation operation) throws MetamacException;
+			deleteOperation(Long operationId) throws MetamacException;
+			List<@Operation> findAllOperations throws MetamacException;
+			List<@Operation> findOperationByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			@Operation publishInternallyOperation(Long operationId) throws MetamacException;
+       		@Operation publishExternallyOperation(Long operationId) throws MetamacException;
+			
+			"Instance"		
+			@Instance findInstanceById(Long id) throws MetamacException;
+			@Instance createInstance(Long operationId, @Instance instance) throws MetamacException;
+       		@Instance updateInstance(@Instance instance) throws MetamacException;
+       		List<@Instance> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;
+			deleteInstance(Long instanceId) throws MetamacException;
+			List<@Instance> findAllInstances throws MetamacException;
+			List<@Instance> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			@Instance publishInternallyInstance(Long instanceId) throws MetamacException;
+       		@Instance publishExternallyInstance(Long instanceId) throws MetamacException;
+	   }
+	   
+	   
+	   	"Provides access to LISTS Artefacts"
+ 		Service StatisticalOperationsListsService {
+ 			> @SurveyTypeRepository
+ 			> @InstanceTypeRepository
+ 			> @SurveySourceRepository
+ 			> @OfficialityTypeRepository
+ 			> @CollMethodRepository
+ 			> @CostRepository
+ 			
+			"SurveyTypeListRepository"
+			@SurveyType findSurveyTypeById(Long id) throws MetamacException;
+			List<@SurveyType> findAllSurveyTypes;
+			
+			"InstanceTypeRepository"
+			@InstanceType findInstanceTypeById(Long id) throws MetamacException;
+			List<@InstanceType> findAllInstanceTypes;
+			
+			"SourceDataRepository"
+			@SurveySource findSurveySourceById(Long id) throws MetamacException;
+			List<@SurveySource> findAllSurveySources;
+			
+			"OfficialityTypeRepository"
+			@OfficialityType findOfficialityTypeById(Long id) throws MetamacException;
+			List<@OfficialityType> findAllOfficialityTypes;
+			
+			"CollMethodRepository"
+			@CollMethod findCollMethodById(Long id) throws MetamacException;
+			List<@CollMethod> findAllCollMethods;
+			
+			"CostRepository"
+			@Cost findCostById(Long id) throws MetamacException;
+			List<@Cost> findAllCosts;
+	   }
+		
+		
+		// ----------------------------------------------------------------
+		// 							ENTITIES
+		// ---------------------------------------------------------------- 
+		
+		"Survey Type List"
+    	Entity SurveyType {
+    		databaseTable="LIS_SURVEY_TYPES"
+    		hint="idSequence=SURVEY_TYPES"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository SurveyTypeRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+    	
+    	"Instance Type List"
+    	Entity InstanceType {
+    		databaseTable="LIS_INSTANCE_TYPES"
+    		hint="idSequence=INSTANCE_TYPES"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository InstanceTypeRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+    	
+    	"Survey Source List"
+    	Entity SurveySource {
+    		databaseTable="LIS_SURVEY_SOURCES"
+    		hint="idSequence=SURVEY_SOURCES"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository SurveySourceRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+    	
+    	"Officiality Type List"
+    	Entity OfficialityType {
+    		databaseTable="LIS_OFFICIALITY_TYPES"
+    		hint="idSequence=OFFICIALITY_TYPES"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository OfficialityTypeRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+    	
+    	"Coll Method List"
+    	Entity CollMethod {
+    		databaseTable="LIS_COLL_METHODS"
+    		hint="idSequence=COLL_METHODS"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository CollMethodRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+    	
+    	"Coll Method List"
+    	Entity Cost {
+    		databaseTable="LIS_COSTS"
+    		hint="idSequence=COSTS"
+    		
+    		not auditable
+    		String identifier;
+    		- @InternationalString description nullable;
+    		
+    		Repository CostRepository {
+    			findById;
+    			findAll;
+    		}
+    	}
+		
+		
+		"Semantic grouping of statistical operations"
+		Entity Family {
+			databaseTable="TBL_FAMILIES"
+			hint="idSequence=FAMILIES"
+			
+			gap
+			
+			"Semantic identifier"
+       		String code;
+       		"URI"
+       		String uri nullable;
+       		"TITLE"
+       		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
+       		"TITLE_ALTERNATIVE"
+       		- @InternationalString acronym cascade="all" nullable databaseColumn="ACRONYM_FK";
+       		"DESCRIPTION"
+       		- @InternationalString description cascade="all" nullable databaseColumn="DESCRIPTION_FK";
+       		"Related statistical operations"
+       		- Set<@Operation> operations cascade="none" databaseJoinTable="TBL_FAMILIES_OPERATIONS" <-> families;
+			"INTERNAL_INVENTORY_DATE"
+			DateTimeTZ internalInventoryDate nullable;
+       		"PROC_STATUS"
+       		- @ProcStatusEnum procStatus not nullable;
+       		"INVENTORY_DATE"
+       		DateTimeTZ inventoryDate nullable;
+       		
+		
+			Repository FamilyRepository {
+				findById;
+		   		findAll;
+		   		save;
+		   		delete;
+				findByQuery;
+				findByCondition;
+			}
+		}  
+		
+		"Statistical operation"
+		Entity Operation {
+			databaseTable="TBL_OPERATIONS"
+			hint="idSequence=OPERATIONS"
+			
+			gap
+			
+			- @ExternalItemBt commonMetadata nullable;
+			
+			"Metadata CODE"
+       		String code;
+       		"Metadta URI"
+       		String uri nullable;
+       		"Metadata TITLE"
+       		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
+       		"Metadata TITLE_ALTERNATIVE"
+       		- @InternationalString acronym cascade="all" nullable databaseColumn="ACRONYM_FK";
+       		
+       		"Related families"
+       		- Set<@Family> families cascade="none" <-> operations;
+       		"Subject areas and subject codes. Its type is CATEGORY"
+       		- @ExternalItemBt subjectArea nullable;
+       		"Metadata SECONDARY_SUBJECT_AREAS. Its type is CATEGORY"
+       		- Set<@ExternalItem> secondarySubjectAreas databaseColumn="SECUN_SUBJECT_AREAS_FK" databaseJoinTable="TBL_EI_SECONDARY_AREAS" cascade="all-delete-orphan";
+       		
+       		"Metadata OBJECTIVE"
+       		- @InternationalString objective cascade="all" nullable databaseColumn="OBJECTIVE_FK";
+       		"Metadata DESCRIPTION"
+       		- @InternationalString description cascade="all" nullable databaseColumn="DESCRIPTION_FK";
+       		"Related instances"
+       		-Bag<@Instance> instances inverse <-> operation orderby="order desc";
+       		
+       		"Metadata SURVEY_TYPE"
+       		- @SurveyType surveyType cascade="none" nullable databaseColumn="SURVEY_TYPE_FK";
+       		"Metadata OFFICIALITY_TYPE"
+       		- @OfficialityType officialityType cascade="none" nullable databaseColumn="OFFICIALITY_TYPE_FK";
+       		"Metadata INDICATOR_SYSTEM"
+			Boolean indicatorSystem;
+       		
+       		"Metadata PRODUCER. Its type is ORGANIZATION"
+       		- Set<@ExternalItem> producer databaseColumn="PRODUCER_FK" databaseJoinTable="TBL_EI_PRODUCERS"  cascade="all-delete-orphan";
+       		"Metadata REGIONAL_RESPONSIBLE. Its type is ORGANIZATION"
+       		- Set<@ExternalItem> regionalResponsible databaseColumn="REGIONAL_RESPONSIBLE_FK" databaseJoinTable="TBL_EI_REG_RESPONSIBLES"  cascade="all-delete-orphan";
+       		"Metadata REGIONAL_CONTRIBUTOR. Its type is ORGANIZATION"
+       		- Set<@ExternalItem> regionalContributor databaseColumn="REGIONAL_CONTRIBUTOR_FK" databaseJoinTable="TBL_EI_REG_CONTRIBUTORS"  cascade="all-delete-orphan";
+       		"Metadata INTERNAL_INVENTORY_DATE"
+			DateTimeTZ internalInventoryDate nullable;
+			"Metadata CURRENTLY_ACTIVE"
+			Boolean currentlyActive;
+       		"Metadata PROC_STATUS"
+       		- @ProcStatusEnum procStatus not nullable;
+       		"Metadata STATUS"
+       		- @StatusEnum status not nullable;
+       		
+       		"Metadata PUBLISHER"
+       		- Set<@ExternalItem> publisher databaseColumn="PUBLISHER_FK" databaseJoinTable="TBL_EI_PUBLISHERS"  cascade="all-delete-orphan";
+       		"Metadata REL_POL_US_AC"
+       		- @InternationalString relPolUsAc cascade="all" nullable databaseColumn="REL_POL_US_AC_FK";
+       		"Metadata REL_POL_US_AC_URL"
+       		String relPolUsAcUrl nullable;
+       		"Metadata RELEASE_CALENDAR"
+       		Boolean releaseCalendar;
+       		"Metadata RELEASE_CALENDAR_ACCESS"
+       		String releaseCalendarAccess nullable pattern="'https?://.+'";
+       		"Metadata UPDATE_FREQUENCY. Its type is CODE"
+       		- Set<@ExternalItem> updateFrequency databaseColumn="UPDATE_FREQUENCY_FK" databaseJoinTable="TBL_EI_UPDATE_FREQUENCY"  cascade="all-delete-orphan";
+       		"INVENTORY_DATE"
+       		DateTimeTZ inventoryDate nullable;
+       		"Metadata REV_POLICY"
+       		- @InternationalString revPolicy cascade="all" nullable databaseColumn="REV_POLICY_FK";
+       		"Metadata REV_POLICY_URL"
+       		String revPolicyUrl nullable;
+       		"Metadata REV_PRACTICE"
+       		- @InternationalString revPractice cascade="all" nullable databaseColumn="REV_PRACTICE_FK";
+       		"Metadata REV_PRACTICE_URL"
+       		String revPracticeUrl nullable;
+       		// CONTAT: It comes from AppCommonMetadata
+       		
+       		
+       		// LEGAL_ACTS: It comes from AppCommonMetadata
+       		// DATA_SHARING: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
+       		
+       		"Metadata COMMENT"
+       		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
+       		"Metadata COMMENT_URL"
+       		String commentUrl nullable;
+       		"Metadata NOTES"
+       		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
+       		"Metadata NOTES_URL"
+       		String notesUrl nullable;
+       		
+       		
+			Repository OperationRepository {
+				findById;
+		   		findAll;
+		   		save;
+		   		delete;
+				findByQuery;
+				findByCondition;
+			}
+		}
+		
+		"Statistical instance"
+		Entity Instance {
+			databaseTable="TBL_INSTANCES"
+			hint="idSequence=INSTANCES"
+			
+			gap 
+
+			"Order"
+			Integer order databaseColumn="ORDER_IDX";
+			
+			"Metadata CODE"
+       		String code;
+       		"Metadta URI"
+       		String uri nullable;
+       		"Metadata TITLE"
+       		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
+       		"Metadata TITLE_ALTERNATIVE"
+       		- @InternationalString acronym cascade="all" nullable databaseColumn="ACRONYM_FK";
+			
+       		"Related operation"
+       		- @Operation operation not nullable cascade="merge" databaseColumn="OPERATION_FK" <-> instances; 
+       		
+       		"Metadata DATA_DESCRIPTION"
+       		- @InternationalString dataDescription cascade="all" nullable databaseColumn="DATA_DESCRIPTION_FK";
+       		"Metadata STATISTICAL_POPULATION" 
+       		- @InternationalString statisticalPopulation cascade="all" nullable databaseColumn="STATISTICAL_POPULATION_FK";
+       		"Metadata STATISTICAL_UNIT. Its type is CONCEPT"
+       		- Set<@ExternalItem> statisticalUnit databaseColumn="STATISTICAL_UNIT_FK" databaseJoinTable="TBL_EI_STATISTICAL_UNITS"  cascade="all-delete-orphan";
+       		"Metadata GEOGRAPHIC_GRANULARITY. Its type is CODE"
+       		- @ExternalItemBt geographicGranularity nullable;
+       		"Metadata GEOGRAPHIC_COMPARABILITY"
+       		- @InternationalString geographicComparability cascade="all" nullable databaseColumn="GEOGRAPHIC_COMPARABILITY_FK";
+       		"Metadata TEMPORAL_GRANULARITY. Its type is CODE"
+       		- @ExternalItemBt temporalGranularity nullable;
+       		"Metadata TEMPORAL_COMPARABILITY"
+       		- @InternationalString temporalComparability cascade="all" nullable databaseColumn="TEMPORAL_COMPARABILITY_FK";
+       		"Metadata BASE_PERIOD. Its type is CODE"
+       		- @ExternalItemBt basePeriod nullable;
+       		"Metadata UNIT_MEASURE. Its type is CODE"
+       		- Set<@ExternalItem> unitMeasure databaseColumn="UNIT_MEASURE_FK" databaseJoinTable="TBL_EI_UNITS_MEASURE"  cascade="all-delete-orphan";
+       		"Metadata STAT_CONC_DEF"
+       		- @InternationalString statConcDef cascade="all" nullable databaseColumn="STAT_CONC_DEF_FK";
+       		"Metadata STAT_CONC_DEF_LIST. Its type is CONCEPT_SCHEME"
+       		- Set<@ExternalItem> statConcDefList databaseColumn="STAT_CONC_DEF_LIST_FK" databaseJoinTable="TBL_EI_CONC_DEF_LISTS"  cascade="all-delete-orphan";
+       		"Metadata CLASS_SYSTEM"
+       		- @InternationalString classSystem cascade="all" nullable databaseColumn="CLASS_SYSTEM_FK";
+       		"Metadata CLASS_SYSTEM_LIST. Its type is CONCEPT_SCHEME"
+       		- Set<@ExternalItem> classSystemList databaseColumn="CLASS_SYSTEM_LIST_FK" databaseJoinTable="TBL_EI_CLASS_SYSTEM_LISTS"  cascade="all-delete-orphan";
+       		
+       		"Metadata INSTANCE_TYPE"
+       		- @InstanceType instanceType cascade="none" nullable databaseColumn="INSTANCE_TYPE_FK";
+       		
+       		"Metadata INTERNAL_INVENTORY_DATE"
+			DateTimeTZ internalInventoryDate nullable;
+       		"Metadata PROC_STATUS"
+       		- @ProcStatusEnum procStatus not nullable;
+       		"Metadata DOC_METHOD"
+       		- @InternationalString docMethod cascade="all" nullable databaseColumn="DOC_METHOD_FK";
+       		"Metadata DOC_METHOD_URL"
+       		String docMethodUrl nullable;
+       		"Metadata SURVEY_SOURCE"
+       		- @SurveySource surveySource cascade="none" nullable databaseColumn="SURVEY_SOURCE_FK";
+       		"Metadata COLL_METHOD"
+       		- @CollMethod collMethod cascade="none" nullable databaseColumn="COLL_METHOD_FK";
+       		"Metadata INFORMATION_SUPPLIERS. Its type is ORGANIZATION / CONCEPTS"
+       		- Set<@ExternalItem> informationSuppliers databaseColumn="INFORMATION_SUPPLIERS_FK" databaseJoinTable="TBL_EI_INF_SUPPLIERS"  cascade="all-delete-orphan";
+       		"Metadata FREQ_COLL. Its type is CODE"
+       		- Set<@ExternalItem> freqColl databaseColumn="FREQ_COLL_FK" databaseJoinTable="TBL_EI_FREQ_COLL"  cascade="all-delete-orphan";
+       		"Metadata DATA_VALIDATION"
+       		- @InternationalString dataValidation cascade="all" nullable databaseColumn="DATA_VALIDATION_FK";
+       		"Metadata DATA_VALIDATION_URL"
+       		String dataValidationUrl nullable;
+       		"Metadata DATA_COMPILATION"
+       		- @InternationalString dataCompilation cascade="all" nullable databaseColumn="DATA_COMPILATION_FK";
+       		"Metadata DATA_COMPILATION_URL"
+       		String dataCompilationUrl nullable;
+       		"Metadata ADJUSTMENT"
+       		- @InternationalString adjustment cascade="all" nullable databaseColumn="ADJUSTMENT_FK";
+       		"Metadata ADJUSTMENT_URL"
+       		String adjustmentUrl nullable;
+       		"Metadata COST_BURDEN"
+       		- @InternationalString costBurden cascade="all" nullable databaseColumn="COST_BURDEN_FK";
+       		"Metadata COST_BURDEN_URL"
+       		String costBurdenUrl nullable;
+       		"Metadata COST"
+       		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TBL_INSTANCES_COSTS";
+
+			// TODO CURRENT_INSTANCE       		
+       		"INVENTORY_DATE"
+       		DateTimeTZ inventoryDate nullable;
+       		
+       		"Metadata QUALITY_DOC"
+       		- @InternationalString qualityDoc cascade="all" nullable databaseColumn="QUALITY_DOC_FK";
+       		"Metadata QUALITY_DOC"
+       		String qualityDocUrl nullable;
+       		"Metadata QUALITY_ASSURE"
+       		- @InternationalString qualityAssure cascade="all" nullable databaseColumn="QUALITY_ASSURE_FK";
+       		"Metadata QUALITY_ASSURE_URL"
+       		String qualityAssureUrl nullable;
+       		"Metadata QUALITY_ASSMNT"
+       		- @InternationalString qualityAssmnt cascade="all" nullable databaseColumn="QUALITY_ASSMNT_FK";
+       		"Metadata QUALITY_ASSMNT_URL"
+       		String qualityAssmntUrl nullable;
+       		"Metadata USER_NEEDS"
+       		- @InternationalString userNeeds cascade="all" nullable databaseColumn="USER_NEEDS_FK";
+       		"Metadata USER_NEEDS_URL"
+       		String userNeedsUrl nullable;
+       		"Metadata USER_SAT"
+       		- @InternationalString userSat cascade="all" nullable databaseColumn="USER_SAT_FK";
+       		"Metadata USER_SAT_URL"
+       		String userSatUrl nullable;
+       		"Metadata COMPLETENESS"
+       		- @InternationalString completeness cascade="all" nullable databaseColumn="COMPLETENESS_FK";
+       		"Metadata COMPLETENESS_URL"
+       		String completenessUrl nullable;
+       		"Metadata TIMELINESS"
+       		- @InternationalString timeliness cascade="all" nullable databaseColumn="TIMELINESS_FK";
+       		"Metadata TIMELINESS_URL"
+       		String timelinessUrl nullable;
+       		"Metadata PUNCTUALITY"
+       		- @InternationalString punctuality cascade="all" nullable databaseColumn="PUNCTUALITY_FK";
+       		"Metadata PUNCTUALITY_URL"
+       		String punctualityUrl nullable;
+       		"Metadata ACCURACY_OVERALL"
+       		- @InternationalString accuracyOverall cascade="all" nullable databaseColumn="ACCURACY_OVERALL_FK";
+       		"Metadata ACCURACY_OVERALL_URL"
+       		String accuracyOverallUrl nullable;
+       		"Metadata SAMPLING_ERR"
+       		- @InternationalString samplingErr cascade="all" nullable databaseColumn="SAMPLING_ERR_FK";
+       		"Metadata SAMPLING_ERR_URL"
+       		String samplingErrUrl nullable;
+       		"Metadata NONSAMPLING_ERR"
+       		- @InternationalString nonsamplingErr cascade="all" nullable databaseColumn="NONSAMPLING_ERR_FK";
+       		"Metadata NONSAMPLING_ERR_URL"
+       		String nonsamplingErrUrl nullable;
+       		"Metadata COHER_X_DOMAIN"
+       		- @InternationalString coherXDomain cascade="all" nullable databaseColumn="COHER_X_DOMAIN_FK";
+       		"Metadata COHER_X_DOMAIN_URL"
+       		String coherXDomainUrl nullable;
+       		"Metadata COHER_INTERNAL"
+       		- @InternationalString coherInternal cascade="all" nullable databaseColumn="COHER_INTERNAL_FK";
+       		"Metadata COHER_INTERNAL_URL"
+       		String coherInternalUrl nullable;
+       		
+       		// LEGAL_ACTS: It comes from AppCommonMetadata
+       		// DATA_SHARING: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
+       		
+       		"Metadata COMMENT"
+       		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
+       		"Metadata COMMENT_URL"
+       		String commentUrl nullable;
+       		"Metadata NOTES"
+       		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
+       		"Metadata NOTES_URL"
+       		String notesUrl nullable;
+       		
+			Repository InstanceRepository {
+				findById;
+		   		findAll;
+		   		save;
+		   		delete;
+				findByQuery;
+				findByCondition;
+			}
+		} 
+	}
+	
+	
+	
+	Module dtos {    	
+		basePackage=org.siemac.metamac.statistical.operations.core.dto
+		
+		// ----------------------------------------------------------------
+		// 							DTOS
+		// ----------------------------------------------------------------
+		
+		"Dto for SurveyType"
+       	DataTransferObject SurveyTypeDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	"Dto for InstanceType"
+       	DataTransferObject InstanceTypeDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	"Dto for SurveySource"
+       	DataTransferObject SurveySourceDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	"Dto for OfficialityType"
+       	DataTransferObject OfficialityTypeDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	"Dto for CollMethod"
+       	DataTransferObject CollMethodDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	"Dto for Cost"
+       	DataTransferObject CostDto extends @IdentityDto  {
+       		String identifier;
+       		-@InternationalStringDto description nullable;
+       	}
+       	
+       	
+       	"Dto for FamilytDto"
+       	DataTransferObject FamilyDto extends @AuditableDto  {
+			String code required;	
+			String uri nullable;
+       		-@InternationalStringDto title required;
+       		-@InternationalStringDto acronym nullable;
+       		-@InternationalStringDto description nullable;
+       		JAVADATE internalInventoryDate nullable;
+       		-@ProcStatusEnum procStatus required;
+       		JAVADATE inventoryDate nullable;
+       	}
+       	
+       	
+       	
+       	"Dto for FamilyBaseDto"
+       	DataTransferObject FamilyBaseDto extends @AuditableDto  {
+			String code;	
+       		-@InternationalStringDto title;
+       		-@InternationalStringDto description nullable;
+       		-@ProcStatusEnum procStatus required;
+       	}
+       	
+       	
+       	"Dto for OperationDto"
+       	DataTransferObject OperationDto extends @AuditableDto  {
+       		- @ExternalItemBtDto commonMetadata nullable;
+       		
+       		String code;
+       		String uri nullable;
+       		- @InternationalStringDto title;
+       		- @InternationalStringDto acronym nullable;
+       		
+       		- @ExternalItemBtDto subjectArea nullable;
+       		- Set<@ExternalItemBtDto> secondarySubjectAreas;
+       		
+       		- @InternationalStringDto objective nullable;
+       		- @InternationalStringDto description nullable;
+       		
+       		- @SurveyTypeDto surveyType nullable;
+       		- @OfficialityTypeDto officialityType nullable;
+       		Boolean indicatorSystem;
+       		
+       		- Set<@ExternalItemBtDto> producer;
+       		- Set<@ExternalItemBtDto> regionalResponsible;
+       		- Set<@ExternalItemBtDto> regionalContributor;
+			JAVADATE internalInventoryDate nullable;
+			Boolean currentlyActive;
+       		- @ProcStatusEnum procStatus not nullable;
+       		- @StatusEnum status not nullable;
+       		
+       		- Set<@ExternalItemBtDto> publisher;
+       		- @InternationalStringDto relPolUsAc nullable;
+       		String relPolUsAcUrl nullable;
+       		Boolean releaseCalendar;
+       		String releaseCalendarAccess nullable;
+       		- Set<@ExternalItemBtDto> updateFrequency;
+       		- @InstanceBaseDto currentInstance nullable;
+       		- @InstanceBaseDto currentInternalInstance nullable;
+       		JAVADATE inventoryDate nullable;
+       		- @InternationalStringDto revPolicy nullable;
+       		String revPolicyUrl nullable;
+       		- @InternationalStringDto revPractice nullable;
+       		String revPracticeUrl nullable;
+       		// CONTAT: It comes from AppCommonMetadata
+       		
+       		// LEGAL_ACTS: It comes from AppCommonMetadata
+       		// DATA_SHARING: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
+       		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
+       		
+       		- @InternationalStringDto comment  nullable;
+       		String commentUrl nullable;
+       		- @InternationalStringDto notes  nullable;
+       		String notesUrl nullable;
+       	}
+       	
+       	
+       	"Dto for OperationBaseDto"
+       	DataTransferObject OperationBaseDto extends @AuditableDto  {
+       		String code;
+       		-@InternationalStringDto title;
+       		-@InternationalStringDto acronym nullable;
+       		-@ProcStatusEnum procStatus required;
+       	}
+       	
+       	
+       	"Dto for InstanceDto"
+       	DataTransferObject InstanceDto extends @AuditableDto  {
+			Integer order;
+       		String code;
+       		String uri nullable;
+       		- @InternationalStringDto title;
+       		- @InternationalStringDto acronym nullable;
+       		
+//       		-@InstanceBaseDto successor nullable;
+//       		-@InstanceBaseDto predecessor nullable;
+       		
+       		- @InternationalStringDto dataDescription nullable;
+       		- @InternationalStringDto statisticalPopulation nullable;
+       		- Set<@ExternalItemBtDto> statisticalUnit;
+       		- @ExternalItemBtDto geographicGranularity nullable;
+       		- @InternationalStringDto geographicComparability nullable;
+       		- @ExternalItemBtDto temporalGranularity nullable;
+       		- @InternationalStringDto temporalComparability nullable;
+       		- @ExternalItemBtDto basePeriod nullable;
+       		- Set<@ExternalItemBtDto> unitMeasure;
+       		- @InternationalStringDto statConcDef nullable;
+       		- Set<@ExternalItemBtDto> statConcDefList;
+       		- @InternationalStringDto classSystem nullable;
+       		- Set<@ExternalItemBtDto> classSystemList;
+       		
+       		- @InstanceTypeDto instanceType nullable;
+       		
+			JAVADATE internalInventoryDate nullable;
+			- @ProcStatusEnum procStatus not nullable;
+       		- @InternationalStringDto docMethod nullable;
+       		String docMethodUrl nullable;
+       		- @SurveySourceDto surveySource nullable;
+       		- @CollMethodDto collMethod nullable;
+       		- Set<@ExternalItemBtDto> informationSuppliers;
+       		- Set<@ExternalItemBtDto> freqColl;
+       		- @InternationalStringDto dataValidation nullable;
+       		String dataValidationUrl nullable;
+       		- @InternationalStringDto dataCompilation nullable;
+       		String dataCompilationUrl nullable;
+       		- @InternationalStringDto adjustment nullable;
+       		String adjustmentUrl nullable;
+       		- @InternationalStringDto costBurden nullable;
+       		String costBurdenUrl nullable;
+       		- Set<@CostDto> cost;
+       		
+       		JAVADATE inventoryDate nullable;
+       		
+       		- @InternationalStringDto qualityDoc nullable;
+       		String qualityDocUrl nullable;
+       		- @InternationalStringDto qualityAssure nullable;
+       		String qualityAssureUrl nullable;
+       		- @InternationalStringDto qualityAssmnt nullable;
+       		String qualityAssmntUrl nullable;
+       		- @InternationalStringDto userNeeds nullable;
+       		String userNeedsUrl nullable;
+       		- @InternationalStringDto userSat nullable;
+       		String userSatUrl nullable;
+       		- @InternationalStringDto completeness nullable;
+       		String completenessUrl nullable;
+       		- @InternationalStringDto timeliness nullable;
+       		String timelinessUrl nullable;
+       		- @InternationalStringDto punctuality  nullable;
+       		String punctualityUrl nullable;
+       		- @InternationalStringDto accuracyOverall  nullable;
+       		String accuracyOverallUrl nullable;
+       		- @InternationalStringDto samplingErr  nullable;
+       		String samplingErrUrl nullable;
+       		- @InternationalStringDto nonsamplingErr  nullable;
+       		String nonsamplingErrUrl nullable;
+       		- @InternationalStringDto coherXDomain  nullable;
+       		String coherXDomainUrl nullable;
+       		- @InternationalStringDto coherInternal  nullable;
+       		String coherInternalUrl nullable;
+       		
+       		- @InternationalStringDto comment  nullable;
+       		String commentUrl nullable;
+       		- @InternationalStringDto notes  nullable;
+       		String notesUrl nullable;
+       		
+       	}
+       	
+       	"Dto for InstanceBaseDto"
+       	DataTransferObject InstanceBaseDto extends @AuditableDto  {
+       		String code;
+       		-@InternationalStringDto title;
+       		-@ProcStatusEnum procStatus required;
+       		-@InternationalStringDto description nullable;
+       		Integer order;
+       	}
+       	
+	}
+	
+	Module enums {    	
+		basePackage=org.siemac.metamac.statistical.operations.core.enume
+       	
+       	// ----------------------------------------------------------------
+    	// 								ENUM
+    	// ----------------------------------------------------------------
+    	
+    	"ProcStatus Enum is used to specify the valid states of the entities"
+    	enum ProcStatusEnum {
+    		DRAFT,
+    		PUBLISH_INTERNALLY,
+    		PUBLISH_EXTERNALLY
+    	}
+    	
+    	"Status Enum is used to specify the statistical state of the survey"
+    	enum StatusEnum {
+    		PLANNING,
+    		DESIGN,
+    		PRODUCTION,
+    		OUT_OF_PRINT
+    	}
+       
+    }
+}

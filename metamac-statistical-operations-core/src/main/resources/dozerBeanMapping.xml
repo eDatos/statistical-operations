@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		<custom-converters>
+			<converter type="org.siemac.metamac.statistical.operations.core.mapper.Date2JodaTimeConverter">
+				<class-a>org.joda.time.DateTime</class-a>
+				<class-b>java.util.Date</class-b>
+			</converter>
+			<converter type="org.siemac.metamac.statistical.operations.core.mapper.Long2JodaDurationConverter">
+				<class-a>org.joda.time.Duration</class-a>
+				<class-b>java.lang.Long</class-b>
+			</converter>
+		</custom-converters>
+	</configuration>
+
+
+	<!-- ***********************************************************
+	 ONLY CLASS WITH DIRECT ID FIELD
+	**************************************************************** -->
+
+	<!-- Lists -->
+
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.SurveyType</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.InstanceType</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.SurveySource</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.OfficialityType</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.CollMethod</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Cost</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	
+	
+	<!-- Tables -->
+	
+	<mapping>
+		<class-a>org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto</class-a>
+		<class-b>org.siemac.metamac.core.common.bt.domain.ExternalItemBt</class-b>
+		<field>
+			<a>type</a>
+			<b is-accessible="true">type</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.core.common.dto.serviceapi.LocalisedStringDto</class-a>
+  		<class-b>org.siemac.metamac.core.common.ent.domain.LocalisedString</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto</class-a>
+  		<class-b>org.siemac.metamac.core.common.ent.domain.InternationalString</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Family</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Operation</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Instance</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Family</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Operation</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto</class-a>
+  		<class-b>org.siemac.metamac.statistical.operations.core.domain.Instance</class-b>
+		<field>
+			<a>id</a>
+			<b is-accessible="true">id</b>
+		</field>
+		<field>
+			<a>uuid</a>
+			<b is-accessible="true">uuid</b>
+		</field>
+	</mapping>
+
+</mappings>

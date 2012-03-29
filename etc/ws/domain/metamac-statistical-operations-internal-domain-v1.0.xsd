@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:cDomain_v1_0="http://www.siemac.org/metamac/schema/common/v1.0/domain"
+	xmlns:tns="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/domain"
+	targetNamespace="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/domain">
+
+	<xsd:import namespace="http://www.siemac.org/metamac/schema/common/v1.0/domain"
+		schemaLocation="classpath:metamac-domain-v1.0.xsd" />
+
+	<xsd:complexType name="OperationBase">
+		<xsd:sequence>
+			<xsd:element name="uri" type="cDomain_v1_0:Text_255" />
+			<xsd:element name="code" type="cDomain_v1_0:Text_255" />
+			<xsd:element name="title" type="cDomain_v1_0:InternationalString" />
+			<xsd:element name="acronym" type="cDomain_v1_0:InternationalString" />
+			<xsd:element name="description" type="cDomain_v1_0:InternationalString" />
+			<xsd:element name="objetive" type="cDomain_v1_0:InternationalString" />
+			<xsd:element name="procStatus" type="tns:ProcStatusType" />    
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="OperationBaseList">
+        <xsd:sequence>
+            <xsd:element name="operation" type="tns:OperationBase" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="total" type="xsd:unsignedLong" use="optional" />
+    </xsd:complexType>
+
+    <xsd:complexType name="OperationCriteria">
+        <xsd:sequence>
+			<xsd:element name="procStatus" type="tns:ProcStatusType" minOccurs="0"/>
+			<xsd:element name="isIndicatorsSystem" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ProcStatusType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="PUBLISH_INTERNALLY" />
+            <xsd:enumeration value="PUBLISH_EXTERNALLY" />
+        </xsd:restriction>
+    </xsd:simpleType>            
+	
+</xsd:schema>

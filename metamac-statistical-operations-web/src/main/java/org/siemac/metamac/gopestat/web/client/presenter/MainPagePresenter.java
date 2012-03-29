@@ -1,0 +1,282 @@
+package org.siemac.metamac.gopestat.web.client.presenter;
+
+import static org.siemac.metamac.gopestat.web.client.GopestatWeb.getMessages;
+
+import java.util.List;
+
+import org.siemac.metamac.gopestat.web.client.NameTokens;
+import org.siemac.metamac.gopestat.web.client.events.UpdateCategorySchemesEvent;
+import org.siemac.metamac.gopestat.web.client.events.UpdateCodeListsEvent;
+import org.siemac.metamac.gopestat.web.client.events.UpdateCommonMetadataEvent;
+import org.siemac.metamac.gopestat.web.client.events.UpdateFrequencyCodesEvent;
+import org.siemac.metamac.gopestat.web.client.events.UpdateGopestatListsEvent;
+import org.siemac.metamac.gopestat.web.client.events.UpdateOrganisationSchemesEvent;
+import org.siemac.metamac.gopestat.web.client.utils.ErrorUtils;
+import org.siemac.metamac.gopestat.web.client.view.handlers.MainPageUiHandlers;
+import org.siemac.metamac.gopestat.web.client.widgets.BreadCrumbsPanel;
+import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesResult;
+import org.siemac.metamac.gopestat.web.shared.FindAllCodeListsAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllCodeListsResult;
+import org.siemac.metamac.gopestat.web.shared.FindAllCommonMetadataAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllCommonMetadataResult;
+import org.siemac.metamac.gopestat.web.shared.FindAllConceptSchemesAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllConceptSchemesResult;
+import org.siemac.metamac.gopestat.web.shared.FindAllOrganisationSchemesAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllOrganisationSchemesResult;
+import org.siemac.metamac.gopestat.web.shared.GetFrequencyCodesAction;
+import org.siemac.metamac.gopestat.web.shared.GetFrequencyCodesResult;
+import org.siemac.metamac.gopestat.web.shared.GetGopestatListsAction;
+import org.siemac.metamac.gopestat.web.shared.GetGopestatListsResult;
+import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
+import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
+import org.siemac.metamac.web.common.client.events.HideMessageEvent;
+import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
+import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
+import org.siemac.metamac.web.common.client.widgets.MasterHead;
+
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.mvp.client.HasUiHandlers;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.ContentSlot;
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.proxy.Place;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
+
+public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy> implements MainPageUiHandlers, ShowMessageHandler, HideMessageHandler {
+
+    private final PlaceManager  placeManager;
+    private final DispatchAsync dispatcher;
+
+    private static MasterHead   masterHead;
+
+    @ProxyStandard
+    @NameToken(NameTokens.mainPage)
+    public interface MainPageProxy extends Proxy<MainPagePresenter>, Place {
+
+    }
+
+    public interface MainPageView extends View, HasUiHandlers<MainPageUiHandlers> {
+
+        MasterHead getMasterHead();
+
+        BreadCrumbsPanel getBreadCrumbsPanel();
+        void clearBreadcrumbs(int size, PlaceManager placeManager);
+        void setBreadcrumbs(int index, String title);
+
+        void showMessage(List<String> messages, MessageTypeEnum type);
+        void hideMessages();
+    }
+
+    /**
+     * Use this in leaf presenters, inside their {@link #revealInParent} method.
+     * Is used to define a type to use in child presenters when you want to
+     * include them inside this page.
+     */
+    @ContentSlot
+    public static final Type<RevealContentHandler<?>> TYPE_SetContextAreaContent = new Type<RevealContentHandler<?>>();
+
+    @Inject
+    public MainPagePresenter(EventBus eventBus, MainPageView view, MainPageProxy proxy, PlaceManager placeManager, DispatchAsync dispatcher) {
+        super(eventBus, view, proxy);
+        getView().setUiHandlers(this);
+        this.placeManager = placeManager;
+        this.dispatcher = dispatcher;
+        MainPagePresenter.masterHead = getView().getMasterHead();
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+        // TODO Is this the proper place to load value lists?
+        loadCodeLists();
+        loadOrganisations();
+        loadCategorySchemes();
+        loadConceptSchemes();
+        loadCommonMetadata();
+        loadGopestatLists();
+        loadFrequencyCodes();
+    }
+
+    @Override
+    public void prepareFromRequest(PlaceRequest request) {
+        super.prepareFromRequest(request);
+    }
+
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
+        hideMessages();
+        int size = placeManager.getHierarchyDepth();
+        getView().clearBreadcrumbs(size, placeManager);
+        for (int i = 0; i < size; ++i) {
+            final int index = i;
+            placeManager.getTitle(i, new SetPlaceTitleHandler() {
+
+                @Override
+                public void onSetPlaceTitle(String title) {
+                    getView().setBreadcrumbs(index, title);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void revealInParent() {
+        RevealRootContentEvent.fire(this, this);
+    }
+
+    @Override
+    public void onNavigationPaneSectionHeaderClicked(String place) {
+        if (place.length() != 0) {
+            PlaceRequest placeRequest = new PlaceRequest(place);
+            placeManager.revealPlace(placeRequest);
+        }
+    }
+
+    @Override
+    public void onNavigationPaneSectionClicked(String place) {
+        if (place.length() != 0) {
+            PlaceRequest placeRequest = new PlaceRequest(place);
+            placeManager.revealPlace(placeRequest);
+        }
+    }
+
+    public static MasterHead getMasterHead() {
+        return masterHead;
+    }
+
+    @ProxyEvent
+    @Override
+    public void onShowMessage(ShowMessageEvent event) {
+        getView().showMessage(event.getMessages(), event.getMessageType());
+    }
+
+    @ProxyEvent
+    @Override
+    public void onHideMessage(HideMessageEvent event) {
+        hideMessages();
+    }
+
+    private void hideMessages() {
+        getView().hideMessages();
+    }
+
+    private void loadCodeLists() {
+        dispatcher.execute(new FindAllCodeListsAction(), new AsyncCallback<FindAllCodeListsResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(FindAllCodeListsResult result) {
+                UpdateCodeListsEvent.fire(MainPagePresenter.this, result.getCodeLists());
+            }
+        });
+    }
+
+    private void loadOrganisations() {
+        dispatcher.execute(new FindAllOrganisationSchemesAction(), new AsyncCallback<FindAllOrganisationSchemesResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(FindAllOrganisationSchemesResult result) {
+                UpdateOrganisationSchemesEvent.fire(MainPagePresenter.this, result.getOrganisationSchemes());
+            }
+        });
+    }
+
+    private void loadCategorySchemes() {
+        dispatcher.execute(new FindAllCategorySchemesAction(), new AsyncCallback<FindAllCategorySchemesResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(FindAllCategorySchemesResult result) {
+                UpdateCategorySchemesEvent.fire(MainPagePresenter.this, result.getCategorySchemes());
+            }
+        });
+    }
+
+    private void loadConceptSchemes() {
+        dispatcher.execute(new FindAllConceptSchemesAction(), new AsyncCallback<FindAllConceptSchemesResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(FindAllConceptSchemesResult result) {
+                UpdateConceptSchemesEvent.fire(MainPagePresenter.this, result.getConceptSchemes());
+            }
+        });
+    }
+
+    private void loadCommonMetadata() {
+        dispatcher.execute(new FindAllCommonMetadataAction(), new AsyncCallback<FindAllCommonMetadataResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(FindAllCommonMetadataResult result) {
+                UpdateCommonMetadataEvent.fire(MainPagePresenter.this, result.getCommonMetadataList());
+            }
+        });
+    }
+
+    private void loadGopestatLists() {
+        dispatcher.execute(new GetGopestatListsAction(), new AsyncCallback<GetGopestatListsResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(GetGopestatListsResult result) {
+                UpdateGopestatListsEvent.fire(MainPagePresenter.this, result.getSurveyTypeDtos(), result.getInstanceTypeDtos(), result.getSurveySourceDtos(), result.getOfficialityTypeDtos(),
+                        result.getCollMethodDtos(), result.getCostDtos());
+            }
+        });
+    }
+
+    private void loadFrequencyCodes() {
+        dispatcher.execute(new GetFrequencyCodesAction(), new AsyncCallback<GetFrequencyCodesResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onSuccess(GetFrequencyCodesResult result) {
+                UpdateFrequencyCodesEvent.fire(MainPagePresenter.this, result.getUpdateFrequencyCodes(), result.getTemporalGranularityCodes(), result.getFreqCollCodes());
+            }
+        });
+    }
+
+}

@@ -1,0 +1,36 @@
+package org.siemac.metamac.gopestat.web.server.handlers;
+
+import java.util.List;
+
+import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
+import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
+import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
+import org.siemac.metamac.gopestat.web.shared.GetConceptsFromSchemeAction;
+import org.siemac.metamac.gopestat.web.shared.GetConceptsFromSchemeResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gwtplatform.dispatch.server.ExecutionContext;
+import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
+import com.gwtplatform.dispatch.shared.ActionException;
+
+public class GetConceptsFromSchemeActionHandler extends AbstractActionHandler<GetConceptsFromSchemeAction, GetConceptsFromSchemeResult> {
+
+    @Autowired
+    private MetamacCoreCommonService metamacCoreCommonService;
+
+    public GetConceptsFromSchemeActionHandler() {
+        super(GetConceptsFromSchemeAction.class);
+    }
+
+    @Override
+    public GetConceptsFromSchemeResult execute(GetConceptsFromSchemeAction action, ExecutionContext context) throws ActionException {
+        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveConceptScheme(ServiceContextHelper.getServiceContext(), action.getConceptSchemeUri());
+        return new GetConceptsFromSchemeResult(concepts);
+    }
+
+    @Override
+    public void undo(GetConceptsFromSchemeAction action, GetConceptsFromSchemeResult result, ExecutionContext context) throws ActionException {
+
+    }
+
+}

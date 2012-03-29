@@ -1,0 +1,36 @@
+package org.siemac.metamac.gopestat.web.server.handlers;
+
+import java.util.List;
+
+import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
+import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
+import org.siemac.metamac.gopestat.web.server.ServiceContextHelper;
+import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesAction;
+import org.siemac.metamac.gopestat.web.shared.FindAllCategorySchemesResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gwtplatform.dispatch.server.ExecutionContext;
+import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
+import com.gwtplatform.dispatch.shared.ActionException;
+
+public class FindAllCategorySchemesActionHandler extends AbstractActionHandler<FindAllCategorySchemesAction, FindAllCategorySchemesResult> {
+
+    @Autowired
+    private MetamacCoreCommonService metamacCoreCommonService;
+
+    public FindAllCategorySchemesActionHandler() {
+        super(FindAllCategorySchemesAction.class);
+    }
+
+    @Override
+    public FindAllCategorySchemesResult execute(FindAllCategorySchemesAction action, ExecutionContext context) throws ActionException {
+        List<ExternalItemBtDto> categorySchemes = metamacCoreCommonService.findAllCategorySchemes(ServiceContextHelper.getServiceContext());
+        return new FindAllCategorySchemesResult(categorySchemes);
+    }
+
+    @Override
+    public void undo(FindAllCategorySchemesAction action, FindAllCategorySchemesResult result, ExecutionContext context) throws ActionException {
+
+    }
+
+}

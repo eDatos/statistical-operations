@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	xmlns:cdomain_v1_0="http://www.siemac.org/metamac/schema/common/v1.0/domain"
+	xmlns:domain_v1_0="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/domain"
+	xmlns:tns="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/service"
+	targetNamespace="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/service">
+
+	<xsd:import namespace="http://www.siemac.org/metamac/schema/common/v1.0/domain" schemaLocation="classpath:../domain/metamac-domain-v1.0.xsd" />
+	<xsd:import namespace="http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0/domain" schemaLocation="../domain/metamac-statistical-operations-internal-domain-v1.0.xsd" />
+
+	<!-- Common -->
+	<xsd:complexType name="RetrieveVersion" />
+	<xsd:complexType name="RetrieveVersionResponse">
+		<xsd:sequence>
+			<xsd:element name="version" type="cdomain_v1_0:MetamacVersion" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Operations -->
+	<xsd:complexType name="FindOperations">
+		<xsd:sequence>
+			<xsd:element name="criteria" type="domain_v1_0:OperationCriteria" minOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FindOperationsResponse">
+		<xsd:sequence>
+			<xsd:element name="operations" type="domain_v1_0:OperationBaseList" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RetrieveOperation">
+		<xsd:sequence>
+			<xsd:element name="code" type="cdomain_v1_0:Text_255" minOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RetrieveOperationResponse">
+		<xsd:sequence>
+			<xsd:element name="operation" type="domain_v1_0:OperationBase" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ELEMENTS -->
+	<!-- Common -->
+	<xsd:element name="retrieveVersion" type="tns:RetrieveVersion" />
+	<xsd:element name="retrieveVersionResponse" type="tns:RetrieveVersionResponse" />
+	<!-- Operations -->
+	<xsd:element name="findOperations" type="tns:FindOperations" />
+	<xsd:element name="findOperationsResponse" type="tns:FindOperationsResponse" />
+	<xsd:element name="retrieveOperation" type="tns:RetrieveOperation" />
+	<xsd:element name="retrieveOperationResponse" type="tns:RetrieveOperationResponse" />
+</xsd:schema>
