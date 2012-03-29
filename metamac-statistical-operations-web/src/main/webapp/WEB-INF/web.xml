@@ -33,7 +33,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>remoteLogging</servlet-name>
-        <url-pattern>/GopestatWeb/remote_logging</url-pattern>
+        <url-pattern>/OperationsWeb/remote_logging</url-pattern>
     </servlet-mapping>
   
 
@@ -51,7 +51,7 @@
 
 	<!-- ******************* Default page to serve ******************** -->
 	<welcome-file-list>
-		<welcome-file>GopestatWeb.html</welcome-file>
+		<welcome-file>StatisticalOperationsWeb.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>

@@ -226,7 +226,7 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
-					<runTarget>GopestatWeb.html</runTarget>
+					<runTarget>StatisticalOperationsWeb.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<compileSourcesArtifacts>
 				    	<artifact>org.siemac.metamac.statistical.operations:metamac-statistical-operations-core:jar</artifact>
