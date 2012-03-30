@@ -8,6 +8,7 @@ import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
 import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
@@ -34,9 +35,12 @@ public class NewOperationForm extends DynamicForm {
 
     public NewOperationForm() {
         super();
+        
+        setValidateOnChange(true);
 
         identifier = new RequiredTextItem("op-id", getConstants().operationIdentifier());
         identifier.setWidth(200);
+        identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         title = new RequiredTextItem("op-title", getConstants().operationTitle());
         title.setWidth(200);

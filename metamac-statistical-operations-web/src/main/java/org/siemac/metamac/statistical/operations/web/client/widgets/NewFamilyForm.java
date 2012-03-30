@@ -4,6 +4,7 @@ import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
@@ -23,8 +24,11 @@ public class NewFamilyForm extends DynamicForm {
     public NewFamilyForm() {
         super();
 
+        setValidateOnChange(true);
+        
         identifier = new RequiredTextItem("fam-id", OperationsWeb.getConstants().familyIdentifier());
         identifier.setWidth(200);
+        identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         title = new RequiredTextItem("fam-title", OperationsWeb.getConstants().familyTitle());
         title.setWidth(200);

@@ -4,6 +4,7 @@ import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
@@ -23,8 +24,11 @@ public class NewInstanceForm extends DynamicForm {
     public NewInstanceForm() {
         super();
 
+        setValidateOnChange(true);
+        
         identifier = new RequiredTextItem("in-id", OperationsWeb.getConstants().instanceIdentifier());
         identifier.setWidth(200);
+        identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         title = new RequiredTextItem("in-title", OperationsWeb.getConstants().instanceTitle());
         title.setWidth(200);
