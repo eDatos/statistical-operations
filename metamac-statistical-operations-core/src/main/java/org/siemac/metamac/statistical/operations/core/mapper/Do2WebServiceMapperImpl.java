@@ -20,7 +20,7 @@ import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcSta
 import org.springframework.stereotype.Component;
 
 @Component
-public class Do2WebserviceMapperImpl implements Do2WebserviceMapper {
+public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
 
     @Override
     public OperationBase operationToOperationBase(Operation source) throws MetamacException {
@@ -120,7 +120,7 @@ public class Do2WebserviceMapperImpl implements Do2WebserviceMapper {
             case PUBLISH_INTERNALLY:
                 return ProcStatusType.PUBLISH_INTERNALLY;
             default:
-                throw new MetamacException(ServiceExceptionType.UNKNOWN, "ProcStatusEnum non supported in webservices: " + source);
+                throw new MetamacException(ServiceExceptionType.UNKNOWN, "ProcStatusEnum non supported in web services: " + source);
         }
     }
 }

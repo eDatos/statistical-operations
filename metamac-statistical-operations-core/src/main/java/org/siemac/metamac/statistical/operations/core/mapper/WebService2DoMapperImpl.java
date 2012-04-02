@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Webservice2DoMapperImpl implements Webservice2DoMapper {
+public class WebService2DoMapperImpl implements WebService2DoMapper {
 
     @Autowired
     private DozerBeanMapper mapper;
@@ -31,7 +31,7 @@ public class Webservice2DoMapperImpl implements Webservice2DoMapper {
             case PUBLISH_INTERNALLY:
                 return ProcStatusEnum.PUBLISH_INTERNALLY;
             default:
-                throw new MetamacException(ServiceExceptionType.UNKNOWN, "ProcStatusType non supported in webservices: " + source);
+                throw new MetamacException(ServiceExceptionType.UNKNOWN, "ProcStatusType non supported in web services: " + source);
         }
     }
 }

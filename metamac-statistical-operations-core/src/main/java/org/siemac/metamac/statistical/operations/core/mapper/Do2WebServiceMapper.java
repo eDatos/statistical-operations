@@ -8,7 +8,7 @@ import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExcepti
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBaseList;
 
-public interface Do2WebserviceMapper {
+public interface Do2WebServiceMapper {
 
     // Entities
     public OperationBase operationToOperationBase(Operation source) throws MetamacException;

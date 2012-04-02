@@ -11,7 +11,7 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationCriteria;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcStatusType;
 
-public class WebserviceFacadeValidationUtil {
+public class WebServiceFacadeValidationUtil {
 
     public static void validateFindOperations(OperationCriteria criteria) throws MetamacException {
 

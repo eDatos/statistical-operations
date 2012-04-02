@@ -14,10 +14,10 @@ import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
-import org.siemac.metamac.statistical.operations.core.mapper.Do2WebserviceMapper;
-import org.siemac.metamac.statistical.operations.core.mapper.Webservice2DoMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.Do2WebServiceMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.WebService2DoMapper;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.WebserviceFacadeValidationUtil;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.WebServiceFacadeValidationUtil;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacStatisticalOperationsInternalInterfaceV10;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
@@ -31,24 +31,24 @@ import org.springframework.stereotype.Service;
  */
 @WebService(endpointInterface = "org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacStatisticalOperationsInternalInterfaceV10", targetNamespace = "http://www.siemac.org/metamac/statistical/operations/internal/ws/v1.0", serviceName = "MetamacStatisticalOperationsInternal_v1.0", portName = "MetamacStatisticalOperationsInternalSOAP_v1.0")
 @Service("metamacStatisticalOperationsInternalInterfaceV10")
-public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements MetamacStatisticalOperationsInternalInterfaceV10 {
+public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements MetamacStatisticalOperationsInternalInterfaceV10 {
 
     @Autowired
     private StatisticalOperationsBaseService statisticalOperationsBaseService;
 
     @Autowired
-    private Do2WebserviceMapper              do2WebserviceMapper;
+    private Do2WebServiceMapper              do2WebServiceMapper;
 
     @Autowired
-    private Webservice2DoMapper              webservice2DoMapper;
+    private WebService2DoMapper              webService2DoMapper;
 
     private static String                    STATISTICAL_OPERATIONS_WS_VERSION = "v1_0";
 
-    public StatisticalOperationsInternalWebserviceFacadeV10Impl() {
+    public StatisticalOperationsInternalWebServiceFacadeV10Impl() {
     }
 
     private ServiceContext getServiceContextWs() {
-        ServiceContext ctx = new ServiceContext("webservice", "webservice", "webservice"); // TODO ServiceContext en web services
+        ServiceContext ctx = new ServiceContext("webService", "webService", "webService"); // TODO ServiceContext en web services
         return ctx;
     }
 
@@ -60,7 +60,7 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
     public OperationBaseList findOperations(OperationCriteria criteria) throws MetamacExceptionFault {
         try {
             // Validation of parameters
-            WebserviceFacadeValidationUtil.validateFindOperations(criteria);
+            WebServiceFacadeValidationUtil.validateFindOperations(criteria);
 
             // TODO criteria tipo Indicadores
 
@@ -68,7 +68,7 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
             ConditionalCriteria procStatusCriteria = null;
             if (criteria.getProcStatus() != null) {
                 // TODO validar posibles valores?
-                ProcStatusEnum procStatusEnum = webservice2DoMapper.procStatusTypeToProcStatusEnum(criteria.getProcStatus());
+                ProcStatusEnum procStatusEnum = webService2DoMapper.procStatusTypeToProcStatusEnum(criteria.getProcStatus());
                 procStatusCriteria = ConditionalCriteria.equal(OperationProperties.procStatus(), procStatusEnum);
             } else {
                 procStatusCriteria = ConditionalCriteria.or(ConditionalCriteria.equal(OperationProperties.procStatus(), ProcStatusEnum.PUBLISH_INTERNALLY),
@@ -84,10 +84,10 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
 
             // Find
             List<Operation> operations = statisticalOperationsBaseService.findOperationByCondition(getServiceContextWs(), conditions);
-            OperationBaseList operationBaseList = do2WebserviceMapper.operationsToOperationBaseList(operations);
+            OperationBaseList operationBaseList = do2WebServiceMapper.operationsToOperationBaseList(operations);
             return operationBaseList;
         } catch (MetamacException e) {
-            throw do2WebserviceMapper.metamacExceptionToMetamacExceptionFault(e);
+            throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
         }
     }
 
@@ -95,7 +95,7 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
     public OperationBase retrieveOperation(String code) throws MetamacExceptionFault {
         try {
             // Validation of parameters
-            WebserviceFacadeValidationUtil.validateRetrieveOperation(code);
+            WebServiceFacadeValidationUtil.validateRetrieveOperation(code);
 
             // Condition code
             ConditionalCriteria codeConditional = ConditionalCriteria.equal(OperationProperties.code(), code);
@@ -112,7 +112,7 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
             List<Operation> operations = statisticalOperationsBaseService.findOperationByCondition(getServiceContextWs(), conditions);
             if (operations != null && operations.size() == 1) {
                 Operation operation = operations.get(0);
-                OperationBase operationBase = do2WebserviceMapper.operationToOperationBase(operation);
+                OperationBase operationBase = do2WebServiceMapper.operationToOperationBase(operation);
                 return operationBase;
             } else if (operations.size() >= 1) {
                 throw new MetamacException(ServiceExceptionType.UNKNOWN, "Found more than one operation with code " + code);
@@ -120,7 +120,7 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
                 throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND);
             }
         } catch (MetamacException e) {
-            throw do2WebserviceMapper.metamacExceptionToMetamacExceptionFault(e);
+            throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
         }
     }
 
@@ -129,14 +129,14 @@ public class StatisticalOperationsInternalWebserviceFacadeV10Impl implements Met
 
         try {
             // Validation of parameters
-            WebserviceFacadeValidationUtil.validateRetrieveVersion();
+            WebServiceFacadeValidationUtil.validateRetrieveVersion();
 
             // Retrieve version
             MetamacVersion metamacVersion = new MetamacVersion();
             metamacVersion.setServiceVersion(STATISTICAL_OPERATIONS_WS_VERSION);
             return metamacVersion;
         } catch (MetamacException e) {
-            throw do2WebserviceMapper.metamacExceptionToMetamacExceptionFault(e);
+            throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
         }
     }
 
