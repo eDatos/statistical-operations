@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.core.serviceapi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Date;
 import java.util.List;
@@ -55,12 +56,18 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto.getId());
 
-        // Webservice: retrieve operartion
+        // Web service: retrieve operartion
         OperationBase operationBase = metamacStatisticalOperationsInternalInterfaceV10.retrieveOperation(operationDto.getCode());
 
         assertNotNull(operationBase);
         assertEquals(operationDto.getCode(), operationBase.getCode());
         assertEquals(operationDto.getUri(), operationBase.getUri());
+    }
+    
+    @Test
+    public void testRetrieveOperationErrorNotExists() throws Exception {
+
+       fail("testear");
     }
 
     @Test
@@ -74,7 +81,7 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
         OperationDto operationDto2 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto2.getId());
 
-        // Webservice: Find operations
+        // Web service: Find operations
         OperationCriteria operationCriteria = new OperationCriteria();
         operationCriteria.setIsIndicatorsSystem(Boolean.TRUE);
         OperationBaseList operationBaseList = metamacStatisticalOperationsInternalInterfaceV10.findOperations(operationCriteria);

@@ -30,34 +30,32 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
         OperationBase operationBase = new OperationBase();
         operationBase.setUri(source.getUri());
         operationBase.setCode(source.getCode());
-        operationBase.setTitle(internationalStringToWebservice(source.getTitle()));
-        operationBase.setAcronym(internationalStringToWebservice(source.getAcronym()));
-        operationBase.setDescription(internationalStringToWebservice(source.getDescription()));
-        operationBase.setObjetive(internationalStringToWebservice(source.getObjective()));
+        operationBase.setTitle(internationalStringToWebService(source.getTitle()));
+        operationBase.setAcronym(internationalStringToWebService(source.getAcronym()));
+        operationBase.setDescription(internationalStringToWebService(source.getDescription()));
+        operationBase.setObjetive(internationalStringToWebService(source.getObjective()));
         operationBase.setProcStatus(procStatusToProcStatusType(source.getProcStatus()));
 
         return operationBase;
     }
 
-    // TODO qué devolver si no hay resultados?
     @Override
     public OperationBaseList operationsToOperationBaseList(List<Operation> sources) throws MetamacException {
-        OperationBaseList targets = new OperationBaseList();
         if (sources == null || sources.size() == 0) {
-            targets.setTotal(BigInteger.ZERO);
-        } else {
-            targets.setTotal(BigInteger.valueOf(sources.size()));
-            for (Operation source : sources) {
-                OperationBase target = operationToOperationBase(source);
-                targets.getOperation().add(target);
-            }
+            return null;
+        }
+        OperationBaseList targets = new OperationBaseList();
+        targets.setTotal(BigInteger.valueOf(sources.size()));
+        for (Operation source : sources) {
+            OperationBase target = operationToOperationBase(source);
+            targets.getOperation().add(target);
         }
         return targets;
     }
-
+    
     @Override
     public MetamacExceptionFault metamacExceptionToMetamacExceptionFault(MetamacException source) {
-
+        
         org.siemac.metamac.schema.common.v1_0.domain.MetamacException metamacException = new org.siemac.metamac.schema.common.v1_0.domain.MetamacException();
         metamacException.setExceptionItems(new MetamacExceptionItemList());
         if (source.getExceptionItems() == null || source.getExceptionItems().size() == 0) {
@@ -80,36 +78,30 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
     /**************************************************************************
      * PRIVATE
      **************************************************************************/
-    private InternationalString internationalStringToWebservice(org.siemac.metamac.core.common.ent.domain.InternationalString source) {
-        if (source == null) {
+    private InternationalString internationalStringToWebService(org.siemac.metamac.core.common.ent.domain.InternationalString source) {
+        if (source == null || source.getTexts() == null || source.getTexts().size() == 0) {
             return null;
         }
-        // TODO qué devolver si no hay resultados de Localised?
-
-        // InternationalString to InternationalString Ws
+        
         InternationalString internationalString = new InternationalString();
         internationalString.setLocalisedStrings(new LocalisedStringList());
-        if (source.getTexts() == null || source.getTexts().size() == 0) {
-            internationalString.getLocalisedStrings().setTotal(BigInteger.ZERO);
-        } else {
-            internationalString.getLocalisedStrings().setTotal(BigInteger.valueOf(source.getTexts().size()));
-            // LocalisedString to LocalisedString Ws
-            for (org.siemac.metamac.core.common.ent.domain.LocalisedString item : source.getTexts()) {
-                LocalisedString localisedString = localisedStringToLocalisedStringWebservice(item);
-                internationalString.getLocalisedStrings().getLocalisedString().add(localisedString);
-            }
+        internationalString.getLocalisedStrings().setTotal(BigInteger.valueOf(source.getTexts().size()));
+        // LocalisedString to LocalisedString Ws
+        for (org.siemac.metamac.core.common.ent.domain.LocalisedString item : source.getTexts()) {
+            LocalisedString localisedString = localisedStringToLocalisedStringWebService(item);
+            internationalString.getLocalisedStrings().getLocalisedString().add(localisedString);
         }
 
         return internationalString;
     }
 
-    private LocalisedString localisedStringToLocalisedStringWebservice(org.siemac.metamac.core.common.ent.domain.LocalisedString source) {
+    private LocalisedString localisedStringToLocalisedStringWebService(org.siemac.metamac.core.common.ent.domain.LocalisedString source) {
         LocalisedString localisedString = new LocalisedString();
         localisedString.setLocale(source.getLocale());
         localisedString.setLabel(source.getLabel());
         return localisedString;
     }
-
+    
     private ProcStatusType procStatusToProcStatusType(ProcStatusEnum source) throws MetamacException {
         if (source == null) {
             return null;
