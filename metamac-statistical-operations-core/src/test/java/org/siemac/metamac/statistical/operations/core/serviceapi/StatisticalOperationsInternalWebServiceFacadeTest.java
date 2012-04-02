@@ -5,8 +5,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
@@ -18,8 +20,11 @@ import org.siemac.metamac.core.common.dto.serviceapi.LocalisedStringDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacVersion;
+import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacStatisticalOperationsInternalInterfaceV10;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
@@ -48,7 +53,7 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
         MetamacVersion metamacVersion = metamacStatisticalOperationsInternalInterfaceV10.retrieveVersion();
         assertEquals("v1_0", metamacVersion.getServiceVersion());
     }
-
+    
     @Test
     public void testRetrieveOperation() throws Exception {
 
@@ -66,8 +71,16 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
     
     @Test
     public void testRetrieveOperationErrorNotExists() throws Exception {
-
-       fail("testear");
+        String notExists = UUID.randomUUID().toString();
+        try {
+            metamacStatisticalOperationsInternalInterfaceV10.retrieveOperation(notExists);
+            fail("operation not exists");
+        } catch (MetamacExceptionFault e) {
+            assertEquals(BigInteger.ONE, e.getFaultInfo().getExceptionItems().getTotal());
+            assertEquals(ServiceExceptionType.OPERATION_NOT_FOUND.toString(), e.getFaultInfo().getExceptionItems().getMetamacExceptionItem().get(0).getCode());
+            assertEquals(1, e.getFaultInfo().getExceptionItems().getMetamacExceptionItem().get(0).getMessageParameters().size());
+            assertEquals(notExists, e.getFaultInfo().getExceptionItems().getMetamacExceptionItem().get(0).getMessageParameters().get(0));
+        }
     }
 
     @Test
@@ -99,10 +112,6 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
         assertTrue(operation1Exists);
         assertTrue(operation2Exists);
     }
-
-    /**************************************************************************
-     * DBUNIT CONFIGURATION
-     **************************************************************************/
 
     private OperationDto createOperationDto() throws MetamacException {
         OperationDto operationDto = new OperationDto();
