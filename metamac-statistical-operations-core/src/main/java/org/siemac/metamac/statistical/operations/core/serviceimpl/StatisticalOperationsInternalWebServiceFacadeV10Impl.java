@@ -117,7 +117,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
             } else if (operations.size() >= 1) {
                 throw new MetamacException(ServiceExceptionType.UNKNOWN, "Found more than one operation with code " + code);
             } else {
-                throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND);
+                throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
             }
         } catch (MetamacException e) {
             throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
