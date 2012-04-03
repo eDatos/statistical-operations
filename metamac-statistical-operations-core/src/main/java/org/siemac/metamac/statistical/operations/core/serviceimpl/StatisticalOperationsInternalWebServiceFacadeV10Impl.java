@@ -96,7 +96,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
             MetamacCriteriaPropertyRestriction isIndicatorPropertyRestriction = getMetamacCriteriaPropertyRestrictionInCriteria(criteria,
                     OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM.value());
             if (isIndicatorPropertyRestriction != null) {
-                ConditionalCriteria isIndicatorSystemCriteria = ConditionalCriteria.equal(OperationProperties.indicatorSystem(), isIndicatorPropertyRestriction.isBooleanValue());
+                ConditionalCriteria isIndicatorSystemCriteria = ConditionalCriteria.equal(OperationProperties.indicatorSystem(), isIndicatorPropertyRestriction.getBooleanValue());
                 conditions.add(isIndicatorSystemCriteria);
             }
 
