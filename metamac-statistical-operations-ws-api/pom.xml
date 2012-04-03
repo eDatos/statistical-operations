@@ -20,6 +20,24 @@
 	</properties>
 
 	<dependencies>
+	  <dependency>
+			<groupId>org.siemac.metamac</groupId>
+			<artifactId>metamac-api-domain</artifactId>
+			<classifier>client</classifier>
+			<version>${metamac-api-domain.version}</version>
+			<exclusions>
+				<!-- CXF: Conflicting with xerces 2.6.2. Only works with 2.9.1 -->
+				<!-- CXF plugin can work without these dependencies -->
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>				
+			</exclusions>
+        </dependency> 
 	</dependencies>
 
 	<build>
@@ -62,7 +80,8 @@
 									<catalog>${basedir}/../etc/ws-catalog/catalog.xml</catalog>
 									<extraargs>
 										<extraarg>-verbose</extraarg>
-										<!-- <extraarg>-xjc-Xbg</extraarg>  --> <!-- getX to booleans instead of isX -->
+										<extraarg>-xjc-Xbg</extraarg>  <!-- getX to booleans instead of isX  -->
+										<extraarg>-xjc-b,${basedir}/../../metamac-api-domain/src/main/resources/episodes/sun-jaxb.episode</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
@@ -92,6 +111,16 @@
 						<groupId>org.apache.cxf</groupId>
 						<artifactId>cxf-rt-databinding-jaxb</artifactId>
 						<version>${cxf.version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>xerces</groupId>
+								<artifactId>xmlParserAPIs</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>xerces</groupId>
+								<artifactId>xercesImpl</artifactId>
+							</exclusion>
+						</exclusions>
 					</dependency>
 				</dependencies>
 			</plugin>

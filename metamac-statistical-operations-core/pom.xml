@@ -28,6 +28,12 @@
 			<classifier>client</classifier>
 		</dependency>
 		<dependency>
+			<groupId>org.siemac.metamac</groupId>
+			<artifactId>metamac-api-domain</artifactId>
+			<version>${metamac-api-domain.version}</version>
+			<classifier>client</classifier>
+		</dependency>		
+		<dependency>
 			<groupId>org.siemac.metamac.statistical.operations</groupId>
 			<artifactId>metamac-statistical-operations-ws-api</artifactId>
 			<version>${metamac-statistical-operations-ws-api.version}</version>
