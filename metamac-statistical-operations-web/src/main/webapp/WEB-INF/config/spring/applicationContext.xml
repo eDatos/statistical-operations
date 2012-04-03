@@ -65,7 +65,7 @@
 	<import resource="classpath:/spring/core/oracle/applicationContext-oracle.xml" />
 
 	<!-- Web services (spring - jaxws) -->
-	<wss:binding url="/ws/statistical/operations/internal/v1.0/statisticalOperationsInternalInterface">
+	<wss:binding url="/ws/metamac/statistical/operations/internal/v1.0/metamacStatisticalOperationsInternalInterface">
 		<wss:service>
 			<ws:service bean="#metamacStatisticalOperationsInternalInterfaceV10">
 					<!-- the primaryWsdl element works like @WebService(wsdlLocation=...). If the primary WSDL is omitted, the runtime will search for WSDL in /WEB-INF/wsdl/ and find one that matches the specified port and service name -->
