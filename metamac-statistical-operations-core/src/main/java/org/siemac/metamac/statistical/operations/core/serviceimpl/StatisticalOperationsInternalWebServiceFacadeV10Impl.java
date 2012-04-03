@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.core.serviceimpl;
 
 import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -9,6 +10,10 @@ import javax.jws.WebService;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteria;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaConjunctionRestriction;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaPropertyRestriction;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaRestriction;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacVersion;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
@@ -20,9 +25,11 @@ import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOper
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.WebServiceFacadeValidationUtil;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacStatisticalOperationsInternalInterfaceV10;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.FindOperationsResult;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBaseList;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationCriteria;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +51,8 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
 
     private static String                    STATISTICAL_OPERATIONS_WS_VERSION = "v1_0";
 
+    // private static BigInteger MAXIMUM_RESULT_SIZE = BigInteger.valueOf(50);
+
     public StatisticalOperationsInternalWebServiceFacadeV10Impl() {
     }
 
@@ -55,40 +64,69 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
     /**
      * Find operations by criteria.
      * If procStatus is not provided, find internally and externally published. Otherwise, must be internally or externally
+     * TODO paginación, pte de servicio!
+     * TODO mapper de criteria
      */
     @Override
-    public OperationBaseList findOperations(OperationCriteria criteria) throws MetamacExceptionFault {
+    public FindOperationsResult findOperations(MetamacCriteria criteria) throws MetamacExceptionFault {
         try {
+
+            // Init criteria
+            criteria = initCriteria(criteria);
+
             // Validation of parameters
             WebServiceFacadeValidationUtil.validateFindOperations(criteria);
 
-            // TODO criteria tipo Indicadores
+            // Conditions (And)
+            List<ConditionalCriteria> conditions = criteriaFor(Operation.class).build();
 
-            // Condition proc status
+            // Add condition by proc status
+            MetamacCriteriaPropertyRestriction procStatusPropertyRestriction = getMetamacCriteriaPropertyRestrictionInCriteria(criteria, OperationCriteriaPropertyRestriction.PROC_STATUS.value());
             ConditionalCriteria procStatusCriteria = null;
-            if (criteria.getProcStatus() != null) {
-                // TODO validar posibles valores?
-                ProcStatusEnum procStatusEnum = webService2DoMapper.procStatusTypeToProcStatusEnum(criteria.getProcStatus());
+            if (procStatusPropertyRestriction != null) {
+                ProcStatusEnum procStatusEnum = webService2DoMapper.procStatusTypeToProcStatusEnum(ProcStatusType.valueOf(procStatusPropertyRestriction.getStringValue()));
                 procStatusCriteria = ConditionalCriteria.equal(OperationProperties.procStatus(), procStatusEnum);
             } else {
                 procStatusCriteria = ConditionalCriteria.or(ConditionalCriteria.equal(OperationProperties.procStatus(), ProcStatusEnum.PUBLISH_INTERNALLY),
                         ConditionalCriteria.equal(OperationProperties.procStatus(), ProcStatusEnum.PUBLISH_EXTERNALLY));
             }
+            conditions.add(procStatusCriteria);
 
-            // Condition is indicator system
-            ConditionalCriteria isIndicatorSystemCriteria = ConditionalCriteria.equal(OperationProperties.indicatorSystem(), criteria.isIsIndicatorsSystem());
-
-            // Conditions AND
-            List<ConditionalCriteria> conditions = criteriaFor(Operation.class).build();
-            conditions.add(ConditionalCriteria.and(procStatusCriteria, isIndicatorSystemCriteria));
+            // Add condition by is indicators system
+            MetamacCriteriaPropertyRestriction isIndicatorPropertyRestriction = getMetamacCriteriaPropertyRestrictionInCriteria(criteria,
+                    OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM.value());
+            if (isIndicatorPropertyRestriction != null) {
+                ConditionalCriteria isIndicatorSystemCriteria = ConditionalCriteria.equal(OperationProperties.indicatorSystem(), isIndicatorPropertyRestriction.isBooleanValue());
+                conditions.add(isIndicatorSystemCriteria);
+            }
 
             // Find
             List<Operation> operations = statisticalOperationsBaseService.findOperationByCondition(getServiceContextWs(), conditions);
             OperationBaseList operationBaseList = do2WebServiceMapper.operationsToOperationBaseList(operations);
-            return operationBaseList;
+
+            // Return
+            FindOperationsResult findOperationsResult = new FindOperationsResult();
+            findOperationsResult.setTotalResults(BigInteger.valueOf(operations.size()));
+            findOperationsResult.setOperations(operationBaseList);
+            return findOperationsResult;
         } catch (MetamacException e) {
             throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
         }
+    }
+
+    private MetamacCriteriaPropertyRestriction getMetamacCriteriaPropertyRestrictionInCriteria(MetamacCriteria criteria, String propertyName) throws MetamacException {
+        if (!(criteria.getRestriction() instanceof MetamacCriteriaConjunctionRestriction)) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "MetamacCriteria non supported");
+        }
+        for (MetamacCriteriaRestriction criteriaRestriction : ((MetamacCriteriaConjunctionRestriction) criteria.getRestriction()).getRestrictions().getRestriction()) {
+            if (!(criteriaRestriction instanceof MetamacCriteriaPropertyRestriction)) {
+                throw new MetamacException(ServiceExceptionType.UNKNOWN, "MetamacCriteria non supported");
+            }
+            if (propertyName.equals(((MetamacCriteriaPropertyRestriction) criteriaRestriction).getPropertyName())) {
+                return (MetamacCriteriaPropertyRestriction) criteriaRestriction;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -138,6 +176,21 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
         } catch (MetamacException e) {
             throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
         }
+    }
+
+    private MetamacCriteria initCriteria(MetamacCriteria criteria) {
+        if (criteria == null) {
+            criteria = new MetamacCriteria();
+        }
+
+        // TODO
+        // if (criteria.getFirstResult() == null || criteria.getFirstResult().intValue() < 0) {
+        // criteria.setFirstResult(BigInteger.ZERO);
+        // }
+        // if (criteria.getMaxResults() == null || criteria.getMaxResults().intValue() < 0) {
+        // criteria.setMaxResults(MAXIMUM_RESULT_SIZE);
+        // }
+        return criteria;
     }
 
     protected StatisticalOperationsBaseService getStatisticalOperationsBaseService() {

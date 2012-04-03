@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -19,17 +20,21 @@ import org.siemac.metamac.core.common.dto.serviceapi.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.serviceapi.LocalisedStringDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteria;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaConjunctionRestriction;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaPropertyRestriction;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaRestrictionList;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacVersion;
-import org.siemac.metamac.statistical.operations.core.domain.Operation;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.schema.common.v1_0.domain.OperationType;
 import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacStatisticalOperationsInternalInterfaceV10;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.FindOperationsResult;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBaseList;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationCriteria;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -86,31 +91,134 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
     @Test
     public void testFindOperations() throws Exception {
 
-        // Create and publish operation 1
+        // Create and publish internally operation 1
         OperationDto operationDto1 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto1.getId());
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContext(), operationDto1.getId());
-        // Create and publish operation 2
+        // Create and publish internally operation 2
         OperationDto operationDto2 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto2.getId());
+        // Create and publish externally operation 3
+        OperationDto operationDto3 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto3.getId());
+        statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContext(), operationDto3.getId());
 
-        // Web service: Find operations
-        OperationCriteria operationCriteria = new OperationCriteria();
-        operationCriteria.setIsIndicatorsSystem(Boolean.TRUE);
-        OperationBaseList operationBaseList = metamacStatisticalOperationsInternalInterfaceV10.findOperations(operationCriteria);
-
-        assertNotNull(operationBaseList);
-        boolean operation1Exists = false;
-        boolean operation2Exists = false;
-        for (OperationBase operationBase : operationBaseList.getOperation()) {
-            if (operationBase.getCode().equals(operationDto1.getCode())) {
-                operation1Exists = true;
-            } else if (operationBase.getCode().equals(operationDto2.getCode())) {
-                operation2Exists = true;
+        {
+            // Find operations without proc status property restriction
+            MetamacCriteria metamacCriteria = new MetamacCriteria();
+            metamacCriteria.setRestriction(new MetamacCriteriaConjunctionRestriction());
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).setRestrictions(new MetamacCriteriaRestrictionList());
+    
+            // Is indicators system
+            MetamacCriteriaPropertyRestriction isIndicatorsSystemPropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            isIndicatorsSystemPropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM.value());
+            isIndicatorsSystemPropertyRestriction.setOperation(OperationType.EQ);
+            isIndicatorsSystemPropertyRestriction.setBooleanValue(Boolean.TRUE);
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).getRestrictions().getRestriction().add(isIndicatorsSystemPropertyRestriction);
+            
+            // Find
+            FindOperationsResult findOperationsResult = metamacStatisticalOperationsInternalInterfaceV10.findOperations(metamacCriteria);
+    
+            // Validate
+            assertNotNull(findOperationsResult.getOperations());
+            boolean operation1Exists = false;
+            boolean operation2Exists = false;
+            boolean operation3Exists = false;
+            for (OperationBase operationBase : findOperationsResult.getOperations().getOperation()) {
+                if (operationBase.getCode().equals(operationDto1.getCode())) {
+                    operation1Exists = true;
+                } else if (operationBase.getCode().equals(operationDto2.getCode())) {
+                    operation2Exists = true;
+                } else if (operationBase.getCode().equals(operationDto3.getCode())) {
+                    operation3Exists = true;
+                }
             }
+            assertTrue(operation1Exists);
+            assertTrue(operation2Exists);
+            assertTrue(operation3Exists);
         }
-        assertTrue(operation1Exists);
-        assertTrue(operation2Exists);
+        {
+            // Find operations published internally
+            MetamacCriteria metamacCriteria = new MetamacCriteria();
+            metamacCriteria.setRestriction(new MetamacCriteriaConjunctionRestriction());
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).setRestrictions(new MetamacCriteriaRestrictionList());
+    
+            // Is indicators system
+            MetamacCriteriaPropertyRestriction isIndicatorsSystemPropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            isIndicatorsSystemPropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM.value());
+            isIndicatorsSystemPropertyRestriction.setOperation(OperationType.EQ);
+            isIndicatorsSystemPropertyRestriction.setBooleanValue(Boolean.TRUE);
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).getRestrictions().getRestriction().add(isIndicatorsSystemPropertyRestriction);
+            
+            // Publish internally
+            MetamacCriteriaPropertyRestriction procStatusPropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            procStatusPropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.PROC_STATUS.value());
+            procStatusPropertyRestriction.setOperation(OperationType.EQ);
+            procStatusPropertyRestriction.setStringValue(ProcStatusType.PUBLISH_INTERNALLY.value());
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).getRestrictions().getRestriction().add(procStatusPropertyRestriction);
+            
+            // Find
+            FindOperationsResult findOperationsResult = metamacStatisticalOperationsInternalInterfaceV10.findOperations(metamacCriteria);
+    
+            // Validate
+            assertNotNull(findOperationsResult.getOperations());
+            boolean operation1Exists = false;
+            boolean operation2Exists = false;
+            boolean operation3Exists = false;
+            for (OperationBase operationBase : findOperationsResult.getOperations().getOperation()) {
+                if (operationBase.getCode().equals(operationDto1.getCode())) {
+                    operation1Exists = true;
+                } else if (operationBase.getCode().equals(operationDto2.getCode())) {
+                    operation2Exists = true;
+                } else if (operationBase.getCode().equals(operationDto3.getCode())) {
+                    operation3Exists = true;
+                }
+            }
+            assertFalse(operation1Exists);
+            assertTrue(operation2Exists);
+            assertFalse(operation3Exists);
+        }
+        {
+            // Find operations published externally
+            MetamacCriteria metamacCriteria = new MetamacCriteria();
+            metamacCriteria.setRestriction(new MetamacCriteriaConjunctionRestriction());
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).setRestrictions(new MetamacCriteriaRestrictionList());
+    
+            // Is indicators system
+            MetamacCriteriaPropertyRestriction isIndicatorsSystemPropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            isIndicatorsSystemPropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM.value());
+            isIndicatorsSystemPropertyRestriction.setOperation(OperationType.EQ);
+            isIndicatorsSystemPropertyRestriction.setBooleanValue(Boolean.TRUE);
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).getRestrictions().getRestriction().add(isIndicatorsSystemPropertyRestriction);
+            
+            // Publish externally
+            MetamacCriteriaPropertyRestriction procStatusPropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            procStatusPropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.PROC_STATUS.value());
+            procStatusPropertyRestriction.setOperation(OperationType.EQ);
+            procStatusPropertyRestriction.setStringValue(ProcStatusType.PUBLISH_EXTERNALLY.value());
+            ((MetamacCriteriaConjunctionRestriction)metamacCriteria.getRestriction()).getRestrictions().getRestriction().add(procStatusPropertyRestriction);
+            
+            // Find
+            FindOperationsResult findOperationsResult = metamacStatisticalOperationsInternalInterfaceV10.findOperations(metamacCriteria);
+    
+            // Validate
+            assertNotNull(findOperationsResult.getOperations());
+            boolean operation1Exists = false;
+            boolean operation2Exists = false;
+            boolean operation3Exists = false;
+            for (OperationBase operationBase : findOperationsResult.getOperations().getOperation()) {
+                if (operationBase.getCode().equals(operationDto1.getCode())) {
+                    operation1Exists = true;
+                } else if (operationBase.getCode().equals(operationDto2.getCode())) {
+                    operation2Exists = true;
+                } else if (operationBase.getCode().equals(operationDto3.getCode())) {
+                    operation3Exists = true;
+                }
+            }
+            assertTrue(operation1Exists);
+            assertFalse(operation2Exists);
+            assertTrue(operation3Exists);
+        }
     }
 
     private OperationDto createOperationDto() throws MetamacException {

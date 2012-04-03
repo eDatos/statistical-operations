@@ -7,6 +7,5 @@ import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcSta
 public interface WebService2DoMapper {
 
     // Enums
-    public ProcStatusEnum procStatusTypeToProcStatusEnum(ProcStatusType procStatusType) throws MetamacException;
-
+    public ProcStatusEnum procStatusTypeToProcStatusEnum(ProcStatusType source) throws MetamacException;
 }

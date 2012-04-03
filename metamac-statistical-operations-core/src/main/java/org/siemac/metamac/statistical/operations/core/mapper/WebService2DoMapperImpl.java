@@ -14,9 +14,6 @@ public class WebService2DoMapperImpl implements WebService2DoMapper {
     @Autowired
     private DozerBeanMapper mapper;
 
-    /**************************************************************************
-     * GETTERS
-     **************************************************************************/
     protected DozerBeanMapper getMapper() {
         return mapper;
     }

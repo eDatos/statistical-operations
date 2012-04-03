@@ -20,12 +20,12 @@
 	<!-- Operations -->
 	<xsd:complexType name="FindOperations">
 		<xsd:sequence>
-			<xsd:element name="criteria" type="domain_v1_0:OperationCriteria" minOccurs="1"/>
+			<xsd:element name="criteria" type="cdomain_v1_0:MetamacCriteria" minOccurs="1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="FindOperationsResponse">
 		<xsd:sequence>
-			<xsd:element name="operations" type="domain_v1_0:OperationBaseList" />
+			<xsd:element name="operations" type="domain_v1_0:FindOperationsResult" />
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="RetrieveOperation">

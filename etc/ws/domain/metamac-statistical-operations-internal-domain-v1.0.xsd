@@ -26,12 +26,15 @@
         </xsd:sequence>
         <xsd:attribute name="total" type="xsd:unsignedLong" use="optional" />
     </xsd:complexType>
-
-    <xsd:complexType name="OperationCriteria">
-        <xsd:sequence>
-			<xsd:element name="procStatus" type="tns:ProcStatusType" minOccurs="0"/>
-			<xsd:element name="isIndicatorsSystem" type="xsd:boolean" minOccurs="0"/>
-        </xsd:sequence>
+    
+     <xsd:complexType name="FindOperationsResult">
+        <xsd:complexContent>
+            <xsd:extension base="cDomain_v1_0:MetamacCriteriaResult">
+                <xsd:sequence>
+                       <xsd:element name="operations" type="tns:OperationBaseList" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
     </xsd:complexType>
 
     <xsd:simpleType name="ProcStatusType">
@@ -39,6 +42,13 @@
             <xsd:enumeration value="PUBLISH_INTERNALLY" />
             <xsd:enumeration value="PUBLISH_EXTERNALLY" />
         </xsd:restriction>
-    </xsd:simpleType>            
+    </xsd:simpleType>      
+    
+     <xsd:simpleType name="OperationCriteriaPropertyRestriction">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="IS_INDICATORS_SYSTEM" />
+            <xsd:enumeration value="PROC_STATUS" />
+        </xsd:restriction>
+    </xsd:simpleType>        
 	
 </xsd:schema>
