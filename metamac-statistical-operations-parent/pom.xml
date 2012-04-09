@@ -1,29 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
-     <groupId>org.siemac.metamac</groupId>
-     <artifactId>metamac-parent</artifactId>
-     <version>1.0-SNAPSHOT</version>
-     <relativePath>../../metamac-parent/pom.xml</relativePath>
+        <groupId>org.siemac.metamac</groupId>
+        <artifactId>metamac-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-  
-	<groupId>org.siemac.metamac.statistical.operations</groupId>
-	<artifactId>metamac-statistical-operations-parent</artifactId>
-	<version>${metamac-statistical-operations-parent.version}</version>
-	<packaging>pom</packaging>
-	<name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
+
+    <groupId>org.siemac.metamac.statistical.operations</groupId>
+    <artifactId>metamac-statistical-operations-parent</artifactId>
+    <version>${metamac-statistical-operations-parent.version}</version>
+    <packaging>pom</packaging>
+    <name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
     <description>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</description>
 
     <issueManagement>
         <system>Jira</system>
         <url>http://jira.arte-consultores.com/browse/METAMAC</url>
     </issueManagement>
-    
-    <properties>
-        
-    </properties>
-    
+
     <repositories>
         <repository>
             <id>smartclient</id>
@@ -32,9 +28,4 @@
         </repository>
     </repositories>
 
-    <dependencyManagement>
-        <dependencies>
-        
-        </dependencies>
-    </dependencyManagement>
 </project>
