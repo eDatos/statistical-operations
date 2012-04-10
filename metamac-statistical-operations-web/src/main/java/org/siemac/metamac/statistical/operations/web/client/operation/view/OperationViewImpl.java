@@ -77,7 +77,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private static final String             OP_SUBJECT_SECONDARY         = "op-subjetc-secon";
     // CONTENT DESCRIPTORS
     private static final String             OP_DESCRIPTION               = "op-desc";
-    private static final String             OP_OBJETIVE                  = "op-obj";
+    private static final String             OP_OBJECTIVE                  = "op-obj";
     // CLASS DESCRIPTORS
     private static final String             OP_SURVEY_TYPE               = "op-sur";
     private static final String             OP_OFFICIALITY_TYPE          = "op-off-type";
@@ -126,7 +126,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // CONTENT DESCRIPTORS
     private GroupDynamicForm                contentViewForm;
     private GroupDynamicForm                contentEditionForm;
-    private MultiLanguageTextItem           objetive;
+    private MultiLanguageTextItem           objective;
     private MultiLanguageTextItem           description;
 
     // CLASS DESCRIPTORS
@@ -380,7 +380,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.getSecondarySubjectAreas().addAll(secondarySubjectItem.getSelectedExternalItems(secondarySubjects));
         // Content Descriptors
         operationDto.setDescription(description.getValue());
-        operationDto.setObjective(objetive.getValue());
+        operationDto.setObjective(objective.getValue());
 
         // Class Descriptors
         operationDto.setSurveyType(OperationsListUtils.getSurveyTypeDto(surveyType.getValueAsString(), surveyTypeDtos));
@@ -543,8 +543,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Content Descriptors
         contentViewForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
         ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(OP_DESCRIPTION, getConstants().operationDescription());
-        ViewMultiLanguageTextItem objetive = new ViewMultiLanguageTextItem(OP_OBJETIVE, getConstants().operationObjetive());
-        contentViewForm.setFields(objetive, description);
+        ViewMultiLanguageTextItem objective = new ViewMultiLanguageTextItem(OP_OBJECTIVE, getConstants().operationObjective());
+        contentViewForm.setFields(objective, description);
 
         // Class Descriptors
         classViewForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
@@ -634,9 +634,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Content Descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
         description = new MultiLanguageTextItem(OP_DESCRIPTION, getConstants().operationDescription());
-        objetive = new MultiLanguageTextItem(OP_OBJETIVE, getConstants().operationObjetive());
-        objetive.setRequired(true);
-        contentEditionForm.setFields(objetive, description);
+        objective = new MultiLanguageTextItem(OP_OBJECTIVE, getConstants().operationObjective());
+        objective.setRequired(true);
+        contentEditionForm.setFields(objective, description);
 
         // Class Descriptors
         classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
@@ -740,7 +740,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         contentViewForm.setValue(OP_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getDescription()));
-        contentViewForm.setValue(OP_OBJETIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
+        contentViewForm.setValue(OP_OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
 
         // Class Descriptors
         classViewForm.setValue(OP_SURVEY_TYPE, operationDto.getSurveyType() == null ? "" : operationDto.getSurveyType().getIdentifier());
@@ -789,7 +789,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         description.setValue(operationDto.getDescription());
-        objetive.setValue(operationDto.getObjective());
+        objective.setValue(operationDto.getObjective());
 
         // Class Descriptors
         surveyType.setValue(operationDto.getSurveyType() != null ? operationDto.getSurveyType().getId() : null);
