@@ -15,7 +15,7 @@
 			<xsd:element name="title" type="cDomain_v1_0:InternationalString" />
 			<xsd:element name="acronym" type="cDomain_v1_0:InternationalString" />
 			<xsd:element name="description" type="cDomain_v1_0:InternationalString" />
-			<xsd:element name="objetive" type="cDomain_v1_0:InternationalString" />
+			<xsd:element name="objective" type="cDomain_v1_0:InternationalString" />
 			<xsd:element name="procStatus" type="tns:ProcStatusType" />    
 		</xsd:sequence>
 	</xsd:complexType>

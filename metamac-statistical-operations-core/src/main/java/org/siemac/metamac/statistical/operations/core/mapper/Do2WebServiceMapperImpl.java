@@ -33,7 +33,7 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
         operationBase.setTitle(internationalStringToWebService(source.getTitle()));
         operationBase.setAcronym(internationalStringToWebService(source.getAcronym()));
         operationBase.setDescription(internationalStringToWebService(source.getDescription()));
-        operationBase.setObjetive(internationalStringToWebService(source.getObjective()));
+        operationBase.setObjective(internationalStringToWebService(source.getObjective()));
         operationBase.setProcStatus(procStatusToProcStatusType(source.getProcStatus()));
 
         return operationBase;
