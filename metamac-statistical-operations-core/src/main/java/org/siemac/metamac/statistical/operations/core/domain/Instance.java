@@ -8,7 +8,7 @@ import javax.persistence.UniqueConstraint;
  * Statistical instance
  */
 @Entity
-@Table(name = "TBL_INSTANCES", uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
+@Table(name = "TB_INSTANCES", uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
 public class Instance extends InstanceBase {
 
     private static final long serialVersionUID = 1L;

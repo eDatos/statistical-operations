@@ -174,7 +174,7 @@ Application StatisticalOperations {
 		
 		"Survey Type List"
     	Entity SurveyType {
-    		databaseTable="LIS_SURVEY_TYPES"
+    		databaseTable="TB_LIS_SURVEY_TYPES"
     		hint="idSequence=SURVEY_TYPES"
     		
     		not auditable
@@ -189,7 +189,7 @@ Application StatisticalOperations {
     	
     	"Instance Type List"
     	Entity InstanceType {
-    		databaseTable="LIS_INSTANCE_TYPES"
+    		databaseTable="TB_LIS_INSTANCE_TYPES"
     		hint="idSequence=INSTANCE_TYPES"
     		
     		not auditable
@@ -204,7 +204,7 @@ Application StatisticalOperations {
     	
     	"Survey Source List"
     	Entity SurveySource {
-    		databaseTable="LIS_SURVEY_SOURCES"
+    		databaseTable="TB_LIS_SURVEY_SOURCES"
     		hint="idSequence=SURVEY_SOURCES"
     		
     		not auditable
@@ -219,7 +219,7 @@ Application StatisticalOperations {
     	
     	"Officiality Type List"
     	Entity OfficialityType {
-    		databaseTable="LIS_OFFICIALITY_TYPES"
+    		databaseTable="TB_LIS_OFFICIALITY_TYPES"
     		hint="idSequence=OFFICIALITY_TYPES"
     		
     		not auditable
@@ -234,7 +234,7 @@ Application StatisticalOperations {
     	
     	"Coll Method List"
     	Entity CollMethod {
-    		databaseTable="LIS_COLL_METHODS"
+    		databaseTable="TB_LIS_COLL_METHODS"
     		hint="idSequence=COLL_METHODS"
     		
     		not auditable
@@ -249,7 +249,7 @@ Application StatisticalOperations {
     	
     	"Coll Method List"
     	Entity Cost {
-    		databaseTable="LIS_COSTS"
+    		databaseTable="TB_LIS_COSTS"
     		hint="idSequence=COSTS"
     		
     		not auditable
@@ -265,7 +265,7 @@ Application StatisticalOperations {
 		
 		"Semantic grouping of statistical operations"
 		Entity Family {
-			databaseTable="TBL_FAMILIES"
+			databaseTable="TB_FAMILIES"
 			hint="idSequence=FAMILIES"
 			
 			gap
@@ -281,7 +281,7 @@ Application StatisticalOperations {
        		"DESCRIPTION"
        		- @InternationalString description cascade="all" nullable databaseColumn="DESCRIPTION_FK";
        		"Related statistical operations"
-       		- Set<@Operation> operations cascade="none" databaseJoinTable="TBL_FAMILIES_OPERATIONS" <-> families;
+       		- Set<@Operation> operations cascade="none" databaseJoinTable="TB_FAMILIES_OPERATIONS" <-> families;
 			"INTERNAL_INVENTORY_DATE"
 			DateTimeTZ internalInventoryDate nullable;
        		"PROC_STATUS"
@@ -302,7 +302,7 @@ Application StatisticalOperations {
 		
 		"Statistical operation"
 		Entity Operation {
-			databaseTable="TBL_OPERATIONS"
+			databaseTable="TB_OPERATIONS"
 			hint="idSequence=OPERATIONS"
 			
 			gap
@@ -323,7 +323,7 @@ Application StatisticalOperations {
        		"Subject areas and subject codes. Its type is CATEGORY"
        		- @ExternalItemBt subjectArea nullable;
        		"Metadata SECONDARY_SUBJECT_AREAS. Its type is CATEGORY"
-       		- Set<@ExternalItem> secondarySubjectAreas databaseColumn="SECUN_SUBJECT_AREAS_FK" databaseJoinTable="TBL_EI_SECONDARY_AREAS" cascade="all-delete-orphan";
+       		- Set<@ExternalItem> secondarySubjectAreas databaseColumn="SECUN_SUBJECT_AREAS_FK" databaseJoinTable="TB_EI_SECONDARY_AREAS" cascade="all-delete-orphan";
        		
        		"Metadata OBJECTIVE"
        		- @InternationalString objective cascade="all" nullable databaseColumn="OBJECTIVE_FK";
@@ -340,11 +340,11 @@ Application StatisticalOperations {
 			Boolean indicatorSystem;
        		
        		"Metadata PRODUCER. Its type is ORGANIZATION"
-       		- Set<@ExternalItem> producer databaseColumn="PRODUCER_FK" databaseJoinTable="TBL_EI_PRODUCERS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> producer databaseColumn="PRODUCER_FK" databaseJoinTable="TB_EI_PRODUCERS"  cascade="all-delete-orphan";
        		"Metadata REGIONAL_RESPONSIBLE. Its type is ORGANIZATION"
-       		- Set<@ExternalItem> regionalResponsible databaseColumn="REGIONAL_RESPONSIBLE_FK" databaseJoinTable="TBL_EI_REG_RESPONSIBLES"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> regionalResponsible databaseColumn="REGIONAL_RESPONSIBLE_FK" databaseJoinTable="TB_EI_REG_RESPONSIBLES"  cascade="all-delete-orphan";
        		"Metadata REGIONAL_CONTRIBUTOR. Its type is ORGANIZATION"
-       		- Set<@ExternalItem> regionalContributor databaseColumn="REGIONAL_CONTRIBUTOR_FK" databaseJoinTable="TBL_EI_REG_CONTRIBUTORS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> regionalContributor databaseColumn="REGIONAL_CONTRIBUTOR_FK" databaseJoinTable="TB_EI_REG_CONTRIBUTORS"  cascade="all-delete-orphan";
        		"Metadata INTERNAL_INVENTORY_DATE"
 			DateTimeTZ internalInventoryDate nullable;
 			"Metadata CURRENTLY_ACTIVE"
@@ -355,7 +355,7 @@ Application StatisticalOperations {
        		- @StatusEnum status not nullable;
        		
        		"Metadata PUBLISHER"
-       		- Set<@ExternalItem> publisher databaseColumn="PUBLISHER_FK" databaseJoinTable="TBL_EI_PUBLISHERS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> publisher databaseColumn="PUBLISHER_FK" databaseJoinTable="TB_EI_PUBLISHERS"  cascade="all-delete-orphan";
        		"Metadata REL_POL_US_AC"
        		- @InternationalString relPolUsAc cascade="all" nullable databaseColumn="REL_POL_US_AC_FK";
        		"Metadata REL_POL_US_AC_URL"
@@ -365,7 +365,7 @@ Application StatisticalOperations {
        		"Metadata RELEASE_CALENDAR_ACCESS"
        		String releaseCalendarAccess nullable pattern="'https?://.+'";
        		"Metadata UPDATE_FREQUENCY. Its type is CODE"
-       		- Set<@ExternalItem> updateFrequency databaseColumn="UPDATE_FREQUENCY_FK" databaseJoinTable="TBL_EI_UPDATE_FREQUENCY"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> updateFrequency databaseColumn="UPDATE_FREQUENCY_FK" databaseJoinTable="TB_EI_UPDATE_FREQUENCY"  cascade="all-delete-orphan";
        		"INVENTORY_DATE"
        		DateTimeTZ inventoryDate nullable;
        		"Metadata REV_POLICY"
@@ -406,7 +406,7 @@ Application StatisticalOperations {
 		
 		"Statistical instance"
 		Entity Instance {
-			databaseTable="TBL_INSTANCES"
+			databaseTable="TB_INSTANCES"
 			hint="idSequence=INSTANCES"
 			
 			gap 
@@ -431,7 +431,7 @@ Application StatisticalOperations {
        		"Metadata STATISTICAL_POPULATION" 
        		- @InternationalString statisticalPopulation cascade="all" nullable databaseColumn="STATISTICAL_POPULATION_FK";
        		"Metadata STATISTICAL_UNIT. Its type is CONCEPT"
-       		- Set<@ExternalItem> statisticalUnit databaseColumn="STATISTICAL_UNIT_FK" databaseJoinTable="TBL_EI_STATISTICAL_UNITS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> statisticalUnit databaseColumn="STATISTICAL_UNIT_FK" databaseJoinTable="TB_EI_STATISTICAL_UNITS"  cascade="all-delete-orphan";
        		"Metadata GEOGRAPHIC_GRANULARITY. Its type is CODE"
        		- @ExternalItemBt geographicGranularity nullable;
        		"Metadata GEOGRAPHIC_COMPARABILITY"
@@ -443,15 +443,15 @@ Application StatisticalOperations {
        		"Metadata BASE_PERIOD. Its type is CODE"
        		- @ExternalItemBt basePeriod nullable;
        		"Metadata UNIT_MEASURE. Its type is CODE"
-       		- Set<@ExternalItem> unitMeasure databaseColumn="UNIT_MEASURE_FK" databaseJoinTable="TBL_EI_UNITS_MEASURE"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> unitMeasure databaseColumn="UNIT_MEASURE_FK" databaseJoinTable="TB_EI_UNITS_MEASURE"  cascade="all-delete-orphan";
        		"Metadata STAT_CONC_DEF"
        		- @InternationalString statConcDef cascade="all" nullable databaseColumn="STAT_CONC_DEF_FK";
        		"Metadata STAT_CONC_DEF_LIST. Its type is CONCEPT_SCHEME"
-       		- Set<@ExternalItem> statConcDefList databaseColumn="STAT_CONC_DEF_LIST_FK" databaseJoinTable="TBL_EI_CONC_DEF_LISTS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> statConcDefList databaseColumn="STAT_CONC_DEF_LIST_FK" databaseJoinTable="TB_EI_CONC_DEF_LISTS"  cascade="all-delete-orphan";
        		"Metadata CLASS_SYSTEM"
        		- @InternationalString classSystem cascade="all" nullable databaseColumn="CLASS_SYSTEM_FK";
        		"Metadata CLASS_SYSTEM_LIST. Its type is CONCEPT_SCHEME"
-       		- Set<@ExternalItem> classSystemList databaseColumn="CLASS_SYSTEM_LIST_FK" databaseJoinTable="TBL_EI_CLASS_SYSTEM_LISTS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> classSystemList databaseColumn="CLASS_SYSTEM_LIST_FK" databaseJoinTable="TB_EI_CLASS_SYSTEM_LISTS"  cascade="all-delete-orphan";
        		
        		"Metadata INSTANCE_TYPE"
        		- @InstanceType instanceType cascade="none" nullable databaseColumn="INSTANCE_TYPE_FK";
@@ -469,9 +469,9 @@ Application StatisticalOperations {
        		"Metadata COLL_METHOD"
        		- @CollMethod collMethod cascade="none" nullable databaseColumn="COLL_METHOD_FK";
        		"Metadata INFORMATION_SUPPLIERS. Its type is ORGANIZATION / CONCEPTS"
-       		- Set<@ExternalItem> informationSuppliers databaseColumn="INFORMATION_SUPPLIERS_FK" databaseJoinTable="TBL_EI_INF_SUPPLIERS"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> informationSuppliers databaseColumn="INFORMATION_SUPPLIERS_FK" databaseJoinTable="TB_EI_INF_SUPPLIERS"  cascade="all-delete-orphan";
        		"Metadata FREQ_COLL. Its type is CODE"
-       		- Set<@ExternalItem> freqColl databaseColumn="FREQ_COLL_FK" databaseJoinTable="TBL_EI_FREQ_COLL"  cascade="all-delete-orphan";
+       		- Set<@ExternalItem> freqColl databaseColumn="FREQ_COLL_FK" databaseJoinTable="TB_EI_FREQ_COLL"  cascade="all-delete-orphan";
        		"Metadata DATA_VALIDATION"
        		- @InternationalString dataValidation cascade="all" nullable databaseColumn="DATA_VALIDATION_FK";
        		"Metadata DATA_VALIDATION_URL"
@@ -489,7 +489,7 @@ Application StatisticalOperations {
        		"Metadata COST_BURDEN_URL"
        		String costBurdenUrl nullable;
        		"Metadata COST"
-       		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TBL_INSTANCES_COSTS";
+       		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TB_INSTANCES_COSTS";
 
 			// TODO CURRENT_INSTANCE       		
        		"INVENTORY_DATE"

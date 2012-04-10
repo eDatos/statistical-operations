@@ -8,7 +8,7 @@ import javax.persistence.UniqueConstraint;
  * Statistical operation
  */
 @Entity
-@Table(name = "TBL_OPERATIONS", uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
+@Table(name = "TB_OPERATIONS", uniqueConstraints = {@UniqueConstraint(columnNames = {"CODE"})})
 public class Operation extends OperationBase {
 
     private static final long serialVersionUID = 1L;
