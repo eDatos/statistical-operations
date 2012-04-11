@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.schema.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.schema.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.schema.common.v1_0.domain.LocalisedStringList;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacExceptionItem;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacExceptionItemList;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;

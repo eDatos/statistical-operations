@@ -2,6 +2,15 @@ package org.siemac.metamac.statistical.operations.core.mapper;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -11,15 +20,6 @@ import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
 
 public interface Dto2DoMapper {
 

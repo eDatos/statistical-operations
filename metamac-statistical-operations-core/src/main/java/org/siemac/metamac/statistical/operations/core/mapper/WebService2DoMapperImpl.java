@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.core.mapper;
 
 import org.dozer.DozerBeanMapper;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
