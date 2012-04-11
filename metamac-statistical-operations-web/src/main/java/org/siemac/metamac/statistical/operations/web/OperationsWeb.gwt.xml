@@ -33,7 +33,7 @@
 	<inherits name="com.smartgwt.SmartGwt" />
 
 	<!-- METAMAC inherits modules -->
-	<inherits name="org.siemac.metamac.statistical.operations.core.OperationsCore" />
+	<inherits name="org.siemac.metamac.Serviceapi" />
 	<inherits name="org.siemac.metamac.web.common.MetamacWebCommon"/>
 
 	<!-- Specify the app entry point class. -->
