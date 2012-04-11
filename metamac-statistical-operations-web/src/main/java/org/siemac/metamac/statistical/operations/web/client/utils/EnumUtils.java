@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 
 public class EnumUtils {

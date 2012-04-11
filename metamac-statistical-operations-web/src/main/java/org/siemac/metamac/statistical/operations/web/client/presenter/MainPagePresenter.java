@@ -29,8 +29,8 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesRes
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
-import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent;
+import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;

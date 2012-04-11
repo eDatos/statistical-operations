@@ -5,8 +5,8 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;

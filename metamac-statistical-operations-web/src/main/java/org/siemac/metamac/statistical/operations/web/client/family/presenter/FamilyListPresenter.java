@@ -5,8 +5,8 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;

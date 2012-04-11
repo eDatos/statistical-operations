@@ -2,12 +2,12 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;

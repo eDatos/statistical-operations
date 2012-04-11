@@ -5,12 +5,12 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
+import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;

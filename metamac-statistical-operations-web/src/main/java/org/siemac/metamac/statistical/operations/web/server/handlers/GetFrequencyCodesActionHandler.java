@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import java.util.List;
 
 import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
-import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;

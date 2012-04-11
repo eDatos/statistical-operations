@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 
 import com.smartgwt.client.types.Alignment;

@@ -3,8 +3,8 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import java.util.List;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;

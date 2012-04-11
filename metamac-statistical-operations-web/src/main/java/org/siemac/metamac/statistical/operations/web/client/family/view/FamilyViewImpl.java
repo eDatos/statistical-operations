@@ -2,8 +2,8 @@ package org.siemac.metamac.statistical.operations.web.client.family.view;
 
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;

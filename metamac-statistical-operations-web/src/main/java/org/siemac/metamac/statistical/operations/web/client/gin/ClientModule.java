@@ -1,9 +1,9 @@
 package org.siemac.metamac.statistical.operations.web.client.gin;
 
+import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.OperationsPlaceManager;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWebMessages;
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.FamilyListViewImpl;

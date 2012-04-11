@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;

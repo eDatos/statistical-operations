@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;

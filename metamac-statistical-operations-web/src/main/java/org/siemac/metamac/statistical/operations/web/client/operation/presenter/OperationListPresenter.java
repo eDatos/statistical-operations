@@ -5,9 +5,9 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.serviceapi.ExternalItemBtDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;

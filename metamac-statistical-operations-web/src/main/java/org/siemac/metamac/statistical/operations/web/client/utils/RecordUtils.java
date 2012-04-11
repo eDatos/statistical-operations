@@ -1,11 +1,11 @@
 package org.siemac.metamac.statistical.operations.web.client.utils;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OperationDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;

@@ -5,12 +5,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveySourceDto;
-import org.siemac.metamac.statistical.operations.core.dto.serviceapi.SurveyTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
+import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
+import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 
 public class OperationsListUtils {
 
