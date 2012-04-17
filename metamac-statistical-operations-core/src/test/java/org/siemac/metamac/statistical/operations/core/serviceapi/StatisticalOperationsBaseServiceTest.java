@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -8,6 +9,8 @@ import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
+import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
+import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +24,7 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -89,11 +93,36 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     public void testFindFamilyByCondition() throws MetamacException {
         statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
 
-        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("FAMILY-%").build();
+        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("FAMILY-%").distinctRoot()
+                .build();
 
         List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions);
 
         assertTrue(familiesList.size() != 0);
+    }
+
+    @Test
+    public void testFindFamilyByConditionPaginated() throws MetamacException {
+        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+
+        PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
+        PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
+
+        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("FAMILY-%").distinctRoot()
+                .build();
+
+        PagedResult<Family> familiesList1 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions, pagingParameterPage1);
+        PagedResult<Family> familiesList2 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions, pagingParameterPage2);
+
+        assertTrue(familiesList1.getValues().size() != 0);
+        assertEquals(2, familiesList1.getPageSize());
+        assertEquals(2, familiesList1.getRowCount());
+        assertTrue(familiesList1.getTotalPages() >= 2);
+
+        assertTrue(familiesList2.getValues().size() != 0);
+        assertEquals(2, familiesList2.getPageSize());
     }
 
     @Test
@@ -123,13 +152,13 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
         assertNotNull(family);
     }
 
-    @Override
+    @Test
     public void testPublishInternallyFamily() throws Exception {
         // TODO Auto-generated method stub
 
     }
 
-    @Override
+    @Test
     public void testPublishExternallyFamily() throws Exception {
         // TODO Auto-generated method stub
 
@@ -151,9 +180,22 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     }
 
     @Test
-    public void testSaveOperation() throws MetamacException {
+    public void testCreateOperation() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
         assertNotNull(operation);
+    }
+
+    @Test
+    public void testCreateOperationWithInvalidAccess() throws MetamacException {
+        Operation operation = createOperation();
+
+        operation.setReleaseCalendarAccess("invalidUrl");
+
+        try {
+            operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -164,8 +206,6 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testDeleteOperation() throws MetamacException {
-        testSaveOperation();
-
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
         assertNotNull(operation);
         List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContext());
@@ -188,7 +228,7 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testFindAllOperations() throws MetamacException {
-        testSaveOperation();
+        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
 
         List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContext());
         assertTrue(!operations.isEmpty());
@@ -199,47 +239,61 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     public void testFindOperationByCondition() throws MetamacException {
         statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
 
-        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%").build();
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
+                .distinctRoot().build();
 
         List<Operation> operationsList = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions);
 
         assertTrue(operationsList.size() != 0);
     }
 
-    @Override
+    @Test
+    public void testFindOperationByConditionPaginated() throws MetamacException {
+        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+
+        PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
+        PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
+
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
+                .distinctRoot().build();
+
+        PagedResult<Operation> operationsList1 = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions, pagingParameterPage1);
+        PagedResult<Operation> operationsList2 = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions, pagingParameterPage2);
+
+        assertTrue(operationsList1.getValues().size() != 0);
+        assertEquals(2, operationsList1.getPageSize());
+        assertEquals(2, operationsList1.getRowCount());
+        assertTrue(operationsList1.getTotalPages() >= 2);
+
+        assertTrue(operationsList2.getValues().size() != 0);
+        assertEquals(2, operationsList2.getPageSize());
+    }
+
+    @Test
     public void testAddOperationFamilyAssociation() throws Exception {
         // TODO Auto-generated method stub
-
     }
 
-    @Override
+    @Test
     public void testRemoveOperationFamilyAssociation() throws Exception {
         // TODO Auto-generated method stub
-
     }
 
-    @Override
-    public void testCreateOperation() throws Exception {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
+    @Test
     public void testUpdateOperation() throws Exception {
         // TODO Auto-generated method stub
-
     }
 
-    @Override
+    @Test
     public void testPublishInternallyOperation() throws Exception {
         // TODO Auto-generated method stub
-
     }
 
-    @Override
+    @Test
     public void testPublishExternallyOperation() throws Exception {
         // TODO Auto-generated method stub
-
     }
 
     /**************************************************************************
@@ -259,7 +313,7 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     }
 
     @Test
-    public void testSaveInstance() throws MetamacException {
+    public void testCreateInstance() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         assertNotNull(instance);
@@ -279,7 +333,8 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testFindAllInstances() throws MetamacException {
-        testSaveInstance();
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
         assertTrue(!instances.isEmpty());
@@ -296,32 +351,51 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
         assertTrue(instancesList.size() != 0);
     }
+    
+    @Test
+    public void testFindInstanceByConditionPaginated() throws MetamacException {
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        
+        PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
+        PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
 
-    @Override
-    public void testCreateInstance() throws Exception {
-        // TODO Auto-generated method stub
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%").distinctRoot().build();
 
+        PagedResult<Instance> instances1 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage1);
+        PagedResult<Instance> instances2 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage2);
+
+        assertTrue(instances1.getValues().size() != 0);
+        assertEquals(2, instances1.getPageSize());
+        assertEquals(2, instances1.getRowCount());
+        assertTrue(instances1.getTotalPages() >= 2);
+
+        assertTrue(instances2.getValues().size() != 0);
+        assertEquals(2, instances2.getPageSize());
     }
+    
 
-    @Override
+    @Test
     public void testUpdateInstance() throws Exception {
         // TODO Auto-generated method stub
 
     }
 
-    @Override
+    @Test
     public void testUpdateInstancesOrder() throws Exception {
         // TODO Auto-generated method stub
 
     }
 
-    @Override
+    @Test
     public void testPublishInternallyInstance() throws Exception {
         // TODO Auto-generated method stub
 
     }
 
-    @Override
+    @Test
     public void testPublishExternallyInstance() throws Exception {
         // TODO Auto-generated method stub
 

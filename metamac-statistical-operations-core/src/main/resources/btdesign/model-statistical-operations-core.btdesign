@@ -51,7 +51,7 @@ Application StatisticalOperations {
        		@FamilyDto updateFamily(@FamilyDto familyDto) throws MetamacException;
        		deleteFamily(Long familyId) throws MetamacException;
        		List<@FamilyBaseDto> findAllFamilies  throws MetamacException;
-       		List<@FamilyBaseDto> findFamilyByCondition(List<ConditionalCriteria> condition)  throws MetamacException;
+       		MetamacCriteriaResult<@FamilyBaseDto> findFamilyByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@FamilyDto findFamilyById(Long id) throws MetamacException;
        		@FamilyDto publishInternallyFamily(Long familyId) throws MetamacException;
        		@FamilyDto publishExternallyFamily(Long familyId) throws MetamacException;
@@ -65,7 +65,7 @@ Application StatisticalOperations {
        		@OperationDto updateOperation(@OperationDto operationDto) throws MetamacException;
        		deleteOperation(Long operationId) throws MetamacException;
        		List<@OperationBaseDto> findAllOperations  throws MetamacException;
-       		List<@OperationBaseDto> findOperationsByCondition(List<ConditionalCriteria> condition)  throws MetamacException;
+       		MetamacCriteriaResult<@OperationBaseDto> findOperationsByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@OperationDto findOperationById(Long id) throws MetamacException;
        		@OperationDto publishInternallyOperation(Long operationId) throws MetamacException;
        		@OperationDto publishExternallyOperation(Long operationId) throws MetamacException;
@@ -80,7 +80,7 @@ Application StatisticalOperations {
        		List<@InstanceBaseDto> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;
        		deleteInstance(Long instanceId) throws MetamacException;
        		List<@InstanceBaseDto> findAllInstances  throws MetamacException;
-       		List<@InstanceBaseDto> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+       		MetamacCriteriaResult<@InstanceBaseDto> findInstanceByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@InstanceDto findInstanceById(Long id) throws MetamacException;
        		@InstanceBaseDto findInstanceBaseById(Long id) throws MetamacException;
        		@InstanceDto publishInternallyInstance(Long instanceId) throws MetamacException;
@@ -105,7 +105,8 @@ Application StatisticalOperations {
        		@Family updateFamily(@Family family) throws MetamacException;
     		deleteFamily(Long familyId) throws MetamacException;
     		List<@Family> findAllFamilies throws MetamacException;
-    		List<@Family> findFamilyByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+    		List<Family> findFamilyByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+    		PagedResult<@Family> findFamilyByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
     		@Family publishInternallyFamily(Long familyId) throws MetamacException;
        		@Family publishExternallyFamily(Long familyId) throws MetamacException;
        		
@@ -118,7 +119,8 @@ Application StatisticalOperations {
        		@Operation updateOperation(@Operation operation) throws MetamacException;
 			deleteOperation(Long operationId) throws MetamacException;
 			List<@Operation> findAllOperations throws MetamacException;
-			List<@Operation> findOperationByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			List<Operation> findOperationByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			PagedResult<@Operation> findOperationByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
 			@Operation publishInternallyOperation(Long operationId) throws MetamacException;
        		@Operation publishExternallyOperation(Long operationId) throws MetamacException;
 			
@@ -129,7 +131,8 @@ Application StatisticalOperations {
        		List<@Instance> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;
 			deleteInstance(Long instanceId) throws MetamacException;
 			List<@Instance> findAllInstances throws MetamacException;
-			List<@Instance> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			List<Instance> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			PagedResult<@Instance> findInstanceByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
 			@Instance publishInternallyInstance(Long instanceId) throws MetamacException;
        		@Instance publishExternallyInstance(Long instanceId) throws MetamacException;
 	   }
@@ -274,7 +277,7 @@ Application StatisticalOperations {
 			"Semantic identifier"
        		String code;
        		"URI"
-       		String uri nullable;
+       		String uri nullable length="4000";
        		"TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"TITLE_ALTERNATIVE"
@@ -296,8 +299,8 @@ Application StatisticalOperations {
 		   		findAll;
 		   		save;
 		   		delete;
-				findByQuery;
-				findByCondition;
+		   		findByCondition;
+				findByCondition(PagingParameter pagingParameter);
 			}
 		}  
 		
@@ -313,7 +316,7 @@ Application StatisticalOperations {
 			"Metadata CODE"
        		String code;
        		"Metadta URI"
-       		String uri nullable;
+       		String uri nullable length="4000";
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"
@@ -360,11 +363,11 @@ Application StatisticalOperations {
        		"Metadata REL_POL_US_AC"
        		- @InternationalString relPolUsAc cascade="all" nullable databaseColumn="REL_POL_US_AC_FK";
        		"Metadata REL_POL_US_AC_URL"
-       		String relPolUsAcUrl nullable;
+       		String relPolUsAcUrl nullable length="4000";
        		"Metadata RELEASE_CALENDAR"
        		Boolean releaseCalendar;
        		"Metadata RELEASE_CALENDAR_ACCESS"
-       		String releaseCalendarAccess nullable pattern="'https?://.+'";
+       		String releaseCalendarAccess nullable pattern="'https?://.+'" length="4000";
        		"Metadata UPDATE_FREQUENCY. Its type is CODE"
        		- Set<@ExternalItem> updateFrequency databaseColumn="UPDATE_FREQUENCY_FK" databaseJoinTable="TB_EI_UPDATE_FREQUENCY"  cascade="all-delete-orphan";
        		"INVENTORY_DATE"
@@ -372,11 +375,11 @@ Application StatisticalOperations {
        		"Metadata REV_POLICY"
        		- @InternationalString revPolicy cascade="all" nullable databaseColumn="REV_POLICY_FK";
        		"Metadata REV_POLICY_URL"
-       		String revPolicyUrl nullable;
+       		String revPolicyUrl nullable length="4000";
        		"Metadata REV_PRACTICE"
        		- @InternationalString revPractice cascade="all" nullable databaseColumn="REV_PRACTICE_FK";
        		"Metadata REV_PRACTICE_URL"
-       		String revPracticeUrl nullable;
+       		String revPracticeUrl nullable length="4000";
        		// CONTAT: It comes from AppCommonMetadata
        		
        		
@@ -388,11 +391,11 @@ Application StatisticalOperations {
        		"Metadata COMMENT"
        		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
        		"Metadata COMMENT_URL"
-       		String commentUrl nullable;
+       		String commentUrl nullable length="4000";
        		"Metadata NOTES"
        		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
        		"Metadata NOTES_URL"
-       		String notesUrl nullable;
+       		String notesUrl nullable length="4000";
        		
        		
 			Repository OperationRepository {
@@ -400,8 +403,8 @@ Application StatisticalOperations {
 		   		findAll;
 		   		save;
 		   		delete;
-				findByQuery;
-				findByCondition;
+		   		findByCondition;
+				findByCondition(PagingParameter pagingParameter);
 			}
 		}
 		
@@ -418,7 +421,7 @@ Application StatisticalOperations {
 			"Metadata CODE"
        		String code;
        		"Metadta URI"
-       		String uri nullable;
+       		String uri nullable length="4000";
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"
@@ -464,7 +467,7 @@ Application StatisticalOperations {
        		"Metadata DOC_METHOD"
        		- @InternationalString docMethod cascade="all" nullable databaseColumn="DOC_METHOD_FK";
        		"Metadata DOC_METHOD_URL"
-       		String docMethodUrl nullable;
+       		String docMethodUrl nullable length="4000";
        		"Metadata SURVEY_SOURCE"
        		- @SurveySource surveySource cascade="none" nullable databaseColumn="SURVEY_SOURCE_FK";
        		"Metadata COLL_METHOD"
@@ -476,19 +479,19 @@ Application StatisticalOperations {
        		"Metadata DATA_VALIDATION"
        		- @InternationalString dataValidation cascade="all" nullable databaseColumn="DATA_VALIDATION_FK";
        		"Metadata DATA_VALIDATION_URL"
-       		String dataValidationUrl nullable;
+       		String dataValidationUrl nullable length="4000";
        		"Metadata DATA_COMPILATION"
        		- @InternationalString dataCompilation cascade="all" nullable databaseColumn="DATA_COMPILATION_FK";
        		"Metadata DATA_COMPILATION_URL"
-       		String dataCompilationUrl nullable;
+       		String dataCompilationUrl nullable length="4000";
        		"Metadata ADJUSTMENT"
        		- @InternationalString adjustment cascade="all" nullable databaseColumn="ADJUSTMENT_FK";
        		"Metadata ADJUSTMENT_URL"
-       		String adjustmentUrl nullable;
+       		String adjustmentUrl nullable length="4000";
        		"Metadata COST_BURDEN"
        		- @InternationalString costBurden cascade="all" nullable databaseColumn="COST_BURDEN_FK";
        		"Metadata COST_BURDEN_URL"
-       		String costBurdenUrl nullable;
+       		String costBurdenUrl nullable length="4000";
        		"Metadata COST"
        		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TB_INSTANCES_COSTS";
 
@@ -499,55 +502,55 @@ Application StatisticalOperations {
        		"Metadata QUALITY_DOC"
        		- @InternationalString qualityDoc cascade="all" nullable databaseColumn="QUALITY_DOC_FK";
        		"Metadata QUALITY_DOC"
-       		String qualityDocUrl nullable;
+       		String qualityDocUrl nullable length="4000";
        		"Metadata QUALITY_ASSURE"
        		- @InternationalString qualityAssure cascade="all" nullable databaseColumn="QUALITY_ASSURE_FK";
        		"Metadata QUALITY_ASSURE_URL"
-       		String qualityAssureUrl nullable;
+       		String qualityAssureUrl nullable length="4000";
        		"Metadata QUALITY_ASSMNT"
        		- @InternationalString qualityAssmnt cascade="all" nullable databaseColumn="QUALITY_ASSMNT_FK";
        		"Metadata QUALITY_ASSMNT_URL"
-       		String qualityAssmntUrl nullable;
+       		String qualityAssmntUrl nullable length="4000";
        		"Metadata USER_NEEDS"
        		- @InternationalString userNeeds cascade="all" nullable databaseColumn="USER_NEEDS_FK";
        		"Metadata USER_NEEDS_URL"
-       		String userNeedsUrl nullable;
+       		String userNeedsUrl nullable length="4000";
        		"Metadata USER_SAT"
        		- @InternationalString userSat cascade="all" nullable databaseColumn="USER_SAT_FK";
        		"Metadata USER_SAT_URL"
-       		String userSatUrl nullable;
+       		String userSatUrl nullable length="4000";
        		"Metadata COMPLETENESS"
        		- @InternationalString completeness cascade="all" nullable databaseColumn="COMPLETENESS_FK";
        		"Metadata COMPLETENESS_URL"
-       		String completenessUrl nullable;
+       		String completenessUrl nullable length="4000";
        		"Metadata TIMELINESS"
        		- @InternationalString timeliness cascade="all" nullable databaseColumn="TIMELINESS_FK";
        		"Metadata TIMELINESS_URL"
-       		String timelinessUrl nullable;
+       		String timelinessUrl nullable length="4000";
        		"Metadata PUNCTUALITY"
        		- @InternationalString punctuality cascade="all" nullable databaseColumn="PUNCTUALITY_FK";
        		"Metadata PUNCTUALITY_URL"
-       		String punctualityUrl nullable;
+       		String punctualityUrl nullable length="4000";
        		"Metadata ACCURACY_OVERALL"
        		- @InternationalString accuracyOverall cascade="all" nullable databaseColumn="ACCURACY_OVERALL_FK";
        		"Metadata ACCURACY_OVERALL_URL"
-       		String accuracyOverallUrl nullable;
+       		String accuracyOverallUrl nullable length="4000";
        		"Metadata SAMPLING_ERR"
        		- @InternationalString samplingErr cascade="all" nullable databaseColumn="SAMPLING_ERR_FK";
        		"Metadata SAMPLING_ERR_URL"
-       		String samplingErrUrl nullable;
+       		String samplingErrUrl nullable length="4000";
        		"Metadata NONSAMPLING_ERR"
        		- @InternationalString nonsamplingErr cascade="all" nullable databaseColumn="NONSAMPLING_ERR_FK";
        		"Metadata NONSAMPLING_ERR_URL"
-       		String nonsamplingErrUrl nullable;
+       		String nonsamplingErrUrl nullable length="4000";
        		"Metadata COHER_X_DOMAIN"
        		- @InternationalString coherXDomain cascade="all" nullable databaseColumn="COHER_X_DOMAIN_FK";
        		"Metadata COHER_X_DOMAIN_URL"
-       		String coherXDomainUrl nullable;
+       		String coherXDomainUrl nullable length="4000";
        		"Metadata COHER_INTERNAL"
        		- @InternationalString coherInternal cascade="all" nullable databaseColumn="COHER_INTERNAL_FK";
        		"Metadata COHER_INTERNAL_URL"
-       		String coherInternalUrl nullable;
+       		String coherInternalUrl nullable length="4000";
        		
        		// LEGAL_ACTS: It comes from AppCommonMetadata
        		// DATA_SHARING: It comes from AppCommonMetadata
@@ -557,19 +560,19 @@ Application StatisticalOperations {
        		"Metadata COMMENT"
        		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
        		"Metadata COMMENT_URL"
-       		String commentUrl nullable;
+       		String commentUrl nullable length="4000";
        		"Metadata NOTES"
        		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
        		"Metadata NOTES_URL"
-       		String notesUrl nullable;
+       		String notesUrl nullable length="4000";
        		
 			Repository InstanceRepository {
 				findById;
 		   		findAll;
 		   		save;
 		   		delete;
-				findByQuery;
-				findByCondition;
+		   		findByCondition;
+				findByCondition(PagingParameter pagingParameter);
 			}
 		} 
 	}

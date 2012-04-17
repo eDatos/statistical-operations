@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
+import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
+import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
@@ -133,6 +135,19 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return familyRepository.findByCondition(condition);
     }
+    
+    
+    @Override
+    public PagedResult<Family> findFamilyByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
+        // Validations
+
+        // Initializations
+        initCriteriaConditions(condition, Family.class);
+
+        // Repository operation
+        return familyRepository.findByCondition(condition, pagingParameter);
+    }
+    
 
     @Override
     public Family publishInternallyFamily(ServiceContext ctx, Long familyId) throws MetamacException {
@@ -288,6 +303,17 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
 
         // Repository operation
         return operationRepository.findByCondition(condition);
+    }
+    
+    @Override
+    public PagedResult<Operation> findOperationByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
+        // Validations
+
+        // Initializations
+        initCriteriaConditions(condition, Operation.class);
+
+        // Repository operation
+        return operationRepository.findByCondition(condition, pagingParameter);
     }
 
     @Override
@@ -477,6 +503,18 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return instanceRepository.findByCondition(condition);
     }
+    
+    
+    @Override
+    public PagedResult<Instance> findInstanceByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
+        // Validations
+
+        // Initializations
+        initCriteriaConditions(condition, Instance.class);
+
+        // Repository operation
+        return instanceRepository.findByCondition(condition, pagingParameter);
+    }
 
     @Override
     public Instance publishInternallyInstance(ServiceContext ctx, Long instanceId) throws MetamacException {
@@ -595,4 +633,5 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
             }
         }
     }
+
 }
