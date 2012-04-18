@@ -48,6 +48,7 @@
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="IS_INDICATORS_SYSTEM" />
             <xsd:enumeration value="PROC_STATUS" />
+            <xsd:enumeration value="CODE" />
         </xsd:restriction>
     </xsd:simpleType>        
 	

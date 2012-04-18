@@ -12,12 +12,7 @@ import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteria;
 public class WebServiceFacadeValidationUtil {
 
     public static void validateFindOperations(MetamacCriteria criteria) throws MetamacException {
-
-        List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
-
-        ValidationUtils.checkParameterRequired(criteria, "CRITERIA", exceptions);
-
-        ExceptionUtils.throwIfException(exceptions);
+        // nothing
     }
 
     public static void validateRetrieveOperation(String code) throws MetamacException {

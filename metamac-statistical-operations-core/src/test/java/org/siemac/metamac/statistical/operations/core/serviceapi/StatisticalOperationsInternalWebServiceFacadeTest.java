@@ -24,6 +24,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteria;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaConjunctionRestriction;
+import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaDisjunctionRestriction;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaPropertyRestriction;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteriaRestrictionList;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacVersion;
@@ -218,6 +219,92 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
             assertTrue(operation1Exists);
             assertFalse(operation2Exists);
             assertTrue(operation3Exists);
+        }
+        {
+            // Find paginated
+            MetamacCriteria metamacCriteria = new MetamacCriteria();
+            
+            MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
+            // By codes of operations created
+            MetamacCriteriaPropertyRestriction code1PropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            code1PropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.CODE.value());
+            code1PropertyRestriction.setOperation(OperationType.EQ);
+            code1PropertyRestriction.setStringValue(operationDto1.getCode());
+            disjunction.setRestrictions(new MetamacCriteriaRestrictionList());
+            disjunction.getRestrictions().getRestriction().add(code1PropertyRestriction);
+
+            MetamacCriteriaPropertyRestriction code2PropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            code2PropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.CODE.value());
+            code2PropertyRestriction.setOperation(OperationType.EQ);
+            code2PropertyRestriction.setStringValue(operationDto2.getCode());
+            disjunction.getRestrictions().getRestriction().add(code2PropertyRestriction);
+            
+            MetamacCriteriaPropertyRestriction code3PropertyRestriction = new MetamacCriteriaPropertyRestriction();
+            code3PropertyRestriction.setPropertyName(OperationCriteriaPropertyRestriction.CODE.value());
+            code3PropertyRestriction.setOperation(OperationType.EQ);
+            code3PropertyRestriction.setStringValue(operationDto3.getCode());
+            disjunction.getRestrictions().getRestriction().add(code3PropertyRestriction);
+            
+            metamacCriteria.setRestriction(disjunction);
+            
+            // Pagination
+            metamacCriteria.setDoCount(Boolean.TRUE);
+            metamacCriteria.setMaxResults(BigInteger.valueOf(2));
+            
+            // Find first 2 results
+            {
+                metamacCriteria.setFirstResult(BigInteger.ZERO);
+                FindOperationsResult findOperationsResult = metamacStatisticalOperationsInternalInterfaceV10.findOperations(metamacCriteria);
+        
+                // Validate
+                assertEquals(BigInteger.valueOf(3), findOperationsResult.getTotalResults());
+                assertEquals(BigInteger.valueOf(0), findOperationsResult.getFirstResult());
+                assertEquals(BigInteger.valueOf(2), findOperationsResult.getMaximumResultSize());
+                
+                assertNotNull(findOperationsResult.getOperations());
+                boolean operation1Exists = false;
+                boolean operation2Exists = false;
+                boolean operation3Exists = false;
+                for (OperationBase operationBase : findOperationsResult.getOperations().getOperation()) {
+                    if (operationBase.getCode().equals(operationDto1.getCode())) {
+                        operation1Exists = true;
+                    } else if (operationBase.getCode().equals(operationDto2.getCode())) {
+                        operation2Exists = true;
+                    } else if (operationBase.getCode().equals(operationDto3.getCode())) {
+                        operation3Exists = true;
+                    }
+                }
+                assertTrue(operation1Exists);
+                assertTrue(operation2Exists);
+                assertFalse(operation3Exists);
+            }
+            // Find next results (only one)
+            {
+                metamacCriteria.setFirstResult(BigInteger.valueOf(2));
+                FindOperationsResult findOperationsResult = metamacStatisticalOperationsInternalInterfaceV10.findOperations(metamacCriteria);
+        
+                // Validate
+                assertEquals(BigInteger.valueOf(3), findOperationsResult.getTotalResults());
+                assertEquals(BigInteger.valueOf(2), findOperationsResult.getFirstResult());
+                assertEquals(BigInteger.valueOf(2), findOperationsResult.getMaximumResultSize());
+                
+                assertNotNull(findOperationsResult.getOperations());
+                boolean operation1Exists = false;
+                boolean operation2Exists = false;
+                boolean operation3Exists = false;
+                for (OperationBase operationBase : findOperationsResult.getOperations().getOperation()) {
+                    if (operationBase.getCode().equals(operationDto1.getCode())) {
+                        operation1Exists = true;
+                    } else if (operationBase.getCode().equals(operationDto2.getCode())) {
+                        operation2Exists = true;
+                    } else if (operationBase.getCode().equals(operationDto3.getCode())) {
+                        operation3Exists = true;
+                    }
+                }
+                assertFalse(operation1Exists);
+                assertFalse(operation2Exists);
+                assertTrue(operation3Exists);
+            }
         }
     }
 
