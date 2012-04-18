@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
+import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
+import org.siemac.metamac.core.common.criteria.SculptorCriteria;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
 import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
@@ -33,6 +34,8 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.mapper.Do2DtoMapper;
 import org.siemac.metamac.statistical.operations.core.mapper.Dto2DoMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.MetamacCriteria2SculptorCriteriaMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.SculptorCriteria2MetamacCriteriaMapper;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,13 +47,19 @@ import org.springframework.stereotype.Service;
 public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperationsServiceFacadeImplBase {
 
     @Autowired
-    private Do2DtoMapper                      do2DtoMapper;
+    private Do2DtoMapper                           do2DtoMapper;
 
     @Autowired
-    private Dto2DoMapper                      dto2DoMapper;
+    private Dto2DoMapper                           dto2DoMapper;
 
     @Autowired
-    private StatisticalOperationsListsService statisticalOperationsListsService;
+    private MetamacCriteria2SculptorCriteriaMapper metamacCriteria2SculptorCriteriaMapper;
+
+    @Autowired
+    private SculptorCriteria2MetamacCriteriaMapper sculptorCriteria2MetamacCriteriaMapper;
+
+    @Autowired
+    private StatisticalOperationsListsService      statisticalOperationsListsService;
 
     public StatisticalOperationsServiceFacadeImpl() {
     }
@@ -242,19 +251,18 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
 
     @Override
     public MetamacCriteriaResult<FamilyBaseDto> findFamilyByCondition(ServiceContext ctx, MetamacCriteria criteria) throws MetamacException {
-//        // Service call
-//        List<Family> families = getStatisticalOperationsBaseService().findFamilyByCondition(ctx, condition);
-//
-//        // Transform to Dto
-//        List<FamilyBaseDto> familiesDto = familiesListDo2BaseDto(families);
-//
-//        // Return
-//        return familiesDto;
+        // Transform
+        SculptorCriteria sculptorCriteria = metamacCriteria2SculptorCriteriaMapper.getFamilyCriteriaMapper().metamacCriteria2SculptorCriteria(criteria);
         
-        // TODO
-        return null;
+        // Service call
+        PagedResult<Family> families = getStatisticalOperationsBaseService().findFamilyByCondition(ctx, sculptorCriteria.getConditions(), sculptorCriteria.getPagingParameter());
+
+        // Transform to Dto
+        MetamacCriteriaResult<FamilyBaseDto> familiesDto = sculptorCriteria2MetamacCriteriaMapper.pageResultToMetamacCriteriaResultFamily(families, sculptorCriteria.getPageSize());
+
+        // Return
+        return familiesDto;
     }
-    
 
     @Override
     public FamilyDto publishInternallyFamily(ServiceContext ctx, Long familyId) throws MetamacException {
@@ -363,17 +371,19 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
-    public MetamacCriteriaResult<OperationBaseDto> findOperationsByCondition(ServiceContext ctx, MetamacCriteria condition) throws MetamacException {
-//        // Service call
-//        List<Operation> operations = getStatisticalOperationsBaseService().findOperationByCondition(ctx, condition);
-//
-//        // Transform to Dto
-//        List<OperationBaseDto> operationsDto = operationsListDo2BaseDto(operations);
-//
-//        return operationsDto;
+    public MetamacCriteriaResult<OperationBaseDto> findOperationsByCondition(ServiceContext ctx, MetamacCriteria criteria) throws MetamacException {
         
-        // TODO
-        return null;
+        // Transform
+        SculptorCriteria sculptorCriteria = metamacCriteria2SculptorCriteriaMapper.getOperationCriteriaMapper().metamacCriteria2SculptorCriteria(criteria);
+        
+        // Service call
+        PagedResult<Operation> operations = getStatisticalOperationsBaseService().findOperationByCondition(ctx, sculptorCriteria.getConditions(), sculptorCriteria.getPagingParameter());
+
+        // Transform to Dto
+        MetamacCriteriaResult<OperationBaseDto> operationsDto = sculptorCriteria2MetamacCriteriaMapper.pageResultToMetamacCriteriaResultOperation(operations, sculptorCriteria.getPageSize());
+
+        // Return
+        return operationsDto;
     }
 
     @Override
@@ -521,20 +531,21 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
-    public MetamacCriteriaResult<InstanceBaseDto> findInstanceByCondition(ServiceContext ctx, MetamacCriteria condition) throws MetamacException {
-//        // Service call
-//        List<Instance> instances = getStatisticalOperationsBaseService().findInstanceByCondition(ctx, condition);
-//
-//        // Transform to Dto
-//        List<InstanceBaseDto> instancesDto = instancesListDo2BaseDto(instances);
-//
-//        // Return
-//        return instancesDto;
+    public MetamacCriteriaResult<InstanceBaseDto> findInstanceByCondition(ServiceContext ctx, MetamacCriteria criteria) throws MetamacException {
         
-        // TODO
-        return null;
+        // Transform
+        SculptorCriteria sculptorCriteria = metamacCriteria2SculptorCriteriaMapper.getInstanceCriteriaMapper().metamacCriteria2SculptorCriteria(criteria);
+        
+        // Service call
+        PagedResult<Instance> instances = getStatisticalOperationsBaseService().findInstanceByCondition(ctx, sculptorCriteria.getConditions(), sculptorCriteria.getPagingParameter());
+
+        // Transform to Dto
+        MetamacCriteriaResult<InstanceBaseDto> instancesDto = sculptorCriteria2MetamacCriteriaMapper.pageResultToMetamacCriteriaResultInstance(instances, sculptorCriteria.getPageSize());
+
+        // Return
+        return instancesDto;
     }
-    
+
     @Override
     public InstanceDto findInstanceById(ServiceContext ctx, Long identifier) throws MetamacException {
         // Service call

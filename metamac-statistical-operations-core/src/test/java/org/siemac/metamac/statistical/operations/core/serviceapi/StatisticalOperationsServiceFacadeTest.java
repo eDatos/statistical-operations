@@ -1,6 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
-import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -10,12 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
-import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.siemac.metamac.common.test.MetamacBaseTests;
+import org.siemac.metamac.core.common.criteria.MetamacCriteria;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
@@ -36,9 +36,6 @@ import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.core.domain.Family;
-import org.siemac.metamac.statistical.operations.core.domain.Instance;
-import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -459,7 +456,8 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
     @Test
     public void testFindAllFamilies() throws MetamacException {
-        testCreateFamily();
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+        
         List<FamilyBaseDto> families = statisticalOperationsServiceFacade.findAllFamilies(getServiceContext());
         assertTrue(!families.isEmpty());
 
@@ -467,12 +465,46 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
     @Test
     public void testFindFamilyByCondition() throws MetamacException {
-//        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("PRUEBA01%").build();
-//        List<FamilyBaseDto> familiesDto = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), conditions);
-//
-//        assertTrue(familiesDto.size() != 0);
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
+        assertTrue(result.getResults().size() >= 2 );
+    }
+    
+    
+    @Test
+    public void testFindFamilyByConditionPaginated() throws MetamacException {
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+        statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
         
-        // TODO 
+        MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
+        paginator.setCountTotalResults(Boolean.TRUE);
+        paginator.setMaximumResultSize(Integer.valueOf(2));
+        criteria.setPaginator(paginator);
+        
+        {
+            // Page 1
+            criteria.getPaginator().setFirstResult(Integer.valueOf(0));
+        
+            MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
+            assertEquals(2, result.getResults().size());
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
+            assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
+        }
+        
+        {
+            // Page 2
+            criteria.getPaginator().setFirstResult(Integer.valueOf(2));
+            MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
+            assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
+            
+        }
     }
 
     @Test
@@ -1026,17 +1058,52 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         assertTrue(!operations.isEmpty());
     }
 
+    
     @Test
     public void testFindOperationsByCondition() throws MetamacException {
-//        assertTrue(true);
-//
-//        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("PRUEBA01%").build();
-//        List<OperationBaseDto> operationsDto = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), conditions);
-//
-//        assertTrue(operationsDto.size() != 0);
-        
-        // TODO
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
+        assertTrue(result.getResults().size() >= 2 );
     }
+    
+    
+    @Test
+    public void testFindOperationsByConditionPaginated() throws MetamacException {
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
+        
+        MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
+        paginator.setCountTotalResults(Boolean.TRUE);
+        paginator.setMaximumResultSize(Integer.valueOf(2));
+        criteria.setPaginator(paginator);
+        
+        {
+            // Page 1
+            criteria.getPaginator().setFirstResult(Integer.valueOf(0));
+        
+            MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
+            assertEquals(2, result.getResults().size());
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
+            assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
+        }
+        
+        {
+            // Page 2
+            criteria.getPaginator().setFirstResult(Integer.valueOf(2));
+            MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
+            assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
+            
+        }
+    }
+    
+    
 
     @Test
     public void testFindOperationById() throws MetamacException {
@@ -1673,13 +1740,51 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
     @Test
     public void testFindInstanceByCondition() throws MetamacException {
-//        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("PRUEBA01%").build();
-//        List<InstanceBaseDto> instancesDto = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), conditions);
-//
-//        assertTrue(instancesDto.size() != 0);
-        
-        // TODO
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
+        assertTrue(result.getResults().size() >= 2 );
     }
+    
+    
+    @Test
+    public void testFindInstanceByConditionPaginated() throws MetamacException {
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+
+        MetamacCriteria criteria = new MetamacCriteria();
+        
+        MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
+        paginator.setCountTotalResults(Boolean.TRUE);
+        paginator.setMaximumResultSize(Integer.valueOf(2));
+        criteria.setPaginator(paginator);
+        
+        {
+            // Page 1
+            criteria.getPaginator().setFirstResult(Integer.valueOf(0));
+        
+            MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
+            assertEquals(2, result.getResults().size());
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
+            assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
+        }
+        
+        {
+            // Page 2
+            criteria.getPaginator().setFirstResult(Integer.valueOf(2));
+            MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
+            assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
+            assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
+            
+        }
+    }
+    
 
     @Test
     public void testFindInstanceById() throws MetamacException {
