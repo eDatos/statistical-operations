@@ -14,6 +14,9 @@
 		<context:exclude-filter type="regex" expression=".*web.*" />
 	</context:component-scan>
 
+	<!-- metamac-core-common -->
+	<import resource="classpath:/spring/logging-beans-advice.xml"/>
+
 	<!-- CORE Entity Manager -->
 	<import resource="classpath:/spring/core/oracle/applicationContext-datasource.xml" />
 	<import resource="classpath:/pub-sub.xml" />
