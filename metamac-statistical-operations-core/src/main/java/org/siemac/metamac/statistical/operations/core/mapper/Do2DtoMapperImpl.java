@@ -150,9 +150,6 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // CODE
         // Not necessary
 
-        // URI
-        // Not necessary
-
         // TITLE
         familyDto.setTitle(internationalStringToDto(family.getTitle()));
 
@@ -207,9 +204,6 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         operationDto.setCommonMetadata(externalItemBtToDto(operation.getCommonMetadata()));
 
         // CODE
-        // Not necessary
-
-        // URI
         // Not necessary
 
         // TITLE
@@ -354,9 +348,6 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // CODE
-        // Not necessary
-
-        // URI
         // Not necessary
 
         // TITLE

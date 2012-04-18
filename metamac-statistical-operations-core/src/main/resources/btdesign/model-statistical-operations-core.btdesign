@@ -276,8 +276,6 @@ Application StatisticalOperations {
 			
 			"Semantic identifier"
        		String code;
-       		"URI"
-       		String uri nullable length="4000";
        		"TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"TITLE_ALTERNATIVE"
@@ -315,8 +313,6 @@ Application StatisticalOperations {
 			
 			"Metadata CODE"
        		String code;
-       		"Metadta URI"
-       		String uri nullable length="4000";
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"
@@ -420,8 +416,6 @@ Application StatisticalOperations {
 			
 			"Metadata CODE"
        		String code;
-       		"Metadta URI"
-       		String uri nullable length="4000";
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"

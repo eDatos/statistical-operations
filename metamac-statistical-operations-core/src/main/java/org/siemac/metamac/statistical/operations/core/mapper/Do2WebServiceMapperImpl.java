@@ -28,7 +28,6 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
             return null;
         }
         OperationBase operationBase = new OperationBase();
-        operationBase.setUri(source.getUri());
         operationBase.setCode(source.getCode());
         operationBase.setTitle(internationalStringToWebService(source.getTitle()));
         operationBase.setAcronym(internationalStringToWebService(source.getAcronym()));

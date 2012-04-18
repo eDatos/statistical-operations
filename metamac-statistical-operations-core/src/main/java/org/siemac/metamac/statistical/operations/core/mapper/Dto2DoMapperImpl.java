@@ -211,9 +211,6 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // CODE
         target.setCode(source.getCode());
 
-        // URI
-        // Not necessary. It can't be manually modified
-
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), "FAMILY.TITLE"));
 
@@ -251,9 +248,6 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // CODE
         target.setCode(source.getCode());
-
-        // URI
-        // Not necessary. It can't be manually modified
 
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), "OPERATION.TITLE"));
@@ -395,9 +389,6 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // CODE
         target.setCode(source.getCode());
-
-        // URI
-        // Not necessary. It can't be manually edited.
 
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), "INSTANCE.TITLE"));

@@ -72,7 +72,6 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
 
         assertNotNull(operationBase);
         assertEquals(operationDto.getCode(), operationBase.getCode());
-        assertEquals(operationDto.getUri(), operationBase.getUri());
     }
     
     @Test

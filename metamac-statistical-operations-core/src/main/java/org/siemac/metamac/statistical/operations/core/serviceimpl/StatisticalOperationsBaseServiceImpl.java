@@ -67,8 +67,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Family createFamily(ServiceContext ctx, Family family) throws MetamacException {
         // Fill metadata
         family.setProcStatus(ProcStatusEnum.DRAFT);
-        // TODO: Fill URI
-        family.setUri("http://TODO/operations/family/".concat(java.util.UUID.randomUUID().toString()));
 
         // Validations
         validateFamilyCodeUnique(ctx, family.getCode(), null);
@@ -241,8 +239,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         operation.setProcStatus(ProcStatusEnum.DRAFT);
         operation.setStatus(StatusEnum.PLANNING);
         operation.setCurrentlyActive(Boolean.FALSE);
-        // TODO: Fill URI
-        operation.setUri("http://TODO/operations/operation/".concat(java.util.UUID.randomUUID().toString()));
 
         // Validations
         validateOperationCodeUnique(ctx, operation.getCode(), null);
@@ -382,9 +378,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         instance.setOperation(operation);
         instance.setOrder(order);
         instance.setProcStatus(ProcStatusEnum.DRAFT);
-
-        // TODO: Fill URI
-        instance.setUri("http://TODO/operations/instance/".concat(java.util.UUID.randomUUID().toString()));
 
         // Validations
         validateInstanceCodeUnique(ctx, instance.getCode(), null);

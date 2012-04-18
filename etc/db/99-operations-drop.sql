@@ -1,8 +1,8 @@
+   
 -- ###########################################
 -- # Drop
 -- ###########################################
--- Drop index
-  
+
 -- Drop many to many relations
     
 DROP TABLE TB_INSTANCES_COSTS CASCADE CONSTRAINTS PURGE;
@@ -59,8 +59,7 @@ DROP TABLE TB_LIS_COLL_METHODS CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE TB_INTERNATIONAL_STRINGS CASCADE CONSTRAINTS PURGE;
 
-
--- Drop pk sequence
+-- Drop sequences
 
 drop sequence SEQ_I18NSTRS;
 drop sequence SEQ_L10NSTRS;
