@@ -11,6 +11,7 @@ import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 
 public class CheckMandatoryMetadataUtil {
@@ -34,9 +35,9 @@ public class CheckMandatoryMetadataUtil {
             exceptions = new ArrayList<MetamacExceptionItem>();
         }
 
-        ValidationUtils.checkMetadataRequired(family.getCode(), "CODE", exceptions);
-        ValidationUtils.checkMetadataRequired(family.getTitle(), "TITLE", exceptions);
-        ValidationUtils.checkMetadataRequired(family.getProcStatus(), "PROC_STATUS", exceptions);
+        ValidationUtils.checkMetadataRequired(family.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
+        ValidationUtils.checkMetadataRequired(family.getTitle(), ServiceExceptionParameters.FAMILY_TITLE, exceptions);
+        ValidationUtils.checkMetadataRequired(family.getProcStatus(), ServiceExceptionParameters.FAMILY_PROC_STATUS, exceptions);
 
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);
@@ -59,7 +60,7 @@ public class CheckMandatoryMetadataUtil {
             exceptions = new ArrayList<MetamacExceptionItem>();
         }
 
-        ValidationUtils.checkMetadataRequired(family.getInternalInventoryDate(), "INTERNAL_INVENTORY_DATE", exceptions);
+        ValidationUtils.checkMetadataRequired(family.getInternalInventoryDate(), ServiceExceptionParameters.FAMILY_INTERNAL_INVENTORY_DATE, exceptions);
 
         checkCreateFamily(family);
     }
@@ -73,7 +74,7 @@ public class CheckMandatoryMetadataUtil {
     public static void checkFamilyForPublishExternally(Family family) throws MetamacException {
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
-        ValidationUtils.checkMetadataRequired(family.getInventoryDate(), "INVENTORY_DATE", exceptions);
+        ValidationUtils.checkMetadataRequired(family.getInventoryDate(), ServiceExceptionParameters.FAMILY_INVENTORY_DATE, exceptions);
 
         checkFamilyForPublishInternally(family, exceptions);
     }
@@ -97,15 +98,15 @@ public class CheckMandatoryMetadataUtil {
             exceptions = new ArrayList<MetamacExceptionItem>();
         }
 
-        ValidationUtils.checkMetadataRequired(operation.getCode(), "CODE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getTitle(), "TITLE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getProcStatus(), "PROC_STATUS", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getStatus(), "STATUS", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getSubjectArea(), "SUBJECT_AREA", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getIndicatorSystem(), "INDICATOR_SYSTEM", exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getTitle(), ServiceExceptionParameters.OPERATION_TITLE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getProcStatus(), ServiceExceptionParameters.OPERATION_PROC_STATUS, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getStatus(), ServiceExceptionParameters.OPERATION_STATUS, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getSubjectArea(), ServiceExceptionParameters.OPERATION_SUBJECT_AREA, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getIndicatorSystem(), ServiceExceptionParameters.OPERATION_INDICATOR_SYSTEM, exceptions);
 
         if (!ValidationUtils.isEmpty(operation.getReleaseCalendarAccess())) {
-            validateUrl(operation.getReleaseCalendarAccess(), exceptions, "RELEASE_CALENDAR_ACCESS");
+            validateUrl(operation.getReleaseCalendarAccess(), exceptions, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS);
         }
 
         if (!exceptions.isEmpty()) {
@@ -129,15 +130,15 @@ public class CheckMandatoryMetadataUtil {
             exceptions = new ArrayList<MetamacExceptionItem>();
         }
 
-        ValidationUtils.checkMetadataRequired(operation.getCommonMetadata(), "COMMON_METADATA", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getObjective(), "OBJECTIVE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getSurveyType(), "SURVEY_TYPE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getOfficialityType(), "OFFICIALITY_TYPE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getProducer(), "PRODUCER", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getRegionalResponsible(), "REGIONAL_RESPONSIBLE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getInternalInventoryDate(), "INTERNAL_INVEMTORY_DATE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getCurrentlyActive(), "CURRENTLY_ACTIVE", exceptions);
-        ValidationUtils.checkMetadataRequired(operation.getPublisher(), "PUBLISHER", exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getCommonMetadata(), ServiceExceptionParameters.OPERATION_COMMON_METADATA, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getObjective(), ServiceExceptionParameters.OPERATION_OBJECTIVE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getSurveyType(), ServiceExceptionParameters.OPERATION_SURVEY_TYPE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getOfficialityType(), ServiceExceptionParameters.OPERATION_OFFICIALITY_TYPE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getProducer(), ServiceExceptionParameters.OPERATION_PRODUCER, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getRegionalResponsible(), ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getInternalInventoryDate(), ServiceExceptionParameters.OPERATION_INTERNAL_INVENTORY_DATE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getCurrentlyActive(), ServiceExceptionParameters.OPERATION_CURRENTLY_ACTIVE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getPublisher(), ServiceExceptionParameters.OPERATION_PUBLISHER, exceptions);
 
         checkCreateOperation(operation, exceptions);
     }
@@ -152,7 +153,7 @@ public class CheckMandatoryMetadataUtil {
 
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
-        ValidationUtils.checkMetadataRequired(operation.getInventoryDate(), "INVENTORY_DATE", exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getInventoryDate(), ServiceExceptionParameters.OPERATION_INVENTORY_DATE, exceptions);
 
         checkOperationForPublishInternally(operation, exceptions);
     }
@@ -172,10 +173,10 @@ public class CheckMandatoryMetadataUtil {
             exceptions = new ArrayList<MetamacExceptionItem>();
         }
 
-        ValidationUtils.checkMetadataRequired(instance.getOrder(), "ORDER", exceptions);
-        ValidationUtils.checkMetadataRequired(instance.getCode(), "CODE", exceptions);
-        ValidationUtils.checkMetadataRequired(instance.getTitle(), "TITLE", exceptions);
-        ValidationUtils.checkMetadataRequired(instance.getProcStatus(), "PROC_STATUS", exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getOrder(), ServiceExceptionParameters.INSTANCE_ORDER, exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getTitle(), ServiceExceptionParameters.INSTANCE_TITLE, exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getProcStatus(), ServiceExceptionParameters.INSTANCE_PROC_STATUS, exceptions);
 
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);
@@ -191,8 +192,8 @@ public class CheckMandatoryMetadataUtil {
     public static void checkInstanceForPublishInternally(Instance instance) throws MetamacException {
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
-        ValidationUtils.checkMetadataRequired(instance.getInstanceType(), "INSTANCE_TYPE", exceptions);
-        ValidationUtils.checkMetadataRequired(instance.getInternalInventoryDate(), "INTERNAL_INVENTORY_DATE", exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getInstanceType(), ServiceExceptionParameters.INSTANCE_INSTANCE_TYPE, exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getInternalInventoryDate(), ServiceExceptionParameters.INSTANCE_INTERNAL_INVENTORY_DATE, exceptions);
 
         checkCreateInstance(instance, exceptions);
     }
@@ -206,7 +207,7 @@ public class CheckMandatoryMetadataUtil {
     public static void checkInstanceForPublishExternally(Instance instance) throws MetamacException {
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
-        ValidationUtils.checkMetadataRequired(instance.getInventoryDate(), "INVENTORY_DATE", exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getInventoryDate(), ServiceExceptionParameters.INSTANCE_INVENTORY_DATE, exceptions);
 
         checkInstanceForPublishInternally(instance);
     }

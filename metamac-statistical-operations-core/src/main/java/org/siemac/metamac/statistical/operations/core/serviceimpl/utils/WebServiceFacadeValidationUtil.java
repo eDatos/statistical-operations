@@ -8,6 +8,7 @@ import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.exception.utils.ExceptionUtils;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacCriteria;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 
 public class WebServiceFacadeValidationUtil {
 
@@ -18,7 +19,7 @@ public class WebServiceFacadeValidationUtil {
     public static void validateRetrieveOperation(String code) throws MetamacException {
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
-        ValidationUtils.checkParameterRequired(code, "CODE", exceptions);
+        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, exceptions);
 
         ExceptionUtils.throwIfException(exceptions);
     }

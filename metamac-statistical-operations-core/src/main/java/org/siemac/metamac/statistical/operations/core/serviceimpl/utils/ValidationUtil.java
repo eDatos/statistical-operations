@@ -41,7 +41,7 @@ public class ValidationUtil {
      */
     public static void validateIfFamilyRelatedWithOperations(Set<Operation> operationsForFamily) throws MetamacException {
         if (operationsForFamily.isEmpty()) {
-            throw new MetamacException(ServiceExceptionType.FAMILY_WITHOUT_OPERATIONS, "family.getOperations");
+            throw new MetamacException(ServiceExceptionType.FAMILY_WITHOUT_OPERATIONS);
         }
     }
 
