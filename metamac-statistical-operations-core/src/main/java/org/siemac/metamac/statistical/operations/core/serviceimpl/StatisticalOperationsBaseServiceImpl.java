@@ -12,6 +12,7 @@ import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBui
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.fornax.cartridges.sculptor.framework.validation.ValidationUtils;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
@@ -372,6 +373,10 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Instance createInstance(ServiceContext ctx, Long operationId, Instance instance) throws MetamacException {
         // Get information
         Operation operation = findOperationById(ctx, operationId);
+        
+        // Check operation for create instance. Operation PROC_STATUS can't be draft
+        ValidationUtil.validateOperationProcStatusForSaveInstance(operation);
+        
         Integer order = operation.getInstances().size();
 
         // Fill metadata

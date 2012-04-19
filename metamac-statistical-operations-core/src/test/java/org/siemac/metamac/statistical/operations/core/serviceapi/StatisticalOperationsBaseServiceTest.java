@@ -20,6 +20,7 @@ import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
@@ -302,7 +303,8 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testFindInstanceById() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         assertNotNull(instance);
 
@@ -314,14 +316,27 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testCreateInstance() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         assertNotNull(instance);
     }
 
     @Test
-    public void testDeleteInstance() throws MetamacException {
+    public void testCreateInstanceOperationNotPublished() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        try {
+            Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.INSTANCE_INCORRECT_OPERATION_PROC_STATUS.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+    }
+
+    @Test
+    public void testDeleteInstance() throws MetamacException {
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
@@ -333,7 +348,9 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testFindAllInstances() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
@@ -342,7 +359,9 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
     @Test
     public void testFindInstanceByCondition() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%").build();
@@ -351,18 +370,21 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
         assertTrue(instancesList.size() != 0);
     }
-    
+
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
         
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+
         PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
         PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
 
-        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%").distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%")
+                .distinctRoot().build();
 
         PagedResult<Instance> instances1 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage1);
         PagedResult<Instance> instances2 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage2);
@@ -375,7 +397,6 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
         assertTrue(instances2.getValues().size() != 0);
         assertEquals(2, instances2.getPageSize());
     }
-    
 
     @Test
     public void testUpdateInstance() throws Exception {
@@ -507,6 +528,50 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
 
         // TYPE
         operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+
+        return operation;
+    }
+    
+    
+    private Operation createOperationForInternalPublishing() throws MetamacException {
+        Operation operation = createOperation();
+
+        // OBJECTIVE
+        InternationalString objective = new InternationalString();
+        LocalisedString objective_es = new LocalisedString();
+        objective_es.setLabel("OPERACION - OBJECTIVE - ES");
+        objective_es.setLocale("es");
+        LocalisedString objective_en = new LocalisedString();
+        objective_en.setLabel("OPERACION - OBJECTIVE - EN");
+        objective_en.setLocale("en");
+        objective.addText(objective_es);
+        objective.addText(objective_en);
+        operation.setObjective(objective);
+
+        // SURVEY_TYPE
+        operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+
+        // PRODUCER
+        ExternalItem producer01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(producer01);
+
+        ExternalItem producer02 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "INE", TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(producer02);
+
+        // REGIONAL_RESPONSIBLE
+        ExternalItem regionalResponsible01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addRegionalResponsible(regionalResponsible01);
+
+        // PUBLISHER
+        ExternalItem publisher01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addPublisher(publisher01);
+
+        // COMMON_METADATA
+        ExternalItemBt commonMetadata = new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY);
+        operation.setCommonMetadata(commonMetadata);
+        
+        // OFFICIALITY_TYPE
+        operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContext(), Long.valueOf(1)));
 
         return operation;
     }

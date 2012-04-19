@@ -1255,9 +1255,8 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContext()).size();
 
         // Create operation
-        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
-        Long operationId = operationDto.getId();
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto.getId());
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
@@ -1740,10 +1739,12 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
     @Test
     public void testFindInstanceByCondition() throws MetamacException {
-        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
+        
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
         MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
@@ -1753,10 +1754,12 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
     
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {
-        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
-        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
+        
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
+        statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
         
@@ -1885,8 +1888,10 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
     @Test
     public void testFindInstanceBaseById() throws MetamacException {
         // Create instance
-        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
-        InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationDto.getId(), createInstanceDto());
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
+        
+        InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContext()).size();
 
