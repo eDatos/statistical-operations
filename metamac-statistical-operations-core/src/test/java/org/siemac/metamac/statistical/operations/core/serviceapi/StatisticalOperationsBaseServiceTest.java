@@ -11,10 +11,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
-import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.common.test.MetamacBaseTests;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
@@ -35,7 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
-public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests implements StatisticalOperationsBaseServiceTestBase {
+public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsBaseServiceTestBase {
 
     @Autowired
     protected StatisticalOperationsBaseService  statisticalOperationsBaseService;
@@ -43,11 +41,6 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     @Autowired
     protected StatisticalOperationsListsService statisticalOperationsListsService;
 
-    private final ServiceContext                serviceContext = new ServiceContext("system", "123456", "junit");
-
-    protected ServiceContext getServiceContext() {
-        return serviceContext;
-    }
 
     /**************************************************************************
      * Family Tests
@@ -326,7 +319,7 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
     public void testCreateInstanceOperationNotPublished() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
         try {
-            Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+            statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INSTANCE_INCORRECT_OPERATION_PROC_STATUS.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -617,29 +610,5 @@ public class StatisticalOperationsBaseServiceTest extends MetamacBaseTests imple
         instance.setOrder(0);
 
         return instance;
-    }
-
-    /**************************************************************************
-     * DBUNIT CONFIGURATION
-     **************************************************************************/
-
-    @Override
-    protected String getDataSetFile() {
-        return "dbunit/StatisticalOperationsBaseServiceTest.xml";
-    }
-
-    @Override
-    protected List<String> getTablesToRemoveContent() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getSequencesToRestart() {
-        return null;
-    }
-
-    @Override
-    public void tearDownDatabaseTester() throws Exception {
-        // NOTHING;
     }
 }

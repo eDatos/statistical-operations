@@ -4,7 +4,6 @@ import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 
 public class ServiceExceptionType extends CommonServiceExceptionType {
 
-    // Extended Error Codes
     public static final CommonServiceExceptionType INVALID_PROC_STATUS                             = create("exception.operations.invalid.proc_status");
     public static final CommonServiceExceptionType INVALID_URL                                     = create("exception.operations.invalid.url");
 
@@ -34,5 +33,7 @@ public class ServiceExceptionType extends CommonServiceExceptionType {
     public static final CommonServiceExceptionType COST_NOT_FOUND                                  = create("exception.operations.list.cost.not_found");
 
     public static final CommonServiceExceptionType COMMON_METADATA_NOT_FOUND                       = create("exception.operations.common_metadata.not_found");
+
+    public static final CommonServiceExceptionType SECURITY_ACCESS_OPERATION_NOT_ALLOWED           = create("exception.operations.security.access_operation_not_allowed");
 
 }

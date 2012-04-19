@@ -16,6 +16,11 @@
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: CORE</name>
 
     <dependencies>
+    	<dependency>
+			<groupId>org.siemac.metamac</groupId>
+			<artifactId>metamac-sso-client</artifactId>
+			<version>${metamac-sso-client.version}</version>
+		</dependency>
         <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-api-domain</artifactId>

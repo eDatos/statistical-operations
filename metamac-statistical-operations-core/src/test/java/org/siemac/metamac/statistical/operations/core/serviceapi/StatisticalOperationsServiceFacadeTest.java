@@ -9,10 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.common.test.MetamacBaseTests;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
@@ -47,7 +45,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
-public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests implements StatisticalOperationsServiceFacadeTestBase {
+public class StatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
     @Autowired
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -55,11 +53,6 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
     @Autowired
     protected ExternalItemRepository             externalItemRepository;
 
-    private final ServiceContext                 serviceContext = new ServiceContext("system", "123456", "junit");
-
-    protected ServiceContext getServiceContext() {
-        return serviceContext;
-    }
 
     /**************************************************************************
      * Survey Type
@@ -457,7 +450,7 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
     @Test
     public void testFindAllFamilies() throws MetamacException {
         statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
-        
+
         List<FamilyBaseDto> families = statisticalOperationsServiceFacade.findAllFamilies(getServiceContext());
         assertTrue(!families.isEmpty());
 
@@ -470,10 +463,9 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
         MetamacCriteria criteria = new MetamacCriteria();
         MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
-        assertTrue(result.getResults().size() >= 2 );
+        assertTrue(result.getResults().size() >= 2);
     }
-    
-    
+
     @Test
     public void testFindFamilyByConditionPaginated() throws MetamacException {
         statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
@@ -481,29 +473,29 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         statisticalOperationsServiceFacade.createFamily(getServiceContext(), createFamilyDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
-        
+
         MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
         paginator.setCountTotalResults(Boolean.TRUE);
         paginator.setMaximumResultSize(Integer.valueOf(2));
         criteria.setPaginator(paginator);
-        
+
         {
             // Page 1
             criteria.getPaginator().setFirstResult(Integer.valueOf(0));
-        
+
             MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
             assertEquals(2, result.getResults().size());
             assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
             assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
         }
-        
+
         {
             // Page 2
             criteria.getPaginator().setFirstResult(Integer.valueOf(2));
             MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContext(), criteria);
             assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
             assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
-            
+
         }
     }
 
@@ -983,7 +975,7 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContext(), operationDto.getId(), family02.getId());
 
         // Count number of families before delete
-        int familiesBeforeDelete = statisticalOperationsServiceFacade.findAllFamilies(serviceContext).size();
+        int familiesBeforeDelete = statisticalOperationsServiceFacade.findAllFamilies(getServiceContext()).size();
 
         // Get operation
         operationDto = statisticalOperationsServiceFacade.findOperationById(getServiceContext(), operationDto.getId());
@@ -1000,7 +992,7 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         }
 
         // Check number of families before delete
-        int familiesAfterDelete = statisticalOperationsServiceFacade.findAllFamilies(serviceContext).size();
+        int familiesAfterDelete = statisticalOperationsServiceFacade.findAllFamilies(getServiceContext()).size();
         assertEquals(familiesBeforeDelete, familiesAfterDelete);
     }
 
@@ -1058,7 +1050,6 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         assertTrue(!operations.isEmpty());
     }
 
-    
     @Test
     public void testFindOperationsByCondition() throws MetamacException {
         statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
@@ -1066,10 +1057,9 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
 
         MetamacCriteria criteria = new MetamacCriteria();
         MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
-        assertTrue(result.getResults().size() >= 2 );
+        assertTrue(result.getResults().size() >= 2);
     }
-    
-    
+
     @Test
     public void testFindOperationsByConditionPaginated() throws MetamacException {
         statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
@@ -1077,33 +1067,31 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
-        
+
         MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
         paginator.setCountTotalResults(Boolean.TRUE);
         paginator.setMaximumResultSize(Integer.valueOf(2));
         criteria.setPaginator(paginator);
-        
+
         {
             // Page 1
             criteria.getPaginator().setFirstResult(Integer.valueOf(0));
-        
+
             MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
             assertEquals(2, result.getResults().size());
             assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
             assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
         }
-        
+
         {
             // Page 2
             criteria.getPaginator().setFirstResult(Integer.valueOf(2));
             MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContext(), criteria);
             assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
             assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
-            
+
         }
     }
-    
-    
 
     @Test
     public void testFindOperationById() throws MetamacException {
@@ -1741,53 +1729,51 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
     public void testFindInstanceByCondition() throws MetamacException {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
-        
+
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
         MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
-        assertTrue(result.getResults().size() >= 2 );
+        assertTrue(result.getResults().size() >= 2);
     }
-    
-    
+
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
-        
+
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
         statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         MetamacCriteria criteria = new MetamacCriteria();
-        
+
         MetamacCriteriaPaginator paginator = new MetamacCriteriaPaginator();
         paginator.setCountTotalResults(Boolean.TRUE);
         paginator.setMaximumResultSize(Integer.valueOf(2));
         criteria.setPaginator(paginator);
-        
+
         {
             // Page 1
             criteria.getPaginator().setFirstResult(Integer.valueOf(0));
-        
+
             MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
             assertEquals(2, result.getResults().size());
             assertTrue(result.getPaginatorResult().getTotalResults() >= 3);
             assertEquals(Integer.valueOf(0), result.getPaginatorResult().getFirstResult());
         }
-        
+
         {
             // Page 2
             criteria.getPaginator().setFirstResult(Integer.valueOf(2));
             MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContext(), criteria);
             assertTrue(result.getPaginatorResult().getTotalResults() >= 1);
             assertEquals(Integer.valueOf(2), result.getPaginatorResult().getFirstResult());
-            
+
         }
     }
-    
 
     @Test
     public void testFindInstanceById() throws MetamacException {
@@ -1890,7 +1876,7 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         // Create instance
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
-        
+
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
 
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContext()).size();
@@ -2184,27 +2170,4 @@ public class StatisticalOperationsServiceFacadeTest extends MetamacBaseTests imp
         return instanceDto;
     }
 
-    /**************************************************************************
-     * DBUNIT CONFIGURATION
-     **************************************************************************/
-
-    @Override
-    protected String getDataSetFile() {
-        return "dbunit/StatisticalOperationsServiceFacadeTest.xml";
-    }
-
-    @Override
-    protected List<String> getTablesToRemoveContent() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getSequencesToRestart() {
-        return null;
-    }
-
-    @Override
-    public void tearDownDatabaseTester() throws Exception {
-        // NOTHING;
-    }
 }

@@ -23,27 +23,27 @@ Application StatisticalOperations {
        		> @StatisticalOperationsListsService
        		
        		"SurveyType"
-       		List<@SurveyTypeDto> findAllSurveyTypes;
+       		List<@SurveyTypeDto> findAllSurveyTypes  throws MetamacException;
        		@SurveyTypeDto findSurveyTypeById(Long id) throws MetamacException;
        		
        		"InstanceType"
-       		List<@InstanceTypeDto> findAllInstanceTypes;
+       		List<@InstanceTypeDto> findAllInstanceTypes  throws MetamacException;
        		@InstanceTypeDto findInstanceTypeById(Long id) throws MetamacException;
        		
        		"SurveySource"
-       		List<@SurveySourceDto> findAllSurveySources;
+       		List<@SurveySourceDto> findAllSurveySources throws MetamacException;
        		@SurveySourceDto findSurveySourceById(Long id) throws MetamacException;
        		
        		"OfficialityType"
-       		List<@OfficialityTypeDto> findAllOfficialityTypes;
+       		List<@OfficialityTypeDto> findAllOfficialityTypes throws MetamacException;
        		@OfficialityTypeDto findOfficialityTypeById(Long id) throws MetamacException;
        		
        		"CollMethod"
-       		List<@CollMethodDto> findAllCollMethods;
+       		List<@CollMethodDto> findAllCollMethods throws MetamacException;
        		@CollMethodDto findCollMethodById(Long id) throws MetamacException;
        		
        		"Cost"
-       		List<@CostDto> findAllCosts;
+       		List<@CostDto> findAllCosts throws MetamacException;
        		@CostDto findCostById(Long id) throws MetamacException;
        		
        		"Families"
@@ -569,5 +569,20 @@ Application StatisticalOperations {
 				findByCondition(PagingParameter pagingParameter);
 			}
 		} 
+	}
+	
+	Module enume {
+		basePackage=org.siemac.metamac.domain.statistical.operations.enume
+		
+		enum StatisticalOperationsRoleEnum {
+    		TECNICO_APOYO_PRODUCCION,
+    		TECNICO_PRODUCCION,
+    		TECNICO_APOYO_DIFUSION,
+    		TECNICO_DIFUSION,
+    		TECNICO_APOYO_PLANIFICACION,
+    		TECNICO_PLANIFICACION,
+    		ADMINISTRADOR,
+    		ANY_ROLE_ALLOWED
+    	}
 	}
 }

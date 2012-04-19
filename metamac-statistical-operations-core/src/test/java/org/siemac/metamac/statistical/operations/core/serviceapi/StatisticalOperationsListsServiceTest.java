@@ -5,10 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.common.test.MetamacBaseTests;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -25,16 +23,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
-public class StatisticalOperationsListsServiceTest extends MetamacBaseTests implements StatisticalOperationsListsServiceTestBase {
+public class StatisticalOperationsListsServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsListsServiceTestBase {
 
     @Autowired
     protected StatisticalOperationsListsService statisticalOperationsListsService;
-
-    private final ServiceContext                serviceContext = new ServiceContext("system", "123456", "junit");
-
-    protected ServiceContext getServiceContext() {
-        return serviceContext;
-    }
 
     @Test
     public void testFindSurveyTypeById() throws Exception {
@@ -113,27 +105,4 @@ public class StatisticalOperationsListsServiceTest extends MetamacBaseTests impl
 
     }
 
-    /**************************************************************************
-     * DBUNIT CONFIGURATION
-     **************************************************************************/
-
-    @Override
-    protected String getDataSetFile() {
-        return "dbunit/StatisticalOperationsListsServiceTest.xml";
-    }
-
-    @Override
-    protected List<String> getTablesToRemoveContent() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getSequencesToRestart() {
-        return null;
-    }
-
-    @Override
-    public void tearDownDatabaseTester() throws Exception {
-        // NOTHING;
-    }
 }

@@ -8,13 +8,11 @@ import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.common.test.MetamacBaseTests;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
@@ -46,7 +44,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
-public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBaseTests {
+public class StatisticalOperationsInternalWebServiceFacadeTest extends StatisticalOperationsBaseTest {
 
     @Autowired
     protected StatisticalOperationsServiceFacade               statisticalOperationsServiceFacade;
@@ -422,25 +420,5 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
         operationDto.setCommonMetadata(commonMetadata);
 
         return operationDto;
-    }
-
-    @Override
-    protected String getDataSetFile() {
-        return "dbunit/StatisticalOperationsServiceFacadeTest.xml";
-    }
-
-    @Override
-    protected List<String> getTablesToRemoveContent() {
-        return null;
-    }
-
-    @Override
-    protected List<String> getSequencesToRestart() {
-        return null;
-    }
-
-    @Override
-    public void tearDownDatabaseTester() throws Exception {
-        // NOTHING;
     }
 }
