@@ -393,8 +393,26 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateInstance() throws Exception {
-        // TODO Auto-generated method stub
-
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        instance.setBasePeriod("2005Q1");
+        statisticalOperationsBaseService.updateInstance(getServiceContext(), instance);
+    }
+    
+    @Test
+    public void testUpdateInstanceWithIncorrectBasePeriod() throws Exception {
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        instance.setBasePeriod("2005Q1error");
+        try {
+            statisticalOperationsBaseService.updateInstance(getServiceContext(), instance);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
