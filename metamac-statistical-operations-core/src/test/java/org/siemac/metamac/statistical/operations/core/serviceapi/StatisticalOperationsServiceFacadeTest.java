@@ -1045,7 +1045,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Test
     public void testFindAllOperations() throws MetamacException {
-        // testSaveOperation();
+        statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
         List<OperationBaseDto> operations = statisticalOperationsServiceFacade.findAllOperations(getServiceContext());
         assertTrue(!operations.isEmpty());
     }
@@ -1720,7 +1720,12 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Test
     public void testFindAllInstances() throws MetamacException {
-        // testSaveOperation();
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationId);
+        InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
+        assertNotNull(instanceDto);
+
+        
         List<InstanceBaseDto> instances = statisticalOperationsServiceFacade.findAllInstances(getServiceContext());
         assertTrue(!instances.isEmpty());
     }
