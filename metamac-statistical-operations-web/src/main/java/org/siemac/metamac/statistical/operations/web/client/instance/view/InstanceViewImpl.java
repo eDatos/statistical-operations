@@ -29,6 +29,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
+import org.siemac.metamac.web.common.server.utils.TimeVariableWebUtils;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -37,6 +38,7 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
@@ -57,7 +59,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private static final String             IN_GEOGRAPHIC_COMPARABILITY = "in-geo-com";
     private static final String             IN_TEMPORAL_GRANULARITY     = "in-tem-gran";
     private static final String             IN_TEMPORAL_COMPARABILITY   = "in-tem-com";
-    // TODO private static final String IN_BASE_PERIOD = "in-basep";
+    private static final String             IN_BASE_PERIOD              = "in-basep";
     private static final String             IN_UNIT_MEASURE             = "in-umeas";
     private static final String             IN_STAT_CONC_DEF            = "in-sta-con";
     private static final String             IN_STAT_CONC_DEF_LIST       = "in-sta-con-list";
@@ -391,13 +393,14 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewMultiLanguageTextItem geographicComparability = new ViewMultiLanguageTextItem(IN_GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
         ViewTextItem temporalGranularity = new ViewTextItem(IN_TEMPORAL_GRANULARITY, getConstants().instanceTemporalGranularity());
         ViewMultiLanguageTextItem temporalComparability = new ViewMultiLanguageTextItem(IN_TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
+        ViewTextItem basePeriodItem = new ViewTextItem(IN_BASE_PERIOD, getConstants().instanceBasePeriod());
         ViewTextItem unitMeasure = new ViewTextItem(IN_UNIT_MEASURE, getConstants().instanceUnitMeasure());
         ViewMultiLanguageTextItem statConcDef = new ViewMultiLanguageTextItem(IN_STAT_CONC_DEF, getConstants().instanceStatisticalConceptDefinition());
         ViewTextItem statConcDefList = new ViewTextItem(IN_STAT_CONC_DEF_LIST, getConstants().instanceStatisticalConceptsDefinitions());
         ViewMultiLanguageTextItem classSystem = new ViewMultiLanguageTextItem(IN_CLASS_SYSTEM, getConstants().instanceClassSystem());
         ViewTextItem classSystemList = new ViewTextItem(IN_CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
-        contentViewForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularity, geographicComparability, temporalGranularity, temporalComparability, unitMeasure,
-                statConcDef, statConcDefList, classSystem, classSystemList);
+        contentViewForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularity, geographicComparability, temporalGranularity, temporalComparability, basePeriodItem,
+                unitMeasure, statConcDef, statConcDefList, classSystem, classSystemList);
 
         // Class descriptors
         classViewForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
@@ -489,6 +492,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         geographicalComparabilityItem = new MultiLanguageTextItem(IN_GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
         temporalGranularityItem = new SelectItem(IN_TEMPORAL_GRANULARITY, getConstants().instanceTemporalGranularity());
         temporalComparabilityItem = new MultiLanguageTextItem(IN_TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
+        TextItem basePeriodItem = new TextItem(IN_BASE_PERIOD, getConstants().instanceBasePeriod());
+        basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
         unitMeasureItem = new SelectItem(IN_UNIT_MEASURE, getConstants().instanceUnitMeasure());
         unitMeasureItem.setMultiple(true);
         statConcDefItem = new MultiLanguageTextItem(IN_STAT_CONC_DEF, getConstants().instanceStatisticalConceptDefinition());
@@ -498,7 +503,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         classSystemListItem = new SelectItem(IN_CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
         classSystemListItem.setMultiple(true);
         contentEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicalGranularityItem, geographicalComparabilityItem, temporalGranularityItem,
-                temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemItem, classSystemListItem);
+                basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemItem, classSystemListItem);
 
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
@@ -596,7 +601,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentViewForm.setValue(IN_GEOGRAPHIC_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getGeographicComparability()));
         contentViewForm.setValue(IN_TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getCodeId() : "");
         contentViewForm.setValue(IN_TEMPORAL_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getTemporalComparability()));
-        // TODO Base period
+        contentViewForm.setValue(IN_BASE_PERIOD, instanceDto.getBasePeriod());
         contentViewForm.setValue(IN_UNIT_MEASURE, ExternalItemUtils.getExternalItemListToString(instanceDto.getUnitMeasure()));
         contentViewForm.setValue(IN_STAT_CONC_DEF, RecordUtils.getInternationalStringRecord(instanceDto.getStatConcDef()));
         contentViewForm.setValue(IN_STAT_CONC_DEF_LIST, ExternalItemUtils.getExternalItemListToString(instanceDto.getStatConcDefList()));
@@ -661,7 +666,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         geographicalComparabilityItem.setValue(instanceDto.getGeographicComparability());
         temporalGranularityItem.setValue(instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getCodeId() : "");
         temporalComparabilityItem.setValue(instanceDto.getTemporalComparability());
-        // TODO base period
+        contentEditionForm.setValue(IN_BASE_PERIOD, instanceDto.getBasePeriod());
         unitMeasureItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getUnitMeasure()));
         statConcDefItem.setValue(instanceDto.getStatConcDef());
         statConcDefListItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getStatConcDefList()));
