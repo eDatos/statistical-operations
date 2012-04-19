@@ -432,7 +432,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         target.setTemporalComparability(internationalStringToEntity(source.getTemporalComparability(), target.getTemporalComparability(), ServiceExceptionParameters.INSTANCE_TEMPORAL_COMPARABILITY));
 
         // BASE_PERIOD
-        target.setBasePeriod(externalItemBtDtoToExternalItemBt(source.getBasePeriod(), target.getBasePeriod()));
+        target.setBasePeriod(source.getBasePeriod());
 
         // UNIT_MEASURE
         target.getUnitMeasure().clear();

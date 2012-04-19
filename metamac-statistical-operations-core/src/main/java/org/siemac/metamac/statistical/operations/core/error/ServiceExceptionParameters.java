@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.core.error;
 
+
 public class ServiceExceptionParameters {
 
     public static final String CODE                              = "code";
@@ -71,5 +72,6 @@ public class ServiceExceptionParameters {
     public static final String INSTANCE_INSTANCE_TYPE            = "instance.instance_type";
     public static final String INSTANCE_INTERNAL_INVENTORY_DATE  = "instance.internal_inventory_date";
     public static final String INSTANCE_INVENTORY_DATE           = "instance.inventory_date";
+    public static final String INSTANCE_BASE_PERIOD              = "instance.base_period";
 
 }
