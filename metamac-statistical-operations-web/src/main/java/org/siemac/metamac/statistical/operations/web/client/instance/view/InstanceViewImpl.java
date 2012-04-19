@@ -45,7 +45,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     // IDENTIFIERS
     private static final String             IN_IDENTIFIER               = "op-id";
-    private static final String             IN_URI                      = "op-uri";
     private static final String             IN_TITLE                    = "op-title";
     private static final String             IN_ACRONYM                  = "op-acron";
     // CONTENT CLASSIFIERS
@@ -377,10 +376,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Identifiers
         identifiersViewForm = new GroupDynamicForm(getConstants().operationIdentifiers());
         ViewTextItem identifier = new ViewTextItem(IN_IDENTIFIER, getConstants().instanceIdentifier());
-        ViewTextItem uri = new ViewTextItem(IN_URI, getConstants().instanceUri());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(IN_TITLE, getConstants().instanceTitle());
         ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(IN_ACRONYM, getConstants().instanceAcronym());
-        identifiersViewForm.setFields(identifier, uri, title, alternativeTitle);
+        identifiersViewForm.setFields(identifier, title, alternativeTitle);
 
         // Content classifiers
 
@@ -466,11 +464,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().instanceIdentifiers());
         identifier = new RequiredTextItem(IN_IDENTIFIER, getConstants().instanceIdentifier());
-        ViewTextItem uri = new ViewTextItem(IN_URI, getConstants().instanceUri());
         title = new MultiLanguageTextItem(IN_TITLE, getConstants().instanceTitle());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(IN_ACRONYM, getConstants().instanceAcronym());
-        identifiersEditionForm.setFields(identifier, uri, title, acronym);
+        identifiersEditionForm.setFields(identifier, title, acronym);
 
         // Content classifiers
 
@@ -586,7 +583,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private void setViewForm(InstanceDto instanceDto) {
         // Identifiers
         identifiersViewForm.setValue(IN_IDENTIFIER, instanceDto.getCode());
-        identifiersViewForm.setValue(IN_URI, instanceDto.getUri());
         identifiersViewForm.setValue(IN_TITLE, RecordUtils.getInternationalStringRecord(instanceDto.getTitle()));
         identifiersViewForm.setValue(IN_ACRONYM, RecordUtils.getInternationalStringRecord(instanceDto.getAcronym()));
 
@@ -652,7 +648,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private void setEditionForm(InstanceDto instanceDto) {
         // Identifiers
         identifier.setValue(instanceDto.getCode());
-        identifiersEditionForm.setValue(IN_URI, instanceDto.getUri());
         title.setValue(instanceDto.getTitle());
         acronym.setValue(instanceDto.getAcronym());
 

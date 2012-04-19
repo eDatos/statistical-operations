@@ -37,7 +37,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     // IDENTIFIERS
     private static final String       FAMILY_IDENTIFIER              = "id";
-    private static final String       FAMILY_URI                     = "uri";
     private static final String       FAMILY_TITLE                   = "titleItem";
     private static final String       FAMILY_ACRONYM                 = "titleItem-alter";
     // CONTENT DESCRIPTORS
@@ -175,7 +174,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private void setViewForm(FamilyDto familyDto) {
         familyViewForm.setValue(FAMILY_IDENTIFIER, familyDto.getCode());
-        familyViewForm.setValue(FAMILY_URI, familyDto.getUri());
         familyViewForm.setValue(FAMILY_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
         familyViewForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyViewForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
@@ -186,7 +184,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private void setEditionForm(FamilyDto familyDto) {
         familyEditionForm.setValue(FAMILY_IDENTIFIER, familyDto.getCode());
-        familyEditionForm.setValue(FAMILY_URI, familyDto.getUri());
         familyEditionForm.setValue(FAMILY_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
         familyEditionForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyEditionForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
@@ -223,14 +220,13 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // Family Form
         familyViewForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
         ViewTextItem code = new ViewTextItem(FAMILY_IDENTIFIER, OperationsWeb.getConstants().familyIdentifier());
-        ViewTextItem uri = new ViewTextItem(FAMILY_URI, OperationsWeb.getConstants().familyUri());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FAMILY_TITLE, OperationsWeb.getConstants().familyTitle());
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FAMILY_ACRONYM, OperationsWeb.getConstants().familyAcronym());
         ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FAMILY_DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
         ViewTextItem status = new ViewTextItem(FAMILY_STATUS, OperationsWeb.getConstants().familyStatus());
         ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
-        familyViewForm.setFields(code, uri, title, acronym, description, internalInventoryDate, status, inventoryDate);
+        familyViewForm.setFields(code, title, acronym, description, internalInventoryDate, status, inventoryDate);
         // Add to main layout
         mainFormLayout.addViewCanvas(familyViewForm);
     }
@@ -239,7 +235,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // Family Form
         familyEditionForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
         RequiredTextItem code = new RequiredTextItem(FAMILY_IDENTIFIER, OperationsWeb.getConstants().familyCode());
-        ViewTextItem uri = new ViewTextItem(FAMILY_URI, OperationsWeb.getConstants().familyUri());
         titleItem = new MultiLanguageTextItem(FAMILY_TITLE, OperationsWeb.getConstants().familyTitle());
         titleItem.setRequired(true);
         acronymItem = new MultiLanguageTextItem(FAMILY_ACRONYM, OperationsWeb.getConstants().familyAcronym());
@@ -247,7 +242,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         ViewTextItem internalInventoryDate = new ViewTextItem(FAMILY_INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
         ViewTextItem status = new ViewTextItem(FAMILY_STATUS, OperationsWeb.getConstants().familyStatus());
         ViewTextItem inventoryDate = new ViewTextItem(FAMILY_INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
-        familyEditionForm.setFields(code, uri, titleItem, acronymItem, descriptionItem, internalInventoryDate, status, inventoryDate);
+        familyEditionForm.setFields(code, titleItem, acronymItem, descriptionItem, internalInventoryDate, status, inventoryDate);
         // Add to main layout
         mainFormLayout.addEditionCanvas(familyEditionForm);
     }
