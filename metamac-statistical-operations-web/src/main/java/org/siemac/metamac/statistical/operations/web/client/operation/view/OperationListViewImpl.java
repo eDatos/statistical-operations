@@ -55,16 +55,17 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             }
         });
 
+        window = new ModalWindow();
+        window.setTitle(OperationsWeb.getConstants().actionNewOperation());
+        window.setAutoSize(true);
+        window.addItem(newOperationForm);
+
         listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().operationDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
                 getUiHandlers().retrieveCategorySchemes();
-                window = new ModalWindow();
-                window.setTitle(OperationsWeb.getConstants().actionNewOperation());
-                window.setAutoSize(true);
-                window.addItem(newOperationForm);
                 window.show();
             }
         });
@@ -151,7 +152,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
 
     @Override
     public void closeOperationWindow() {
-        window.destroy();
+        window.hide();
     }
 
     @Override
