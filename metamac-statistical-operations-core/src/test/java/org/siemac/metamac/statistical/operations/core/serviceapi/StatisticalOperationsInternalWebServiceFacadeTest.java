@@ -247,8 +247,8 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends MetamacBa
             metamacCriteria.setRestriction(disjunction);
             
             // Pagination
-            metamacCriteria.setDoCount(Boolean.TRUE);
-            metamacCriteria.setMaxResults(BigInteger.valueOf(2));
+            metamacCriteria.setCountTotalResults(Boolean.TRUE);
+            metamacCriteria.setMaximumResultSize(BigInteger.valueOf(2));
             
             // Find first 2 results
             {

@@ -83,10 +83,10 @@ public class MetamacCriteriaWebService2SculptorCriteria<T> {
             if (metamacCriteria.getFirstResult() != null) {
                 startRow = metamacCriteria.getFirstResult().intValue();
             }
-            if (metamacCriteria.getMaxResults() != null) {
-                maximumResultSize = metamacCriteria.getMaxResults().intValue();
+            if (metamacCriteria.getMaximumResultSize() != null) {
+                maximumResultSize = metamacCriteria.getMaximumResultSize().intValue();
             }
-            countTotalResults = metamacCriteria.getDoCount();
+            countTotalResults = metamacCriteria.getCountTotalResults();
         }
         if (startRow == null || startRow < 0) {
             startRow = Integer.valueOf(0);
