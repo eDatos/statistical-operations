@@ -6,16 +6,16 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.FormErrorOrientation;
 import com.smartgwt.client.types.VerticalAlignment;
-import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
-public class NewInstanceForm extends DynamicForm {
+public class NewInstanceForm extends CustomDynamicForm {
 
     private RequiredTextItem identifier;
     private RequiredTextItem title;
@@ -25,7 +25,7 @@ public class NewInstanceForm extends DynamicForm {
         super();
 
         setValidateOnChange(true);
-        
+
         identifier = new RequiredTextItem("in-id", OperationsWeb.getConstants().instanceIdentifier());
         identifier.setWidth(200);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
