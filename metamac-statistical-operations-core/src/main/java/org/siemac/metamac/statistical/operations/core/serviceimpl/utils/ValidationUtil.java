@@ -7,6 +7,7 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 
 public class ValidationUtil {
@@ -181,6 +182,20 @@ public class ValidationUtil {
             throw new MetamacException(ServiceExceptionType.INSTANCE_WITHOUT_OPERATION_PUBLISHED_EXTERNALLY);
         }
 
+    }
+    
+    
+    /**
+     * Check if the expectedSize and the realSize of an instancesList is correct
+     * @param expectedSize
+     * @param realSize 
+     * @throws MetamacException 
+     */
+    public static void checkUpdateInstancesOrder(int expectedSize, int realSize) throws MetamacException {
+        if (expectedSize != realSize) {
+            throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE);
+        }
+        
     }
 
 }

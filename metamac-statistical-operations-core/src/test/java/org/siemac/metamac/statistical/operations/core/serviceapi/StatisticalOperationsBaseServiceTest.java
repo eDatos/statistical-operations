@@ -1,11 +1,12 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -184,9 +185,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testCreateOperationWithoutDescription() throws MetamacException {
         Operation operation = createOperation();
         operation.setDescription(null);
-        
+
         operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
-        
+
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
     }
@@ -298,7 +299,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
     }
-    
+
     @Test
     public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
         Operation operation = createOperation();
@@ -313,7 +314,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
         }
     }
-    
+
     @Test
     public void testUpdateOperationWitReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
         Operation operation = createOperation();
@@ -329,7 +330,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
         }
     }
-    
 
     @Test
     public void testUpdateOperationWithoutOperation() throws Exception {
@@ -399,6 +399,24 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
 
         statisticalOperationsBaseService.deleteInstance(getServiceContext(), instance.getId());
+
+        assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContext()).size() < instances.size());
+    }
+
+    @Test
+    public void testDeleteInstanceCheckUpdateOrder() throws MetamacException {
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+
+        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
+
+        statisticalOperationsBaseService.deleteInstance(getServiceContext(), instance01.getId());
+
+        instance02 = statisticalOperationsBaseService.findInstanceById(getServiceContext(), instance02.getId());
+        assertEquals(Integer.valueOf(0), instance02.getOrder());
 
         assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContext()).size() < instances.size());
     }
@@ -481,8 +499,51 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateInstancesOrder() throws Exception {
-        // TODO Auto-generated method stub
+        // Create operation
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
 
+        // Create instances
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+
+        // Change order
+        List<Long> instancesIds = new ArrayList<Long>();
+        instancesIds.add(instance03.getId());
+        instancesIds.add(instance02.getId());
+        instancesIds.add(instance01.getId());
+
+        List<Instance> orderedInstances = statisticalOperationsBaseService.updateInstancesOrder(getServiceContext(), operation.getId(), instancesIds);
+
+        // Check correct order
+        assertEquals(orderedInstances.get(2).getId(), instance01.getId());
+        assertEquals(orderedInstances.get(1).getId(), instance02.getId());
+        assertEquals(orderedInstances.get(0).getId(), instance03.getId());
+    }
+
+    @Test
+    public void testUpdateInstancesOrderIncorrectParameter() throws Exception {
+        // Create operation
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
+        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+
+        // Create instances
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+
+        // Change order
+        List<Long> instancesIds = new ArrayList<Long>();
+        instancesIds.add(instance03.getId());
+        instancesIds.add(instance02.getId());
+
+        try {
+            statisticalOperationsBaseService.updateInstancesOrder(getServiceContext(), operation.getId(), instancesIds);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.PARAMETER_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE, e.getExceptionItems().get(0).getMessageParameters()[0]);
+        }
     }
 
     @Test

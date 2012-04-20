@@ -427,6 +427,8 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public List<Instance> updateInstancesOrder(ServiceContext ctx, Long operationId, List<Long> instancesIdList) throws MetamacException {
         // Validations
+        List<Instance> instances = findOperationById(ctx, operationId).getInstances();
+        ValidationUtil.checkUpdateInstancesOrder(instancesIdList.size(), instances.size());
 
         // Update order
         List<Instance> instancesList = new ArrayList<Instance>();
@@ -450,7 +452,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         operation.getInstances().clear();
         operation.getInstances().addAll(instancesList);
 
-        // TODO: Comprobar si es mejor no eliminar todo y volver a insertar sino ir cambiando el metadato order de cada instancia
         operation = updateOperation(ctx, operation);
 
         return operation.getInstances();
@@ -472,7 +473,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         instanceRepository.delete(instance);
 
         // Reset order of instances
-        // TODO: COmprobar que funciona corectamente
         List<Instance> instances = operation.getInstances();
         Collections.reverse(instances);
 
