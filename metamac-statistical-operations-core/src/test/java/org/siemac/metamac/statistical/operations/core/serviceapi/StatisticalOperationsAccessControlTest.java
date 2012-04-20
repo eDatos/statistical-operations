@@ -1300,43 +1300,6 @@ public class StatisticalOperationsAccessControlTest extends StatisticalOperation
         return familyDto;
     }
 
-    private FamilyDto createFamilyDtoForUpdate() {
-        FamilyDto familyDto = new FamilyDto();
-
-        // Auditable information
-        familyDto.setCreatedBy("Junit");
-        familyDto.setCreatedDate(new Date());
-
-        // Identifier
-        familyDto.setCode("PRUEBA01" + RandomStringUtils.random(50, true, true));
-
-        // TITLE
-        InternationalStringDto title = new InternationalStringDto();
-        LocalisedStringDto title_es = new LocalisedStringDto();
-        title_es.setLabel("NO VISIBLE Título en español de familia");
-        title_es.setLocale("es");
-        LocalisedStringDto title_en = new LocalisedStringDto();
-        title_en.setLabel("NO VISIBLE Título en inglés de familia");
-        title_en.setLocale("en");
-        title.addText(title_es);
-        title.addText(title_en);
-        familyDto.setTitle(title);
-
-        // DESCRIPTION
-        InternationalStringDto description = new InternationalStringDto();
-        LocalisedStringDto description_es = new LocalisedStringDto();
-        description_es.setLabel("NO VISIBLE Descripción en español de familia");
-        description_es.setLocale("es");
-        LocalisedStringDto description_en = new LocalisedStringDto();
-        description_en.setLabel("NO VISIBLE Descripción en inglés de familia");
-        description_en.setLocale("en");
-        description.addText(description_es);
-        description.addText(description_en);
-        familyDto.setDescription(description);
-
-        return familyDto;
-    }
-
     private OperationDto createOperationDto() throws MetamacException {
         OperationDto operationDto = new OperationDto();
 
@@ -1454,33 +1417,6 @@ public class StatisticalOperationsAccessControlTest extends StatisticalOperation
         return operationDto;
     }
 
-    private OperationDto createOperationDtoWithProducer() throws MetamacException {
-        OperationDto operationDto = createOperationDto();
-
-        // PRODUCER
-        ExternalItemBtDto producer01 = new ExternalItemBtDto();
-        producer01.setCodeId("ISTAC_FOR_REMOVE");
-        producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer01.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer01);
-
-        ExternalItemBtDto producer02 = new ExternalItemBtDto();
-        producer02.setCodeId("INE_FOR_REMOVE");
-        producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer02.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer02);
-
-        return operationDto;
-    }
-
-    private OperationDto createOperationDtoWithOfficialityType() throws MetamacException {
-        OperationDto operationDto = createOperationDto();
-
-        // OFFICIALITY TYPE
-        operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContext(), Long.valueOf(1)));
-
-        return operationDto;
-    }
 
     private InstanceDto createInstanceDto() throws MetamacException {
         InstanceDto instanceDto = new InstanceDto();
@@ -1510,31 +1446,5 @@ public class StatisticalOperationsAccessControlTest extends StatisticalOperation
         return instanceDto;
     }
 
-    private InstanceDto createInstanceDtoWithGeographicGranularity() throws MetamacException {
-        InstanceDto instanceDto = createInstanceDto();
-
-        // GEOGRAPHIC_GRANULARITY
-        ExternalItemBtDto geographicGranularity = new ExternalItemBtDto();
-        geographicGranularity.setCodeId("GEOGRAPHIC_GRANULARITY");
-        geographicGranularity.setType(TypeExternalArtefactsEnum.CONCEPT);
-        geographicGranularity.setUriInt("uri:interna:todo");
-        instanceDto.setGeographicGranularity(geographicGranularity);
-
-        return instanceDto;
-
-    }
-
-    private InstanceDto createIncompleteInstanceDto() {
-        InstanceDto instanceDto = new InstanceDto();
-
-        // Auditable information
-        instanceDto.setCreatedBy("Junit");
-        instanceDto.setCreatedDate(new Date());
-
-        // Identifier
-        instanceDto.setCode("PRUEBA01" + RandomStringUtils.random(50, true, true));
-
-        return instanceDto;
-    }
 
 }
