@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -23,6 +24,7 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,7 +42,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Autowired
     protected StatisticalOperationsListsService statisticalOperationsListsService;
-
 
     /**************************************************************************
      * Family Tests
@@ -180,6 +181,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     }
 
     @Test
+    public void testCreateOperationWithoutDescription() throws MetamacException {
+        Operation operation = createOperation();
+        operation.setDescription(null);
+        
+        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        
+        assertNotNull(operation);
+        assertEquals(null, operation.getDescription());
+    }
+
+    @Test
     public void testCreateOperationWithInvalidAccess() throws MetamacException {
         Operation operation = createOperation();
 
@@ -277,7 +289,59 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateOperation() throws Exception {
-        // TODO Auto-generated method stub
+        Operation operation = createOperationWithDescription();
+        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        assertNotNull(operation.getDescription());
+
+        operation.setDescription(null);
+        operation = statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        assertNotNull(operation);
+        assertEquals(null, operation.getDescription());
+    }
+    
+    @Test
+    public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
+        Operation operation = createOperation();
+        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        assertNull(operation.getReleaseCalendarAccess());
+
+        operation.setReleaseCalendarAccess("incorrectUrl");
+        try {
+            statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
+        }
+    }
+    
+    @Test
+    public void testUpdateOperationWitReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
+        Operation operation = createOperation();
+        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        assertNull(operation.getReleaseCalendarAccess());
+
+        operation.setReleaseCalendar(Boolean.FALSE);
+        operation.setReleaseCalendarAccess("http://tutu.com");
+        try {
+            statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
+        }
+    }
+    
+
+    @Test
+    public void testUpdateOperationWithoutOperation() throws Exception {
+        Operation operation = createOperation();
+        operation.setDescription(null);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        assertEquals(null, operation.getDescription());
+
+        operation.setCommentUrl("http://tutu.com");
+        operation = statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        assertNotNull(operation);
+        assertEquals(null, operation.getDescription());
     }
 
     @Test
@@ -329,7 +393,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testDeleteInstance() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
@@ -343,7 +407,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testFindAllInstances() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
@@ -354,7 +418,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testFindInstanceByCondition() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
 
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%").build();
@@ -368,7 +432,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testFindInstanceByConditionPaginated() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
@@ -395,17 +459,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testUpdateInstance() throws Exception {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         instance.setBasePeriod("2005Q1");
         statisticalOperationsBaseService.updateInstance(getServiceContext(), instance);
     }
-    
+
     @Test
     public void testUpdateInstanceWithIncorrectBasePeriod() throws Exception {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        
+
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
         instance.setBasePeriod("2005Q1error");
         try {
@@ -503,7 +567,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         title.addText(title_en);
         operation.setTitle(title);
 
-        // DESCRIPTION
+        // ACRONYM
         InternationalString acronym = new InternationalString();
         LocalisedString acronym_es = new LocalisedString();
         acronym_es.setLabel("Acronynm en español de operación");
@@ -534,6 +598,24 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         return operation;
     }
 
+    private Operation createOperationWithDescription() throws MetamacException {
+        Operation operation = createOperation();
+
+        // DESCRIPTION
+        InternationalString description = new InternationalString();
+        LocalisedString description_es = new LocalisedString();
+        description_es.setLabel("Acronynm en español de operación");
+        description_es.setLocale("es");
+        LocalisedString description_en = new LocalisedString();
+        description_en.setLabel("Acronynm en inglés de operación");
+        description_en.setLocale("en");
+        description.addText(description_es);
+        description.addText(description_en);
+        operation.setDescription(description);
+
+        return operation;
+    }
+
     private Operation createOperationWithType() throws MetamacException {
         Operation operation = createOperation();
 
@@ -542,8 +624,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         return operation;
     }
-    
-    
+
     private Operation createOperationForInternalPublishing() throws MetamacException {
         Operation operation = createOperation();
 
@@ -580,7 +661,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         // COMMON_METADATA
         ExternalItemBt commonMetadata = new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY);
         operation.setCommonMetadata(commonMetadata);
-        
+
         // OFFICIALITY_TYPE
         operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContext(), Long.valueOf(1)));
 

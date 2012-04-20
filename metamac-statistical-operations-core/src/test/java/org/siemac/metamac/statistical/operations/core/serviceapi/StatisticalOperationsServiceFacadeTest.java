@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.functors.ExceptionPredicate;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,7 +54,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Autowired
     protected ExternalItemRepository             externalItemRepository;
-
 
     /**************************************************************************
      * Survey Type
@@ -676,14 +677,13 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Test
     public void testCreateOperation() throws MetamacException {
-        int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContext()).size();
 
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
         assertNotNull(operationDto);
 
         // Check number of operations
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContext()).size();
-        assertEquals(operationsBefore + 1, operationsAfter);
+        assertEquals(1, operationsAfter);
     }
 
     @Test
@@ -740,6 +740,24 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Check number of operations
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContext()).size();
         assertEquals(operationsBefore, operationsAfter);
+    }
+
+    @Test
+    public void testUpdateOperationWithDescriptionWithoutLocales() throws Exception {
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDto());
+        assertNotNull(operationDto);
+
+        // DESCRIPTION
+        InternationalStringDto description = new InternationalStringDto();
+        operationDto.setDescription(description);
+
+        try {
+            statisticalOperationsServiceFacade.updateOperation(getServiceContext(), operationDto);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_REQUIRED.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionParameters.OPERATION_DESCRIPTION, e.getExceptionItems().get(0).getMessageParameters()[0]);
+        }
+
     }
 
     @Test
@@ -1725,7 +1743,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContext(), operationId, createInstanceDto());
         assertNotNull(instanceDto);
 
-        
         List<InstanceBaseDto> instances = statisticalOperationsServiceFacade.findAllInstances(getServiceContext());
         assertTrue(!instances.isEmpty());
     }
@@ -1997,7 +2014,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         title.addText(title_en);
         operationDto.setTitle(title);
 
-        // DESCRIPTION
+        // ACRONYM
         InternationalStringDto acronym = new InternationalStringDto();
         LocalisedStringDto acronym_es = new LocalisedStringDto();
         acronym_es.setLabel("Descripción en español de operacion");
