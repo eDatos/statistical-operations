@@ -35,7 +35,7 @@ public class NewOperationForm extends CustomDynamicForm {
 
     public NewOperationForm() {
         super();
-        
+
         setValidateOnChange(true);
 
         identifier = new RequiredTextItem("op-id", getConstants().operationIdentifier());

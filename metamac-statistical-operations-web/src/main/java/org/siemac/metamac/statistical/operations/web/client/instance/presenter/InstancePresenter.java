@@ -72,16 +72,16 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             UpdateConceptSchemesHandler,
             UpdateFrequencyCodesHandler {
 
-    private final DispatchAsync              dispatcher;
-    private final PlaceManager               placeManager;
+    private final DispatchAsync                dispatcher;
+    private final PlaceManager                 placeManager;
 
-    private Long                             idOperation;
-    private Long                             idInstance;
-    private InstanceDto                      instanceDto;
+    private Long                               idOperation;
+    private Long                               idInstance;
+    private InstanceDto                        instanceDto;
 
     private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
-    public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.instancePage)

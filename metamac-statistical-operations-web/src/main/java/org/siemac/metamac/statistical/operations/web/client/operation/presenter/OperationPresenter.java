@@ -90,17 +90,17 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             UpdateCommonMetadataHandler,
             UpdateFrequencyCodesHandler {
 
-    private final DispatchAsync              dispatcher;
-    private final PlaceManager               placeManager;
+    private final DispatchAsync                dispatcher;
+    private final PlaceManager                 placeManager;
 
-    private Long                             idOperation;
-    private OperationDto                     operationDto;
-    private List<InstanceBaseDto>            instanceBaseDtos;
-    private List<FamilyBaseDto>              familyBaseDtos;
+    private Long                               idOperation;
+    private OperationDto                       operationDto;
+    private List<InstanceBaseDto>              instanceBaseDtos;
+    private List<FamilyBaseDto>                familyBaseDtos;
 
     private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
-    public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)

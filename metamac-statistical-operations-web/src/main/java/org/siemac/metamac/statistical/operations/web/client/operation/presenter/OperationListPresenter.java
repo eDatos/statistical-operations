@@ -52,12 +52,12 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class OperationListPresenter extends Presenter<OperationListPresenter.OperationListView, OperationListPresenter.OperationsListProxy> implements OperationListUiHandlers {
 
-    private final DispatchAsync              dispatcher;
-    private final PlaceManager               placeManager;
+    private final DispatchAsync                dispatcher;
+    private final PlaceManager                 placeManager;
 
     private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
-    public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationListPage)

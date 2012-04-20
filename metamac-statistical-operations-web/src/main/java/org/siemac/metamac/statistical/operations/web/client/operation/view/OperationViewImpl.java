@@ -76,7 +76,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private static final String             OP_SUBJECT_SECONDARY         = "op-subjetc-secon";
     // CONTENT DESCRIPTORS
     private static final String             OP_DESCRIPTION               = "op-desc";
-    private static final String             OP_OBJECTIVE                  = "op-obj";
+    private static final String             OP_OBJECTIVE                 = "op-obj";
     // CLASS DESCRIPTORS
     private static final String             OP_SURVEY_TYPE               = "op-sur";
     private static final String             OP_OFFICIALITY_TYPE          = "op-off-type";
@@ -218,13 +218,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // INSTANCES
 
         newInstanceForm = new NewInstanceForm();
-        
+
         newInstanceWindow = new ModalWindow();
         newInstanceWindow.setTitle(getConstants().actionNewInstance());
         newInstanceWindow.setAutoSize(true);
         newInstanceWindow.addItem(newInstanceForm);
-        
-        
+
         instanceListGridToolStrip = new ListGridToolStrip(getConstants().instanceDeleteConfirmation());
         instanceListGridToolStrip.getNewButton().addClickHandler(new ClickHandler() {
 
@@ -232,7 +231,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             public void onClick(ClickEvent event) {
                 // Clear new instance form
                 newInstanceForm.clearValues();
-                
+
                 newInstanceWindow.show();
             }
         });

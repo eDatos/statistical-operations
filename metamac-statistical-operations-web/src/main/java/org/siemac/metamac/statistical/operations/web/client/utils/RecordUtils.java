@@ -86,8 +86,8 @@ public class RecordUtils {
      * @return
      */
     public static InstanceRecord getInstanceRecord(InstanceDto instanceDto) {
-        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()), null, OperationsWeb.getCoreMessages()
-                .getString(OperationsWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
+        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()), null, OperationsWeb
+                .getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
         return record;
     }
 

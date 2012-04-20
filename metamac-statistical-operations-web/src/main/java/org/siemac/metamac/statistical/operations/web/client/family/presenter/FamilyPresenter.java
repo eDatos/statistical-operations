@@ -54,16 +54,16 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, FamilyPresenter.FamilyProxy> implements FamilyUiHandlers {
 
-    private final DispatchAsync              dispatcher;
-    private final PlaceManager               placeManager;
+    private final DispatchAsync                dispatcher;
+    private final PlaceManager                 placeManager;
 
-    private Long                             idFamily;
-    private FamilyDto                        familyDto;
-    private List<OperationBaseDto>           operationBaseDtos;
+    private Long                               idFamily;
+    private FamilyDto                          familyDto;
+    private List<OperationBaseDto>             operationBaseDtos;
 
     private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
 
-    public static final Object               TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.familyPage)
