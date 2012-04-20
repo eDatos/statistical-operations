@@ -42,15 +42,20 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         panel = new VLayout();
 
         newFamilyForm = new NewFamilyForm();
+
+        window = new ModalWindow();
+        window.setTitle(OperationsWeb.getConstants().actionNewFamily());
+        window.setAutoSize(true);
+        window.addItem(newFamilyForm);
+
         listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().familyDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
-                window = new ModalWindow();
-                window.setTitle(OperationsWeb.getConstants().actionNewFamily());
-                window.setAutoSize(true);
-                window.addItem(newFamilyForm);
+                // Clear new family form
+                newFamilyForm.clearValues();
+
                 window.show();
             }
         });
@@ -137,7 +142,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
 
     @Override
     public void closeFamilyWindow() {
-        window.destroy();
+        window.hide();
     }
 
     @Override

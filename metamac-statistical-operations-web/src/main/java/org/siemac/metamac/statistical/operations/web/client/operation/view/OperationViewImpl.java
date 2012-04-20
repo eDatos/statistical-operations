@@ -218,15 +218,21 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // INSTANCES
 
         newInstanceForm = new NewInstanceForm();
+        
+        newInstanceWindow = new ModalWindow();
+        newInstanceWindow.setTitle(getConstants().actionNewInstance());
+        newInstanceWindow.setAutoSize(true);
+        newInstanceWindow.addItem(newInstanceForm);
+        
+        
         instanceListGridToolStrip = new ListGridToolStrip(getConstants().instanceDeleteConfirmation());
         instanceListGridToolStrip.getNewButton().addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
-                newInstanceWindow = new ModalWindow();
-                newInstanceWindow.setTitle(getConstants().actionNewInstance());
-                newInstanceWindow.setAutoSize(true);
-                newInstanceWindow.addItem(newInstanceForm);
+                // Clear new instance form
+                newInstanceForm.clearValues();
+                
                 newInstanceWindow.show();
             }
         });
@@ -466,7 +472,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     @Override
     public void closeInstanceWindow() {
-        newInstanceWindow.destroy();
+        newInstanceWindow.hide();
     }
 
     @Override

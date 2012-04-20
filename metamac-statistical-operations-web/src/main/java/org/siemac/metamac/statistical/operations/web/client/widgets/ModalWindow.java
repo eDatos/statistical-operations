@@ -16,7 +16,7 @@ public class ModalWindow extends Window {
 
             @Override
             public void onCloseClick(CloseClickEvent event) {
-                destroy();
+                hide();
             }
         });
     }

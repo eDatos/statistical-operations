@@ -65,7 +65,12 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
+                // Load category schemes (required to create a new operation)
                 getUiHandlers().retrieveCategorySchemes();
+                
+                // Clear new operation form
+                newOperationForm.clearValues();
+                
                 window.show();
             }
         });
