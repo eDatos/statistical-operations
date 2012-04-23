@@ -62,8 +62,8 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends Statistic
     public void testRetrieveOperation() throws Exception {
 
         // Create and publish
-        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
-        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto.getId());
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
 
         // Web service: retrieve operartion
         OperationBase operationBase = metamacStatisticalOperationsInternalInterfaceV10.retrieveOperation(operationDto.getCode());
@@ -90,16 +90,16 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends Statistic
     public void testFindOperations() throws Exception {
 
         // Create and publish internally operation 1
-        OperationDto operationDto1 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
-        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto1.getId());
-        statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContext(), operationDto1.getId());
+        OperationDto operationDto1 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto1.getId());
+        statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto1.getId());
         // Create and publish internally operation 2
-        OperationDto operationDto2 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
-        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto2.getId());
+        OperationDto operationDto2 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto2.getId());
         // Create and publish externally operation 3
-        OperationDto operationDto3 = statisticalOperationsServiceFacade.createOperation(getServiceContext(), createOperationDtoForInternalPublishing());
-        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContext(), operationDto3.getId());
-        statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContext(), operationDto3.getId());
+        OperationDto operationDto3 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto3.getId());
+        statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto3.getId());
 
         {
             // Find operations without proc status property restriction
@@ -346,10 +346,10 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends Statistic
         operationDto.setReleaseCalendarAccess("http://www.draft.com");
 
         // SURVEY_TYPE
-        operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+        operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // OFFICIALITY_TYPE
-        operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContext(), Long.valueOf(1)));
+        operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
         ExternalItemBtDto subjectArea = new ExternalItemBtDto();
@@ -383,7 +383,7 @@ public class StatisticalOperationsInternalWebServiceFacadeTest extends Statistic
         operationDto.setObjective(objective);
 
         // SURVEY_TYPE
-        operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+        operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
         ExternalItemBtDto producer01 = new ExternalItemBtDto();

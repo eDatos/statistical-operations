@@ -50,10 +50,10 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testFindFamilyById() throws MetamacException {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
         assertNotNull(family);
 
-        Family familyRetrieved = statisticalOperationsBaseService.findFamilyById(getServiceContext(), family.getId());
+        Family familyRetrieved = statisticalOperationsBaseService.findFamilyById(getServiceContextAdministrador(), family.getId());
         assertNotNull(familyRetrieved);
 
         assertTrue(family.equals(familyRetrieved));
@@ -61,47 +61,47 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testSaveFamilyWithOperations() throws MetamacException {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamilyWithOperations());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamilyWithOperations());
         assertNotNull(family);
     }
 
     @Test
     public void testDeleteFamily() throws MetamacException {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
 
-        List<Family> families = statisticalOperationsBaseService.findAllFamilies(getServiceContext());
+        List<Family> families = statisticalOperationsBaseService.findAllFamilies(getServiceContextAdministrador());
 
-        statisticalOperationsBaseService.deleteFamily(getServiceContext(), family.getId());
+        statisticalOperationsBaseService.deleteFamily(getServiceContextAdministrador(), family.getId());
 
-        assertTrue(statisticalOperationsBaseService.findAllFamilies(getServiceContext()).size() < families.size());
+        assertTrue(statisticalOperationsBaseService.findAllFamilies(getServiceContextAdministrador()).size() < families.size());
     }
 
     @Test
     public void testFindAllFamilies() throws MetamacException {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
         assertNotNull(family);
 
-        List<Family> families = statisticalOperationsBaseService.findAllFamilies(getServiceContext());
+        List<Family> families = statisticalOperationsBaseService.findAllFamilies(getServiceContextAdministrador());
         assertTrue(!families.isEmpty());
     }
 
     @Test
     public void testFindFamilyByCondition() throws MetamacException {
-        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
 
         List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("FAMILY-%").distinctRoot()
                 .build();
 
-        List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions);
+        List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
 
         assertTrue(familiesList.size() != 0);
     }
 
     @Test
     public void testFindFamilyByConditionPaginated() throws MetamacException {
-        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
-        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
-        statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
 
         PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
         PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
@@ -109,8 +109,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).like("FAMILY-%").distinctRoot()
                 .build();
 
-        PagedResult<Family> familiesList1 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions, pagingParameterPage1);
-        PagedResult<Family> familiesList2 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContext(), conditions, pagingParameterPage2);
+        PagedResult<Family> familiesList1 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage1);
+        PagedResult<Family> familiesList2 = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage2);
 
         assertTrue(familiesList1.getValues().size() != 0);
         assertEquals(2, familiesList1.getPageSize());
@@ -123,13 +123,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateFamily() throws Exception {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
         assertNotNull(family);
     }
 
     @Test
     public void testUpdateFamily() throws Exception {
-        Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+        Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
         assertNotNull(family);
 
         // TITLE
@@ -144,7 +144,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         title.addText(title_en);
         family.setTitle(title);
 
-        family = statisticalOperationsBaseService.updateFamily(getServiceContext(), family);
+        family = statisticalOperationsBaseService.updateFamily(getServiceContextAdministrador(), family);
         assertNotNull(family);
     }
 
@@ -166,10 +166,10 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testFindOperationById() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
 
-        Operation operationRetrieved = statisticalOperationsBaseService.findOperationById(getServiceContext(), operation.getId());
+        Operation operationRetrieved = statisticalOperationsBaseService.findOperationById(getServiceContextAdministrador(), operation.getId());
         assertNotNull(operationRetrieved);
 
         assertTrue(operation.equals(operationRetrieved));
@@ -177,7 +177,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateOperation() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
     }
 
@@ -186,7 +186,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operation = createOperation();
         operation.setDescription(null);
 
-        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
 
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
@@ -199,7 +199,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setReleaseCalendarAccess("invalidUrl");
 
         try {
-            operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+            operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -207,58 +207,58 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testSaveOperationWithFamilies() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationWithFamilies());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationWithFamilies());
         assertNotNull(operation);
     }
 
     @Test
     public void testDeleteOperation() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
-        List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContext());
+        List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContextAdministrador());
 
-        statisticalOperationsBaseService.deleteOperation(getServiceContext(), operation.getId());
+        statisticalOperationsBaseService.deleteOperation(getServiceContextAdministrador(), operation.getId());
 
-        assertTrue(statisticalOperationsBaseService.findAllOperations(getServiceContext()).size() < operations.size());
+        assertTrue(statisticalOperationsBaseService.findAllOperations(getServiceContextAdministrador()).size() < operations.size());
     }
 
     @Test
     public void testDeleteOperationWithType() throws MetamacException {
-        int operationsNumberBefore = statisticalOperationsBaseService.findAllOperations(getServiceContext()).size();
-        int operationsTypeBefore = statisticalOperationsListsService.findAllSurveyTypes(getServiceContext()).size();
+        int operationsNumberBefore = statisticalOperationsBaseService.findAllOperations(getServiceContextAdministrador()).size();
+        int operationsTypeBefore = statisticalOperationsListsService.findAllSurveyTypes(getServiceContextAdministrador()).size();
 
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationWithType());
-        statisticalOperationsBaseService.deleteOperation(getServiceContext(), operation.getId());
-        assertTrue(statisticalOperationsBaseService.findAllOperations(getServiceContext()).size() <= operationsNumberBefore);
-        assertTrue(statisticalOperationsListsService.findAllSurveyTypes(getServiceContext()).size() == operationsTypeBefore);
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationWithType());
+        statisticalOperationsBaseService.deleteOperation(getServiceContextAdministrador(), operation.getId());
+        assertTrue(statisticalOperationsBaseService.findAllOperations(getServiceContextAdministrador()).size() <= operationsNumberBefore);
+        assertTrue(statisticalOperationsListsService.findAllSurveyTypes(getServiceContextAdministrador()).size() == operationsTypeBefore);
     }
 
     @Test
     public void testFindAllOperations() throws MetamacException {
-        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
 
-        List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContext());
+        List<Operation> operations = statisticalOperationsBaseService.findAllOperations(getServiceContextAdministrador());
         assertTrue(!operations.isEmpty());
 
     }
 
     @Test
     public void testFindOperationByCondition() throws MetamacException {
-        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
 
         List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
                 .distinctRoot().build();
 
-        List<Operation> operationsList = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions);
+        List<Operation> operationsList = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions);
 
         assertTrue(operationsList.size() != 0);
     }
 
     @Test
     public void testFindOperationByConditionPaginated() throws MetamacException {
-        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
-        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
-        statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
 
         PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
         PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
@@ -266,8 +266,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
                 .distinctRoot().build();
 
-        PagedResult<Operation> operationsList1 = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions, pagingParameterPage1);
-        PagedResult<Operation> operationsList2 = statisticalOperationsBaseService.findOperationByCondition(getServiceContext(), conditions, pagingParameterPage2);
+        PagedResult<Operation> operationsList1 = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage1);
+        PagedResult<Operation> operationsList2 = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage2);
 
         assertTrue(operationsList1.getValues().size() != 0);
         assertEquals(2, operationsList1.getPageSize());
@@ -291,11 +291,11 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testUpdateOperation() throws Exception {
         Operation operation = createOperationWithDescription();
-        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertNotNull(operation.getDescription());
 
         operation.setDescription(null);
-        operation = statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
     }
@@ -303,12 +303,12 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
         Operation operation = createOperation();
-        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertNull(operation.getReleaseCalendarAccess());
 
         operation.setReleaseCalendarAccess("incorrectUrl");
         try {
-            statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+            statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
@@ -318,13 +318,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testUpdateOperationWitReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
         Operation operation = createOperation();
-        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertNull(operation.getReleaseCalendarAccess());
 
         operation.setReleaseCalendar(Boolean.FALSE);
         operation.setReleaseCalendarAccess("http://tutu.com");
         try {
-            statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+            statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
@@ -335,11 +335,11 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testUpdateOperationWithoutOperation() throws Exception {
         Operation operation = createOperation();
         operation.setDescription(null);
-        operation = statisticalOperationsBaseService.createOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertEquals(null, operation.getDescription());
 
         operation.setCommentUrl("http://tutu.com");
-        operation = statisticalOperationsBaseService.updateOperation(getServiceContext(), operation);
+        operation = statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
     }
@@ -360,12 +360,12 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testFindInstanceById() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         assertNotNull(instance);
 
-        Instance instanceRetrieved = statisticalOperationsBaseService.findInstanceById(getServiceContext(), instance.getId());
+        Instance instanceRetrieved = statisticalOperationsBaseService.findInstanceById(getServiceContextAdministrador(), instance.getId());
         assertNotNull(instanceRetrieved);
 
         assertTrue(instance.equals(instanceRetrieved));
@@ -373,17 +373,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateInstance() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
-        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         assertNotNull(instance);
     }
 
     @Test
     public void testCreateInstanceOperationNotPublished() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         try {
-            statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+            statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INSTANCE_INCORRECT_OPERATION_PROC_STATUS.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -391,69 +391,69 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testDeleteInstance() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
-        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
+        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador());
 
-        statisticalOperationsBaseService.deleteInstance(getServiceContext(), instance.getId());
+        statisticalOperationsBaseService.deleteInstance(getServiceContextAdministrador(), instance.getId());
 
-        assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContext()).size() < instances.size());
+        assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador()).size() < instances.size());
     }
 
     @Test
     public void testDeleteInstanceCheckUpdateOrder() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
-        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
+        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador());
 
-        statisticalOperationsBaseService.deleteInstance(getServiceContext(), instance01.getId());
+        statisticalOperationsBaseService.deleteInstance(getServiceContextAdministrador(), instance01.getId());
 
-        instance02 = statisticalOperationsBaseService.findInstanceById(getServiceContext(), instance02.getId());
+        instance02 = statisticalOperationsBaseService.findInstanceById(getServiceContextAdministrador(), instance02.getId());
         assertEquals(Integer.valueOf(0), instance02.getOrder());
 
-        assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContext()).size() < instances.size());
+        assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador()).size() < instances.size());
     }
 
     @Test
     public void testFindAllInstances() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
-        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContext());
+        List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador());
         assertTrue(!instances.isEmpty());
     }
 
     @Test
     public void testFindInstanceByCondition() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%").build();
 
-        List<Instance> instancesList = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions);
+        List<Instance> instancesList = statisticalOperationsBaseService.findInstanceByCondition(getServiceContextAdministrador(), conditions);
 
         assertTrue(instancesList.size() != 0);
     }
 
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
         PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
         PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
@@ -461,8 +461,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).like("INSTANCE-%")
                 .distinctRoot().build();
 
-        PagedResult<Instance> instances1 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage1);
-        PagedResult<Instance> instances2 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContext(), conditions, pagingParameterPage2);
+        PagedResult<Instance> instances1 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage1);
+        PagedResult<Instance> instances2 = statisticalOperationsBaseService.findInstanceByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage2);
 
         assertTrue(instances1.getValues().size() != 0);
         assertEquals(2, instances1.getPageSize());
@@ -475,23 +475,23 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateInstance() throws Exception {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         instance.setBasePeriod("2005Q1");
-        statisticalOperationsBaseService.updateInstance(getServiceContext(), instance);
+        statisticalOperationsBaseService.updateInstance(getServiceContextAdministrador(), instance);
     }
 
     @Test
     public void testUpdateInstanceWithIncorrectBasePeriod() throws Exception {
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
-        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         instance.setBasePeriod("2005Q1error");
         try {
-            statisticalOperationsBaseService.updateInstance(getServiceContext(), instance);
+            statisticalOperationsBaseService.updateInstance(getServiceContextAdministrador(), instance);
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.METADATA_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -500,13 +500,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testUpdateInstancesOrder() throws Exception {
         // Create operation
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
         // Create instances
-        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
         // Change order
         List<Long> instancesIds = new ArrayList<Long>();
@@ -514,7 +514,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         instancesIds.add(instance02.getId());
         instancesIds.add(instance01.getId());
 
-        List<Instance> orderedInstances = statisticalOperationsBaseService.updateInstancesOrder(getServiceContext(), operation.getId(), instancesIds);
+        List<Instance> orderedInstances = statisticalOperationsBaseService.updateInstancesOrder(getServiceContextAdministrador(), operation.getId(), instancesIds);
 
         // Check correct order
         assertEquals(orderedInstances.get(2).getId(), instance01.getId());
@@ -525,13 +525,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testUpdateInstancesOrderIncorrectParameter() throws Exception {
         // Create operation
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperationForInternalPublishing());
-        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContext(), operation.getId());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
         // Create instances
-        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
-        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContext(), operation.getId(), createInstance());
+        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
         // Change order
         List<Long> instancesIds = new ArrayList<Long>();
@@ -539,7 +539,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         instancesIds.add(instance02.getId());
 
         try {
-            statisticalOperationsBaseService.updateInstancesOrder(getServiceContext(), operation.getId(), instancesIds);
+            statisticalOperationsBaseService.updateInstancesOrder(getServiceContextAdministrador(), operation.getId(), instancesIds);
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.PARAMETER_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
             assertEquals(ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE, e.getExceptionItems().get(0).getMessageParameters()[0]);
@@ -603,7 +603,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         // OPERATIONS
         for (int i = 0; i < 4; i++) {
-            Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+            Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
             family.getOperations().add(operation);
         }
 
@@ -681,7 +681,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operation = createOperation();
 
         // TYPE
-        operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+        operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         return operation;
     }
@@ -702,7 +702,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setObjective(objective);
 
         // SURVEY_TYPE
-        operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContext(), Long.valueOf(1)));
+        operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
         ExternalItem producer01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
@@ -724,7 +724,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setCommonMetadata(commonMetadata);
 
         // OFFICIALITY_TYPE
-        operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContext(), Long.valueOf(1)));
+        operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         return operation;
     }
@@ -734,7 +734,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         // FAMILIES
         for (int i = 0; i < 4; i++) {
-            Family family = statisticalOperationsBaseService.createFamily(getServiceContext(), createFamily());
+            Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
             operation.getFamilies().add(family);
         }
 
@@ -760,7 +760,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         instance.setTitle(title);
 
         // OPERATION
-        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContext(), createOperation());
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         instance.setOperation(operation);
 
         // PROC_STATUS

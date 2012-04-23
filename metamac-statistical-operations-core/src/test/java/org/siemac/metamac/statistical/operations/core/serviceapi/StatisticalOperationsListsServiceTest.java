@@ -30,77 +30,77 @@ public class StatisticalOperationsListsServiceTest extends StatisticalOperations
 
     @Test
     public void testFindSurveyTypeById() throws Exception {
-        SurveyType surveyType = statisticalOperationsListsService.findSurveyTypeById(getServiceContext(), Long.valueOf(1));
+        SurveyType surveyType = statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(surveyType);
     }
 
     @Test
     public void testFindAllSurveyTypes() throws Exception {
-        List<SurveyType> surveyTypesList = statisticalOperationsListsService.findAllSurveyTypes(getServiceContext());
+        List<SurveyType> surveyTypesList = statisticalOperationsListsService.findAllSurveyTypes(getServiceContextAdministrador());
         assertTrue(!surveyTypesList.isEmpty());
     }
 
     @Test
     public void testFindInstanceTypeById() throws Exception {
-        InstanceType instanceType = statisticalOperationsListsService.findInstanceTypeById(getServiceContext(), Long.valueOf(1));
+        InstanceType instanceType = statisticalOperationsListsService.findInstanceTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(instanceType);
     }
 
     @Test
     public void testFindAllInstanceTypes() throws Exception {
-        List<InstanceType> instanceTypesList = statisticalOperationsListsService.findAllInstanceTypes(getServiceContext());
+        List<InstanceType> instanceTypesList = statisticalOperationsListsService.findAllInstanceTypes(getServiceContextAdministrador());
         assertTrue(!instanceTypesList.isEmpty());
     }
 
     @Test
     public void testFindSurveySourceById() throws Exception {
-        SurveySource surveySource = statisticalOperationsListsService.findSurveySourceById(getServiceContext(), Long.valueOf(1));
+        SurveySource surveySource = statisticalOperationsListsService.findSurveySourceById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(surveySource);
     }
 
     @Test
     public void testFindAllSurveySources() throws Exception {
-        List<SurveySource> sourcesDataList = statisticalOperationsListsService.findAllSurveySources(getServiceContext());
+        List<SurveySource> sourcesDataList = statisticalOperationsListsService.findAllSurveySources(getServiceContextAdministrador());
         assertTrue(!sourcesDataList.isEmpty());
 
     }
 
     @Test
     public void testFindOfficialityTypeById() throws Exception {
-        OfficialityType officialityType = statisticalOperationsListsService.findOfficialityTypeById(getServiceContext(), Long.valueOf(1));
+        OfficialityType officialityType = statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(officialityType);
     }
 
     @Test
     public void testFindAllOfficialityTypes() throws Exception {
-        List<OfficialityType> officialityTypesList = statisticalOperationsListsService.findAllOfficialityTypes(getServiceContext());
+        List<OfficialityType> officialityTypesList = statisticalOperationsListsService.findAllOfficialityTypes(getServiceContextAdministrador());
         assertTrue(!officialityTypesList.isEmpty());
     }
 
     @Test
     public void testFindCollMethodById() throws Exception {
-        CollMethod collMethod = statisticalOperationsListsService.findCollMethodById(getServiceContext(), Long.valueOf(1));
+        CollMethod collMethod = statisticalOperationsListsService.findCollMethodById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(collMethod);
 
     }
 
     @Test
     public void testFindAllCollMethods() throws Exception {
-        List<CollMethod> collMethodsList = statisticalOperationsListsService.findAllCollMethods(getServiceContext());
+        List<CollMethod> collMethodsList = statisticalOperationsListsService.findAllCollMethods(getServiceContextAdministrador());
         assertTrue(!collMethodsList.isEmpty());
 
     }
 
     @Test
     public void testFindCostById() throws Exception {
-        Cost cost = statisticalOperationsListsService.findCostById(getServiceContext(), Long.valueOf(1));
+        Cost cost = statisticalOperationsListsService.findCostById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(cost);
 
     }
 
     @Test
     public void testFindAllCosts() throws Exception {
-        List<Cost> costsList = statisticalOperationsListsService.findAllCosts(getServiceContext());
+        List<Cost> costsList = statisticalOperationsListsService.findAllCosts(getServiceContextAdministrador());
         assertTrue(!costsList.isEmpty());
 
     }
