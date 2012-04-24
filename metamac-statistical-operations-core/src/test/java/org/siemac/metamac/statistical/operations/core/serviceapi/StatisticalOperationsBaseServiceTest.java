@@ -30,12 +30,20 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  * Spring based transactional test with DbUnit support.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
+@Transactional
 public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsBaseServiceTestBase {
 
     @Autowired
@@ -43,6 +51,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Autowired
     protected StatisticalOperationsListsService statisticalOperationsListsService;
+    
+    @Autowired
+    private PlatformTransactionManager transactionManager = null;
 
     /**************************************************************************
      * Family Tests
@@ -300,11 +311,18 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals(null, operation.getDescription());
     }
 
+
     @Test
     public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
+        DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
+        defaultTransactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status = transactionManager.getTransaction(defaultTransactionDefinition);
+
         Operation operation = createOperation();
         operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertNull(operation.getReleaseCalendarAccess());
+
+        transactionManager.commit(status);
 
         operation.setReleaseCalendarAccess("incorrectUrl");
         try {

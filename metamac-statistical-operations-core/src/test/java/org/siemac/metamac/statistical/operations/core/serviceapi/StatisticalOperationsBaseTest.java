@@ -143,9 +143,4 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
         sequences.add("SEQ_COSTS");
         return sequences;
     }
-
-    @Override
-    public void tearDownDatabaseTester() throws Exception {
-        // NOTHING;
-    }
 }
