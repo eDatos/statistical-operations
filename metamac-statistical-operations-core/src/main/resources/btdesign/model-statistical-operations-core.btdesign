@@ -291,6 +291,8 @@ Application StatisticalOperations {
        		"INVENTORY_DATE"
        		DateTimeTZ inventoryDate nullable;
        		
+       		"Last update to optimistic locking"
+			DateTimeTZ updateDate nullable;
 		
 			Repository FamilyRepository {
 				findById;
@@ -393,6 +395,8 @@ Application StatisticalOperations {
        		"Metadata NOTES_URL"
        		String notesUrl nullable length="4000";
        		
+       		"Last update to optimistic locking"
+			DateTimeTZ updateDate nullable;
        		
 			Repository OperationRepository {
 				findById;
@@ -559,6 +563,9 @@ Application StatisticalOperations {
        		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
        		"Metadata NOTES_URL"
        		String notesUrl nullable length="4000";
+       		
+       		"Last update to optimistic locking"
+			DateTimeTZ updateDate nullable;
        		
 			Repository InstanceRepository {
 				findById;
