@@ -5,7 +5,6 @@ import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 public class ServiceExceptionType extends CommonServiceExceptionType {
 
     public static final CommonServiceExceptionType INVALID_PROC_STATUS                             = create("exception.operations.invalid.proc_status");
-    public static final CommonServiceExceptionType INVALID_URL                                     = create("exception.operations.invalid.url");
 
     public static final CommonServiceExceptionType FAMILY_WITHOUT_PUBLISHED_INTERNALLY_OPERATIONS  = create("exception.operations.family.without_published_internally_operations");
     public static final CommonServiceExceptionType FAMILY_NOT_FOUND                                = create("exception.operations.family.not_found");

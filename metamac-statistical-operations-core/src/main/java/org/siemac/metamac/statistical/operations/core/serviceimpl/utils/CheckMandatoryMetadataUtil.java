@@ -2,8 +2,6 @@ package org.siemac.metamac.statistical.operations.core.serviceimpl.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
@@ -112,7 +110,7 @@ public class CheckMandatoryMetadataUtil {
         ValidationUtils.checkMetadataRequired(operation.getIndicatorSystem(), ServiceExceptionParameters.OPERATION_INDICATOR_SYSTEM, exceptions);
 
         if (!ValidationUtils.isEmpty(operation.getReleaseCalendarAccess())) {
-            validateUrl(operation.getReleaseCalendarAccess(), exceptions, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS);
+            ValidationUtils.validateUrl(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
         }
         
         if (operation.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(operation.getCode())) {
@@ -232,16 +230,4 @@ public class CheckMandatoryMetadataUtil {
     public static void checkCreateInstance(Instance instance) throws MetamacException {
         checkCreateInstance(instance, null);
     }
-
-    private static void validateUrl(String parameter, List<MetamacExceptionItem> exceptions, String parameterName) {
-        if (parameter != null) {
-            Pattern p = Pattern.compile("https?://.+");
-            Matcher m = p.matcher(parameter);
-            if (!m.matches()) {
-                exceptions.add(new MetamacExceptionItem(ServiceExceptionType.INVALID_URL, parameterName));
-            }
-        }
-
-    }
-
 }

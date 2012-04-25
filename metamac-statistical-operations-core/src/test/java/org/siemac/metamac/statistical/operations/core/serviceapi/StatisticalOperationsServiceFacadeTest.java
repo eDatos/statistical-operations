@@ -881,7 +881,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         try {
             operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
         }
 
         // Check number of operations

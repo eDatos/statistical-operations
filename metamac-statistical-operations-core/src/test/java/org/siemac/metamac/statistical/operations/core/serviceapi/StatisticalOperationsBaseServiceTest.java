@@ -212,7 +212,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
 
@@ -328,7 +328,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
         }
     }
@@ -344,7 +344,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
             assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
         }
     }
