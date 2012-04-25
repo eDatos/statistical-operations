@@ -10,7 +10,6 @@
 
 	<xsd:complexType name="OperationBase">
 		<xsd:sequence>
-			<xsd:element name="uri" type="cDomain_v1_0:Text_255" />
 			<xsd:element name="code" type="cDomain_v1_0:Text_255" />
 			<xsd:element name="title" type="cDomain_v1_0:InternationalString" />
 			<xsd:element name="acronym" type="cDomain_v1_0:InternationalString" />
