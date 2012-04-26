@@ -60,22 +60,23 @@
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut id="serviceFacadePointCut"
-			expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*ServiceFacade.*(..)) or execution(public * org.siemac.metamac.statistical.operations..ws..*Interface*.*(..))" />
+		<aop:pointcut id="businessServiceCore"
+			expression="execution(public * org.siemac.metamac..serviceapi.*.*(..))" />
+		<aop:pointcut id="readOnlyBusinessServiceCore"
+			expression="execution(public * org.siemac.metamac..serviceapi.*.get*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..))" />
 		<!-- Repeating the expression, since I can't find a way to refer to the 
 			other pointcuts. -->
-		<aop:pointcut id="updatingServiceFacade"
-			expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*ServiceFacade.*(..)) and not (execution(public * org.siemac.metamac.statistical.operations..serviceapi.*.get*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..)))" />
-
-		<aop:advisor pointcut-ref="serviceFacadePointCut"
+		<aop:pointcut id="updatingBusinessServiceCore"
+			expression="execution(public * org.siemac.metamac..serviceapi.*.*(..)) and not (execution(public * org.siemac.metamac..serviceapi.*.get*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..)))" />
+		<aop:advisor pointcut-ref="businessServiceCore"
 			advice-ref="txAdvice" order="1" />
-		<aop:advisor pointcut-ref="serviceFacadePointCut"
+		<aop:advisor pointcut-ref="businessServiceCore"
 			advice-ref="serviceContextStoreAdvice" order="2" />
-		<aop:advisor pointcut-ref="serviceFacadePointCut"
+		<aop:advisor pointcut-ref="businessServiceCore"
 			advice-ref="errorHandlingAdvice" order="3" />
-		<aop:advisor pointcut-ref="serviceFacadePointCut"
+		<aop:advisor pointcut-ref="businessServiceCore"
 			advice-ref="hibernateErrorHandlingAdvice" order="4" />
-		<aop:advisor pointcut-ref="updatingServiceFacade"
+		<aop:advisor pointcut-ref="updatingBusinessServiceCore"
 			advice-ref="jpaInterceptorFlushEager" order="5" />
 	</aop:config>
 
