@@ -243,7 +243,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // INVENTORY_DATE
         // Not necessary. It can't be manually modified
-        
+
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
@@ -387,7 +387,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // NOTES_URL
         target.setNotesUrl(source.getNotesUrl());
-        
+
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
@@ -615,7 +615,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // NOTES_URL
         target.setNotesUrl(source.getNotesUrl());
-        
+
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
@@ -653,7 +653,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
                 target.add(externalItemBtDtoToExternalItem(itemDto));
             }
         }
-        
+
         return target;
     }
 
@@ -766,12 +766,12 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         Set<Cost> result = new HashSet<Cost>();
 
-        if (target != null) { // Exist
+        // Exist
+        if (target != null) {
             for (CostDto itemDto : source) {
                 boolean found = false;
                 for (Cost itemPersisted : target) {
                     if (itemPersisted.equals(itemDto)) {
-                        // target.add(itemPersisted);
                         found = true;
                         break;
                     }
@@ -780,7 +780,8 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
                     result.add(costDtoToEntity(itemDto, ctx));
                 }
             }
-        } else { // New
+        } else {
+            // New
             target = new HashSet<Cost>();
             for (CostDto item : source) {
                 result.add(costDtoToEntity(item, ctx));
