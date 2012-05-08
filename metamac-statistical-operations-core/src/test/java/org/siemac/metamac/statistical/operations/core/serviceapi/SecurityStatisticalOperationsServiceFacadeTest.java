@@ -495,10 +495,10 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
         operationDto.setCommentUrl("http://tutu.com");
 
-        statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoPlanificacion(), operationDto);
-        statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccionOperation01(), operationDto);
-        statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoPlanificacion(), operationDto);
-        statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccion(), operationDto);
+        operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoPlanificacion(), operationDto);
+        operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccionOperation01(), operationDto);
+        operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoPlanificacion(), operationDto);
+        operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccion(), operationDto);
 
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoDifusion(), operationDto);

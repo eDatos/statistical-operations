@@ -53,111 +53,111 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
      **************************************************************************/
 
     @Override
-    public SurveyTypeDto surveyTypeToDto(SurveyType surveyType) {
-        if (surveyType == null) {
+    public SurveyTypeDto surveyTypeToDto(SurveyType source) {
+        if (source == null) {
             return null;
         }
 
-        SurveyTypeDto surveyTypeDto = getMapper().map(surveyType, SurveyTypeDto.class);
+        SurveyTypeDto target = getMapper().map(source, SurveyTypeDto.class);
 
         // DESCRIPTION
-        surveyTypeDto.setDescription(internationalStringToDto(surveyType.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return surveyTypeDto;
+        return target;
     }
 
     @Override
-    public InstanceTypeDto instanceTypeToDto(InstanceType instanceType) {
-        if (instanceType == null) {
+    public InstanceTypeDto instanceTypeToDto(InstanceType source) {
+        if (source == null) {
             return null;
         }
 
-        InstanceTypeDto instanceTypeDto = getMapper().map(instanceType, InstanceTypeDto.class);
+        InstanceTypeDto target = getMapper().map(source, InstanceTypeDto.class);
 
         // DESCRIPTION
-        instanceTypeDto.setDescription(internationalStringToDto(instanceType.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return instanceTypeDto;
+        return target;
     }
 
     @Override
-    public SurveySourceDto surveySourceToDto(SurveySource surveySource) {
-        if (surveySource == null) {
+    public SurveySourceDto surveySourceToDto(SurveySource source) {
+        if (source == null) {
             return null;
         }
 
-        SurveySourceDto surveySourceDto = getMapper().map(surveySource, SurveySourceDto.class);
+        SurveySourceDto target = getMapper().map(source, SurveySourceDto.class);
 
         // DESCRIPTION
-        surveySourceDto.setDescription(internationalStringToDto(surveySource.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return surveySourceDto;
+        return target;
     }
 
     @Override
-    public OfficialityTypeDto officialityTypeToDto(OfficialityType officialityType) {
-        if (officialityType == null) {
+    public OfficialityTypeDto officialityTypeToDto(OfficialityType source) {
+        if (source == null) {
             return null;
         }
 
-        OfficialityTypeDto officialityTypeDto = getMapper().map(officialityType, OfficialityTypeDto.class);
+        OfficialityTypeDto target = getMapper().map(source, OfficialityTypeDto.class);
 
         // DESCRIPTION
-        officialityTypeDto.setDescription(internationalStringToDto(officialityType.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return officialityTypeDto;
+        return target;
     }
 
     @Override
-    public CollMethodDto collMethodToDto(CollMethod collMethod) {
-        if (collMethod == null) {
+    public CollMethodDto collMethodToDto(CollMethod source) {
+        if (source == null) {
             return null;
         }
 
-        CollMethodDto collMethodDto = getMapper().map(collMethod, CollMethodDto.class);
+        CollMethodDto target = getMapper().map(source, CollMethodDto.class);
 
         // DESCRIPTION
-        collMethodDto.setDescription(internationalStringToDto(collMethod.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return collMethodDto;
+        return target;
     }
 
     @Override
-    public CostDto costToDto(Cost cost) {
-        if (cost == null) {
+    public CostDto costToDto(Cost source) {
+        if (source == null) {
             return null;
         }
 
-        CostDto costDto = getMapper().map(cost, CostDto.class);
+        CostDto target = getMapper().map(source, CostDto.class);
 
         // DESCRIPTION
-        costDto.setDescription(internationalStringToDto(cost.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
-        return costDto;
+        return target;
     }
 
     /**************************************************************************
      * PUBLIC - ENTITIES
      **************************************************************************/
 
-    public FamilyDto familyToDto(Family family) {
-        if (family == null) {
+    public FamilyDto familyToDto(Family source) {
+        if (source == null) {
             return null;
         }
 
-        FamilyDto familyDto = getMapper().map(family, FamilyDto.class);
+        FamilyDto target = getMapper().map(source, FamilyDto.class);
 
         // CODE
         // Not necessary
 
         // TITLE
-        familyDto.setTitle(internationalStringToDto(family.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // TITLE_ALTERNATIVE
-        familyDto.setAcronym(internationalStringToDto(family.getAcronym()));
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
 
         // DESCRIPTION
-        familyDto.setDescription(internationalStringToDto(family.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
         // INTERNAL_INVENTORY_DATE
         // Not necessary
@@ -167,80 +167,82 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
 
         // INVENTORY_DATE
         // Not necessary
+        
+        target.setOptimisticLockingVersion(source.getVersion());
 
-        return familyDto;
+        return target;
     }
 
-    public FamilyBaseDto familyToBaseDto(Family family) {
-        if (family == null) {
+    public FamilyBaseDto familyToBaseDto(Family source) {
+        if (source == null) {
             return null;
         }
 
-        FamilyBaseDto familyBaseDto = getMapper().map(family, FamilyBaseDto.class);
+        FamilyBaseDto target = getMapper().map(source, FamilyBaseDto.class);
 
         // IDENTIFIER
         // Not necessary
 
         // TITLE
-        familyBaseDto.setTitle(internationalStringToDto(family.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // DESCRIPTION
-        familyBaseDto.setDescription(internationalStringToDto(family.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
         // PROC STATUS
         // Not necessary
 
-        return familyBaseDto;
+        return target;
     }
 
-    public OperationDto operationToDto(Operation operation) {
-        if (operation == null) {
+    public OperationDto operationToDto(Operation source) {
+        if (source == null) {
             return null;
         }
 
-        OperationDto operationDto = getMapper().map(operation, OperationDto.class);
+        OperationDto target = getMapper().map(source, OperationDto.class);
 
         // APP_COMMON_METADATA
-        operationDto.setCommonMetadata(externalItemBtToDto(operation.getCommonMetadata()));
+        target.setCommonMetadata(externalItemBtToDto(source.getCommonMetadata()));
 
         // CODE
         // Not necessary
 
         // TITLE
-        operationDto.setTitle(internationalStringToDto(operation.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // TITLE_ALETERNATIVE
-        operationDto.setAcronym(internationalStringToDto(operation.getAcronym()));
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(externalItemBtToDto(operation.getSubjectArea()));
+        target.setSubjectArea(externalItemBtToDto(source.getSubjectArea()));
 
         // SECONDARY_SUBJECT_AREAS
-        operationDto.getSecondarySubjectAreas().addAll(externalItemListToDto(operation.getSecondarySubjectAreas()));
+        target.getSecondarySubjectAreas().addAll(externalItemListToDto(source.getSecondarySubjectAreas()));
 
         // OBJECTIVE
-        operationDto.setObjective(internationalStringToDto(operation.getObjective()));
+        target.setObjective(internationalStringToDto(source.getObjective()));
 
         // DESCRIPTION
-        operationDto.setDescription(internationalStringToDto(operation.getDescription()));
+        target.setDescription(internationalStringToDto(source.getDescription()));
 
         // SURVEY_TYPE
-        operationDto.setSurveyType(surveyTypeToDto(operation.getSurveyType()));
+        target.setSurveyType(surveyTypeToDto(source.getSurveyType()));
 
         // OFFICIALITY_TYPE
-        operationDto.setOfficialityType(officialityTypeToDto(operation.getOfficialityType()));
+        target.setOfficialityType(officialityTypeToDto(source.getOfficialityType()));
 
         // INDICATOR_SYSTEM
         // Not necessary
 
         // PRODUCER
-        operationDto.getProducer().addAll(externalItemListToDto(operation.getProducer()));
+        target.getProducer().addAll(externalItemListToDto(source.getProducer()));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.getRegionalResponsible().addAll(externalItemListToDto(operation.getRegionalResponsible()));
+        target.getRegionalResponsible().addAll(externalItemListToDto(source.getRegionalResponsible()));
 
         // REGIONAL_CONTRIBUTOR
-        operationDto.getRegionalContributor().addAll(externalItemListToDto(operation.getRegionalContributor()));
+        target.getRegionalContributor().addAll(externalItemListToDto(source.getRegionalContributor()));
 
         // INTERNAL_INVENTORY_DATE
         // Not necessary
@@ -258,10 +260,10 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Transformed in service
 
         // PUBLISHER
-        operationDto.getPublisher().addAll(externalItemListToDto(operation.getPublisher()));
+        target.getPublisher().addAll(externalItemListToDto(source.getPublisher()));
 
         // REL_POL_US_AC
-        operationDto.setRelPolUsAc(internationalStringToDto(operation.getRelPolUsAc()));
+        target.setRelPolUsAc(internationalStringToDto(source.getRelPolUsAc()));
         // REL_POL_US_AC_URL
         // Not necessary
 
@@ -271,7 +273,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // UPDATE_FREQUENCY
-        operationDto.getUpdateFrequency().addAll(externalItemListToDto(operation.getUpdateFrequency()));
+        target.getUpdateFrequency().addAll(externalItemListToDto(source.getUpdateFrequency()));
 
         // CURRENT_INSTANCE
         // Transformed in service
@@ -280,12 +282,12 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // REV_POLICY
-        operationDto.setRevPolicy(internationalStringToDto(operation.getRevPolicy()));
+        target.setRevPolicy(internationalStringToDto(source.getRevPolicy()));
         // REV_POLICY_URL
         // Not necessary
 
         // REV_PRACTICE
-        operationDto.setRevPractice(internationalStringToDto(operation.getRevPractice()));
+        target.setRevPractice(internationalStringToDto(source.getRevPractice()));
         // REV_PRACTICE_URL
         // Not necessary
 
@@ -302,47 +304,49 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // TODO
 
         // COMMENT
-        operationDto.setComment(internationalStringToDto(operation.getComment()));
+        target.setComment(internationalStringToDto(source.getComment()));
         // COMMENT_URL
         // Not necessary
 
         // NOTES
-        operationDto.setNotes(internationalStringToDto(operation.getNotes()));
+        target.setNotes(internationalStringToDto(source.getNotes()));
         // NOTES_URL
         // Not necessary
+        
+        target.setOptimisticLockingVersion(source.getVersion());
 
-        return operationDto;
+        return target;
     }
 
-    public OperationBaseDto operationToBaseDto(Operation operation) {
-        if (operation == null) {
+    public OperationBaseDto operationToBaseDto(Operation source) {
+        if (source == null) {
             return null;
         }
 
-        OperationBaseDto operationBaseDto = getMapper().map(operation, OperationBaseDto.class);
+        OperationBaseDto target = getMapper().map(source, OperationBaseDto.class);
 
         // CODE
         // Not necessary
 
         // TITLE
-        operationBaseDto.setTitle(internationalStringToDto(operation.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // TITLE_ALTERNATIVE
-        operationBaseDto.setAcronym(internationalStringToDto(operation.getAcronym()));
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
 
         // PROC_STATUS
         // Not necessary
 
-        return operationBaseDto;
+        return target;
     }
 
     @Override
-    public InstanceDto instanceToDto(Instance instance) {
-        if (instance == null) {
+    public InstanceDto instanceToDto(Instance source) {
+        if (source == null) {
             return null;
         }
 
-        InstanceDto instanceDto = getMapper().map(instance, InstanceDto.class);
+        InstanceDto target = getMapper().map(source, InstanceDto.class);
 
         // ORDER
         // Not necessary
@@ -351,55 +355,55 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // TITLE
-        instanceDto.setTitle(internationalStringToDto(instance.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // TITLE_ALETERNATIVE
-        instanceDto.setAcronym(internationalStringToDto(instance.getAcronym()));
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
 
         // SURVEY_CODE
         // Instance DTO doesn't have Operation Information.
 
         // DATA_DESCRIPTION
-        instanceDto.setDataDescription(internationalStringToDto(instance.getDataDescription()));
+        target.setDataDescription(internationalStringToDto(source.getDataDescription()));
 
         // STATISTICAL_POPULATION
-        instanceDto.setStatisticalPopulation(internationalStringToDto(instance.getStatisticalPopulation()));
+        target.setStatisticalPopulation(internationalStringToDto(source.getStatisticalPopulation()));
 
         // STATISTICAL_UNIT
-        instanceDto.getStatisticalUnit().addAll(externalItemListToDto(instance.getStatisticalUnit()));
+        target.getStatisticalUnit().addAll(externalItemListToDto(source.getStatisticalUnit()));
 
         // GEOGRAPHIC_GRANULARITY
-        instanceDto.setGeographicGranularity(externalItemBtToDto(instance.getGeographicGranularity()));
+        target.setGeographicGranularity(externalItemBtToDto(source.getGeographicGranularity()));
 
         // GEOGRAPHIC_COMPARABILITY
-        instanceDto.setGeographicComparability(internationalStringToDto(instance.getGeographicComparability()));
+        target.setGeographicComparability(internationalStringToDto(source.getGeographicComparability()));
 
         // TEMPORAL_GRANULARITY
-        instanceDto.setTemporalGranularity(externalItemBtToDto(instance.getTemporalGranularity()));
+        target.setTemporalGranularity(externalItemBtToDto(source.getTemporalGranularity()));
 
         // TEMPORAL_COMPARABILITY
-        instanceDto.setTemporalComparability(internationalStringToDto(instance.getTemporalComparability()));
+        target.setTemporalComparability(internationalStringToDto(source.getTemporalComparability()));
 
         // BASE_PERIOD
         // Not necessary
 
         // UNIT_MEASURE
-        instanceDto.getUnitMeasure().addAll(externalItemListToDto(instance.getUnitMeasure()));
+        target.getUnitMeasure().addAll(externalItemListToDto(source.getUnitMeasure()));
 
         // STAT_CONC_DEF
-        instanceDto.setStatConcDef(internationalStringToDto(instance.getStatConcDef()));
+        target.setStatConcDef(internationalStringToDto(source.getStatConcDef()));
 
         // STAT_CONC_DEF_LIST
-        instanceDto.getStatConcDefList().addAll(externalItemListToDto(instance.getStatConcDefList()));
+        target.getStatConcDefList().addAll(externalItemListToDto(source.getStatConcDefList()));
 
         // CLASS_SYSTEM
-        instanceDto.setClassSystem(internationalStringToDto(instance.getClassSystem()));
+        target.setClassSystem(internationalStringToDto(source.getClassSystem()));
 
         // CLASS_SYSTEM_LIST
-        instanceDto.getClassSystemList().addAll(externalItemListToDto(instance.getClassSystemList()));
+        target.getClassSystemList().addAll(externalItemListToDto(source.getClassSystemList()));
 
         // INSTANCE_TYPE
-        instanceDto.setInstanceType(instanceTypeToDto(instance.getInstanceType()));
+        target.setInstanceType(instanceTypeToDto(source.getInstanceType()));
 
         // INTERNAL_INVENTORY_DATE
         // Not necessary
@@ -411,140 +415,142 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // DOC_METHOD
-        instanceDto.setDocMethod(internationalStringToDto(instance.getDocMethod()));
+        target.setDocMethod(internationalStringToDto(source.getDocMethod()));
 
         // DOC_METHOD_URL
         // Not necessary
 
         // SURVEY_SOURCE
-        instanceDto.setSurveySource(surveySourceToDto(instance.getSurveySource()));
+        target.setSurveySource(surveySourceToDto(source.getSurveySource()));
 
         // COLL_METHOD
-        instanceDto.setCollMethod(collMethodToDto(instance.getCollMethod()));
+        target.setCollMethod(collMethodToDto(source.getCollMethod()));
 
         // INFORMATION_SUPPLIERS
-        instanceDto.getInformationSuppliers().addAll(externalItemListToDto(instance.getInformationSuppliers()));
+        target.getInformationSuppliers().addAll(externalItemListToDto(source.getInformationSuppliers()));
 
         // FREQ_COLL
-        instanceDto.getFreqColl().addAll(externalItemListToDto(instance.getFreqColl()));
+        target.getFreqColl().addAll(externalItemListToDto(source.getFreqColl()));
 
         // DATA_VALIDATION
-        instanceDto.setDataValidation(internationalStringToDto(instance.getDataValidation()));
+        target.setDataValidation(internationalStringToDto(source.getDataValidation()));
         // DATA_VALIDATION_URL
         // Not necessary
 
         // DATA_COMPILATION
-        instanceDto.setDataCompilation(internationalStringToDto(instance.getDataCompilation()));
+        target.setDataCompilation(internationalStringToDto(source.getDataCompilation()));
         // DATA_COMPILATION_URL
         // Not necessary
 
         // ADJUSTMENT
-        instanceDto.setAdjustment(internationalStringToDto(instance.getAdjustment()));
+        target.setAdjustment(internationalStringToDto(source.getAdjustment()));
         // ADJUSTMENT_URL
         // Not necessary
 
         // COST_BURDEN
-        instanceDto.setCostBurden(internationalStringToDto(instance.getCostBurden()));
+        target.setCostBurden(internationalStringToDto(source.getCostBurden()));
         // COST_BURDEN_URL
         // Not necessary
 
         // COST
-        instanceDto.getCost().addAll(costListToDto(instance.getCost()));
+        target.getCost().addAll(costListToDto(source.getCost()));
 
         // INVENTORY_DATE
         // Not necessary
 
         // QUALITY_DOC
-        instanceDto.setQualityDoc(internationalStringToDto(instance.getQualityDoc()));
+        target.setQualityDoc(internationalStringToDto(source.getQualityDoc()));
         // QUALITY_DOC_URL
         // Not necessary
 
         // QUALITY_ASSURE
-        instanceDto.setQualityAssure(internationalStringToDto(instance.getQualityAssure()));
+        target.setQualityAssure(internationalStringToDto(source.getQualityAssure()));
         // QUALITY_ASSURE_URL
         // Not necessary
 
         // QUALITY_ASSMNT
-        instanceDto.setQualityAssmnt(internationalStringToDto(instance.getQualityAssmnt()));
+        target.setQualityAssmnt(internationalStringToDto(source.getQualityAssmnt()));
         // QUALITY_ASSMNT_URL
         // Not necessary
 
         // USER_NEEDS
-        instanceDto.setUserNeeds(internationalStringToDto(instance.getUserNeeds()));
+        target.setUserNeeds(internationalStringToDto(source.getUserNeeds()));
         // USER_NEEDS_URL
         // Not necessary
 
         // USER_SAT
-        instanceDto.setUserSat(internationalStringToDto(instance.getUserSat()));
+        target.setUserSat(internationalStringToDto(source.getUserSat()));
         // USER_SAT_URL
         // Not necessary
 
         // COMPLETENESS
-        instanceDto.setCompleteness(internationalStringToDto(instance.getCompleteness()));
+        target.setCompleteness(internationalStringToDto(source.getCompleteness()));
         // COMPLETENESS_URL
         // Not necessary
 
         // TIMELINESS
-        instanceDto.setTimeliness(internationalStringToDto(instance.getTimeliness()));
+        target.setTimeliness(internationalStringToDto(source.getTimeliness()));
         // TIMELINESS_URL
         // Not necessary
 
         // PUNCTUALITY
-        instanceDto.setPunctuality(internationalStringToDto(instance.getPunctuality()));
+        target.setPunctuality(internationalStringToDto(source.getPunctuality()));
         // PUNCTUALITY_URL
         // Not necessary
 
         // ACCURACY_OVERALL
-        instanceDto.setAccuracyOverall(internationalStringToDto(instance.getAccuracyOverall()));
+        target.setAccuracyOverall(internationalStringToDto(source.getAccuracyOverall()));
         // ACCURACY_OVERALL_URL
         // Not necessary
 
         // SAMPLING_ERR
-        instanceDto.setSamplingErr(internationalStringToDto(instance.getSamplingErr()));
+        target.setSamplingErr(internationalStringToDto(source.getSamplingErr()));
         // SAMPLING_ERR_URL
         // Not necessary
 
         // NONSAMPLING_ERR
-        instanceDto.setNonsamplingErr(internationalStringToDto(instance.getNonsamplingErr()));
+        target.setNonsamplingErr(internationalStringToDto(source.getNonsamplingErr()));
         // NONSAMPLING_ERR_URL
         // Not necessary
 
         // COHER_X_DOMAIN
-        instanceDto.setCoherXDomain(internationalStringToDto(instance.getCoherXDomain()));
+        target.setCoherXDomain(internationalStringToDto(source.getCoherXDomain()));
         // COHER_X_DOMAIN_URL
         // Not necessary
 
         // COHER_INTERNAL
-        instanceDto.setCoherInternal(internationalStringToDto(instance.getCoherInternal()));
+        target.setCoherInternal(internationalStringToDto(source.getCoherInternal()));
         // COHER_INTERNAL_URL
         // Not necessary
 
         // COMMENT
-        instanceDto.setComment(internationalStringToDto(instance.getComment()));
+        target.setComment(internationalStringToDto(source.getComment()));
         // COMMENT_URL
         // Not necessary
 
         // NOTES
-        instanceDto.setNotes(internationalStringToDto(instance.getNotes()));
+        target.setNotes(internationalStringToDto(source.getNotes()));
         // NOTES_URL
         // Not necessary
 
-        return instanceDto;
+        target.setOptimisticLockingVersion(source.getVersion());
+        
+        return target;
     }
 
     @Override
-    public InstanceBaseDto instanceToBaseDto(Instance instance) {
-        if (instance == null) {
+    public InstanceBaseDto instanceToBaseDto(Instance source) {
+        if (source == null) {
             return null;
         }
 
-        InstanceBaseDto instanceBaseDto = getMapper().map(instance, InstanceBaseDto.class);
+        InstanceBaseDto target = getMapper().map(source, InstanceBaseDto.class);
 
         // CODE
         // Not necessary
 
         // TITLE
-        instanceBaseDto.setTitle(internationalStringToDto(instance.getTitle()));
+        target.setTitle(internationalStringToDto(source.getTitle()));
 
         // PROC_STATUS
         // Not necessary
@@ -552,7 +558,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // ORDER
         // Not necessary
 
-        return instanceBaseDto;
+        return target;
     }
 
     /**************************************************************************

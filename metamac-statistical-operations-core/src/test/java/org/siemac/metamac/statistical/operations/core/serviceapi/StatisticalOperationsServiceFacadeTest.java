@@ -2,7 +2,9 @@ package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -335,6 +337,40 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Check operations for family
         List<OperationBaseDto> operationsForFamilyAfter = statisticalOperationsServiceFacade.findOperationsForFamily(getServiceContextAdministrador(), familyDto.getId());
         assertEquals(operationsForFamilyBefore.size(), operationsForFamilyAfter.size());
+    }
+
+    @Test
+    public void testUpdateFamilyOptimisticLockingError() throws Exception {
+        Long id = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate()).getId();
+
+        // Retrieve family - session 1
+        FamilyDto familyDtoSession1 = statisticalOperationsServiceFacade.findFamilyById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), familyDtoSession1.getOptimisticLockingVersion());
+        familyDtoSession1.setCode("newCode");
+
+        // Retrieve family - session 2
+        FamilyDto familyDtoSession2 = statisticalOperationsServiceFacade.findFamilyById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), familyDtoSession1.getOptimisticLockingVersion());
+        familyDtoSession2.setCode("newCode2");
+
+        // Update family - session 1
+        FamilyDto familyDtoSession1AfterUpdate = statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyDtoSession1);
+        assertEquals(Long.valueOf(1), familyDtoSession1AfterUpdate.getOptimisticLockingVersion());
+
+        // Update family - session 2
+        try {
+            statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyDtoSession2);
+            fail("Optimistic locking");
+        } catch (MetamacException e) {
+            assertEquals(1, e.getExceptionItems().size());
+            assertEquals(ServiceExceptionType.OPTIMISTIC_LOCKING.getCode(), e.getExceptionItems().get(0).getCode());
+            assertNull(e.getExceptionItems().get(0).getMessageParameters());
+        }
+
+        // Update family - session 1
+        familyDtoSession1AfterUpdate.setCode("newCode1_secondUpdate");
+        FamilyDto familyDtoSession1AfterUpdate2 = statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyDtoSession1AfterUpdate);
+        assertEquals(Long.valueOf(2), familyDtoSession1AfterUpdate2.getOptimisticLockingVersion());
     }
 
     @Test
@@ -917,6 +953,40 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
         assertEquals(operationsBefore, operationsAfter);
     }
+    
+    @Test
+    public void testUpdateOperationOptimisticLockingError() throws Exception {
+        Long id = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
+
+        // Retrieve operation - session 1
+        OperationDto operationDtoSession1 = statisticalOperationsServiceFacade.findOperationById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), operationDtoSession1.getOptimisticLockingVersion());
+        operationDtoSession1.setCode("newCode");
+
+        // Retrieve operation - session 2
+        OperationDto operationDtoSession2 = statisticalOperationsServiceFacade.findOperationById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), operationDtoSession1.getOptimisticLockingVersion());
+        operationDtoSession2.setCode("newCode2");
+
+        // Update operation - session 1
+        OperationDto operationDtoSession1AfterUpdate = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDtoSession1);
+        assertEquals(Long.valueOf(1), operationDtoSession1AfterUpdate.getOptimisticLockingVersion());
+
+        // Update operation - session 2
+        try {
+            statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDtoSession2);
+            fail("Optimistic locking");
+        } catch (MetamacException e) {
+            assertEquals(1, e.getExceptionItems().size());
+            assertEquals(ServiceExceptionType.OPTIMISTIC_LOCKING.getCode(), e.getExceptionItems().get(0).getCode());
+            assertNull(e.getExceptionItems().get(0).getMessageParameters());
+        }
+
+        // Update operation - session 1
+        operationDtoSession1AfterUpdate.setCode("newCode1_secondUpdate");
+        OperationDto operationDtoSession1AfterUpdate2 = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDtoSession1AfterUpdate);
+        assertEquals(Long.valueOf(2), operationDtoSession1AfterUpdate2.getOptimisticLockingVersion());
+    }
 
     @Test
     public void testDeleteOperationWithList() throws Exception {
@@ -1434,7 +1504,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instance01 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
         InstanceDto instance02 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
         InstanceDto instance03 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
-        
+
         List<Long> instancesIds = new ArrayList<Long>();
         instancesIds.add(instance03.getId());
         instancesIds.add(instance02.getId());
@@ -1449,12 +1519,48 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Check order number
         // TODO: Check this
-//        assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(2));
-//        assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
-//        assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(0));
+        // assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(2));
+        // assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
+        // assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(0));
 
         // Check number of instances
         assertEquals(3, statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId()).size());
+    }
+    
+    @Test
+    public void testUpdateInstanceOptimisticLockingError() throws Exception {
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        Long id = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto()).getId();
+
+        // Retrieve instance - session 1
+        InstanceDto instanceDtoSession1 = statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), instanceDtoSession1.getOptimisticLockingVersion());
+        instanceDtoSession1.setCode("newCode");
+
+        // Retrieve instance - session 2
+        InstanceDto instanceDtoSession2 = statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), id);
+        assertEquals(Long.valueOf(0), instanceDtoSession1.getOptimisticLockingVersion());
+        instanceDtoSession2.setCode("newCode2");
+
+        // Update instance - session 1
+        InstanceDto instanceDtoSession1AfterUpdate = statisticalOperationsServiceFacade.updateInstance(getServiceContextAdministrador(), instanceDtoSession1);
+        assertEquals(Long.valueOf(1), instanceDtoSession1AfterUpdate.getOptimisticLockingVersion());
+
+        // Update instance - session 2
+        try {
+            statisticalOperationsServiceFacade.updateInstance(getServiceContextAdministrador(), instanceDtoSession2);
+            fail("Optimistic locking");
+        } catch (MetamacException e) {
+            assertEquals(1, e.getExceptionItems().size());
+            assertEquals(ServiceExceptionType.OPTIMISTIC_LOCKING.getCode(), e.getExceptionItems().get(0).getCode());
+            assertNull(e.getExceptionItems().get(0).getMessageParameters());
+        }
+
+        // Update instance - session 1
+        instanceDtoSession1AfterUpdate.setCode("newCode1_secondUpdate");
+        InstanceDto instanceDtoSession1AfterUpdate2 = statisticalOperationsServiceFacade.updateInstance(getServiceContextAdministrador(), instanceDtoSession1AfterUpdate);
+        assertEquals(Long.valueOf(2), instanceDtoSession1AfterUpdate2.getOptimisticLockingVersion());
     }
 
     @Test

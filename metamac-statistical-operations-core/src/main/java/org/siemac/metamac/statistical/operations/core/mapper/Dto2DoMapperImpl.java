@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
@@ -17,6 +18,7 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.exception.utils.ExceptionUtils;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
+import org.siemac.metamac.core.common.util.OptimisticLockingUtils;
 import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.core.common.vo.domain.ExternalItemRepository;
 import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
@@ -140,9 +142,11 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             return null;
         }
 
+        // If exists, retrieves existing entity. Otherwise, creates new entity
         Family target = new Family();
         if (source.getId() != null) {
             target = statisticalOperationsBaseService.findFamilyById(ctx, source.getId());
+            OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
@@ -162,9 +166,11 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             return null;
         }
 
+        // If exists, retrieves existing entity. Otherwise, creates new entity
         Operation target = new Operation();
         if (source.getId() != null) {
             target = statisticalOperationsBaseService.findOperationById(ctx, source.getId());
+            OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
@@ -184,9 +190,11 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             return null;
         }
 
+        // If exists, retrieves existing entity. Otherwise, creates new entity
         Instance target = new Instance();
         if (source.getId() != null) {
             target = statisticalOperationsBaseService.findInstanceById(ctx, source.getId());
+            OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
@@ -235,6 +243,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // INVENTORY_DATE
         // Not necessary. It can't be manually modified
+        
+        // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
+        target.setUpdateDate(new DateTime());
 
         return target;
     }
@@ -376,6 +387,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // NOTES_URL
         target.setNotesUrl(source.getNotesUrl());
+        
+        // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
+        target.setUpdateDate(new DateTime());
 
         return target;
     }
@@ -423,7 +437,8 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         target.setGeographicGranularity(externalItemBtDtoToExternalItemBt(source.getGeographicGranularity(), target.getGeographicGranularity()));
 
         // GEOGRAPHIC_COMPARABILITY
-        target.setGeographicComparability(internationalStringToEntity(source.getGeographicComparability(), target.getGeographicComparability(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_COMPARABILITY));
+        target.setGeographicComparability(internationalStringToEntity(source.getGeographicComparability(), target.getGeographicComparability(),
+                ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_COMPARABILITY));
 
         // TEMPORAL_GRANULARITY
         target.setTemporalGranularity(externalItemBtDtoToExternalItemBt(source.getTemporalGranularity(), target.getTemporalGranularity()));
@@ -600,6 +615,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // NOTES_URL
         target.setNotesUrl(source.getNotesUrl());
+        
+        // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
+        target.setUpdateDate(new DateTime());
 
         return target;
     }
@@ -635,7 +653,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
                 target.add(externalItemBtDtoToExternalItem(itemDto));
             }
         }
-
+        
         return target;
     }
 

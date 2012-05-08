@@ -46,6 +46,8 @@
 
 	<!-- |_ General Advices -->
 	<import resource="classpath:/spring/general-beans-advice.xml" />
+	
+	<bean id="flushingHandlingAdvice" class="org.siemac.metamac.statistical.operations.core.aop.FlushingInterceptor" />
 
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
@@ -60,10 +62,13 @@
 	</tx:advice>
 
 	<aop:config>
+		<aop:pointcut id="updateServicePointCut" expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*Service.*update*(..))" />
+		
 		<aop:pointcut id="businessServiceCore"
 			expression="execution(public * org.siemac.metamac..serviceapi.*.*(..))" />
 		<aop:pointcut id="readOnlyBusinessServiceCore"
 			expression="execution(public * org.siemac.metamac..serviceapi.*.get*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..))" />
+			
 		<!-- Repeating the expression, since I can't find a way to refer to the 
 			other pointcuts. -->
 		<aop:pointcut id="updatingBusinessServiceCore"
@@ -78,6 +83,10 @@
 			advice-ref="hibernateErrorHandlingAdvice" order="4" />
 		<aop:advisor pointcut-ref="updatingBusinessServiceCore"
 			advice-ref="jpaInterceptorFlushEager" order="5" />
+			
+		<aop:aspect id="flushing" ref="flushingHandlingAdvice">
+			<aop:after pointcut-ref="updateServicePointCut" method="forceFlushToOptimisticLocking" />
+		</aop:aspect>
 	</aop:config>
 
 </beans>
