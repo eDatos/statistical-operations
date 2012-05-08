@@ -4,11 +4,11 @@
 
 	<configuration>
 		<custom-converters>
-			<converter type="org.siemac.metamac.statistical.operations.core.mapper.Date2JodaTimeConverter">
+			<converter type="org.siemac.metamac.core.common.dozer.Date2JodaTimeConverter">
 				<class-a>org.joda.time.DateTime</class-a>
 				<class-b>java.util.Date</class-b>
 			</converter>
-			<converter type="org.siemac.metamac.statistical.operations.core.mapper.Long2JodaDurationConverter">
+			<converter type="org.siemac.metamac.core.common.dozer.Long2JodaDurationConverter">
 				<class-a>org.joda.time.Duration</class-a>
 				<class-b>java.lang.Long</class-b>
 			</converter>
