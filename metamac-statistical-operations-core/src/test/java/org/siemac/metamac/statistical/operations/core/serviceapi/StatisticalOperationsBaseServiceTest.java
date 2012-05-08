@@ -51,9 +51,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Autowired
     protected StatisticalOperationsListsService statisticalOperationsListsService;
-    
+
     @Autowired
-    private PlatformTransactionManager transactionManager = null;
+    private PlatformTransactionManager          transactionManager = null;
 
     /**************************************************************************
      * Family Tests
@@ -161,13 +161,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testPublishInternallyFamily() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
 
     }
 
     @Test
     public void testPublishExternallyFamily() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
 
     }
 
@@ -291,12 +291,12 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testAddOperationFamilyAssociation() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
     }
 
     @Test
     public void testRemoveOperationFamilyAssociation() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
     }
 
     @Test
@@ -310,7 +310,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
     }
-
 
     @Test
     public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
@@ -364,12 +363,12 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testPublishInternallyOperation() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
     }
 
     @Test
     public void testPublishExternallyOperation() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
     }
 
     /**************************************************************************
@@ -566,13 +565,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testPublishInternallyInstance() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
 
     }
 
     @Test
     public void testPublishExternallyInstance() throws Exception {
-        // TODO Auto-generated method stub
+        // This test is in *ServiceFacade
 
     }
 
