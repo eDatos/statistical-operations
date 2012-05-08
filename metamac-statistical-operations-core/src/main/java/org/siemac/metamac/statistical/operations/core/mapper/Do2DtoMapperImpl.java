@@ -292,16 +292,10 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // CONTACT: Extracted from AppCommonMetadata
-        // TODO
-
         // LEGAL_ACTS: Extracted from AppCommonMetadata
-        // TODO
         // DATA_SHARING: Extracted from AppCommonMetadata
-        // TODO
         // CONFIDENCIALITY_POLICY: Extracted from AppCommonMetadata
-        // TODO
         // CONFIDENCIALITY_DATA_TREATMENT: Extracted from AppCommonMetadata
-        // TODO
 
         // COMMENT
         target.setComment(internationalStringToDto(source.getComment()));
