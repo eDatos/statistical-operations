@@ -1474,10 +1474,9 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(orderedInstances.get(0).getId(), instance03.getId());
 
         // Check order number
-        // TODO: Check this
-        // assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(2));
-        // assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
-        // assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(0));
+        assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(0));
+        assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
+        assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(2));
 
         // Check number of instances
         assertEquals(3, statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId()).size());
