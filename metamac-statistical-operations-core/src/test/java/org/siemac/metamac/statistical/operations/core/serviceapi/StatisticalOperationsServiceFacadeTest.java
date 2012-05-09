@@ -953,7 +953,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
         assertEquals(operationsBefore, operationsAfter);
     }
-    
+
     @Test
     public void testUpdateOperationOptimisticLockingError() throws Exception {
         Long id = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
@@ -1461,27 +1461,44 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instance02 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
         InstanceDto instance03 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
 
+        // Check orders
+        assertEquals(Integer.valueOf(0), instance01.getOrder());
+        assertEquals(Integer.valueOf(1), instance02.getOrder());
+        assertEquals(Integer.valueOf(2), instance03.getOrder());
+        
+        // Change order: updateInstancesOrder receive an asc order
         List<Long> instancesIds = new ArrayList<Long>();
         instancesIds.add(instance03.getId());
         instancesIds.add(instance02.getId());
         instancesIds.add(instance01.getId());
-
+        
+        // orderedInstances return asc order
         List<InstanceBaseDto> orderedInstances = statisticalOperationsServiceFacade.updateInstancesOrder(getServiceContextAdministrador(), operationDto.getId(), instancesIds);
 
+        // Check order number. It has to be asc
+        assertEquals(Integer.valueOf(0), orderedInstances.get(0).getOrder());
+        assertEquals(Integer.valueOf(1), orderedInstances.get(1).getOrder());
+        assertEquals(Integer.valueOf(2), orderedInstances.get(2).getOrder());
+
         // Check correct order
-        assertEquals(orderedInstances.get(2).getId(), instance01.getId());
-        assertEquals(orderedInstances.get(1).getId(), instance02.getId());
-        assertEquals(orderedInstances.get(0).getId(), instance03.getId());
+        assertEquals(instance01.getId(), orderedInstances.get(2).getId());
+        assertEquals(instance02.getId(), orderedInstances.get(1).getId());
+        assertEquals(instance03.getId(), orderedInstances.get(0).getId());
 
-        // Check order number
-        assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(0));
-        assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
-        assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(2));
+        // Delete instance
+        statisticalOperationsServiceFacade.deleteInstance(getServiceContextAdministrador(), instance02.getId());
 
-        // Check number of instances
-        assertEquals(3, statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId()).size());
+        orderedInstances = statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId());
+
+        // Check order number. It has to be desc
+        assertEquals(Integer.valueOf(1), orderedInstances.get(0).getOrder());
+        assertEquals(Integer.valueOf(0), orderedInstances.get(1).getOrder());
+
+        // Check correct order
+        assertEquals(instance01.getId(), orderedInstances.get(0).getId());
+        assertEquals(instance03.getId(), orderedInstances.get(1).getId());
     }
-    
+
     @Test
     public void testUpdateInstanceOptimisticLockingError() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
