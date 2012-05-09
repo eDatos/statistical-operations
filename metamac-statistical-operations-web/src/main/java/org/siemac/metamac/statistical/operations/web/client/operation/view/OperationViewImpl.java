@@ -436,13 +436,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     @Override
     public boolean validate() {
-        // return identifiersEditionForm.validate(false) &&
-        // productionEditionForm.validate(false) &&
-        // contentEditionForm.validate(false) &&
-        // classificationEditionForm.validate(false) &&
-        // diffusionEditionForm.validate(false) &&
-        // subjectItem.validateItem();
-        return true;
+        return identifiersEditionForm.validate(false) && productionEditionForm.validate(false) && contentEditionForm.validate(false) && classificationEditionForm.validate(false)
+                && diffusionEditionForm.validate(false) && subjectItem.validateItem();
     }
 
     @Override
