@@ -1451,50 +1451,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
-    // @Test
-    // public void testUpdateInstancesOrder() throws Exception {
-    // initializeData();
-    //
-    // int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
-    //
-    // // Create operation
-    // OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-    // operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto);
-    //
-    //
-    // for (int i = 0; i < 3; i++) {
-    // InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
-    // assertNotNull(instanceDto);
-    // }
-    //
-    // // Check number of instances
-    // int instancesAfter = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
-    // assertEquals(instancesBefore + 3, instancesAfter);
-    //
-    // // Change order
-    // List<InstanceDto> instances = statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId());
-    //
-    // List<Long> instancesIds = new ArrayList<Long>();
-    // instancesIds.add(instances.get(2).getId());
-    // instancesIds.add(instances.get(1).getId());
-    // instancesIds.add(instances.get(0).getId());
-    //
-    // List<InstanceDto> orderedInstances = statisticalOperationsServiceFacade.updateInstancesOrder(getServiceContextAdministrador(), operationDto.getId(), instancesIds);
-    //
-    // // Check correct order
-    // assertEquals(orderedInstances.get(2).getId(), instances.get(0).getId());
-    // assertEquals(orderedInstances.get(1).getId(), instances.get(1).getId());
-    // assertEquals(orderedInstances.get(0).getId(), instances.get(2).getId());
-    //
-    // // Check order number
-    // assertEquals(orderedInstances.get(0).getOrder(), Integer.valueOf(0));
-    // assertEquals(orderedInstances.get(1).getOrder(), Integer.valueOf(1));
-    // assertEquals(orderedInstances.get(2).getOrder(), Integer.valueOf(2));
-    //
-    // // Check number of instances
-    // assertEquals(orderedInstances.size(), statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextAdministrador(), operationDto.getId()).size());
-    // }
-
     @Test
     public void testUpdateInstancesOrder() throws Exception {
         // Create operation
