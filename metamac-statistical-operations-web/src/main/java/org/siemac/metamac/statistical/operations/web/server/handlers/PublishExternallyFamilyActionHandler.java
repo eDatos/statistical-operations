@@ -7,7 +7,6 @@ import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -29,7 +28,7 @@ public class PublishExternallyFamilyActionHandler extends AbstractActionHandler<
             FamilyDto familyDto = statisticalOperationsServiceFacade.publishExternallyFamily(ServiceContextHelper.getServiceContext(), action.getFamilyId());
             return new PublishExternallyFamilyResult(familyDto);
         } catch (MetamacException e) {
-            throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+            throw WebExceptionUtils.createMetamacWebException(e);
         }
     }
 

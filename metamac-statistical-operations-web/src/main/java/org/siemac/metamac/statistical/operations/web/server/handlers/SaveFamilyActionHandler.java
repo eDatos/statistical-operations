@@ -7,7 +7,6 @@ import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -32,7 +31,7 @@ public class SaveFamilyActionHandler extends AbstractActionHandler<SaveFamilyAct
                 FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(ServiceContextHelper.getServiceContext(), familyToSave);
                 return new SaveFamilyResult(familyDto);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
 
         } else {
@@ -41,7 +40,7 @@ public class SaveFamilyActionHandler extends AbstractActionHandler<SaveFamilyAct
                 FamilyDto familyDto = statisticalOperationsServiceFacade.updateFamily(ServiceContextHelper.getServiceContext(), familyToSave);
                 return new SaveFamilyResult(familyDto);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
         }
     }

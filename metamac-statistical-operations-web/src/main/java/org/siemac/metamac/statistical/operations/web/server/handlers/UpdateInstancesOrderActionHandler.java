@@ -9,7 +9,6 @@ import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -31,7 +30,7 @@ public class UpdateInstancesOrderActionHandler extends AbstractActionHandler<Upd
             List<InstanceBaseDto> instances = statisticalOperationsServiceFacade.updateInstancesOrder(ServiceContextHelper.getServiceContext(), action.getOperationId(), action.getInstancesIds());
             return new UpdateInstancesOrderResult(instances);
         } catch (MetamacException e) {
-            throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+            throw WebExceptionUtils.createMetamacWebException(e);
         }
     }
 

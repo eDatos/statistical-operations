@@ -10,7 +10,6 @@ import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -33,14 +32,14 @@ public class UpdateOperationFamiliesActionHandler extends AbstractActionHandler<
             try {
                 familyDtos = statisticalOperationsServiceFacade.addFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
         }
         for (Long familyId : action.getFamiliesToRemove()) {
             try {
                 familyDtos = statisticalOperationsServiceFacade.removeFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
         }
         return new UpdateOperationFamiliesResult(familyDtos);

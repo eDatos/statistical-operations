@@ -7,7 +7,6 @@ import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -32,7 +31,7 @@ public class SaveOperationActionHandler extends AbstractActionHandler<SaveOperat
                 OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(ServiceContextHelper.getServiceContext(), operationToSave);
                 return new SaveOperationResult(operationDto);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
         } else {
             // Update operation
@@ -40,7 +39,7 @@ public class SaveOperationActionHandler extends AbstractActionHandler<SaveOperat
                 OperationDto operationDto = statisticalOperationsServiceFacade.updateOperation(ServiceContextHelper.getServiceContext(), operationToSave);
                 return new SaveOperationResult(operationDto);
             } catch (MetamacException e) {
-                throw new MetamacWebException(WebExceptionUtils.getMetamacWebExceptionItem(e.getExceptionItems()));
+                throw WebExceptionUtils.createMetamacWebException(e);
             }
         }
     }
