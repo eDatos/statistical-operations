@@ -47,9 +47,11 @@
 			<aop:after-returning pointcut-ref="updateServicePointCut" method="forceFlushToOptimisticLocking" />
 		</aop:aspect>
 		
+		
+		<!-- TODO: Descomentar esto cuando los servicios sean REST -->
 		<!-- Flush mode interceptor -->
-		<aop:aspect id="flushingMode" ref="disableFlushHandlingAdvice">
-			<aop:around method="manageFlushMode" pointcut-ref="doMapperPointCut" />
-		</aop:aspect>
+<!-- 		<aop:aspect id="flushingMode" ref="disableFlushHandlingAdvice"> -->
+<!-- 			<aop:around method="manageFlushMode" pointcut-ref="doMapperPointCut" /> -->
+<!-- 		</aop:aspect> -->
 	</aop:config>
 </beans>
