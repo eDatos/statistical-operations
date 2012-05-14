@@ -41,7 +41,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  * Spring based transactional test with DbUnit support.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
 @Transactional
 public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsBaseServiceTestBase {

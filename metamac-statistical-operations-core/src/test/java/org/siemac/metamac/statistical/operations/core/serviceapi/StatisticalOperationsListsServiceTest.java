@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
 @Transactional
 public class StatisticalOperationsListsServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsListsServiceTestBase {

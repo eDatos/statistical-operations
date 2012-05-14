@@ -43,7 +43,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:oracle/applicationContext-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
 public class StatisticalOperationsInternalWebServiceFacadeTest extends StatisticalOperationsBaseTest {
 
     @Autowired
