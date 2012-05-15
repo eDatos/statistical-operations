@@ -47,6 +47,9 @@
 	<extend-property name="locale" values="es" />
 	<extend-property name="locale" values="en" />
 	<extend-property name="locale" values="pt" />
+    
+    <!-- Disable image sprite -->
+    <set-property name="ClientBundle.enableInlining" value="false" />
 	
 	<!-- Configure GIN -->
 	<define-configuration-property name="gin.ginjector" is-multi-valued="false" />
