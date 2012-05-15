@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.siemac.metamac.statistical.operations</groupId>
+    <groupId>org.siemac.metamac</groupId>
     <artifactId>metamac-statistical-operations-parent</artifactId>
-    <version>${metamac-statistical-operations-parent.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
     <description>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</description>
