@@ -25,13 +25,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.siemac.metamac.statistical.operations</groupId>
+            <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-statistical-operations-core</artifactId>
             <version>${metamac-statistical-operations-core.version}</version>
             <classifier>client</classifier>
         </dependency>
         <dependency>
-            <groupId>org.siemac.metamac.statistical.operations</groupId>
+            <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-statistical-operations-ws-api</artifactId>
             <version>${metamac-statistical-operations-ws-api.version}</version>
         </dependency>
@@ -253,7 +253,7 @@
                     <runTarget>StatisticalOperationsWeb.html</runTarget>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <compileSourcesArtifacts>
-                        <artifact>org.siemac.metamac.statistical.operations:metamac-statistical-operations-core:jar</artifact>
+                        <artifact>org.siemac.metamac:metamac-statistical-operations-core:jar</artifact>
                         <artifact>org.siemac.metamac:metamac-core-common:jar:client</artifact>
                         <artifact>org.siemac.metamac:metamac-api-domain:jar:client</artifact>
                     </compileSourcesArtifacts>
