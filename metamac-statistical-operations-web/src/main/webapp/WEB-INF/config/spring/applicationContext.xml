@@ -62,7 +62,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<import resource="classpath:/spring/core/oracle/applicationContext-oracle.xml" />
+	<import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
 
 	<!-- Web services (spring - jaxws) -->
 	<wss:binding url="/ws/metamac/statistical/operations/internal/v1.0/metamacStatisticalOperationsInternalInterface">
