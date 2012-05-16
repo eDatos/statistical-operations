@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.siemac.metamac</groupId>
         <artifactId>metamac-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>org.siemac.metamac</groupId>
     <artifactId>metamac-statistical-operations-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
     <description>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</description>
@@ -27,5 +27,12 @@
             <url>http://www.smartclient.com/maven2</url>
         </repository>
     </repositories>
+
+    <properties>
+        <metamac-api-domain.version>1.0.0</metamac-api-domain.version>
+        <metamac-sso.version>1.0.0</metamac-sso.version>
+        <metamac-web-common.version>1.0.0</metamac-web-common.version>
+        <metamac-common-test.version>1.0.0</metamac-common-test.version>
+    </properties>
 
 </project>
