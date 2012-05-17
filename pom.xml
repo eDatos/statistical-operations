@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.siemac.metamac</groupId>
         <artifactId>metamac-statistical-operations-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>metamac-statistical-operations-parent/pom.xml</relativePath>
     </parent>
-    
+
     <artifactId>metamac-statistical-operations</artifactId>
     <packaging>pom</packaging>
     <name>METAMAC :: STATISTICAL :: OPERATIONS</name>
     <description>METAMAC :: STATISTICAL :: OPERATIONS</description>
+
+    <scm>
+        <connection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</connection>
+        <developerConnection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</developerConnection>
+        <url>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</url>
+    </scm>
 
     <modules>
         <module>metamac-statistical-operations-parent</module>

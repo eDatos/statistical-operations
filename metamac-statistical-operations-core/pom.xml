@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-statistical-operations-ws-api</artifactId>
-            <version>${pom.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.siemac.metamac</groupId>
