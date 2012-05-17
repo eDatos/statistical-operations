@@ -29,10 +29,30 @@
     </repositories>
 
     <properties>
+        <!-- IMPORTANT: These properties are overwritten in perfomRelease profile -->
+        <metamac-statistical-operations.baseDir>${basedir}/..</metamac-statistical-operations.baseDir>
+        <metamac-api-domain.baseDir>${basedir}/../../metamac-api-domain</metamac-api-domain.baseDir>
+
         <metamac-api-domain.version>1.0.0</metamac-api-domain.version>
         <metamac-sso.version>1.0.0</metamac-sso.version>
         <metamac-web-common.version>1.0.0</metamac-web-common.version>
         <metamac-common-test.version>1.0.0</metamac-common-test.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <metamac-statistical-operations.baseDir>${basedir}../../../..</metamac-statistical-operations.baseDir>
+                <metamac-api-domain.baseDir>${basedir}../../../../../metamac-api-domain</metamac-api-domain.baseDir>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
