@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.siemac.metamac</groupId>
         <artifactId>metamac-statistical-operations-parent</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../metamac-statistical-operations-parent/pom.xml</relativePath>
     </parent>
 
@@ -132,14 +132,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <basedir />
+                    <basedir></basedir>
                     <includes>
                         <include>target/classes/META-INF/wsdl/**/*.xsd</include>
                     </includes>
                     <replacements>
                         <replacement>
                             <token>classpath:</token>
-                            <value />
+                            <value></value>
                         </replacement>
                     </replacements>
                 </configuration>
