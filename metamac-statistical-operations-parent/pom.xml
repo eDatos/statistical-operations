@@ -49,8 +49,8 @@
                 </property>
             </activation>
             <properties>
-                <metamac-statistical-operations.baseDir>${basedir}../../../..</metamac-statistical-operations.baseDir>
-                <metamac-api-domain.baseDir>${basedir}../../../../../metamac-api-domain</metamac-api-domain.baseDir>
+                <metamac-statistical-operations.baseDir>${basedir}/../../../..</metamac-statistical-operations.baseDir>
+                <metamac-api-domain.baseDir>${basedir}/../../../../../metamac-api-domain</metamac-api-domain.baseDir>
             </properties>
         </profile>
     </profiles>
