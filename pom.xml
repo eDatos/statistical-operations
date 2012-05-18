@@ -22,9 +22,9 @@
 
     <modules>
         <module>metamac-statistical-operations-parent</module>
-<!--         <module>metamac-statistical-operations-core</module> -->
+        <module>metamac-statistical-operations-core</module>
         <module>metamac-statistical-operations-ws-api</module>
-<!--         <module>metamac-statistical-operations-web</module> -->
+        <module>metamac-statistical-operations-web</module>
     </modules>
 
     <build>
