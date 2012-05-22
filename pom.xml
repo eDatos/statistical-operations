@@ -17,7 +17,7 @@
     <scm>
         <connection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</connection>
         <developerConnection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</developerConnection>
-        <url>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</url>
+        <url>http://svn.arte-consultores.com/viewvc/arte/istac/metamac/metamac-statistical-operations/trunk/</url>
     </scm>
 
     <modules>
