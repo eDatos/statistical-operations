@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.siemac.metamac</groupId>
+        <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
         <artifactId>metamac-statistical-operations-parent</artifactId>
         <version>1.0.1-SNAPSHOT</version>
         <relativePath>../metamac-statistical-operations-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.siemac.metamac</groupId>
+    <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
     <artifactId>metamac-statistical-operations-core</artifactId>
     <packaging>jar</packaging>
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: CORE</name>
@@ -17,7 +17,7 @@
     <dependencies>
 		<!-- METAMAC -->
     	<dependency>
-			<groupId>org.siemac.metamac</groupId>
+			<groupId>org.siemac.metamac.metamac-sso</groupId>
 			<artifactId>metamac-sso-client</artifactId>
 			<version>${metamac-sso.version}</version>
 		</dependency>
@@ -28,7 +28,7 @@
             <classifier>client</classifier>
         </dependency>
         <dependency>
-            <groupId>org.siemac.metamac</groupId>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
             <artifactId>metamac-statistical-operations-ws-api</artifactId>
             <version>${project.version}</version>
         </dependency>
