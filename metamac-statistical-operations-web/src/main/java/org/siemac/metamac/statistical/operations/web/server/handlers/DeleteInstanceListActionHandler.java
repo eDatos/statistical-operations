@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -25,7 +25,7 @@ public class DeleteInstanceListActionHandler extends AbstractActionHandler<Delet
     public DeleteInstanceListResult execute(DeleteInstanceListAction action, ExecutionContext context) throws ActionException {
         for (Long id : action.getInstanceIds()) {
             try {
-                statisticalOperationsServiceFacade.deleteInstance(ServiceContextHelper.getServiceContext(), id);
+                statisticalOperationsServiceFacade.deleteInstance(ServiceContextHolder.getCurrentServiceContext(), id);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);
             }

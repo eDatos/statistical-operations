@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class GetCategoriesFromSchemeActionHandler extends AbstractActionHandler<
 
     @Override
     public GetCategoriesFromSchemeResult execute(GetCategoriesFromSchemeAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> categories = metamacCoreCommonService.retrieveCategoryScheme(ServiceContextHelper.getServiceContext(), action.getCategorySchemeUri());
+        List<ExternalItemBtDto> categories = metamacCoreCommonService.retrieveCategoryScheme(ServiceContextHolder.getCurrentServiceContext(), action.getCategorySchemeUri());
         return new GetCategoriesFromSchemeResult(categories);
     }
 

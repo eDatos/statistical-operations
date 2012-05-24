@@ -6,7 +6,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -30,14 +30,14 @@ public class UpdateOperationFamiliesActionHandler extends AbstractActionHandler<
         List<FamilyBaseDto> familyDtos = new ArrayList<FamilyBaseDto>();
         for (Long familyId : action.getFamiliesToAdd()) {
             try {
-                familyDtos = statisticalOperationsServiceFacade.addFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
+                familyDtos = statisticalOperationsServiceFacade.addFamilyForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);
             }
         }
         for (Long familyId : action.getFamiliesToRemove()) {
             try {
-                familyDtos = statisticalOperationsServiceFacade.removeFamilyForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId(), familyId);
+                familyDtos = statisticalOperationsServiceFacade.removeFamilyForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId(), familyId);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);
             }

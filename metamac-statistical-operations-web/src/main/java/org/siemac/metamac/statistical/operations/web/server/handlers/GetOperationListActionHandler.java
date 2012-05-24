@@ -5,7 +5,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -27,7 +27,7 @@ public class GetOperationListActionHandler extends AbstractActionHandler<GetOper
     @Override
     public GetOperationListResult execute(GetOperationListAction action, ExecutionContext context) throws ActionException {
         try {
-            List<OperationBaseDto> operationBaseDtos = statisticalOperationsServiceFacade.findAllOperations(ServiceContextHelper.getServiceContext());
+            List<OperationBaseDto> operationBaseDtos = statisticalOperationsServiceFacade.findAllOperations(ServiceContextHolder.getCurrentServiceContext());
             return new GetOperationListResult(operationBaseDtos);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

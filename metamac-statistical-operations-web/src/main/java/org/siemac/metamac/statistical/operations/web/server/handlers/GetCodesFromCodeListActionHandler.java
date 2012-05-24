@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class GetCodesFromCodeListActionHandler extends AbstractActionHandler<Get
 
     @Override
     public GetCodesFromCodeListResult execute(GetCodesFromCodeListAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveCodelist(ServiceContextHelper.getServiceContext(), action.getCodeListUri());
+        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), action.getCodeListUri());
         return new GetCodesFromCodeListResult(concepts);
     }
 

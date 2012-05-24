@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class GetConceptsFromSchemeActionHandler extends AbstractActionHandler<Ge
 
     @Override
     public GetConceptsFromSchemeResult execute(GetConceptsFromSchemeAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveConceptScheme(ServiceContextHelper.getServiceContext(), action.getConceptSchemeUri());
+        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveConceptScheme(ServiceContextHolder.getCurrentServiceContext(), action.getConceptSchemeUri());
         return new GetConceptsFromSchemeResult(concepts);
     }
 

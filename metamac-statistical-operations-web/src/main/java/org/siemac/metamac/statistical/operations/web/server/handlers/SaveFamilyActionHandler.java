@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -28,7 +28,7 @@ public class SaveFamilyActionHandler extends AbstractActionHandler<SaveFamilyAct
         if (familyToSave.getId() == null) {
             // Create family
             try {
-                FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(ServiceContextHelper.getServiceContext(), familyToSave);
+                FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(ServiceContextHolder.getCurrentServiceContext(), familyToSave);
                 return new SaveFamilyResult(familyDto);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);
@@ -37,7 +37,7 @@ public class SaveFamilyActionHandler extends AbstractActionHandler<SaveFamilyAct
         } else {
             // Update family
             try {
-                FamilyDto familyDto = statisticalOperationsServiceFacade.updateFamily(ServiceContextHelper.getServiceContext(), familyToSave);
+                FamilyDto familyDto = statisticalOperationsServiceFacade.updateFamily(ServiceContextHolder.getCurrentServiceContext(), familyToSave);
                 return new SaveFamilyResult(familyDto);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);

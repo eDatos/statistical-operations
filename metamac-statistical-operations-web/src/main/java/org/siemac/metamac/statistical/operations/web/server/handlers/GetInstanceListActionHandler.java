@@ -5,7 +5,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -28,7 +28,7 @@ public class GetInstanceListActionHandler extends AbstractActionHandler<GetInsta
     public GetInstanceListResult execute(GetInstanceListAction action, ExecutionContext context) throws ActionException {
         List<InstanceBaseDto> instanceBaseDtos = null;
         try {
-            instanceBaseDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
+            instanceBaseDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             return new GetInstanceListResult(instanceBaseDtos);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

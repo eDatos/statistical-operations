@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class FindAllOrganisationSchemesActionHandler extends AbstractActionHandl
 
     @Override
     public FindAllOrganisationSchemesResult execute(FindAllOrganisationSchemesAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> organisationSchemes = metamacCoreCommonService.findAllOrganisationSchemes(ServiceContextHelper.getServiceContext());
+        List<ExternalItemBtDto> organisationSchemes = metamacCoreCommonService.findAllOrganisationSchemes(ServiceContextHolder.getCurrentServiceContext());
         return new FindAllOrganisationSchemesResult(organisationSchemes);
     }
 

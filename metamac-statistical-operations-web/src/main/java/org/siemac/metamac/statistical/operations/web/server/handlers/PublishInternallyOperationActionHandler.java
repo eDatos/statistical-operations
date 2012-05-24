@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -25,7 +25,7 @@ public class PublishInternallyOperationActionHandler extends AbstractActionHandl
     @Override
     public PublishInternallyOperationResult execute(PublishInternallyOperationAction action, ExecutionContext context) throws ActionException {
         try {
-            OperationDto operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
+            OperationDto operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             return new PublishInternallyOperationResult(operationDto);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

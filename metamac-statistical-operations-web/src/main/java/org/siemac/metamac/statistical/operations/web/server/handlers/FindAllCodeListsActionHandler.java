@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class FindAllCodeListsActionHandler extends AbstractActionHandler<FindAll
 
     @Override
     public FindAllCodeListsResult execute(FindAllCodeListsAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> codeLists = metamacCoreCommonService.findAllCodelists(ServiceContextHelper.getServiceContext());
+        List<ExternalItemBtDto> codeLists = metamacCoreCommonService.findAllCodelists(ServiceContextHolder.getCurrentServiceContext());
         return new FindAllCodeListsResult(codeLists);
     }
 

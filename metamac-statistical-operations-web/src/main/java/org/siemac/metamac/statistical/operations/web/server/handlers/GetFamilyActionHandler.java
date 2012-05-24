@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -25,7 +25,7 @@ public class GetFamilyActionHandler extends AbstractActionHandler<GetFamilyActio
     @Override
     public GetFamilyResult execute(GetFamilyAction action, ExecutionContext context) throws ActionException {
         try {
-            FamilyDto familyDto = statisticalOperationsServiceFacade.findFamilyById(ServiceContextHelper.getServiceContext(), action.getFamilyId());
+            FamilyDto familyDto = statisticalOperationsServiceFacade.findFamilyById(ServiceContextHolder.getCurrentServiceContext(), action.getFamilyId());
             return new GetFamilyResult(familyDto);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

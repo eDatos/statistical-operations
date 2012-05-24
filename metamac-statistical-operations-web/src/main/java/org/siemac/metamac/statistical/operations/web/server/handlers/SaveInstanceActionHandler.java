@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -28,7 +28,7 @@ public class SaveInstanceActionHandler extends AbstractActionHandler<SaveInstanc
         if (instanceToSave.getId() == null) {
             // Create instance
             try {
-                InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(ServiceContextHelper.getServiceContext(), action.getOperationId(), instanceToSave);
+                InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId(), instanceToSave);
                 return new SaveInstanceResult(instanceDto);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);
@@ -36,7 +36,7 @@ public class SaveInstanceActionHandler extends AbstractActionHandler<SaveInstanc
         } else {
             // Update instance
             try {
-                InstanceDto instanceDto = statisticalOperationsServiceFacade.updateInstance(ServiceContextHelper.getServiceContext(), instanceToSave);
+                InstanceDto instanceDto = statisticalOperationsServiceFacade.updateInstance(ServiceContextHolder.getCurrentServiceContext(), instanceToSave);
                 return new SaveInstanceResult(instanceDto);
             } catch (MetamacException e) {
                 throw WebExceptionUtils.createMetamacWebException(e);

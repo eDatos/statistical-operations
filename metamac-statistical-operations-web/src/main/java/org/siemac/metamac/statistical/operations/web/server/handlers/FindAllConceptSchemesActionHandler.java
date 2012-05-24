@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class FindAllConceptSchemesActionHandler extends AbstractActionHandler<Fi
 
     @Override
     public FindAllConceptSchemesResult execute(FindAllConceptSchemesAction action, ExecutionContext context) throws ActionException {
-        List<ExternalItemBtDto> conceptSchemes = metamacCoreCommonService.findAllConceptSchemes(ServiceContextHelper.getServiceContext());
+        List<ExternalItemBtDto> conceptSchemes = metamacCoreCommonService.findAllConceptSchemes(ServiceContextHolder.getCurrentServiceContext());
         return new FindAllConceptSchemesResult(conceptSchemes);
     }
 

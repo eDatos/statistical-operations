@@ -6,7 +6,7 @@ import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +37,9 @@ public class GetFrequencyCodesActionHandler extends AbstractActionHandler<GetFre
                 INSTANCE_TEMPORAL_GRANULARITY);
         String freqColl = ((ConfigurationServiceImpl) ApplicationContextProvider.getApplicationContext().getBean("configurationService")).getProperties().getProperty(INSTANCE_FREQ_COLL);
         // Codes
-        List<ExternalItemBtDto> updateFrequencyCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHelper.getServiceContext(), updateFrequency);
-        List<ExternalItemBtDto> temporalGranularityCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHelper.getServiceContext(), temporalGranularity);
-        List<ExternalItemBtDto> freqCollCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHelper.getServiceContext(), freqColl);
+        List<ExternalItemBtDto> updateFrequencyCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), updateFrequency);
+        List<ExternalItemBtDto> temporalGranularityCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), temporalGranularity);
+        List<ExternalItemBtDto> freqCollCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), freqColl);
         return new GetFrequencyCodesResult(updateFrequencyCodes, temporalGranularityCodes, freqCollCodes);
     }
 

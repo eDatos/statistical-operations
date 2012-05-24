@@ -7,7 +7,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHelper;
+import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesResult;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -29,9 +29,9 @@ public class GetOperationAndInstancesActionHandler extends AbstractActionHandler
     @Override
     public GetOperationAndInstancesResult execute(GetOperationAndInstancesAction action, ExecutionContext context) throws ActionException {
         try {
-            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationById(ServiceContextHelper.getServiceContext(), action.getOperationId());
-            List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
-            List<InstanceBaseDto> instanceDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHelper.getServiceContext(), action.getOperationId());
+            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            List<InstanceBaseDto> instanceDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             return new GetOperationAndInstancesResult(operationDto, instanceDtos, familyBaseDtos);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
