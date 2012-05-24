@@ -35,10 +35,10 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
+import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -181,84 +181,84 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     }
 
     private void loadCodeLists() {
-        dispatcher.execute(new FindAllCodeListsAction(), new AsyncCallback<FindAllCodeListsResult>() {
+        dispatcher.execute(new FindAllCodeListsAction(), new WaitingAsyncCallback<FindAllCodeListsResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllCodeListsResult result) {
+            public void onWaitSuccess(FindAllCodeListsResult result) {
                 UpdateCodeListsEvent.fire(MainPagePresenter.this, result.getCodeLists());
             }
         });
     }
 
     private void loadOrganisations() {
-        dispatcher.execute(new FindAllOrganisationSchemesAction(), new AsyncCallback<FindAllOrganisationSchemesResult>() {
+        dispatcher.execute(new FindAllOrganisationSchemesAction(), new WaitingAsyncCallback<FindAllOrganisationSchemesResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllOrganisationSchemesResult result) {
+            public void onWaitSuccess(FindAllOrganisationSchemesResult result) {
                 UpdateOrganisationSchemesEvent.fire(MainPagePresenter.this, result.getOrganisationSchemes());
             }
         });
     }
 
     private void loadCategorySchemes() {
-        dispatcher.execute(new FindAllCategorySchemesAction(), new AsyncCallback<FindAllCategorySchemesResult>() {
+        dispatcher.execute(new FindAllCategorySchemesAction(), new WaitingAsyncCallback<FindAllCategorySchemesResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllCategorySchemesResult result) {
+            public void onWaitSuccess(FindAllCategorySchemesResult result) {
                 UpdateCategorySchemesEvent.fire(MainPagePresenter.this, result.getCategorySchemes());
             }
         });
     }
 
     private void loadConceptSchemes() {
-        dispatcher.execute(new FindAllConceptSchemesAction(), new AsyncCallback<FindAllConceptSchemesResult>() {
+        dispatcher.execute(new FindAllConceptSchemesAction(), new WaitingAsyncCallback<FindAllConceptSchemesResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllConceptSchemesResult result) {
+            public void onWaitSuccess(FindAllConceptSchemesResult result) {
                 UpdateConceptSchemesEvent.fire(MainPagePresenter.this, result.getConceptSchemes());
             }
         });
     }
 
     private void loadCommonMetadata() {
-        dispatcher.execute(new FindAllCommonMetadataAction(), new AsyncCallback<FindAllCommonMetadataResult>() {
+        dispatcher.execute(new FindAllCommonMetadataAction(), new WaitingAsyncCallback<FindAllCommonMetadataResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllCommonMetadataResult result) {
+            public void onWaitSuccess(FindAllCommonMetadataResult result) {
                 UpdateCommonMetadataEvent.fire(MainPagePresenter.this, result.getCommonMetadataList());
             }
         });
     }
 
     private void loadOperationsLists() {
-        dispatcher.execute(new GetOperationsListsAction(), new AsyncCallback<GetOperationsListsResult>() {
+        dispatcher.execute(new GetOperationsListsAction(), new WaitingAsyncCallback<GetOperationsListsResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetOperationsListsResult result) {
+            public void onWaitSuccess(GetOperationsListsResult result) {
                 UpdateOperationsListsEvent.fire(MainPagePresenter.this, result.getSurveyTypeDtos(), result.getInstanceTypeDtos(), result.getSurveySourceDtos(), result.getOfficialityTypeDtos(),
                         result.getCollMethodDtos(), result.getCostDtos());
             }
@@ -266,14 +266,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     }
 
     private void loadFrequencyCodes() {
-        dispatcher.execute(new GetFrequencyCodesAction(), new AsyncCallback<GetFrequencyCodesResult>() {
+        dispatcher.execute(new GetFrequencyCodesAction(), new WaitingAsyncCallback<GetFrequencyCodesResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetFrequencyCodesResult result) {
+            public void onWaitSuccess(GetFrequencyCodesResult result) {
                 UpdateFrequencyCodesEvent.fire(MainPagePresenter.this, result.getUpdateFrequencyCodes(), result.getTemporalGranularityCodes(), result.getFreqCollCodes());
             }
         });

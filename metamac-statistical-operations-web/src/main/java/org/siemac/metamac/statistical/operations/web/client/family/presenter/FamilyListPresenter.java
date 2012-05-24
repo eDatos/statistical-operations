@@ -22,9 +22,9 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -153,15 +153,15 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void saveFamily(FamilyDto familyToSave) {
-        dispatcher.execute(new SaveFamilyAction(familyToSave), new AsyncCallback<SaveFamilyResult>() {
+        dispatcher.execute(new SaveFamilyAction(familyToSave), new WaitingAsyncCallback<SaveFamilyResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 getView().closeFamilyWindow();
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorSave()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(SaveFamilyResult result) {
+            public void onWaitSuccess(SaveFamilyResult result) {
                 getView().closeFamilyWindow();
                 getView().onFamilySaved(result.getFamilySaved());
             }
@@ -170,15 +170,15 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void deleteFamilies(List<Long> familyIds) {
-        dispatcher.execute(new DeleteFamilyListAction(familyIds), new AsyncCallback<DeleteFamilyListResult>() {
+        dispatcher.execute(new DeleteFamilyListAction(familyIds), new WaitingAsyncCallback<DeleteFamilyListResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 retrieveFamilies();
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(DeleteFamilyListResult result) {
+            public void onWaitSuccess(DeleteFamilyListResult result) {
                 retrieveFamilies();
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getMessageList(getMessages().familyDeleted()), MessageTypeEnum.SUCCESS);
             }
@@ -186,14 +186,14 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     }
 
     private void retrieveFamilies() {
-        dispatcher.execute(new GetFamilyListAction(), new AsyncCallback<GetFamilyListResult>() {
+        dispatcher.execute(new GetFamilyListAction(), new WaitingAsyncCallback<GetFamilyListResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetFamilyListResult result) {
+            public void onWaitSuccess(GetFamilyListResult result) {
                 getView().setFamilies(result.getFamilyBaseDtos());
             }
         });

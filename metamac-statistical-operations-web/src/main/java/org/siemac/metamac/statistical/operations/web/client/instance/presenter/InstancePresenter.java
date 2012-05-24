@@ -42,9 +42,9 @@ import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
+import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -189,14 +189,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void saveInstance(InstanceDto instanceToSave) {
-        dispatcher.execute(new SaveInstanceAction(idOperation, instanceToSave), new AsyncCallback<SaveInstanceResult>() {
+        dispatcher.execute(new SaveInstanceAction(idOperation, instanceToSave), new WaitingAsyncCallback<SaveInstanceResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorSave()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(SaveInstanceResult result) {
+            public void onWaitSuccess(SaveInstanceResult result) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceSaved()), MessageTypeEnum.SUCCESS);
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
@@ -205,14 +205,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void retrieveInstance(Long idInstance) {
-        dispatcher.execute(new GetInstanceAction(idInstance), new AsyncCallback<GetInstanceResult>() {
+        dispatcher.execute(new GetInstanceAction(idInstance), new WaitingAsyncCallback<GetInstanceResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetInstanceResult result) {
+            public void onWaitSuccess(GetInstanceResult result) {
                 instanceDto = result.getInstanceDto();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));
                 getView().setInstance(instanceDto);
@@ -221,14 +221,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void publishInstanceInternally() {
-        dispatcher.execute(new PublishInternallyInstanceAction(instanceDto.getId()), new AsyncCallback<PublishInternallyInstanceResult>() {
+        dispatcher.execute(new PublishInternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallback<PublishInternallyInstanceResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorInternallyPublishing()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(PublishInternallyInstanceResult result) {
+            public void onWaitSuccess(PublishInternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceInternallyPublished()), MessageTypeEnum.SUCCESS);
@@ -237,14 +237,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void publishInstanceExternally() {
-        dispatcher.execute(new PublishExternallyInstanceAction(instanceDto.getId()), new AsyncCallback<PublishExternallyInstanceResult>() {
+        dispatcher.execute(new PublishExternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallback<PublishExternallyInstanceResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorExternallyPublishing()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(PublishExternallyInstanceResult result) {
+            public void onWaitSuccess(PublishExternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceExternallyPublished()), MessageTypeEnum.SUCCESS);
@@ -278,14 +278,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void populateInfSuppliersOrg(String schemeUri) {
-        dispatcher.execute(new GetOrganisationsFromSchemeAction(schemeUri), new AsyncCallback<GetOrganisationsFromSchemeResult>() {
+        dispatcher.execute(new GetOrganisationsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetOrganisationsFromSchemeResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetOrganisationsFromSchemeResult result) {
+            public void onWaitSuccess(GetOrganisationsFromSchemeResult result) {
                 getView().setInfSuppliersOrg(result.getOrganisations());
             }
         });
@@ -293,14 +293,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void populateInfSuppliersConcept(String schemeUri) {
-        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new AsyncCallback<GetConceptsFromSchemeResult>() {
+        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetConceptsFromSchemeResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetConceptsFromSchemeResult result) {
+            public void onWaitSuccess(GetConceptsFromSchemeResult result) {
                 getView().setInfSuppliersConcept(result.getConcepts());
             }
         });
@@ -308,14 +308,14 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void populateStatisticalUnitConcepts(String schemeUri) {
-        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new AsyncCallback<GetConceptsFromSchemeResult>() {
+        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetConceptsFromSchemeResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetConceptsFromSchemeResult result) {
+            public void onWaitSuccess(GetConceptsFromSchemeResult result) {
                 getView().setStatisticalUnitConcepts(result.getConcepts());
             }
         });

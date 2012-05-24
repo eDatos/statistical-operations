@@ -27,9 +27,9 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -157,15 +157,15 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void saveOperation(OperationDto operationToSave) {
-        dispatcher.execute(new SaveOperationAction(operationToSave), new AsyncCallback<SaveOperationResult>() {
+        dispatcher.execute(new SaveOperationAction(operationToSave), new WaitingAsyncCallback<SaveOperationResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 getView().closeOperationWindow();
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorSave()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(SaveOperationResult result) {
+            public void onWaitSuccess(SaveOperationResult result) {
                 getView().closeOperationWindow();
                 getView().onOperationSaved(result.getOperationSaved());
             }
@@ -173,14 +173,14 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     }
 
     private void retrieveOperations() {
-        dispatcher.execute(new GetOperationListAction(), new AsyncCallback<GetOperationListResult>() {
+        dispatcher.execute(new GetOperationListAction(), new WaitingAsyncCallback<GetOperationListResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetOperationListResult result) {
+            public void onWaitSuccess(GetOperationListResult result) {
                 getView().setOperations(result.getOperationBaseDtos());
             }
         });
@@ -188,15 +188,15 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void deleteOperations(List<Long> operationIds) {
-        dispatcher.execute(new DeleteOperationListAction(operationIds), new AsyncCallback<DeleteOperationListResult>() {
+        dispatcher.execute(new DeleteOperationListAction(operationIds), new WaitingAsyncCallback<DeleteOperationListResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 retrieveOperations();
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(DeleteOperationListResult result) {
+            public void onWaitSuccess(DeleteOperationListResult result) {
                 retrieveOperations();
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
             }
@@ -205,14 +205,14 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void populateSubjects(String uri) {
-        dispatcher.execute(new GetCategoriesFromSchemeAction(uri), new AsyncCallback<GetCategoriesFromSchemeResult>() {
+        dispatcher.execute(new GetCategoriesFromSchemeAction(uri), new WaitingAsyncCallback<GetCategoriesFromSchemeResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetCategoriesFromSchemeResult result) {
+            public void onWaitSuccess(GetCategoriesFromSchemeResult result) {
                 getView().setSubjects(result.getCategories());
             }
         });
@@ -220,14 +220,14 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void retrieveCategorySchemes() {
-        dispatcher.execute(new FindAllCategorySchemesAction(), new AsyncCallback<FindAllCategorySchemesResult>() {
+        dispatcher.execute(new FindAllCategorySchemesAction(), new WaitingAsyncCallback<FindAllCategorySchemesResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(FindAllCategorySchemesResult result) {
+            public void onWaitSuccess(FindAllCategorySchemesResult result) {
                 getView().setCategorySchemes(result.getCategorySchemes());
             }
         });

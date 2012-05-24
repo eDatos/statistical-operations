@@ -29,9 +29,9 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperatio
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -202,25 +202,25 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     private void retrieveFamily(Long idFamily) {
-        dispatcher.execute(new GetFamilyAndOperationsAction(idFamily), new AsyncCallback<GetFamilyAndOperationsResult>() {
+        dispatcher.execute(new GetFamilyAndOperationsAction(idFamily), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(GetFamilyAndOperationsResult result) {
+            public void onWaitSuccess(GetFamilyAndOperationsResult result) {
                 familyDto = result.getFamilyDto();
                 operationBaseDtos = result.getOperationBaseDtos();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleStatisticalFamily(familyDto.getCode()));
-                dispatcher.execute(new GetOperationListAction(), new AsyncCallback<GetOperationListResult>() {
+                dispatcher.execute(new GetOperationListAction(), new WaitingAsyncCallback<GetOperationListResult>() {
 
                     @Override
-                    public void onFailure(Throwable caught) {
+                    public void onWaitFailure(Throwable caught) {
                         ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
                     }
                     @Override
-                    public void onSuccess(GetOperationListResult result) {
+                    public void onWaitSuccess(GetOperationListResult result) {
                         // Make sure the operation list is set before setting family operations
                         getView().setAllOperations(result.getOperationBaseDtos());
                         getView().setFamily(familyDto, operationBaseDtos);
@@ -232,14 +232,14 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
     @Override
     public void saveFamily(FamilyDto familyToSave) {
-        dispatcher.execute(new SaveFamilyAction(familyToSave), new AsyncCallback<SaveFamilyResult>() {
+        dispatcher.execute(new SaveFamilyAction(familyToSave), new WaitingAsyncCallback<SaveFamilyResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorSave()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(SaveFamilyResult result) {
+            public void onWaitSuccess(SaveFamilyResult result) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familySaved()), MessageTypeEnum.SUCCESS);
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
@@ -256,15 +256,15 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
     @Override
     public void updateFamilyOperations(List<Long> operationsToAdd, List<Long> operationsToRemove) {
-        dispatcher.execute(new UpdateFamilyOperationsAction(idFamily, operationsToAdd, operationsToRemove), new AsyncCallback<UpdateFamilyOperationsResult>() {
+        dispatcher.execute(new UpdateFamilyOperationsAction(idFamily, operationsToAdd, operationsToRemove), new WaitingAsyncCallback<UpdateFamilyOperationsResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 getView().closeOperationsWindow();
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorAddToFamily()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(UpdateFamilyOperationsResult result) {
+            public void onWaitSuccess(UpdateFamilyOperationsResult result) {
                 operationBaseDtos = result.getOperationDtos();
                 getView().setOperations(operationBaseDtos);
                 getView().closeOperationsWindow();
@@ -282,14 +282,14 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     private void publishFamilyInternally() {
-        dispatcher.execute(new PublishInternallyFamilyAction(familyDto.getId()), new AsyncCallback<PublishInternallyFamilyResult>() {
+        dispatcher.execute(new PublishInternallyFamilyAction(familyDto.getId()), new WaitingAsyncCallback<PublishInternallyFamilyResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorInternallyPublishing()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(PublishInternallyFamilyResult result) {
+            public void onWaitSuccess(PublishInternallyFamilyResult result) {
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familyInternallyPublished()), MessageTypeEnum.SUCCESS);
@@ -298,14 +298,14 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     private void publishFamilyExternally() {
-        dispatcher.execute(new PublishExternallyFamilyAction(familyDto.getId()), new AsyncCallback<PublishExternallyFamilyResult>() {
+        dispatcher.execute(new PublishExternallyFamilyAction(familyDto.getId()), new WaitingAsyncCallback<PublishExternallyFamilyResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorExternallyPublishing()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onSuccess(PublishExternallyFamilyResult result) {
+            public void onWaitSuccess(PublishExternallyFamilyResult result) {
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familyExternallyPublished()), MessageTypeEnum.SUCCESS);
