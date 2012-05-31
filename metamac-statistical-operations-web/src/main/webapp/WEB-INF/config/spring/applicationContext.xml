@@ -54,7 +54,7 @@
     <!-- METAMAC environment configuration -->
     <bean id="configurationService" class="org.siemac.metamac.core.common.conf.ConfigurationServiceImpl">
         <property name="systemConfigurationFile">
-            <value>classpath:metamac/environment.xml</value>
+            <value>classpath:conf/environment.xml</value>
         </property>
     </bean>
 
@@ -63,9 +63,6 @@
             <ref bean="configurationService" />
         </property>
     </bean>
-
-    <!-- Spring Beans for side server of GWT -->
-    <bean class="org.siemac.metamac.statistical.operations.web.server.ServerModule" />
 
     <!-- ActionHandler beans -->
     <bean class="org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler" />

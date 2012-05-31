@@ -3,6 +3,8 @@ package org.siemac.metamac.statistical.operations.web.client.presenter;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
@@ -36,9 +38,13 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageH
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.CloseSessionAction;
+import org.siemac.metamac.web.common.shared.CloseSessionResult;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -57,6 +63,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 
 public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy> implements MainPageUiHandlers, ShowMessageHandler, HideMessageHandler {
+
+    private static Logger       logger = Logger.getLogger(MainPagePresenter.class.getName());
 
     private final PlaceManager  placeManager;
     private final DispatchAsync dispatcher;
@@ -275,6 +283,21 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
             @Override
             public void onWaitSuccess(GetFrequencyCodesResult result) {
                 UpdateFrequencyCodesEvent.fire(MainPagePresenter.this, result.getUpdateFrequencyCodes(), result.getTemporalGranularityCodes(), result.getFreqCollCodes());
+            }
+        });
+    }
+
+    @Override
+    public void closeSession() {
+        dispatcher.execute(new CloseSessionAction(), new AsyncCallback<CloseSessionResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                logger.log(Level.SEVERE, "Error closing session");
+            }
+            @Override
+            public void onSuccess(CloseSessionResult result) {
+                Window.Location.assign(result.getLogoutPageUrl());
             }
         });
     }
