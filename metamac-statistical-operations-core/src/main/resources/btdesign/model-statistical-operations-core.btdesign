@@ -105,7 +105,7 @@ Application StatisticalOperations {
        		@Family updateFamily(@Family family) throws MetamacException;
     		deleteFamily(Long familyId) throws MetamacException;
     		List<@Family> findAllFamilies throws MetamacException;
-    		List<Family> findFamilyByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+    		List<@Family> findFamilyByCondition(List<ConditionalCriteria> condition) throws MetamacException;
     		PagedResult<@Family> findFamilyByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
     		@Family publishInternallyFamily(Long familyId) throws MetamacException;
        		@Family publishExternallyFamily(Long familyId) throws MetamacException;
@@ -119,7 +119,7 @@ Application StatisticalOperations {
        		@Operation updateOperation(@Operation operation) throws MetamacException;
 			deleteOperation(Long operationId) throws MetamacException;
 			List<@Operation> findAllOperations throws MetamacException;
-			List<Operation> findOperationByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			List<@Operation> findOperationByCondition(List<ConditionalCriteria> condition) throws MetamacException;
 			PagedResult<@Operation> findOperationByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
 			@Operation publishInternallyOperation(Long operationId) throws MetamacException;
        		@Operation publishExternallyOperation(Long operationId) throws MetamacException;
@@ -131,7 +131,7 @@ Application StatisticalOperations {
        		List<@Instance> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;
 			deleteInstance(Long instanceId) throws MetamacException;
 			List<@Instance> findAllInstances throws MetamacException;
-			List<Instance> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
+			List<@Instance> findInstanceByCondition(List<ConditionalCriteria> condition) throws MetamacException;
 			PagedResult<@Instance> findInstanceByCondition(List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException;
 			@Instance publishInternallyInstance(Long instanceId) throws MetamacException;
        		@Instance publishExternallyInstance(Long instanceId) throws MetamacException;
