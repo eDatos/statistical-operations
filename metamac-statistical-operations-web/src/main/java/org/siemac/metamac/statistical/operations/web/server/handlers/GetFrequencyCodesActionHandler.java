@@ -6,15 +6,17 @@ import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
-import org.siemac.metamac.statistical.operations.web.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+@Component
 public class GetFrequencyCodesActionHandler extends AbstractActionHandler<GetFrequencyCodesAction, GetFrequencyCodesResult> {
 
     private static final String      OPERATION_UPDATE_FREQUENCY    = "metamac.gopestast.codelist.operation.updatefrequency";

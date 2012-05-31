@@ -33,6 +33,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.SaveOperati
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateFamilyOperationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateInstancesOrderActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateOperationFamiliesActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.ValidateTicketActionHandler;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
@@ -66,193 +67,22 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler;
+import org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler;
+import org.siemac.metamac.web.common.shared.CloseSessionAction;
+import org.siemac.metamac.web.common.shared.GetLoginPageUrlAction;
+import org.siemac.metamac.web.common.shared.ValidateTicketAction;
+import org.springframework.stereotype.Component;
 
-import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.server.spring.HandlerModule;
-import com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator;
-import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
 
 /**
  * Module which binds the handlers and configurations.
  */
-@Configuration
-@Import(DefaultModule.class)
+@Component
 public class ServerModule extends HandlerModule {
 
     public ServerModule() {
-    }
-
-    @Bean
-    public ActionValidator getDefaultActionValidator() {
-        return new DefaultActionValidator();
-    }
-
-    @Bean
-    public GetFamilyListActionHandler getFamilyListActionHandler() {
-        return new GetFamilyListActionHandler();
-    }
-
-    @Bean
-    public GetFamilyActionHandler getFamilyActionHandler() {
-        return new GetFamilyActionHandler();
-    }
-
-    @Bean
-    public GetFamilyAndOperationsActionHandler getFamilyAndOperationsActionHandler() {
-        return new GetFamilyAndOperationsActionHandler();
-    }
-
-    @Bean
-    public SaveFamilyActionHandler getSaveFamilyActionHandler() {
-        return new SaveFamilyActionHandler();
-    }
-
-    @Bean
-    public DeleteFamilyListActionHandler getDeleteFamilyListActionHandler() {
-        return new DeleteFamilyListActionHandler();
-    }
-
-    @Bean
-    public SaveOperationActionHandler getSaveOperationActionHandler() {
-        return new SaveOperationActionHandler();
-    }
-
-    @Bean
-    public GetOperationAndInstancesActionHandler getOperationAndInstancesActionHandler() {
-        return new GetOperationAndInstancesActionHandler();
-    }
-
-    @Bean
-    public SaveInstanceActionHandler getSaveInstanceActionHandler() {
-        return new SaveInstanceActionHandler();
-    }
-
-    @Bean
-    public GetOperationsListsActionHandler getOperationsListsActionHandler() {
-        return new GetOperationsListsActionHandler();
-    }
-
-    @Bean
-    public GetInstanceActionHandler getInstanceActionHandler() {
-        return new GetInstanceActionHandler();
-    }
-
-    @Bean
-    public GetOperationListActionHandler getOperationListActionHandler() {
-        return new GetOperationListActionHandler();
-    }
-
-    @Bean
-    public DeleteOperationListActionHandler getDeleteOperationListActionHandler() {
-        return new DeleteOperationListActionHandler();
-    }
-
-    @Bean
-    public DeleteInstanceListActionHandler getDeleteInstanceListActionHandler() {
-        return new DeleteInstanceListActionHandler();
-    }
-
-    @Bean
-    public GetInstanceListActionHandler getInstanceListActionHandler() {
-        return new GetInstanceListActionHandler();
-    }
-
-    @Bean
-    public UpdateFamilyOperationsActionHandler getUpdateFamilyOperationsActionHandler() {
-        return new UpdateFamilyOperationsActionHandler();
-    }
-
-    @Bean
-    public UpdateOperationFamiliesActionHandler getOperationFamiliesActionHandler() {
-        return new UpdateOperationFamiliesActionHandler();
-    }
-
-    @Bean
-    public PublishInternallyFamilyActionHandler getPublishInternallyFamilyActionHandler() {
-        return new PublishInternallyFamilyActionHandler();
-    }
-
-    @Bean
-    public PublishExternallyFamilyActionHandler getPublishExternallyFamilyActionHandler() {
-        return new PublishExternallyFamilyActionHandler();
-    }
-
-    @Bean
-    public PublishInternallyOperationActionHandler getPublishInternallyOperationActionHandler() {
-        return new PublishInternallyOperationActionHandler();
-    }
-
-    @Bean
-    public PublishExternallyOperationActionHandler getPublishExternallyOperationActionHandler() {
-        return new PublishExternallyOperationActionHandler();
-    }
-
-    @Bean
-    public PublishInternallyInstanceActionHandler getPublishInternallyInstanceActionHandler() {
-        return new PublishInternallyInstanceActionHandler();
-    }
-
-    @Bean
-    public PublishExternallyInstanceActionHandler getPublishExternallyInstanceActionHandler() {
-        return new PublishExternallyInstanceActionHandler();
-    }
-
-    @Bean
-    public FindAllCategorySchemesActionHandler getFindAllCategorySchemesActionHandler() {
-        return new FindAllCategorySchemesActionHandler();
-    }
-
-    @Bean
-    public GetCategoriesFromSchemeActionHandler getCategoriesFromSchemeActionHandler() {
-        return new GetCategoriesFromSchemeActionHandler();
-    }
-
-    @Bean
-    public FindAllOrganisationSchemesActionHandler getFindAllOrganisationSchemesActionHandler() {
-        return new FindAllOrganisationSchemesActionHandler();
-    }
-
-    @Bean
-    public GetOrganisationsFromSchemeActionHandler getGetOrganisationsFromSchemeActionHandler() {
-        return new GetOrganisationsFromSchemeActionHandler();
-    }
-
-    @Bean
-    public FindAllCommonMetadataActionHandler getfindAllCommonMetadataActionHandler() {
-        return new FindAllCommonMetadataActionHandler();
-    }
-
-    @Bean
-    public FindAllConceptSchemesActionHandler getFindAllConceptSchemesActionHandler() {
-        return new FindAllConceptSchemesActionHandler();
-    }
-
-    @Bean
-    public GetConceptsFromSchemeActionHandler getConceptsFromSchemeActionHandler() {
-        return new GetConceptsFromSchemeActionHandler();
-    }
-
-    @Bean
-    public FindAllCodeListsActionHandler getFindAllCodeListsActionHandler() {
-        return new FindAllCodeListsActionHandler();
-    }
-
-    @Bean
-    public GetCodesFromCodeListActionHandler getCodesFromCodeListActionHandler() {
-        return new GetCodesFromCodeListActionHandler();
-    }
-
-    @Bean
-    public GetFrequencyCodesActionHandler getFrequencyCodesActionHandler() {
-        return new GetFrequencyCodesActionHandler();
-    }
-
-    @Bean
-    public UpdateInstancesOrderActionHandler getUpdateInstancesOrderActionHandler() {
-        return new UpdateInstancesOrderActionHandler();
     }
 
     protected void configureHandlers() {
@@ -289,6 +119,10 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetCodesFromCodeListAction.class, GetCodesFromCodeListActionHandler.class);
         bindHandler(GetFrequencyCodesAction.class, GetFrequencyCodesActionHandler.class);
         bindHandler(UpdateInstancesOrderAction.class, UpdateInstancesOrderActionHandler.class);
+
+        bindHandler(ValidateTicketAction.class, ValidateTicketActionHandler.class);
+        bindHandler(GetLoginPageUrlAction.class, GetLoginPageUrlActionHandler.class);
+        bindHandler(CloseSessionAction.class, CloseSessionActionHandler.class);
     }
 
 }

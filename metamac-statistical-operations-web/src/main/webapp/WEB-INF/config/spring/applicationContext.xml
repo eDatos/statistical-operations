@@ -21,16 +21,30 @@
 
 
     <!-- SpringBeanProvider GWTP -->
-    <context:component-scan base-package="com.gwtplatform.dispatch.server.spring" />
+    <context:component-scan base-package="com.gwtplatform.dispatch.server.spring,org.siemac.metamac.statistical.operations.web" />
 
     <!-- Activates annotation-based bean configuration -->
     <context:annotation-config />
+
+    <!-- Spring Beans for side server of GWT -->
+    <bean class="com.gwtplatform.dispatch.server.spring.configuration.DefaultModule" />
+    <bean class="com.gwtplatform.dispatch.server.spring.actionvalidator.DefaultActionValidator" />
 
     <!-- if proxy-target-class is false, error in actionHandlers beans (spring cannot find them) -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <!-- Logger aspect for logging exceptions thrown by actionHandlers -->
     <bean id="logAspect" class="org.siemac.metamac.web.common.server.aspects.ActionHandlerLoggerAspect" />
+
+    <bean id="logger" class="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean">
+        <constructor-arg>
+            <bean class="java.util.logging.Logger" factory-method="getAnonymousLogger">
+                <property name="level">
+                    <value>FINEST</value>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
 
     <!-- Configure externalized logging configuration file -->
     <bean id="loggingSetup" class="org.siemac.metamac.web.common.server.logging.LoggingSetup">
@@ -53,15 +67,9 @@
     <!-- Spring Beans for side server of GWT -->
     <bean class="org.siemac.metamac.statistical.operations.web.server.ServerModule" />
 
-    <bean id="logger" class="com.gwtplatform.dispatch.server.spring.LoggerFactoryBean">
-        <constructor-arg>
-            <bean class="java.util.logging.Logger" factory-method="getAnonymousLogger">
-                <property name="level">
-                    <value>FINEST</value>
-                </property>
-            </bean>
-        </constructor-arg>
-    </bean>
+    <!-- ActionHandler beans -->
+    <bean class="org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler" />
+    <bean class="org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler" />
 
     <import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
 
@@ -69,7 +77,7 @@
     <wss:binding url="/ws/metamac/statistical/operations/internal/v1.0/metamacStatisticalOperationsInternalInterface">
         <wss:service>
             <ws:service bean="#metamacStatisticalOperationsInternalInterfaceV10">
-                <!-- the primaryWsdl element works like @WebService(wsdlLocation=...). If the primary WSDL is omitted, the runtime will search for WSDL in /WEB-INF/wsdl/ and find one that matches the specified port 
+                <!-- the primaryWsdl element works like @WebService(wsdlLocation=...). If the primary WSDL is omitted, the runtime will search for WSDL in /WEB-INF/wsdl/ and find one that matches the specified port
                     and service name -->
                 <!-- <ws:metadata> -->
                 <!-- <value>META-INF/wsdl/service/metamac-statistical-operations-internal-service-v1.0.xsd</value> -->
