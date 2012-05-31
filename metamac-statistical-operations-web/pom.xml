@@ -181,27 +181,27 @@
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
         <plugins>
-        
+
             <!-- Maven Compiler Plugin -->
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
-                  <compilerArgument>-proc:none</compilerArgument>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
-            
+
             <!--
-               |  WORKAROUND: 
-               |    El plugin de maven-compiler-plugin tiene un problema a la hora de crear clases usando anotaciones.
-               |    Por ello se pasa en el compilar el argumento "-proc:none" y se añade el plugin: maven-processor-plugin:
-               |    Véase:
-               |       http://docs.jboss.org/hibernate/validator/4.2/reference/en-US/html/validator-annotation-processor.html#d0e3740
-               |       http://jira.codehaus.org/browse/MCOMPILER-157
-               +-->
+                | WORKAROUND:
+                | El plugin de maven-compiler-plugin tiene un problema a la hora de crear clases usando anotaciones.
+                | Por ello se pasa en el compilar el argumento "-proc:none" y se añade el plugin: maven-processor-plugin:
+                | Véase:
+                | http://docs.jboss.org/hibernate/validator/4.2/reference/en-US/html/validator-annotation-processor.html#d0e3740
+                | http://jira.codehaus.org/browse/MCOMPILER-157
+                + -->
             <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
@@ -222,10 +222,10 @@
                     </processors>
                 </configuration>
             </plugin>
-            
+
 
             <!-- GWT Maven Plugin -->
-            
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -255,13 +255,14 @@
                         <artifact>org.siemac.metamac.metamac-statistical-operations:metamac-statistical-operations-core:jar</artifact>
                         <artifact>org.siemac.metamac:metamac-core-common:jar:client</artifact>
                         <artifact>org.siemac.metamac:metamac-api-domain:jar:client</artifact>
+                        <artifact>org.siemac.metamac.metamac-sso:metamac-sso-client:jar</artifact>
                     </compileSourcesArtifacts>
                     <!-- In inplace mode, the warSourceDirectory is used to match the same use case of the war:inplace http://maven.apache.org/plugins/maven-war-plugin/inplace-mojo.html goal. -->
                     <inplace>true</inplace>
                 </configuration>
             </plugin>
 
-             <plugin>
+            <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
