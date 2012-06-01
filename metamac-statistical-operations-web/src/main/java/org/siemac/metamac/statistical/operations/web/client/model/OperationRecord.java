@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.model;
 
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
+import org.siemac.metamac.web.common.client.resources.GlobalResources;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
@@ -10,13 +11,14 @@ public class OperationRecord extends ListGridRecord {
         super();
     }
 
-    public OperationRecord(Long id, String code, String title, String acronym, String status) {
+    public OperationRecord(Long id, String code, String title, String acronym, String status, Boolean indicatorsSystem) {
         super();
         setId(id);
         setCode(code);
         setTitle(title);
         setAcronym(acronym);
         setStatus(status);
+        setIndicatorsSystem(indicatorsSystem);
     }
 
     public Long getId() {
@@ -57,6 +59,12 @@ public class OperationRecord extends ListGridRecord {
 
     public void setStatus(String value) {
         setAttribute(OperationDS.OP_STATUS, value);
+    }
+
+    public void setIndicatorsSystem(Boolean value) {
+        if (value != null && value) {
+            setAttribute(OperationDS.OP_INDICATOR_SYSTEM, GlobalResources.RESOURCE.success().getURL());
+        }
     }
 
 }

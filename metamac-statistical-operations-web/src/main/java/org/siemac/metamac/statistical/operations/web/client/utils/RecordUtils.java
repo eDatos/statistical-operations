@@ -49,7 +49,7 @@ public class RecordUtils {
     public static OperationRecord getOperationRecord(OperationBaseDto operationBaseDto) {
         OperationRecord record = new OperationRecord(operationBaseDto.getId(), operationBaseDto.getCode(), InternationalStringUtils.getLocalisedString(operationBaseDto.getTitle()),
                 InternationalStringUtils.getLocalisedString(operationBaseDto.getAcronym()), OperationsWeb.getCoreMessages().getString(
-                        OperationsWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()));
+                        OperationsWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()), null); // TODO
         return record;
     }
 
@@ -62,7 +62,7 @@ public class RecordUtils {
     public static OperationRecord getOperationRecord(OperationDto operationDto) {
         OperationRecord record = new OperationRecord(operationDto.getId(), operationDto.getCode(), InternationalStringUtils.getLocalisedString(operationDto.getTitle()),
                 InternationalStringUtils.getLocalisedString(operationDto.getAcronym()), OperationsWeb.getCoreMessages().getString(
-                        OperationsWeb.getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
+                        OperationsWeb.getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()), operationDto.getIndicatorSystem());
         return record;
     }
 

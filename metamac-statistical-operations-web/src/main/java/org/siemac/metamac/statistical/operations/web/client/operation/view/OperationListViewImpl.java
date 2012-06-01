@@ -20,6 +20,7 @@ import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
@@ -81,7 +82,9 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operation());
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
         ListGridField statusField = new ListGridField(OperationDS.OP_STATUS, OperationsWeb.getConstants().operationStatus());
-        operationListGrid.setFields(codeField, titleField, descriptionField, statusField);
+        ListGridField indicatorsSystem = new ListGridField(OperationDS.OP_INDICATOR_SYSTEM, OperationsWeb.getConstants().operationIndicatorSystem());
+        indicatorsSystem.setType(ListGridFieldType.IMAGE);
+        operationListGrid.setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem);
         operationListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
