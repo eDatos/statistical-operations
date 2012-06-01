@@ -103,6 +103,10 @@
                     <groupId>javax.servlet</groupId>
                     <artifactId>servlet-api</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>net.sourceforge.htmlunit</groupId>
+                    <artifactId>htmlunit</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- GIN -->
@@ -174,6 +178,53 @@
             <artifactId>jaxb-impl</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
+
+        <!-- CAS -->
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>${cas-client.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-security</groupId>
+            <artifactId>xmlsec</artifactId>
+            <version>${xmlsec.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xmlParserAPIs</artifactId>
+            <version>${xerces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${xerces.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -54,7 +54,7 @@
     <!-- METAMAC environment configuration -->
     <bean id="configurationService" class="org.siemac.metamac.core.common.conf.ConfigurationServiceImpl">
         <property name="systemConfigurationFile">
-            <value>classpath:conf/environment.xml</value>
+            <value>classpath:metamac/environment.xml</value>
         </property>
     </bean>
 
