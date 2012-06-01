@@ -68,7 +68,7 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
     // IDENTIFIERS
-    private static final String             OP_IDENTIFIER                = "op-id";
+    private static final String             OP_CODE                = "op-id";
     private static final String             OP_TITLE                     = "op-title";
     private static final String             OP_ALTERNATIVE_TITLE         = "op-alter-title";
     // CONTENT CLASSIFIERS
@@ -527,7 +527,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private void createViewForm() {
         // Identifiers
         identifiersViewForm = new GroupDynamicForm(getConstants().operationIdentifiers());
-        ViewTextItem identifier = new ViewTextItem(OP_IDENTIFIER, getConstants().operationIdentifier());
+        ViewTextItem identifier = new ViewTextItem(OP_CODE, getConstants().operationIdentifier());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OP_TITLE, getConstants().operationTitle());
         ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(OP_ALTERNATIVE_TITLE, getConstants().operationAcronym());
         identifiersViewForm.setFields(identifier, title, alternativeTitle);
@@ -597,7 +597,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private void createEditionForm() {
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().operationIdentifiers());
-        identifier = new RequiredTextItem(OP_IDENTIFIER, getConstants().operationIdentifier());
+        identifier = new RequiredTextItem(OP_CODE, getConstants().operationIdentifier());
         title = new MultiLanguageTextItem(OP_TITLE, getConstants().operationTitle());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(OP_ALTERNATIVE_TITLE, getConstants().operationAcronym());
@@ -726,7 +726,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private void setViewForm(OperationDto operationDto) {
         // Identifiers
-        identifiersViewForm.setValue(OP_IDENTIFIER, operationDto.getCode());
+        identifiersViewForm.setValue(OP_CODE, operationDto.getCode());
         identifiersViewForm.setValue(OP_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
         identifiersViewForm.setValue(OP_ALTERNATIVE_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
 
