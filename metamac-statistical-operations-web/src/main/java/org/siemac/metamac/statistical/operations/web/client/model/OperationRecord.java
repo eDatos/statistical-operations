@@ -1,14 +1,10 @@
 package org.siemac.metamac.statistical.operations.web.client.model;
 
+import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
+
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class OperationRecord extends ListGridRecord {
-
-    public static final String ID      = "id";
-    public static final String CODE    = "code";
-    public static final String TITLE   = "title";
-    public static final String ACRONYM = "acron";
-    public static final String STATUS  = "status";
 
     public OperationRecord() {
         super();
@@ -24,43 +20,43 @@ public class OperationRecord extends ListGridRecord {
     }
 
     public Long getId() {
-        return getAttributeAsLong(ID);
+        return getAttributeAsLong(OperationDS.OP_ID);
     }
 
     public void setId(Long value) {
-        setAttribute(ID, value);
+        setAttribute(OperationDS.OP_ID, value);
     }
 
     public String getCode() {
-        return getAttributeAsString(CODE);
+        return getAttributeAsString(OperationDS.OP_CODE);
     }
 
     public void setCode(String value) {
-        setAttribute(CODE, value);
+        setAttribute(OperationDS.OP_CODE, value);
     }
 
     public String getTitle() {
-        return getAttributeAsString(TITLE);
+        return getAttributeAsString(OperationDS.OP_TITLE);
     }
 
     public void setTitle(String value) {
-        setAttribute(TITLE, value);
+        setAttribute(OperationDS.OP_TITLE, value);
     }
 
     public String getAcronym() {
-        return getAttributeAsString(ACRONYM);
+        return getAttributeAsString(OperationDS.OP_ACRONYM);
     }
 
     public void setAcronym(String value) {
-        setAttribute(ACRONYM, value);
+        setAttribute(OperationDS.OP_ACRONYM, value);
     }
 
     public String getStatus() {
-        return getAttributeAsString(STATUS);
+        return getAttributeAsString(OperationDS.OP_STATUS);
     }
 
     public void setStatus(String value) {
-        setAttribute(STATUS, value);
+        setAttribute(OperationDS.OP_STATUS, value);
     }
 
 }

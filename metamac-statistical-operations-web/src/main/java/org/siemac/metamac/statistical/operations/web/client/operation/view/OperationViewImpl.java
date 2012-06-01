@@ -492,8 +492,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersViewForm = new GroupDynamicForm(getConstants().operationIdentifiers());
         ViewTextItem identifier = new ViewTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.OP_TITLE, getConstants().operationTitle());
-        ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(OperationDS.OP_ALTERNATIVE_TITLE, getConstants().operationAcronym());
-        identifiersViewForm.setFields(identifier, title, alternativeTitle);
+        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.OP_ACRONYM, getConstants().operationAcronym());
+        identifiersViewForm.setFields(identifier, title, acronym);
 
         // Content Classifiers
         classificationViewForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -563,7 +563,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifier = new RequiredTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
         title = new MultiLanguageTextItem(OperationDS.OP_TITLE, getConstants().operationTitle());
         title.setRequired(true);
-        acronym = new MultiLanguageTextItem(OperationDS.OP_ALTERNATIVE_TITLE, getConstants().operationAcronym());
+        acronym = new MultiLanguageTextItem(OperationDS.OP_ACRONYM, getConstants().operationAcronym());
         identifiersEditionForm.setFields(identifier, title, acronym);
 
         // Content classifiers
@@ -691,7 +691,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Identifiers
         identifiersViewForm.setValue(OperationDS.OP_CODE, operationDto.getCode());
         identifiersViewForm.setValue(OperationDS.OP_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
-        identifiersViewForm.setValue(OperationDS.OP_ALTERNATIVE_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
+        identifiersViewForm.setValue(OperationDS.OP_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
 
         // Content Classifiers
         classificationViewForm.setValue(OperationDS.OP_SUBJECT, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getCodeId());

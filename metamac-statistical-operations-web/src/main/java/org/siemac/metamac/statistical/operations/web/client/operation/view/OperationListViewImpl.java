@@ -8,6 +8,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
@@ -76,10 +77,10 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
 
         operationListGrid = new CustomListGrid();
-        ListGridField codeField = new ListGridField(OperationRecord.CODE, OperationsWeb.getConstants().operationIdentifier());
-        ListGridField titleField = new ListGridField(OperationRecord.TITLE, OperationsWeb.getConstants().operation());
-        ListGridField descriptionField = new ListGridField(OperationRecord.ACRONYM, OperationsWeb.getConstants().operationAcronym());
-        ListGridField statusField = new ListGridField(OperationRecord.STATUS, OperationsWeb.getConstants().operationStatus());
+        ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
+        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operation());
+        ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
+        ListGridField statusField = new ListGridField(OperationDS.OP_STATUS, OperationsWeb.getConstants().operationStatus());
         operationListGrid.setFields(codeField, titleField, descriptionField, statusField);
         operationListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 

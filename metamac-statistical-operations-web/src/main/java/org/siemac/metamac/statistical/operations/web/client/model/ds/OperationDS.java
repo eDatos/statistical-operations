@@ -6,9 +6,10 @@ import com.smartgwt.client.data.fields.DataSourceTextField;
 public class OperationDS extends DataSource {
 
     // IDENTIFIERS
-    public static final String OP_CODE                      = "op-id";
+    public static final String OP_ID                        = "op-id";
+    public static final String OP_CODE                      = "op-code";
     public static final String OP_TITLE                     = "op-title";
-    public static final String OP_ALTERNATIVE_TITLE         = "op-alter-title";
+    public static final String OP_ACRONYM                   = "op-acron";
     // CONTENT CLASSIFIERS
     public static final String OP_SUBJECT                   = "op-subjectItem";
     public static final String OP_SUBJECT_SECONDARY         = "op-subjetc-secon";

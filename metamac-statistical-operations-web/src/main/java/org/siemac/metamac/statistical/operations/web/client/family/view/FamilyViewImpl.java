@@ -7,7 +7,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
-import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
@@ -112,10 +112,10 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
         operationListGrid = new ListGrid();
         operationListGrid.setHeight(150);
-        ListGridField identifierField = new ListGridField(OperationRecord.ID, OperationsWeb.getConstants().familyIdentifier());
-        ListGridField titleField = new ListGridField(OperationRecord.TITLE, OperationsWeb.getConstants().familyTitle());
-        ListGridField titleAlternativeField = new ListGridField(OperationRecord.ACRONYM, OperationsWeb.getConstants().familyAcronym());
-        ListGridField statusField = new ListGridField(OperationRecord.STATUS, OperationsWeb.getConstants().operationStatus());
+        ListGridField identifierField = new ListGridField(OperationDS.OP_ID, OperationsWeb.getConstants().familyIdentifier());
+        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().familyTitle());
+        ListGridField titleAlternativeField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().familyAcronym());
+        ListGridField statusField = new ListGridField(OperationDS.OP_STATUS, OperationsWeb.getConstants().operationStatus());
         operationListGrid.setFields(identifierField, titleField, titleAlternativeField, statusField);
 
         VLayout operationsLayout = new VLayout();
