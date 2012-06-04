@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 
 public class OperationMainFormLayout extends BasePublicationMainFormLayout {
 
@@ -11,7 +12,7 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
     }
 
     public OperationMainFormLayout(boolean canEdit) {
-        super();
+        super(canEdit);
     }
 
     public void setOperationCode(String operationCode) {
@@ -42,11 +43,15 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
     }
 
     private void showPublishInternallyButton() {
-        publishInternally.show();
+        if (ClientSecurityUtils.canPublishOperationInternally(operationCode)) {
+            publishInternally.show();
+        }
     }
 
     private void showPublishExternallyButton() {
-        publishExternally.show();
+        if (ClientSecurityUtils.canPublishOperationExternally(operationCode)) {
+            publishExternally.show();
+        }
     }
 
 }
