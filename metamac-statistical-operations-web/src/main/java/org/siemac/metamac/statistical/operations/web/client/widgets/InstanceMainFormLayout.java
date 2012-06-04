@@ -11,7 +11,7 @@ public class InstanceMainFormLayout extends BasePublicationMainFormLayout {
     }
 
     public InstanceMainFormLayout(boolean canEdit) {
-        super();
+        super(canEdit);
     }
 
     public void setOperationCode(String operationCode) {
