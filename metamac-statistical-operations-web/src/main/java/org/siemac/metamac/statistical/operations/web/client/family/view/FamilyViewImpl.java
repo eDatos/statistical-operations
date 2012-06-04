@@ -9,10 +9,11 @@ import org.siemac.metamac.statistical.operations.web.client.family.presenter.Fam
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
-import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
+import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
@@ -23,6 +24,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -49,7 +51,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private VLayout                   panel;
 
-    private PublishMainFormLayout     mainFormLayout;
+    private FamilyMainFormLayout      mainFormLayout;
     private GroupDynamicForm          familyViewForm;
     private GroupDynamicForm          familyEditionForm;
 
@@ -74,7 +76,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
         // Family
 
-        mainFormLayout = new PublishMainFormLayout();
+        mainFormLayout = new FamilyMainFormLayout(ClientSecurityUtils.canUpdateFamily());
         mainFormLayout.getTranslateToolStripButton().addClickHandler(new ClickHandler() {
 
             @Override
@@ -105,6 +107,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
                 window.show();
             }
         });
+        editToolStripButton.setVisibility(ClientSecurityUtils.canAddOperationToFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
         operationToolStrip.addButton(editToolStripButton);
 
         TitleLabel operationsTitleLabel = new TitleLabel(OperationsWeb.getConstants().operations());
