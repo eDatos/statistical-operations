@@ -115,7 +115,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         ListGridField identifierField = new ListGridField(OperationDS.OP_ID, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField titleAlternativeField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().familyAcronym());
-        ListGridField statusField = new ListGridField(OperationDS.OP_STATUS, OperationsWeb.getConstants().operationStatus());
+        ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getConstants().operationStatus());
         operationListGrid.setFields(identifierField, titleField, titleAlternativeField, statusField);
 
         VLayout operationsLayout = new VLayout();

@@ -54,11 +54,11 @@ public class OperationRecord extends ListGridRecord {
     }
 
     public String getStatus() {
-        return getAttributeAsString(OperationDS.OP_STATUS);
+        return getAttributeAsString(OperationDS.OP_PROC_STATUS);
     }
 
     public void setStatus(String value) {
-        setAttribute(OperationDS.OP_STATUS, value);
+        setAttribute(OperationDS.OP_PROC_STATUS, value);
     }
 
     public void setIndicatorsSystem(Boolean value) {
