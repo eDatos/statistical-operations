@@ -10,7 +10,7 @@ public class FamilyMainFormLayout extends BasePublicationMainFormLayout {
     }
 
     public FamilyMainFormLayout(boolean canEdit) {
-        super();
+        super(canEdit);
     }
 
     public void updatePublishSection(ProcStatusEnum status) {
