@@ -29,7 +29,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrd
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
-import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
+import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
@@ -70,7 +70,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private VLayout                         panel;
 
-    private PublishMainFormLayout           mainFormLayout;
+    private OperationMainFormLayout           mainFormLayout;
 
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
@@ -167,7 +167,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // OPERATION
 
-        mainFormLayout = new PublishMainFormLayout();
+        mainFormLayout = new OperationMainFormLayout();
         mainFormLayout.getTranslateToolStripButton().addClickHandler(new ClickHandler() {
 
             @Override

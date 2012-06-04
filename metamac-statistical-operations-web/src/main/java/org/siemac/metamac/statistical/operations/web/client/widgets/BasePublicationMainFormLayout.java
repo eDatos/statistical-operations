@@ -9,15 +9,24 @@ import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
-public class PublishMainFormLayout extends InternationalMainFormLayout {
+public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
 
-    private ToolStripButton publishInternally;
-    private ToolStripButton publishExternally;
+    protected ToolStripButton publishInternally;
+    protected ToolStripButton publishExternally;
 
-    private ProcStatusEnum  status;
+    protected ProcStatusEnum  status;
 
-    public PublishMainFormLayout() {
+    public BasePublicationMainFormLayout() {
+        super();
+        common();
+    }
 
+    public BasePublicationMainFormLayout(boolean canEdit) {
+        super(canEdit);
+        common();
+    }
+
+    private void common() {
         publishInternally = new ToolStripButton(OperationsWeb.getConstants().publishInternally());
         publishInternally.setVisibility(Visibility.HIDDEN);
         publishInternally.setWidth(150);
@@ -38,25 +47,6 @@ public class PublishMainFormLayout extends InternationalMainFormLayout {
 
         getToolStrip().addButton(publishInternally);
         getToolStrip().addButton(publishExternally);
-
-    }
-
-    public void updatePublishSection(ProcStatusEnum status) {
-        this.status = status;
-        updateVisibility();
-    }
-
-    private void updateVisibility() {
-        if (ProcStatusEnum.DRAFT.equals(status)) {
-            publishInternally.show();
-            publishExternally.hide();
-        } else if (ProcStatusEnum.PUBLISH_INTERNALLY.equals(status)) {
-            publishInternally.hide();
-            publishExternally.show();
-        } else if (ProcStatusEnum.PUBLISH_EXTERNALLY.equals(status)) {
-            publishInternally.hide();
-            publishExternally.hide();
-        }
     }
 
     public HasClickHandlers getPublishInternally() {
@@ -65,11 +55,6 @@ public class PublishMainFormLayout extends InternationalMainFormLayout {
 
     public HasClickHandlers getPublishExternally() {
         return publishExternally;
-    }
-
-    public void setViewMode() {
-        super.setViewMode();
-        updateVisibility();
     }
 
     public void setEditionMode() {

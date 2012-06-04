@@ -17,7 +17,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.PublishMainFormLayout;
+import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;
@@ -102,7 +102,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     private VLayout                         panel;
 
-    private PublishMainFormLayout           mainFormLayout;
+    private InstanceMainFormLayout           mainFormLayout;
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
     private GroupDynamicForm                identifiersEditionForm;
@@ -217,7 +217,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Instance
 
-        mainFormLayout = new PublishMainFormLayout();
+        mainFormLayout = new InstanceMainFormLayout();
         mainFormLayout.getTranslateToolStripButton().addClickHandler(new ClickHandler() {
 
             @Override
