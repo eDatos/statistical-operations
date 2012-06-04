@@ -21,6 +21,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getSurveyTypeHashMap(List<SurveyTypeDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (SurveyTypeDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
@@ -34,6 +35,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getInstanceTypeHashMap(List<InstanceTypeDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (InstanceTypeDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
@@ -47,6 +49,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getOfficialityTypeHashMap(List<OfficialityTypeDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (OfficialityTypeDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
@@ -60,6 +63,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getSurveySourceHashMap(List<SurveySourceDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (SurveySourceDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
@@ -73,6 +77,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getCollMethodsHashMap(List<CollMethodDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (CollMethodDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
@@ -86,6 +91,7 @@ public class OperationsListUtils {
      */
     public static LinkedHashMap<String, String> getCostHashMap(List<CostDto> list) {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        hashMap.put(new String(), new String());
         for (CostDto type : list) {
             hashMap.put(type.getId().toString(), type.getIdentifier());
         }
