@@ -9,6 +9,7 @@ import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
@@ -18,6 +19,7 @@ import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
@@ -59,6 +61,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
                 window.show();
             }
         });
+        listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
         familyListGrid = new CustomListGrid();
         ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
@@ -78,7 +81,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
                     deselectFamily();
                     if (familyListGrid.getSelectedRecords().length > 1) {
                         // Delete more than one Family with one click
-                        listGridToolStrip.getDeleteButton().show();
+                        showListGridDeleteButton();
                     }
                 }
             }
@@ -180,7 +183,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
             listGridToolStrip.getDeleteButton().hide();
             familyListGrid.deselectAllRecords();
         } else {
-            listGridToolStrip.getDeleteButton().show();
+            showListGridDeleteButton();
         }
     }
 
@@ -189,6 +192,12 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
      */
     private void deselectFamily() {
         listGridToolStrip.getDeleteButton().hide();
+    }
+
+    private void showListGridDeleteButton() {
+        if (ClientSecurityUtils.canDeleteFamily()) {
+            listGridToolStrip.getDeleteButton().show();
+        }
     }
 
 }
