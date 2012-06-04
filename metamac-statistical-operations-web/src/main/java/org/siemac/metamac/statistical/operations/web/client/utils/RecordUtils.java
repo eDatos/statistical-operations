@@ -49,7 +49,7 @@ public class RecordUtils {
     public static OperationRecord getOperationRecord(OperationBaseDto operationBaseDto) {
         OperationRecord record = new OperationRecord(operationBaseDto.getId(), operationBaseDto.getCode(), InternationalStringUtils.getLocalisedString(operationBaseDto.getTitle()),
                 InternationalStringUtils.getLocalisedString(operationBaseDto.getAcronym()), OperationsWeb.getCoreMessages().getString(
-                        OperationsWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()), null); // TODO
+                        OperationsWeb.getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()), operationBaseDto.getIndicatorSystem());
         return record;
     }
 
