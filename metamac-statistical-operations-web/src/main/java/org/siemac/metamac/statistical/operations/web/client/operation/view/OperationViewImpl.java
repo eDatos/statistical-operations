@@ -710,7 +710,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         productionViewForm.setValue(OperationDS.OP_PRODUCER, ExternalItemUtils.getExternalItemListToString(operationDto.getProducer()));
         productionViewForm.setValue(OperationDS.OP_REG_RESPONSIBLE, ExternalItemUtils.getExternalItemListToString(operationDto.getRegionalResponsible()));
         productionViewForm.setValue(OperationDS.OP_REG_CONTRIBUTOR, ExternalItemUtils.getExternalItemListToString(operationDto.getRegionalContributor()));
-        productionViewForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate() != null ? operationDto.getInternalInventoryDate().toString() : "");
+        productionViewForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         productionViewForm.setValue(OperationDS.OP_CURRENTLY_ACTIVE, (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive()) ? getConstants().yes() : getConstants().no());
         productionViewForm.setValue(OperationDS.OP_STATUS, operationDto.getStatus() == null ? null : getCoreMessages().getString(getCoreMessages().statusEnum() + operationDto.getStatus().getName()));
         productionViewForm.setValue(OperationDS.OP_PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
@@ -722,7 +722,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
         diffusionViewForm.setValue(OperationDS.OP_UPDATE_FREQ, ExternalItemUtils.getExternalItemListToString(operationDto.getUpdateFrequency()));
         diffusionViewForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
-        diffusionViewForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate() != null ? operationDto.getInventoryDate().toString() : "");
+        diffusionViewForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         staticRevPolicyItem.setValue(operationDto.getRevPolicy(), operationDto.getRevPolicyUrl());
         staticRevPracticeItem.setValue(operationDto.getRevPractice(), operationDto.getRevPracticeUrl());
 
@@ -758,7 +758,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         producerItem.clearValue();
         regionalResponsibleItem.clearValue();
         regionalContributorItem.getValue();
-        productionEditionForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate() != null ? operationDto.getInternalInventoryDate().toString() : "");
+        productionEditionForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         currentlyActiveItem.setValue(operationDto.getCurrentlyActive() != null ? operationDto.getCurrentlyActive() : false);
         statusItem.setValue(operationDto.getStatus() == null ? null : operationDto.getStatus().toString());
         productionEditionForm.setValue(OperationDS.OP_PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
@@ -770,7 +770,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
         updateFrequencyItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(operationDto.getUpdateFrequency()));
         diffusionEditionForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
-        diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate() != null ? operationDto.getInventoryDate().toString() : "");
+        diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         revPolicyItem.setValue(operationDto.getRevPolicy(), operationDto.getRevPolicyUrl());
         revPracticeItem.setValue(operationDto.getRevPractice(), operationDto.getRevPracticeUrl());
         commonMetadataItem.setValue(operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getCodeId() : null);

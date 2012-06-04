@@ -612,11 +612,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         classViewForm.setValue(IN_INSTANCE_TYPE, instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getIdentifier() : "");
 
         // Production descriptors
-        productionViewForm.setValue(IN_INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate() != null ? instanceDto.getInternalInventoryDate().toString() : "");
+        productionViewForm.setValue(IN_INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate());
         productionViewForm.setValue(IN_PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
 
         // Diffusion and Publication
-        diffusionViewForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate() != null ? instanceDto.getInventoryDate().toString() : "");
+        diffusionViewForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate());
         staticDocMethodItem.setValue(instanceDto.getDocMethod(), instanceDto.getDocMethodUrl());
         productionViewForm.setValue(IN_SURVEY_SOURCE, instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getIdentifier() : "");
         productionViewForm.setValue(IN_COLL_METHOD, instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getIdentifier() : "");
@@ -677,7 +677,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceTypeItem.setValue(instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getId().toString() : "");
 
         // Production descriptors
-        diffusionEditionForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate() != null ? instanceDto.getInventoryDate().toString() : "");
+        diffusionEditionForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate());
         docMethodItem.setValue(instanceDto.getDocMethod(), instanceDto.getDocMethodUrl());
         surveySourceItem.setValue(instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getId() : "");
         collMethodItem.setValue(instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getId() : "");
@@ -691,7 +691,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         costItem.setValues(getCostIds(instanceDto.getCost()));
 
         // Diffusion and Publication
-        diffusionEditionForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate() != null ? instanceDto.getInventoryDate().toString() : "");
+        diffusionEditionForm.setValue(IN_INVENTORY_DATE, instanceDto.getInventoryDate());
 
         // Quality Descriptors
         qualityDocItem.setValue(instanceDto.getQualityDoc(), instanceDto.getQualityDocUrl());

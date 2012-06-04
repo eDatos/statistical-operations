@@ -177,9 +177,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         familyViewForm.setValue(FAMILY_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
         familyViewForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyViewForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
-        familyViewForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate() == null ? "" : familyDto.getInternalInventoryDate().toString());
+        familyViewForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
         familyViewForm.setValue(FAMILY_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
-        familyViewForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate() == null ? "" : familyDto.getInventoryDate().toString());
+        familyViewForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate());
     }
 
     private void setEditionForm(FamilyDto familyDto) {
@@ -187,9 +187,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         familyEditionForm.setValue(FAMILY_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
         familyEditionForm.setValue(FAMILY_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
         familyEditionForm.setValue(FAMILY_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
-        familyEditionForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate() == null ? "" : familyDto.getInternalInventoryDate().toString());
+        familyEditionForm.setValue(FAMILY_INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
         familyEditionForm.setValue(FAMILY_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
-        familyEditionForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate() == null ? "" : familyDto.getInventoryDate().toString());
+        familyEditionForm.setValue(FAMILY_INVENTORY_DATE, familyDto.getInventoryDate());
     }
 
     @Override
