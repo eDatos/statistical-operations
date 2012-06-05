@@ -11,6 +11,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.OperationRecor
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
@@ -21,6 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
@@ -76,6 +78,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
                 window.show();
             }
         });
+        listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateOperation() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
         operationListGrid = new CustomListGrid();
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
@@ -97,7 +100,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
                     deselectOperation();
                     if (operationListGrid.getSelectedRecords().length > 1) {
                         // Delete more than one Family with one click
-                        listGridToolStrip.getDeleteButton().show();
+                        showListGridDeleteButton();
                     }
                 }
             }
@@ -182,6 +185,18 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         return selectedOperations;
     }
 
+    public List<String> getSelectedOperationCodes() {
+        List<String> selectedOperations = new ArrayList<String>();
+        if (operationListGrid.getSelectedRecords() != null) {
+            ListGridRecord[] records = operationListGrid.getSelectedRecords();
+            for (int i = 0; i < records.length; i++) {
+                OperationRecord record = (OperationRecord) records[i];
+                selectedOperations.add(record.getCode());
+            }
+        }
+        return selectedOperations;
+    }
+
     @Override
     public void onOperationSaved(OperationDto operationDto) {
         OperationRecord record = RecordUtils.getOperationRecord(operationDto);
@@ -199,7 +214,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             listGridToolStrip.getDeleteButton().hide();
             operationListGrid.deselectAllRecords();
         } else {
-            listGridToolStrip.getDeleteButton().show();
+            showListGridDeleteButton();
         }
     }
 
@@ -218,6 +233,20 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     @Override
     public void setSubjects(List<ExternalItemBtDto> subjects) {
         this.newOperationForm.setSubjetcAreas(subjects);
+    }
+
+    private void showListGridDeleteButton() {
+        List<String> selectedOperationCodes = getSelectedOperationCodes();
+        boolean actionAllowed = true;
+        for (String code : selectedOperationCodes) {
+            if (!ClientSecurityUtils.canDeleteOperation(code)) {
+                actionAllowed = false;
+                break;
+            }
+        }
+        if (actionAllowed) {
+            listGridToolStrip.getDeleteButton().show();
+        }
     }
 
 }

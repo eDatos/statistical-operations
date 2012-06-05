@@ -21,6 +21,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.EnumUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
@@ -49,6 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.SortDirection;
+import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -70,7 +72,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private VLayout                         panel;
 
-    private OperationMainFormLayout           mainFormLayout;
+    private OperationMainFormLayout         mainFormLayout;
+
+    private OperationDto                    operationDto;
 
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
@@ -140,7 +144,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private NewInstanceForm                 newInstanceForm;
 
     private ToolStrip                       familiesToolStrip;
-    private ToolStripButton                 editToolStripButton;
+    private ToolStripButton                 editFamiliesToolStripButton;
     private ListGrid                        familyListGrid;
     // Families modal window
     private ModalWindow                     familiesWindow;
@@ -229,7 +233,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     deselectInstance();
                     if (instanceListGrid.getSelectedRecords().length > 1) {
                         // Delete more than one Instance with one click
-                        instanceListGridToolStrip.getDeleteButton().show();
+                        showInstanceListGridDeleteButton();
                     }
                 }
             }
@@ -245,8 +249,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         addFamiliesToOperationForm = new AddFamiliesToOperationForm();
         familiesToolStrip = new ToolStrip();
         familiesToolStrip.setWidth100();
-        editToolStripButton = new ToolStripButton(getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
-        editToolStripButton.addClickHandler(new ClickHandler() {
+        editFamiliesToolStripButton = new ToolStripButton(getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
+        editFamiliesToolStripButton.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
@@ -260,7 +264,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 familiesWindow.show();
             }
         });
-        familiesToolStrip.addButton(editToolStripButton);
+        familiesToolStrip.addButton(editFamiliesToolStripButton);
 
         TitleLabel familiesTitleLabel = new TitleLabel(getConstants().families());
         familiesTitleLabel.setStyleName("sectionTitleLeftMargin");
@@ -325,6 +329,15 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     @Override
     public void setOperation(OperationDto operationDto, List<InstanceBaseDto> instanceBaseDtos, List<FamilyBaseDto> familyBaseDtos) {
+        this.operationDto = operationDto;
+
+        // Security
+        mainFormLayout.setCanEdit(ClientSecurityUtils.canUpdateOperation(operationDto.getCode()));
+        mainFormLayout.setOperationCode(operationDto.getCode());
+        instancesOrderFormLayout.setCanEdit(ClientSecurityUtils.canUpdateInstancesOrder(operationDto.getCode()));
+        instanceListGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateInstance(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
+        editFamiliesToolStripButton.setVisibility(ClientSecurityUtils.canAddFamilyToOperation(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
+
         // Operation
         setOperation(operationDto);
 
@@ -826,7 +839,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             instanceListGridToolStrip.getDeleteButton().hide();
             instanceListGrid.deselectAllRecords();
         } else {
-            instanceListGridToolStrip.getDeleteButton().show();
+            showInstanceListGridDeleteButton();
         }
     }
 
@@ -929,6 +942,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionEditionForm.setTranslationsShowed(translationsShowed);
         annotationsViewForm.setTranslationsShowed(translationsShowed);
         annotationsEditionForm.setTranslationsShowed(translationsShowed);
+    }
+
+    private void showInstanceListGridDeleteButton() {
+        if (ClientSecurityUtils.canDeleteInstance(operationDto.getCode())) {
+            instanceListGridToolStrip.getDeleteButton().show();
+        }
     }
 
 }
