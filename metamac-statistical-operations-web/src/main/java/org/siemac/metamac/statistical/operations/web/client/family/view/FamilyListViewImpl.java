@@ -67,7 +67,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(FamilyRecord.TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
-        ListGridField statusField = new ListGridField(FamilyRecord.STATUS, OperationsWeb.getConstants().familyStatus());
+        ListGridField statusField = new ListGridField(FamilyRecord.STATUS, OperationsWeb.getConstants().familyProcStatus());
         familyListGrid.setFields(codeField, titleField, descriptionField, statusField);
         familyListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 
