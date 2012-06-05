@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 
 public class InstanceMainFormLayout extends BasePublicationMainFormLayout {
 
@@ -42,11 +43,15 @@ public class InstanceMainFormLayout extends BasePublicationMainFormLayout {
     }
 
     private void showPublishInternallyButton() {
-        publishInternally.show();
+        if (ClientSecurityUtils.canPublishInstanceInternally(operationCode)) {
+            publishInternally.show();
+        }
     }
 
     private void showPublishExternallyButton() {
-        publishExternally.show();
+        if (ClientSecurityUtils.canPublishInstanceExternally(operationCode)) {
+            publishExternally.show();
+        }
     }
 
 }

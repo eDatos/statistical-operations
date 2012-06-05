@@ -96,7 +96,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     public interface InstanceView extends View, HasUiHandlers<InstanceUiHandlers> {
 
-        void setInstance(InstanceDto instanceDto);
+        void setInstance(InstanceDto instanceDto, String operationCode);
         HasClickHandlers getSave();
         void onInstanceSaved(InstanceDto instanceDto);
         InstanceDto getInstance(InstanceDto instanceDto);
@@ -213,9 +213,13 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             }
             @Override
             public void onWaitSuccess(GetInstanceResult result) {
+                if (idOperation == null || !idOperation.equals(result.getOperationBaseDto().getId())) {
+                    // TODO Show error page if operationId does not correspond with the instance operation
+                }
+                idOperation = result.getOperationBaseDto().getId();
                 instanceDto = result.getInstanceDto();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));
-                getView().setInstance(instanceDto);
+                getView().setInstance(instanceDto, result.getOperationBaseDto().getCode());
             }
         });
     }

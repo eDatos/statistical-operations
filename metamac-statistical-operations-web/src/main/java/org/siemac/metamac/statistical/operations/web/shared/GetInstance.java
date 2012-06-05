@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.shared;
 
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
@@ -10,9 +11,12 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetInstance {
 
     @In(1)
-    Long        instanceId;
+    Long             instanceId;
 
     @Out(1)
-    InstanceDto instanceDto;
+    InstanceDto      instanceDto;
+
+    @Out(2)
+    OperationBaseDto operationBaseDto;
 
 }

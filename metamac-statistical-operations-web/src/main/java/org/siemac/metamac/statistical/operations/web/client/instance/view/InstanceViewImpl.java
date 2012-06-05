@@ -16,6 +16,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
@@ -102,7 +103,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     private VLayout                         panel;
 
-    private InstanceMainFormLayout           mainFormLayout;
+    private InstanceMainFormLayout          mainFormLayout;
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
     private GroupDynamicForm                identifiersEditionForm;
@@ -211,6 +212,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private List<CollMethodDto>             collMethodDtos;
     private List<CostDto>                   costDtos;
 
+    public String                           operationCode;
+
     public InstanceViewImpl() {
         super();
         panel = new VLayout();
@@ -258,7 +261,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     }
 
     @Override
-    public void setInstance(InstanceDto instanceDto) {
+    public void setInstance(InstanceDto instanceDto, String operationCode) {
+        this.operationCode = operationCode;
+
+        // Security
+        mainFormLayout.setCanEdit(ClientSecurityUtils.canUpdateInstance(operationCode));
+        mainFormLayout.setOperationCode(operationCode);
+
         mainFormLayout.setViewMode();
         mainFormLayout.updatePublishSection(instanceDto.getProcStatus());
         // Set Instance
@@ -274,7 +283,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     @Override
     public void onInstanceSaved(InstanceDto instanceDto) {
-        setInstance(instanceDto);
+        setInstance(instanceDto, this.operationCode); // Operation code should be the same
     }
 
     @Override

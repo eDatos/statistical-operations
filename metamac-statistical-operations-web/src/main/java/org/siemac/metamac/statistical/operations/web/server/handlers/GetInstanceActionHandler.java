@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
+import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
@@ -26,10 +27,10 @@ public class GetInstanceActionHandler extends AbstractActionHandler<GetInstanceA
 
     @Override
     public GetInstanceResult execute(GetInstanceAction action, ExecutionContext context) throws ActionException {
-        InstanceDto instanceDto = null;
         try {
-            instanceDto = statisticalOperationsServiceFacade.findInstanceById(ServiceContextHolder.getCurrentServiceContext(), action.getInstanceId());
-            return new GetInstanceResult(instanceDto);
+            InstanceDto instanceDto = statisticalOperationsServiceFacade.findInstanceById(ServiceContextHolder.getCurrentServiceContext(), action.getInstanceId());
+            OperationBaseDto operationBaseDto = statisticalOperationsServiceFacade.findOperationForInstance(ServiceContextHolder.getCurrentServiceContext(), instanceDto.getId());
+            return new GetInstanceResult(instanceDto, operationBaseDto);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
