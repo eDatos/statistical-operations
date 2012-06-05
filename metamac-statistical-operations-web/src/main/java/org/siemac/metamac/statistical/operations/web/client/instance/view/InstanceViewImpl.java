@@ -14,6 +14,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
+import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
@@ -21,6 +22,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurity
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
+import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.TimeVariableWebUtils;
@@ -39,6 +41,9 @@ import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.FormItemIfFunction;
+import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -53,7 +58,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
     private GroupDynamicForm                identifiersEditionForm;
-    private RequiredTextItem                identifier;
+    private RequiredTextItem                code;
     private MultiLanguageTextItem           title;
     private MultiLanguageTextItem           acronym;
 
@@ -421,11 +426,28 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private void createEditionForm() {
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().instanceIdentifiers());
-        identifier = new RequiredTextItem(InstanceDS.CODE, getConstants().instanceIdentifier());
+
+        code = new RequiredTextItem(InstanceDS.CODE, getConstants().instanceIdentifier());
+        code.setShowIfCondition(new FormItemIfFunction() {
+
+            @Override
+            public boolean execute(FormItem item, Object value, DynamicForm form) {
+                return canInstanceCodeBeEdited();
+            }
+        });
+        ViewTextItem staticCode = new ViewTextItem(InstanceDS.CODE_VIEW, getConstants().instanceIdentifier());
+        staticCode.setShowIfCondition(new FormItemIfFunction() {
+
+            @Override
+            public boolean execute(FormItem item, Object value, DynamicForm form) {
+                return !canInstanceCodeBeEdited();
+            }
+        });
+
         title = new MultiLanguageTextItem(InstanceDS.TITLE, getConstants().instanceTitle());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(InstanceDS.ACRONYM, getConstants().instanceAcronym());
-        identifiersEditionForm.setFields(identifier, title, acronym);
+        identifiersEditionForm.setFields(staticCode, code, title, acronym);
 
         // Content classifiers
 
@@ -468,7 +490,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Production descriptors
         productionEditionForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getConstants().instanceInternalInventoryDate());
+
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getConstants().instanceProcStatus());
+        ViewTextItem staticProcStatus = new ViewTextItem(InstanceDS.PROC_STATUS_VIEW, getConstants().instanceProcStatus());
+        staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
+
         docMethodItem = new MultiLanguageTextAndUrlItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         surveySourceItem = new SelectItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
         collMethodItem = new SelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
@@ -498,8 +524,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         costBurdenItem = new MultiLanguageTextAndUrlItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
         costItem = new SelectItem(InstanceDS.COST, getConstants().instanceCost());
         costItem.setMultiple(true);
-        productionEditionForm.setFields(internalInventoryDate, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem, infSuppliersConceptsItem, freqCollItem,
-                dataValidationItem, dataCompilationItem, adjustmentItem, costBurdenItem, costItem);
+        productionEditionForm.setFields(internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem, infSuppliersConceptsItem,
+                freqCollItem, dataValidationItem, dataCompilationItem, adjustmentItem, costBurdenItem, costItem);
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().instanceDiffusionDescriptors());
@@ -607,7 +633,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     private void setEditionForm(InstanceDto instanceDto) {
         // Identifiers
-        identifier.setValue(instanceDto.getCode());
+        code.setValue(instanceDto.getCode());
+        identifiersEditionForm.setValue(InstanceDS.CODE_VIEW, instanceDto.getCode());
+
         title.setValue(instanceDto.getTitle());
         acronym.setValue(instanceDto.getAcronym());
 
@@ -632,7 +660,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceTypeItem.setValue(instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getId().toString() : "");
 
         // Production descriptors
-        diffusionEditionForm.setValue(InstanceDS.INVENTORY_DATE, instanceDto.getInventoryDate());
+        productionEditionForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInventoryDate());
+
+        productionEditionForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
+        productionEditionForm.setValue(InstanceDS.PROC_STATUS_VIEW, instanceDto.getProcStatus().getName());
+
         docMethodItem.setValue(instanceDto.getDocMethod(), instanceDto.getDocMethodUrl());
         surveySourceItem.setValue(instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getId() : "");
         collMethodItem.setValue(instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getId() : "");
@@ -666,6 +698,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Annotations
         commentItem.setValue(instanceDto.getComment(), instanceDto.getCommentUrl());
         notesItem.setValue(instanceDto.getNotes(), instanceDto.getNotesUrl());
+        
+        identifiersEditionForm.markForRedraw();
+        productionEditionForm.markForRedraw();
     }
 
     @Override
@@ -763,6 +798,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         qualityEditionForm.setTranslationsShowed(translationsShowed);
         annotationsViewForm.setTranslationsShowed(translationsShowed);
         annotationsEditionForm.setTranslationsShowed(translationsShowed);
+    }
+
+    private boolean canInstanceCodeBeEdited() {
+        // Operation code can be edited only when ProcStatus is DRAFT
+        return (productionEditionForm.getValue(InstanceDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(productionEditionForm.getValue(InstanceDS.PROC_STATUS_VIEW)));
     }
 
 }

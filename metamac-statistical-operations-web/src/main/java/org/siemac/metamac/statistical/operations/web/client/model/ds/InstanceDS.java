@@ -7,8 +7,9 @@ public class InstanceDS extends DataSource {
 
     // IDENTIFIERS
     public static final String CODE                     = "in-code";
+    public static final String CODE_VIEW                = "in-code-view";       // Not mapped in DTO
     public static final String TITLE                    = "in-title";
-    public static final String ACRONYM                  = "op-acron";
+    public static final String ACRONYM                  = "in-acron";
     // CONTENT CLASSIFIERS
 
     // CONTENT DESCRIPTORS
@@ -30,6 +31,7 @@ public class InstanceDS extends DataSource {
     // PRODUCTION DESCRIPTORS
     public static final String INTERNAL_INVENTORY_DATE  = "in-int-inv-date";
     public static final String PROC_STATUS              = "in-proc-status";
+    public static final String PROC_STATUS_VIEW         = "in-proc-status-view"; // Not mapped in DTO
     public static final String DOC_METHOD               = "in-doc-met";
     public static final String SURVEY_SOURCE            = "in-ssource";
     public static final String COLL_METHOD              = "in-coll-met";

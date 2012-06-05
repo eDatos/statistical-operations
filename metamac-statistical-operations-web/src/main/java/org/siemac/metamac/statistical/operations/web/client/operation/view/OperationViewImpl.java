@@ -33,6 +33,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
+import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
@@ -678,6 +679,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         statusItem.setValueMap(EnumUtils.getStatusEnumHashMap());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
         ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getConstants().operationProcStatus());
+        staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
         productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, inventoryDate, currentlyActiveItem, statusItem, staticProcStatus, procStatus);
 
         // Diffusion and Publication
