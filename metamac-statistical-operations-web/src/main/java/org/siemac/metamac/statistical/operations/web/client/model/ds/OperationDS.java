@@ -46,9 +46,9 @@ public class OperationDS extends DataSource {
 
     public OperationDS() {
 
-        DataSourceTextField code = new DataSourceTextField();
-        code.setPrimaryKey(true);
-        addField(code);
+        DataSourceTextField id = new DataSourceTextField(OP_ID);
+        id.setPrimaryKey(true);
+        addField(id);
 
     }
 
