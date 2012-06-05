@@ -14,6 +14,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
+import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
@@ -54,6 +55,9 @@ import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.FormItemIfFunction;
+import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -79,7 +83,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // IDENTIFIERS
     private GroupDynamicForm                identifiersViewForm;
     private GroupDynamicForm                identifiersEditionForm;
-    private RequiredTextItem                identifier;
+    private RequiredTextItem                code;
     private MultiLanguageTextItem           title;
     private MultiLanguageTextItem           acronym;
 
@@ -274,7 +278,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ListGridField identifierFamilyField = new ListGridField(FamilyRecord.CODE, getConstants().familyIdentifier());
         ListGridField titleFamilyField = new ListGridField(FamilyRecord.TITLE, getConstants().familyTitle());
         ListGridField descriptionFamilyField = new ListGridField(FamilyRecord.DESCRIPTION, getConstants().familyDescription());
-        ListGridField statusFamilyField = new ListGridField(FamilyRecord.STATUS, getConstants().familyStatus());
+        ListGridField statusFamilyField = new ListGridField(FamilyRecord.STATUS, getConstants().familyProcStatus());
         familyListGrid.setFields(identifierFamilyField, titleFamilyField, descriptionFamilyField, statusFamilyField);
 
         VLayout familiesListGridLayout = new VLayout();
@@ -573,11 +577,28 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private void createEditionForm() {
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().operationIdentifiers());
-        identifier = new RequiredTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
+
+        code = new RequiredTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
+        code.setShowIfCondition(new FormItemIfFunction() {
+
+            @Override
+            public boolean execute(FormItem item, Object value, DynamicForm form) {
+                return canOperationCodeBeEdited();
+            }
+        });
+        ViewTextItem staticCode = new ViewTextItem(OperationDS.OP_CODE_VIEW, getConstants().operationIdentifier());
+        staticCode.setShowIfCondition(new FormItemIfFunction() {
+
+            @Override
+            public boolean execute(FormItem item, Object value, DynamicForm form) {
+                return !canOperationCodeBeEdited();
+            }
+        });
+
         title = new MultiLanguageTextItem(OperationDS.OP_TITLE, getConstants().operationTitle());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(OperationDS.OP_ACRONYM, getConstants().operationAcronym());
-        identifiersEditionForm.setFields(identifier, title, acronym);
+        identifiersEditionForm.setFields(staticCode, code, title, acronym);
 
         // Content classifiers
         classificationEditionForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -656,7 +677,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         statusItem = new SelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
         statusItem.setValueMap(EnumUtils.getStatusEnumHashMap());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
-        productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, inventoryDate, currentlyActiveItem, statusItem, procStatus);
+        ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getConstants().operationProcStatus());
+        productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, inventoryDate, currentlyActiveItem, statusItem, staticProcStatus, procStatus);
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
@@ -748,7 +770,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private void setEditionForm(OperationDto operationDto) {
         // Identifiers
-        identifier.setValue(operationDto.getCode());
+        code.setValue(operationDto.getCode());
+        identifiersEditionForm.setValue(OperationDS.OP_CODE_VIEW, operationDto.getCode());
+
         title.setValue(operationDto.getTitle());
         acronym.setValue(operationDto.getAcronym());
 
@@ -775,6 +799,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         currentlyActiveItem.setValue(operationDto.getCurrentlyActive() != null ? operationDto.getCurrentlyActive() : false);
         statusItem.setValue(operationDto.getStatus() == null ? null : operationDto.getStatus().toString());
         productionEditionForm.setValue(OperationDS.OP_PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
+        productionEditionForm.setValue(OperationDS.OP_PROC_STATUS_VIEW, operationDto.getProcStatus().toString());
 
         // Diffusion and Publication
         publisherItem.clearValue();
@@ -791,6 +816,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Annotations
         commentItem.setValue(operationDto.getComment(), operationDto.getCommentUrl());
         notesItem.setValue(operationDto.getNotes(), operationDto.getNotesUrl());
+
+        identifiersEditionForm.markForRedraw();
+        productionEditionForm.markForRedraw();
     }
 
     @Override
@@ -948,6 +976,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         if (ClientSecurityUtils.canDeleteInstance(operationDto.getCode())) {
             instanceListGridToolStrip.getDeleteButton().show();
         }
+    }
+
+    private boolean canOperationCodeBeEdited() {
+        // Operation code can be edited only when ProcStatus is DRAFT
+        return (productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW)));
     }
 
 }

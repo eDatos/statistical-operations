@@ -82,7 +82,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
 
         operationListGrid = new CustomListGrid();
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
-        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operation());
+        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operationTitle());
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
         ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getConstants().operationStatus());
         ListGridField indicatorsSystem = new ListGridField(OperationDS.OP_INDICATOR_SYSTEM, OperationsWeb.getConstants().operationIndicatorSystem());
