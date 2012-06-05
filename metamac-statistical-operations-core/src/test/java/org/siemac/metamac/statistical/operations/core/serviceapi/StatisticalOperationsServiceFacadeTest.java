@@ -224,6 +224,33 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int familiesAfter = statisticalOperationsServiceFacade.findAllFamilies(getServiceContextAdministrador()).size();
         assertEquals(familiesBefore, familiesAfter);
     }
+    
+    
+    @Test
+    public void testUpdateFamilyCodeUnmodifiable() throws MetamacException {
+        // Create operation
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        
+        // Create family
+        Long familyId = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate()).getId();
+        
+        // Relate family with operation
+        statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), familyId, operationId);
+        
+        // Publish family
+        statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoPlanificacion(), familyId);
+
+        // Change family code
+        FamilyDto familyDto = statisticalOperationsServiceFacade.findFamilyById(getServiceContextAdministrador(), familyId);
+        familyDto.setCode("FAMILY_OTHER_CODE");
+        
+        try {
+            statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyDto);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_UNMODIFIABLE.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+    }
 
     @Test
     public void testUpdateFamilyWithoutDescription() throws MetamacException {
@@ -775,6 +802,24 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Check number of operations
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
         assertEquals(operationsBefore, operationsAfter);
+    }
+    
+
+    @Test
+    public void testUpdateOperationCodeUnmodifiable() throws MetamacException {
+        // Create operation
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        
+        // Change operation code
+        OperationDto operationDto = statisticalOperationsServiceFacade.findOperationById(getServiceContextAdministrador(), operationId);
+        operationDto.setCode("OPERATION_OTHER_CODE");
+        
+        try {
+            statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_UNMODIFIABLE.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -1421,6 +1466,30 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(instancesBefore, instancesAfter);
 
     }
+    
+    @Test
+    public void testUpdateInstanceCodeUnmodifiable() throws MetamacException {
+        // Create operation
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        
+        // Create instance
+        Long instanceId = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto()).getId();
+        
+        // Publish instance
+        statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoPlanificacion(), instanceId);
+
+        // Change instance code
+        InstanceDto instanceDto = statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), instanceId);
+        instanceDto.setCode("INSTANCE_OTHER_CODE");
+        
+        try {
+            statisticalOperationsServiceFacade.updateInstance(getServiceContextAdministrador(), instanceDto);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_UNMODIFIABLE.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+    }
+    
 
     @Test
     public void testUpdateInstanceWithExternalItemBt() throws Exception {
