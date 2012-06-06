@@ -232,6 +232,21 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
+    public FamilyDto findFamilyByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Family family = getStatisticalOperationsBaseService().findFamilyByCode(ctx, code);
+
+        // Transform to dto
+        FamilyDto familyDto = do2DtoMapper.familyToDto(family);
+
+        // Return
+        return familyDto;
+    }
+
+    @Override
     public FamilyDto createFamily(ServiceContext ctx, FamilyDto familyDto) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
@@ -480,6 +495,21 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
+    public OperationDto findOperationByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Operation operation = getStatisticalOperationsBaseService().findOperationByCode(ctx, code);
+
+        // Transform to dto
+        OperationDto operationDto = operationToDto(ctx, operation);
+
+        // Return
+        return operationDto;
+    }
+
+    @Override
     public OperationDto publishInternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
@@ -628,7 +658,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION,
                 StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
-        checkAccessOperationById(ctx, operationId,  StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION,
+        checkAccessOperationById(ctx, operationId, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION,
                 StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
 
         // Service call
@@ -690,6 +720,21 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
 
         // Service call
         Instance instance = getStatisticalOperationsBaseService().findInstanceById(ctx, identifier);
+
+        // Transform to dto
+        InstanceDto instanceDto = do2DtoMapper.instanceToDto(instance);
+
+        // Return
+        return instanceDto;
+    }
+
+    @Override
+    public InstanceDto findInstanceByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Instance instance = getStatisticalOperationsBaseService().findInstanceByCode(ctx, code);
 
         // Transform to dto
         InstanceDto instanceDto = do2DtoMapper.instanceToDto(instance);

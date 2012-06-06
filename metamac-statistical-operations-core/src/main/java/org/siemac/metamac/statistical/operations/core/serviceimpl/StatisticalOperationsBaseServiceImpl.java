@@ -14,6 +14,8 @@ import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
+import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -22,6 +24,7 @@ import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceRepository;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationRepository;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.exception.FamilyNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.InstanceNotFoundException;
@@ -54,6 +57,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Family findFamilyById(ServiceContext ctx, Long id) throws MetamacException {
         // Validations
+        ValidationUtils.checkParameterRequired(id, ServiceExceptionParameters.ID, new ArrayList<MetamacExceptionItem>());
 
         // Return family
         try {
@@ -61,6 +65,28 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         } catch (FamilyNotFoundException e) {
             throw new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND);
         }
+    }
+
+    @Override
+    public Family findFamilyByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).ignoreCaseEq(code)
+                .distinctRoot().build();
+
+        // Find
+        List<Family> result = findFamilyByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND, code);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + code);
+        }
+
+        // Return unique result
+        return result.get(0);
     }
 
     @Override
@@ -133,8 +159,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return familyRepository.findByCondition(condition);
     }
-    
-    
+
     @Override
     public PagedResult<Family> findFamilyByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
         // Validations
@@ -145,7 +170,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return familyRepository.findByCondition(condition, pagingParameter);
     }
-    
 
     @Override
     public Family publishInternallyFamily(ServiceContext ctx, Long familyId) throws MetamacException {
@@ -234,6 +258,28 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     }
 
     @Override
+    public Operation findOperationByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).ignoreCaseEq(code)
+                .distinctRoot().build();
+
+        // Find
+        List<Operation> result = findOperationByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + code);
+        }
+
+        // Return unique result
+        return result.get(0);
+    }
+
+    @Override
     public Operation createOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Fill metadata
         operation.setProcStatus(ProcStatusEnum.DRAFT);
@@ -300,7 +346,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return operationRepository.findByCondition(condition);
     }
-    
+
     @Override
     public PagedResult<Operation> findOperationByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
         // Validations
@@ -369,13 +415,35 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     }
 
     @Override
+    public Instance findInstanceByCode(ServiceContext ctx, String code) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).ignoreCaseEq(code)
+                .distinctRoot().build();
+
+        // Find
+        List<Instance> result = findInstanceByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, code);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + code);
+        }
+
+        // Return unique result
+        return result.get(0);
+    }
+
+    @Override
     public Instance createInstance(ServiceContext ctx, Long operationId, Instance instance) throws MetamacException {
         // Get information
         Operation operation = findOperationById(ctx, operationId);
-        
+
         // Check operation for create instance. Operation PROC_STATUS can't be draft
         ValidationUtil.validateOperationProcStatusForSaveInstance(operation);
-        
+
         Integer order = operation.getInstances().size();
 
         // Fill metadata
@@ -500,8 +568,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Repository operation
         return instanceRepository.findByCondition(condition);
     }
-    
-    
+
     @Override
     public PagedResult<Instance> findInstanceByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
         // Validations
@@ -575,13 +642,13 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
                 if (families.size() == 1) {
                     throw new MetamacException(ServiceExceptionType.FAMILY_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (families.size() > 1) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + code);
                 }
             } else {
                 if (families.size() == 2) {
                     throw new MetamacException(ServiceExceptionType.FAMILY_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (families.size() > 2) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + code);
                 }
             }
         }
@@ -597,13 +664,13 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
                 if (operations.size() == 1) {
                     throw new MetamacException(ServiceExceptionType.OPERATION_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (operations.size() > 1) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + code);
                 }
             } else {
                 if (operations.size() == 2) {
                     throw new MetamacException(ServiceExceptionType.OPERATION_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (operations.size() > 2) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + code);
                 }
             }
         }
@@ -619,13 +686,13 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
                 if (instances.size() == 1) {
                     throw new MetamacException(ServiceExceptionType.INSTANCE_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (instances.size() > 1) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + code);
                 }
             } else {
                 if (instances.size() == 2) {
                     throw new MetamacException(ServiceExceptionType.INSTANCE_ALREADY_EXIST_CODE_DUPLICATED, code);
                 } else if (instances.size() > 2) {
-                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code code " + code);
+                    throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + code);
                 }
             }
         }

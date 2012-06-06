@@ -74,6 +74,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoPlanificacion(), Long.valueOf(1));
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoProduccion(), Long.valueOf(1));
     }
+    
 
     @Test
     public void testFindAllSurveySources() throws Exception {
@@ -295,6 +296,19 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyById(getServiceContextTecnicoPlanificacion(), familyId);
         statisticalOperationsServiceFacade.findFamilyById(getServiceContextTecnicoProduccion(), familyId);
 
+    }
+    
+    @Test
+    public void testFindFamilyByCode() throws Exception {
+        String familyCode = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getCode();
+
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoApoyoDifusion(), familyCode);
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoApoyoPlanificacion(), familyCode);
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoApoyoProduccion(), familyCode);
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoDifusion(), familyCode);
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoPlanificacion(), familyCode);
+        statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoProduccion(), familyCode);
+        
     }
 
     @Test
@@ -589,6 +603,19 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoDifusion(), operationId);
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoPlanificacion(), operationId);
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoProduccion(), operationId);
+    }
+    
+    @Test
+    public void testFindOperationByCode() throws Exception {
+        String operationCode = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getCode();
+
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoApoyoDifusion(), operationCode);
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoApoyoPlanificacion(), operationCode);
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoApoyoProduccion(), operationCode);
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoDifusion(), operationCode);
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoPlanificacion(), operationCode);
+        statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoProduccion(), operationCode);
+        
     }
 
     @Test
@@ -1103,6 +1130,21 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceById(getServiceContextTecnicoProduccion(), instanceId);
 
     }
+    
+    @Test
+    public void testFindInstanceByCode() throws Exception {
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        String instanceCode = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto()).getCode();
+
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoApoyoDifusion(), instanceCode);
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoApoyoPlanificacion(), instanceCode);
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoApoyoProduccion(), instanceCode);
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoDifusion(), instanceCode);
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoPlanificacion(), instanceCode);
+        statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoProduccion(), instanceCode);
+        
+    }
 
     @Test
     public void testFindInstanceBaseById() throws Exception {
@@ -1445,6 +1487,5 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         return instanceDto;
     }
-
 
 }

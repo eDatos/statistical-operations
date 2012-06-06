@@ -71,6 +71,31 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     }
 
     @Test
+    public void testFindFamilyByCode() throws Exception {
+        String family_code = "family_01";
+
+        Family family = createFamily();
+        family.setCode(family_code);
+
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), family);
+
+        Family familyRetrieved = statisticalOperationsBaseService.findFamilyByCode(getServiceContextAdministrador(), family_code);
+        assertNotNull(familyRetrieved);
+        assertEquals(family_code, family.getCode());
+    }
+
+    @Test
+    public void testFindFamilyByCodeNotExists() throws Exception {
+        String family_code = "not_exists";
+
+        try {
+            statisticalOperationsBaseService.findFamilyByCode(getServiceContextAdministrador(), family_code);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.FAMILY_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+    }
+
+    @Test
     public void testSaveFamilyWithOperations() throws MetamacException {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamilyWithOperations());
         assertNotNull(family);
@@ -184,6 +209,31 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operationRetrieved);
 
         assertTrue(operation.equals(operationRetrieved));
+    }
+
+    @Test
+    public void testFindOperationByCode() throws Exception {
+        String operation_code = "operation_01";
+
+        Operation operation = createOperation();
+        operation.setCode(operation_code);
+
+        statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
+
+        Operation operationRetrieved = statisticalOperationsBaseService.findOperationByCode(getServiceContextAdministrador(), operation_code);
+        assertNotNull(operationRetrieved);
+        assertEquals(operation_code, operation.getCode());
+    }
+
+    @Test
+    public void testFindOperationByCodeNotExists() throws Exception {
+        String operation_code = "not_exists";
+
+        try {
+            statisticalOperationsBaseService.findOperationByCode(getServiceContextAdministrador(), operation_code);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.OPERATION_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -386,6 +436,32 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(instanceRetrieved);
 
         assertTrue(instance.equals(instanceRetrieved));
+    }
+
+    @Test
+    public void testFindInstanceByCode() throws Exception {
+        String instance_code = "instance_01";
+        Instance instance = createInstance();
+        instance.setCode(instance_code);
+
+        Long operationId = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing()).getId();
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operationId, instance);
+
+        Instance instanceRetrieved = statisticalOperationsBaseService.findInstanceByCode(getServiceContextAdministrador(), instance_code);
+        assertNotNull(instanceRetrieved);
+        assertEquals(instance_code, instance.getCode());
+    }
+
+    @Test
+    public void testFindInstanceByCodeNotExists() throws Exception {
+        String instance_code = "not_exists";
+
+        try {
+            statisticalOperationsBaseService.findInstanceByCode(getServiceContextAdministrador(), instance_code);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -788,4 +864,5 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         return instance;
     }
+
 }

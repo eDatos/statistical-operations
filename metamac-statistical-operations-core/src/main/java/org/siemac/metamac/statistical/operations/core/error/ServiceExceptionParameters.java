@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.core.error;
 
 public class ServiceExceptionParameters {
 
+    public static final String ID                                = "id";
     public static final String CODE                              = "code";
     public static final String INSTANCES_ID_LIST_SIZE            = "intances_id_list.size";
 
