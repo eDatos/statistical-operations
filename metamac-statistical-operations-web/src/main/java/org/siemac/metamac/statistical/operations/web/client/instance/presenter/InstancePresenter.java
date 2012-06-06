@@ -11,6 +11,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
@@ -54,6 +55,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -85,6 +87,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @ProxyCodeSplit
     @NameToken(NameTokens.instancePage)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface InstanceProxy extends Proxy<InstancePresenter>, Place {
 
     }

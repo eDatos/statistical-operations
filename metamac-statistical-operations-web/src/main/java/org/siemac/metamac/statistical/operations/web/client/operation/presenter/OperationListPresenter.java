@@ -8,6 +8,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
@@ -38,6 +39,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -61,6 +63,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationListPage)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface OperationsListProxy extends Proxy<OperationListPresenter>, Place {
 
     }

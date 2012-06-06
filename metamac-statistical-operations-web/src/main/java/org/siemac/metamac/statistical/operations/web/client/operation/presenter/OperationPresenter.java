@@ -13,6 +13,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
@@ -69,6 +70,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -104,6 +106,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface OperationProxy extends Proxy<OperationPresenter>, Place {
 
     }

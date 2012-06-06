@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
@@ -54,6 +55,7 @@ import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -73,6 +75,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
     @ProxyStandard
     @NameToken(NameTokens.mainPage)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface MainPageProxy extends Proxy<MainPagePresenter>, Place {
 
     }

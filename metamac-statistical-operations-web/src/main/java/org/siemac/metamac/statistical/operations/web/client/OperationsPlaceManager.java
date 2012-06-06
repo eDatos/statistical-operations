@@ -26,19 +26,17 @@ public class OperationsPlaceManager extends PlaceManagerImpl {
         revealPlace(defaultPlaceRequest);
     }
 
-    /*
-     * TODO Implement this method when authentication needed
-     * @Override
-     * public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
-     * PlaceRequest placeRequest = new PlaceRequest(NameTokens.signInPage);
-     * placeRequest = placeRequest.with("redirect", unauthorizedHistoryToken);
-     * revealPlace(placeRequest);
-     * }
-     */
+    @Override
+    public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
+        PlaceRequest placeRequest = new PlaceRequest(NameTokens.errorPage);
+        placeRequest = placeRequest.with("redirect", unauthorizedHistoryToken);
+        revealPlace(placeRequest);
+    }
 
     @Override
     public void revealErrorPlace(String invalidHistoryToken) {
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.errorPage);
         revealPlace(placeRequest);
     }
+
 }

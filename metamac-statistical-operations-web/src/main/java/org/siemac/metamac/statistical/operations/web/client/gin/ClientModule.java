@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.gin;
 
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.OperationsPlaceManager;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants;
@@ -14,7 +15,9 @@ import org.siemac.metamac.statistical.operations.web.client.operation.presenter.
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.OperationListViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.OperationViewImpl;
+import org.siemac.metamac.statistical.operations.web.client.presenter.ErrorPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.view.ErrorPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.view.MainPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.client.widgets.view.OperationsToolStripViewImpl;
@@ -38,8 +41,12 @@ public class ClientModule extends AbstractPresenterModule {
         // Constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.familyListPage);
 
+        // Gate keeper
+        bind(LoggedInGatekeeper.class).in(Singleton.class);
+
         // Presenters
         bindPresenter(MainPagePresenter.class, MainPagePresenter.MainPageView.class, MainPageViewImpl.class, MainPagePresenter.MainPageProxy.class);
+        bindPresenter(ErrorPagePresenter.class, ErrorPagePresenter.ErrorPageView.class, ErrorPageViewImpl.class, ErrorPagePresenter.ErrorPageProxy.class);
         bindPresenter(FamilyListPresenter.class, FamilyListPresenter.FamilyListView.class, FamilyListViewImpl.class, FamilyListPresenter.FamiliesListProxy.class);
         bindPresenter(FamilyPresenter.class, FamilyPresenter.FamilyView.class, FamilyViewImpl.class, FamilyPresenter.FamilyProxy.class);
         bindPresenter(OperationListPresenter.class, OperationListPresenter.OperationListView.class, OperationListViewImpl.class, OperationListPresenter.OperationsListProxy.class);

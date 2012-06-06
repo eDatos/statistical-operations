@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
@@ -40,6 +41,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
@@ -67,6 +69,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
     @ProxyCodeSplit
     @NameToken(NameTokens.familyPage)
+    @UseGatekeeper(LoggedInGatekeeper.class)
     public interface FamilyProxy extends Proxy<FamilyPresenter>, Place {
 
     }

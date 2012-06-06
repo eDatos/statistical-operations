@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
 import org.siemac.metamac.web.common.client.MetamacEntryPoint;
+import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.GetLoginPageUrlAction;
 import org.siemac.metamac.web.common.shared.GetLoginPageUrlResult;
@@ -52,6 +53,8 @@ public class OperationsWeb extends MetamacEntryPoint {
             @Override
             public void onWaitSuccess(MockCASUserResult result) {
                 OperationsWeb.principal = result.getMetamacPrincipal();
+                
+                LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
 
                 // This is required for GWT-Platform proxy's generator.
                 DelayedBindRegistry.bind(ginjector);
@@ -98,6 +101,8 @@ public class OperationsWeb extends MetamacEntryPoint {
     //
     // String url = Window.Location.createUrlBuilder().setHash("").buildString();
     // Window.Location.assign(url);
+    //
+    // LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
     //
     // // This is required for GWT-Platform proxy's generator.
     // DelayedBindRegistry.bind(ginjector);
