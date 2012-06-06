@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
@@ -244,6 +245,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
                 return canFamilyCodeBeEdited(form);
             }
         });
+        code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         ViewTextItem staticCode = new ViewTextItem(FamilyDS.CODE_VIEW, OperationsWeb.getConstants().familyIdentifier());
         staticCode.setShowIfCondition(new FormItemIfFunction() {

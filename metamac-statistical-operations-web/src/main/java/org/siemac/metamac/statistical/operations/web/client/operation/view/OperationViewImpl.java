@@ -32,6 +32,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridTool
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
@@ -587,6 +588,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 return canOperationCodeBeEdited();
             }
         });
+        code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
         ViewTextItem staticCode = new ViewTextItem(OperationDS.OP_CODE_VIEW, getConstants().operationIdentifier());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 

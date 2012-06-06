@@ -21,6 +21,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
@@ -435,6 +436,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 return canInstanceCodeBeEdited();
             }
         });
+        code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
         ViewTextItem staticCode = new ViewTextItem(InstanceDS.CODE_VIEW, getConstants().instanceIdentifier());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 
@@ -698,7 +700,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Annotations
         commentItem.setValue(instanceDto.getComment(), instanceDto.getCommentUrl());
         notesItem.setValue(instanceDto.getNotes(), instanceDto.getNotesUrl());
-        
+
         identifiersEditionForm.markForRedraw();
         productionEditionForm.markForRedraw();
     }
