@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
+import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent.LoginAuthenticatedEventHandler;
 
@@ -35,7 +36,7 @@ public class LoggedInGatekeeper implements Gatekeeper {
 
     private boolean hasAnyAllowedRole(MetamacPrincipal metamacPrincipal) {
         for (MetamacPrincipalAccess access : metamacPrincipal.getAccesses()) {
-            if (isRoleAllowed(access.getRole())) {
+            if (StatisticalOperationsConstants.SECURITY_APPLICATION_ID.equals(access.getApplication()) && isRoleAllowed(access.getRole())) {
                 return true;
             }
         }
