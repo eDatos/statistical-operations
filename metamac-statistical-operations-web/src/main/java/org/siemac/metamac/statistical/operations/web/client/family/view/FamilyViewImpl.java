@@ -21,6 +21,7 @@ import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
@@ -52,7 +53,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private MultiLanguageTextItem     titleItem;
     private MultiLanguageTextItem     acronymItem;
-    private MultiLanguageTextItem     descriptionItem;
+    private MultiLanguageTextAreaItem descriptionItem;
 
     private ToolStrip                 operationToolStrip;
     private ToolStripButton           editToolStripButton;
@@ -259,7 +260,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         titleItem = new MultiLanguageTextItem(FamilyDS.TITLE, OperationsWeb.getConstants().familyTitle());
         titleItem.setRequired(true);
         acronymItem = new MultiLanguageTextItem(FamilyDS.ACRONYM, OperationsWeb.getConstants().familyAcronym());
-        descriptionItem = new MultiLanguageTextItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        descriptionItem = new MultiLanguageTextAreaItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
 
         // Status
@@ -268,7 +269,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
         ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
-        familyEditionForm.setFields(staticCode, code, titleItem, acronymItem, descriptionItem, internalInventoryDate, procStatus, staticProcStatus, inventoryDate);
+        familyEditionForm.setFields(staticCode, code, titleItem, acronymItem, procStatus, descriptionItem, internalInventoryDate, staticProcStatus, inventoryDate);
         // Add to main layout
         mainFormLayout.addEditionCanvas(familyEditionForm);
     }

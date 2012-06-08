@@ -28,8 +28,9 @@ import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.TimeVariableWebUtils;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAndUrlItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextAndUrlItem;
@@ -45,7 +46,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
@@ -69,36 +69,36 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultiLanguageTextItem           dataDescriptionItem;
     private MultiLanguageTextItem           statisticalPopulationItem;
     private ExternalMultipleSelectItem      statisticalUnitItem;
-    private SelectItem                      geographicalGranularityItem;
+    private CustomSelectItem                geographicalGranularityItem;
     private MultiLanguageTextItem           geographicalComparabilityItem;
-    private SelectItem                      temporalGranularityItem;
+    private CustomSelectItem                temporalGranularityItem;
     private MultiLanguageTextItem           temporalComparabilityItem;
     // TODO base period
-    private SelectItem                      unitMeasureItem;
+    private CustomSelectItem                unitMeasureItem;
     private MultiLanguageTextItem           statConcDefItem;
-    private SelectItem                      statConcDefListItem;
+    private CustomSelectItem                statConcDefListItem;
     private MultiLanguageTextItem           classSystemItem;
-    private SelectItem                      classSystemListItem;
+    private CustomSelectItem                classSystemListItem;
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm                classViewForm;
     private GroupDynamicForm                classEditionForm;
-    private SelectItem                      instanceTypeItem;
+    private CustomSelectItem                instanceTypeItem;
 
     // PRODUCTION DESCRIPTORS
     private GroupDynamicForm                productionViewForm;
     private GroupDynamicForm                productionEditionForm;
-    private MultiLanguageTextAndUrlItem     docMethodItem;
-    private SelectItem                      collMethodItem;
-    private SelectItem                      surveySourceItem;
+    private MultiLanguageTextAreaAndUrlItem docMethodItem;
+    private CustomSelectItem                collMethodItem;
+    private CustomSelectItem                surveySourceItem;
     private ExternalMultipleSelectItem      infSuppliersOrganItem;
     private ExternalMultipleSelectItem      infSuppliersConceptsItem;
-    private SelectItem                      freqCollItem;
-    private MultiLanguageTextAndUrlItem     dataValidationItem;
-    private MultiLanguageTextAndUrlItem     dataCompilationItem;
-    private MultiLanguageTextAndUrlItem     adjustmentItem;
-    private MultiLanguageTextAndUrlItem     costBurdenItem;
-    private SelectItem                      costItem;
+    private CustomSelectItem                freqCollItem;
+    private MultiLanguageTextAreaAndUrlItem dataValidationItem;
+    private MultiLanguageTextAreaAndUrlItem dataCompilationItem;
+    private MultiLanguageTextAreaAndUrlItem adjustmentItem;
+    private MultiLanguageTextAreaAndUrlItem costBurdenItem;
+    private CustomSelectItem                costItem;
 
     private ViewMultiLanguageTextAndUrlItem staticDocMethodItem;
     private ViewMultiLanguageTextAndUrlItem staticDataValidationItem;
@@ -113,19 +113,19 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // QUALITY DESCRIPTORS
     private GroupDynamicForm                qualityViewForm;
     private GroupDynamicForm                qualityEditionForm;
-    private MultiLanguageTextAndUrlItem     qualityDocItem;
-    private MultiLanguageTextAndUrlItem     qualityAssureItem;
-    private MultiLanguageTextAndUrlItem     qualityAssesmentItem;
-    private MultiLanguageTextAndUrlItem     userNeedsItem;
-    private MultiLanguageTextAndUrlItem     userSatItem;
-    private MultiLanguageTextAndUrlItem     completenessItem;
-    private MultiLanguageTextAndUrlItem     timelinessItem;
-    private MultiLanguageTextAndUrlItem     punctualityItem;
-    private MultiLanguageTextAndUrlItem     accuracyOverallItem;
-    private MultiLanguageTextAndUrlItem     samplingErrItem;
-    private MultiLanguageTextAndUrlItem     nonSamplingErrItem;
-    private MultiLanguageTextAndUrlItem     coherXDomItem;
-    private MultiLanguageTextAndUrlItem     coherInternalItem;
+    private MultiLanguageTextAreaAndUrlItem qualityDocItem;
+    private MultiLanguageTextAreaAndUrlItem qualityAssureItem;
+    private MultiLanguageTextAreaAndUrlItem qualityAssesmentItem;
+    private MultiLanguageTextAreaAndUrlItem userNeedsItem;
+    private MultiLanguageTextAreaAndUrlItem userSatItem;
+    private MultiLanguageTextAreaAndUrlItem completenessItem;
+    private MultiLanguageTextAreaAndUrlItem timelinessItem;
+    private MultiLanguageTextAreaAndUrlItem punctualityItem;
+    private MultiLanguageTextAreaAndUrlItem accuracyOverallItem;
+    private MultiLanguageTextAreaAndUrlItem samplingErrItem;
+    private MultiLanguageTextAreaAndUrlItem nonSamplingErrItem;
+    private MultiLanguageTextAreaAndUrlItem coherXDomItem;
+    private MultiLanguageTextAreaAndUrlItem coherInternalItem;
 
     private ViewMultiLanguageTextAndUrlItem staticQualityDocItem;
     private ViewMultiLanguageTextAndUrlItem staticQualityAssureItem;
@@ -144,8 +144,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // ANNOTATIONS
     private GroupDynamicForm                annotationsViewForm;
     private GroupDynamicForm                annotationsEditionForm;
-    private MultiLanguageTextAndUrlItem     commentItem;
-    private MultiLanguageTextAndUrlItem     notesItem;
+    private MultiLanguageTextAreaAndUrlItem commentItem;
+    private MultiLanguageTextAreaAndUrlItem notesItem;
 
     private ViewMultiLanguageTextAndUrlItem staticCommentItem;
     private ViewMultiLanguageTextAndUrlItem staticNotesItem;
@@ -467,26 +467,26 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 }
             }
         });
-        geographicalGranularityItem = new SelectItem(InstanceDS.GEOGRAPHIC_GRANULARITY, getConstants().instanceGeographicGranularity());
+        geographicalGranularityItem = new CustomSelectItem(InstanceDS.GEOGRAPHIC_GRANULARITY, getConstants().instanceGeographicGranularity());
         geographicalComparabilityItem = new MultiLanguageTextItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
-        temporalGranularityItem = new SelectItem(InstanceDS.TEMPORAL_GRANULARITY, getConstants().instanceTemporalGranularity());
+        temporalGranularityItem = new CustomSelectItem(InstanceDS.TEMPORAL_GRANULARITY, getConstants().instanceTemporalGranularity());
         temporalComparabilityItem = new MultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
         TextItem basePeriodItem = new TextItem(InstanceDS.BASE_PERIOD, getConstants().instanceBasePeriod());
         basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
-        unitMeasureItem = new SelectItem(InstanceDS.UNIT_MEASURE, getConstants().instanceUnitMeasure());
+        unitMeasureItem = new CustomSelectItem(InstanceDS.UNIT_MEASURE, getConstants().instanceUnitMeasure());
         unitMeasureItem.setMultiple(true);
         statConcDefItem = new MultiLanguageTextItem(InstanceDS.STAT_CONC_DEF, getConstants().instanceStatisticalConceptDefinition());
-        statConcDefListItem = new SelectItem(InstanceDS.STAT_CONC_DEF_LIST, getConstants().instanceStatisticalConceptsDefinitions());
+        statConcDefListItem = new CustomSelectItem(InstanceDS.STAT_CONC_DEF_LIST, getConstants().instanceStatisticalConceptsDefinitions());
         statConcDefListItem.setMultiple(true);
         classSystemItem = new MultiLanguageTextItem(InstanceDS.CLASS_SYSTEM, getConstants().instanceClassSystem());
-        classSystemListItem = new SelectItem(InstanceDS.CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
+        classSystemListItem = new CustomSelectItem(InstanceDS.CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
         classSystemListItem.setMultiple(true);
         contentEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicalGranularityItem, geographicalComparabilityItem, temporalGranularityItem,
                 basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemItem, classSystemListItem);
 
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
-        instanceTypeItem = new SelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
+        instanceTypeItem = new CustomSelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
         classEditionForm.setFields(instanceTypeItem);
 
         // Production descriptors
@@ -497,9 +497,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem staticProcStatus = new ViewTextItem(InstanceDS.PROC_STATUS_VIEW, getConstants().instanceProcStatus());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
-        docMethodItem = new MultiLanguageTextAndUrlItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
-        surveySourceItem = new SelectItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
-        collMethodItem = new SelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
+        docMethodItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
+        surveySourceItem = new CustomSelectItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
+        collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         infSuppliersOrganItem = new ExternalMultipleSelectItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliersOrg());
         infSuppliersOrganItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -518,13 +518,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 getUiHandlers().populateInfSuppliersConcept(event.getValue().toString());
             }
         });
-        freqCollItem = new SelectItem(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
+        freqCollItem = new CustomSelectItem(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
         freqCollItem.setMultiple(true);
-        dataValidationItem = new MultiLanguageTextAndUrlItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
-        dataCompilationItem = new MultiLanguageTextAndUrlItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
-        adjustmentItem = new MultiLanguageTextAndUrlItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
-        costBurdenItem = new MultiLanguageTextAndUrlItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
-        costItem = new SelectItem(InstanceDS.COST, getConstants().instanceCost());
+        dataValidationItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
+        dataCompilationItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
+        adjustmentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
+        costBurdenItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
+        costItem = new CustomSelectItem(InstanceDS.COST, getConstants().instanceCost());
         costItem.setMultiple(true);
         productionEditionForm.setFields(internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem, infSuppliersConceptsItem,
                 freqCollItem, dataValidationItem, dataCompilationItem, adjustmentItem, costBurdenItem, costItem);
@@ -536,26 +536,26 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Quality Descriptors
         qualityEditionForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        qualityDocItem = new MultiLanguageTextAndUrlItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
-        qualityAssureItem = new MultiLanguageTextAndUrlItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
-        qualityAssesmentItem = new MultiLanguageTextAndUrlItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
-        userNeedsItem = new MultiLanguageTextAndUrlItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
-        userSatItem = new MultiLanguageTextAndUrlItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
-        completenessItem = new MultiLanguageTextAndUrlItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
-        timelinessItem = new MultiLanguageTextAndUrlItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
-        punctualityItem = new MultiLanguageTextAndUrlItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
-        accuracyOverallItem = new MultiLanguageTextAndUrlItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
-        samplingErrItem = new MultiLanguageTextAndUrlItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
-        nonSamplingErrItem = new MultiLanguageTextAndUrlItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
-        coherXDomItem = new MultiLanguageTextAndUrlItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
-        coherInternalItem = new MultiLanguageTextAndUrlItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
+        qualityDocItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
+        qualityAssureItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
+        qualityAssesmentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
+        userNeedsItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
+        userSatItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
+        completenessItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
+        timelinessItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
+        punctualityItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
+        accuracyOverallItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
+        samplingErrItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
+        nonSamplingErrItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
+        coherXDomItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
+        coherInternalItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
         qualityEditionForm.setFields(qualityDocItem, qualityAssureItem, qualityAssesmentItem, userNeedsItem, userSatItem, completenessItem, timelinessItem, punctualityItem, accuracyOverallItem,
                 samplingErrItem, nonSamplingErrItem, coherXDomItem, coherInternalItem);
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        commentItem = new MultiLanguageTextAndUrlItem(InstanceDS.COMMENTS, getConstants().instanceComments());
-        notesItem = new MultiLanguageTextAndUrlItem(InstanceDS.NOTES, getConstants().instanceNotes());
+        commentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COMMENTS, getConstants().instanceComments());
+        notesItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.NOTES, getConstants().instanceNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         mainFormLayout.addEditionCanvas(identifiersEditionForm);

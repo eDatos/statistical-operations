@@ -39,11 +39,9 @@ public class NewOperationForm extends CustomDynamicForm {
         setValidateOnChange(true);
 
         identifier = new RequiredTextItem("op-id", getConstants().operationIdentifier());
-        identifier.setWidth(200);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         title = new RequiredTextItem("op-title", getConstants().operationTitle());
-        title.setWidth(200);
 
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
 

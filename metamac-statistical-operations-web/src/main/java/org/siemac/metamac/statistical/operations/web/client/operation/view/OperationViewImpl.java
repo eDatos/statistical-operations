@@ -40,9 +40,13 @@ import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAndUrlItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaAndUrlItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextAndUrlItem;
@@ -60,8 +64,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.form.fields.SelectItem;
-import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
@@ -99,13 +101,13 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private GroupDynamicForm                contentViewForm;
     private GroupDynamicForm                contentEditionForm;
     private MultiLanguageTextItem           objective;
-    private MultiLanguageTextItem           description;
+    private MultiLanguageTextAreaItem       description;
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm                classViewForm;
     private GroupDynamicForm                classEditionForm;
-    private SelectItem                      surveyType;
-    private SelectItem                      officialityType;
+    private CustomSelectItem                surveyType;
+    private CustomSelectItem                officialityType;
     private CustomCheckboxItem              indSystem;
 
     // PRODUCTION DESCRIPTORS
@@ -115,7 +117,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private ExternalMultipleSelectItem      regionalResponsibleItem;
     private ExternalMultipleSelectItem      regionalContributorItem;
     private CustomCheckboxItem              currentlyActiveItem;
-    private SelectItem                      statusItem;
+    private CustomSelectItem                statusItem;
 
     // DIFUSSION AND PUBLICATION
     private GroupDynamicForm                diffusionViewForm;
@@ -123,11 +125,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private ExternalMultipleSelectItem      publisherItem;
     private MultiLanguageTextAndUrlItem     relPolUsAc;
     private CustomCheckboxItem              releaseCalendar;
-    private TextItem                        releaseCalendarAccess;
-    private SelectItem                      updateFrequencyItem;
-    private MultiLanguageTextAndUrlItem     revPolicyItem;
-    private MultiLanguageTextAndUrlItem     revPracticeItem;
-    private SelectItem                      commonMetadataItem;
+    private CustomTextItem                  releaseCalendarAccess;
+    private CustomSelectItem                updateFrequencyItem;
+    private MultiLanguageTextAreaAndUrlItem revPolicyItem;
+    private MultiLanguageTextAreaAndUrlItem revPracticeItem;
+    private CustomSelectItem                commonMetadataItem;
 
     private ViewMultiLanguageTextAndUrlItem staticRelPolUsAc;
     private ViewMultiLanguageTextAndUrlItem staticRevPolicyItem;
@@ -136,8 +138,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // ANNOTATIONS
     private GroupDynamicForm                annotationsViewForm;
     private GroupDynamicForm                annotationsEditionForm;
-    private MultiLanguageTextAndUrlItem     commentItem;
-    private MultiLanguageTextAndUrlItem     notesItem;
+    private MultiLanguageTextAreaAndUrlItem commentItem;
+    private MultiLanguageTextAreaAndUrlItem notesItem;
 
     private ViewMultiLanguageTextAndUrlItem staticCommentItem;
     private ViewMultiLanguageTextAndUrlItem staticNotesItem;
@@ -630,15 +632,15 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        description = new MultiLanguageTextItem(OperationDS.OP_DESCRIPTION, getConstants().operationDescription());
+        description = new MultiLanguageTextAreaItem(OperationDS.OP_DESCRIPTION, getConstants().operationDescription());
         objective = new MultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getConstants().operationObjective());
         objective.setRequired(true);
         contentEditionForm.setFields(objective, description);
 
         // Class Descriptors
         classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
-        surveyType = new SelectItem(OperationDS.OP_SURVEY_TYPE, getConstants().operationSurveyType());
-        officialityType = new SelectItem(OperationDS.OP_OFFICIALITY_TYPE, getConstants().operationOfficialityType());
+        surveyType = new CustomSelectItem(OperationDS.OP_SURVEY_TYPE, getConstants().operationSurveyType());
+        officialityType = new CustomSelectItem(OperationDS.OP_OFFICIALITY_TYPE, getConstants().operationOfficialityType());
         indSystem = new CustomCheckboxItem(OperationDS.OP_INDICATOR_SYSTEM, getConstants().operationIndicatorSystem());
         indSystem.setTitleStyle("requiredFormLabel");
         classEditionForm.setFields(surveyType, officialityType, indSystem);
@@ -677,7 +679,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         });
         ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
-        statusItem = new SelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
+        statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
         statusItem.setValueMap(EnumUtils.getStatusEnumHashMap());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
         ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getConstants().operationProcStatus());
@@ -698,22 +700,22 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         });
         relPolUsAc = new MultiLanguageTextAndUrlItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
         releaseCalendar = new CustomCheckboxItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
-        releaseCalendarAccess = new TextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
-        updateFrequencyItem = new SelectItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
+        releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
+        updateFrequencyItem = new CustomSelectItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
         updateFrequencyItem.setMultiple(true);
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
         ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getConstants().operationInventoryDate());
-        revPolicyItem = new MultiLanguageTextAndUrlItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
-        revPracticeItem = new MultiLanguageTextAndUrlItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
-        commonMetadataItem = new SelectItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
+        revPolicyItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
+        revPracticeItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
+        commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
         diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
                 revPracticeItem, commonMetadataItem);
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        commentItem = new MultiLanguageTextAndUrlItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
-        notesItem = new MultiLanguageTextAndUrlItem(OperationDS.OP_NOTES, getConstants().operationNotes());
+        commentItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
+        notesItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_NOTES, getConstants().operationNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         // Add to main layout
