@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+        <artifactId>metamac-statistical-operations-parent</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath>../metamac-statistical-operations-parent/pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+    <artifactId>metamac-statistical-operations-web</artifactId>
+    <packaging>war</packaging>
+    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WEB</name>
+    <description>METAMAC :: STATISTICAL :: OPERATIONS :: WEB</description>
+
+    <properties>
+        <!-- Convenience property to set the GWT version -->
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-core</artifactId>
+            <version>${project.version}</version>
+            <classifier>client</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-ws-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.siemac.metamac</groupId>
+            <artifactId>metamac-web-common</artifactId>
+            <version>${metamac-web-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>${icu4j.version}</version>
+        </dependency>
+
+        <!-- Web services (spring - jaxws) -->
+        <dependency>
+            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+            <artifactId>jaxws-spring</artifactId>
+            <version>${jaxws-spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <!-- must be version 2.2.2 -->
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mimepull</artifactId>
+                    <groupId>org.jvnet</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>sjsxp</artifactId>
+                    <groupId>com.sun.xml.stream</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>resolver</artifactId>
+                    <groupId>com.sun.org.apache.xml.internal</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
