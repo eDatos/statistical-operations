@@ -55,8 +55,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
     }
 
     private ServiceContext getServiceContextWs() {
-        ServiceContext ctx = new ServiceContext("webService", "webService", "webService"); // TODO ServiceContext en web services
-        return ctx;
+        return new ServiceContext("adminWsInternal", "adminWsInternal", "wsInternal");
     }
 
     /**

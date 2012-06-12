@@ -52,8 +52,7 @@ public class StatisticalOperationsExternalWebServiceFacadeV10Impl implements Met
     }
 
     private ServiceContext getServiceContextWs() {
-        ServiceContext ctx = new ServiceContext("webServiceExternal", "webService", "webService"); // TODO ServiceContext en web services
-        return ctx;
+        return new ServiceContext("adminWsExternal", "adminWsExternal", "wsExternal");
     }
 
     /**
