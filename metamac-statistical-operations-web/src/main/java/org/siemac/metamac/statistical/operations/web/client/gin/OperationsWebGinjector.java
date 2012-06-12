@@ -10,6 +10,7 @@ import org.siemac.metamac.statistical.operations.web.client.operation.presenter.
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.presenter.ErrorPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.presenter.UnauthorizedPagePresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
@@ -30,13 +31,15 @@ public interface OperationsWebGinjector extends Ginjector {
     LoggedInGatekeeper getLoggedInGatekeeper();
 
     Provider<MainPagePresenter> getMainPagePresenter();
-    AsyncProvider<ErrorPagePresenter> getErrorPagePresenter();
-    
+
     AsyncProvider<FamilyListPresenter> getFamilyListPresenter();
     AsyncProvider<FamilyPresenter> getFamilyPresenter();
     AsyncProvider<OperationListPresenter> getOperationListPresenter();
     AsyncProvider<OperationPresenter> getOperationPresenter();
     AsyncProvider<InstancePresenter> getInstancePresenter();
+
+    AsyncProvider<ErrorPagePresenter> getErrorPagePresenter();
+    AsyncProvider<UnauthorizedPagePresenter> getUnauthorizedPagePresenter();
 
     // Interfaces
     public OperationsWebConstants getOperationsWebConstants();

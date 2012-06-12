@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class GetCategoriesFromSchemeActionHandler extends AbstractActionHandler<GetCategoriesFromSchemeAction, GetCategoriesFromSchemeResult> {
+public class GetCategoriesFromSchemeActionHandler extends SecurityActionHandler<GetCategoriesFromSchemeAction, GetCategoriesFromSchemeResult> {
 
     @Autowired
     private MetamacCoreCommonService metamacCoreCommonService;
@@ -25,7 +25,7 @@ public class GetCategoriesFromSchemeActionHandler extends AbstractActionHandler<
     }
 
     @Override
-    public GetCategoriesFromSchemeResult execute(GetCategoriesFromSchemeAction action, ExecutionContext context) throws ActionException {
+    public GetCategoriesFromSchemeResult executeSecurityAction(GetCategoriesFromSchemeAction action) throws ActionException {
         List<ExternalItemBtDto> categories = metamacCoreCommonService.retrieveCategoryScheme(ServiceContextHolder.getCurrentServiceContext(), action.getCategorySchemeUri());
         return new GetCategoriesFromSchemeResult(categories);
     }

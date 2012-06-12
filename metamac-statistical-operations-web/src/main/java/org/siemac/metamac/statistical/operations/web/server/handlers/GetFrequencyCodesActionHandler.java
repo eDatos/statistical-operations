@@ -6,18 +6,18 @@ import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class GetFrequencyCodesActionHandler extends AbstractActionHandler<GetFrequencyCodesAction, GetFrequencyCodesResult> {
+public class GetFrequencyCodesActionHandler extends SecurityActionHandler<GetFrequencyCodesAction, GetFrequencyCodesResult> {
 
     private static final String      OPERATION_UPDATE_FREQUENCY    = "metamac.gopestast.codelist.operation.updatefrequency";
     private static final String      INSTANCE_TEMPORAL_GRANULARITY = "metamac.gopestast.codelist.instance.temporalgranularity";
@@ -31,7 +31,7 @@ public class GetFrequencyCodesActionHandler extends AbstractActionHandler<GetFre
     }
 
     @Override
-    public GetFrequencyCodesResult execute(GetFrequencyCodesAction action, ExecutionContext context) throws ActionException {
+    public GetFrequencyCodesResult executeSecurityAction(GetFrequencyCodesAction action) throws ActionException {
         // CodeLists URIs
         String updateFrequency = ((ConfigurationServiceImpl) ApplicationContextProvider.getApplicationContext().getBean("configurationService")).getProperties()
                 .getProperty(OPERATION_UPDATE_FREQUENCY);

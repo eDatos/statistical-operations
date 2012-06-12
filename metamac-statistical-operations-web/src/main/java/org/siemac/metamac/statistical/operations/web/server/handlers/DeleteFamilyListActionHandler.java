@@ -5,16 +5,16 @@ import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOper
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListResult;
 import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class DeleteFamilyListActionHandler extends AbstractActionHandler<DeleteFamilyListAction, DeleteFamilyListResult> {
+public class DeleteFamilyListActionHandler extends SecurityActionHandler<DeleteFamilyListAction, DeleteFamilyListResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -24,7 +24,7 @@ public class DeleteFamilyListActionHandler extends AbstractActionHandler<DeleteF
     }
 
     @Override
-    public DeleteFamilyListResult execute(DeleteFamilyListAction action, ExecutionContext context) throws ActionException {
+    public DeleteFamilyListResult executeSecurityAction(DeleteFamilyListAction action) throws ActionException {
         for (Long id : action.getFamilyIds()) {
             try {
                 statisticalOperationsServiceFacade.deleteFamily(ServiceContextHolder.getCurrentServiceContext(), id);

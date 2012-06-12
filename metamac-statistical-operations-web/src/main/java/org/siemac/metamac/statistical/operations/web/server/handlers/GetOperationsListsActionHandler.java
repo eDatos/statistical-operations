@@ -10,19 +10,19 @@ import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class GetOperationsListsActionHandler extends AbstractActionHandler<GetOperationsListsAction, GetOperationsListsResult> {
+public class GetOperationsListsActionHandler extends SecurityActionHandler<GetOperationsListsAction, GetOperationsListsResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -32,7 +32,7 @@ public class GetOperationsListsActionHandler extends AbstractActionHandler<GetOp
     }
 
     @Override
-    public GetOperationsListsResult execute(GetOperationsListsAction action, ExecutionContext context) throws ActionException {
+    public GetOperationsListsResult executeSecurityAction(GetOperationsListsAction action) throws ActionException {
         try {
             List<SurveyTypeDto> surveyTypeDtos = statisticalOperationsServiceFacade.findAllSurveyTypes(ServiceContextHolder.getCurrentServiceContext());
             List<InstanceTypeDto> instanceTypeDtos = statisticalOperationsServiceFacade.findAllInstanceTypes(ServiceContextHolder.getCurrentServiceContext());

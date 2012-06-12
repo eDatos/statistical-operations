@@ -7,19 +7,19 @@ import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class GetOperationAndInstancesActionHandler extends AbstractActionHandler<GetOperationAndInstancesAction, GetOperationAndInstancesResult> {
+public class GetOperationAndInstancesActionHandler extends SecurityActionHandler<GetOperationAndInstancesAction, GetOperationAndInstancesResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -29,7 +29,7 @@ public class GetOperationAndInstancesActionHandler extends AbstractActionHandler
     }
 
     @Override
-    public GetOperationAndInstancesResult execute(GetOperationAndInstancesAction action, ExecutionContext context) throws ActionException {
+    public GetOperationAndInstancesResult executeSecurityAction(GetOperationAndInstancesAction action) throws ActionException {
         try {
             OperationDto operationDto = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());

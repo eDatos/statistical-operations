@@ -17,8 +17,10 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.Opera
 import org.siemac.metamac.statistical.operations.web.client.operation.view.OperationViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.presenter.ErrorPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.presenter.UnauthorizedPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.view.ErrorPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.view.MainPageViewImpl;
+import org.siemac.metamac.statistical.operations.web.client.view.UnauthorizedPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.client.widgets.view.OperationsToolStripViewImpl;
 
@@ -46,12 +48,15 @@ public class ClientModule extends AbstractPresenterModule {
 
         // Presenters
         bindPresenter(MainPagePresenter.class, MainPagePresenter.MainPageView.class, MainPageViewImpl.class, MainPagePresenter.MainPageProxy.class);
-        bindPresenter(ErrorPagePresenter.class, ErrorPagePresenter.ErrorPageView.class, ErrorPageViewImpl.class, ErrorPagePresenter.ErrorPageProxy.class);
         bindPresenter(FamilyListPresenter.class, FamilyListPresenter.FamilyListView.class, FamilyListViewImpl.class, FamilyListPresenter.FamiliesListProxy.class);
         bindPresenter(FamilyPresenter.class, FamilyPresenter.FamilyView.class, FamilyViewImpl.class, FamilyPresenter.FamilyProxy.class);
         bindPresenter(OperationListPresenter.class, OperationListPresenter.OperationListView.class, OperationListViewImpl.class, OperationListPresenter.OperationsListProxy.class);
         bindPresenter(OperationPresenter.class, OperationPresenter.OperationView.class, OperationViewImpl.class, OperationPresenter.OperationProxy.class);
         bindPresenter(InstancePresenter.class, InstancePresenter.InstanceView.class, InstanceViewImpl.class, InstancePresenter.InstanceProxy.class);
+
+        // Error pages
+        bindPresenter(ErrorPagePresenter.class, ErrorPagePresenter.ErrorPageView.class, ErrorPageViewImpl.class, ErrorPagePresenter.ErrorPageProxy.class);
+        bindPresenter(UnauthorizedPagePresenter.class, UnauthorizedPagePresenter.UnauthorizedPageView.class, UnauthorizedPageViewImpl.class, UnauthorizedPagePresenter.UnauthorizedPageProxy.class);
 
         // Presenter widgets
         bindSingletonPresenterWidget(OperationsToolStripPresenterWidget.class, OperationsToolStripPresenterWidget.OperationsToolStripView.class, OperationsToolStripViewImpl.class);

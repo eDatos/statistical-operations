@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class FindAllCodeListsActionHandler extends AbstractActionHandler<FindAllCodeListsAction, FindAllCodeListsResult> {
+public class FindAllCodeListsActionHandler extends SecurityActionHandler<FindAllCodeListsAction, FindAllCodeListsResult> {
 
     @Autowired
     private MetamacCoreCommonService metamacCoreCommonService;
@@ -25,7 +25,7 @@ public class FindAllCodeListsActionHandler extends AbstractActionHandler<FindAll
     }
 
     @Override
-    public FindAllCodeListsResult execute(FindAllCodeListsAction action, ExecutionContext context) throws ActionException {
+    public FindAllCodeListsResult executeSecurityAction(FindAllCodeListsAction action) throws ActionException {
         List<ExternalItemBtDto> codeLists = metamacCoreCommonService.findAllCodelists(ServiceContextHolder.getCurrentServiceContext());
         return new FindAllCodeListsResult(codeLists);
     }

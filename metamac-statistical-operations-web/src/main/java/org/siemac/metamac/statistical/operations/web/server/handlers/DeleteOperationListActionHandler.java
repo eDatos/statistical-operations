@@ -2,19 +2,19 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
+import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.ExecutionContext;
-import com.gwtplatform.dispatch.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class DeleteOperationListActionHandler extends AbstractActionHandler<DeleteOperationListAction, DeleteOperationListResult> {
+public class DeleteOperationListActionHandler extends SecurityActionHandler<DeleteOperationListAction, DeleteOperationListResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -24,7 +24,7 @@ public class DeleteOperationListActionHandler extends AbstractActionHandler<Dele
     }
 
     @Override
-    public DeleteOperationListResult execute(DeleteOperationListAction action, ExecutionContext context) throws ActionException {
+    public DeleteOperationListResult executeSecurityAction(DeleteOperationListAction action) throws ActionException {
         for (Long id : action.getOperationIds()) {
             try {
                 statisticalOperationsServiceFacade.deleteOperation(ServiceContextHolder.getCurrentServiceContext(), id);

@@ -8,9 +8,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
-// see ClientModule
-// bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.signInPage);
-
 public class OperationsPlaceManager extends PlaceManagerImpl {
 
     private final PlaceRequest defaultPlaceRequest;
@@ -28,7 +25,7 @@ public class OperationsPlaceManager extends PlaceManagerImpl {
 
     @Override
     public void revealUnauthorizedPlace(String unauthorizedHistoryToken) {
-        PlaceRequest placeRequest = new PlaceRequest(NameTokens.errorPage);
+        PlaceRequest placeRequest = new PlaceRequest(NameTokens.unauthorizedAccessPage);
         placeRequest = placeRequest.with("redirect", unauthorizedHistoryToken);
         revealPlace(placeRequest);
     }
