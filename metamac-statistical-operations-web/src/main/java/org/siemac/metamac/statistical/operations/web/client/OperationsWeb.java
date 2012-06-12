@@ -53,7 +53,7 @@ public class OperationsWeb extends MetamacEntryPoint {
             @Override
             public void onWaitSuccess(MockCASUserResult result) {
                 OperationsWeb.principal = result.getMetamacPrincipal();
-                
+
                 LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
 
                 // This is required for GWT-Platform proxy's generator.
