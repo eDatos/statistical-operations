@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-    <artifactId>metamac-statistical-operations-ws-api</artifactId>
+    <artifactId>metamac-statistical-operations-ws-int-api</artifactId>
     <packaging>jar</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WS :: API</name>
+    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WS :: INTERNAL API</name>
 
     <dependencies>
         <dependency>
