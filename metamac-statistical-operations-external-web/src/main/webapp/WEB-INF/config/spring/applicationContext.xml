@@ -20,7 +20,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <!-- Configure externalized logging configuration file -->
-    <bean id="loggingSetup" class="org.siemac.metamac.web.common.server.logging.LoggingSetup">
+    <bean id="loggingSetup" class="org.siemac.metamac.core.common.logging.LoggingSetup">
         <property name="logConfigurationFile" value="${environment.metamac.data}/statistical-operations/conf/dynamic/logback-statistical-operations-external-web.xml" />
     </bean>
 
