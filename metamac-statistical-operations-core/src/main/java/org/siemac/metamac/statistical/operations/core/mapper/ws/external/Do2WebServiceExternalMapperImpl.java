@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.core.mapper;
+package org.siemac.metamac.statistical.operations.core.mapper.ws.external;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -6,21 +6,23 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.schema.common.v1_0.domain.InternationalString;
-import org.siemac.metamac.schema.common.v1_0.domain.LocalisedString;
-import org.siemac.metamac.schema.common.v1_0.domain.LocalisedStringList;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacExceptionItem;
 import org.siemac.metamac.schema.common.v1_0.domain.MetamacExceptionItemList;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBase;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.OperationBaseList;
-import org.siemac.metamac.statistical.operations.internal.ws.v1_0.domain.ProcStatusType;
+import org.siemac.metamac.statistical.operations.core.mapper.ws.Do2WebServiceCommonMapper;
+import org.siemac.metamac.statistical.operations.external.ws.v1_0.MetamacExceptionFault;
+import org.siemac.metamac.statistical.operations.external.ws.v1_0.domain.OperationBase;
+import org.siemac.metamac.statistical.operations.external.ws.v1_0.domain.OperationBaseList;
+import org.siemac.metamac.statistical.operations.external.ws.v1_0.domain.ProcStatusType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
+public class Do2WebServiceExternalMapperImpl implements Do2WebServiceExternalMapper {
+
+    @Autowired
+    private Do2WebServiceCommonMapper do2WebServiceCommonMapper;
 
     @Override
     public OperationBase operationToOperationBase(Operation source) throws MetamacException {
@@ -29,10 +31,10 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
         }
         OperationBase operationBase = new OperationBase();
         operationBase.setCode(source.getCode());
-        operationBase.setTitle(internationalStringToWebService(source.getTitle()));
-        operationBase.setAcronym(internationalStringToWebService(source.getAcronym()));
-        operationBase.setDescription(internationalStringToWebService(source.getDescription()));
-        operationBase.setObjective(internationalStringToWebService(source.getObjective()));
+        operationBase.setTitle(do2WebServiceCommonMapper.internationalStringToWebService(source.getTitle()));
+        operationBase.setAcronym(do2WebServiceCommonMapper.internationalStringToWebService(source.getAcronym()));
+        operationBase.setDescription(do2WebServiceCommonMapper.internationalStringToWebService(source.getDescription()));
+        operationBase.setObjective(do2WebServiceCommonMapper.internationalStringToWebService(source.getObjective()));
         operationBase.setProcStatus(procStatusToProcStatusType(source.getProcStatus()));
 
         return operationBase;
@@ -51,10 +53,10 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
         }
         return targets;
     }
-    
+
     @Override
     public MetamacExceptionFault metamacExceptionToMetamacExceptionFault(MetamacException source) {
-        
+
         org.siemac.metamac.schema.common.v1_0.domain.MetamacException metamacException = new org.siemac.metamac.schema.common.v1_0.domain.MetamacException();
         metamacException.setExceptionItems(new MetamacExceptionItemList());
         if (source.getExceptionItems() == null || source.getExceptionItems().size() == 0) {
@@ -77,30 +79,7 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
     /**************************************************************************
      * PRIVATE
      **************************************************************************/
-    private InternationalString internationalStringToWebService(org.siemac.metamac.core.common.ent.domain.InternationalString source) {
-        if (source == null || source.getTexts() == null || source.getTexts().size() == 0) {
-            return null;
-        }
-        
-        InternationalString internationalString = new InternationalString();
-        internationalString.setLocalisedStrings(new LocalisedStringList());
-        internationalString.getLocalisedStrings().setTotal(BigInteger.valueOf(source.getTexts().size()));
-        // LocalisedString to LocalisedString Ws
-        for (org.siemac.metamac.core.common.ent.domain.LocalisedString item : source.getTexts()) {
-            LocalisedString localisedString = localisedStringToLocalisedStringWebService(item);
-            internationalString.getLocalisedStrings().getLocalisedString().add(localisedString);
-        }
 
-        return internationalString;
-    }
-
-    private LocalisedString localisedStringToLocalisedStringWebService(org.siemac.metamac.core.common.ent.domain.LocalisedString source) {
-        LocalisedString localisedString = new LocalisedString();
-        localisedString.setLocale(source.getLocale());
-        localisedString.setLabel(source.getLabel());
-        return localisedString;
-    }
-    
     private ProcStatusType procStatusToProcStatusType(ProcStatusEnum source) throws MetamacException {
         if (source == null) {
             return null;
@@ -108,8 +87,6 @@ public class Do2WebServiceMapperImpl implements Do2WebServiceMapper {
         switch (source) {
             case PUBLISH_EXTERNALLY:
                 return ProcStatusType.PUBLISH_EXTERNALLY;
-            case PUBLISH_INTERNALLY:
-                return ProcStatusType.PUBLISH_INTERNALLY;
             default:
                 throw new MetamacException(ServiceExceptionType.UNKNOWN, "ProcStatusEnum non supported in web services: " + source);
         }

@@ -18,9 +18,9 @@ import org.siemac.metamac.schema.common.v1_0.domain.MetamacVersion;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
-import org.siemac.metamac.statistical.operations.core.mapper.Do2WebServiceMapper;
-import org.siemac.metamac.statistical.operations.core.mapper.MetamacCriteriaWebService2SculptorCriteriaMapper;
-import org.siemac.metamac.statistical.operations.core.mapper.SculptorCriteria2MetamacCriteriaWebServiceMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.ws.internal.Do2WebServiceInternalMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.ws.internal.MetamacCriteriaWebServiceInternal2SculptorCriteriaMapper;
+import org.siemac.metamac.statistical.operations.core.mapper.ws.internal.SculptorCriteria2MetamacCriteriaWebServiceInternalMapper;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.WebServiceFacadeValidationUtil;
 import org.siemac.metamac.statistical.operations.internal.ws.v1_0.MetamacExceptionFault;
@@ -38,18 +38,18 @@ import org.springframework.stereotype.Service;
 public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements MetamacStatisticalOperationsInternalInterfaceV10 {
 
     @Autowired
-    private StatisticalOperationsBaseService                 statisticalOperationsBaseService;
+    private StatisticalOperationsBaseService                         statisticalOperationsBaseService;
 
     @Autowired
-    private Do2WebServiceMapper                              do2WebServiceMapper;
+    private Do2WebServiceInternalMapper                              do2WebServiceMapper;
 
     @Autowired
-    private MetamacCriteriaWebService2SculptorCriteriaMapper metamacCriteriaWebService2SculptorCriteriaMapper;
+    private MetamacCriteriaWebServiceInternal2SculptorCriteriaMapper metamacCriteriaWebServiceInternal2SculptorCriteriaMapper;
 
     @Autowired
-    private SculptorCriteria2MetamacCriteriaWebServiceMapper sculptorCriteria2MetamacCriteriaWebServiceMapper;
+    private SculptorCriteria2MetamacCriteriaWebServiceInternalMapper sculptorCriteria2MetamacCriteriaWebServiceInternalMapper;
 
-    private static String                                    STATISTICAL_OPERATIONS_WS_VERSION = "v1_0";
+    private static String                                            STATISTICAL_OPERATIONS_WS_VERSION = "v1_0";
 
     public StatisticalOperationsInternalWebServiceFacadeV10Impl() {
     }
@@ -70,7 +70,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
             WebServiceFacadeValidationUtil.validateFindOperations(criteria);
 
             // Transform
-            SculptorCriteria sculptorCriteria = metamacCriteriaWebService2SculptorCriteriaMapper.getOperationCriteriaMapper().metamacCriteria2SculptorCriteria(criteria);
+            SculptorCriteria sculptorCriteria = metamacCriteriaWebServiceInternal2SculptorCriteriaMapper.getOperationCriteriaMapper().metamacCriteria2SculptorCriteria(criteria);
 
             // Add condition by proc status to avoid searching not published
             ConditionalCriteria procStatusCriteria = ConditionalCriteria.or(ConditionalCriteria.equal(OperationProperties.procStatus(), ProcStatusEnum.PUBLISH_INTERNALLY),
@@ -81,7 +81,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
             PagedResult<Operation> result = statisticalOperationsBaseService.findOperationByCondition(getServiceContextWs(), sculptorCriteria.getConditions(), sculptorCriteria.getPagingParameter());
 
             // Transform
-            FindOperationsResult findOperationsResult = sculptorCriteria2MetamacCriteriaWebServiceMapper.pageResultToFindOperationsResult(result, sculptorCriteria.getPageSize());
+            FindOperationsResult findOperationsResult = sculptorCriteria2MetamacCriteriaWebServiceInternalMapper.pageResultToFindOperationsResult(result, sculptorCriteria.getPageSize());
             return findOperationsResult;
         } catch (MetamacException e) {
             throw do2WebServiceMapper.metamacExceptionToMetamacExceptionFault(e);
@@ -107,7 +107,7 @@ public class StatisticalOperationsInternalWebServiceFacadeV10Impl implements Met
             List<ConditionalCriteria> conditions = criteria.build();
             // Only one result
             PagingParameter pagingParameter = PagingParameter.pageAccess(1, 1);
-            
+
             // Find operations
             PagedResult<Operation> result = statisticalOperationsBaseService.findOperationByCondition(getServiceContextWs(), conditions, pagingParameter);
             if (result.getValues() != null && result.getValues().size() == 1) {
