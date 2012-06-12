@@ -33,6 +33,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-ws-ext-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-common-test</artifactId>
             <version>${metamac-common-test.version}</version>

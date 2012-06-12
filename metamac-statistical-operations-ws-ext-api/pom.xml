@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-    <artifactId>metamac-statistical-operations-ws-int-api</artifactId>
+    <artifactId>metamac-statistical-operations-ws-ext-api</artifactId>
     <packaging>jar</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WS :: INTERNAL API</name>
+    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WS :: EXTERNAL API</name>
 
     <dependencies>
         <dependency>
@@ -71,7 +71,7 @@
                             <sourceRoot>${basedir}/src/generated/java</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>${metamac-statistical-operations.baseDir}/etc/ws/metamac-statistical-operations-internal-v1.0.wsdl</wsdl>
+                                    <wsdl>${metamac-statistical-operations.baseDir}/etc/ws/metamac-statistical-operations-external-v1.0.wsdl</wsdl>
                                     <catalog>${metamac-statistical-operations.baseDir}/etc/ws-catalog/catalog.xml</catalog>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>
