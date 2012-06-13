@@ -32,6 +32,7 @@
         <!-- IMPORTANT: These properties are overwritten in perfomRelease profile -->
         <metamac-statistical-operations.baseDir>${basedir}/..</metamac-statistical-operations.baseDir>
         <metamac-api-domain.baseDir>${basedir}/../../metamac-api-domain</metamac-api-domain.baseDir>
+        <metamac-parent.baseDir>${basedir}/../../metamac-parent</metamac-parent.baseDir>
 
         <metamac-api-domain.version>1.1.0</metamac-api-domain.version>
         <metamac-sso.version>1.1.0</metamac-sso.version>
@@ -51,6 +52,7 @@
             <properties>
                 <metamac-statistical-operations.baseDir>${basedir}/../../../..</metamac-statistical-operations.baseDir>
                 <metamac-api-domain.baseDir>${basedir}/../../../../../metamac-api-domain</metamac-api-domain.baseDir>
+                <metamac-parent.baseDir>${basedir}/../../../../../metamac-parent</metamac-parent.baseDir>
             </properties>
         </profile>
     </profiles>
