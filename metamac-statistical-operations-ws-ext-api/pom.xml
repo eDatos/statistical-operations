@@ -76,7 +76,7 @@
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>
                                         <extraarg>-xjc-Xbg</extraarg>  <!-- getX to booleans instead of isX -->
-                                        <extraarg>-xjc-b,${metamac-api-domain.baseDir}/src/generated/java/META-INF/sun-jaxb.episode</extraarg>
+                                        <extraarg>-xjc-b,${metamac-api-domain.baseDir}/src/main/resources/episodes/sun-jaxb.episode</extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
