@@ -44,7 +44,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>../etc/ws</directory>
+                <directory>${metamac-statistical-operations.baseDir}/etc/ws</directory>
                 <targetPath>META-INF/wsdl</targetPath>
                 <includes>
                     <include>**/*</include>
