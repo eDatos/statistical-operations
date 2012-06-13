@@ -134,7 +134,7 @@
                 <configuration>
                     <basedir />
                     <includes>
-                        <include>target/classes/META-INF/wsdl/**/*.xsd</include>
+                        <include>${basedir}/target/classes/META-INF/wsdl/**/*.xsd</include>
                     </includes>
                     <replacements>
                         <replacement>
