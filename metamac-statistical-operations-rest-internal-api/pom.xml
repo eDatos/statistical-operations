@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+        <artifactId>metamac-statistical-operations-parent</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath>../metamac-statistical-operations-parent/pom.xml</relativePath>
+    </parent>
+
+	<groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+	<artifactId>metamac-statistical-operations-rest-internal-api</artifactId>
+	<packaging>jar</packaging>
+	<name>SIEMAC :: METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL API</name>
+	<description>SIEMAC :: METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL API</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>${jsr311-api.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+		
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/generated</directory>
+							<includes>
+								<include>**/*.java</include>
+								<include>**/*.xml</include>
+								<include>**/*.properties</include>
+								<include>**/*.dot</include>
+							</includes>
+							<excludes>
+								<exclude>**/.svn/*</exclude>
+							</excludes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
+							<directory>src/test/generated</directory>
+							<includes>
+								<include>**/*.java</include>
+								<include>**/*.xml</include>
+								<include>**/*.properties</include>
+							</includes>
+							<excludes>
+								<exclude>**/.svn/*</exclude>
+							</excludes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-wadl2java-plugin</artifactId>
+				<version>2.6.0</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/generated/java</sourceRoot>
+							<wadlOptions>
+								<wadlOption>
+									<wadl>${basedir}/../etc/wadl/metamac-statistical-operations-rest-internal-v1.0.wadl</wadl>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+									<interface>true</interface>
+<!-- 									<impl>true</impl> -->
+									<packagename>org.siemac.metamac.statistical.operations.rest.internal.v1_0.service</packagename>
+								</wadlOption>
+							</wadlOptions>
+						</configuration>
+						<goals>
+							<goal>wadl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-impl</artifactId>
+						<version>${jaxb.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-xjc</artifactId>
+						<version>${jaxb.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-antrun-plugin</artifactId> -->
+<!-- 				<version>1.6</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>generate-sources</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>run</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<target> -->
+<!-- 								Delete JAXB binding because is generated in other jar -->
+<!-- 								wadsl2java don't support JAXB episode							 -->
+<!-- 								<delete dir="${basedir}/src/generated/java/org/sdmx" includeemptydirs="true"/>							 -->
+<!-- 							</target> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
+		</plugins>
+	</build>
+</project>

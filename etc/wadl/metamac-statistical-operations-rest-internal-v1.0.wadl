@@ -1,0 +1,27 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" 
+			 xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0">
+ 	
+	<grammars>
+ 		<include href="metamac-statistical-operations-rest-internal-domain-v1.0.xsd" />
+ 	</grammars>
+ 
+	<resources base="RESOURCES_BASE">
+		<resource id="statisticalOperationsRestServiceFacade" path="/operations">
+			<resource path="/">
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/{code}">
+				<param name="code" style="template"/>
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+	</resources>  
+</application>
