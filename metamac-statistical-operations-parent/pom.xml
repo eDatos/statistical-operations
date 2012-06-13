@@ -10,7 +10,7 @@
 
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
     <artifactId>metamac-statistical-operations-parent</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
     <description>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</description>
@@ -56,10 +56,4 @@
             </properties>
         </profile>
     </profiles>
-
-  <scm>
-    <connection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-parent/tags/20120613-0816-v1.1.0/metamac-statistical-operations-parent</connection>
-    <developerConnection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-parent/tags/20120613-0816-v1.1.0/metamac-statistical-operations-parent</developerConnection>
-    <url>http://svn.arte-consultores.com/viewvc/arte/istac/metamac/metamac-parent/tags/20120613-0816-v1.1.0/metamac-statistical-operations-parent</url>
-  </scm>
 </project>
