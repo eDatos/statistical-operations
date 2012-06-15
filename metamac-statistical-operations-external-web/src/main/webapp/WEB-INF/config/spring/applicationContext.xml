@@ -35,7 +35,7 @@
     </bean>
 
     <import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
-    <import resource="classpath:/spring/statistical-operations-rest/applicationContext.xml" />
+    <import resource="classpath:/spring/statistical-operations-rest-internal/applicationContext.xml" />
 
    
 </beans>
