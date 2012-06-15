@@ -24,23 +24,22 @@
         <servlet-name>dispatch</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>CXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>dispatch</servlet-name>
         <url-pattern>/dispatch/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Web services -->
-    <servlet>
-        <servlet-name>jaxws-servlet</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>jaxws-servlet</servlet-name>
-        <url-pattern>/ws/*</url-pattern>
-    </servlet-mapping>
-    
     <error-page>
         <exception-type>404</exception-type>
         <location>/error.html</location>

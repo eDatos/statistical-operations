@@ -24,13 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-            <artifactId>metamac-statistical-operations-core</artifactId>
-            <version>${project.version}</version>
-            <classifier>client</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-            <artifactId>metamac-statistical-operations-ws-ext-api</artifactId>
+            <artifactId>metamac-statistical-operations-rest-internal-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

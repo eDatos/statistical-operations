@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
-	xmlns:cDomain_v1_0="http://www.siemac.org/metamac/schema/common/v1.0/domain"
 	xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
 	targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
 
-	<xsd:complexType name="OperationBase">
+	<xsd:complexType name="OperationBaseType">
 		<xsd:sequence>
 			<xsd:element name="code" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
+    
+    <!-- Elements -->
+    <xsd:element name="OperationBase">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="operationBase" type="tns:OperationBaseType" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
 </xsd:schema>
