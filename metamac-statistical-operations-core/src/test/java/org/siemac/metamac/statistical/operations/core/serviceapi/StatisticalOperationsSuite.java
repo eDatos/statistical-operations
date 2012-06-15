@@ -10,5 +10,5 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({SecurityStatisticalOperationsServiceFacadeTest.class, StatisticalOperationsBaseServiceTest.class, StatisticalOperationsInternalWebServiceFacadeTest.class,
         StatisticalOperationsListsServiceTest.class, StatisticalOperationsServiceFacadeTest.class})
-public class StatisticalOperationsSuiteTest {
+public class StatisticalOperationsSuite {
 }
