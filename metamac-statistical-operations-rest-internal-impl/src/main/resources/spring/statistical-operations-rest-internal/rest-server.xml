@@ -13,13 +13,13 @@
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-    <jaxrs:server id="restFacade" address="/api/internal/">
+    <jaxrs:server id="restFacade" address="/api/internal/v1.0">
         <jaxrs:features>
             <cxf:logging />
         </jaxrs:features>
 
         <jaxrs:serviceBeans>
-            <ref bean="statisticalOperationsRestFacade" />
+            <ref bean="statisticalOperationsRestFacadeV10" />
         </jaxrs:serviceBeans>
 
         <jaxrs:providers>
