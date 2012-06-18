@@ -1,8 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
+import java.math.BigInteger;
 import java.util.List;
-
-import javax.ws.rs.core.Response;
 
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
@@ -14,12 +13,9 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
-import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationBase;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationBaseType;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapper;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +31,24 @@ public class StatisticalOperationsRestFacadeImpl implements StatisticalOperation
     private ServiceContext                   serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal"); // TODO
 
     @Override
-    public Response findOperations() {
-        // TODO
-        return null;
+    public Operations findOperations() {
+        Operations operations = new Operations();
+        operations.setSize(BigInteger.valueOf(2));
+        {
+            org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
+            operation.setCode("1aaa1");
+            operations.getItems().add(operation);
+        }
+        {
+            org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
+            operation.setCode("2aaa1");
+            operations.getItems().add(operation);
+        }
+        return operations;
     }
 
     @Override
-    public OperationBase retrieveOperationByCode(String code) {
+    public org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation retrieveOperationByCode(String code) {
         try {
             // TODO Validation of parameters
 
@@ -63,13 +70,13 @@ public class StatisticalOperationsRestFacadeImpl implements StatisticalOperation
             PagedResult<Operation> result = statisticalOperationsBaseService.findOperationByCondition(serviceContextRestInternal, conditions, pagingParameter);
             if (result != null && result.getValues() != null && result.getValues().size() == 1) {
                 Operation operation = result.getValues().get(0);
-                OperationBase operationBase = do2RestInternalMapper.operationToOperationBase(operation);
+                org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operationBase = do2RestInternalMapper.operationToOperationBase(operation);
                 return operationBase;
+                
             } else {
                 // TODO
-                OperationBase operationBase = new OperationBase();
-                operationBase.setOperationBase(new OperationBaseType());
-                operationBase.getOperationBase().setCode("NOT_EXISTS");
+                org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operationBase = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
+                operationBase.setCode("NOT_EXISTS");
                 return operationBase;
 //                throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
             }

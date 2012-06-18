@@ -23,11 +23,11 @@ public class StatisticalOperationsRestFacadeTest extends AbstractBusClientServer
     @Test
     public void testRetrieveOperationByCode() throws Exception {
 
-        // http://localhost:9001/api/internal/v1.0/operations
+        // http://localhost:9001/api/internal/v1.0/operations/[CODE]
         String baseAddress = "http://localhost:" + PORT + "/api/internal/v1.0/operations/CODE-1/";
         WebClient webClient = WebClient.create(baseAddress).accept("application/json");
         Response response = webClient.get();
-        assertNotNull(response.getEntity());
+        assertNotNull(response.getEntity().toString());
         // Long id = wc.type("application/xml").accept("text/plain").post(new Book("CXF", 1L), Long.class);
         // assertEquals(new Long(1), id);
         // Book book = wc.accept("application/xml").query("id", 1L).get(Book.class);
@@ -59,4 +59,18 @@ public class StatisticalOperationsRestFacadeTest extends AbstractBusClientServer
     // return bos.getOut().toString();
     // }
 
+    @Test
+    public void testFindOperations() throws Exception {
+
+        // http://localhost:9001/api/internal/v1.0/operations
+        String baseAddress = "http://localhost:" + PORT + "/api/internal/v1.0/operations";
+        WebClient webClient = WebClient.create(baseAddress).accept("application/json");
+        Response response = webClient.get();
+        assertNotNull(response.getEntity().toString());
+        
+        webClient = WebClient.create(baseAddress).accept("application/xml");
+        response = webClient.get();
+        assertNotNull(response.getEntity().toString());
+
+    }
 }

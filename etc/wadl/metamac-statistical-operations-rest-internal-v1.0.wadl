@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <application xmlns="http://wadl.dev.java.net/2009/02" 
 			 xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0"
 			 xmlns:domain="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
@@ -10,8 +11,10 @@
 		<resource id="statisticalOperationsRestFacade" path="/v1.0/operations">
 			<resource path="/">
 				<method name="GET" id="findOperations">
+	                <request>
+	                </request>
 	                <response status="200">
-	                    <representation mediaType="application/xml" />
+	                    <representation mediaType="*/*" element="domain:operations"/>
 	                </response>
 				</method>
 			</resource>
@@ -21,7 +24,7 @@
 						<param name="code" style="template"/>
 					</request>
 	                <response status="200">
-	                    <representation mediaType="*/*" element="domain:OperationBase"/>
+	                    <representation mediaType="*/*" element="domain:operation"/>
 	                </response>
 				</method>
 			</resource>
