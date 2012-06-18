@@ -19,8 +19,8 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2Re
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("statisticalOperationsRestFacade")
-public class StatisticalOperationsRestFacadeImpl implements StatisticalOperationsRestFacade {
+@Service("statisticalOperationsRestFacadeV10")
+public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestFacadeV10 {
 
     @Autowired
     private StatisticalOperationsBaseService statisticalOperationsBaseService;

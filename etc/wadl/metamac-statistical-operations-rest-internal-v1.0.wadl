@@ -8,7 +8,7 @@
  	</grammars>
  	
 	<resources base="URL_RESOURCES_BASE">
-		<resource id="statisticalOperationsRestFacade" path="/v1.0/operations">
+		<resource id="statisticalOperationsRestFacadeV10" path="/operations">
 			<resource path="/">
 				<method name="GET" id="findOperations">
 	                <request>
