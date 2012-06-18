@@ -86,6 +86,10 @@
 							<wadlOptions>
 								<wadlOption>
 									<wadl>${basedir}/../etc/wadl/metamac-statistical-operations-rest-internal-v1.0.wadl</wadl>
+                                    <bindingFiles>
+                                        <bindingFile>${basedir}/../etc/wadl/binding.xjb</bindingFile>
+                                    </bindingFiles>
+                                    
 									<extraargs>
 										<extraarg>-verbose</extraarg>
 									</extraargs>
