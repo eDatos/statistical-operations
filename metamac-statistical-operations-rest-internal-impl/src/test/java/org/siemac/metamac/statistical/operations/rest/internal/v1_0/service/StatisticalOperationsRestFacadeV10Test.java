@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.siemac.metamac.common.test.rest.ServerResource;
 
-public class StatisticalOperationsRestFacadeTest extends AbstractBusClientServerTestBase {
+public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientServerTestBase {
 
     private static final String PORT = ServerResource.PORT;
     private static String baseAddress = "http://localhost:" + PORT + "/api/internal/v1.0/";
