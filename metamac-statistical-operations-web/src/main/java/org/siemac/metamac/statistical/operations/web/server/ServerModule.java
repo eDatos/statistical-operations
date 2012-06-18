@@ -14,12 +14,14 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetConcepts
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyAndOperationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyListActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFrequencyCodesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesByCodeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationListActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOrganisationsFromSchemeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyFamilyActionHandler;
@@ -49,12 +51,14 @@ import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchem
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesByCodeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
@@ -90,29 +94,39 @@ public class ServerModule extends HandlerModule {
     }
 
     protected void configureHandlers() {
+
+        // Families
         bindHandler(GetFamilyListAction.class, GetFamilyListActionHandler.class);
+        bindHandler(GetFamilyPaginatedListAction.class, GetFamilyPaginatedListActionHandler.class);
         bindHandler(GetFamilyAction.class, GetFamilyActionHandler.class);
         bindHandler(GetFamilyAndOperationsAction.class, GetFamilyAndOperationsActionHandler.class);
         bindHandler(SaveFamilyAction.class, SaveFamilyActionHandler.class);
         bindHandler(DeleteFamilyListAction.class, DeleteFamilyListActionHandler.class);
+        bindHandler(UpdateFamilyOperationsAction.class, UpdateFamilyOperationsActionHandler.class);
+        bindHandler(PublishInternallyFamilyAction.class, PublishInternallyFamilyActionHandler.class);
+        bindHandler(PublishExternallyFamilyAction.class, PublishExternallyFamilyActionHandler.class);
+
+        // Operations
+        bindHandler(GetOperationListAction.class, GetOperationListActionHandler.class);
+        bindHandler(GetOperationPaginatedListAction.class, GetOperationPaginatedListActionHandler.class);
+        bindHandler(GetOperationsListsAction.class, GetOperationsListsActionHandler.class);
         bindHandler(SaveOperationAction.class, SaveOperationActionHandler.class);
         bindHandler(GetOperationAndInstancesAction.class, GetOperationAndInstancesActionHandler.class);
         bindHandler(GetOperationAndInstancesByCodeAction.class, GetOperationAndInstancesByCodeActionHandler.class);
-        bindHandler(SaveInstanceAction.class, SaveInstanceActionHandler.class);
-        bindHandler(GetOperationsListsAction.class, GetOperationsListsActionHandler.class);
-        bindHandler(GetInstanceAction.class, GetInstanceActionHandler.class);
-        bindHandler(GetOperationListAction.class, GetOperationListActionHandler.class);
         bindHandler(DeleteOperationListAction.class, DeleteOperationListActionHandler.class);
-        bindHandler(DeleteInstanceListAction.class, DeleteInstanceListActionHandler.class);
-        bindHandler(GetInstanceListAction.class, GetInstanceListActionHandler.class);
-        bindHandler(UpdateFamilyOperationsAction.class, UpdateFamilyOperationsActionHandler.class);
         bindHandler(UpdateOperationFamiliesAction.class, UpdateOperationFamiliesActionHandler.class);
-        bindHandler(PublishInternallyFamilyAction.class, PublishInternallyFamilyActionHandler.class);
-        bindHandler(PublishExternallyFamilyAction.class, PublishExternallyFamilyActionHandler.class);
         bindHandler(PublishInternallyOperationAction.class, PublishInternallyOperationActionHandler.class);
         bindHandler(PublishExternallyOperationAction.class, PublishExternallyOperationActionHandler.class);
+
+        // Instances
+        bindHandler(SaveInstanceAction.class, SaveInstanceActionHandler.class);
+        bindHandler(GetInstanceAction.class, GetInstanceActionHandler.class);
+        bindHandler(DeleteInstanceListAction.class, DeleteInstanceListActionHandler.class);
+        bindHandler(GetInstanceListAction.class, GetInstanceListActionHandler.class);
         bindHandler(PublishInternallyInstanceAction.class, PublishInternallyInstanceActionHandler.class);
         bindHandler(PublishExternallyInstanceAction.class, PublishExternallyInstanceActionHandler.class);
+        bindHandler(UpdateInstancesOrderAction.class, UpdateInstancesOrderActionHandler.class);
+
         bindHandler(FindAllCategorySchemesAction.class, FindAllCategorySchemesActionHandler.class);
         bindHandler(GetCategoriesFromSchemeAction.class, GetCategoriesFromSchemeActionHandler.class);
         bindHandler(FindAllOrganisationSchemesAction.class, FindAllOrganisationSchemesActionHandler.class);
@@ -123,7 +137,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(FindAllCodeListsAction.class, FindAllCodeListsActionHandler.class);
         bindHandler(GetCodesFromCodeListAction.class, GetCodesFromCodeListActionHandler.class);
         bindHandler(GetFrequencyCodesAction.class, GetFrequencyCodesActionHandler.class);
-        bindHandler(UpdateInstancesOrderAction.class, UpdateInstancesOrderActionHandler.class);
 
         bindHandler(ValidateTicketAction.class, ValidateTicketActionHandler.class);
         bindHandler(GetLoginPageUrlAction.class, GetLoginPageUrlActionHandler.class);

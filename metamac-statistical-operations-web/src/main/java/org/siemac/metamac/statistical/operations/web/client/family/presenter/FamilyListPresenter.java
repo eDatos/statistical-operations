@@ -17,8 +17,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
@@ -26,6 +26,7 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -49,6 +50,8 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyListView, FamilyListPresenter.FamiliesListProxy> implements FamilyListUiHandlers {
 
+    public final static int                    FAMILY_LIST_MAX_RESULTS           = 30;
+
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
 
@@ -70,7 +73,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     public interface FamilyListView extends View, HasUiHandlers<FamilyListUiHandlers> {
 
-        void setFamilies(List<FamilyBaseDto> familyDtos);
+        void setFamilies(List<FamilyBaseDto> familyDtos, int firstResult, int totalResults);
 
         HasRecordClickHandlers getSelectedFamily();
         List<Long> getSelectedFamilies();
@@ -137,7 +140,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveFamilies();
+        retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
     }
 
     @Override
@@ -177,27 +180,29 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveFamilies();
+                retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
-                retrieveFamilies();
+                retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getMessageList(getMessages().familyDeleted()), MessageTypeEnum.SUCCESS);
             }
         });
     }
 
-    private void retrieveFamilies() {
-        dispatcher.execute(new GetFamilyListAction(), new WaitingAsyncCallback<GetFamilyListResult>() {
+    @Override
+    public void retrieveFamilyList(int firstResult, int maxResults) {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults), new AsyncCallback<GetFamilyPaginatedListResult>() {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
+            public void onFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
+
             @Override
-            public void onWaitSuccess(GetFamilyListResult result) {
-                getView().setFamilies(result.getFamilyBaseDtos());
+            public void onSuccess(GetFamilyPaginatedListResult result) {
+                getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
             }
         });
     }

@@ -22,8 +22,8 @@ import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchem
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
@@ -54,6 +54,8 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class OperationListPresenter extends Presenter<OperationListPresenter.OperationListView, OperationListPresenter.OperationsListProxy> implements OperationListUiHandlers {
 
+    public final static int                    OPERATION_LIST_MAX_RESULTS        = 30;
+
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
 
@@ -75,7 +77,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     public interface OperationListView extends View, HasUiHandlers<OperationListUiHandlers> {
 
-        void setOperations(List<OperationBaseDto> operationBaseDtos);
+        void setOperations(List<OperationBaseDto> operationBaseDtos, int firstResult, int totalResults);
         HasRecordClickHandlers getSelectedOperation();
         HasClickHandlers getSaveNewOperation();
         OperationDto getOperation();
@@ -141,7 +143,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveOperations();
+        retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
     }
 
     @Override
@@ -175,16 +177,17 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
         });
     }
 
-    private void retrieveOperations() {
-        dispatcher.execute(new GetOperationListAction(), new WaitingAsyncCallback<GetOperationListResult>() {
+    @Override
+    public void retrieveOperationList(int firstResult, int maxResults) {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onWaitSuccess(GetOperationListResult result) {
-                getView().setOperations(result.getOperationBaseDtos());
+            public void onWaitSuccess(GetOperationPaginatedListResult result) {
+                getView().setOperations(result.getOperationBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
             }
         });
     }
@@ -195,12 +198,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveOperations();
+                retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
-                retrieveOperations();
+                retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
             }
         });

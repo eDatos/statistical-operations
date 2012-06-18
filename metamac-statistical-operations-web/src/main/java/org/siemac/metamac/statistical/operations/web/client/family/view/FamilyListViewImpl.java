@@ -14,7 +14,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
-import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.PaginatedBaseCustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -30,13 +31,13 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers> implements FamilyListPresenter.FamilyListView {
 
-    private VLayout           panel;
-    private ListGridToolStrip listGridToolStrip;
-    private CustomListGrid    familyListGrid;
+    private VLayout                     panel;
+    private ListGridToolStrip           listGridToolStrip;
+    private PaginatedBaseCustomListGrid familyListGrid;
 
     // Modal window
-    private ModalWindow       window;
-    private NewFamilyForm     newFamilyForm;
+    private ModalWindow                 window;
+    private NewFamilyForm               newFamilyForm;
 
     @Inject
     public FamilyListViewImpl() {
@@ -63,23 +64,29 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
         listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
-        familyListGrid = new CustomListGrid();
+        familyListGrid = new PaginatedBaseCustomListGrid(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS, new PaginatedAction() {
+
+            @Override
+            public void retrieveResultSet(int firstResult, int maxResults) {
+                getUiHandlers().retrieveFamilyList(firstResult, maxResults);
+            }
+        });
         ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(FamilyRecord.TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         ListGridField statusField = new ListGridField(FamilyRecord.STATUS, OperationsWeb.getConstants().familyProcStatus());
-        familyListGrid.setFields(codeField, titleField, descriptionField, statusField);
-        familyListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
+        familyListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField);
+        familyListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
             public void onSelectionChanged(SelectionEvent event) {
-                if (familyListGrid.getSelectedRecords() != null && familyListGrid.getSelectedRecords().length == 1) {
-                    FamilyRecord record = (FamilyRecord) familyListGrid.getSelectedRecord();
+                if (familyListGrid.getListGrid().getSelectedRecords() != null && familyListGrid.getListGrid().getSelectedRecords().length == 1) {
+                    FamilyRecord record = (FamilyRecord) familyListGrid.getListGrid().getSelectedRecord();
                     selectFamily(record.getId());
                 } else {
                     // No record selected
                     deselectFamily();
-                    if (familyListGrid.getSelectedRecords().length > 1) {
+                    if (familyListGrid.getListGrid().getSelectedRecords().length > 1) {
                         // Delete more than one Family with one click
                         showListGridDeleteButton();
                     }
@@ -113,19 +120,21 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     }
 
     @Override
-    public void setFamilies(List<FamilyBaseDto> familyDtos) {
-        familyListGrid.removeAllData();
+    public void setFamilies(List<FamilyBaseDto> familyDtos, int firstResult, int totalResults) {
+        familyListGrid.getListGrid().selectAllRecords();
+        familyListGrid.getListGrid().removeSelectedData();
         if (familyDtos != null) {
             for (FamilyBaseDto familyDto : familyDtos) {
-                familyListGrid.addData(RecordUtils.getFamilyRecord(familyDto));
+                familyListGrid.getListGrid().addData(RecordUtils.getFamilyRecord(familyDto));
             }
         }
+        familyListGrid.refreshPaginationInfo(firstResult, familyDtos.size(), totalResults);
         listGridToolStrip.getDeleteButton().hide();
     }
 
     @Override
     public HasRecordClickHandlers getSelectedFamily() {
-        return familyListGrid;
+        return familyListGrid.getListGrid();
     }
 
     @Override
@@ -156,8 +165,8 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     @Override
     public List<Long> getSelectedFamilies() {
         List<Long> selectedFamilies = new ArrayList<Long>();
-        if (familyListGrid.getSelectedRecords() != null) {
-            ListGridRecord[] records = familyListGrid.getSelectedRecords();
+        if (familyListGrid.getListGrid().getSelectedRecords() != null) {
+            ListGridRecord[] records = familyListGrid.getListGrid().getSelectedRecords();
             for (int i = 0; i < records.length; i++) {
                 FamilyRecord record = (FamilyRecord) records[i];
                 selectedFamilies.add(record.getId());
@@ -169,7 +178,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     @Override
     public void onFamilySaved(FamilyDto familyDto) {
         FamilyRecord record = RecordUtils.getFamilyRecord(familyDto);
-        familyListGrid.addData(record);
+        familyListGrid.getListGrid().addData(record);
     }
 
     /**
@@ -181,7 +190,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         if (id == null) {
             // New family
             listGridToolStrip.getDeleteButton().hide();
-            familyListGrid.deselectAllRecords();
+            familyListGrid.getListGrid().deselectAllRecords();
         } else {
             showListGridDeleteButton();
         }

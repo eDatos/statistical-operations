@@ -16,7 +16,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperationForm;
-import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.PaginatedBaseCustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -35,13 +36,13 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHandlers> implements OperationListPresenter.OperationListView {
 
-    private VLayout           panel;
-    private ListGridToolStrip listGridToolStrip;
-    private CustomListGrid    operationListGrid;
+    private VLayout                     panel;
+    private ListGridToolStrip           listGridToolStrip;
+    private PaginatedBaseCustomListGrid operationListGrid;
 
     // Modal window
-    private ModalWindow       window;
-    private NewOperationForm  newOperationForm;
+    private ModalWindow                 window;
+    private NewOperationForm            newOperationForm;
 
     @Inject
     public OperationListViewImpl() {
@@ -80,25 +81,31 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
         listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateOperation() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
-        operationListGrid = new CustomListGrid();
+        operationListGrid = new PaginatedBaseCustomListGrid(OperationListPresenter.OPERATION_LIST_MAX_RESULTS, new PaginatedAction() {
+
+            @Override
+            public void retrieveResultSet(int firstResult, int maxResults) {
+                getUiHandlers().retrieveOperationList(firstResult, maxResults);
+            }
+        });
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operationTitle());
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
         ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getConstants().operationStatus());
         ListGridField indicatorsSystem = new ListGridField(OperationDS.OP_INDICATOR_SYSTEM, OperationsWeb.getConstants().operationIndicatorSystem());
         indicatorsSystem.setType(ListGridFieldType.IMAGE);
-        operationListGrid.setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem);
-        operationListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
+        operationListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem);
+        operationListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
             public void onSelectionChanged(SelectionEvent event) {
-                if (operationListGrid.getSelectedRecords() != null && operationListGrid.getSelectedRecords().length == 1) {
-                    OperationRecord record = (OperationRecord) operationListGrid.getSelectedRecord();
+                if (operationListGrid.getListGrid().getSelectedRecords() != null && operationListGrid.getListGrid().getSelectedRecords().length == 1) {
+                    OperationRecord record = (OperationRecord) operationListGrid.getListGrid().getSelectedRecord();
                     selectOperation(record.getId());
                 } else {
                     // No record selected
                     deselectOperation();
-                    if (operationListGrid.getSelectedRecords().length > 1) {
+                    if (operationListGrid.getListGrid().getSelectedRecords().length > 1) {
                         // Delete more than one Family with one click
                         showListGridDeleteButton();
                     }
@@ -132,19 +139,21 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     }
 
     @Override
-    public void setOperations(List<OperationBaseDto> operationBaseDtos) {
-        operationListGrid.removeAllData();
+    public void setOperations(List<OperationBaseDto> operationBaseDtos, int firstResult, int totalResults) {
+        operationListGrid.getListGrid().selectAllRecords();
+        operationListGrid.getListGrid().removeSelectedData();
         if (operationBaseDtos != null) {
             for (OperationBaseDto operationBaseDto : operationBaseDtos) {
-                operationListGrid.addData(RecordUtils.getOperationRecord(operationBaseDto));
+                operationListGrid.getListGrid().addData(RecordUtils.getOperationRecord(operationBaseDto));
             }
         }
+        operationListGrid.refreshPaginationInfo(firstResult, operationBaseDtos.size(), totalResults);
         listGridToolStrip.getDeleteButton().hide();
     }
 
     @Override
     public HasRecordClickHandlers getSelectedOperation() {
-        return operationListGrid;
+        return operationListGrid.getListGrid();
     }
 
     @Override
@@ -175,8 +184,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     @Override
     public List<Long> getSelectedOperations() {
         List<Long> selectedOperations = new ArrayList<Long>();
-        if (operationListGrid.getSelectedRecords() != null) {
-            ListGridRecord[] records = operationListGrid.getSelectedRecords();
+        if (operationListGrid.getListGrid().getSelectedRecords() != null) {
+            ListGridRecord[] records = operationListGrid.getListGrid().getSelectedRecords();
             for (int i = 0; i < records.length; i++) {
                 OperationRecord record = (OperationRecord) records[i];
                 selectedOperations.add(record.getId());
@@ -187,8 +196,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
 
     public List<String> getSelectedOperationCodes() {
         List<String> selectedOperations = new ArrayList<String>();
-        if (operationListGrid.getSelectedRecords() != null) {
-            ListGridRecord[] records = operationListGrid.getSelectedRecords();
+        if (operationListGrid.getListGrid().getSelectedRecords() != null) {
+            ListGridRecord[] records = operationListGrid.getListGrid().getSelectedRecords();
             for (int i = 0; i < records.length; i++) {
                 OperationRecord record = (OperationRecord) records[i];
                 selectedOperations.add(record.getCode());
@@ -200,7 +209,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     @Override
     public void onOperationSaved(OperationDto operationDto) {
         OperationRecord record = RecordUtils.getOperationRecord(operationDto);
-        operationListGrid.addData(record);
+        operationListGrid.getListGrid().addData(record);
     }
 
     /**
@@ -212,7 +221,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         if (id == null) {
             // New operation
             listGridToolStrip.getDeleteButton().hide();
-            operationListGrid.deselectAllRecords();
+            operationListGrid.getListGrid().deselectAllRecords();
         } else {
             showListGridDeleteButton();
         }
