@@ -155,10 +155,10 @@ public class MetamacCriteriaWebService2SculptorCriteria<T> {
                 condditionProperty.ignoreCaseEq(sculptorPropertyCriteria.getValue());
                 break;
             case LIKE:
-                condditionProperty.like(sculptorPropertyCriteria.getValue());
+                condditionProperty.like("%" + sculptorPropertyCriteria.getValue() + "%");
                 break;
             case ILIKE:
-                condditionProperty.ignoreCaseLike(sculptorPropertyCriteria.getValue());
+                condditionProperty.ignoreCaseLike("%" + sculptorPropertyCriteria.getValue() + "%");
                 break;
             case IS_NULL:
                 condditionProperty.isNull();
