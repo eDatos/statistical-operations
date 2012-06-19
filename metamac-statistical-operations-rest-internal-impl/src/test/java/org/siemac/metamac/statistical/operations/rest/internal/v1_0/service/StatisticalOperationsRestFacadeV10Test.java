@@ -15,6 +15,8 @@ import org.siemac.metamac.common.test.rest.ServerResource;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsCoreMocks;
+import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestAsserts;
+import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestMocks;
 import org.springframework.context.ApplicationContext;
 
 public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientServerTestBase {
@@ -56,7 +58,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = statisticalOperationsRestFacadeClient.retrieveOperationByCode(code);
 
         assertNotNull(operation);
-        assertEquals(code, operation.getCode());
+        StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(), operation);
     }
 
     @Test

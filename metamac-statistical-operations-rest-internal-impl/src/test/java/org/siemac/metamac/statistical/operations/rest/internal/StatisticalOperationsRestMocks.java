@@ -1,19 +1,20 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
-import org.siemac.metamac.core.common.ent.domain.InternationalString;
-import org.siemac.metamac.core.common.ent.domain.LocalisedString;
-import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StatisticalOperationsCoreMocks {
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+
+
+public class StatisticalOperationsRestMocks {
 
     public static Operation mockOperation1() {
 
         Operation operation = new Operation();
 
-        operation.setProcStatus(ProcStatusEnum.PUBLISH_EXTERNALLY);
         operation.setCode("Code1");
-        operation.setTitle(mockInternationalString("es", "Título en español de operación", "en", "Operation title in English"));
+        operation.getTitles().addAll(mockInternationalString("es", "Título en español de operación", "en", "Operation title in English"));
 
         // // DESCRIPTION
         // InternationalString acronym = new InternationalString();
@@ -105,19 +106,18 @@ public class StatisticalOperationsCoreMocks {
         return operation;
     }
 
-    private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
+    private static List<LocalisedString> mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
-        InternationalString internationalString = new InternationalString();
-
+        List<LocalisedString> internationalString = new ArrayList<LocalisedString>();
         LocalisedString internationalStringLocale1 = new LocalisedString();
         internationalStringLocale1.setLocale(locale1);
         internationalStringLocale1.setLabel(label1);
-        internationalString.addText(internationalStringLocale1);
+        internationalString.add(internationalStringLocale1);
 
         LocalisedString internationalStringLocale2 = new LocalisedString();
         internationalStringLocale2.setLocale(locale2);
         internationalStringLocale2.setLabel(label2);
-        internationalString.addText(internationalStringLocale2);
+        internationalString.add(internationalStringLocale2);
 
         return internationalString;
     }
