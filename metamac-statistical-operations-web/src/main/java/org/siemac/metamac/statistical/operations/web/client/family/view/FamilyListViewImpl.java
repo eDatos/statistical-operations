@@ -14,7 +14,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
-import org.siemac.metamac.web.common.client.widgets.PaginatedBaseCustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -31,13 +31,13 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers> implements FamilyListPresenter.FamilyListView {
 
-    private VLayout                     panel;
-    private ListGridToolStrip           listGridToolStrip;
-    private PaginatedBaseCustomListGrid familyListGrid;
+    private VLayout                panel;
+    private ListGridToolStrip      listGridToolStrip;
+    private PaginatedCheckListGrid familyListGrid;
 
     // Modal window
-    private ModalWindow                 window;
-    private NewFamilyForm               newFamilyForm;
+    private ModalWindow            window;
+    private NewFamilyForm          newFamilyForm;
 
     @Inject
     public FamilyListViewImpl() {
@@ -64,7 +64,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
         listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
-        familyListGrid = new PaginatedBaseCustomListGrid(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS, new PaginatedAction() {
+        familyListGrid = new PaginatedCheckListGrid(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS, new PaginatedAction() {
 
             @Override
             public void retrieveResultSet(int firstResult, int maxResults) {
