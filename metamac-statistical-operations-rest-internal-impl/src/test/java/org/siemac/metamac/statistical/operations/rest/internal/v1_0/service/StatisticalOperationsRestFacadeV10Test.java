@@ -13,8 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.siemac.metamac.common.test.rest.ServerResource;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
-import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsCoreMocks;
 import org.springframework.context.ApplicationContext;
 
 public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientServerTestBase {
@@ -46,13 +46,13 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
 
-        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq("Code1"))).thenReturn(new Operation());
+        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq("Code1"))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
     }
 
     @Test
     public void testRetrieveOperationByCode() throws Exception {
 
-        String code = "NOT_EXISTS";
+        String code = "Code1";
         org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = statisticalOperationsRestFacadeClient.retrieveOperationByCode(code);
 
         assertNotNull(operation);
