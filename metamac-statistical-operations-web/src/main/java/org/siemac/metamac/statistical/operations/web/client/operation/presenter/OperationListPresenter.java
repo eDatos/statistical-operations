@@ -54,6 +54,7 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class OperationListPresenter extends Presenter<OperationListPresenter.OperationListView, OperationListPresenter.OperationsListProxy> implements OperationListUiHandlers {
 
+    public final static int                    OPERATION_LIST_FIRST_RESULT       = 0;
     public final static int                    OPERATION_LIST_MAX_RESULTS        = 30;
 
     private final DispatchAsync                dispatcher;
@@ -143,7 +144,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
+        retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
     }
 
     @Override
@@ -198,12 +199,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
-                retrieveOperationList(1, OPERATION_LIST_MAX_RESULTS);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
             }
         });

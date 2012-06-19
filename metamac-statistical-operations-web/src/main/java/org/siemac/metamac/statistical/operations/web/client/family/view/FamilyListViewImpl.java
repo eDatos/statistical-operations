@@ -71,6 +71,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
                 getUiHandlers().retrieveFamilyList(firstResult, maxResults);
             }
         });
+        familyListGrid.setHeight(720);
         ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(FamilyRecord.TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
@@ -179,6 +180,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     public void onFamilySaved(FamilyDto familyDto) {
         FamilyRecord record = RecordUtils.getFamilyRecord(familyDto);
         familyListGrid.getListGrid().addData(record);
+        familyListGrid.goToLastPageAfterCreate();
     }
 
     /**

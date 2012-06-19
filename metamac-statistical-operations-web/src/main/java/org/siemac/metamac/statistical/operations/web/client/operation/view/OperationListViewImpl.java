@@ -88,6 +88,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
                 getUiHandlers().retrieveOperationList(firstResult, maxResults);
             }
         });
+        operationListGrid.setHeight(720);
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operationTitle());
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
@@ -210,6 +211,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     public void onOperationSaved(OperationDto operationDto) {
         OperationRecord record = RecordUtils.getOperationRecord(operationDto);
         operationListGrid.getListGrid().addData(record);
+        operationListGrid.goToLastPageAfterCreate();
     }
 
     /**

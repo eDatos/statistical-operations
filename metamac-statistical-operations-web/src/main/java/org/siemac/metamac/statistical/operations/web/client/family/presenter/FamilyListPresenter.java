@@ -50,6 +50,7 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyListView, FamilyListPresenter.FamiliesListProxy> implements FamilyListUiHandlers {
 
+    public final static int                    FAMILY_LIST_FIRST_RESULT          = 0;
     public final static int                    FAMILY_LIST_MAX_RESULTS           = 30;
 
     private final DispatchAsync                dispatcher;
@@ -140,7 +141,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
+        retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
     }
 
     @Override
@@ -180,12 +181,12 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
-                retrieveFamilyList(1, FAMILY_LIST_MAX_RESULTS);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getMessageList(getMessages().familyDeleted()), MessageTypeEnum.SUCCESS);
             }
         });
