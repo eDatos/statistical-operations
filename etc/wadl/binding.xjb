@@ -7,5 +7,13 @@
 
 	<jaxb:globalBindings> 
 		<xjc:simple/> 
+		<jaxb:javaType name="java.util.Date" 
+		     	       xmlType="xs:dateTime" 
+		               parseMethod="org.apache.cxf.tools.common.DataTypeAdapter.parseDateTime" 
+					   printMethod="org.apache.cxf.tools.common.DataTypeAdapter.printDateTime" />
+		<jaxb:javaType name="java.util.Date" 
+		     	       xmlType="xs:date" 
+		               parseMethod="org.apache.cxf.tools.common.DataTypeAdapter.parseDateTime" 
+					   printMethod="org.apache.cxf.tools.common.DataTypeAdapter.printDateTime" />
 	</jaxb:globalBindings> 
 </jaxb:bindings>

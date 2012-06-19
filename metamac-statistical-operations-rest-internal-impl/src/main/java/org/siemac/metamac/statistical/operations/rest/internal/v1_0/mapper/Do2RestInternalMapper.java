@@ -6,5 +6,5 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Opera
 public interface Do2RestInternalMapper {
 
     // Entities
-    public Operation operationToOperationBase(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException;
+    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException;
 }

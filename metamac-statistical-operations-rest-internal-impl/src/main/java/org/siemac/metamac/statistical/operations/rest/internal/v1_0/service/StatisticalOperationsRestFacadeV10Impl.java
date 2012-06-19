@@ -12,6 +12,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2Re
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// TODO uri
 @Service("statisticalOperationsRestFacadeV10")
 public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestFacadeV10 {
 
@@ -53,7 +54,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                 return operation;
 //                throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
             }
-            Operation operation = do2RestInternalMapper.operationToOperationBase(operationEntity);
+            Operation operation = do2RestInternalMapper.toOperation(operationEntity);
             return operation;
         } catch (MetamacException e) {
             // TODO error, con código y título

@@ -1,15 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified"
+    elementFormDefault="qualified"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-	xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
-	targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
+    xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
+    targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
     jaxb:version="2.1">
 
     <xsd:complexType name="Operation">
         <xsd:sequence>
             <xsd:element name="code" type="xsd:string" />
-            <xsd:element name="title" type="tns:LocalisedString" minOccurs="0" maxOccurs="unbounded" />
+<!-- URI -->
+            <xsd:element name="title" type="tns:InternationalString" />
+            <xsd:element name="acronym" type="tns:InternationalString" />
+<!-- FAMILY_CODE -->
+<!-- FAMILY_TITLE -->
+<!-- SUBJECT AREA -->
+<!-- SUBJECT_CODE -->
+<!-- SECUNDARY_SUBJECT_AREAS -->
+<!-- SECUNDARY_SUBJECT_CODES -->
+            <xsd:element name="objective" type="tns:InternationalString" />
+            <xsd:element name="description" type="tns:InternationalString" />
+<!-- INSTANCE_CODE -->
+<!-- INSTANCE_TITLE -->
+            <xsd:element name="surveyType" type="xsd:string" />
+            <xsd:element name="officialityType" type="xsd:string" />
+            <xsd:element name="indicatorSystem" type="xsd:boolean" minOccurs="0" />
+<!-- PRODUCER -->
+<!-- REGIONAL_RESPONSIBLE -->
+<!-- REGIONAL_CONTRIBUTOR -->
+            <xsd:element name="internalInventoryDate" type="xsd:dateTime" />
+            <xsd:element name="currentlyActive" type="xsd:boolean" minOccurs="0" />
+            <xsd:element name="status" type="xsd:string" />
+            <xsd:element name="procStatus" type="xsd:string" />
+<!-- PUBLISHER -->
+            <xsd:element name="relPolUsAc" type="tns:InternationalString" />
+            <xsd:element name="relPolUsAcUrl" type="xsd:string" />
+            <xsd:element name="releaseCalendar" type="xsd:boolean" minOccurs="0" />
+            <xsd:element name="releaseCalendarAccess" type="xsd:string" />
+<!-- UPDATE_FREQUENCY -->
+<!-- CURRENT_INTERNAL_INSTANCE -->
+<!-- CURRENT_INSTANCE -->
+            <xsd:element name="inventoryDate" type="xsd:dateTime" />
+            <xsd:element name="revPolicy" type="tns:InternationalString" />
+            <xsd:element name="revPolicyUrl" type="xsd:string" />
+            <xsd:element name="revPractice" type="tns:InternationalString" />
+            <xsd:element name="revPracticeUrl" type="xsd:string" />
+<!-- CONTACT -->
+<!-- LEGAL_ACTS -->
+<!-- DATA_SHARING -->
+<!-- CONFIDENTIALITY_POLICY -->
+<!-- CONFIDENTIALITY_DATA_TREATMENT -->
+
+            <xsd:element name="comment" type="tns:InternationalString" />
+            <xsd:element name="commentUrl" type="xsd:string" />
+            <xsd:element name="notes" type="tns:InternationalString" />
+            <xsd:element name="notesUrl" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -19,12 +64,18 @@
             <xsd:element name="items" type="tns:Operation" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
+
+    <xsd:complexType name="InternationalString">
+        <xsd:sequence>
+            <xsd:element name="texts" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
     
     <xsd:complexType name="LocalisedString">
         <xsd:sequence>
+            <xsd:element name="locale" type="xsd:string" />
             <xsd:element name="label" type="xsd:string" />
         </xsd:sequence>
-        <xsd:attribute name="locale" type="xsd:string" />
     </xsd:complexType>
 
     <!-- Elements -->

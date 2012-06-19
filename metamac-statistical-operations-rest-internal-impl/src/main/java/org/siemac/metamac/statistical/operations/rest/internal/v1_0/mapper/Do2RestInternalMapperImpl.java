@@ -1,10 +1,10 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
 
-import java.util.ArrayList; 
-import java.util.List;
+import java.util.Date;
 
-import org.siemac.metamac.core.common.ent.domain.InternationalString;
+import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.springframework.stereotype.Component;
@@ -12,31 +12,90 @@ import org.springframework.stereotype.Component;
 @Component
 public class Do2RestInternalMapperImpl implements Do2RestInternalMapper {
 
+    // TODO conversión de DateTime de Joda
     @Override
-    public Operation operationToOperationBase(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException {
+    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException {
         if (source == null) {
             return null;
         }
-        Operation operation = new Operation();
-        operation.setCode(source.getCode());
-        if (source.getTitle() != null) {
-            operation.getTitles().addAll(internationalStringToText(source.getTitle()));
+        Operation target = new Operation();
+        target.setCode(source.getCode());
+        // TODO uri
+        target.setTitle(toInternationalString(source.getTitle()));
+        target.setAcronym(toInternationalString(source.getAcronym()));
+        // TODO FAMILY_CODE
+        // TODO FAMILY_TITLE
+        // TODO SUBJECT_AREA
+        // TODO SUBJECT_CODE
+        // TODO SECUNDARY_SUBJECT_AREAS
+        // TODO SECUNDARY_SUBJECT_CODES
+        target.setObjective(toInternationalString(source.getObjective()));
+        target.setDescription(toInternationalString(source.getDescription()));
+        // TODO INSTANCE_CODE
+        // TODO INSTANCE_TITLE
+        // TODO SURVEY_TYPE: qué dato?
+        if (source.getSurveyType() != null) {
+            target.setSurveyType(source.getSurveyType().getIdentifier());
         }
+        // TODO officialy type: qué dato?
+        if (source.getOfficialityType() != null) {
+            target.setOfficialityType(source.getOfficialityType().getIdentifier());
+        }
+        target.setIndicatorSystem(source.getIndicatorSystem());
+        // TODO PRODUCER
+        // TODO REGIONAL_RESPONSIBLE
+        // TODO REGIONAL_CONTRIBUTOR
+        target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
+        target.setCurrentlyActive(source.getCurrentlyActive());
+        // TODO status, qué poner
+        if (source.getStatus() != null) {
+            target.setStatus(source.getStatus().name());
+        }
+        // TODO proc status, qué poner
+        target.setProcStatus(source.getProcStatus().name());
+        // TODO PUBLISHER
+        target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
+        target.setRelPolUsAcUrl(source.getRelPolUsAcUrl());
+        target.setReleaseCalendar(source.getReleaseCalendar());
+        target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
+        // TODO UPDATE_FREQUENCY
+        // TODO CURRENT_INTERNAL_INSTANCE
+        // TODO CURRENT_INSTANCE
+        target.setInventoryDate(toDate(source.getInventoryDate()));
+        target.setRevPolicy(toInternationalString(source.getRevPolicy()));
+        target.setRevPolicyUrl(source.getRevPolicyUrl());
+        target.setRevPractice(toInternationalString(source.getRevPractice()));
+        target.setRevPracticeUrl(source.getRevPracticeUrl());
+        // TODO LEGAL_ACTS
+        // TODO DATA_SHARING
+        // TODO CONFIDENTIALITY_POLICY
+        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        target.setComment(toInternationalString(source.getComment()));
+        target.setCommentUrl(source.getCommentUrl());
+        target.setNotes(toInternationalString(source.getNotes()));
+        target.setNotesUrl(source.getNotesUrl());
 
-        return operation;
+        return target;
     }
 
-    private List<LocalisedString> internationalStringToText(InternationalString sources) {
+    private InternationalString toInternationalString(org.siemac.metamac.core.common.ent.domain.InternationalString sources) {
         if (sources == null) {
             return null;
         }
-        List<LocalisedString> targets = new ArrayList<LocalisedString>();
+        InternationalString targets = new InternationalString();
         for (org.siemac.metamac.core.common.ent.domain.LocalisedString source : sources.getTexts()) {
             LocalisedString target = new LocalisedString();
             target.setLabel(source.getLabel());
             target.setLocale(source.getLocale());
-            targets.add(target);
+            targets.getTexts().add(target);
         }
         return targets;
+    }
+
+    private Date toDate(DateTime source) {
+        if (source == null) {
+            return null;
+        }
+        return source.toDate();
     }
 }

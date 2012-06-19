@@ -1,11 +1,9 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.joda.time.DateTime;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-
 
 public class StatisticalOperationsRestMocks {
 
@@ -14,110 +12,68 @@ public class StatisticalOperationsRestMocks {
         Operation operation = new Operation();
 
         operation.setCode("Code1");
-        operation.getTitles().addAll(mockInternationalString("es", "Título en español de operación", "en", "Operation title in English"));
+        // TODO uri
+        operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
+        operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
+        // TODO FAMILY_CODE
+        // TODO FAMILY_TITLE
+        // TODO SUBJECT_AREA
+        // TODO SUBJECT_CODE
+        // TODO SECUNDARY_SUBJECT_AREAS
+        // TODO SECUNDARY_SUBJECT_CODES
+        operation.setObjective(mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
+        operation.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
+        // TODO INSTANCE_CODE
+        // TODO INSTANCE_TITLE
+        operation.setSurveyType("surveyIdentifier");
+        operation.setOfficialityType("officialityIdentifier");
 
-        // // DESCRIPTION
-        // InternationalString acronym = new InternationalString();
-        // LocalisedString acronym_es = new LocalisedString();
-        // acronym_es.setLabel("Descripción en español de operacion");
-        // acronym_es.setLocale("es");
-        // LocalisedString acronym_en = new LocalisedString();
-        // acronym_en.setLabel("Descripción en inglés de operacion");
-        // acronym_en.setLocale("en");
-        // acronym.addText(acronym_es);
-        // acronym.addText(acronym_en);
-        // operation.setAcronym(acronym);
-        //
-        // // RELEASE_CALENDAR
-        // operation.setReleaseCalendar(false);
-        //
-        // // RELEASE_CALENDAR_ACCESS
-        // operation.setReleaseCalendarAccess("http://www.draft.com");
-        //
-        // // SURVEY_TYPE
-        // operation.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
-        //
-        // // OFFICIALITY_TYPE
-        // operation.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
-        //
-        // // SUBJECT_AREA
-        // ExternalItemBt subjectArea = new ExternalItemBt();
-        // subjectArea.setCodeId("PRUEBA");
-        // subjectArea.setType(TypeExternalArtefactsEnum.CATEGORY);
-        // subjectArea.setUriInt("uri:external:todo");
-        // operation.setSubjectArea(subjectArea);
-        //
-        // // STATUS
-        // operation.setStatus(StatusEnum.PLANNING);
-        //
-        // // INDICATOR_SYSTEM
-        // operation.setIndicatorSystem(true);
-        //
-        //
-        // // OBJECTIVE
-        // InternationalString objective = new InternationalString();
-        // LocalisedString objective_es = new LocalisedString();
-        // objective_es.setLabel("OPERACION - OBJECTIVE - ES");
-        // objective_es.setLocale("es");
-        // LocalisedString objective_en = new LocalisedString();
-        // objective_en.setLabel("OPERACION - OBJECTIVE - EN");
-        // objective_en.setLocale("en");
-        // objective.addText(objective_es);
-        // objective.addText(objective_en);
-        // operation.setObjective(objective);
-        //
-        // // SURVEY_TYPE
-        // operation.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
-        //
-        // // PRODUCER
-        // ExternalItemBt producer01 = new ExternalItemBt();
-        // producer01.setCodeId("ISTAC");
-        // producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        // producer01.setUriInt("uri:interna:todo");
-        // operation.addProducer(producer01);
-        //
-        // ExternalItemBt producer02 = new ExternalItemBt();
-        // producer02.setCodeId("INE");
-        // producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        // producer02.setUriInt("uri:interna:todo");
-        // operation.addProducer(producer02);
-        //
-        // // REGIONAL_RESPONSIBLE
-        // ExternalItemBt regionalResponsible01 = new ExternalItemBt();
-        // regionalResponsible01.setCodeId("ISTAC");
-        // regionalResponsible01.setType(TypeExternalArtefactsEnum.AGENCY);
-        // regionalResponsible01.setUriInt("uri:interna:todo");
-        // operation.addRegionalResponsible(regionalResponsible01);
-        //
-        // // PUBLISHER
-        // ExternalItemBt publisher01 = new ExternalItemBt();
-        // publisher01.setCodeId("ISTAC");
-        // publisher01.setType(TypeExternalArtefactsEnum.AGENCY);
-        // publisher01.setUriInt("uri:interna:todo");
-        // operation.addPublisher(publisher01);
-        //
-        // // COMMON_METADATA
-        // ExternalItemBt commonMetadata = new ExternalItemBt();
-        // commonMetadata.setCodeId("ISTAC");
-        // commonMetadata.setType(TypeExternalArtefactsEnum.AGENCY);
-        // commonMetadata.setUriInt("uri:interna:todo");
-        // operation.setCommonMetadata(commonMetadata);
+        operation.setIndicatorSystem(Boolean.TRUE);
+        // TODO PRODUCER
+        // TODO REGIONAL_RESPONSIBLE
+        // TODO REGIONAL_CONTRIBUTOR
+        operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
+        operation.setCurrentlyActive(Boolean.FALSE);
+        operation.setStatus("DESIGN");
+        operation.setProcStatus("PUBLISH_EXTERNALLY");
+        // TODO PUBLISHER
+        operation.setRelPolUsAc(mockInternationalString("es", "RelPolUsAc 1 en español", "en", "RelPolUsAc 1 in English"));
+        operation.setRelPolUsAcUrl("http://relPolUsAc1.url");
+        operation.setReleaseCalendar(Boolean.TRUE);
+        operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
+        // TODO UPDATE_FREQUENCY
+        // TODO CURRENT_INTERNAL_INSTANCE
+        // TODO CURRENT_INSTANCE
+        operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
+        operation.setRevPolicy(mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
+        operation.setRevPolicyUrl("http://revPolicy1.url");
+        operation.setRevPractice(mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
+        operation.setRevPracticeUrl("http://revPractice1.url");
+        // TODO LEGAL_ACTS
+        // TODO DATA_SHARING
+        // TODO CONFIDENTIALITY_POLICY
+        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        operation.setComment(mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
+        operation.setCommentUrl("http://comments1.url");
+        operation.setNotes(mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
+        operation.setNotesUrl("http://notes1.url");
 
         return operation;
     }
 
-    private static List<LocalisedString> mockInternationalString(String locale1, String label1, String locale2, String label2) {
+    private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
-        List<LocalisedString> internationalString = new ArrayList<LocalisedString>();
+        InternationalString internationalString = new InternationalString();
+        
         LocalisedString internationalStringLocale1 = new LocalisedString();
         internationalStringLocale1.setLocale(locale1);
         internationalStringLocale1.setLabel(label1);
-        internationalString.add(internationalStringLocale1);
+        internationalString.getTexts().add(internationalStringLocale1);
 
         LocalisedString internationalStringLocale2 = new LocalisedString();
         internationalStringLocale2.setLocale(locale2);
         internationalStringLocale2.setLabel(label2);
-        internationalString.add(internationalStringLocale2);
+        internationalString.getTexts().add(internationalStringLocale2);
 
         return internationalString;
     }
