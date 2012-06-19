@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Do2RestInternalMapperImpl implements Do2RestInternalMapper {
 
-    // TODO conversión de DateTime de Joda
+    // TODO conversión de DateTime de Joda ¿qué mostrar en el xml?
     @Override
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException {
         if (source == null) {

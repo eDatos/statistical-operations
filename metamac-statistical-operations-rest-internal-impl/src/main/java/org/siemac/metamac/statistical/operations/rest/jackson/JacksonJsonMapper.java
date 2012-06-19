@@ -8,11 +8,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class JacksonJsonMapper extends ObjectMapper {
 
     public JacksonJsonMapper() {
-        // SimpleModule module = new SimpleModule("NAME", new Version(1, 0, 0, null));
-        // module.addSerializer(DateTime.class, new DateTimeSerializer());
-        // objectMapper.registerModule(module);
         this.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
         this.configure(SerializationConfig.Feature.INDENT_OUTPUT, true);
         this.configure(SerializationConfig.Feature.WRITE_EMPTY_JSON_ARRAYS, false);
+        this.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 }
