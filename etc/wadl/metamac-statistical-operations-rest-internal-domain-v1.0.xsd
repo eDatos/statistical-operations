@@ -8,11 +8,13 @@
     
     <xsd:complexType name="Operation">
         <xsd:sequence>
-            <xsd:element name="code" type="xsd:string" />
+<!-- PARENT_LINK /operations -->
+<!--  KIND -->        
+            <xsd:element name="id" type="xsd:string" />
             <xsd:element name="selfLink" type="xsd:string" />
             <xsd:element name="title" type="tns:InternationalString" />
             <xsd:element name="acronym" type="tns:InternationalString" />
-            <xsd:element name="family" type="tns:Resource" />
+            <xsd:element name="family" type="tns:Resource" maxOccurs="unbounded" />
 
 <!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
 
@@ -60,6 +62,7 @@
             <xsd:element name="commentUrl" type="xsd:string" />
             <xsd:element name="notes" type="tns:InternationalString" />
             <xsd:element name="notesUrl" type="xsd:string" />
+<!-- CHILD_LINK -->            
         </xsd:sequence>
     </xsd:complexType>
 
@@ -85,9 +88,9 @@
     
     <xsd:complexType name="Resource">
         <xsd:sequence>
-            <xsd:element name="code" type="xsd:string" />
+            <xsd:element name="id" type="xsd:string" />
             <xsd:element name="kind" type="xsd:string" />
-            <xsd:element name="link" type="xsd:string" />
+            <xsd:element name="selfLink" type="xsd:string" />
             <xsd:element name="title" type="tns:InternationalString" />
         </xsd:sequence>
     </xsd:complexType>    

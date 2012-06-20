@@ -4,19 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 
 public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsOperation(Operation expected, Operation actual) {
-        assertEquals(expected.getCode(), expected.getCode());
+        assertEquals(expected.getId(), expected.getId());
         assertEquals(expected.getSelfLink(), expected.getSelfLink());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
-        // TODO FAMILY_CODE
-        // TODO FAMILY_TITLE
+        assertEqualsResources(expected.getFamilies(), actual.getFamilies());
         // TODO SUBJECT_AREA
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
@@ -60,23 +62,49 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
     }
 
-    public static void assertEqualsInternationalString(InternationalString expecteds, InternationalString actuals) {
-        if (actuals == null && expecteds == null) {
-            return;
-        } else if ((actuals != null && expecteds == null) || (actuals == null && expecteds != null)) {
-            fail();
+    public static void assertEqualsResources(List<Resource> expecteds, List<Resource> actuals) {
+        assertEqualsNullability(expecteds, actuals);
+        assertEquals(expecteds.size(), actuals.size());
+        for (Resource expected : expecteds) {
+            boolean existsItem = false;
+            for (Resource actual : actuals) {
+                if (expected.getId().equals(actual.getId())) {
+                    assertEqualsResource(expected, actual);
+                    existsItem = true;
+                }
+            }
+            assertTrue(existsItem);
         }
-        assertEquals(expecteds.getTexts().size(), actuals.getTexts().size());
+    }
 
+    public static void assertEqualsResource(Resource expected, Resource actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getKind(), actual.getKind());
+        assertEquals(expected.getSelfLink(), actual.getSelfLink());
+        assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
+    }
+
+    public static void assertEqualsInternationalString(InternationalString expecteds, InternationalString actuals) {
+        assertEqualsNullability(expecteds, actuals);
+        assertEquals(expecteds.getTexts().size(), actuals.getTexts().size());
         for (LocalisedString expected : expecteds.getTexts()) {
-            boolean localeExists = false;
+            boolean existsItem = false;
             for (LocalisedString actual : actuals.getTexts()) {
                 if (expected.getLocale().equals(actual.getLocale())) {
                     assertEquals(expected.getLabel(), actual.getLabel());
-                    localeExists = true;
+                    existsItem = true;
                 }
             }
-            assertTrue(localeExists);
+            assertTrue(existsItem);
+        }
+    }
+    
+    // TODO pasar a librería de Asserts
+    private static void assertEqualsNullability(Object expected, Object actual) {
+        if (actual == null && expected == null) {
+            return;
+        } else if ((actual != null && expected == null) || (actual == null && expected != null)) {
+            fail();
         }
     }
 }

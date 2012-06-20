@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
-    <code>Code1</code>
+    <id>Code1</id>
     <selfLink>http://localhost:9001/api/internal/v1.0/operations/Code1</selfLink>
     <title>
         <texts>
@@ -22,6 +22,36 @@
             <label>Acronym 1 in English</label>
         </texts>
     </acronym>
+ <family>
+        <id>familyCode1</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/api/internal/v1.0/families/familyCode1</selfLink>
+        <title>
+            <texts>
+                <locale>en</locale>
+                <label>Title family familyCode1</label>
+            </texts>
+            <texts>
+                <locale>es</locale>
+                <label>Título family familyCode1</label>
+            </texts>
+        </title>
+    </family>
+    <family>
+        <id>familyCode2</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/api/internal/v1.0/families/familyCode2</selfLink>
+        <title>
+            <texts>
+                <locale>en</locale>
+                <label>Title family familyCode2</label>
+            </texts>
+            <texts>
+                <locale>es</locale>
+                <label>Título family familyCode2</label>
+            </texts>
+        </title>
+    </family>    
     <objective>
         <texts>
             <locale>es</locale>

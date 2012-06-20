@@ -1,33 +1,58 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.core.domain.Family;
+import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
-//    @Context
-//    private MessageContext context;     // Always null in this bean...
+    // @Context
+    // private MessageContext context; // Always null in this bean...
 
-    // TODO conversión de DateTime de Joda ¿qué mostrar en el xml?
+    /**
+     * TODO
+     * <id>""</id>
+     * <kind>""</kind>
+     * <link rel="self" href="" />
+     * <title>""</title>
+     * <description>""</description>
+     * <parent>
+     * <kind>""</kind>
+     * <link rel="self" href="" />
+     * <title>""</title>
+     * </parent>
+     * <children>
+     * <child>
+     * <kind>""</kind>
+     * <link rel="self" href="" />
+     * <title>""</title>
+     * </child>
+     * </children>
+     */
     @Override
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) throws MetamacException {
         if (source == null) {
             return null;
         }
         Operation target = new Operation();
-        target.setCode(source.getCode());
-        target.setSelfLink(createUrlOperationsOperation(source, apiUrl));
+        target.setId(source.getCode());
+        target.setSelfLink(createSelfLinkOperation(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
-        // TODO FAMILY_CODE
-        // TODO FAMILY_TITLE
+        target.getFamilies().addAll(toFamiliesResource(source.getFamilies(), apiUrl));
         // TODO SUBJECT_AREA
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
@@ -81,6 +106,30 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
+    private List<Resource> toFamiliesResource(Set<Family> sources, String apiUrl) {
+        List<Resource> targets = new ArrayList<Resource>();
+        if (sources == null) {
+            return targets;
+        }
+        for (Family source : sources) {
+            Resource target = toFamilyResource(source, apiUrl);
+            targets.add(target);
+        }
+        return targets;
+    }
+
+    private Resource toFamilyResource(Family source, String apiUrl) {
+        if (source == null) {
+            return null;
+        }
+        Resource target = new Resource();
+        target.setId(source.getCode());
+        target.setKind(RestInternalConstants.KIND_FAMILY);
+        target.setSelfLink(createSelfLinkFamily(source, apiUrl));
+        target.setTitle(toInternationalString(source.getTitle()));
+        return target;
+    }
+
     private InternationalString toInternationalString(org.siemac.metamac.core.common.ent.domain.InternationalString sources) {
         if (sources == null) {
             return null;
@@ -101,12 +150,19 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return source.toDate();
     }
-    
 
-    private String createUrlOperationsOperation(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
-        StringBuilder url = new StringBuilder();
-        url.append(apiUrl);
-        url.append("/operations/" + operation.getCode());
-        return url.toString();
+    private String createSelfLinkOperation(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
+        return createSelfLink(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS, operation.getCode());
+    }
+
+    private String createSelfLinkFamily(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
+        return createSelfLink(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode());
+    }
+
+    private String createSelfLink(String apiUrl, String baseResource, String resourceId) {
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl);
+        uriComponentsBuilder = uriComponentsBuilder.pathSegment(baseResource);
+        uriComponentsBuilder = uriComponentsBuilder.pathSegment(resourceId);
+        return uriComponentsBuilder.build().toUriString();
     }
 }

@@ -1,6 +1,5 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
-import java.math.BigInteger;
 import java.net.URI;
 
 import javax.ws.rs.core.Context;
@@ -17,7 +16,6 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2Re
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// TODO uri
 @Service("statisticalOperationsRestFacadeV10")
 public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestFacadeV10 {
 
@@ -34,19 +32,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     @Override
     public Operations findOperations() {
-        Operations operations = new Operations();
-        operations.setSize(BigInteger.valueOf(2));
-        {
-            org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
-            operation.setCode("1aaa1");
-            operations.getItems().add(operation);
-        }
-        {
-            org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
-            operation.setCode("2aaa1");
-            operations.getItems().add(operation);
-        }
-        return operations;
+        return null; // TODO
     }
 
     @Override
@@ -58,7 +44,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             if (operationEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationEntity.getProcStatus()))) {
                 // TODO
                 Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
-                operation.setCode("NOT_EXISTS");
+                operation.setId("NOT_EXISTS");
                 return operation;
                 // throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
             }

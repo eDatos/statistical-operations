@@ -5,6 +5,7 @@ import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
@@ -16,11 +17,10 @@ public class StatisticalOperationsCoreMocks {
         Operation operation = new Operation();
 
         operation.setCode("Code1");
-        // TODO uri
         operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
-        // TODO FAMILY_CODE
-        // TODO FAMILY_TITLE
+        operation.addFamily(mockFamily("familyCode1"));
+        operation.addFamily(mockFamily("familyCode2"));
         // TODO SUBJECT_AREA
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
@@ -29,7 +29,7 @@ public class StatisticalOperationsCoreMocks {
         operation.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
         // TODO INSTANCE_CODE
         // TODO INSTANCE_TITLE
-        
+
         SurveyType surveyType = new SurveyType();
         surveyType.setDescription(mockInternationalString("es", "Survey 1 en español", "en", "Survey 1 in English"));
         surveyType.setIdentifier("surveyIdentifier");
@@ -88,5 +88,13 @@ public class StatisticalOperationsCoreMocks {
         internationalString.addText(internationalStringLocale2);
 
         return internationalString;
+    }
+
+    private static Family mockFamily(String code) {
+        Family family = new Family();
+        family.setCode(code);
+        family.setTitle(mockInternationalString("es", "Título family " + code, "en", "Title family " + code));
+        family.setDescription(mockInternationalString("es", "Descripción Familia " + code, "en", "Description Family " + code));
+        return family;
     }
 }

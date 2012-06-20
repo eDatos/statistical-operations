@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 
 public class StatisticalOperationsRestMocks {
 
@@ -11,13 +12,12 @@ public class StatisticalOperationsRestMocks {
 
         Operation operation = new Operation();
 
-        operation.setCode("Code1");
+        operation.setId("Code1");
         operation.setSelfLink(baseApi + "/operations/Code1");
-        // TODO uri
         operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
-        // TODO FAMILY_CODE
-        // TODO FAMILY_TITLE
+        operation.getFamilies().add(mockFamily("familyCode1", baseApi));
+        operation.getFamilies().add(mockFamily("familyCode2", baseApi));
         // TODO SUBJECT_AREA
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
@@ -77,5 +77,19 @@ public class StatisticalOperationsRestMocks {
         internationalString.getTexts().add(internationalStringLocale2);
 
         return internationalString;
+    }
+    
+
+    private static Resource mockFamily(String id, String baseApi) {
+        return mockResource(id, RestInternalConstants.KIND_FAMILY, baseApi + "/families/" + id, "family");
+    }
+    
+    private static Resource mockResource(String id, String kind, String selfLink, String subtitle) {
+        Resource resource = new Resource();
+        resource.setId(id);
+        resource.setKind(kind);
+        resource.setSelfLink(selfLink);
+        resource.setTitle(mockInternationalString("es", "Título " + subtitle + " " + id, "en", "Title " + subtitle + " " + id));
+        return resource;
     }
 }
