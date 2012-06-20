@@ -13,7 +13,7 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapper;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     private StatisticalOperationsBaseService statisticalOperationsBaseService;
 
     @Autowired
-    private Do2RestInternalMapper            do2RestInternalMapper;
+    private Do2RestInternalMapperV10         do2RestInternalMapper;
 
     @Context
     private MessageContext                   context;
@@ -48,7 +48,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
         return operations;
     }
-    
+
     @Override
     public Operation retrieveOperationByCode(String code) {
         try {
@@ -70,7 +70,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             return null;
         }
     }
-    
+
     // TODO pasar a librería común
     /**
      * Get API Url
