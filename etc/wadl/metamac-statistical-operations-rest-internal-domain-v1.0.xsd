@@ -9,42 +9,48 @@
     <xsd:complexType name="Operation">
         <xsd:sequence>
             <xsd:element name="code" type="xsd:string" />
-<!-- URI -->
+<!-- URI self link -->
             <xsd:element name="title" type="tns:InternationalString" />
             <xsd:element name="acronym" type="tns:InternationalString" />
-<!-- FAMILY_CODE -->
-<!-- FAMILY_TITLE -->
-<!-- SUBJECT AREA -->
-<!-- SUBJECT_CODE -->
-<!-- SECUNDARY_SUBJECT_AREAS -->
-<!-- SECUNDARY_SUBJECT_CODES -->
+<!-- FAMILY_CODE idem indic.    code, kind (GG), selfLink, title -->
+<!-- FAMILY_TITLE idem indic -->
+
+<!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
+
+<!-- SECUNDARY_SUBJECT_AREAS idem anterior -->
+
             <xsd:element name="objective" type="tns:InternationalString" />
             <xsd:element name="description" type="tns:InternationalString" />
-<!-- INSTANCE_CODE -->
-<!-- INSTANCE_TITLE -->
+
+<!-- INSTANCE idem indic. kind: operation#instance (preguntar GG) -->
+
             <xsd:element name="surveyType" type="xsd:string" />
             <xsd:element name="officialityType" type="xsd:string" />
             <xsd:element name="indicatorSystem" type="xsd:boolean" minOccurs="0" />
-<!-- PRODUCER -->
-<!-- REGIONAL_RESPONSIBLE -->
-<!-- REGIONAL_CONTRIBUTOR -->
+            
+<!-- PRODUCER Idem subject_area -->
+<!-- REGIONAL_RESPONSIBLE anter-->
+<!-- REGIONAL_CONTRIBUTOR ateior -->
             <xsd:element name="internalInventoryDate" type="xsd:dateTime" />
             <xsd:element name="currentlyActive" type="xsd:boolean" minOccurs="0" />
             <xsd:element name="status" type="xsd:string" />
             <xsd:element name="procStatus" type="xsd:string" />
-<!-- PUBLISHER -->
+<!-- PUBLISHER idem atner -->
             <xsd:element name="relPolUsAc" type="tns:InternationalString" />
             <xsd:element name="relPolUsAcUrl" type="xsd:string" />
             <xsd:element name="releaseCalendar" type="xsd:boolean" minOccurs="0" />
             <xsd:element name="releaseCalendarAccess" type="xsd:string" />
-<!-- UPDATE_FREQUENCY -->
-<!-- CURRENT_INTERNAL_INSTANCE -->
-<!-- CURRENT_INSTANCE -->
+<!-- UPDATE_FREQUENCY idem anterior-->
+
+
+<!-- CURRENT_INTERNAL_INSTANCE idem instance -->
+<!-- CURRENT_INSTANCE idem instance -->
             <xsd:element name="inventoryDate" type="xsd:dateTime" />
             <xsd:element name="revPolicy" type="tns:InternationalString" />
             <xsd:element name="revPolicyUrl" type="xsd:string" />
             <xsd:element name="revPractice" type="tns:InternationalString" />
             <xsd:element name="revPracticeUrl" type="xsd:string" />
+<!-- los 5 siguientes se deberán traer de common-metadata. Pendiente. invocación a su api? -->            
 <!-- CONTACT -->
 <!-- LEGAL_ACTS -->
 <!-- DATA_SHARING -->
