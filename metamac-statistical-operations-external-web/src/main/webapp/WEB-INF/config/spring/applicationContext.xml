@@ -38,6 +38,7 @@
     </bean>
 
     <import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
+<!--     <import resource="classpath:/spring/statistical-operations-rest-internal/applicationContext.xml" /> -->
 
     <!-- Web services (spring - jaxws) -->
     <wss:binding url="/ws/metamac/statistical/operations/external/v1.0/metamacStatisticalOperationsExternalInterface">
