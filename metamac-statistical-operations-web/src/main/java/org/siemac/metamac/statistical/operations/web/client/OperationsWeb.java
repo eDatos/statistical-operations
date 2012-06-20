@@ -50,6 +50,7 @@ public class OperationsWeb extends MetamacEntryPoint {
             @Override
             public void onWaitFailure(Throwable caught) {
                 logger.log(Level.SEVERE, "Error loading toolbar");
+                checkAuthentication();
             }
             
             public void onWaitSuccess(GetNavigationBarUrlResult result) {
