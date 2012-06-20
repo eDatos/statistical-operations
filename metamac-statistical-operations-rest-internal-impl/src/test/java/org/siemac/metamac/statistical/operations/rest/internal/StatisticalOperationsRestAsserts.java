@@ -9,6 +9,7 @@ public class StatisticalOperationsRestAsserts {
     // TODO parent, kind, children
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getId(), expected.getId());
+        assertEquals(expected.getKind(), expected.getKind());
         RestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
         RestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         RestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
