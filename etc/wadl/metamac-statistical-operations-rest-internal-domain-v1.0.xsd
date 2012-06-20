@@ -8,8 +8,7 @@
     <xsd:import></xsd:import>
     <xsd:complexType name="Operation">
         <xsd:sequence>
-            <!-- PARENT_LINK /operations -->
-            <!--  KIND -->
+            <!-- PARENT_/operations -->
             <xsd:element name="id" type="xsd:string" />
             <xsd:element name="kind" type="xsd:string" />
             <xsd:element name="link" type="cDomain_v1_0:Link" />
