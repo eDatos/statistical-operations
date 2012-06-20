@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
+    <code>Code1</code>
+    <title>
+        <texts>
+            <locale>en</locale>
+            <label>Title 1 in English</label>
+        </texts>
+        <texts>
+            <locale>es</locale>
+            <label>Título 1 en español</label>
+        </texts>
+    </title>
+    <acronym>
+        <texts>
+            <locale>es</locale>
+            <label>Acrónimo 1 en español</label>
+        </texts>
+        <texts>
+            <locale>en</locale>
+            <label>Acronym 1 in English</label>
+        </texts>
+    </acronym>
+    <objective>
+        <texts>
+            <locale>es</locale>
+            <label>Objetivo 1 en español</label>
+        </texts>
+        <texts>
+            <locale>en</locale>
+            <label>Objective 1 in English</label>
+        </texts>
+    </objective>
+    <description>
+        <texts>
+            <locale>en</locale>
+            <label>Description 1 in English</label>
+        </texts>
+        <texts>
+            <locale>es</locale>
+            <label>Descripción 1 en español</label>
+        </texts>
+    </description>
+    <surveyType>surveyIdentifier</surveyType>
+    <officialityType>officialityIdentifier</officialityType>
+    <indicatorSystem>true</indicatorSystem>
+    <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
+    <currentlyActive>false</currentlyActive>
+    <status>DESIGN</status>
+    <procStatus>PUBLISH_EXTERNALLY</procStatus>
+    <relPolUsAc>
+        <texts>
+            <locale>es</locale>
+            <label>RelPolUsAc 1 en español</label>
+        </texts>
+        <texts>
+            <locale>en</locale>
+            <label>RelPolUsAc 1 in English</label>
+        </texts>
+    </relPolUsAc>
+    <relPolUsAcUrl>http://relPolUsAc1.url</relPolUsAcUrl>
+    <releaseCalendar>true</releaseCalendar>
+    <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
+    <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
+    <revPolicy>
+        <texts>
+            <locale>en</locale>
+            <label>RevPolicy 1 in English</label>
+        </texts>
+        <texts>
+            <locale>es</locale>
+            <label>RevPolicy 1 en español</label>
+        </texts>
+    </revPolicy>
+    <revPolicyUrl>http://revPolicy1.url</revPolicyUrl>
+    <revPractice>
+        <texts>
+            <locale>es</locale>
+            <label>RevPractice 1 en español</label>
+        </texts>
+        <texts>
+            <locale>en</locale>
+            <label>RevPractice 1 in English</label>
+        </texts>
+    </revPractice>
+    <revPracticeUrl>http://revPractice1.url</revPracticeUrl>
+    <comment>
+        <texts>
+            <locale>es</locale>
+            <label>Comentarios 1 en español</label>
+        </texts>
+        <texts>
+            <locale>en</locale>
+            <label>Comments 1 in English</label>
+        </texts>
+    </comment>
+    <commentUrl>http://comments1.url</commentUrl>
+    <notes>
+        <texts>
+            <locale>en</locale>
+            <label>Notes 1 in English</label>
+        </texts>
+        <texts>
+            <locale>es</locale>
+            <label>Notas 1 en español</label>
+        </texts>
+    </notes>
+    <notesUrl>http://notes1.url</notesUrl>
+</operation>
