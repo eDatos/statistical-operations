@@ -50,6 +50,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Operation target = new Operation();
         target.setId(source.getCode());
+        target.setKind(RestInternalConstants.KIND_OPERATION);
         target.setLink(toOperationLink(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
