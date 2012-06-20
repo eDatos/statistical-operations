@@ -9,7 +9,7 @@ public class JacksonJsonMapper extends ObjectMapper {
 
     public JacksonJsonMapper() {
         this.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-        this.configure(SerializationConfig.Feature.INDENT_OUTPUT, true);
+//        this.configure(SerializationConfig.Feature.INDENT_OUTPUT, true); // do not indent, to consume less bytes
         this.configure(SerializationConfig.Feature.WRITE_EMPTY_JSON_ARRAYS, false);
         this.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
