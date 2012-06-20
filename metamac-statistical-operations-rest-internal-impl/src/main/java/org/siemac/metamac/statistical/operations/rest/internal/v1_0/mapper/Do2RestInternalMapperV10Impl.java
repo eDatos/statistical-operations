@@ -10,7 +10,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Opera
 import org.springframework.stereotype.Component;
 
 @Component
-public class Do2RestInternalMapperImplV10 implements Do2RestInternalMapperV10 {
+public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
 //    @Context
 //    private MessageContext context;     // Always null in this bean...
