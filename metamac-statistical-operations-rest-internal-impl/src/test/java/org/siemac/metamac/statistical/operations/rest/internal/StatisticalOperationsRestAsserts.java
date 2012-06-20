@@ -12,7 +12,7 @@ public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getCode(), expected.getCode());
-        // TODO uri
+        assertEquals(expected.getSelfLink(), expected.getSelfLink());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         // TODO FAMILY_CODE

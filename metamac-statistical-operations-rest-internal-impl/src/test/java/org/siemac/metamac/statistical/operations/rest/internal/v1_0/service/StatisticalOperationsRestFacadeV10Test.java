@@ -68,7 +68,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation operation = statisticalOperationsRestFacadeClient.retrieveOperationByCode(code);
 
         assertNotNull(operation);
-        StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(), operation);
+        StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(baseApi), operation);
     }
 
     @Test
@@ -111,6 +111,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         assertEquals(actualFormatted.length(), expectedFormatted.length());
     }
 
+    // TODO testear
     @Test
     public void testFindOperations() throws Exception {
         org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations operations = statisticalOperationsRestFacadeClient.findOperations();

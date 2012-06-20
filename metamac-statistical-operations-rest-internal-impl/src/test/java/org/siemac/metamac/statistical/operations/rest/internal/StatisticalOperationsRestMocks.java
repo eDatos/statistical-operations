@@ -7,11 +7,12 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Opera
 
 public class StatisticalOperationsRestMocks {
 
-    public static Operation mockOperation1() {
+    public static Operation mockOperation1(String baseApi) {
 
         Operation operation = new Operation();
 
         operation.setCode("Code1");
+        operation.setSelfLink(baseApi + "/operations/Code1");
         // TODO uri
         operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
@@ -64,7 +65,7 @@ public class StatisticalOperationsRestMocks {
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
         InternationalString internationalString = new InternationalString();
-        
+
         LocalisedString internationalStringLocale1 = new LocalisedString();
         internationalStringLocale1.setLocale(locale1);
         internationalStringLocale1.setLabel(label1);

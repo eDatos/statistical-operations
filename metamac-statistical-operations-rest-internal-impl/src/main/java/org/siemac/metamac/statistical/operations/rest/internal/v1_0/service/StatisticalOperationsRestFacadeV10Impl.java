@@ -1,7 +1,12 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
 import java.math.BigInteger;
+import java.net.URI;
 
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+
+import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
@@ -22,6 +27,9 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Autowired
     private Do2RestInternalMapper            do2RestInternalMapper;
 
+    @Context
+    private MessageContext                   context;
+
     private ServiceContext                   serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal"); // TODO
 
     @Override
@@ -40,7 +48,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
         return operations;
     }
-
+    
     @Override
     public Operation retrieveOperationByCode(String code) {
         try {
@@ -52,14 +60,24 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                 Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
                 operation.setCode("NOT_EXISTS");
                 return operation;
-//                throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+                // throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
             }
-            Operation operation = do2RestInternalMapper.toOperation(operationEntity);
+            Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
             return operation;
         } catch (MetamacException e) {
             // TODO error, con código y título
             // return Response.status(errorStatus).entity(sdmx21ErrorResponse).build();
             return null;
         }
+    }
+    
+    // TODO pasar a librería común
+    /**
+     * Get API Url
+     */
+    private String getApiUrl() {
+        UriInfo uriInfo = context.getUriInfo();
+        URI uri = uriInfo.getBaseUri();
+        return uri.toString();
     }
 }

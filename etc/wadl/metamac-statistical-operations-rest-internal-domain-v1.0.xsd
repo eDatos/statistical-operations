@@ -5,15 +5,14 @@
     xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
     targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
     jaxb:version="2.1">
-
+    
     <xsd:complexType name="Operation">
         <xsd:sequence>
             <xsd:element name="code" type="xsd:string" />
-<!-- URI self link -->
+            <xsd:element name="selfLink" type="xsd:string" />
             <xsd:element name="title" type="tns:InternationalString" />
             <xsd:element name="acronym" type="tns:InternationalString" />
-<!-- FAMILY_CODE idem indic.    code, kind (GG), selfLink, title -->
-<!-- FAMILY_TITLE idem indic -->
+            <xsd:element name="family" type="tns:Resource" />
 
 <!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
 
@@ -83,6 +82,15 @@
             <xsd:element name="label" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
+    
+    <xsd:complexType name="Resource">
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:string" />
+            <xsd:element name="kind" type="xsd:string" />
+            <xsd:element name="link" type="xsd:string" />
+            <xsd:element name="title" type="tns:InternationalString" />
+        </xsd:sequence>
+    </xsd:complexType>    
 
     <!-- Elements -->
     <xsd:element name="operation" type="tns:Operation" />

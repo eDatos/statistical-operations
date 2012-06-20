@@ -12,15 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class Do2RestInternalMapperImpl implements Do2RestInternalMapper {
 
+//    @Context
+//    private MessageContext context;     // Always null in this bean...
+
     // TODO conversión de DateTime de Joda ¿qué mostrar en el xml?
     @Override
-    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source) throws MetamacException {
+    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) throws MetamacException {
         if (source == null) {
             return null;
         }
         Operation target = new Operation();
         target.setCode(source.getCode());
-        // TODO uri
+        target.setSelfLink(createUrlOperationsOperation(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         // TODO FAMILY_CODE
@@ -97,5 +100,13 @@ public class Do2RestInternalMapperImpl implements Do2RestInternalMapper {
             return null;
         }
         return source.toDate();
+    }
+    
+
+    private String createUrlOperationsOperation(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
+        StringBuilder url = new StringBuilder();
+        url.append(apiUrl);
+        url.append("/operations/" + operation.getCode());
+        return url.toString();
     }
 }

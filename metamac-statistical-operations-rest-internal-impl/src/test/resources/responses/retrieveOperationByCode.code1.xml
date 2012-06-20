@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
     <code>Code1</code>
+    <selfLink>http://localhost:9001/api/internal/v1.0/operations/Code1</selfLink>
     <title>
         <texts>
             <locale>en</locale>
