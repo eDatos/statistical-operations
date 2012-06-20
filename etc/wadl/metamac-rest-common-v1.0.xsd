@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:tns="http://www.siemac.org/metamac/rest/v1.0/domain"
+    targetNamespace="http://www.siemac.org/metamac/rest/v1.0/domain"
+    jaxb:version="2.1">
+    
+    <xsd:complexType name="InternationalString">
+        <xsd:sequence>
+            <xsd:element name="texts" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LocalisedString">
+        <xsd:sequence>
+            <xsd:element name="locale" type="xsd:string" />
+            <xsd:element name="label" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Resource">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string" />
+            <xsd:element name="kind" type="xsd:string" />
+            <xsd:element name="link" type="tns:Link" />
+            <xsd:element name="title" type="tns:InternationalString" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Link">
+        <xsd:attribute name="rel" />
+        <xsd:attribute name="href" />
+    </xsd:complexType>
+
+</xsd:schema>

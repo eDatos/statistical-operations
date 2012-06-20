@@ -7,12 +7,13 @@ import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.rest.v1_0.domain.InternationalString;
+import org.siemac.metamac.rest.v1_0.domain.Link;
+import org.siemac.metamac.rest.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -49,7 +50,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Operation target = new Operation();
         target.setId(source.getCode());
-        target.setSelfLink(createSelfLinkOperation(source, apiUrl));
+        target.setLink(toOperationLink(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.getFamilies().addAll(toFamiliesResource(source.getFamilies(), apiUrl));
@@ -125,7 +126,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Resource target = new Resource();
         target.setId(source.getCode());
         target.setKind(RestInternalConstants.KIND_FAMILY);
-        target.setSelfLink(createSelfLinkFamily(source, apiUrl));
+        target.setLink(toFamilyLink(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         return target;
     }
@@ -151,15 +152,21 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return source.toDate();
     }
 
-    private String createSelfLinkOperation(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
-        return createSelfLink(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS, operation.getCode());
+    private Link toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
+        Link link = new Link();
+        link.setRel(RestInternalConstants.LINK_SELF); 
+        link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS, operation.getCode()));
+        return link;
     }
 
-    private String createSelfLinkFamily(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
-        return createSelfLink(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode());
+    private Link toFamilyLink(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
+        Link link = new Link();
+        link.setRel(RestInternalConstants.LINK_SELF); 
+        link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode()));
+        return link;
     }
 
-    private String createSelfLink(String apiUrl, String baseResource, String resourceId) {
+    private String createLinkHref(String apiUrl, String baseResource, String resourceId) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl);
         uriComponentsBuilder = uriComponentsBuilder.pathSegment(baseResource);
         uriComponentsBuilder = uriComponentsBuilder.pathSegment(resourceId);

@@ -1,10 +1,11 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
 import org.joda.time.DateTime;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.v1_0.domain.InternationalString;
+import org.siemac.metamac.rest.v1_0.domain.Link;
+import org.siemac.metamac.rest.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 
 public class StatisticalOperationsRestMocks {
 
@@ -13,7 +14,7 @@ public class StatisticalOperationsRestMocks {
         Operation operation = new Operation();
 
         operation.setId("Code1");
-        operation.setSelfLink(baseApi + "/operations/Code1");
+        operation.setLink(mockLink(baseApi + "/operations/Code1"));
         operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.getFamilies().add(mockFamily("familyCode1", baseApi));
@@ -79,17 +80,24 @@ public class StatisticalOperationsRestMocks {
         return internationalString;
     }
     
-
     private static Resource mockFamily(String id, String baseApi) {
         return mockResource(id, RestInternalConstants.KIND_FAMILY, baseApi + "/families/" + id, "family");
     }
     
-    private static Resource mockResource(String id, String kind, String selfLink, String subtitle) {
+    private static Resource mockResource(String id, String kind, String href, String subtitle) {
         Resource resource = new Resource();
         resource.setId(id);
         resource.setKind(kind);
-        resource.setSelfLink(selfLink);
+        resource.setLink(mockLink(href));
         resource.setTitle(mockInternationalString("es", "Título " + subtitle + " " + id, "en", "Title " + subtitle + " " + id));
         return resource;
     }
+    
+    private static Link mockLink(String href) {
+        Link link = new Link();
+        link.setRel(RestInternalConstants.LINK_SELF);
+        link.setHref(href);
+        return link;
+    }
+    
 }

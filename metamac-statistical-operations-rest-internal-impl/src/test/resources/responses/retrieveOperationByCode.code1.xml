@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
+<operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/v1.0/domain">
     <id>Code1</id>
-    <selfLink>http://localhost:9001/api/internal/v1.0/operations/Code1</selfLink>
+    <link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Code1"/>
     <title>
-        <texts>
-            <locale>en</locale>
-            <label>Title 1 in English</label>
-        </texts>
-        <texts>
-            <locale>es</locale>
-            <label>Título 1 en español</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Title 1 in English</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Título 1 en español</ns2:label>
+        </ns2:texts>
     </title>
     <acronym>
-        <texts>
-            <locale>es</locale>
-            <label>Acrónimo 1 en español</label>
-        </texts>
-        <texts>
-            <locale>en</locale>
-            <label>Acronym 1 in English</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Acrónimo 1 en español</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Acronym 1 in English</ns2:label>
+        </ns2:texts>
     </acronym>
- <family>
-        <id>familyCode1</id>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/api/internal/v1.0/families/familyCode1</selfLink>
-        <title>
-            <texts>
-                <locale>en</locale>
-                <label>Title family familyCode1</label>
-            </texts>
-            <texts>
-                <locale>es</locale>
-                <label>Título family familyCode1</label>
-            </texts>
-        </title>
+    <family>
+        <ns2:id>familyCode2</ns2:id>
+        <ns2:kind>statisticalOperations#family</ns2:kind>
+        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/families/familyCode2"/>
+        <ns2:title>
+            <ns2:texts>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título family familyCode2</ns2:label>
+            </ns2:texts>
+            <ns2:texts>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title family familyCode2</ns2:label>
+            </ns2:texts>
+        </ns2:title>
     </family>
     <family>
-        <id>familyCode2</id>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/api/internal/v1.0/families/familyCode2</selfLink>
-        <title>
-            <texts>
-                <locale>en</locale>
-                <label>Title family familyCode2</label>
-            </texts>
-            <texts>
-                <locale>es</locale>
-                <label>Título family familyCode2</label>
-            </texts>
-        </title>
-    </family>    
+        <ns2:id>familyCode1</ns2:id>
+        <ns2:kind>statisticalOperations#family</ns2:kind>
+        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/families/familyCode1"/>
+        <ns2:title>
+            <ns2:texts>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título family familyCode1</ns2:label>
+            </ns2:texts>
+            <ns2:texts>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title family familyCode1</ns2:label>
+            </ns2:texts>
+        </ns2:title>
+    </family>
     <objective>
-        <texts>
-            <locale>es</locale>
-            <label>Objetivo 1 en español</label>
-        </texts>
-        <texts>
-            <locale>en</locale>
-            <label>Objective 1 in English</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Objective 1 in English</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Objetivo 1 en español</ns2:label>
+        </ns2:texts>
     </objective>
     <description>
-        <texts>
-            <locale>en</locale>
-            <label>Description 1 in English</label>
-        </texts>
-        <texts>
-            <locale>es</locale>
-            <label>Descripción 1 en español</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Description 1 in English</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Descripción 1 en español</ns2:label>
+        </ns2:texts>
     </description>
     <surveyType>surveyIdentifier</surveyType>
     <officialityType>officialityIdentifier</officialityType>
@@ -80,61 +80,61 @@
     <status>DESIGN</status>
     <procStatus>PUBLISH_EXTERNALLY</procStatus>
     <relPolUsAc>
-        <texts>
-            <locale>es</locale>
-            <label>RelPolUsAc 1 en español</label>
-        </texts>
-        <texts>
-            <locale>en</locale>
-            <label>RelPolUsAc 1 in English</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>RelPolUsAc 1 in English</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>RelPolUsAc 1 en español</ns2:label>
+        </ns2:texts>
     </relPolUsAc>
     <relPolUsAcUrl>http://relPolUsAc1.url</relPolUsAcUrl>
     <releaseCalendar>true</releaseCalendar>
     <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
     <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
     <revPolicy>
-        <texts>
-            <locale>en</locale>
-            <label>RevPolicy 1 in English</label>
-        </texts>
-        <texts>
-            <locale>es</locale>
-            <label>RevPolicy 1 en español</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>RevPolicy 1 en español</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>RevPolicy 1 in English</ns2:label>
+        </ns2:texts>
     </revPolicy>
     <revPolicyUrl>http://revPolicy1.url</revPolicyUrl>
     <revPractice>
-        <texts>
-            <locale>es</locale>
-            <label>RevPractice 1 en español</label>
-        </texts>
-        <texts>
-            <locale>en</locale>
-            <label>RevPractice 1 in English</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>RevPractice 1 en español</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>RevPractice 1 in English</ns2:label>
+        </ns2:texts>
     </revPractice>
     <revPracticeUrl>http://revPractice1.url</revPracticeUrl>
     <comment>
-        <texts>
-            <locale>es</locale>
-            <label>Comentarios 1 en español</label>
-        </texts>
-        <texts>
-            <locale>en</locale>
-            <label>Comments 1 in English</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Comentarios 1 en español</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Comments 1 in English</ns2:label>
+        </ns2:texts>
     </comment>
     <commentUrl>http://comments1.url</commentUrl>
     <notes>
-        <texts>
-            <locale>en</locale>
-            <label>Notes 1 in English</label>
-        </texts>
-        <texts>
-            <locale>es</locale>
-            <label>Notas 1 en español</label>
-        </texts>
+        <ns2:texts>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Notes 1 in English</ns2:label>
+        </ns2:texts>
+        <ns2:texts>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Notas 1 en español</ns2:label>
+        </ns2:texts>
     </notes>
     <notesUrl>http://notes1.url</notesUrl>
 </operation>

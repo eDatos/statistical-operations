@@ -6,16 +6,18 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InternationalString;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.v1_0.domain.InternationalString;
+import org.siemac.metamac.rest.v1_0.domain.Link;
+import org.siemac.metamac.rest.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Resource;
 
 public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getId(), expected.getId());
-        assertEquals(expected.getSelfLink(), expected.getSelfLink());
+        assertEquals(expected.getLink().getRel(), expected.getLink().getRel());
+        assertEquals(expected.getLink().getHref(), expected.getLink().getHref());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         assertEqualsResources(expected.getFamilies(), actual.getFamilies());
@@ -80,8 +82,13 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsResource(Resource expected, Resource actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
-        assertEquals(expected.getSelfLink(), actual.getSelfLink());
+        assertEqualsLink(expected.getLink(), actual.getLink());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
+    }
+    
+    public static void assertEqualsLink(Link expected, Link actual) {
+        assertEquals(expected.getRel(), actual.getRel());
+        assertEquals(expected.getHref(), actual.getHref());
     }
 
     public static void assertEqualsInternationalString(InternationalString expecteds, InternationalString actuals) {
