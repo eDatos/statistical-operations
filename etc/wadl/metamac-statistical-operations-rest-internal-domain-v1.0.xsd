@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:cDomain_v1_0="http://www.siemac.org/metamac/rest/v1.0/domain"
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain"
     targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" jaxb:version="2.1">
 
-    <xsd:import namespace="http://www.siemac.org/metamac/rest/v1.0/domain" schemaLocation="metamac-rest-common-domain-v1.0.xsd" />
-
-    <xsd:import></xsd:import>
-    <xsd:complexType name="Operation">
-        <xsd:sequence>
+    <xs:import namespace="http://www.siemac.org/metamac/rest/common/v1.0/domain" schemaLocation="metamac-rest-common-domain-v1.0.xsd" />
+                          
+    <xs:complexType name="Operation">
+        <xs:sequence>
             <!-- PARENT (operations) -->
-            <xsd:element name="id" type="xsd:string" />
-            <xsd:element name="kind" type="xsd:string" />
-            <xsd:element name="link" type="cDomain_v1_0:Link" />
-            <xsd:element name="title" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="acronym" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="family" type="cDomain_v1_0:Resource" maxOccurs="unbounded" />
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="link" type="common:Link" />
+            <xs:element name="title" type="common:InternationalString" />
+            <xs:element name="acronym" type="common:InternationalString" />
+            <xs:element name="family" type="common:Resource" maxOccurs="unbounded" />
             <!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
-            <xsd:element name="subjectArea" type="cDomain_v1_0:Resource" />
+            <xs:element name="subjectArea" type="common:Resource" />
 
 
             <!-- SECUNDARY_SUBJECT_AREAS ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
 
-            <xsd:element name="objective" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="description" type="cDomain_v1_0:InternationalString" />
+            <xs:element name="objective" type="common:InternationalString" />
+            <xs:element name="description" type="common:InternationalString" />
 
             <!-- INSTANCE idem indic. kind: operation#instance-->
 
-            <xsd:element name="surveyType" type="xsd:string" />
-            <xsd:element name="officialityType" type="xsd:string" />
-            <xsd:element name="indicatorSystem" type="xsd:boolean" minOccurs="0" />
+            <xs:element name="surveyType" type="xs:string" />
+            <xs:element name="officialityType" type="xs:string" />
+            <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
 
             <!-- PRODUCER Idem subject_area -->
             <!-- REGIONAL_RESPONSIBLE anter-->
             <!-- REGIONAL_CONTRIBUTOR ateior -->
-            <xsd:element name="internalInventoryDate" type="xsd:dateTime" />
-            <xsd:element name="currentlyActive" type="xsd:boolean" minOccurs="0" />
-            <xsd:element name="status" type="xsd:string" />
-            <xsd:element name="procStatus" type="xsd:string" />
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
+            <xs:element name="status" type="xs:string" />
+            <xs:element name="procStatus" type="xs:string" />
             <!-- PUBLISHER idem atner -->
-            <xsd:element name="relPolUsAc" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="relPolUsAcUrl" type="xsd:string" />
-            <xsd:element name="releaseCalendar" type="xsd:boolean" minOccurs="0" />
-            <xsd:element name="releaseCalendarAccess" type="xsd:string" />
+            <xs:element name="relPolUsAc" type="common:InternationalString" />
+            <xs:element name="relPolUsAcUrl" type="xs:string" />
+            <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
+            <xs:element name="releaseCalendarAccess" type="xs:string" />
             <!-- UPDATE_FREQUENCY idem anterior-->
 
 
             <!-- CURRENT_INTERNAL_INSTANCE idem instance -->
             <!-- CURRENT_INSTANCE idem instance -->
-            <xsd:element name="inventoryDate" type="xsd:dateTime" />
-            <xsd:element name="revPolicy" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="revPolicyUrl" type="xsd:string" />
-            <xsd:element name="revPractice" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="revPracticeUrl" type="xsd:string" />
+            <xs:element name="inventoryDate" type="xs:dateTime" />
+            <xs:element name="revPolicy" type="common:InternationalString" />
+            <xs:element name="revPolicyUrl" type="xs:string" />
+            <xs:element name="revPractice" type="common:InternationalString" />
+            <xs:element name="revPracticeUrl" type="xs:string" />
             <!-- los 5 siguientes se deberán traer de common-metadata. Pendiente. invocación a su api? -->
             <!-- CONTACT -->
             <!-- LEGAL_ACTS -->
@@ -59,22 +58,22 @@
             <!-- CONFIDENTIALITY_POLICY -->
             <!-- CONFIDENTIALITY_DATA_TREATMENT -->
 
-            <xsd:element name="comment" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="commentUrl" type="xsd:string" />
-            <xsd:element name="notes" type="cDomain_v1_0:InternationalString" />
-            <xsd:element name="notesUrl" type="xsd:string" />
+            <xs:element name="comment" type="common:InternationalString" />
+            <xs:element name="commentUrl" type="xs:string" />
+            <xs:element name="notes" type="common:InternationalString" />
+            <xs:element name="notesUrl" type="xs:string" />
             <!-- CHILD_LINK -->
-        </xsd:sequence>
-    </xsd:complexType>
+        </xs:sequence>
+    </xs:complexType>
 
-    <xsd:complexType name="Operations">
-        <xsd:sequence>
-            <xsd:element name="size" type="xsd:integer" />
-            <xsd:element name="items" type="tns:Operation" maxOccurs="unbounded" />
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="Operations">
+        <xs:sequence>
+            <xs:element name="size" type="xs:integer" />
+            <xs:element name="items" type="tns:Operation" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
 
     <!-- Elements -->
-    <xsd:element name="operation" type="tns:Operation" />
-    <xsd:element name="operations" type="tns:Operations" />
-</xsd:schema>
+    <xs:element name="operation" type="tns:Operation" />
+    <xs:element name="operations" type="tns:Operations" />
+</xs:schema>

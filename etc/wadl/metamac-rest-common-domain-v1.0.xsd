@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+<xs:schema version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     elementFormDefault="qualified"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    xmlns:tns="http://www.siemac.org/metamac/rest/v1.0/domain"
-    targetNamespace="http://www.siemac.org/metamac/rest/v1.0/domain"
+    xmlns:tns="http://www.siemac.org/metamac/rest/common/v1.0/domain"
+    targetNamespace="http://www.siemac.org/metamac/rest/common/v1.0/domain"
     jaxb:version="2.1">
     
-    <xsd:complexType name="InternationalString">
-        <xsd:sequence>
-            <xsd:element name="texts" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="InternationalString">
+        <xs:sequence>
+            <xs:element name="texts" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
     
-    <xsd:complexType name="LocalisedString">
-        <xsd:sequence>
-            <xsd:element name="locale" type="xsd:string" />
-            <xsd:element name="label" type="xsd:string" />
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="LocalisedString">
+        <xs:sequence>
+            <xs:element name="locale" type="xs:string" />
+            <xs:element name="label" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
     
-    <xsd:complexType name="Resource">
-        <xsd:sequence>
-            <xsd:element name="id" type="xsd:string" />
-            <xsd:element name="kind" type="xsd:string" />
-            <xsd:element name="link" type="tns:Link" />
-            <xsd:element name="title" type="tns:InternationalString" />
-        </xsd:sequence>
-    </xsd:complexType>
+    <xs:complexType name="Resource">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="link" type="tns:Link" />
+            <xs:element name="title" type="tns:InternationalString" />
+        </xs:sequence>
+    </xs:complexType>
     
-    <xsd:complexType name="Link">
-        <xsd:attribute name="rel" />
-        <xsd:attribute name="href" />
-    </xsd:complexType>
+    <xs:complexType name="Link">
+        <xs:attribute name="rel" />
+        <xs:attribute name="href" />
+    </xs:complexType>
 
-</xsd:schema>
+    <xs:complexType name="Error">
+        <xs:sequence>
+            <xs:element name="errorItems" type="tns:ErrorItem" minOccurs="1" maxOccurs="unbounded">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ErrorItem">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" />
+            <xs:element name="parameters" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <!-- Elements -->
+    <xs:element name="error" type="tns:Error" />
+        
+</xs:schema>

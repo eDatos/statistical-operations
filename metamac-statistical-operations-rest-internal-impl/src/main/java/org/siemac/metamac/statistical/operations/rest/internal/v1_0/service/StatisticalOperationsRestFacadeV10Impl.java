@@ -3,12 +3,18 @@ package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 import java.net.URI;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.rest.common.v1_0.domain.Error;
+import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
@@ -28,7 +34,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Context
     private MessageContext                   context;
 
-    private ServiceContext                   serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal"); // TODO
+    private ServiceContext                   serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
 
     @Override
     public Operations findOperations() {
@@ -36,25 +42,38 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public Operation retrieveOperationByCode(String code) {
+    public Response retrieveOperationByCode(String code) {
         try {
             // TODO Validation of parameters
 
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, code);
             if (operationEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationEntity.getProcStatus()))) {
-                // TODO
-                Operation operation = new org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation();
-                operation.setId("NOT_EXISTS");
-                return operation;
-                // throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+                // Operation not found
+                Error error = getError(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+                return Response.status(Status.NOT_FOUND).entity(error).build();
             }
+
+            // Transform and return
             Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
-            return operation;
+            return Response.ok(operation).build();
+
         } catch (MetamacException e) {
-            // TODO error, con código y título
-            // return Response.status(errorStatus).entity(sdmx21ErrorResponse).build();
-            return null;
+            // TODO log error
+            Error error = do2RestInternalMapper.toError(e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(error).build();
         }
+    }
+
+    // TODO pasar a librería común
+    private Error getError(CommonServiceExceptionType exceptionType, String parameter) {
+        Error error = new Error();
+        ErrorItem errorItem = new ErrorItem();
+        errorItem.setCode(exceptionType.toString());
+        if (parameter != null) {
+            errorItem.getParameters().add(parameter);
+        }
+        error.getErrorItems().add(errorItem);
+        return error;
     }
 
     // TODO pasar a librería común

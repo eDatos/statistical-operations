@@ -1,9 +1,9 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
-import org.siemac.metamac.rest.v1_0.domain.InternationalString;
-import org.siemac.metamac.rest.v1_0.domain.Link;
-import org.siemac.metamac.rest.v1_0.domain.LocalisedString;
-import org.siemac.metamac.rest.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
+import org.siemac.metamac.rest.common.v1_0.domain.Link;
+import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 
 public class RestMocks {
 

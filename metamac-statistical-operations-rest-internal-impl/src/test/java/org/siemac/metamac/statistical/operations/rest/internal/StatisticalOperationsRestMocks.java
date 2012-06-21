@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
 import org.joda.time.DateTime;
-import org.siemac.metamac.rest.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
 public class StatisticalOperationsRestMocks {

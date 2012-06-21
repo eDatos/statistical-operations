@@ -1,16 +1,21 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.rest.v1_0.domain.InternationalString;
-import org.siemac.metamac.rest.v1_0.domain.Link;
-import org.siemac.metamac.rest.v1_0.domain.LocalisedString;
-import org.siemac.metamac.rest.v1_0.domain.Resource;
+import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
+import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
+import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
+import org.siemac.metamac.rest.common.v1_0.domain.Link;
+import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
+import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -108,6 +113,48 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
+    // TODO pasar a librería común
+    @Override
+    public org.siemac.metamac.rest.common.v1_0.domain.Error toError(Exception exception) {
+        org.siemac.metamac.rest.common.v1_0.domain.Error error = new org.siemac.metamac.rest.common.v1_0.domain.Error();
+        error.getErrorItems().addAll(toErrorItems(exception));
+        return error;
+    }
+
+    private List<ErrorItem> toErrorItems(Exception exception) {
+
+        List<ErrorItem> errorItems = new ArrayList<ErrorItem>();
+        if (exception instanceof MetamacException) {
+            MetamacException metamacException = (MetamacException) exception;
+            for (MetamacExceptionItem metamacExceptionItem : metamacException.getExceptionItems()) {
+                ErrorItem errorItem = new ErrorItem();
+                errorItem.setCode(metamacExceptionItem.getCode());
+                errorItem.setMessage(metamacExceptionItem.getMessage());
+                if (metamacExceptionItem.getMessageParameters() != null) {
+                    for (int i = 0; i < metamacExceptionItem.getMessageParameters().length; i++) {
+                        Serializable messageParameter = metamacExceptionItem.getMessageParameters()[i];
+                        String parameter = null;
+                        if (messageParameter instanceof String) {
+                            parameter = messageParameter.toString();
+                        } else if (messageParameter instanceof String[]) {
+                            parameter = Arrays.deepToString((String[]) messageParameter);
+                        } else {
+                            parameter = messageParameter.toString();
+                        }
+                        errorItem.getParameters().add(parameter);
+                    }
+                }
+                errorItems.add(errorItem);
+            }
+        } else {
+            ErrorItem errorItem = new ErrorItem();
+            errorItem.setCode(CommonServiceExceptionType.UNKNOWN.getCode());
+            errorItem.setMessage(exception.getMessage());
+            errorItems.add(errorItem);
+        }
+        return errorItems;
+    }
+
     private List<Resource> toFamiliesResource(Set<Family> sources, String apiUrl) {
         List<Resource> targets = new ArrayList<Resource>();
         if (sources == null) {
@@ -155,14 +202,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     private Link toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
         Link link = new Link();
-        link.setRel(RestInternalConstants.LINK_SELF); 
+        link.setRel(RestInternalConstants.LINK_SELF);
         link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS, operation.getCode()));
         return link;
     }
 
     private Link toFamilyLink(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
         Link link = new Link();
-        link.setRel(RestInternalConstants.LINK_SELF); 
+        link.setRel(RestInternalConstants.LINK_SELF);
         link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode()));
         return link;
     }
