@@ -49,6 +49,8 @@ import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.validator.RequiredIfFunction;
+import com.smartgwt.client.widgets.form.validator.RequiredIfValidator;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> implements InstancePresenter.InstanceView {
@@ -164,6 +166,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private List<CollMethodDto>             collMethodDtos;
     private List<CostDto>                   costDtos;
 
+    private InstanceDto                     instanceDto;
     public String                           operationCode;
 
     public InstanceViewImpl() {
@@ -214,6 +217,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     @Override
     public void setInstance(InstanceDto instanceDto, String operationCode) {
+        this.instanceDto = instanceDto;
         this.operationCode = operationCode;
 
         // Security
@@ -487,6 +491,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
         instanceTypeItem = new CustomSelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
+        instanceTypeItem.setValidators(getRequiredIfInternallyPublished());
         classEditionForm.setFields(instanceTypeItem);
 
         // Production descriptors
@@ -805,6 +810,29 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private boolean canInstanceCodeBeEdited() {
         // Operation code can be edited only when ProcStatus is DRAFT
         return (productionEditionForm.getValue(InstanceDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(productionEditionForm.getValue(InstanceDS.PROC_STATUS_VIEW)));
+    }
+
+    /**
+     * Validate those metadata that are required is instance status is PUBLISH_INTERNALLY (if status is PUBLISH_EXTERNALLY, metadata should be required too)
+     * 
+     * @return
+     */
+    private RequiredIfValidator getRequiredIfInternallyPublished() {
+        return new RequiredIfValidator(new RequiredIfFunction() {
+
+            @Override
+            public boolean execute(FormItem formItem, Object value) {
+                return isInstanceInternallyPublished() || isInstanceExternallyPublished();
+            }
+        });
+    }
+
+    private boolean isInstanceInternallyPublished() {
+        return ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceDto.getProcStatus());
+    }
+
+    private boolean isInstanceExternallyPublished() {
+        return ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceDto.getProcStatus());
     }
 
 }

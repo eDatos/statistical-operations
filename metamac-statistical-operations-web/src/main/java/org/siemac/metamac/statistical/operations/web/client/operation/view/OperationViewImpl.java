@@ -636,7 +636,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
         description = new MultiLanguageTextAreaItem(OperationDS.OP_DESCRIPTION, getConstants().operationDescription());
         objective = new MultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getConstants().operationObjective());
-        objective.setRequired(true);
+        objective.setValidators(getRequiredIfInternallyPublished());
         contentEditionForm.setFields(objective, description);
 
         // Class Descriptors
