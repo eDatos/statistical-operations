@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.testutil.common.AbstractBusClientServerTestBase;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
@@ -71,9 +72,8 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Test
     public void testRetrieveOperationByCode() throws Exception {
 
-        String code = OPERATION_CODE1;
-        String baseRequest = baseApi + "/operations/" + code;
-        WebClient webClient = WebClient.create(baseRequest).accept(APPLICATION_XML);
+        String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
         Operation operation = webClient.get(Operation.class);
 
         // Validation
@@ -83,62 +83,58 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Test
     public void testRetrieveOperationByCodeReviewXml() throws Exception {
 
-        String code = OPERATION_CODE1;
-        String baseRequest = baseApi + "/operations/" + code;
-
-        WebClient webClient = WebClient.create(baseRequest).accept(APPLICATION_XML);
+        String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
         Response response = webClient.get();
 
         // Validation
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
-        InputStream responseActual = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.xml");
-        InputStream responseExpected = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseActual, responseExpected);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.xml");
+        InputStream responseActual = (InputStream) response.getEntity();
+        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
     public void testRetrieveOperationByCodeReviewJson() throws Exception {
 
-        String code = OPERATION_CODE1;
-        String baseRequest = baseApi + "/operations/" + code;
-
-        WebClient webClient = WebClient.create(baseRequest).accept(APPLICATION_JSON);
+        String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
         Response response = webClient.get();
 
         // Validation
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
-        InputStream responseActual = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.json");
-        InputStream responseExpected = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseActual, responseExpected);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.json");
+        InputStream responseActual = (InputStream) response.getEntity();
+        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
     public void testRetrieveOperationByCodeErrorNotExists() throws Exception {
 
-        String code = NOT_EXISTS;
-        String baseRequest = baseApi + "/operations/" + code;
-        WebClient webClient = WebClient.create(baseRequest).accept(APPLICATION_XML);
+        String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
         try {
             webClient.get(Operation.class);
         } catch (Exception e) {
-            // TODO comprobar excepción
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
+            InputStream responseActual = (InputStream)((ServerWebApplicationException)e).getResponse().getEntity();
+            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
     
     @Test
     public void testRetrieveOperationByCodeErrorNotExistsReviewXml() throws Exception {
 
-        String code = NOT_EXISTS;
-        String baseRequest = baseApi + "/operations/" + code;
+        String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
 
-        WebClient webClient = WebClient.create(baseRequest).accept(APPLICATION_XML);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
         Response response = webClient.get();
 
         // Validation
         assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
-        InputStream responseActual = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
-        InputStream responseExpected = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseActual, responseExpected);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
+        InputStream responseActual = (InputStream) response.getEntity();
+        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     // TODO testear
@@ -146,5 +142,9 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Ignore
     public void testFindOperations() throws Exception {
         // org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations operations = statisticalOperationsRestFacadeClient.findOperations();
-    }    
+    }
+
+    private String getRequestUriRetrieveOperationByCode(String code) {
+        return baseApi + "/operations/" + code;
+    }
 }

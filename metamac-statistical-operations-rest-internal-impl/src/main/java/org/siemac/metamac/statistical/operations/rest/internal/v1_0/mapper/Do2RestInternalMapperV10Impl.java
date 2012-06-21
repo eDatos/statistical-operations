@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
@@ -49,7 +50,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
      * </children>
      */
     @Override
-    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) throws MetamacException {
+    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) {
         if (source == null) {
             return null;
         }
@@ -60,7 +61,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.getFamilies().addAll(toFamiliesResource(source.getFamilies(), apiUrl));
-        // TODO SUBJECT_AREA
+        target.setSubjectArea(toResource(source.getSubjectArea()));
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
         // TODO SECUNDARY_SUBJECT_CODES
@@ -179,6 +180,18 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
+    private Resource toResource(ExternalItemBt source) {
+        if (source == null) {
+            return null;
+        }
+        Resource target = new Resource();
+        target.setId(source.getCodeId());
+        target.setKind(source.getType().name());
+        target.setLink(toExternalItemLink(source));
+        target.setTitle(null); // TODO pendiente de que se añada title en ExternalItem
+        return target;
+    }
+
     private InternationalString toInternationalString(org.siemac.metamac.core.common.ent.domain.InternationalString sources) {
         if (sources == null) {
             return null;
@@ -211,6 +224,13 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Link link = new Link();
         link.setRel(RestInternalConstants.LINK_SELF);
         link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode()));
+        return link;
+    }
+    
+    private Link toExternalItemLink(ExternalItemBt externalItemBt) {
+        Link link = new Link();
+        link.setRel(RestInternalConstants.LINK_SELF);
+        link.setHref(externalItemBt.getUriInt());
         return link;
     }
 
