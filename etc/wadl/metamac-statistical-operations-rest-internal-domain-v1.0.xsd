@@ -8,22 +8,23 @@
     <xsd:import></xsd:import>
     <xsd:complexType name="Operation">
         <xsd:sequence>
-            <!-- PARENT_/operations -->
+            <!-- PARENT (operations) -->
             <xsd:element name="id" type="xsd:string" />
             <xsd:element name="kind" type="xsd:string" />
             <xsd:element name="link" type="cDomain_v1_0:Link" />
             <xsd:element name="title" type="cDomain_v1_0:InternationalString" />
             <xsd:element name="acronym" type="cDomain_v1_0:InternationalString" />
             <xsd:element name="family" type="cDomain_v1_0:Resource" maxOccurs="unbounded" />
-
             <!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
+            <xsd:element name="subjectArea" type="cDomain_v1_0:Resource" />
 
-            <!-- SECUNDARY_SUBJECT_AREAS idem anterior -->
+
+            <!-- SECUNDARY_SUBJECT_AREAS ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
 
             <xsd:element name="objective" type="cDomain_v1_0:InternationalString" />
             <xsd:element name="description" type="cDomain_v1_0:InternationalString" />
 
-            <!-- INSTANCE idem indic. kind: operation#instance (preguntar GG) -->
+            <!-- INSTANCE idem indic. kind: operation#instance-->
 
             <xsd:element name="surveyType" type="xsd:string" />
             <xsd:element name="officialityType" type="xsd:string" />
