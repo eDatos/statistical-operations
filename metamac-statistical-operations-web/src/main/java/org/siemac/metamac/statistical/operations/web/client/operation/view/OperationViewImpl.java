@@ -701,6 +701,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         relPolUsAc = new MultiLanguageTextAndUrlItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
         releaseCalendar = new CustomCheckboxItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
+        releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
         updateFrequencyItem = new CustomSelectItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
         updateFrequencyItem.setMultiple(true);
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
