@@ -75,7 +75,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultiLanguageTextItem           geographicalComparabilityItem;
     private CustomSelectItem                temporalGranularityItem;
     private MultiLanguageTextItem           temporalComparabilityItem;
-    // TODO base period
     private CustomSelectItem                unitMeasureItem;
     private MultiLanguageTextItem           statConcDefItem;
     private CustomSelectItem                statConcDefListItem;
@@ -260,7 +259,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setGeographicComparability(geographicalComparabilityItem.getValue());
         instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemBtDtoFromCodeId(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
         instanceDto.setTemporalComparability(temporalComparabilityItem.getValue());
-        // TODO Base period
+        instanceDto.setBasePeriod(contentEditionForm.getValueAsString(InstanceDS.BASE_PERIOD));
         instanceDto.getUnitMeasure().clear();
         instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(codeLists, unitMeasureItem.getValues()));
         instanceDto.setStatConcDef(statConcDefItem.getValue());
