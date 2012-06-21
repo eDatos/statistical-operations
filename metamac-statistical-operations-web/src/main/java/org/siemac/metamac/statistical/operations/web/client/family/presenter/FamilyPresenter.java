@@ -10,6 +10,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
 import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
@@ -201,6 +202,8 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
         if (id != null) {
             idFamily = Long.valueOf(id);
             retrieveFamily(idFamily);
+        } else {
+            OperationsWeb.showErrorPage();
         }
     }
 
@@ -210,6 +213,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
             @Override
             public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorRetrievingData()), MessageTypeEnum.ERROR);
+                OperationsWeb.showErrorPage();
             }
             @Override
             public void onWaitSuccess(GetFamilyAndOperationsResult result) {

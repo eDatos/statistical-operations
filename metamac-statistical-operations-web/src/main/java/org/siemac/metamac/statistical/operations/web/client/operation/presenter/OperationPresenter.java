@@ -15,6 +15,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent.UpdateCategorySchemesHandler;
@@ -293,6 +294,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         if (id != null) {
             idOperation = Long.valueOf(id);
             retrieveOperation(idOperation);
+        } else {
+            OperationsWeb.showErrorPage();
         }
     }
 
@@ -399,6 +402,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingData()), MessageTypeEnum.ERROR);
+                OperationsWeb.showErrorPage();
             }
             @Override
             public void onWaitSuccess(GetOperationAndInstancesResult result) {

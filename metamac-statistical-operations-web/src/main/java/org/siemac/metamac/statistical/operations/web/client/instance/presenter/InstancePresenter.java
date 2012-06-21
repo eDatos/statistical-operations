@@ -13,6 +13,7 @@ import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
 import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent.UpdateCodeListsHandler;
@@ -182,11 +183,15 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         if (id != null) {
             idInstance = Long.valueOf(id);
             retrieveInstance(idInstance);
-        }
-        // Get operation id
-        String operation = PlaceRequestUtils.getOperationParamFromUrl(placeManager);
-        if (operation != null) {
-            idOperation = Long.valueOf(operation);
+            // Get operation id
+            String operation = PlaceRequestUtils.getOperationParamFromUrl(placeManager);
+            if (operation != null) {
+                idOperation = Long.valueOf(operation);
+            } else {
+                OperationsWeb.showErrorPage();
+            }
+        } else {
+            OperationsWeb.showErrorPage();
         }
     }
 
@@ -212,6 +217,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
+                OperationsWeb.showErrorPage();
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override

@@ -43,24 +43,24 @@ public class OperationsWeb extends MetamacEntryPoint {
         @Source("OperationsWebStyles.css")
         CssResource css();
     }
-    
+
     public void onModuleLoad() {
         ginjector.getDispatcher().execute(new GetNavigationBarUrlAction(), new WaitingAsyncCallback<GetNavigationBarUrlResult>() {
-            
+
             @Override
             public void onWaitFailure(Throwable caught) {
                 logger.log(Level.SEVERE, "Error loading toolbar");
                 checkAuthentication();
             }
-            
+
             public void onWaitSuccess(GetNavigationBarUrlResult result) {
-                //Load scripts for navigation bar
+                // Load scripts for navigation bar
                 IstacNavBar.loadScripts(result.getNavigationBarUrl());
-                
+
                 checkAuthentication();
             };
         });
-       
+
     }
 
     // TODO This method should be removed to use CAS authentication
@@ -179,6 +179,10 @@ public class OperationsWeb extends MetamacEntryPoint {
 
     public static OperationsWebGinjector getOperationsWebGinjector() {
         return ginjector;
+    }
+
+    public static void showErrorPage() {
+        ginjector.getPlaceManager().revealErrorPlace(null);
     }
 
 }
