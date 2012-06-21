@@ -24,12 +24,14 @@ public class RestMocks {
         return internationalString;
     }
 
-    public static Resource mockResource(String id, String kind, String rel, String href, String subtitle) {
+    public static Resource mockResource(String id, String kind, String rel, String href, Boolean addTitle, String subtitle) {
         Resource resource = new Resource();
         resource.setId(id);
         resource.setKind(kind);
         resource.setLink(mockLink(rel, href));
-        resource.setTitle(mockInternationalString("es", "Título " + subtitle + " " + id, "en", "Title " + subtitle + " " + id));
+        if (addTitle) {
+            resource.setTitle(mockInternationalString("es", "Título " + subtitle + " " + id, "en", "Title " + subtitle + " " + id));
+        }
         return resource;
     }
 

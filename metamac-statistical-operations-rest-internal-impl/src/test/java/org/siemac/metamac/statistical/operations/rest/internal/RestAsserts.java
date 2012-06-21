@@ -20,6 +20,9 @@ public class RestAsserts {
 
     public static void assertEqualsResources(List<Resource> expecteds, List<Resource> actuals) {
         assertEqualsNullability(expecteds, actuals);
+        if (expecteds == null) {
+            return;
+        }
         assertEquals(expecteds.size(), actuals.size());
         for (Resource expected : expecteds) {
             boolean existsItem = false;
@@ -34,6 +37,10 @@ public class RestAsserts {
     }
 
     public static void assertEqualsResource(Resource expected, Resource actual) {
+        assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
         assertEqualsLink(expected.getLink(), actual.getLink());
@@ -41,12 +48,19 @@ public class RestAsserts {
     }
     
     public static void assertEqualsLink(Link expected, Link actual) {
+        assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
         assertEquals(expected.getRel(), actual.getRel());
         assertEquals(expected.getHref(), actual.getHref());
     }
 
     public static void assertEqualsInternationalString(InternationalString expecteds, InternationalString actuals) {
         assertEqualsNullability(expecteds, actuals);
+        if (expecteds == null) {
+            return;
+        }
         assertEquals(expecteds.getTexts().size(), actuals.getTexts().size());
         for (LocalisedString expected : expecteds.getTexts()) {
             boolean existsItem = false;

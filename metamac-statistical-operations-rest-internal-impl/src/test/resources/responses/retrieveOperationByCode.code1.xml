@@ -53,6 +53,11 @@
             </ns2:texts>
         </ns2:title>
     </family>
+    <subjectArea>
+        <ns2:id>subjectArea1</ns2:id>
+        <ns2:kind>CATEGORY</ns2:kind>
+        <ns2:link rel="self" href="http://subjectArea1"/>
+    </subjectArea>    
     <objective>
         <ns2:texts>
             <ns2:locale>en</ns2:locale>

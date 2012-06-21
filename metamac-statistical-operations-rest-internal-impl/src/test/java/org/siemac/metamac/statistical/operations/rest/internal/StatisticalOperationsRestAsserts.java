@@ -14,8 +14,7 @@ public class StatisticalOperationsRestAsserts {
         RestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         RestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         RestAsserts.assertEqualsResources(expected.getFamilies(), actual.getFamilies());
-        // TODO SUBJECT_AREA
-        // TODO SUBJECT_CODE
+        RestAsserts.assertEqualsResource(expected.getSubjectArea(), actual.getSubjectArea());
         // TODO SECUNDARY_SUBJECT_AREAS
         // TODO SECUNDARY_SUBJECT_CODES
         RestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
@@ -55,4 +54,5 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         RestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
-    }}
+    }
+}

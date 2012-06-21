@@ -1,8 +1,10 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -21,6 +23,7 @@ public class StatisticalOperationsCoreMocks {
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.addFamily(mockFamily("familyCode1"));
         operation.addFamily(mockFamily("familyCode2"));
+        operation.setSubjectArea(mockExternalItemBt("http://subjectArea1", "subjectArea1", TypeExternalArtefactsEnum.CATEGORY));
         // TODO SUBJECT_AREA
         // TODO SUBJECT_CODE
         // TODO SECUNDARY_SUBJECT_AREAS
@@ -96,5 +99,9 @@ public class StatisticalOperationsCoreMocks {
         family.setTitle(mockInternationalString("es", "Título family " + code, "en", "Title family " + code));
         family.setDescription(mockInternationalString("es", "Descripción Familia " + code, "en", "Description Family " + code));
         return family;
+    }
+    
+    private static ExternalItemBt mockExternalItemBt(String uri, String code, TypeExternalArtefactsEnum type) {
+        return new ExternalItemBt(uri, code, type);
     }
 }

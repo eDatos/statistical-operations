@@ -14,7 +14,6 @@
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" />
             <xs:element name="family" type="common:Resource" maxOccurs="unbounded" />
-            <!-- SUBJECT_AREA ExternalItem code (codeId), kind (typeExternal), selfLink (uriInt), title pendiente de añadir en ExternalItem -->
             <xs:element name="subjectArea" type="common:Resource" />
 
 

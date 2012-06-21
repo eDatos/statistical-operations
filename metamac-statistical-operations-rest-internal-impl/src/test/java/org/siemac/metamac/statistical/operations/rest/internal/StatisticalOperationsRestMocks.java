@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
@@ -17,8 +18,7 @@ public class StatisticalOperationsRestMocks {
         operation.setAcronym(RestMocks.mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.getFamilies().add(mockFamily("familyCode1", baseApi));
         operation.getFamilies().add(mockFamily("familyCode2", baseApi));
-        // TODO SUBJECT_AREA
-        // TODO SUBJECT_CODE
+        operation.setSubjectArea(RestMocks.mockResource("subjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://subjectArea1", Boolean.FALSE, null));
         // TODO SECUNDARY_SUBJECT_AREAS
         // TODO SECUNDARY_SUBJECT_CODES
         operation.setObjective(RestMocks.mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
@@ -62,6 +62,6 @@ public class StatisticalOperationsRestMocks {
     }
 
     private static Resource mockFamily(String id, String baseApi) {
-        return RestMocks.mockResource(id, RestInternalConstants.KIND_FAMILY, RestInternalConstants.LINK_SELF, baseApi + "/families/" + id, "family");
+        return RestMocks.mockResource(id, RestInternalConstants.KIND_FAMILY, RestInternalConstants.LINK_SELF, baseApi + "/families/" + id, Boolean.TRUE, "family");
     }
 }
