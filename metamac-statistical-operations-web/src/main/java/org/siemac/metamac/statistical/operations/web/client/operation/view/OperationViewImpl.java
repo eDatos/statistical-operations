@@ -66,6 +66,8 @@ import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.validator.RequiredIfFunction;
+import com.smartgwt.client.widgets.form.validator.RequiredIfValidator;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
@@ -640,7 +642,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Class Descriptors
         classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
         surveyType = new CustomSelectItem(OperationDS.OP_SURVEY_TYPE, getConstants().operationSurveyType());
+        surveyType.setValidators(getRequiredIfInternallyPublished());
         officialityType = new CustomSelectItem(OperationDS.OP_OFFICIALITY_TYPE, getConstants().operationOfficialityType());
+        officialityType.setValidators(getRequiredIfInternallyPublished());
         indSystem = new CustomCheckboxItem(OperationDS.OP_INDICATOR_SYSTEM, getConstants().operationIndicatorSystem());
         indSystem.setTitleStyle("requiredFormLabel");
         classEditionForm.setFields(surveyType, officialityType, indSystem);
@@ -648,6 +652,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Production descriptors
         productionEditionForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
         producerItem = new ExternalMultipleSelectItem(OperationDS.OP_PRODUCER, getConstants().operationProducers());
+        producerItem.setValidators(getRequiredIfInternallyPublished());
         producerItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -658,6 +663,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
         regionalResponsibleItem = new ExternalMultipleSelectItem(OperationDS.OP_REG_RESPONSIBLE, getConstants().operationRegionalResponsibles());
+        regionalResponsibleItem.setValidators(getRequiredIfInternallyPublished());
         regionalResponsibleItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -679,6 +685,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         });
         ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
+        currentlyActiveItem.setValidators(getRequiredIfInternallyPublished());
         statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
         statusItem.setValueMap(EnumUtils.getStatusEnumHashMap());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
@@ -689,6 +696,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
         publisherItem = new ExternalMultipleSelectItem(OperationDS.OP_PUBLISHER, getConstants().operationPublisher());
+        publisherItem.setValidators(getRequiredIfInternallyPublished());
         publisherItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -710,6 +718,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         revPolicyItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
         revPracticeItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
         commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
+        commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
         diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
                 revPracticeItem, commonMetadataItem);
 
@@ -988,6 +997,29 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private boolean canOperationCodeBeEdited() {
         // Operation code can be edited only when ProcStatus is DRAFT
         return (productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW)));
+    }
+
+    /**
+     * Validate those metadata that are required is operation status is PUBLISH_INTERNALLY (if status is PUBLISH_EXTERNALLY, metadata should be required too)
+     * 
+     * @return
+     */
+    private RequiredIfValidator getRequiredIfInternallyPublished() {
+        return new RequiredIfValidator(new RequiredIfFunction() {
+
+            @Override
+            public boolean execute(FormItem formItem, Object value) {
+                return isOperationInternallyPublished() || isOperationExternallyPublished();
+            }
+        });
+    }
+
+    private boolean isOperationInternallyPublished() {
+        return ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationDto.getProcStatus());
+    }
+
+    private boolean isOperationExternallyPublished() {
+        return ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationDto.getProcStatus());
     }
 
 }
