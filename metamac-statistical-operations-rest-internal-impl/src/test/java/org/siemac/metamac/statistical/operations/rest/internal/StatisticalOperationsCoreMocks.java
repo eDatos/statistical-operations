@@ -31,11 +31,11 @@ public class StatisticalOperationsCoreMocks {
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea3", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea3"));
         operation.setObjective(mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
         operation.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
-        operation.addInstance(mockInstance("instanceCode1"));
-        operation.addInstance(mockInstance("instanceCode2"));
-        operation.addInstance(mockInstance("instanceCode3"));
+        operation.addInstance(mockInstance("instanceCode1", ProcStatusEnum.DRAFT));
+        operation.addInstance(mockInstance("instanceCode2", ProcStatusEnum.PUBLISH_INTERNALLY));
+        operation.addInstance(mockInstance("instanceCode3", ProcStatusEnum.PUBLISH_EXTERNALLY));
         operation.setSurveyType(mockSurveyType("surveyIdentifier"));
-        operation.setOfficialityType(mockOfficialityType("officialityIdentifier"));
+        operation.setOfficialityType(mockOfficialityType("officialityTypeIdentifier"));
         operation.setIndicatorSystem(Boolean.TRUE);
         operation.getProducer().add(mockExternalItem("producer1", TypeExternalArtefactsEnum.AGENCY, "http://producer1"));
         operation.getProducer().add(mockExternalItem("producer2", TypeExternalArtefactsEnum.AGENCY, "http://producer2"));
@@ -59,17 +59,12 @@ public class StatisticalOperationsCoreMocks {
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency2", TypeExternalArtefactsEnum.CODE, "http://updateFrequency2"));
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency3", TypeExternalArtefactsEnum.CODE, "http://updateFrequency3"));
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency4", TypeExternalArtefactsEnum.CODE, "http://updateFrequency4"));
-        // TODO CURRENT_INTERNAL_INSTANCE
-        // TODO CURRENT_INSTANCE
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
         operation.setRevPolicy(mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
         operation.setRevPolicyUrl("http://revPolicy1.url");
         operation.setRevPractice(mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
         operation.setRevPracticeUrl("http://revPractice1.url");
-        // TODO LEGAL_ACTS
-        // TODO DATA_SHARING
-        // TODO CONFIDENTIALITY_POLICY
-        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
         operation.setCommentUrl("http://comments1.url");
         operation.setNotes(mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
@@ -103,10 +98,11 @@ public class StatisticalOperationsCoreMocks {
         return family;
     }
 
-    private static Instance mockInstance(String code) {
+    private static Instance mockInstance(String code, ProcStatusEnum procStatus) {
         Instance instance = new Instance();
         instance.setCode(code);
         instance.setTitle(mockInternationalString("es", "Título instance " + code, "en", "Title instance " + code));
+        instance.setProcStatus(procStatus);
         return instance;
     }
 

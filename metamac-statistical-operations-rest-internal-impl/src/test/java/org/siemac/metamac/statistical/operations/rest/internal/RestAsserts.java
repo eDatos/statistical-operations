@@ -27,7 +27,12 @@ public class RestAsserts {
         for (Resource expected : expecteds) {
             boolean existsItem = false;
             for (Resource actual : actuals) {
-                if (expected.getId().equals(actual.getId())) {
+                if (expected.getId() != null) {
+                    if (expected.getId().equals(actual.getId())) {
+                        assertEqualsResource(expected, actual);
+                        existsItem = true;
+                    }
+                } else if (expected.getKind() != null && expected.getKind().equals(actual.getKind())) {
                     assertEqualsResource(expected, actual);
                     existsItem = true;
                 }
@@ -46,7 +51,7 @@ public class RestAsserts {
         assertEqualsLink(expected.getLink(), actual.getLink());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
     }
-    
+
     public static void assertEqualsLink(Link expected, Link actual) {
         assertEqualsNullability(expected, actual);
         if (expected == null) {
@@ -73,7 +78,7 @@ public class RestAsserts {
             assertTrue(existsItem);
         }
     }
-    
+
     public static void assertEqualsResponse(InputStream responseExpected, InputStream responseActual) throws Exception {
         String actual = getStringFromInputStream(responseActual);
         String expected = getStringFromInputStream(responseExpected);
@@ -82,7 +87,7 @@ public class RestAsserts {
         String expectedFormatted = StringUtils.deleteWhitespace(expected);
         assertEquals(actualFormatted.length(), expectedFormatted.length());
     }
-    
+
     private static String getStringFromInputStream(InputStream in) throws Exception {
         CachedOutputStream bos = new CachedOutputStream();
         IOUtils.copy(in, bos);
@@ -90,7 +95,7 @@ public class RestAsserts {
         bos.close();
         return bos.getOut().toString();
     }
-    
+
     private static void assertEqualsNullability(Object expected, Object actual) {
         if (actual == null && expected == null) {
             return;

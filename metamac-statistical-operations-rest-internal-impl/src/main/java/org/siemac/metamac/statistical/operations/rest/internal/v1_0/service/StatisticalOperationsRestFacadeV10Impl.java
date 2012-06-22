@@ -42,11 +42,11 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     @Override
     public Operations findOperations() {
-        return null; // TODO
+        return null; // TODO findOperations
     }
 
     @Override
-    public Response retrieveOperationByCode(String code) throws Exception {
+    public Response retrieveOperationByCode(String code) {
         try {
             // TODO Validation of parameters
 

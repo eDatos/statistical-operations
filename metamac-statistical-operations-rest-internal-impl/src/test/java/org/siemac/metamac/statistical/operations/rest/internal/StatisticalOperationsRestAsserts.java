@@ -18,8 +18,8 @@ public class StatisticalOperationsRestAsserts {
         RestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
         RestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
         RestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances());
-        assertEquals(expected.getSurveyType(), actual.getSurveyType());
-        assertEquals(expected.getOfficialityType(), actual.getOfficialityType());
+        RestAsserts.assertEqualsResource(expected.getSurveyType(), actual.getSurveyType());
+        RestAsserts.assertEqualsResource(expected.getOfficialityType(), actual.getOfficialityType());
         assertEquals(expected.isIndicatorSystem(), actual.isIndicatorSystem());
         RestAsserts.assertEqualsResources(expected.getProducers(), actual.getProducers());
         RestAsserts.assertEqualsResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
@@ -41,15 +41,12 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getRevPolicyUrl(), actual.getRevPolicyUrl());
         RestAsserts.assertEqualsInternationalString(expected.getRevPractice(), actual.getRevPractice());
         assertEquals(expected.getRevPracticeUrl(), actual.getRevPracticeUrl());
-        // TODO LEGAL_ACTS
-        // TODO DATA_SHARING
-        // TODO CONFIDENTIALITY_POLICY
-        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         RestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
         assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         RestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
-        // TODO parent
-        // TODO children
+        RestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
+        RestAsserts.assertEqualsResources(expected.getchildren(), actual.getchildren());
     }
 }

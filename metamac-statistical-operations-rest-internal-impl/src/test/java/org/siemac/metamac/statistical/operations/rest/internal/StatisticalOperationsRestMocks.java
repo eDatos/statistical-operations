@@ -27,8 +27,8 @@ public class StatisticalOperationsRestMocks {
         operation.getInstances().add(RestMocks.mockResource("instanceCode1", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode1", Boolean.TRUE, "instance"));
         operation.getInstances().add(RestMocks.mockResource("instanceCode2", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode2", Boolean.TRUE, "instance"));
         operation.getInstances().add(RestMocks.mockResource("instanceCode3", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode3", Boolean.TRUE, "instance"));
-        operation.setSurveyType("surveyIdentifier");
-        operation.setOfficialityType("officialityIdentifier");
+        operation.setSurveyType(RestMocks.mockResource("surveyIdentifier", null, null, null, Boolean.TRUE, "survey"));
+        operation.setOfficialityType(RestMocks.mockResource("officialityTypeIdentifier", null, null, null, Boolean.TRUE, "officialityType"));
         operation.setIndicatorSystem(Boolean.TRUE);
         operation.getProducers().add(RestMocks.mockResource("producer1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer1", Boolean.FALSE, null));
         operation.getProducers().add(RestMocks.mockResource("producer2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer2", Boolean.FALSE, null));
@@ -52,24 +52,20 @@ public class StatisticalOperationsRestMocks {
         operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency2", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency2", Boolean.FALSE, null));
         operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency3", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency3", Boolean.FALSE, null));
         operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency4", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency4", Boolean.FALSE, null));
-        // TODO CURRENT_INTERNAL_INSTANCE
-        // TODO CURRENT_INSTANCE
+        operation.setCurrentInternalInstance(RestMocks.mockResource("instanceCode2", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode2", Boolean.TRUE, "instance"));
+        operation.setCurrentInstance(RestMocks.mockResource("instanceCode3", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode3", Boolean.TRUE, "instance"));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(RestMocks.mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
         operation.setRevPolicyUrl("http://revPolicy1.url");
         operation.setRevPractice(RestMocks.mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
         operation.setRevPracticeUrl("http://revPractice1.url");
-        // TODO LEGAL_ACTS
-        // TODO DATA_SHARING
-        // TODO CONFIDENTIALITY_POLICY
-        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(RestMocks.mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
         operation.setCommentUrl("http://comments1.url");
         operation.setNotes(RestMocks.mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
         operation.setNotesUrl("http://notes1.url");
-
-        // TODO parent
-        // TODO children
+        operation.setParent(RestMocks.mockResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/operations", Boolean.FALSE, null));
+        operation.getchildren().add(RestMocks.mockResource(null, RestInternalConstants.KIND_INSTANCES, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances", Boolean.FALSE, null));
         return operation;
     }
 

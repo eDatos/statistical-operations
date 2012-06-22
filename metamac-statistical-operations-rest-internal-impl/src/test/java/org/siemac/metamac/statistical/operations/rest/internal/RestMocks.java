@@ -36,6 +36,9 @@ public class RestMocks {
     }
 
     public static Link mockLink(String rel, String href) {
+        if (href == null) {
+            return null;
+        }
         Link link = new Link();
         link.setRel(rel);
         link.setHref(href);

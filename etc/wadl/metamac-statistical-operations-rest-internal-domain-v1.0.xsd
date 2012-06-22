@@ -7,7 +7,6 @@
                           
     <xs:complexType name="Operation">
         <xs:sequence>
-            <!-- PARENT (operations) -->
             <xs:element name="id" type="xs:string" />
             <xs:element name="kind" type="xs:string" />
             <xs:element name="link" type="common:Link" />
@@ -19,8 +18,8 @@
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" />
             <xs:element name="instance" type="common:Resource" maxOccurs="unbounded" />
-            <xs:element name="surveyType" type="xs:string" />
-            <xs:element name="officialityType" type="xs:string" />
+            <xs:element name="surveyType" type="common:Resource" />
+            <xs:element name="officialityType" type="common:Resource" />
             <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
             <xs:element name="producer" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="regionalResponsible" type="common:Resource" maxOccurs="unbounded" />
@@ -51,7 +50,8 @@
             <xs:element name="commentUrl" type="xs:string" />
             <xs:element name="notes" type="common:InternationalString" />
             <xs:element name="notesUrl" type="xs:string" />
-            <!-- CHILD_LINK -->
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 

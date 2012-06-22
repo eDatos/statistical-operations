@@ -137,7 +137,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         RestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
-    // TODO testear
+    // TODO testear findOperations
     @Test
     @Ignore
     public void testFindOperations() throws Exception {

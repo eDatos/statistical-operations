@@ -9,7 +9,7 @@
     
     <xs:complexType name="InternationalString">
         <xs:sequence>
-            <xs:element name="texts" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="text" type="tns:LocalisedString" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
