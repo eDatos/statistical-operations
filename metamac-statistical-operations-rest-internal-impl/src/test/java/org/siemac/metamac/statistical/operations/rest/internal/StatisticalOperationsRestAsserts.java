@@ -6,7 +6,6 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Opera
 
 public class StatisticalOperationsRestAsserts {
 
-    // TODO parent, kind, children
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
@@ -15,32 +14,28 @@ public class StatisticalOperationsRestAsserts {
         RestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         RestAsserts.assertEqualsResources(expected.getFamilies(), actual.getFamilies());
         RestAsserts.assertEqualsResource(expected.getSubjectArea(), actual.getSubjectArea());
-        // TODO SECUNDARY_SUBJECT_AREAS
-        // TODO SECUNDARY_SUBJECT_CODES
+        RestAsserts.assertEqualsResources(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
         RestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
         RestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
-        // TODO INSTANCE_CODE
-        // TODO INSTANCE_TITLE
-        // TODO survey type: lista? mirar excel
+        RestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances());
         assertEquals(expected.getSurveyType(), actual.getSurveyType());
-        // TODO officialy type: lista? mirar excel
         assertEquals(expected.getOfficialityType(), actual.getOfficialityType());
         assertEquals(expected.isIndicatorSystem(), actual.isIndicatorSystem());
-        // TODO PRODUCER
-        // TODO REGIONAL_RESPONSIBLE
-        // TODO REGIONAL_CONTRIBUTOR
+        RestAsserts.assertEqualsResources(expected.getProducers(), actual.getProducers());
+        RestAsserts.assertEqualsResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
+        RestAsserts.assertEqualsResources(expected.getRegionalContributors(), actual.getRegionalContributors());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.isCurrentlyActive(), actual.isCurrentlyActive());
         assertEquals(expected.getStatus(), actual.getStatus());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
-        // TODO PUBLISHER
+        RestAsserts.assertEqualsResources(expected.getPublishers(), actual.getPublishers());
         RestAsserts.assertEqualsInternationalString(expected.getRelPolUsAc(), actual.getRelPolUsAc());
         assertEquals(expected.getRelPolUsAcUrl(), actual.getRelPolUsAcUrl());
         assertEquals(expected.isReleaseCalendar(), actual.isReleaseCalendar());
         assertEquals(expected.getReleaseCalendarAccess(), actual.getReleaseCalendarAccess());
-        // TODO UPDATE_FREQUENCY
-        // TODO CURRENT_INTERNAL_INSTANCE
-        // TODO CURRENT_INSTANCE
+        RestAsserts.assertEqualsResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
+        RestAsserts.assertEqualsResource(expected.getCurrentInternalInstance(), actual.getCurrentInternalInstance());
+        RestAsserts.assertEqualsResource(expected.getCurrentInstance(), actual.getCurrentInstance());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         RestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
         assertEquals(expected.getRevPolicyUrl(), actual.getRevPolicyUrl());
@@ -54,5 +49,7 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         RestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
+        // TODO parent
+        // TODO children
     }
 }

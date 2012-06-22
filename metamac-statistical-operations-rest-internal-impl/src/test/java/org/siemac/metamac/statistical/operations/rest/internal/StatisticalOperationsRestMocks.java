@@ -19,29 +19,39 @@ public class StatisticalOperationsRestMocks {
         operation.getFamilies().add(mockFamily("familyCode1", baseApi));
         operation.getFamilies().add(mockFamily("familyCode2", baseApi));
         operation.setSubjectArea(RestMocks.mockResource("subjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://subjectArea1", Boolean.FALSE, null));
-        // TODO SECUNDARY_SUBJECT_AREAS
-        // TODO SECUNDARY_SUBJECT_CODES
+        operation.getSecondarySubjectAreas().add(RestMocks.mockResource("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea1", Boolean.FALSE, null));
+        operation.getSecondarySubjectAreas().add(RestMocks.mockResource("secundarySubjectArea2", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea2", Boolean.FALSE, null));
+        operation.getSecondarySubjectAreas().add(RestMocks.mockResource("secundarySubjectArea3", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea3", Boolean.FALSE, null));
         operation.setObjective(RestMocks.mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
         operation.setDescription(RestMocks.mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
-        // TODO INSTANCE_CODE
-        // TODO INSTANCE_TITLE
+        operation.getInstances().add(RestMocks.mockResource("instanceCode1", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode1", Boolean.TRUE, "instance"));
+        operation.getInstances().add(RestMocks.mockResource("instanceCode2", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode2", Boolean.TRUE, "instance"));
+        operation.getInstances().add(RestMocks.mockResource("instanceCode3", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances/instanceCode3", Boolean.TRUE, "instance"));
         operation.setSurveyType("surveyIdentifier");
         operation.setOfficialityType("officialityIdentifier");
-
         operation.setIndicatorSystem(Boolean.TRUE);
-        // TODO PRODUCER
-        // TODO REGIONAL_RESPONSIBLE
-        // TODO REGIONAL_CONTRIBUTOR
+        operation.getProducers().add(RestMocks.mockResource("producer1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer1", Boolean.FALSE, null));
+        operation.getProducers().add(RestMocks.mockResource("producer2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer2", Boolean.FALSE, null));
+        operation.getRegionalResponsibles().add(RestMocks.mockResource("regionalResponsible1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible1", Boolean.FALSE, null));
+        operation.getRegionalResponsibles().add(RestMocks.mockResource("regionalResponsible2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible2", Boolean.FALSE, null));
+        operation.getRegionalResponsibles().add(RestMocks.mockResource("regionalResponsible3", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible3", Boolean.FALSE, null));
+        operation.getRegionalContributors().add(RestMocks.mockResource("regionalContributor1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalContributor1", Boolean.FALSE, null));
+        operation.getRegionalContributors().add(RestMocks.mockResource("regionalContributor2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalContributor2", Boolean.FALSE, null));
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus("DESIGN");
         operation.setProcStatus("PUBLISH_EXTERNALLY");
-        // TODO PUBLISHER
+        operation.getPublishers().add(RestMocks.mockResource("publisher1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher1", Boolean.FALSE, null));
+        operation.getPublishers().add(RestMocks.mockResource("publisher2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher2", Boolean.FALSE, null));
+        operation.getPublishers().add(RestMocks.mockResource("publisher3", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher3", Boolean.FALSE, null));
         operation.setRelPolUsAc(RestMocks.mockInternationalString("es", "RelPolUsAc 1 en español", "en", "RelPolUsAc 1 in English"));
         operation.setRelPolUsAcUrl("http://relPolUsAc1.url");
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
-        // TODO UPDATE_FREQUENCY
+        operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency1", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency1", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency2", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency2", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency3", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency3", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(RestMocks.mockResource("updateFrequency4", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency4", Boolean.FALSE, null));
         // TODO CURRENT_INTERNAL_INSTANCE
         // TODO CURRENT_INSTANCE
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
@@ -58,6 +68,8 @@ public class StatisticalOperationsRestMocks {
         operation.setNotes(RestMocks.mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
         operation.setNotesUrl("http://notes1.url");
 
+        // TODO parent
+        // TODO children
         return operation;
     }
 

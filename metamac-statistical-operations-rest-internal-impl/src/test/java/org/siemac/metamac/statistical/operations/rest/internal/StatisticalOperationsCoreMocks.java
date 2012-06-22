@@ -5,9 +5,11 @@ import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
+import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
@@ -23,40 +25,40 @@ public class StatisticalOperationsCoreMocks {
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.addFamily(mockFamily("familyCode1"));
         operation.addFamily(mockFamily("familyCode2"));
-        operation.setSubjectArea(mockExternalItemBt("http://subjectArea1", "subjectArea1", TypeExternalArtefactsEnum.CATEGORY));
-        // TODO SUBJECT_AREA
-        // TODO SUBJECT_CODE
-        // TODO SECUNDARY_SUBJECT_AREAS
-        // TODO SECUNDARY_SUBJECT_CODES
+        operation.setSubjectArea(mockExternalItemBt("subjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://subjectArea1"));
+        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea1"));
+        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea2", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea2"));
+        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea3", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea3"));
         operation.setObjective(mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
         operation.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
-        // TODO INSTANCE_CODE
-        // TODO INSTANCE_TITLE
-
-        SurveyType surveyType = new SurveyType();
-        surveyType.setDescription(mockInternationalString("es", "Survey 1 en español", "en", "Survey 1 in English"));
-        surveyType.setIdentifier("surveyIdentifier");
-        operation.setSurveyType(surveyType);
-
-        OfficialityType officialityType = new OfficialityType();
-        officialityType.setDescription(mockInternationalString("es", "Officiality 1 en español", "en", "Officiality 1 in English"));
-        officialityType.setIdentifier("officialityIdentifier");
-        operation.setOfficialityType(officialityType);
-
+        operation.addInstance(mockInstance("instanceCode1"));
+        operation.addInstance(mockInstance("instanceCode2"));
+        operation.addInstance(mockInstance("instanceCode3"));
+        operation.setSurveyType(mockSurveyType("surveyIdentifier"));
+        operation.setOfficialityType(mockOfficialityType("officialityIdentifier"));
         operation.setIndicatorSystem(Boolean.TRUE);
-        // TODO PRODUCER
-        // TODO REGIONAL_RESPONSIBLE
-        // TODO REGIONAL_CONTRIBUTOR
+        operation.getProducer().add(mockExternalItem("producer1", TypeExternalArtefactsEnum.AGENCY, "http://producer1"));
+        operation.getProducer().add(mockExternalItem("producer2", TypeExternalArtefactsEnum.AGENCY, "http://producer2"));
+        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible1", TypeExternalArtefactsEnum.AGENCY, "http://regionalResponsible1"));
+        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible2", TypeExternalArtefactsEnum.AGENCY, "http://regionalResponsible2"));
+        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible3", TypeExternalArtefactsEnum.AGENCY, "http://regionalResponsible3"));
+        operation.getRegionalContributor().add(mockExternalItem("regionalContributor1", TypeExternalArtefactsEnum.AGENCY, "http://regionalContributor1"));
+        operation.getRegionalContributor().add(mockExternalItem("regionalContributor2", TypeExternalArtefactsEnum.AGENCY, "http://regionalContributor2"));
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(StatusEnum.DESIGN);
         operation.setProcStatus(ProcStatusEnum.PUBLISH_EXTERNALLY);
-        // TODO PUBLISHER
+        operation.getPublisher().add(mockExternalItem("publisher1", TypeExternalArtefactsEnum.AGENCY, "http://publisher1"));
+        operation.getPublisher().add(mockExternalItem("publisher2", TypeExternalArtefactsEnum.AGENCY, "http://publisher2"));
+        operation.getPublisher().add(mockExternalItem("publisher3", TypeExternalArtefactsEnum.AGENCY, "http://publisher3"));
         operation.setRelPolUsAc(mockInternationalString("es", "RelPolUsAc 1 en español", "en", "RelPolUsAc 1 in English"));
         operation.setRelPolUsAcUrl("http://relPolUsAc1.url");
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
-        // TODO UPDATE_FREQUENCY
+        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency1", TypeExternalArtefactsEnum.CODE, "http://updateFrequency1"));
+        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency2", TypeExternalArtefactsEnum.CODE, "http://updateFrequency2"));
+        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency3", TypeExternalArtefactsEnum.CODE, "http://updateFrequency3"));
+        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency4", TypeExternalArtefactsEnum.CODE, "http://updateFrequency4"));
         // TODO CURRENT_INTERNAL_INSTANCE
         // TODO CURRENT_INSTANCE
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
@@ -100,8 +102,33 @@ public class StatisticalOperationsCoreMocks {
         family.setDescription(mockInternationalString("es", "Descripción Familia " + code, "en", "Description Family " + code));
         return family;
     }
-    
-    private static ExternalItemBt mockExternalItemBt(String uri, String code, TypeExternalArtefactsEnum type) {
+
+    private static Instance mockInstance(String code) {
+        Instance instance = new Instance();
+        instance.setCode(code);
+        instance.setTitle(mockInternationalString("es", "Título instance " + code, "en", "Title instance " + code));
+        return instance;
+    }
+
+    private static SurveyType mockSurveyType(String code) {
+        SurveyType surveyType = new SurveyType();
+        surveyType.setDescription(mockInternationalString("es", "Título survey " + code, "en", "Title survey " + code));
+        surveyType.setIdentifier(code);
+        return surveyType;
+    }
+
+    private static OfficialityType mockOfficialityType(String code) {
+        OfficialityType officialityType = new OfficialityType();
+        officialityType.setDescription(mockInternationalString("es", "Título officialityType " + code, "en", "Title officialityType " + code));
+        officialityType.setIdentifier(code);
+        return officialityType;
+    }
+
+    private static ExternalItemBt mockExternalItemBt(String code, TypeExternalArtefactsEnum type, String uri) {
         return new ExternalItemBt(uri, code, type);
+    }
+
+    private static ExternalItem mockExternalItem(String code, TypeExternalArtefactsEnum type, String uri) {
+        return new ExternalItem(new ExternalItemBt(uri, code, type));
     }
 }

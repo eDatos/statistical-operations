@@ -12,12 +12,14 @@ import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
+import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Link;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
+import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     // @Context
-    // private MessageContext context; // Always null in this bean...
+    // private MessageContext context; // Always null in this bean (not in Service)...
 
     /**
      * TODO
@@ -60,52 +62,47 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setLink(toOperationLink(source, apiUrl));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
-        target.getFamilies().addAll(toFamiliesResource(source.getFamilies(), apiUrl));
-        target.setSubjectArea(toResource(source.getSubjectArea()));
-        // TODO SUBJECT_CODE
-        // TODO SECUNDARY_SUBJECT_AREAS
-        // TODO SECUNDARY_SUBJECT_CODES
+        target.getFamilies().addAll(familiesToResources(source.getFamilies(), apiUrl));
+        target.setSubjectArea(externalItemToResource(source.getSubjectArea()));
+        target.getSecondarySubjectAreas().addAll(externalItemsToResources(source.getSecondarySubjectAreas()));
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
-        // TODO INSTANCE_CODE
-        // TODO INSTANCE_TITLE
-        // TODO SURVEY_TYPE: qué dato?
+        target.getInstances().addAll(instancesToResources(source.getInstances(), apiUrl));
         if (source.getSurveyType() != null) {
+            // TODO SURVEY_TYPE: qué dato?
             target.setSurveyType(source.getSurveyType().getIdentifier());
         }
-        // TODO officialy type: qué dato?
         if (source.getOfficialityType() != null) {
+            // TODO officialy type: qué dato?
             target.setOfficialityType(source.getOfficialityType().getIdentifier());
         }
         target.setIndicatorSystem(source.getIndicatorSystem());
-        // TODO PRODUCER
-        // TODO REGIONAL_RESPONSIBLE
-        // TODO REGIONAL_CONTRIBUTOR
+        target.getProducers().addAll(externalItemsToResources(source.getProducer()));
+        target.getRegionalResponsibles().addAll(externalItemsToResources(source.getRegionalResponsible()));
+        target.getRegionalContributors().addAll(externalItemsToResources(source.getRegionalContributor()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
-        // TODO status, qué poner
         if (source.getStatus() != null) {
             target.setStatus(source.getStatus().name());
         }
-        // TODO proc status, qué poner
         target.setProcStatus(source.getProcStatus().name());
-        // TODO PUBLISHER
+        target.getPublishers().addAll(externalItemsToResources(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
         target.setRelPolUsAcUrl(source.getRelPolUsAcUrl());
         target.setReleaseCalendar(source.getReleaseCalendar());
         target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
-        // TODO UPDATE_FREQUENCY
-        // TODO CURRENT_INTERNAL_INSTANCE
-        // TODO CURRENT_INSTANCE
+        target.getUpdateFrequencies().addAll(externalItemsToResources(source.getUpdateFrequency()));
+        // TODO CURRENT_INTERNAL_INSTANCE No está en OperationBase
+        // TODO CURRENT_INSTANCE No está en OperationBase
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
         target.setRevPolicyUrl(source.getRevPolicyUrl());
         target.setRevPractice(toInternationalString(source.getRevPractice()));
         target.setRevPracticeUrl(source.getRevPracticeUrl());
-        // TODO LEGAL_ACTS
-        // TODO DATA_SHARING
-        // TODO CONFIDENTIALITY_POLICY
-        // TODO CONFIDENTIALITY_DATA_TREATMENT
+        // TODO LEGAL_ACTS No está en OperationBase
+        // TODO DATA_SHARING No está en OperationBase
+        // TODO CONFIDENTIALITY_POLICY No está en OperationBase
+        // TODO CONFIDENTIALITY_DATA_TREATMENT No está en OperationBase
         target.setComment(toInternationalString(source.getComment()));
         target.setCommentUrl(source.getCommentUrl());
         target.setNotes(toInternationalString(source.getNotes()));
@@ -156,19 +153,19 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return errorItems;
     }
 
-    private List<Resource> toFamiliesResource(Set<Family> sources, String apiUrl) {
+    private List<Resource> familiesToResources(Set<Family> sources, String apiUrl) {
         List<Resource> targets = new ArrayList<Resource>();
         if (sources == null) {
             return targets;
         }
         for (Family source : sources) {
-            Resource target = toFamilyResource(source, apiUrl);
+            Resource target = familyToResource(source, apiUrl);
             targets.add(target);
         }
         return targets;
     }
 
-    private Resource toFamilyResource(Family source, String apiUrl) {
+    private Resource familyToResource(Family source, String apiUrl) {
         if (source == null) {
             return null;
         }
@@ -180,7 +177,43 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private Resource toResource(ExternalItemBt source) {
+    private List<Resource> instancesToResources(List<Instance> sources, String apiUrl) {
+        List<Resource> targets = new ArrayList<Resource>();
+        if (sources == null) {
+            return targets;
+        }
+        for (Instance source : sources) {
+            Resource target = instanceToResource(source, apiUrl);
+            targets.add(target);
+        }
+        return targets;
+    }
+
+    private Resource instanceToResource(Instance source, String apiUrl) {
+        if (source == null) {
+            return null;
+        }
+        Resource target = new Resource();
+        target.setId(source.getCode());
+        target.setKind(RestInternalConstants.KIND_INSTANCE);
+        target.setLink(toInstanceLink(source, apiUrl));
+        target.setTitle(toInternationalString(source.getTitle()));
+        return target;
+    }
+
+    private List<Resource> externalItemsToResources(Set<ExternalItem> sources) {
+        if (sources == null) {
+            return null;
+        }
+        List<Resource> targets = new ArrayList<Resource>();
+        for (ExternalItem source : sources) {
+            Resource target = externalItemToResource(source.getExt());
+            targets.add(target);
+        }
+        return targets;
+    }
+
+    private Resource externalItemToResource(ExternalItemBt source) {
         if (source == null) {
             return null;
         }
@@ -226,7 +259,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES, family.getCode()));
         return link;
     }
-    
+
+    private Link toInstanceLink(org.siemac.metamac.statistical.operations.core.domain.Instance instance, String apiUrl) {
+        Link link = new Link();
+        link.setRel(RestInternalConstants.LINK_SELF);
+        link.setHref(createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS, instance.getOperation().getCode(), RestInternalConstants.LINK_SUBPATH_INSTANCES, instance.getCode()));
+        return link;
+    }
+
     private Link toExternalItemLink(ExternalItemBt externalItemBt) {
         Link link = new Link();
         link.setRel(RestInternalConstants.LINK_SELF);
@@ -234,10 +274,13 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return link;
     }
 
-    private String createLinkHref(String apiUrl, String baseResource, String resourceId) {
+    private String createLinkHref(String apiUrl, String... subpaths) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl);
-        uriComponentsBuilder = uriComponentsBuilder.pathSegment(baseResource);
-        uriComponentsBuilder = uriComponentsBuilder.pathSegment(resourceId);
+        if (subpaths != null) {
+            for (int i = 0; i < subpaths.length; i++) {
+                uriComponentsBuilder = uriComponentsBuilder.pathSegment(subpaths[i]);
+            }
+        }
         return uriComponentsBuilder.build().toUriString();
     }
 }
