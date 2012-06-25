@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.rest.internal;
 
 import static org.junit.Assert.assertEquals;
 
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
 public class StatisticalOperationsRestAsserts {
@@ -46,6 +47,20 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         RestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
+        RestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
+        RestAsserts.assertEqualsResources(expected.getchildren(), actual.getchildren());
+    }
+    
+    public static void assertEqualsFamily(Family expected, Family actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getKind(), actual.getKind());
+        RestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
+        RestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
+        RestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
+        RestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
+        assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
+        assertEquals(expected.getProcStatus(), actual.getProcStatus());
+        assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         RestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
         RestAsserts.assertEqualsResources(expected.getchildren(), actual.getchildren());
     }

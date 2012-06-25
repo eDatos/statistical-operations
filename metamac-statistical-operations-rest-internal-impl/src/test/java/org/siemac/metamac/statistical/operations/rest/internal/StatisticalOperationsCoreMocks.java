@@ -72,7 +72,22 @@ public class StatisticalOperationsCoreMocks {
 
         return operation;
     }
+    
+    public static Family mockFamily1() {
 
+        Family family = new Family();
+
+        family.setCode("Code1");
+        family.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
+        family.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
+        family.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
+        family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
+        family.setProcStatus(ProcStatusEnum.PUBLISH_EXTERNALLY);
+        family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
+        family.addOperation(mockOperation1());
+        return family;
+    }
+    
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
         InternationalString internationalString = new InternationalString();

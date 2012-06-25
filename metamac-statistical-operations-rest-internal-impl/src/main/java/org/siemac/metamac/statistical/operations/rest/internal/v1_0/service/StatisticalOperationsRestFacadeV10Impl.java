@@ -18,6 +18,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.RestException;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
@@ -49,7 +50,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Override
     public Operation retrieveOperationByCode(String code) {
         try {
-            // TODO Validation of parameters
+            // TODO Validation of parameters. validar code?
 
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, code);
             if (operationEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationEntity.getProcStatus()))) {
@@ -61,6 +62,27 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Transform and return
             Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
             return operation;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+    
+    @Override
+    public Family retrieveFamilyByCode(String code) {
+        try {
+            // TODO Validation of parameters. validar code?
+
+            org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = statisticalOperationsBaseService.findFamilyByCode(serviceContextRestInternal, code);
+            if (familyEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(familyEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(familyEntity.getProcStatus()))) {
+                // Family not found
+                Error error = getError(ServiceExceptionType.FAMILY_NOT_FOUND, code);
+                throw new RestException(error, Status.NOT_FOUND);
+            }
+
+            // Transform and return
+            Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
+            return family;
 
         } catch (MetamacException e) {
             throw manageException(e);

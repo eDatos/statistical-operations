@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.rest.internal;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
 public class StatisticalOperationsRestMocks {
@@ -65,8 +66,27 @@ public class StatisticalOperationsRestMocks {
         operation.setNotes(RestMocks.mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
         operation.setNotesUrl("http://notes1.url");
         operation.setParent(RestMocks.mockResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/operations", Boolean.FALSE, null));
+        operation.getchildren().add(RestMocks.mockResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/families", Boolean.FALSE, null));
         operation.getchildren().add(RestMocks.mockResource(null, RestInternalConstants.KIND_INSTANCES, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1/instances", Boolean.FALSE, null));
         return operation;
+    }
+    
+    public static Family mockFamily1(String baseApi) {
+
+        Family family = new Family();
+
+        family.setId("Code1");
+        family.setKind(RestInternalConstants.KIND_FAMILY);
+        family.setLink(RestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/families/Code1"));
+        family.setTitle(RestMocks.mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
+        family.setAcronym(RestMocks.mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
+        family.setDescription(RestMocks.mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
+        family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
+        family.setProcStatus("PUBLISH_EXTERNALLY");
+        family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
+        family.setParent(RestMocks.mockResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/families", Boolean.FALSE, null));
+        family.getchildren().add(RestMocks.mockResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/families/Code1/operations", Boolean.FALSE, null));
+        return family;
     }
 
     private static Resource mockFamily(String id, String baseApi) {

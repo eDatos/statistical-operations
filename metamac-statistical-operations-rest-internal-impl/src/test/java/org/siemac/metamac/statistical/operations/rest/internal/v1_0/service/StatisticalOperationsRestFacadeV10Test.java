@@ -19,14 +19,13 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.siemac.metamac.common.test.rest.ServerResource;
-import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
-import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.RestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsCoreMocks;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestMocks;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.springframework.context.ApplicationContext;
 
@@ -46,6 +45,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
 
     // Operations
     private static String                             OPERATION_CODE1    = "Code1";
+    private static String                             FAMILY_CODE1       = "Code1";
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -66,9 +66,12 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
 
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
-
+        // Operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
+        // Families
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
     }
 
     @Test
@@ -119,7 +122,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
             webClient.get(Operation.class);
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
-            InputStream responseActual = (InputStream)((ServerWebApplicationException)e).getResponse().getEntity();
+            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             RestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
@@ -133,7 +136,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
             webClient.get(Operation.class);
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.json");
-            InputStream responseActual = (InputStream)((ServerWebApplicationException)e).getResponse().getEntity();
+            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             RestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
@@ -145,7 +148,78 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         // org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations operations = statisticalOperationsRestFacadeClient.findOperations();
     }
 
+    @Test
+    public void testRetrieveFamilyByCode() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
+        Family family = webClient.get(Family.class);
+
+        // Validation
+        StatisticalOperationsRestAsserts.assertEqualsFamily(StatisticalOperationsRestMocks.mockFamily1(baseApi), family);
+    }
+
+    @Test
+    public void testRetrieveFamilyByCodeXml() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
+        Response response = webClient.get();
+
+        // Validation
+        assertEquals(Status.OK.getStatusCode(), response.getStatus());
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.xml");
+        InputStream responseActual = (InputStream) response.getEntity();
+        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+    }
+
+    @Test
+    public void testRetrieveFamilyByCodeJson() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
+        Response response = webClient.get();
+
+        // Validation
+        assertEquals(Status.OK.getStatusCode(), response.getStatus());
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.json");
+        InputStream responseActual = (InputStream) response.getEntity();
+        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+    }
+
+    @Test
+    public void testRetrieveFamilyByCodeErrorNotExistsXml() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamilyByCode(NOT_EXISTS);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
+        try {
+            webClient.get(Family.class);
+        } catch (Exception e) {
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.xml");
+            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
+            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        }
+    }
+
+    @Test
+    public void testRetrieveFamilyByCodeErrorNotExistsJson() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamilyByCode(NOT_EXISTS);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
+        try {
+            webClient.get(Family.class);
+        } catch (Exception e) {
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.json");
+            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
+            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        }
+    }
+
     private String getRequestUriRetrieveOperationByCode(String code) {
         return baseApi + "/operations/" + code;
+    }
+
+    private String getRequestUriRetrieveFamilyByCode(String code) {
+        return baseApi + "/families/" + code;
     }
 }

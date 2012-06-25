@@ -12,8 +12,8 @@
  	</grammars>
  	
 	<resources base="URL_RESOURCES_BASE">
-		<resource id="statisticalOperationsRestFacadeV10" path="/operations">
-			<resource path="/">
+		<resource id="statisticalOperationsRestFacadeV10">
+			<resource path="/operations">
 				<method name="GET" id="findOperations">
 	                <request>
 	                </request>
@@ -22,13 +22,26 @@
 	                </response>
 				</method>
 			</resource>
-			<resource path="/{code}">
+			<resource path="operations/{code}">
 				<method name="GET" id="retrieveOperationByCode">
 					<request>
 						<param name="code" style="template"/>
 					</request>
 	                <response status="200">
 	                    <representation mediaType="*/*" element="domain:operation"/>
+	                </response>
+	                 <response status="404 500">
+	                    <representation mediaType="*/*" element="common:error"/>
+	                </response>
+				</method>
+			</resource>
+			<resource path="families/{code}">
+				<method name="GET" id="retrieveFamilyByCode">
+					<request>
+						<param name="code" style="template"/>
+					</request>
+	                <response status="200">
+	                    <representation mediaType="*/*" element="domain:family"/>
 	                </response>
 	                 <response status="404 500">
 	                    <representation mediaType="*/*" element="common:error"/>

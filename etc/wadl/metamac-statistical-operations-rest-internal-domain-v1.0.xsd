@@ -54,6 +54,22 @@
             <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="Family">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="link" type="common:Link" />
+            <xs:element name="title" type="common:InternationalString" />
+            <xs:element name="acronym" type="common:InternationalString" />
+            <xs:element name="description" type="common:InternationalString" />
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="procStatus" type="xs:string" />
+            <xs:element name="inventoryDate" type="xs:dateTime" />
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:complexType name="Operations">
         <xs:sequence>
@@ -65,4 +81,5 @@
     <!-- Elements -->
     <xs:element name="operation" type="tns:Operation" />
     <xs:element name="operations" type="tns:Operations" />
+    <xs:element name="family" type="tns:Family" />
 </xs:schema>
