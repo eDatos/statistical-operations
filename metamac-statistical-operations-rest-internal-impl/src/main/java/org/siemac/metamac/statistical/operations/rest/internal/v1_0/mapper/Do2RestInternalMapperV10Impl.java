@@ -14,7 +14,6 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Link;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
@@ -24,6 +23,8 @@ import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.rest.common.v1_0.domain.Error;
+import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -85,8 +86,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
     // TODO pasar a librería común toError
     @Override
-    public org.siemac.metamac.rest.common.v1_0.domain.Error toError(Exception exception) {
-        org.siemac.metamac.rest.common.v1_0.domain.Error error = new org.siemac.metamac.rest.common.v1_0.domain.Error();
+    public Error toError(Exception exception) {
+        Error error = new Error();
         error.getErrorItems().addAll(toErrorItems(exception));
         return error;
     }

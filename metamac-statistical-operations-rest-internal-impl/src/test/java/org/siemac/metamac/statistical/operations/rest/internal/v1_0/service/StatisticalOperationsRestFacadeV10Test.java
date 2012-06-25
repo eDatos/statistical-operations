@@ -19,6 +19,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.siemac.metamac.common.test.rest.ServerResource;
+import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
+import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.RestAsserts;
@@ -81,7 +83,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     }
 
     @Test
-    public void testRetrieveOperationByCodeReviewXml() throws Exception {
+    public void testRetrieveOperationByCodeXml() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
         WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
@@ -95,7 +97,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     }
 
     @Test
-    public void testRetrieveOperationByCodeReviewJson() throws Exception {
+    public void testRetrieveOperationByCodeJson() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
         WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
@@ -109,7 +111,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     }
 
     @Test
-    public void testRetrieveOperationByCodeErrorNotExists() throws Exception {
+    public void testRetrieveOperationByCodeErrorNotExistsXml() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
         WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
@@ -121,20 +123,19 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
             RestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
-    
+
     @Test
-    public void testRetrieveOperationByCodeErrorNotExistsReviewXml() throws Exception {
+    public void testRetrieveOperationByCodeErrorNotExistsJson() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
-
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
-        Response response = webClient.get();
-
-        // Validation
-        assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
-        InputStream responseActual = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
+        try {
+            webClient.get(Operation.class);
+        } catch (Exception e) {
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.json");
+            InputStream responseActual = (InputStream)((ServerWebApplicationException)e).getResponse().getEntity();
+            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        }
     }
 
     // TODO testear findOperations

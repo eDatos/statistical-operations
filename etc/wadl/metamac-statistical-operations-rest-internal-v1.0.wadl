@@ -28,7 +28,7 @@
 						<param name="code" style="template"/>
 					</request>
 	                <response status="200">
-	                    <representation mediaType="*/*" />
+	                    <representation mediaType="*/*" element="domain:operation"/>
 	                </response>
 	                 <response status="404 500">
 	                    <representation mediaType="*/*" element="common:error"/>
