@@ -7,8 +7,11 @@ import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
 import org.siemac.metamac.web.common.client.MetamacEntryPoint;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
+import org.siemac.metamac.web.common.client.utils.ApplicationEditionLanguages;
 import org.siemac.metamac.web.common.client.widgets.IstacNavBar;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.GetEditionLanguagesAction;
+import org.siemac.metamac.web.common.shared.GetEditionLanguagesResult;
 import org.siemac.metamac.web.common.shared.GetLoginPageUrlAction;
 import org.siemac.metamac.web.common.shared.GetLoginPageUrlResult;
 import org.siemac.metamac.web.common.shared.GetNavigationBarUrlAction;
@@ -50,14 +53,13 @@ public class OperationsWeb extends MetamacEntryPoint {
             @Override
             public void onWaitFailure(Throwable caught) {
                 logger.log(Level.SEVERE, "Error loading toolbar");
-                checkAuthentication();
+                loadNonSecuredApplication();
             }
 
             public void onWaitSuccess(GetNavigationBarUrlResult result) {
                 // Load scripts for navigation bar
                 IstacNavBar.loadScripts(result.getNavigationBarUrl());
-
-                checkAuthentication();
+                loadNonSecuredApplication();
             };
         });
 
@@ -65,7 +67,7 @@ public class OperationsWeb extends MetamacEntryPoint {
 
     // TODO This method should be removed to use CAS authentication
     // Application id should be the same than the one defined in org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants.SECURITY_APPLICATION_ID
-    public void checkAuthentication() {
+    private void loadNonSecuredApplication() {
         ginjector.getDispatcher().execute(new MockCASUserAction("GESTOR_OPERACIONES"), new WaitingAsyncCallback<MockCASUserResult>() {
 
             @Override
@@ -76,20 +78,28 @@ public class OperationsWeb extends MetamacEntryPoint {
             public void onWaitSuccess(MockCASUserResult result) {
                 OperationsWeb.principal = result.getMetamacPrincipal();
 
-                LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
+                // Load edition languages
+                ginjector.getDispatcher().execute(new GetEditionLanguagesAction(), new WaitingAsyncCallback<GetEditionLanguagesResult>() {
 
-                // This is required for GWT-Platform proxy's generator.
-                DelayedBindRegistry.bind(ginjector);
-                ginjector.getPlaceManager().revealCurrentPlace();
-
-                // Inject global styles
-                GWT.<GlobalResources> create(GlobalResources.class).css().ensureInjected();
+                    @Override
+                    public void onWaitFailure(Throwable caught) {
+                        logger.log(Level.SEVERE, "Error loading edition languages");
+                        // If an error occurs while loading edition languages, enable SPANISH, ENGLISH and PORTUGUESE by default
+                        ApplicationEditionLanguages.setEditionLanguages(new String[]{ApplicationEditionLanguages.SPANISH, ApplicationEditionLanguages.ENGLISH, ApplicationEditionLanguages.PORTUGUESE});
+                        loadApplication();
+                    }
+                    @Override
+                    public void onWaitSuccess(GetEditionLanguagesResult result) {
+                        ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
+                        loadApplication();
+                    }
+                });
             }
         });
     }
 
     // TODO Restore this method to use CAS authentication
-    // public void onModuleLoad() {
+    // private void loadSecuredApplication() {
     // String ticketParam = Window.Location.getParameter(TICKET);
     // if (ticketParam != null) {
     // UrlBuilder urlBuilder = Window.Location.createUrlBuilder();
@@ -124,18 +134,36 @@ public class OperationsWeb extends MetamacEntryPoint {
     // String url = Window.Location.createUrlBuilder().setHash("").buildString();
     // Window.Location.assign(url);
     //
-    // LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
+    // // Load edition languages
+    // ginjector.getDispatcher().execute(new GetEditionLanguagesAction(), new WaitingAsyncCallback<GetEditionLanguagesResult>() {
     //
-    // // This is required for GWT-Platform proxy's generator.
-    // DelayedBindRegistry.bind(ginjector);
-    // ginjector.getPlaceManager().revealCurrentPlace();
-    //
-    // // Inject global styles
-    // GWT.<GlobalResources> create(GlobalResources.class).css().ensureInjected();
+    // @Override
+    // public void onWaitFailure(Throwable caught) {
+    // logger.log(Level.SEVERE, "Error loading edition languages");
+    // // If an error occurs while loading edition languages, enable SPANISH, ENGLISH and PORTUGUESE by default
+    // ApplicationEditionLanguages.setEditionLanguages(new String[]{ApplicationEditionLanguages.SPANISH, ApplicationEditionLanguages.ENGLISH,
+    // ApplicationEditionLanguages.PORTUGUESE});
+    // loadApplication();
+    // }
+    // @Override
+    // public void onWaitSuccess(GetEditionLanguagesResult result) {
+    // ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
+    // loadApplication();
+    // }
+    // });
     // }
     // });
     // }
     // }
+
+    private void loadApplication() {
+        LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
+        // This is required for GWT-Platform proxy's generator.
+        DelayedBindRegistry.bind(ginjector);
+        ginjector.getPlaceManager().revealCurrentPlace();
+        // Inject global styles
+        GWT.<GlobalResources> create(GlobalResources.class).css().ensureInjected();
+    }
 
     public void displayLoginView() {
         String serviceUrl = Window.Location.createUrlBuilder().buildString();
