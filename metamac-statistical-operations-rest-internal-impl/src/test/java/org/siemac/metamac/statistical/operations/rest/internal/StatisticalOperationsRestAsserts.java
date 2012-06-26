@@ -13,30 +13,30 @@ public class StatisticalOperationsRestAsserts {
         RestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
         RestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         RestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
-        RestAsserts.assertEqualsResources(expected.getFamilies(), actual.getFamilies());
-        RestAsserts.assertEqualsResource(expected.getSubjectArea(), actual.getSubjectArea());
-        RestAsserts.assertEqualsResources(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
+        RestAsserts.assertEqualsRelatedResources(expected.getFamilies(), actual.getFamilies());
+        RestAsserts.assertEqualsRelatedResource(expected.getSubjectArea(), actual.getSubjectArea());
+        RestAsserts.assertEqualsRelatedResources(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
         RestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
         RestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
-        RestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances());
-        RestAsserts.assertEqualsResource(expected.getSurveyType(), actual.getSurveyType());
-        RestAsserts.assertEqualsResource(expected.getOfficialityType(), actual.getOfficialityType());
+        RestAsserts.assertEqualsRelatedResources(expected.getInstances(), actual.getInstances());
+        RestAsserts.assertEqualsRelatedResource(expected.getSurveyType(), actual.getSurveyType());
+        RestAsserts.assertEqualsRelatedResource(expected.getOfficialityType(), actual.getOfficialityType());
         assertEquals(expected.isIndicatorSystem(), actual.isIndicatorSystem());
-        RestAsserts.assertEqualsResources(expected.getProducers(), actual.getProducers());
-        RestAsserts.assertEqualsResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
-        RestAsserts.assertEqualsResources(expected.getRegionalContributors(), actual.getRegionalContributors());
+        RestAsserts.assertEqualsRelatedResources(expected.getProducers(), actual.getProducers());
+        RestAsserts.assertEqualsRelatedResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
+        RestAsserts.assertEqualsRelatedResources(expected.getRegionalContributors(), actual.getRegionalContributors());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.isCurrentlyActive(), actual.isCurrentlyActive());
         assertEquals(expected.getStatus(), actual.getStatus());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
-        RestAsserts.assertEqualsResources(expected.getPublishers(), actual.getPublishers());
+        RestAsserts.assertEqualsRelatedResources(expected.getPublishers(), actual.getPublishers());
         RestAsserts.assertEqualsInternationalString(expected.getRelPolUsAc(), actual.getRelPolUsAc());
         assertEquals(expected.getRelPolUsAcUrl(), actual.getRelPolUsAcUrl());
         assertEquals(expected.isReleaseCalendar(), actual.isReleaseCalendar());
         assertEquals(expected.getReleaseCalendarAccess(), actual.getReleaseCalendarAccess());
-        RestAsserts.assertEqualsResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
-        RestAsserts.assertEqualsResource(expected.getCurrentInternalInstance(), actual.getCurrentInternalInstance());
-        RestAsserts.assertEqualsResource(expected.getCurrentInstance(), actual.getCurrentInstance());
+        RestAsserts.assertEqualsRelatedResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
+        RestAsserts.assertEqualsRelatedResource(expected.getCurrentInternalInstance(), actual.getCurrentInternalInstance());
+        RestAsserts.assertEqualsRelatedResource(expected.getCurrentInstance(), actual.getCurrentInstance());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         RestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
         assertEquals(expected.getRevPolicyUrl(), actual.getRevPolicyUrl());
@@ -47,8 +47,8 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         RestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
-        RestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
-        RestAsserts.assertEqualsResources(expected.getchildren(), actual.getchildren());
+        RestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
+        RestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
     
     public static void assertEqualsFamily(Family expected, Family actual) {
@@ -61,7 +61,7 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
-        RestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
-        RestAsserts.assertEqualsResources(expected.getchildren(), actual.getchildren());
+        RestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
+        RestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
 }

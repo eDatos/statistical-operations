@@ -13,27 +13,27 @@ import org.apache.cxf.io.CachedOutputStream;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Link;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
-import org.siemac.metamac.rest.common.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 
 // TODO Pasar a librería común
 public class RestAsserts {
 
-    public static void assertEqualsResources(List<Resource> expecteds, List<Resource> actuals) {
+    public static void assertEqualsRelatedResources(List<RelatedResource> expecteds, List<RelatedResource> actuals) {
         assertEqualsNullability(expecteds, actuals);
         if (expecteds == null) {
             return;
         }
         assertEquals(expecteds.size(), actuals.size());
-        for (Resource expected : expecteds) {
+        for (RelatedResource expected : expecteds) {
             boolean existsItem = false;
-            for (Resource actual : actuals) {
+            for (RelatedResource actual : actuals) {
                 if (expected.getId() != null) {
                     if (expected.getId().equals(actual.getId())) {
-                        assertEqualsResource(expected, actual);
+                        assertEqualsRelatedResource(expected, actual);
                         existsItem = true;
                     }
                 } else if (expected.getKind() != null && expected.getKind().equals(actual.getKind())) {
-                    assertEqualsResource(expected, actual);
+                    assertEqualsRelatedResource(expected, actual);
                     existsItem = true;
                 }
             }
@@ -41,7 +41,7 @@ public class RestAsserts {
         }
     }
 
-    public static void assertEqualsResource(Resource expected, Resource actual) {
+    public static void assertEqualsRelatedResource(RelatedResource expected, RelatedResource actual) {
         assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;

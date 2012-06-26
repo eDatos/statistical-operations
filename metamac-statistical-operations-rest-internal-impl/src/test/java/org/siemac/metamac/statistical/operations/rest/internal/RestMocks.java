@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.rest.internal;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Link;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
-import org.siemac.metamac.rest.common.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 
 public class RestMocks {
 
@@ -24,8 +24,8 @@ public class RestMocks {
         return internationalString;
     }
 
-    public static Resource mockResource(String id, String kind, String rel, String href, Boolean addTitle, String subtitle) {
-        Resource resource = new Resource();
+    public static RelatedResource mockRelatedResource(String id, String kind, String rel, String href, Boolean addTitle, String subtitle) {
+        RelatedResource resource = new RelatedResource();
         resource.setId(id);
         resource.setKind(kind);
         resource.setLink(mockLink(rel, href));
