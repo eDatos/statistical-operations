@@ -18,10 +18,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.siemac.metamac.common.test.rest.ServerResource;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
+import org.siemac.metamac.rest.common.test.ServerResource;
+import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.rest.internal.RestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsCoreMocks;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestMocks;
@@ -96,7 +96,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.xml");
         InputStream responseActual = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.json");
         InputStream responseActual = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
 
@@ -137,7 +137,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
 
@@ -170,7 +170,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.xml");
         InputStream responseActual = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
@@ -184,7 +184,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.json");
         InputStream responseActual = (InputStream) response.getEntity();
-        RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
     }
 
     @Test
@@ -197,7 +197,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.xml");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
 
@@ -211,7 +211,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         } catch (Exception e) {
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            RestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
 
