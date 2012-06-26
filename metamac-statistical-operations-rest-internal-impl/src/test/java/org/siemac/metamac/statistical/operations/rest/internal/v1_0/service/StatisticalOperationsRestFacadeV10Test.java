@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.any; 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -86,31 +86,23 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     }
 
     @Test
-    public void testRetrieveOperationByCodeXml() throws Exception {
+    public void testRetrieveOperationByCodeXmlWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
-        Response response = webClient.get();
-
-        // Validation
-        assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.xml");
-        InputStream responseActual = (InputStream) response.getEntity();
-        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
 
     @Test
-    public void testRetrieveOperationByCodeJson() throws Exception {
+    public void testRetrieveOperationByCodeJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
-        Response response = webClient.get();
-
-        // Validation
-        assertEquals(Status.OK.getStatusCode(), response.getStatus());
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.code1.json");
-        InputStream responseActual = (InputStream) response.getEntity();
-        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
     }
 
     @Test
@@ -140,6 +132,24 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
+    
+    @Test
+    public void testRetrieveOperationByCodeErrorNotExistsJsonWithoutJaxbTransformation() throws Exception {
+        String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.json");
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveOperationByCodeErrorNotExistsXmlWithoutJaxbTransformation() throws Exception {
+        String requestUri = getRequestUriRetrieveOperationByCode(NOT_EXISTS);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
+    }
 
     // TODO testear findOperations
     @Test
@@ -162,29 +172,21 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Test
     public void testRetrieveFamilyByCodeXml() throws Exception {
 
-        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
-        Response response = webClient.get();
-
-        // Validation
-        assertEquals(Status.OK.getStatusCode(), response.getStatus());
+        String requestUri = getRequestUriRetrieveOperationByCode(FAMILY_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.xml");
-        InputStream responseActual = (InputStream) response.getEntity();
-        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
 
     @Test
     public void testRetrieveFamilyByCodeJson() throws Exception {
 
-        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
-        Response response = webClient.get();
-
-        // Validation
-        assertEquals(Status.OK.getStatusCode(), response.getStatus());
+        String requestUri = getRequestUriRetrieveOperationByCode(FAMILY_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.json");
-        InputStream responseActual = (InputStream) response.getEntity();
-        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
     }
 
     @Test
@@ -214,6 +216,34 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
     }
+
+    @Test
+    public void testRetrieveFamilyByCodeErrorNotExistsJsonWithoutJaxbTransformation() throws Exception {
+        String requestUri = getRequestUriRetrieveFamilyByCode(NOT_EXISTS);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.json");
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveFamilyByCodeErrorNotExistsXmlWithoutJaxbTransformation() throws Exception {
+        String requestUri = getRequestUriRetrieveFamilyByCode(NOT_EXISTS);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.notFound.xml");
+        
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
+    }
+
+    private void testRequestWithoutJaxbTransformation(String requestUri, String mediaType, Status statusExpected, InputStream responseExpected) throws Exception {
+
+        WebClient webClient = WebClient.create(requestUri).accept(mediaType);
+        Response response = webClient.get();
+        
+        assertEquals(statusExpected.getStatusCode(), response.getStatus());
+        InputStream responseActual = (InputStream) response.getEntity();
+        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+    }    
 
     private String getRequestUriRetrieveOperationByCode(String code) {
         return baseApi + "/operations/" + code;
