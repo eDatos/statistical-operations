@@ -367,39 +367,47 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return link;
     }
 
+    // API/operations
     private String createLinkHrefOperations(String apiUrl) {
         return createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
     }
 
+    // API/operations/OPERATION_ID
     private String createLinkHrefOperation(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkOperations = createLinkHrefOperations(apiUrl);
         return createLinkHref(linkOperations, operation.getCode());
     }
 
+    // API/operations/OPERATION_ID/instances
     private String createLinkHrefInstances(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkOperation = createLinkHrefOperation(apiUrl, operation);
         return createLinkHref(linkOperation, RestInternalConstants.LINK_SUBPATH_INSTANCES);
     }
 
+    // API/operations/OPERATION_ID/instances/INSTANCE_ID
     private String createLinkHrefInstance(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Instance instance) {
         String linkOperation = createLinkHrefInstances(apiUrl, instance.getOperation());
         return createLinkHref(linkOperation, instance.getCode());
     }
 
+    // API/families
     private String createLinkHrefFamilies(String apiUrl) {
         return createLinkHref(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES);
     }
 
+    // API/families/family
     private String createLinkHrefFamily(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Family family) {
         String linkFamilies = createLinkHrefFamilies(apiUrl);
         return createLinkHref(linkFamilies, family.getCode());
     }
 
+    // API/operations/OPERATION_ID/families
     private String createLinkHrefOperationChildrenFamilies(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkFamily = createLinkHrefOperation(apiUrl, operation);
         return createLinkHref(linkFamily, RestInternalConstants.LINK_SUBPATH_FAMILIES);
     }
 
+    // API/families/FAMILY_ID/operations
     private String createLinkHrefFamilyChildrenOperations(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Family family) {
         String linkFamily = createLinkHrefFamily(apiUrl, family);
         return createLinkHref(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
