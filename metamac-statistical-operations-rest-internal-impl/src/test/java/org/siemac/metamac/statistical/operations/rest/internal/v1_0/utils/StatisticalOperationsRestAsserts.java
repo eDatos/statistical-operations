@@ -67,75 +67,72 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
     
-    /**
-     * TODO
-     * 
-CODE
-URI
-TITLE
-ACRONYM
-SURVEY_CODE
-SURVEY_TITLE
-SUCCESSOR
-PREDECESSOR
-DATA_DESCRIPTION
-STATISTICAL_POPULATION
-STATISTICAL_UNIT
-GEOGRAPHIC_GRANULARITY
-GEOGRAPHIC_COMPARABILITY
-TEMPORAL_GRANULARITY
-TEMPORAL_COMPARABILITY
-BASE_PERIOD
-UNIT_MEASURE
-STAT_CONC_DEF
-STAT_CONC_DEF_LIST
-CLASS_SYSTEM
-CLASS_SYSTEM_LIST
-INSTANCE_TYPES
-INTERNAL_INVENTORY_DATE
-PROC_STATUS
-DOC_METHOD
-SURVEY_SOURCE
-COLL_METHOD
-INFORMATION_SUPPLIERS
-FREQ_COLL
-DATA_VALIDATION
-DATA_COMPILATION
-ADJUSTMENT
-COST_BURDEN
-COST
-INVENTORY_DATE
-QUALITY_DOC
-QUALITY_ASSURE
-QUALITY_ASSMNT
-USER_NEEDS
-USER_SAT
-COMPLETENESS
-TIMELINESS
-PUNCTUALITY
-ACCURACY_OVERALL
-SAMPLING_ERR
-NONSAMPLING_ERR
-COHER_X_DOM
-COHER_INTERNAL
-COMMENT
-NOTES
-        // CHILDREN
-        // PARENT
-
-     */
-    
     public static void assertEqualsInstance(Instance expected, Instance actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
         MetamacRestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
+        MetamacRestAsserts.assertEqualsRelatedResource(expected.getSurvey(), actual.getSurvey());
+        // TODO SUCCESSOR, PREDECESSOR
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getDataDescription(), actual.getDataDescription());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getStatisticalPopulation(), actual.getStatisticalPopulation());
+        MetamacRestAsserts.assertEqualsRelatedResources(expected.getStatisticalUnits(), actual.getStatisticalUnits());
+        MetamacRestAsserts.assertEqualsRelatedResource(expected.getGeographicGranularity(), actual.getGeographicGranularity());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getGeographicComparability(), actual.getGeographicComparability());
+        
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
+    
+    /**
+     * TODO
+
+            
+            <xs:element name="temporalGranularity" type="common:RelatedResource" />
+            <xs:element name="temporalComparability" type="common:InternationalString" />
+            <xs:element name="basePeriod" type="xs:string" />
+            <xs:element name="unitMeasure" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="statConcDef" type="common:InternationalString" />
+            <xs:element name="statConcDefList" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="classSystem" type="common:InternationalString" />
+            <xs:element name="classSystemList" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="instanceType" type="common:RelatedResource" />
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="procStatus" type="xs:string" />
+            <xs:element name="docMethod" type="common:InternationalString" />
+            <xs:element name="surveySource" type="common:RelatedResource" />
+            <xs:element name="collMethod" type="common:RelatedResource" />
+            <xs:element name="informationSuppliers" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="freqColl" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="dataValidation" type="common:InternationalString" />
+            <xs:element name="dataCompilation" type="common:InternationalString" />
+            <xs:element name="adjustment" type="common:InternationalString" />
+            <xs:element name="costBurden" type="common:InternationalString" />
+            <xs:element name="cost" type="common:RelatedResource" maxOccurs="unbounded"/>
+            <xs:element name="inventoryDate" type="xs:dateTime" />
+            <xs:element name="qualityDoc" type="common:InternationalString" />
+            <xs:element name="qualityAssure" type="common:InternationalString" />
+            <xs:element name="qualityAssmnt" type="common:InternationalString" />
+            <xs:element name="userNeeds" type="common:InternationalString" />
+            <xs:element name="userSat" type="common:InternationalString" />
+            <xs:element name="completeness" type="common:InternationalString" />
+            <xs:element name="timeliness" type="common:InternationalString" />
+            <xs:element name="punctuality" type="common:InternationalString" />
+            <xs:element name="accuracyOverall" type="common:InternationalString" />
+            <xs:element name="samplingErr" type="common:InternationalString" />
+            <xs:element name="nonsamplingErr" type="common:InternationalString" />
+            <xs:element name="coherXDom" type="common:InternationalString" />
+            <xs:element name="coherInternal" type="common:InternationalString" />
+            <xs:element name="comment" type="common:InternationalString" />
+            <xs:element name="notes" type="common:InternationalString" />
+            <xs:element name="parent" type="common:RelatedResource" />
+            <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+     */
 
 }

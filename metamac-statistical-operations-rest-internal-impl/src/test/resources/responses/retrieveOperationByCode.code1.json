@@ -9,11 +9,11 @@
     "texts": [
       {
         "locale": "es",
-        "label": "Título 1 en español"
+        "label": "Título operation Operation1"
       },
       {
         "locale": "en",
-        "label": "Title 1 in English"
+        "label": "Title operation Operation1"
       }
     ]
   },

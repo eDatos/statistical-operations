@@ -6,11 +6,11 @@
     <title>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
-            <ns2:label>Título 1 en español</ns2:label>
+            <ns2:label>Título operation Operation1</ns2:label>
         </ns2:text>
         <ns2:text>
             <ns2:locale>en</ns2:locale>
-            <ns2:label>Title 1 in English</ns2:label>
+            <ns2:label>Title operation Operation1</ns2:label>
         </ns2:text>
     </title>
     <acronym>

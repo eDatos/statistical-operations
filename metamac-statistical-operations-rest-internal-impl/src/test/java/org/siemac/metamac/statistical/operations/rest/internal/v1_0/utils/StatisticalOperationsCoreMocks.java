@@ -25,7 +25,7 @@ public class StatisticalOperationsCoreMocks {
         Operation operation = new Operation();
 
         operation.setCode("Operation1");
-        operation.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
+        operation.setTitle(mockInternationalString("es", "Título operation Operation1", "en", "Title operation Operation1"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.addFamily(mockFamily("familyCode1"));
         operation.addFamily(mockFamily("familyCode2"));

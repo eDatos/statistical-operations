@@ -30,11 +30,11 @@
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>Título 1 en español</ns2:label>
+                <ns2:label>Título operation Operation1</ns2:label>
             </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
-                <ns2:label>Title 1 in English</ns2:label>
+                <ns2:label>Title operation Operation1</ns2:label>
             </ns2:text>
         </ns2:title>
     </survey>
@@ -75,12 +75,12 @@
     </geographicGranularity>
     <geographicComparability>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>Comparando Geográficos 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>geographicComparability 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Comparando Geográficos 1 en español</ns2:label>
         </ns2:text>
     </geographicComparability>
     <temporalGranularity>
@@ -90,12 +90,12 @@
     </temporalGranularity>
     <temporalComparability>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>Comparando Temporal 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>temporalComparability 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Comparando Temporal 1 en español</ns2:label>
         </ns2:text>
     </temporalComparability>
     <basePeriod>2012</basePeriod>
@@ -106,19 +106,14 @@
     </unitMeasure>
     <statConcDef>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>StatConcDef 1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>StatConcDef 1 en español</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>StatConcDef 1 in English</ns2:label>
+        </ns2:text>
     </statConcDef>
-    <statConcDefList>
-        <ns2:id>statConcDefList3</ns2:id>
-        <ns2:kind>CODELIST</ns2:kind>
-        <ns2:link rel="self" href="http://statConcDefList3"/>
-    </statConcDefList>
     <statConcDefList>
         <ns2:id>statConcDefList1</ns2:id>
         <ns2:kind>CODELIST</ns2:kind>
@@ -128,6 +123,11 @@
         <ns2:id>statConcDefList2</ns2:id>
         <ns2:kind>CODELIST</ns2:kind>
         <ns2:link rel="self" href="http://statConcDefList2"/>
+    </statConcDefList>
+    <statConcDefList>
+        <ns2:id>statConcDefList3</ns2:id>
+        <ns2:kind>CODELIST</ns2:kind>
+        <ns2:link rel="self" href="http://statConcDefList3"/>
     </statConcDefList>
     <classSystem>
         <ns2:text>
@@ -247,37 +247,24 @@
     </adjustment>
     <costBurden>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>CostBurden 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>CostBurden 1 in English</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>CostBurden 1 en español</ns2:label>
+        </ns2:text>
     </costBurden>
     <cost>
-        <ns2:id>cost1</ns2:id>
+        <ns2:id>cost2</ns2:id>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
-                <ns2:label>Title cost cost1</ns2:label>
+                <ns2:label>Title cost cost2</ns2:label>
             </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>Título cost cost1</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </cost>
-    <cost>
-        <ns2:id>cost3</ns2:id>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Title cost cost3</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Título cost cost3</ns2:label>
+                <ns2:label>Título cost cost2</ns2:label>
             </ns2:text>
         </ns2:title>
     </cost>
@@ -295,27 +282,40 @@
         </ns2:title>
     </cost>
     <cost>
-        <ns2:id>cost2</ns2:id>
+        <ns2:id>cost3</ns2:id>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title cost cost3</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título cost cost3</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </cost>
+    <cost>
+        <ns2:id>cost1</ns2:id>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>Título cost cost2</ns2:label>
+                <ns2:label>Título cost cost1</ns2:label>
             </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
-                <ns2:label>Title cost cost2</ns2:label>
+                <ns2:label>Title cost cost1</ns2:label>
             </ns2:text>
         </ns2:title>
     </cost>
     <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
     <qualityDoc>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>QualityDoc 1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>QualityDoc 1 en español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>QualityDoc 1 in English</ns2:label>
         </ns2:text>
     </qualityDoc>
     <qualityAssure>
@@ -340,32 +340,32 @@
     </qualityAssmnt>
     <userNeeds>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>UserNeeds 1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>UserNeeds 1 en español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>UserNeeds 1 in English</ns2:label>
         </ns2:text>
     </userNeeds>
     <userSat>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>UserSat 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>UserSat 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>UserSat 1 en español</ns2:label>
         </ns2:text>
     </userSat>
     <completeness>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>Completeness 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>Completeness 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Completeness 1 en español</ns2:label>
         </ns2:text>
     </completeness>
     <timeliness>
@@ -380,12 +380,12 @@
     </timeliness>
     <punctuality>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>Punctuality 1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>Punctuality 1 en español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>Punctuality 1 in English</ns2:label>
         </ns2:text>
     </punctuality>
     <accuracyOverall>
@@ -400,12 +400,12 @@
     </accuracyOverall>
     <samplingErr>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>SamplingErr 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>SamplingErr 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>SamplingErr 1 en español</ns2:label>
         </ns2:text>
     </samplingErr>
     <nonsamplingErr>
@@ -420,22 +420,22 @@
     </nonsamplingErr>
     <coherXDom>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>CoherXDom 1 en español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>CoherXDom 1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>CoherXDom 1 en español</ns2:label>
         </ns2:text>
     </coherXDom>
     <coherInternal>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>CoherInternal 1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>CoherInternal 1 en español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>CoherInternal 1 in English</ns2:label>
         </ns2:text>
     </coherInternal>
     <comment>

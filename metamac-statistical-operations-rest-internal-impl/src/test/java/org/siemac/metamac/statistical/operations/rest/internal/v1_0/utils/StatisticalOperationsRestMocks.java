@@ -19,7 +19,7 @@ public class StatisticalOperationsRestMocks {
         operation.setId("Operation1");
         operation.setKind(RestInternalConstants.KIND_OPERATION);
         operation.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1"));
-        operation.setTitle(MetamacRestMocks.mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
+        operation.setTitle(MetamacRestMocks.mockInternationalString("es", "Título operation Operation1", "en", "Title operation Operation1"));
         operation.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         operation.getFamilies().add(mockFamily("familyCode1", baseApi));
         operation.getFamilies().add(mockFamily("familyCode2", baseApi));
@@ -102,7 +102,7 @@ public class StatisticalOperationsRestMocks {
         instance.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/Instance1"));
         instance.setTitle(MetamacRestMocks.mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         instance.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
-        instance.setSurvey(MetamacRestMocks.mockRelatedResource("code1", RestInternalConstants.KIND_OPERATION, RestInternalConstants.LINK_SELF, baseApi + "/operations/Code1", Boolean.TRUE, "operation"));
+        instance.setSurvey(MetamacRestMocks.mockRelatedResource("Operation1", RestInternalConstants.KIND_OPERATION, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1", Boolean.TRUE, "operation"));
         // TODO SUCCESSOR, PREDECESSOR
         instance.setDataDescription(MetamacRestMocks.mockInternationalString("es", "Descripción de Datos 1 en español", "en", "DataDescription 1 in English"));
         instance.setStatisticalPopulation(MetamacRestMocks.mockInternationalString("es", "Carga de Estadísticas 1 en español", "en", "StatisticalPopulation 1 in English"));
