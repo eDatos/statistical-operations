@@ -8,7 +8,7 @@
  	
 	<grammars>
  		<include href="metamac-statistical-operations-rest-internal-domain-v1.0.xsd" />
- 		<include href="metamac-rest-common-domain-v1.0.xsd" />
+ 		<include href="metamac-rest-api:metamac-rest-common-domain-v1.0.xsd" />
  	</grammars>
  	
 	<resources base="URL_RESOURCES_BASE">
