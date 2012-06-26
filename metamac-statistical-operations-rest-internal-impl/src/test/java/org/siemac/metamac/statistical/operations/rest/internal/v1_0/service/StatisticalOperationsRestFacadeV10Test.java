@@ -172,7 +172,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Test
     public void testRetrieveFamilyByCodeXml() throws Exception {
 
-        String requestUri = getRequestUriRetrieveOperationByCode(FAMILY_CODE1);
+        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.xml");
         
         // Request and validate
@@ -182,7 +182,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
     @Test
     public void testRetrieveFamilyByCodeJson() throws Exception {
 
-        String requestUri = getRequestUriRetrieveOperationByCode(FAMILY_CODE1);
+        String requestUri = getRequestUriRetrieveFamilyByCode(FAMILY_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyByCode.code1.json");
         
         // Request and validate
