@@ -1,9 +1,9 @@
 {
-  "id": "Code1",
+  "id": "Family1",
   "kind": "statisticalOperations#family",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/api/internal/v1.0/families/Code1"
+    "href": "http://localhost:9001/api/internal/v1.0/families/Family1"
   },
   "title": {
     "texts": [
@@ -56,7 +56,7 @@
       "kind": "statisticalOperations#operations",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/families/Code1/operations"
+        "href": "http://localhost:9001/api/internal/v1.0/families/Family1/operations"
       }
     }
   ]

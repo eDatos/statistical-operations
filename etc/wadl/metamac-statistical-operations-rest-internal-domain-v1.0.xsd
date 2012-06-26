@@ -101,7 +101,7 @@
             <xs:element name="statConcDefList" type="common:RelatedResource" maxOccurs="unbounded"/>
             <xs:element name="classSystem" type="common:InternationalString" />
             <xs:element name="classSystemList" type="common:RelatedResource" maxOccurs="unbounded"/>
-<!-- INSTANCE_TYPES -->
+            <xs:element name="instanceType" type="common:RelatedResource" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="xs:string" />
             <xs:element name="docMethod" type="common:InternationalString" />

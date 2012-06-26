@@ -1,9 +1,9 @@
 {
-  "id": "Code1",
+  "id": "Operation1",
   "kind": "statisticalOperations#operation",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/api/internal/v1.0/operations/Code1"
+    "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
   },
   "title": {
     "texts": [
@@ -135,7 +135,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances/instanceCode1"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode1"
       },
       "title": {
         "texts": [
@@ -155,7 +155,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances/instanceCode2"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode2"
       },
       "title": {
         "texts": [
@@ -175,7 +175,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances/instanceCode3"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode3"
       },
       "title": {
         "texts": [
@@ -368,7 +368,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances/instanceCode2"
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode2"
     },
     "title": {
       "texts": [
@@ -388,7 +388,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances/instanceCode3"
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode3"
     },
     "title": {
       "texts": [
@@ -468,14 +468,14 @@
       "kind": "statisticalOperations#instances",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/instances"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances"
       }
     },
     {
       "kind": "statisticalOperations#families",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Code1/families"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/families"
       }
     }
   ]

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
 public class StatisticalOperationsRestAsserts {
@@ -123,5 +124,18 @@ NOTES
         // PARENT
 
      */
+    
+    public static void assertEqualsInstance(Instance expected, Instance actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getKind(), actual.getKind());
+        MetamacRestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
+        assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
+        assertEquals(expected.getProcStatus(), actual.getProcStatus());
+        assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
+        MetamacRestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
+        MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
+    }
 
 }

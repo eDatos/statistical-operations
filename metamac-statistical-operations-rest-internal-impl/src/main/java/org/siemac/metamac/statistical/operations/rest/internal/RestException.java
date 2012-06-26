@@ -9,6 +9,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.Error;
 /**
  * JAX-RS has a RuntimeException class, called WebApplicationException, that allows you to abort your JAX-RS service method.
  * Can take an HTTP status code or even a Response object as one of its constructor parameters
+ * 
+ * TODO pasar a librería común
  */
 public class RestException extends WebApplicationException {
 

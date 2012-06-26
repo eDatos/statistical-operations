@@ -2,7 +2,6 @@ package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
 import java.net.URI;
 
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
@@ -19,6 +18,7 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.RestException;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
@@ -88,6 +88,28 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             throw manageException(e);
         }
     }
+    
+    // TODO validar que el código de operación corresponde al que se indica por parámetros?
+    @Override
+    public Instance retrieveInstanceByCode(String operationCode, String code) {
+        try {
+            // TODO Validation of parameters. validar code?
+
+            org.siemac.metamac.statistical.operations.core.domain.Instance instanceEntity = statisticalOperationsBaseService.findInstanceByCode(serviceContextRestInternal, code);
+            if (instanceEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceEntity.getProcStatus()))) {
+                // Instance not found
+                Error error = getError(ServiceExceptionType.INSTANCE_NOT_FOUND, code);
+                throw new RestException(error, Status.NOT_FOUND);
+            }
+
+            // Transform and return
+            Instance instance = do2RestInternalMapper.toInstance(instanceEntity, getApiUrl());
+            return instance;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
 
     // TODO pasar a librería común
     private Error getError(CommonServiceExceptionType exceptionType, String parameter) {
@@ -101,7 +123,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         return error;
     }
 
-    // TODO pasar a librería común
+    // TODO pasar a librería común?
     /**
      * Get Base API url
      */

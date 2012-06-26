@@ -22,6 +22,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
@@ -134,7 +135,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getStatConcDefLists().addAll(externalItemsToRelatedResources(source.getStatConcDefList()));
         target.setClassSystem(toInternationalString(source.getClassSystem()));
         target.getClassSystemLists().addAll(externalItemsToRelatedResources(source.getClassSystemList()));
-        // TODO INSTANCE_TYPES
+        target.setInstanceType(instanceTypeToRelatedResource(source.getInstanceType()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setProcStatus(source.getProcStatus().name());
         target.setDocMethod(toInternationalString(source.getDocMethod()));
@@ -147,6 +148,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setAdjustment(toInternationalString(source.getAdjustment()));
         target.setCostBurden(toInternationalString(source.getCostBurden()));
         target.getCosts().addAll(costToRelatedResources(source.getCost()));
+        target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setQualityDoc(toInternationalString(source.getQualityDoc()));
         target.setQualityAssure(toInternationalString(source.getQualityAssure()));
         target.setQualityAssmnt(toInternationalString(source.getQualityAssmnt()));
@@ -299,6 +301,16 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
+    private RelatedResource instanceTypeToRelatedResource(InstanceType source) {
+        if (source == null) {
+            return null;
+        }
+        RelatedResource target = new RelatedResource();
+        target.setId(source.getIdentifier());
+        target.setTitle(toInternationalString(source.getDescription()));
+        return target;
+    }
+    
     private RelatedResource collMethodToRelatedResource(CollMethod source) {
         if (source == null) {
             return null;
