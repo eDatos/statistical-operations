@@ -1,24 +1,22 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
-import static org.mockito.Matchers.any; 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.io.InputStream;
 
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.apache.cxf.testutil.common.AbstractBusClientServerTestBase;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
+import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
@@ -29,18 +27,13 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.springframework.context.ApplicationContext;
 
-public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientServerTestBase {
+public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest {
 
     private static final String                       PORT               = ServerResource.PORT;
     private static String                             baseApi            = "http://localhost:" + PORT + "/api/internal/v1.0";
 
-    private static String                             APPLICATION_XML    = "application/xml";
-    private static String                             APPLICATION_JSON   = "application/json";
-
     private static ApplicationContext                 applicationContext = null;
-
-    private static StatisticalOperationsRestFacadeV10 statisticalOperationsRestFacadeClient;
-
+    
     private static String                             NOT_EXISTS         = "NOT_EXISTS";
 
     // Operations
@@ -55,10 +48,6 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
 
         // Get application context from Jetty
         applicationContext = ApplicationContextProvider.getApplicationContext();
-
-        // Rest client
-        statisticalOperationsRestFacadeClient = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class);
-        WebClient.client(statisticalOperationsRestFacadeClient).accept(APPLICATION_XML);
     }
 
     @Before
@@ -80,7 +69,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         String requestUri = getRequestUriRetrieveOperationByCode(OPERATION_CODE1);
         WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
         Operation operation = webClient.get(Operation.class);
-
+        
         // Validation
         StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(baseApi), operation);
     }
@@ -234,17 +223,7 @@ public class StatisticalOperationsRestFacadeV10Test extends AbstractBusClientSer
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
     }
-
-    private void testRequestWithoutJaxbTransformation(String requestUri, String mediaType, Status statusExpected, InputStream responseExpected) throws Exception {
-
-        WebClient webClient = WebClient.create(requestUri).accept(mediaType);
-        Response response = webClient.get();
-        
-        assertEquals(statusExpected.getStatusCode(), response.getStatus());
-        InputStream responseActual = (InputStream) response.getEntity();
-        MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
-    }    
-
+    
     private String getRequestUriRetrieveOperationByCode(String code) {
         return baseApi + "/operations/" + code;
     }
