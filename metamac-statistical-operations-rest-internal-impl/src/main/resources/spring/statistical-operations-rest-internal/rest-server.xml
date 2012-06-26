@@ -37,7 +37,7 @@
         <property name="mapper" ref="jacksonJsonMapper" />
     </bean>
     
-    <bean id="jacksonJsonMapper" class="org.siemac.metamac.statistical.operations.rest.jackson.JacksonJsonMapper" />
+    <bean id="jacksonJsonMapper" class="org.siemac.metamac.rest.jackson.JacksonJsonMapper" />
     
     <util:map id="propertiesMap">
         <entry key="jaxb.formatted.output">

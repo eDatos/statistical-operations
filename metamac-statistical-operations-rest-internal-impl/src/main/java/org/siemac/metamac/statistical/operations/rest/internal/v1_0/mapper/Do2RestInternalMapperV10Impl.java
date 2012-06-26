@@ -255,7 +255,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         instancesTarget.setLink(toInstancesLink(operation, apiUrl));
         targets.add(instancesTarget);
         
-        // TODO families
+        // Families
         RelatedResource familiesTarget = new RelatedResource();
         familiesTarget.setKind(RestInternalConstants.KIND_FAMILIES);
         familiesTarget.setLink(toOperationChildrenFamiliesLink(operation, apiUrl));

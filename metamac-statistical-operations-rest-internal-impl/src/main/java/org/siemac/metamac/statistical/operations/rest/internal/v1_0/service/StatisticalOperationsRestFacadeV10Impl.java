@@ -114,7 +114,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     /**
      * Throws response error, logging exception
      */
-    private WebApplicationException manageException(MetamacException e) {
+    private RestException manageException(MetamacException e) {
         logger.error("Error", e);
         Error error = do2RestInternalMapper.toError(e);
         return new RestException(error, Status.INTERNAL_SERVER_ERROR);
