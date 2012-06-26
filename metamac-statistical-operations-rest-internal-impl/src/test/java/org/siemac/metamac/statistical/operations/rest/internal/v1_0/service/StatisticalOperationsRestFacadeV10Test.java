@@ -20,11 +20,11 @@ import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsCoreMocks;
-import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestAsserts;
-import org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsRestMocks;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestAsserts;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestMocks;
 import org.springframework.context.ApplicationContext;
 
 public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest {

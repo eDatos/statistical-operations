@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal;
+package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
 import static org.junit.Assert.assertEquals;
 

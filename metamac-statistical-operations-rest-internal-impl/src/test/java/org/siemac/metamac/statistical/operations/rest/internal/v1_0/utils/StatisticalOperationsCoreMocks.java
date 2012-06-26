@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal;
+package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;

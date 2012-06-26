@@ -1,9 +1,10 @@
-package org.siemac.metamac.statistical.operations.rest.internal;
+package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
+import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 
