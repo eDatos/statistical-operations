@@ -89,7 +89,6 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
     
-    // TODO validar que el código de operación corresponde al que se indica por parámetros?
     @Override
     public Instance retrieveInstanceByCode(String operationCode, String code) {
         try {

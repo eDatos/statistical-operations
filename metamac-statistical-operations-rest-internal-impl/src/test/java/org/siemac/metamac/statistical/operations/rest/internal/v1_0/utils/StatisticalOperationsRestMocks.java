@@ -63,7 +63,7 @@ public class StatisticalOperationsRestMocks {
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(MetamacRestMocks.mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
         operation.setRevPractice(MetamacRestMocks.mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
-        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(MetamacRestMocks.mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
         operation.setNotes(MetamacRestMocks.mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
         operation.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/operations", Boolean.FALSE, null));

@@ -69,7 +69,7 @@ public class StatisticalOperationsCoreMocks {
         operation.setRevPolicyUrl("http://revPolicy1.url");
         operation.setRevPractice(mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
         operation.setRevPracticeUrl("http://revPractice1.url");
-        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
         operation.setCommentUrl("http://comments1.url");
         operation.setNotes(mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
