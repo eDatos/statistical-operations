@@ -57,7 +57,6 @@ public class StatisticalOperationsCoreMocks {
         operation.getPublisher().add(mockExternalItem("publisher22", TypeExternalArtefactsEnum.AGENCY, "http://publisher22"));
         operation.getPublisher().add(mockExternalItem("publisher333", TypeExternalArtefactsEnum.AGENCY, "http://publisher333"));
         operation.setRelPolUsAc(mockInternationalString("es", "RelPolUsAc 1 en español", "en", "RelPolUsAc 1 in English"));
-        operation.setRelPolUsAcUrl("http://relPolUsAc1.url");
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency1", TypeExternalArtefactsEnum.CODE, "http://updateFrequency1"));
@@ -66,14 +65,10 @@ public class StatisticalOperationsCoreMocks {
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency4444", TypeExternalArtefactsEnum.CODE, "http://updateFrequency4444"));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
         operation.setRevPolicy(mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
-        operation.setRevPolicyUrl("http://revPolicy1.url");
         operation.setRevPractice(mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
-        operation.setRevPracticeUrl("http://revPractice1.url");
         // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
-        operation.setCommentUrl("http://comments1.url");
         operation.setNotes(mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
-        operation.setNotesUrl("http://notes1.url");
 
         return operation;
     }
@@ -151,9 +146,7 @@ public class StatisticalOperationsCoreMocks {
         instance.setCoherXDomain(mockInternationalString("es", "CoherXDom 1 en español", "en", "CoherXDom 1 in English"));
         instance.setCoherInternal(mockInternationalString("es", "CoherInternal 1 en español", "en", "CoherInternal 1 in English"));
         instance.setComment(mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
-        instance.setCommentUrl("http://comments1.url");
         instance.setNotes(mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
-        instance.setNotesUrl("http://notes1.url");
 
         return instance;
     }
