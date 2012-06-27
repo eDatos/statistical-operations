@@ -36,11 +36,16 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Autowired
     private Do2RestInternalMapperV10         do2RestInternalMapper;
 
-    @Context
+    // @Context // must inject with setter, because with @Context is not injected in web server
     private MessageContext                   context;
 
     private ServiceContext                   serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
     private Logger                           logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
+
+    @Context
+    public void setMessageContext(MessageContext context) {
+        this.context = context;
+    }
 
     @Override
     public Operations findOperations() {
@@ -67,7 +72,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             throw manageException(e);
         }
     }
-    
+
     @Override
     public Family retrieveFamilyByCode(String code) {
         try {
@@ -88,7 +93,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             throw manageException(e);
         }
     }
-    
+
     @Override
     public Instance retrieveInstanceByCode(String operationCode, String code) {
         try {
