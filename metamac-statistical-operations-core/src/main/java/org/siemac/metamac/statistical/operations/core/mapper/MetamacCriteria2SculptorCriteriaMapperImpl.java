@@ -71,6 +71,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getStringValue());
+                case OPERATION_CODE:
+                    return new SculptorPropertyCriteria(FamilyProperties.operations().code(), propertyRestriction.getStringValue());
+                case OPERATION_ID:
+                    return new SculptorPropertyCriteria(FamilyProperties.operations().id(), propertyRestriction.getLongValue());
                 default:
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }
@@ -96,6 +100,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getStringValue());
+                case FAMILY_CODE:
+                    return new SculptorPropertyCriteria(OperationProperties.families().code(), propertyRestriction.getStringValue());
+                case FAMILY_ID:
+                    return new SculptorPropertyCriteria(OperationProperties.families().id(), propertyRestriction.getLongValue());
                 default:
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }
@@ -121,6 +129,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getStringValue());
+                case OPERATION_CODE:
+                    return new SculptorPropertyCriteria(InstanceProperties.operation().code(), propertyRestriction.getStringValue());
+                case OPERATION_ID:
+                    return new SculptorPropertyCriteria(InstanceProperties.operation().id(), propertyRestriction.getLongValue());
                 default:
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }

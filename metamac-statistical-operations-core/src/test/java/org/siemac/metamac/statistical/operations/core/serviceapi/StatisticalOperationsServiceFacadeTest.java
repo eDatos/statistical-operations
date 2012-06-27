@@ -574,6 +574,90 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(3, result.getResults().size());
 
     }
+    
+    @Test
+    public void testFindFamilyByConditionOperationCode() throws MetamacException {
+
+        // Insert data
+        OperationDto operationDto01a = createOperationDtoForInternalPublishing();
+        operationDto01a.setCode("operationDto01-a");
+        OperationDto operationDto01b = createOperationDtoForInternalPublishing();
+        operationDto01b.setCode("operationDto01-b");
+
+        FamilyDto familyDto011 = createFamilyDto();
+        familyDto011.setCode("familyDto011");
+        FamilyDto familyDto012 = createFamilyDto();
+        familyDto012.setCode("familyDto012");
+
+        operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
+        operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
+        operationDto01a= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
+        operationDto01b= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+
+        familyDto011= statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
+        familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
+
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01b.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto012.getId());
+
+        // Retrieve families with operation code "operationDto01-a" --> familyDto011 && familyDto012
+        MetamacCriteria criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), "operationDto01-a", OperationType.EQ));
+
+        MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Retrieve families with operation code "operationDto01-b" --> familyDto011
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), "operationDto01-b", OperationType.EQ));
+
+        result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
+
+    }
+    
+    @Test
+    public void testFindFamilyByConditionOperationId() throws MetamacException {
+
+        // Insert data
+        OperationDto operationDto01a = createOperationDtoForInternalPublishing();
+        operationDto01a.setCode("operationDto01-a");
+        OperationDto operationDto01b = createOperationDtoForInternalPublishing();
+        operationDto01b.setCode("operationDto01-b");
+
+        FamilyDto familyDto011 = createFamilyDto();
+        familyDto011.setCode("familyDto011");
+        FamilyDto familyDto012 = createFamilyDto();
+        familyDto012.setCode("familyDto012");
+
+        operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
+        operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
+        operationDto01a= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
+        operationDto01b= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+
+        familyDto011= statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
+        familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
+
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01b.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto012.getId());
+
+        // Retrieve families with operation code "operationDto01-a" --> familyDto011 && familyDto012
+        MetamacCriteria criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_ID.name(), operationDto01a.getId(), OperationType.EQ));
+
+        MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Retrieve families with operation code "operationDto01-b" --> familyDto011
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_ID.name(), operationDto01b.getId(), OperationType.EQ));
+
+        result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
+
+    }
 
     @Test
     public void testFindFamilyByConditionPaginated() throws MetamacException {
@@ -1286,6 +1370,90 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
+
+    }
+
+    @Test
+    public void testFindOperationByConditionFamilyCode() throws MetamacException {
+
+        // Insert data
+        OperationDto operationDto01a = createOperationDtoForInternalPublishing();
+        operationDto01a.setCode("operationDto01-a");
+        OperationDto operationDto01b = createOperationDtoForInternalPublishing();
+        operationDto01b.setCode("operationDto01-b");
+
+        FamilyDto familyDto011 = createFamilyDto();
+        familyDto011.setCode("familyDto011");
+        FamilyDto familyDto012 = createFamilyDto();
+        familyDto012.setCode("familyDto012");
+
+        operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
+        operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
+        operationDto01a= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
+        operationDto01b= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+
+        familyDto011= statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
+        familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
+
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01b.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto012.getId());
+
+        // Retrieve operations with family code "familyDto011" --> operationDto01-a && operationDto01-b
+        MetamacCriteria criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.FAMILY_CODE.name(), "familyDto011", OperationType.EQ));
+
+        MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Retrieve operations with family code "familyDto012" --> operationDto01-a
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.FAMILY_CODE.name(), "familyDto012", OperationType.EQ));
+
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
+
+    }
+    
+    @Test
+    public void testFindOperationByConditionFamilyId() throws MetamacException {
+
+        // Insert data
+        OperationDto operationDto01a = createOperationDtoForInternalPublishing();
+        operationDto01a.setCode("operationDto01-a");
+        OperationDto operationDto01b = createOperationDtoForInternalPublishing();
+        operationDto01b.setCode("operationDto01-b");
+
+        FamilyDto familyDto011 = createFamilyDto();
+        familyDto011.setCode("familyDto011");
+        FamilyDto familyDto012 = createFamilyDto();
+        familyDto012.setCode("familyDto012");
+
+        operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
+        operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
+        operationDto01a= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
+        operationDto01b= statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+
+        familyDto011= statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
+        familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
+
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01b.getId(), familyDto011.getId());
+        statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextAdministrador(), operationDto01a.getId(), familyDto012.getId());
+
+        // Retrieve operations with family code "familyDto011" --> operationDto01-a && operationDto01-b
+        MetamacCriteria criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.FAMILY_ID.name(), familyDto011.getId(), OperationType.EQ));
+
+        MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Retrieve operations with family code "familyDto012" --> operationDto01-a
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.FAMILY_ID.name(), familyDto012.getId(), OperationType.EQ));
+
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
 
     }
 
@@ -2005,48 +2173,87 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(result.getResults().size() >= 2);
     }
 
+    
     @Test
-    public void testFindInstanceByConditionCode() throws MetamacException {
+    public void testFindInstanceByConditionOperationCode() throws MetamacException {
 
         // Insert data
-        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
-        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        
+        // Operation 01 --> Instance 011 and Instance 012
+        OperationDto operation01 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation01.getId());
+        
+        InstanceDto instanceDto011 = createInstanceDto();
+        instanceDto011.setCode("instanceDto011");
+        InstanceDto instanceDto012 = createInstanceDto();
+        instanceDto012.setCode("instanceDto012");
 
-        InstanceDto instanceDto01 = createInstanceDto();
-        instanceDto01.setCode("instanceDto01");
-        InstanceDto instanceDto02 = createInstanceDto();
-        instanceDto02.setCode("instanceDto02");
-        InstanceDto instanceDto03 = createInstanceDto();
-        instanceDto03.setCode("instanceDto03");
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto011);
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto012);
 
-        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, instanceDto01);
-        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, instanceDto02);
-        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, instanceDto03);
-
-        // Retrieve "instanceDto01" or "instanceDto02"
+        // Operation 02 --> Instance 021
+        OperationDto operation02 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation02.getId());
+        
+        InstanceDto instanceDto021 = createInstanceDto();
+        instanceDto021.setCode("instanceDto021");
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation02.getId(), instanceDto021);
+        
+        
+        // Retrieve instances for "operation01" --> instanceDto011 && instanceDto012
         MetamacCriteria criteria = new MetamacCriteria();
-        MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.CODE.name(), "instanceDto02", OperationType.EQ));
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.CODE.name(), "instanceDto01", OperationType.EQ));
-        criteria.setRestriction(disjunction);
-
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.OPERATION_CODE.name(), operation01.getCode(), OperationType.EQ));
+        
         MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(2, result.getResults().size());
 
-        // Retrieve "instanceDto01"
+        // Retrieve instances for "operation02" --> instanceDto021
         criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.CODE.name(), "instanceDto01", OperationType.EQ));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.OPERATION_CODE.name(), operation02.getCode(), OperationType.EQ));
 
         result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(1, result.getResults().size());
+    }
+    
+    @Test
+    public void testFindInstanceByConditionOperationId() throws MetamacException {
 
-        // Retrieve "*Dto*"
+        // Insert data
+        
+        // Operation 01 --> Instance 011 and Instance 012
+        Long operation01 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation01);
+        
+        InstanceDto instanceDto011 = createInstanceDto();
+        instanceDto011.setCode("instanceDto011");
+        InstanceDto instanceDto012 = createInstanceDto();
+        instanceDto012.setCode("instanceDto012");
+
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01, instanceDto011);
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01, instanceDto012);
+
+        // Operation 02 --> Instance 021
+        Long operation02 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation02);
+        
+        InstanceDto instanceDto021 = createInstanceDto();
+        instanceDto021.setCode("instanceDto021");
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation02, instanceDto021);
+        
+        
+        // Retrieve instances for "operation01" --> instanceDto011 && instanceDto012
+        MetamacCriteria criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.OPERATION_ID.name(), operation01, OperationType.EQ));
+        
+        MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+
+        // Retrieve instances for "operation02" --> instanceDto021
         criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.CODE.name(), "Dto", OperationType.ILIKE));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.OPERATION_ID.name(), operation02, OperationType.EQ));
 
         result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
-        assertEquals(3, result.getResults().size());
-
+        assertEquals(1, result.getResults().size());
     }
 
     @Test
@@ -2098,7 +2305,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(instanceDto.getId().equals(instanceRetrieved.getId()));
     }
 
-    
     @Test
     public void testFindInstanceByCode() throws Exception {
         // Create instance

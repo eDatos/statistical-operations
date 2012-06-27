@@ -2,7 +2,9 @@ package org.siemac.metamac.statistical.operations.core.criteria;
 
 public enum InstanceCriteriaPropertyEnum  {
 
-    CODE;
+    CODE,
+    OPERATION_CODE,
+    OPERATION_ID;
     
     public String value() {
         return name();

@@ -2,7 +2,9 @@ package org.siemac.metamac.statistical.operations.core.criteria;
 
 public enum OperationCriteriaPropertyEnum  {
 
-    CODE;
+    CODE,
+    FAMILY_CODE,
+    FAMILY_ID;
     
     public String value() {
         return name();

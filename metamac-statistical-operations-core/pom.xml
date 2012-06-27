@@ -32,6 +32,12 @@
             <artifactId>metamac-common-test</artifactId>
             <version>${metamac-common-test.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.siemac.metamac</groupId>
+                    <artifactId>metamac-core-common</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Add dependency to JMS when consumers are used, deployment.type=ear <dependency> <groupId>javax.jms</groupId> <artifactId>jms</artifactId> 
