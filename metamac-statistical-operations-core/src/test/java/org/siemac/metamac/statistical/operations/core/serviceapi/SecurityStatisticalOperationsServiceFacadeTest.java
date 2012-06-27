@@ -507,7 +507,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         OperationDto operationDto = createOperationDto();
         operationDto.setCode("C0025A");
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
-        operationDto.setCommentUrl("http://tutu.com");
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoPlanificacion(), operationDto);
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccionOperation01(), operationDto);
