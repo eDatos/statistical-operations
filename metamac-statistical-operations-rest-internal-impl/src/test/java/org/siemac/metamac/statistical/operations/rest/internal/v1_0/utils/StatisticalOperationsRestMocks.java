@@ -30,8 +30,9 @@ public class StatisticalOperationsRestMocks {
         operation.getSecondarySubjectAreas().add(MetamacRestMocks.mockRelatedResource("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea333", Boolean.FALSE, null));
         operation.setObjective(MetamacRestMocks.mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
         operation.setDescription(MetamacRestMocks.mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
-        operation.getInstances().add(MetamacRestMocks.mockRelatedResource("instanceCode1", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode1", Boolean.TRUE, "instance"));
+        operation.getInstances().add(MetamacRestMocks.mockRelatedResource("instance1", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instance1", Boolean.TRUE, "instance"));
         operation.getInstances().add(MetamacRestMocks.mockRelatedResource("instanceCode22", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode22", Boolean.TRUE, "instance"));
+        operation.getInstances().add(MetamacRestMocks.mockRelatedResource("instanceCode333", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode333", Boolean.TRUE, "instance"));
         operation.getInstances().add(MetamacRestMocks.mockRelatedResource("instanceCode333", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode333", Boolean.TRUE, "instance"));
         operation.setSurveyType(MetamacRestMocks.mockRelatedResource("surveyIdentifier", null, null, null, Boolean.TRUE, "survey"));
         operation.setOfficialityType(MetamacRestMocks.mockRelatedResource("officialityTypeIdentifier", null, null, null, Boolean.TRUE, "officialityType"));
@@ -99,7 +100,8 @@ public class StatisticalOperationsRestMocks {
         instance.setTitle(MetamacRestMocks.mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         instance.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         instance.setSurvey(MetamacRestMocks.mockRelatedResource("Operation1", RestInternalConstants.KIND_OPERATION, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1", Boolean.TRUE, "operation"));
-        // TODO SUCCESSOR, PREDECESSOR
+        instance.setPredecessor(MetamacRestMocks.mockRelatedResource("instanceCode333", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode333", Boolean.TRUE, "instance"));
+        instance.setSuccessor(MetamacRestMocks.mockRelatedResource("instanceCode22", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode22", Boolean.TRUE, "instance"));
         instance.setDataDescription(MetamacRestMocks.mockInternationalString("es", "Descripción de Datos 1 en español", "en", "DataDescription 1 in English"));
         instance.setStatisticalPopulation(MetamacRestMocks.mockInternationalString("es", "Carga de Estadísticas 1 en español", "en", "StatisticalPopulation 1 in English"));
         instance.getStatisticalUnits().add(MetamacRestMocks.mockRelatedResource("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE.name(), RestInternalConstants.LINK_SELF, "http://statisticalUnit1", Boolean.FALSE, null));

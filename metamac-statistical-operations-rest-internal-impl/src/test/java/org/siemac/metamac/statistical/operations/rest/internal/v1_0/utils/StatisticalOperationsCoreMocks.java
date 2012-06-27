@@ -35,9 +35,10 @@ public class StatisticalOperationsCoreMocks {
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea333"));
         operation.setObjective(mockInternationalString("es", "Objetivo 1 en español", "en", "Objective 1 in English"));
         operation.setDescription(mockInternationalString("es", "Descripción 1 en español", "en", "Description 1 in English"));
-        operation.addInstance(mockInstance("instanceCode1", ProcStatusEnum.DRAFT));
-        operation.addInstance(mockInstance("instanceCode22", ProcStatusEnum.PUBLISH_INTERNALLY));
-        operation.addInstance(mockInstance("instanceCode333", ProcStatusEnum.PUBLISH_EXTERNALLY));
+        operation.addInstance(mockInstance("instanceCode1", ProcStatusEnum.DRAFT, Integer.valueOf(0)));
+        operation.addInstance(mockInstance("instanceCode22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3)));
+        operation.addInstance(mockInstance("instance1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2)));
+        operation.addInstance(mockInstance("instanceCode333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1)));
         operation.setSurveyType(mockSurveyType("surveyIdentifier"));
         operation.setOfficialityType(mockOfficialityType("officialityTypeIdentifier"));
         operation.setIndicatorSystem(Boolean.TRUE);
@@ -100,7 +101,7 @@ public class StatisticalOperationsCoreMocks {
         instance.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         instance.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
         instance.setOperation(mockOperation1());
-        // TODO SUCCESSOR, PREDECESSOR
+        instance.setOrder(Integer.valueOf(2));
         instance.setDataDescription(mockInternationalString("es", "Descripción de Datos 1 en español", "en", "DataDescription 1 in English"));
         instance.setStatisticalPopulation(mockInternationalString("es", "Carga de Estadísticas 1 en español", "en", "StatisticalPopulation 1 in English"));
         instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE, "http://statisticalUnit1"));
@@ -182,11 +183,12 @@ public class StatisticalOperationsCoreMocks {
         return family;
     }
 
-    private static Instance mockInstance(String code, ProcStatusEnum procStatus) {
+    private static Instance mockInstance(String code, ProcStatusEnum procStatus, Integer order) {
         Instance instance = new Instance();
         instance.setCode(code);
         instance.setTitle(mockInternationalString("es", "Título instance " + code, "en", "Title instance " + code));
         instance.setProcStatus(procStatus);
+        instance.setOrder(order);
         return instance;
     }
 

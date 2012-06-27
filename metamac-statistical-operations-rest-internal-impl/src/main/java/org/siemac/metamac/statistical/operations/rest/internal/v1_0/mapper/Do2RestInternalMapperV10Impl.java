@@ -116,7 +116,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setSurvey(operationToRelatedResource(source.getOperation(), apiUrl));
-        // TODO SUCCESSOR, PREDECESSOR
+        target.setPredecessor(instanceToRelatedResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() - 1), apiUrl));
+        target.setSuccessor(instanceToRelatedResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() + 1), apiUrl));
         target.setDataDescription(toInternationalString(source.getDataDescription()));
         target.setStatisticalPopulation(toInternationalString(source.getStatisticalPopulation()));
         target.getStatisticalUnits().addAll(externalItemsToRelatedResources(source.getStatisticalUnit()));
@@ -163,7 +164,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getchildren().addAll(toInstanceChildren(source, apiUrl));
         return target;
     }
-
     // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
     @Override
     public Error toError(Exception exception) {
@@ -305,7 +305,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
-    
+
     private RelatedResource collMethodToRelatedResource(CollMethod source) {
         if (source == null) {
             return null;
@@ -561,6 +561,20 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         for (org.siemac.metamac.statistical.operations.core.domain.Instance instance : instances) {
             if (procStatus.equals(instance.getProcStatus())) {
                 return instance;
+            }
+        }
+        return null;
+    }
+
+    private org.siemac.metamac.statistical.operations.core.domain.Instance getInstanceInOrder(List<org.siemac.metamac.statistical.operations.core.domain.Instance> instances, Integer order) {
+
+        for (org.siemac.metamac.statistical.operations.core.domain.Instance instance : instances) {
+            if (order.equals(instance.getOrder())) {
+                if (ProcStatusEnum.PUBLISH_INTERNALLY.equals(instance.getProcStatus()) || ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instance.getProcStatus())) {
+                    return instance;
+                } else {
+                    return null;
+                }
             }
         }
         return null;

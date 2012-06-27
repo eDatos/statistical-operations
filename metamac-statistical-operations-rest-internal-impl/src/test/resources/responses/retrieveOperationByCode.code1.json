@@ -131,6 +131,26 @@
   },
   "instances": [
     {
+      "id": "instance1",
+      "kind": "statisticalOperations#instance",
+      "link": {
+        "rel": "self",
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instance1"
+      },
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title instance instance1"
+          },
+          {
+            "locale": "es",
+            "label": "Título instance instance1"
+          }
+        ]
+      }
+    },
+    {
       "id": "instanceCode1",
       "kind": "statisticalOperations#instance",
       "link": {

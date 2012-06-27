@@ -94,6 +94,21 @@
         </ns2:text>
     </description>
     <instance>
+        <ns2:id>instance1</ns2:id>
+        <ns2:kind>statisticalOperations#instance</ns2:kind>
+        <ns2:link rel="self" href="http://localhost:9101/api/internal/v1.0/operations/Operation1/instances/instance1"/>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title instance instance1</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título instance instance1</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </instance>
+    <instance>
         <ns2:id>instanceCode1</ns2:id>
         <ns2:kind>statisticalOperations#instance</ns2:kind>
         <ns2:link rel="self" href="http://localhost:9101/api/internal/v1.0/operations/Operation1/instances/instanceCode1"/>

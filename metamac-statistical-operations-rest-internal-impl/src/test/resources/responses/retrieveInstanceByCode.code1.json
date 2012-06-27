@@ -49,15 +49,55 @@
       ]
     }
   },
+  "successor": {
+    "id": "instanceCode22",
+    "kind": "statisticalOperations#instance",
+    "link": {
+      "rel": "self",
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
+    },
+    "title": {
+      "texts": [
+        {
+          "locale": "en",
+          "label": "Title instance instanceCode22"
+        },
+        {
+          "locale": "es",
+          "label": "Título instance instanceCode22"
+        }
+      ]
+    }
+  },
+  "predecessor": {
+    "id": "instanceCode333",
+    "kind": "statisticalOperations#instance",
+    "link": {
+      "rel": "self",
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
+    },
+    "title": {
+      "texts": [
+        {
+          "locale": "en",
+          "label": "Title instance instanceCode333"
+        },
+        {
+          "locale": "es",
+          "label": "Título instance instanceCode333"
+        }
+      ]
+    }
+  },
   "dataDescription": {
     "texts": [
       {
-        "locale": "en",
-        "label": "DataDescription 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Descripción de Datos 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "DataDescription 1 in English"
       }
     ]
   },
@@ -75,19 +115,19 @@
   },
   "statisticalUnits": [
     {
-      "id": "statisticalUnit1",
-      "kind": "DATASTRUCTURE",
-      "link": {
-        "rel": "self",
-        "href": "http://statisticalUnit1"
-      }
-    },
-    {
       "id": "statisticalUnit22",
       "kind": "DATASTRUCTURE",
       "link": {
         "rel": "self",
         "href": "http://statisticalUnit22"
+      }
+    },
+    {
+      "id": "statisticalUnit1",
+      "kind": "DATASTRUCTURE",
+      "link": {
+        "rel": "self",
+        "href": "http://statisticalUnit1"
       }
     }
   ],
@@ -183,30 +223,30 @@
   "classSystem": {
     "texts": [
       {
-        "locale": "es",
-        "label": "ClassSystem 1 en español"
-      },
-      {
         "locale": "en",
         "label": "ClassSystem 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "ClassSystem 1 en español"
       }
     ]
   },
   "classSystemLists": [
-    {
-      "id": "statConcDefList1",
-      "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList1"
-      }
-    },
     {
       "id": "statConcDefList22",
       "kind": "CODELIST",
       "link": {
         "rel": "self",
         "href": "http://statConcDefList22"
+      }
+    },
+    {
+      "id": "statConcDefList1",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList1"
       }
     }
   ],
@@ -244,12 +284,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title surveySource surveySource1"
-        },
-        {
           "locale": "es",
           "label": "Título surveySource surveySource1"
+        },
+        {
+          "locale": "en",
+          "label": "Title surveySource surveySource1"
         }
       ]
     }
@@ -300,36 +340,36 @@
   "dataValidation": {
     "texts": [
       {
-        "locale": "es",
-        "label": "DataValidation 1 en español"
-      },
-      {
         "locale": "en",
         "label": "DataValidation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DataValidation 1 en español"
       }
     ]
   },
   "dataCompilation": {
     "texts": [
       {
-        "locale": "es",
-        "label": "DataCompilation 1 en español"
-      },
-      {
         "locale": "en",
         "label": "DataCompilation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DataCompilation 1 en español"
       }
     ]
   },
   "adjustment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Adjustment 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Adjustment 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Adjustment 1 en español"
       }
     ]
   },
@@ -346,36 +386,6 @@
     ]
   },
   "costs": [
-    {
-      "id": "cost22",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "Título cost cost22"
-          },
-          {
-            "locale": "en",
-            "label": "Title cost cost22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cost4444",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Title cost cost4444"
-          },
-          {
-            "locale": "es",
-            "label": "Título cost cost4444"
-          }
-        ]
-      }
-    },
     {
       "id": "cost333",
       "title": {
@@ -396,12 +406,42 @@
       "title": {
         "texts": [
           {
+            "locale": "en",
+            "label": "Title cost cost1"
+          },
+          {
             "locale": "es",
             "label": "Título cost cost1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost4444",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título cost cost4444"
           },
           {
             "locale": "en",
-            "label": "Title cost cost1"
+            "label": "Title cost cost4444"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost22",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título cost cost22"
+          },
+          {
+            "locale": "en",
+            "label": "Title cost cost22"
           }
         ]
       }
@@ -423,48 +463,48 @@
   "qualityAssure": {
     "texts": [
       {
-        "locale": "en",
-        "label": "QualityAssure 1 in English"
-      },
-      {
         "locale": "es",
         "label": "QualityAssure 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "QualityAssure 1 in English"
       }
     ]
   },
   "qualityAssmnt": {
     "texts": [
       {
-        "locale": "es",
-        "label": "QualityAssmnt 1 en español"
-      },
-      {
         "locale": "en",
         "label": "QualityAssmnt 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "QualityAssmnt 1 en español"
       }
     ]
   },
   "userNeeds": {
     "texts": [
       {
-        "locale": "es",
-        "label": "UserNeeds 1 en español"
-      },
-      {
         "locale": "en",
         "label": "UserNeeds 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "UserNeeds 1 en español"
       }
     ]
   },
   "userSat": {
     "texts": [
       {
-        "locale": "es",
-        "label": "UserSat 1 en español"
-      },
-      {
         "locale": "en",
         "label": "UserSat 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "UserSat 1 en español"
       }
     ]
   },
@@ -483,12 +523,12 @@
   "timeliness": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Timeliness 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Timeliness 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Timeliness 1 in English"
       }
     ]
   },
@@ -507,12 +547,12 @@
   "accuracyOverall": {
     "texts": [
       {
-        "locale": "en",
-        "label": "AccuracyOverall 1 in English"
-      },
-      {
         "locale": "es",
         "label": "AccuracyOverall 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "AccuracyOverall 1 in English"
       }
     ]
   },
@@ -555,36 +595,36 @@
   "coherInternal": {
     "texts": [
       {
-        "locale": "es",
-        "label": "CoherInternal 1 en español"
-      },
-      {
         "locale": "en",
         "label": "CoherInternal 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "CoherInternal 1 en español"
       }
     ]
   },
   "comment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Comentarios 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Comments 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Comentarios 1 en español"
       }
     ]
   },
   "notes": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Notas 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Notes 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Notas 1 en español"
       }
     ]
   },
