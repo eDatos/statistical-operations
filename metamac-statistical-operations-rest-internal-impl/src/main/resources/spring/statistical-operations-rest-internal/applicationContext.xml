@@ -15,4 +15,5 @@
   
   <!-- Includes -->
   <import resource="classpath:/spring/statistical-operations-rest-internal/include/rest-server.xml"/>
+  <import resource="classpath:/spring/statistical-operations-rest-internal/include/interceptor.xml"/>
 </beans>
