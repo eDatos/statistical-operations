@@ -111,7 +111,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
 
-    // TODO pasar a librería común
+    // TODO pasar a librería común?
     private Error getError(CommonServiceExceptionType exceptionType, String parameter) {
         Error error = new Error();
         ErrorItem errorItem = new ErrorItem();

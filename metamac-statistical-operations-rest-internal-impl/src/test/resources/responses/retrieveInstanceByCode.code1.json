@@ -1,0 +1,598 @@
+{
+  "id": "Instance1",
+  "kind": "statisticalOperations#instance",
+  "link": {
+    "rel": "self",
+    "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/Instance1"
+  },
+  "title": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "Title 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Título 1 en español"
+      }
+    ]
+  },
+  "acronym": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "Acrónimo 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Acronym 1 in English"
+      }
+    ]
+  },
+  "survey": {
+    "id": "Operation1",
+    "kind": "statisticalOperations#operation",
+    "link": {
+      "rel": "self",
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
+    },
+    "title": {
+      "texts": [
+        {
+          "locale": "es",
+          "label": "Título operation Operation1"
+        },
+        {
+          "locale": "en",
+          "label": "Title operation Operation1"
+        }
+      ]
+    }
+  },
+  "dataDescription": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "DataDescription 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Descripción de Datos 1 en español"
+      }
+    ]
+  },
+  "statisticalPopulation": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "Carga de Estadísticas 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "StatisticalPopulation 1 in English"
+      }
+    ]
+  },
+  "statisticalUnits": [
+    {
+      "id": "statisticalUnit2",
+      "kind": "DATASTRUCTURE",
+      "link": {
+        "rel": "self",
+        "href": "http://statisticalUnit2"
+      }
+    },
+    {
+      "id": "statisticalUnit1",
+      "kind": "DATASTRUCTURE",
+      "link": {
+        "rel": "self",
+        "href": "http://statisticalUnit1"
+      }
+    }
+  ],
+  "geographicGranularity": {
+    "id": "geographicGranularity",
+    "kind": "CODELIST",
+    "link": {
+      "rel": "self",
+      "href": "http://geographicGranularity"
+    }
+  },
+  "geographicComparability": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "geographicComparability 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Comparando Geográficos 1 en español"
+      }
+    ]
+  },
+  "temporalGranularity": {
+    "id": "temporalGranularity",
+    "kind": "CODELIST",
+    "link": {
+      "rel": "self",
+      "href": "http://temporalGranularity"
+    }
+  },
+  "temporalComparability": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "temporalComparability 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Comparando Temporal 1 en español"
+      }
+    ]
+  },
+  "basePeriod": "2012",
+  "unitMeasures": [
+    {
+      "id": "unitMeasure1",
+      "kind": "CONCEPT",
+      "link": {
+        "rel": "self",
+        "href": "http://unitMeasure1"
+      }
+    }
+  ],
+  "statConcDef": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "StatConcDef 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "StatConcDef 1 en español"
+      }
+    ]
+  },
+  "statConcDefLists": [
+    {
+      "id": "statConcDefList3",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList3"
+      }
+    },
+    {
+      "id": "statConcDefList1",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList1"
+      }
+    },
+    {
+      "id": "statConcDefList2",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList2"
+      }
+    }
+  ],
+  "classSystem": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "ClassSystem 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "ClassSystem 1 en español"
+      }
+    ]
+  },
+  "classSystemLists": [
+    {
+      "id": "statConcDefList1",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList1"
+      }
+    },
+    {
+      "id": "statConcDefList2",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList2"
+      }
+    }
+  ],
+  "instanceType": {
+    "id": "instanceType1",
+    "title": {
+      "texts": [
+        {
+          "locale": "en",
+          "label": "Title instanceType instanceType1"
+        },
+        {
+          "locale": "es",
+          "label": "Título instanceType instanceType1"
+        }
+      ]
+    }
+  },
+  "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
+  "procStatus": "PUBLISH_EXTERNALLY",
+  "docMethod": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "DocMethod 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DocMethod 1 en español"
+      }
+    ]
+  },
+  "surveySource": {
+    "id": "surveySource1",
+    "title": {
+      "texts": [
+        {
+          "locale": "es",
+          "label": "Título surveySource surveySource1"
+        },
+        {
+          "locale": "en",
+          "label": "Title surveySource surveySource1"
+        }
+      ]
+    }
+  },
+  "collMethod": {
+    "id": "collMethod1",
+    "title": {
+      "texts": [
+        {
+          "locale": "en",
+          "label": "Title collMethod collMethod1"
+        },
+        {
+          "locale": "es",
+          "label": "Título collMethod collMethod1"
+        }
+      ]
+    }
+  },
+  "informationSuppliers": [
+    {
+      "id": "informationSupplier1",
+      "kind": "COMMON_METADATA",
+      "link": {
+        "rel": "self",
+        "href": "http://informationSupplier1"
+      }
+    }
+  ],
+  "freqColls": [
+    {
+      "id": "freqColl1",
+      "kind": "CATEGORY_SCHEME",
+      "link": {
+        "rel": "self",
+        "href": "http://freqColl1"
+      }
+    },
+    {
+      "id": "freqColl2",
+      "kind": "CATEGORY_SCHEME",
+      "link": {
+        "rel": "self",
+        "href": "http://freqColl2"
+      }
+    }
+  ],
+  "dataValidation": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "DataValidation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DataValidation 1 en español"
+      }
+    ]
+  },
+  "dataCompilation": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "DataCompilation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DataCompilation 1 en español"
+      }
+    ]
+  },
+  "adjustment": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "Adjustment 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Adjustment 1 en español"
+      }
+    ]
+  },
+  "costBurden": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "CostBurden 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "CostBurden 1 en español"
+      }
+    ]
+  },
+  "costs": [
+    {
+      "id": "cost3",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título cost cost3"
+          },
+          {
+            "locale": "en",
+            "label": "Title cost cost3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost4",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title cost cost4"
+          },
+          {
+            "locale": "es",
+            "label": "Título cost cost4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost2",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title cost cost2"
+          },
+          {
+            "locale": "es",
+            "label": "Título cost cost2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título cost cost1"
+          },
+          {
+            "locale": "en",
+            "label": "Title cost cost1"
+          }
+        ]
+      }
+    }
+  ],
+  "inventoryDate": "2013-02-04T13:15:14.000+0000",
+  "qualityDoc": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "QualityDoc 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "QualityDoc 1 in English"
+      }
+    ]
+  },
+  "qualityAssure": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "QualityAssure 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "QualityAssure 1 en español"
+      }
+    ]
+  },
+  "qualityAssmnt": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "QualityAssmnt 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "QualityAssmnt 1 en español"
+      }
+    ]
+  },
+  "userNeeds": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "UserNeeds 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "UserNeeds 1 in English"
+      }
+    ]
+  },
+  "userSat": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "UserSat 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "UserSat 1 en español"
+      }
+    ]
+  },
+  "completeness": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "Completeness 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Completeness 1 en español"
+      }
+    ]
+  },
+  "timeliness": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "Timeliness 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Timeliness 1 en español"
+      }
+    ]
+  },
+  "punctuality": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "Punctuality 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Punctuality 1 in English"
+      }
+    ]
+  },
+  "accuracyOverall": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "AccuracyOverall 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "AccuracyOverall 1 in English"
+      }
+    ]
+  },
+  "samplingErr": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "SamplingErr 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "SamplingErr 1 en español"
+      }
+    ]
+  },
+  "nonsamplingErr": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "NonsamplingErr 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "NonsamplingErr 1 en español"
+      }
+    ]
+  },
+  "coherXDom": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "CoherXDom 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "CoherXDom 1 en español"
+      }
+    ]
+  },
+  "coherInternal": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "CoherInternal 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "CoherInternal 1 en español"
+      }
+    ]
+  },
+  "comment": {
+    "texts": [
+      {
+        "locale": "es",
+        "label": "Comentarios 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Comments 1 in English"
+      }
+    ]
+  },
+  "notes": {
+    "texts": [
+      {
+        "locale": "en",
+        "label": "Notes 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Notas 1 en español"
+      }
+    ]
+  },
+  "parent": {
+    "kind": "statisticalOperations#operation",
+    "link": {
+      "rel": "self",
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
+    }
+  }
+}

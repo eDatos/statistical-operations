@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<error xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <errorItems code="exception.operations.instance.not_found">
+        <parameters>NOT_EXISTS</parameters>
+    </errorItems>
+</error>
