@@ -14,5 +14,5 @@
   </context:component-scan>
   
   <!-- Includes -->
-  <import resource="classpath:/spring/statistical-operations-rest-internal/rest-server.xml"/>
+  <import resource="classpath:/spring/statistical-operations-rest-internal/include/rest-server.xml"/>
 </beans>
