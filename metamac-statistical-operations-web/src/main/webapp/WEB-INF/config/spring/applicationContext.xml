@@ -58,6 +58,9 @@
         </property>
     </bean>
 
+    <!-- Core -->
     <import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
+    <!-- Rest -->
+    <import resource="classpath:/spring/statistical-operations-rest-internal/applicationContext.xml" />
 </beans>
 
