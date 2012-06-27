@@ -326,7 +326,6 @@
       }
     ]
   },
-  "relPolUsAcUrl": "http://relPolUsAc1.url",
   "releaseCalendar": true,
   "releaseCalendarAccess": "http://releaseCalendarAccess1",
   "updateFrequencies": [
@@ -416,7 +415,6 @@
       }
     ]
   },
-  "revPolicyUrl": "http://revPolicy1.url",
   "revPractice": {
     "texts": [
       {
@@ -429,7 +427,6 @@
       }
     ]
   },
-  "revPracticeUrl": "http://revPractice1.url",
   "comment": {
     "texts": [
       {
@@ -442,7 +439,6 @@
       }
     ]
   },
-  "commentUrl": "http://comments1.url",
   "notes": {
     "texts": [
       {
@@ -455,7 +451,6 @@
       }
     ]
   },
-  "notesUrl": "http://notes1.url",
   "parent": {
     "kind": "statisticalOperations#operations",
     "link": {

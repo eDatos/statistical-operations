@@ -30,7 +30,6 @@
             <xs:element name="procStatus" type="xs:string" />
             <xs:element name="publisher" type="common:RelatedResource" maxOccurs="unbounded" />
             <xs:element name="relPolUsAc" type="common:InternationalString" />
-            <xs:element name="relPolUsAcUrl" type="xs:string" />
             <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
             <xs:element name="releaseCalendarAccess" type="xs:string" />
             <xs:element name="updateFrequency" type="common:RelatedResource" maxOccurs="unbounded" />
@@ -38,18 +37,14 @@
             <xs:element name="currentInstance" type="common:RelatedResource" />
             <xs:element name="inventoryDate" type="xs:dateTime" />
             <xs:element name="revPolicy" type="common:InternationalString" />
-            <xs:element name="revPolicyUrl" type="xs:string" />
             <xs:element name="revPractice" type="common:InternationalString" />
-            <xs:element name="revPracticeUrl" type="xs:string" />
             <!-- CONTACT -->
             <!-- LEGAL_ACTS -->
             <!-- DATA_SHARING -->
             <!-- CONFIDENTIALITY_POLICY -->
             <!-- CONFIDENTIALITY_DATA_TREATMENT -->
             <xs:element name="comment" type="common:InternationalString" />
-            <xs:element name="commentUrl" type="xs:string" />
             <xs:element name="notes" type="common:InternationalString" />
-            <xs:element name="notesUrl" type="xs:string" />
             <xs:element name="parent" type="common:RelatedResource" />
             <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" />
         </xs:sequence>

@@ -50,7 +50,6 @@ public class StatisticalOperationsRestMocks {
         operation.getPublishers().add(MetamacRestMocks.mockRelatedResource("publisher2", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher2", Boolean.FALSE, null));
         operation.getPublishers().add(MetamacRestMocks.mockRelatedResource("publisher3", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher3", Boolean.FALSE, null));
         operation.setRelPolUsAc(MetamacRestMocks.mockInternationalString("es", "RelPolUsAc 1 en español", "en", "RelPolUsAc 1 in English"));
-        operation.setRelPolUsAcUrl("http://relPolUsAc1.url");
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
         operation.getUpdateFrequencies().add(MetamacRestMocks.mockRelatedResource("updateFrequency1", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency1", Boolean.FALSE, null));
@@ -61,14 +60,10 @@ public class StatisticalOperationsRestMocks {
         operation.setCurrentInstance(MetamacRestMocks.mockRelatedResource("instanceCode3", RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/instanceCode3", Boolean.TRUE, "instance"));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(MetamacRestMocks.mockInternationalString("es", "RevPolicy 1 en español", "en", "RevPolicy 1 in English"));
-        operation.setRevPolicyUrl("http://revPolicy1.url");
         operation.setRevPractice(MetamacRestMocks.mockInternationalString("es", "RevPractice 1 en español", "en", "RevPractice 1 in English"));
-        operation.setRevPracticeUrl("http://revPractice1.url");
         // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(MetamacRestMocks.mockInternationalString("es", "Comentarios 1 en español", "en", "Comments 1 in English"));
-        operation.setCommentUrl("http://comments1.url");
         operation.setNotes(MetamacRestMocks.mockInternationalString("es", "Notas 1 en español", "en", "Notes 1 in English"));
-        operation.setNotesUrl("http://notes1.url");
         operation.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/operations", Boolean.FALSE, null));
         operation.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/families", Boolean.FALSE, null));
         operation.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_INSTANCES, RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances", Boolean.FALSE, null));

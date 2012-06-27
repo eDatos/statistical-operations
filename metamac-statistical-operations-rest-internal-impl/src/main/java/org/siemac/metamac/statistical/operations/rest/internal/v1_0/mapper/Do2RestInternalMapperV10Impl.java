@@ -68,7 +68,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setProcStatus(source.getProcStatus().name());
         target.getPublishers().addAll(externalItemsToRelatedResources(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
-        target.setRelPolUsAcUrl(source.getRelPolUsAcUrl());
         target.setReleaseCalendar(source.getReleaseCalendar());
         target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
         target.getUpdateFrequencies().addAll(externalItemsToRelatedResources(source.getUpdateFrequency()));
@@ -76,14 +75,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setCurrentInternalInstance(instanceToRelatedResource(getInstanceInProcStatus(source.getInstances(), ProcStatusEnum.PUBLISH_INTERNALLY), apiUrl));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
-        target.setRevPolicyUrl(source.getRevPolicyUrl());
         target.setRevPractice(toInternationalString(source.getRevPractice()));
-        target.setRevPracticeUrl(source.getRevPracticeUrl());
         // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         target.setComment(toInternationalString(source.getComment()));
-        target.setCommentUrl(source.getCommentUrl());
         target.setNotes(toInternationalString(source.getNotes()));
-        target.setNotesUrl(source.getNotesUrl());
         target.setParent(toOperationParent(apiUrl));
         target.getchildren().addAll(toOperationChildren(source, apiUrl));
         return target;

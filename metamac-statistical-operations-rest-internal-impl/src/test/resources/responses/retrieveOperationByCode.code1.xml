@@ -229,7 +229,6 @@
             <ns2:label>RelPolUsAc 1 in English</ns2:label>
         </ns2:text>
     </relPolUsAc>
-    <relPolUsAcUrl>http://relPolUsAc1.url</relPolUsAcUrl>
     <releaseCalendar>true</releaseCalendar>
     <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
     <updateFrequency>
@@ -293,7 +292,6 @@
             <ns2:label>RevPolicy 1 en español</ns2:label>
         </ns2:text>
     </revPolicy>
-    <revPolicyUrl>http://revPolicy1.url</revPolicyUrl>
     <revPractice>
         <ns2:text>
             <ns2:locale>en</ns2:locale>
@@ -304,7 +302,6 @@
             <ns2:label>RevPractice 1 en español</ns2:label>
         </ns2:text>
     </revPractice>
-    <revPracticeUrl>http://revPractice1.url</revPracticeUrl>
     <comment>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
@@ -315,7 +312,6 @@
             <ns2:label>Comments 1 in English</ns2:label>
         </ns2:text>
     </comment>
-    <commentUrl>http://comments1.url</commentUrl>
     <notes>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
@@ -326,7 +322,6 @@
             <ns2:label>Notes 1 in English</ns2:label>
         </ns2:text>
     </notes>
-    <notesUrl>http://notes1.url</notesUrl>
     <parent>
         <ns2:kind>statisticalOperations#operations</ns2:kind>
         <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/operations"/>

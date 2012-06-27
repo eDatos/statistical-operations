@@ -33,7 +33,6 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getPublishers(), actual.getPublishers());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRelPolUsAc(), actual.getRelPolUsAc());
-        assertEquals(expected.getRelPolUsAcUrl(), actual.getRelPolUsAcUrl());
         assertEquals(expected.isReleaseCalendar(), actual.isReleaseCalendar());
         assertEquals(expected.getReleaseCalendarAccess(), actual.getReleaseCalendarAccess());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
@@ -41,14 +40,10 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getCurrentInstance(), actual.getCurrentInstance());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
-        assertEquals(expected.getRevPolicyUrl(), actual.getRevPolicyUrl());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPractice(), actual.getRevPractice());
-        assertEquals(expected.getRevPracticeUrl(), actual.getRevPracticeUrl());
         // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         MetamacRestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
-        assertEquals(expected.getCommentUrl(), actual.getCommentUrl());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
-        assertEquals(expected.getNotesUrl(), actual.getNotesUrl());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
