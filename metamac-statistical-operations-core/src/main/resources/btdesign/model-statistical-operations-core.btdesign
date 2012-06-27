@@ -366,8 +366,6 @@ Application StatisticalOperations {
        		- Set<@ExternalItem> publisher databaseColumn="PUBLISHER_FK" databaseJoinTable="TB_EI_PUBLISHERS"  cascade="all-delete-orphan";
        		"Metadata REL_POL_US_AC"
        		- @InternationalString relPolUsAc cascade="all" nullable databaseColumn="REL_POL_US_AC_FK";
-       		"Metadata REL_POL_US_AC_URL"
-       		String relPolUsAcUrl nullable length="4000";
        		"Metadata RELEASE_CALENDAR"
        		Boolean releaseCalendar;
        		"Metadata RELEASE_CALENDAR_ACCESS"
@@ -378,12 +376,8 @@ Application StatisticalOperations {
        		DateTimeTZ inventoryDate nullable;
        		"Metadata REV_POLICY"
        		- @InternationalString revPolicy cascade="all" nullable databaseColumn="REV_POLICY_FK";
-       		"Metadata REV_POLICY_URL"
-       		String revPolicyUrl nullable length="4000";
        		"Metadata REV_PRACTICE"
        		- @InternationalString revPractice cascade="all" nullable databaseColumn="REV_PRACTICE_FK";
-       		"Metadata REV_PRACTICE_URL"
-       		String revPracticeUrl nullable length="4000";
        		// CONTAT: It comes from AppCommonMetadata
        		
        		
@@ -394,12 +388,8 @@ Application StatisticalOperations {
        		
        		"Metadata COMMENT"
        		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
-       		"Metadata COMMENT_URL"
-       		String commentUrl nullable length="4000";
        		"Metadata NOTES"
        		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
-       		"Metadata NOTES_URL"
-       		String notesUrl nullable length="4000";
        		
        		"Last update to optimistic locking"
 			DateTimeTZ updateDate nullable;
@@ -470,8 +460,6 @@ Application StatisticalOperations {
        		- @ProcStatusEnum procStatus not nullable;
        		"Metadata DOC_METHOD"
        		- @InternationalString docMethod cascade="all" nullable databaseColumn="DOC_METHOD_FK";
-       		"Metadata DOC_METHOD_URL"
-       		String docMethodUrl nullable length="4000";
        		"Metadata SURVEY_SOURCE"
        		- @SurveySource surveySource cascade="none" nullable databaseColumn="SURVEY_SOURCE_FK";
        		"Metadata COLL_METHOD"
@@ -482,20 +470,12 @@ Application StatisticalOperations {
        		- Set<@ExternalItem> freqColl databaseColumn="FREQ_COLL_FK" databaseJoinTable="TB_EI_FREQ_COLL"  cascade="all-delete-orphan";
        		"Metadata DATA_VALIDATION"
        		- @InternationalString dataValidation cascade="all" nullable databaseColumn="DATA_VALIDATION_FK";
-       		"Metadata DATA_VALIDATION_URL"
-       		String dataValidationUrl nullable length="4000";
        		"Metadata DATA_COMPILATION"
        		- @InternationalString dataCompilation cascade="all" nullable databaseColumn="DATA_COMPILATION_FK";
-       		"Metadata DATA_COMPILATION_URL"
-       		String dataCompilationUrl nullable length="4000";
        		"Metadata ADJUSTMENT"
        		- @InternationalString adjustment cascade="all" nullable databaseColumn="ADJUSTMENT_FK";
-       		"Metadata ADJUSTMENT_URL"
-       		String adjustmentUrl nullable length="4000";
        		"Metadata COST_BURDEN"
        		- @InternationalString costBurden cascade="all" nullable databaseColumn="COST_BURDEN_FK";
-       		"Metadata COST_BURDEN_URL"
-       		String costBurdenUrl nullable length="4000";
        		"Metadata COST"
        		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TB_INSTANCES_COSTS";
 
@@ -505,70 +485,35 @@ Application StatisticalOperations {
        		
        		"Metadata QUALITY_DOC"
        		- @InternationalString qualityDoc cascade="all" nullable databaseColumn="QUALITY_DOC_FK";
-       		"Metadata QUALITY_DOC"
-       		String qualityDocUrl nullable length="4000";
        		"Metadata QUALITY_ASSURE"
        		- @InternationalString qualityAssure cascade="all" nullable databaseColumn="QUALITY_ASSURE_FK";
-       		"Metadata QUALITY_ASSURE_URL"
-       		String qualityAssureUrl nullable length="4000";
        		"Metadata QUALITY_ASSMNT"
        		- @InternationalString qualityAssmnt cascade="all" nullable databaseColumn="QUALITY_ASSMNT_FK";
-       		"Metadata QUALITY_ASSMNT_URL"
-       		String qualityAssmntUrl nullable length="4000";
        		"Metadata USER_NEEDS"
        		- @InternationalString userNeeds cascade="all" nullable databaseColumn="USER_NEEDS_FK";
-       		"Metadata USER_NEEDS_URL"
-       		String userNeedsUrl nullable length="4000";
        		"Metadata USER_SAT"
        		- @InternationalString userSat cascade="all" nullable databaseColumn="USER_SAT_FK";
-       		"Metadata USER_SAT_URL"
-       		String userSatUrl nullable length="4000";
        		"Metadata COMPLETENESS"
        		- @InternationalString completeness cascade="all" nullable databaseColumn="COMPLETENESS_FK";
-       		"Metadata COMPLETENESS_URL"
-       		String completenessUrl nullable length="4000";
        		"Metadata TIMELINESS"
        		- @InternationalString timeliness cascade="all" nullable databaseColumn="TIMELINESS_FK";
-       		"Metadata TIMELINESS_URL"
-       		String timelinessUrl nullable length="4000";
        		"Metadata PUNCTUALITY"
        		- @InternationalString punctuality cascade="all" nullable databaseColumn="PUNCTUALITY_FK";
-       		"Metadata PUNCTUALITY_URL"
-       		String punctualityUrl nullable length="4000";
        		"Metadata ACCURACY_OVERALL"
        		- @InternationalString accuracyOverall cascade="all" nullable databaseColumn="ACCURACY_OVERALL_FK";
-       		"Metadata ACCURACY_OVERALL_URL"
-       		String accuracyOverallUrl nullable length="4000";
        		"Metadata SAMPLING_ERR"
        		- @InternationalString samplingErr cascade="all" nullable databaseColumn="SAMPLING_ERR_FK";
-       		"Metadata SAMPLING_ERR_URL"
-       		String samplingErrUrl nullable length="4000";
        		"Metadata NONSAMPLING_ERR"
        		- @InternationalString nonsamplingErr cascade="all" nullable databaseColumn="NONSAMPLING_ERR_FK";
-       		"Metadata NONSAMPLING_ERR_URL"
-       		String nonsamplingErrUrl nullable length="4000";
        		"Metadata COHER_X_DOMAIN"
        		- @InternationalString coherXDomain cascade="all" nullable databaseColumn="COHER_X_DOMAIN_FK";
-       		"Metadata COHER_X_DOMAIN_URL"
-       		String coherXDomainUrl nullable length="4000";
        		"Metadata COHER_INTERNAL"
        		- @InternationalString coherInternal cascade="all" nullable databaseColumn="COHER_INTERNAL_FK";
-       		"Metadata COHER_INTERNAL_URL"
-       		String coherInternalUrl nullable length="4000";
-       		
-       		// LEGAL_ACTS: It comes from AppCommonMetadata
-       		// DATA_SHARING: It comes from AppCommonMetadata
-       		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
-       		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
        		
        		"Metadata COMMENT"
        		- @InternationalString comment cascade="all" nullable databaseColumn="COMMENT_FK";
-       		"Metadata COMMENT_URL"
-       		String commentUrl nullable length="4000";
        		"Metadata NOTES"
        		- @InternationalString notes cascade="all" nullable databaseColumn="NOTES_FK";
-       		"Metadata NOTES_URL"
-       		String notesUrl nullable length="4000";
        		
        		"Last update to optimistic locking"
 			DateTimeTZ updateDate nullable;

@@ -405,7 +405,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertEquals(null, operation.getDescription());
 
-        operation.setCommentUrl("http://tutu.com");
         operation = statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
         assertNotNull(operation);
         assertEquals(null, operation.getDescription());
