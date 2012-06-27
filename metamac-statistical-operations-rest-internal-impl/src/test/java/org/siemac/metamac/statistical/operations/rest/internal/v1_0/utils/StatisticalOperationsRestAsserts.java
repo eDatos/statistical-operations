@@ -41,8 +41,11 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPractice(), actual.getRevPractice());
-        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
+        MetamacRestAsserts.assertEqualsRelatedResources(expected.getContacts(), actual.getContacts());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getLegalActs(), actual.getLegalActs());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getDataSharing(), actual.getDataSharing());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityPolicy(), actual.getConfidentialityPolicy());
+        MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityDataTreatment(), actual.getConfidentialityDataTreatment());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
@@ -69,7 +72,8 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getSurvey(), actual.getSurvey());
-        // TODO SUCCESSOR, PREDECESSOR
+        MetamacRestAsserts.assertEqualsRelatedResource(expected.getSuccessor(), actual.getSuccessor());
+        MetamacRestAsserts.assertEqualsRelatedResource(expected.getPredecessor(), actual.getPredecessor());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataDescription(), actual.getDataDescription());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getStatisticalPopulation(), actual.getStatisticalPopulation());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getStatisticalUnits(), actual.getStatisticalUnits());

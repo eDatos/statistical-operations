@@ -38,11 +38,11 @@
             <xs:element name="inventoryDate" type="xs:dateTime" />
             <xs:element name="revPolicy" type="common:InternationalString" />
             <xs:element name="revPractice" type="common:InternationalString" />
-            <!-- CONTACT -->
-            <!-- LEGAL_ACTS -->
-            <!-- DATA_SHARING -->
-            <!-- CONFIDENTIALITY_POLICY -->
-            <!-- CONFIDENTIALITY_DATA_TREATMENT -->
+            <xs:element name="contact" type="common:RelatedResource" maxOccurs="unbounded" />
+            <xs:element name="legalActs" type="common:InternationalString" />
+            <xs:element name="dataSharing" type="common:InternationalString" />
+            <xs:element name="confidentialityPolicy" type="common:InternationalString" />
+            <xs:element name="confidentialityDataTreatment" type="common:InternationalString" />
             <xs:element name="comment" type="common:InternationalString" />
             <xs:element name="notes" type="common:InternationalString" />
             <xs:element name="parent" type="common:RelatedResource" />
@@ -81,8 +81,8 @@
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" />
             <xs:element name="survey" type="common:RelatedResource" />
-<!-- SUCCESSOR -->
-<!-- PREDECESSOR -->
+            <xs:element name="successor" type="common:RelatedResource" />
+            <xs:element name="predecessor" type="common:RelatedResource" />
             <xs:element name="dataDescription" type="common:InternationalString" />
             <xs:element name="statisticalPopulation" type="common:InternationalString" />
             <xs:element name="statisticalUnit" type="common:RelatedResource" maxOccurs="unbounded"/>

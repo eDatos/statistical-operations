@@ -76,7 +76,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
         target.setRevPractice(toInternationalString(source.getRevPractice()));
-        // TODO LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         target.setComment(toInternationalString(source.getComment()));
         target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toOperationParent(apiUrl));
