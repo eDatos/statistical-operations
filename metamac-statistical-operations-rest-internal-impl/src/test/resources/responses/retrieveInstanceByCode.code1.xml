@@ -2,7 +2,7 @@
 <instance xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
     <id>Instance1</id>
     <kind>statisticalOperations#instance</kind>
-    <link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/Instance1"/>
+    <link rel="self" href="http://localhost:9001/internal/v1.0/operations/Operation1/instances/Instance1"/>
     <title>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
@@ -26,7 +26,7 @@
     <survey>
         <ns2:id>Operation1</ns2:id>
         <ns2:kind>statisticalOperations#operation</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Operation1"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/Operation1"/>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -41,7 +41,7 @@
     <successor>
         <ns2:id>instanceCode22</ns2:id>
         <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"/>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -56,7 +56,7 @@
     <predecessor>
         <ns2:id>instanceCode333</ns2:id>
         <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"/>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -490,6 +490,6 @@
     </notes>
     <parent>
         <ns2:kind>statisticalOperations#operation</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/operations/Operation1"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/Operation1"/>
     </parent>
 </instance>

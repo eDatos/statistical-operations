@@ -33,7 +33,7 @@ import org.springframework.context.ApplicationContext;
 public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest {
 
     private static final String                       PORT               = ServerResource.PORT;
-    private static String                             baseApi            = "http://localhost:" + PORT + "/api/internal/v1.0";
+    private static String                             baseApi            = "http://localhost:" + PORT + "/internal/v1.0";
 
     private static StatisticalOperationsRestFacadeV10 statisticalOperationsRestFacadeClientXml;
     private static StatisticalOperationsRestFacadeV10 statisticalOperationsRestFacadeClientJson;

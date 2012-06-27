@@ -2,7 +2,7 @@
 <family xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
     <id>Family1</id>
     <kind>statisticalOperations#family</kind>
-    <link rel="self" href="http://localhost:9001/api/internal/v1.0/families/Family1"/>
+    <link rel="self" href="http://localhost:9001/internal/v1.0/families/Family1"/>
     <title>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
@@ -38,10 +38,10 @@
     <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
     <parent>
         <ns2:kind>statisticalOperations#families</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/families"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families"/>
     </parent>
     <child>
         <ns2:kind>statisticalOperations#operations</ns2:kind>
-        <ns2:link rel="self" href="http://localhost:9001/api/internal/v1.0/families/Family1/operations"/>
+        <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/Family1/operations"/>
     </child>
 </family>

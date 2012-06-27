@@ -3,7 +3,7 @@
   "kind": "statisticalOperations#instance",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/Instance1"
+    "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/Instance1"
   },
   "title": {
     "texts": [
@@ -34,7 +34,7 @@
     "kind": "statisticalOperations#operation",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
     },
     "title": {
       "texts": [
@@ -54,7 +54,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
     },
     "title": {
       "texts": [
@@ -74,7 +74,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
     },
     "title": {
       "texts": [
@@ -632,7 +632,7 @@
     "kind": "statisticalOperations#operation",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
     }
   }
 }

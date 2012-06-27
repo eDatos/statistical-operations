@@ -3,7 +3,7 @@
   "kind": "statisticalOperations#operation",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1"
+    "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
   },
   "title": {
     "texts": [
@@ -35,7 +35,7 @@
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/families/familyCode22"
+        "href": "http://localhost:9001/internal/v1.0/families/familyCode22"
       },
       "title": {
         "texts": [
@@ -55,7 +55,7 @@
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/families/familyCode1"
+        "href": "http://localhost:9001/internal/v1.0/families/familyCode1"
       },
       "title": {
         "texts": [
@@ -135,7 +135,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instance1"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instance1"
       },
       "title": {
         "texts": [
@@ -155,7 +155,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode1"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode1"
       },
       "title": {
         "texts": [
@@ -175,7 +175,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
       },
       "title": {
         "texts": [
@@ -195,7 +195,7 @@
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
       },
       "title": {
         "texts": [
@@ -387,7 +387,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
     },
     "title": {
       "texts": [
@@ -407,7 +407,7 @@
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
+      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
     },
     "title": {
       "texts": [
@@ -475,7 +475,7 @@
     "kind": "statisticalOperations#operations",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations"
+      "href": "http://localhost:9001/internal/v1.0/operations"
     }
   },
   "children": [
@@ -483,14 +483,14 @@
       "kind": "statisticalOperations#instances",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances"
       }
     },
     {
       "kind": "statisticalOperations#families",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/families"
+        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/families"
       }
     }
   ]
