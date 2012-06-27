@@ -4,6 +4,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.ws.rs.core.Response.Status;
@@ -81,6 +82,15 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
     }
 
+    @Test
+    public void testWithoutMatchError404() throws Exception {
+
+        String requestUri = baseApi + "/nomatch";
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, new ByteArrayInputStream(new byte[0]));
+    }
+    
     @Test
     public void testRetrieveOperationByCodeXml() throws Exception {
 
