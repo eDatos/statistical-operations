@@ -30,11 +30,6 @@
             <classifier>client</classifier>
         </dependency>
         <dependency>
-            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-            <artifactId>metamac-statistical-operations-ws-int-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-web-common</artifactId>
             <version>${metamac-web-common.version}</version>
@@ -130,53 +125,6 @@
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-assistedinject</artifactId>
             <version>${guice.version}</version>
-        </dependency>
-
-        <!-- Web services (spring - jaxws) -->
-        <dependency>
-            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
-            <artifactId>jaxws-spring</artifactId>
-            <version>${jaxws-spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <!-- must be version 2.2.2 -->
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>mimepull</artifactId>
-                    <groupId>org.jvnet</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>sjsxp</artifactId>
-                    <groupId>com.sun.xml.stream</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>resolver</artifactId>
-                    <groupId>com.sun.org.apache.xml.internal</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb.version}</version>
         </dependency>
 
         <!-- CAS -->

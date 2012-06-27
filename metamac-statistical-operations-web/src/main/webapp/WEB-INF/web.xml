@@ -46,17 +46,6 @@
         <url-pattern>/OperationsWeb/remote_logging</url-pattern>
     </servlet-mapping>
 
-    <!-- Web services -->
-    <servlet>
-        <servlet-name>jaxws-servlet</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>jaxws-servlet</servlet-name>
-        <url-pattern>/ws/*</url-pattern>
-    </servlet-mapping>
-
     <!-- Logout filter -->
     <filter>
         <filter-name>logoutFilter</filter-name>
