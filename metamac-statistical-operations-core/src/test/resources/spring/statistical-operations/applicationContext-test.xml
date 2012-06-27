@@ -27,11 +27,8 @@
 	<import resource="classpath:/spring/logging-beans-advice.xml" />
 	<import resource="classpath:/spring/general-beans-advice.xml" />
 
-	<!-- metamac-statistical-operations-core > src/main/resources -->
-	
-	<!-- TODO: Cambiar el import cuando los SW sean rest para reutilizar el mismo fichero de interceptores -->
-	<!-- <import resource="classpath:/spring/statistical-operations/include/interceptor.xml" /> -->
-	<import resource="classpath:/Interceptor-test.xml" />
+    <!-- metamac-statistical-operations-core > src/main/resources -->
+    <import resource="classpath:/spring/statistical-operations/include/interceptor.xml" />    
 
 	<!-- metamac-statistical-operations-core > src/test/resources -->
 	<import resource="classpath:/spring/statistical-operations/include/datasource-test.xml" />
