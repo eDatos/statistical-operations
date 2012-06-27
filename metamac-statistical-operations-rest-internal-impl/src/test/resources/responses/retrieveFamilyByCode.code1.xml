@@ -34,7 +34,7 @@
         </ns2:text>
     </description>
     <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
-    <procStatus>PUBLISH_EXTERNALLY</procStatus>
+    <procStatus>PUBLISH_INTERNALLY</procStatus>
     <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
     <parent>
         <ns2:kind>statisticalOperations#families</ns2:kind>

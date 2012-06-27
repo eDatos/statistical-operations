@@ -20,32 +20,32 @@
   "acronym": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Acrónimo 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Acronym 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Acrónimo 1 en español"
       }
     ]
   },
   "families": [
     {
-      "id": "familyCode2",
+      "id": "familyCode22",
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/families/familyCode2"
+        "href": "http://localhost:9001/api/internal/v1.0/families/familyCode22"
       },
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título family familyCode2"
+            "locale": "en",
+            "label": "Title family familyCode22"
           },
           {
-            "locale": "en",
-            "label": "Title family familyCode2"
+            "locale": "es",
+            "label": "Título family familyCode22"
           }
         ]
       }
@@ -60,12 +60,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title family familyCode1"
-          },
-          {
             "locale": "es",
             "label": "Título family familyCode1"
+          },
+          {
+            "locale": "en",
+            "label": "Title family familyCode1"
           }
         ]
       }
@@ -81,39 +81,39 @@
   },
   "secondarySubjectAreas": [
     {
-      "id": "secundarySubjectArea3",
-      "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea3"
-      }
-    },
-    {
-      "id": "secundarySubjectArea2",
-      "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea2"
-      }
-    },
-    {
       "id": "secundarySubjectArea1",
       "kind": "CATEGORY",
       "link": {
         "rel": "self",
         "href": "http://secundarySubjectArea1"
       }
+    },
+    {
+      "id": "secundarySubjectArea22",
+      "kind": "CATEGORY",
+      "link": {
+        "rel": "self",
+        "href": "http://secundarySubjectArea22"
+      }
+    },
+    {
+      "id": "secundarySubjectArea333",
+      "kind": "CATEGORY",
+      "link": {
+        "rel": "self",
+        "href": "http://secundarySubjectArea333"
+      }
     }
   ],
   "objective": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Objective 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Objetivo 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Objective 1 in English"
       }
     ]
   },
@@ -151,41 +151,41 @@
       }
     },
     {
-      "id": "instanceCode2",
+      "id": "instanceCode22",
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode2"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
       },
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instanceCode2"
+            "locale": "en",
+            "label": "Title instance instanceCode22"
           },
           {
-            "locale": "en",
-            "label": "Title instance instanceCode2"
+            "locale": "es",
+            "label": "Título instance instanceCode22"
           }
         ]
       }
     },
     {
-      "id": "instanceCode3",
+      "id": "instanceCode333",
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode3"
+        "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
       },
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "Title instance instanceCode3"
+            "label": "Title instance instanceCode333"
           },
           {
             "locale": "es",
-            "label": "Título instance instanceCode3"
+            "label": "Título instance instanceCode333"
           }
         ]
       }
@@ -196,12 +196,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title survey surveyIdentifier"
-        },
-        {
           "locale": "es",
           "label": "Título survey surveyIdentifier"
+        },
+        {
+          "locale": "en",
+          "label": "Title survey surveyIdentifier"
         }
       ]
     }
@@ -232,21 +232,21 @@
       }
     },
     {
-      "id": "producer2",
+      "id": "producer22",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
-        "href": "http://producer2"
+        "href": "http://producer22"
       }
     }
   ],
   "regionalResponsibles": [
     {
-      "id": "regionalResponsible3",
+      "id": "regionalResponsible22",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
-        "href": "http://regionalResponsible3"
+        "href": "http://regionalResponsible22"
       }
     },
     {
@@ -258,11 +258,11 @@
       }
     },
     {
-      "id": "regionalResponsible2",
+      "id": "regionalResponsible333",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
-        "href": "http://regionalResponsible2"
+        "href": "http://regionalResponsible333"
       }
     }
   ],
@@ -276,27 +276,19 @@
       }
     },
     {
-      "id": "regionalContributor2",
+      "id": "regionalContributor22",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
-        "href": "http://regionalContributor2"
+        "href": "http://regionalContributor22"
       }
     }
   ],
   "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
   "currentlyActive": false,
   "status": "DESIGN",
-  "procStatus": "PUBLISH_EXTERNALLY",
+  "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
-    {
-      "id": "publisher3",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://publisher3"
-      }
-    },
     {
       "id": "publisher1",
       "kind": "AGENCY",
@@ -306,23 +298,31 @@
       }
     },
     {
-      "id": "publisher2",
+      "id": "publisher333",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
-        "href": "http://publisher2"
+        "href": "http://publisher333"
+      }
+    },
+    {
+      "id": "publisher22",
+      "kind": "AGENCY",
+      "link": {
+        "rel": "self",
+        "href": "http://publisher22"
       }
     }
   ],
   "relPolUsAc": {
     "texts": [
       {
-        "locale": "es",
-        "label": "RelPolUsAc 1 en español"
-      },
-      {
         "locale": "en",
         "label": "RelPolUsAc 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "RelPolUsAc 1 en español"
       }
     ]
   },
@@ -330,27 +330,11 @@
   "releaseCalendarAccess": "http://releaseCalendarAccess1",
   "updateFrequencies": [
     {
-      "id": "updateFrequency4",
+      "id": "updateFrequency4444",
       "kind": "CODE",
       "link": {
         "rel": "self",
-        "href": "http://updateFrequency4"
-      }
-    },
-    {
-      "id": "updateFrequency2",
-      "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency2"
-      }
-    },
-    {
-      "id": "updateFrequency3",
-      "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency3"
+        "href": "http://updateFrequency4444"
       }
     },
     {
@@ -360,44 +344,60 @@
         "rel": "self",
         "href": "http://updateFrequency1"
       }
+    },
+    {
+      "id": "updateFrequency333",
+      "kind": "CODE",
+      "link": {
+        "rel": "self",
+        "href": "http://updateFrequency333"
+      }
+    },
+    {
+      "id": "updateFrequency22",
+      "kind": "CODE",
+      "link": {
+        "rel": "self",
+        "href": "http://updateFrequency22"
+      }
     }
   ],
   "currentInternalInstance": {
-    "id": "instanceCode2",
+    "id": "instanceCode22",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode2"
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode22"
     },
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título instance instanceCode2"
+          "locale": "en",
+          "label": "Title instance instanceCode22"
         },
         {
-          "locale": "en",
-          "label": "Title instance instanceCode2"
+          "locale": "es",
+          "label": "Título instance instanceCode22"
         }
       ]
     }
   },
   "currentInstance": {
-    "id": "instanceCode3",
+    "id": "instanceCode333",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode3"
+      "href": "http://localhost:9001/api/internal/v1.0/operations/Operation1/instances/instanceCode333"
     },
     "title": {
       "texts": [
         {
           "locale": "en",
-          "label": "Title instance instanceCode3"
+          "label": "Title instance instanceCode333"
         },
         {
           "locale": "es",
-          "label": "Título instance instanceCode3"
+          "label": "Título instance instanceCode333"
         }
       ]
     }
@@ -406,12 +406,12 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "en",
-        "label": "RevPolicy 1 in English"
-      },
-      {
         "locale": "es",
         "label": "RevPolicy 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "RevPolicy 1 in English"
       }
     ]
   },
