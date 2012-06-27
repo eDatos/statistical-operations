@@ -17,6 +17,7 @@
 	<description>METAMAC :: STATISTICAL OPERATIONS :: REST :: IMPL</description>
 
 	<dependencies>
+        <!-- Metamac -->
 		<dependency>
 			<groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
 			<artifactId>metamac-statistical-operations-rest-internal-api</artifactId>
@@ -34,12 +35,7 @@
             <version>${metamac-rest-common.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_2.5_spec</artifactId>
-            <version>1.1.2</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -94,6 +90,12 @@
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-rest-common-test</artifactId>
             <version>${metamac-rest-common-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_2.5_spec</artifactId>
+            <version>1.1.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

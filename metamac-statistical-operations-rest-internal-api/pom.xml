@@ -37,6 +37,8 @@
             <artifactId>jsr311-api</artifactId>
             <version>${jsr311-api.version}</version>
         </dependency>
+        
+        <!-- Metamac -->
         <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-rest-api</artifactId>
