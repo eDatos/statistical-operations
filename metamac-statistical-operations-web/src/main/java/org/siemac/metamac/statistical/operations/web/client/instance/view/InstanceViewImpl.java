@@ -48,8 +48,6 @@ import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.form.validator.RequiredIfFunction;
-import com.smartgwt.client.widgets.form.validator.RequiredIfValidator;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> implements InstancePresenter.InstanceView {
@@ -469,7 +467,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
         instanceTypeItem = new CustomSelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
-        instanceTypeItem.setValidators(getRequiredIfInternallyPublished());
+        // instanceTypeItem.setValidators(getRequiredIfInternallyPublished());
         classEditionForm.setFields(instanceTypeItem);
 
         // Production descriptors
@@ -798,21 +796,21 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
      * 
      * @return
      */
-    private RequiredIfValidator getRequiredIfInternallyPublished() {
-        return new RequiredIfValidator(new RequiredIfFunction() {
+    // private RequiredIfValidator getRequiredIfInternallyPublished() {
+    // return new RequiredIfValidator(new RequiredIfFunction() {
+    //
+    // @Override
+    // public boolean execute(FormItem formItem, Object value) {
+    // return isInstanceInternallyPublished() || isInstanceExternallyPublished();
+    // }
+    // });
+    // }
 
-            @Override
-            public boolean execute(FormItem formItem, Object value) {
-                return isInstanceInternallyPublished() || isInstanceExternallyPublished();
-            }
-        });
-    }
-
-    private boolean isInstanceInternallyPublished() {
+    public boolean isInstanceInternallyPublished() {
         return ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceDto.getProcStatus());
     }
 
-    private boolean isInstanceExternallyPublished() {
+    public boolean isInstanceExternallyPublished() {
         return ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceDto.getProcStatus());
     }
 
