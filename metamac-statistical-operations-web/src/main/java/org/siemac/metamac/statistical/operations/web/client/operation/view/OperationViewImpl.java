@@ -44,12 +44,10 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAndUrlItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 
@@ -125,26 +123,26 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private GroupDynamicForm                diffusionViewForm;
     private GroupDynamicForm                diffusionEditionForm;
     private ExternalMultipleSelectItem      publisherItem;
-    private MultiLanguageTextAndUrlItem     relPolUsAc;
+    private MultilanguageRichTextEditorItem relPolUsAc;
     private CustomCheckboxItem              releaseCalendar;
     private CustomTextItem                  releaseCalendarAccess;
     private CustomSelectItem                updateFrequencyItem;
-    private MultiLanguageTextAreaAndUrlItem revPolicyItem;
-    private MultiLanguageTextAreaAndUrlItem revPracticeItem;
+    private MultilanguageRichTextEditorItem revPolicyItem;
+    private MultilanguageRichTextEditorItem revPracticeItem;
     private CustomSelectItem                commonMetadataItem;
 
-    private ViewMultiLanguageTextAndUrlItem staticRelPolUsAc;
-    private ViewMultiLanguageTextAndUrlItem staticRevPolicyItem;
-    private ViewMultiLanguageTextAndUrlItem staticRevPracticeItem;
+    private ViewMultiLanguageTextItem       staticRelPolUsAc;
+    private ViewMultiLanguageTextItem       staticRevPolicyItem;
+    private ViewMultiLanguageTextItem       staticRevPracticeItem;
 
     // ANNOTATIONS
     private GroupDynamicForm                annotationsViewForm;
     private GroupDynamicForm                annotationsEditionForm;
-    private MultiLanguageTextAreaAndUrlItem commentItem;
-    private MultiLanguageTextAreaAndUrlItem notesItem;
+    private MultilanguageRichTextEditorItem commentItem;
+    private MultilanguageRichTextEditorItem notesItem;
 
-    private ViewMultiLanguageTextAndUrlItem staticCommentItem;
-    private ViewMultiLanguageTextAndUrlItem staticNotesItem;
+    private ViewMultiLanguageTextItem       staticCommentItem;
+    private ViewMultiLanguageTextItem       staticNotesItem;
 
     private ListGridToolStrip               instanceListGridToolStrip;
     private CustomListGrid                  instanceListGrid;
@@ -390,23 +388,18 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Diffusion and Publication
         operationDto.getPublisher().clear();
         operationDto.getPublisher().addAll(publisherItem.getSelectedExternalItems(publishers));
-        operationDto.setRelPolUsAc(relPolUsAc.getTextValue());
-        operationDto.setRelPolUsAcUrl(relPolUsAc.getUrlValue());
+        operationDto.setRelPolUsAc(relPolUsAc.getValue());
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
         operationDto.getUpdateFrequency().clear();
         operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(updateFrequencyCodes, updateFrequencyItem.getValues()));
-        operationDto.setRevPolicy(revPolicyItem.getTextValue());
-        operationDto.setRevPolicyUrl(revPolicyItem.getUrlValue());
-        operationDto.setRevPractice(revPracticeItem.getTextValue());
-        operationDto.setRevPracticeUrl(revPracticeItem.getUrlValue());
+        operationDto.setRevPolicy(revPolicyItem.getValue());
+        operationDto.setRevPractice(revPracticeItem.getValue());
         operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemBtDtoFromCodeId(commonMetadataList, commonMetadataItem.getValueAsString()));
 
         // ANNOTATIONS
-        operationDto.setComment(commentItem.getTextValue());
-        operationDto.setCommentUrl(commentItem.getUrlValue());
-        operationDto.setNotes(notesItem.getTextValue());
-        operationDto.setNotesUrl(notesItem.getUrlValue());
+        operationDto.setComment(commentItem.getValue());
+        operationDto.setNotes(notesItem.getValue());
         return operationDto;
     }
 
@@ -551,23 +544,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Diffusion Descriptors
         diffusionViewForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
         ViewTextItem publisher = new ViewTextItem(OperationDS.OP_PUBLISHER, getConstants().operationPublisher());
-        staticRelPolUsAc = new ViewMultiLanguageTextAndUrlItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
+        staticRelPolUsAc = new ViewMultiLanguageTextItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
         ViewTextItem releaseCalendar = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
         ViewTextItem updateFreq = new ViewTextItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
         ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getConstants().operationInventoryDate());
-        staticRevPolicyItem = new ViewMultiLanguageTextAndUrlItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
-        staticRevPracticeItem = new ViewMultiLanguageTextAndUrlItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
+        staticRevPolicyItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
+        staticRevPracticeItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
         ViewTextItem commonMetadata = new ViewTextItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
         diffusionViewForm.setFields(publisher, staticRelPolUsAc, releaseCalendar, releaseCalendarAccess, updateFreq, currentInst, currentInternalInst, invDate, staticRevPolicyItem,
                 staticRevPracticeItem, commonMetadata);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        staticCommentItem = new ViewMultiLanguageTextAndUrlItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
-        staticNotesItem = new ViewMultiLanguageTextAndUrlItem(OperationDS.OP_NOTES, getConstants().operationNotes());
+        staticCommentItem = new ViewMultiLanguageTextItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
+        staticNotesItem = new ViewMultiLanguageTextItem(OperationDS.OP_NOTES, getConstants().operationNotes());
         annotationsViewForm.setFields(staticCommentItem, staticNotesItem);
 
         // Add to main layout
@@ -706,7 +699,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        relPolUsAc = new MultiLanguageTextAndUrlItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
+        relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
         releaseCalendar = new CustomCheckboxItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
         releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
@@ -715,8 +708,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
         ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getConstants().operationInventoryDate());
-        revPolicyItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
-        revPracticeItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
+        revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
+        revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
         commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
         commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
         diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
@@ -724,8 +717,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        commentItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
-        notesItem = new MultiLanguageTextAreaAndUrlItem(OperationDS.OP_NOTES, getConstants().operationNotes());
+        commentItem = new MultilanguageRichTextEditorItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
+        notesItem = new MultilanguageRichTextEditorItem(OperationDS.OP_NOTES, getConstants().operationNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         // Add to main layout
@@ -737,7 +730,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         mainFormLayout.addEditionCanvas(diffusionEditionForm);
         mainFormLayout.addEditionCanvas(annotationsEditionForm);
     }
-
     private void setViewForm(OperationDto operationDto) {
         // Identifiers
         identifiersViewForm.setValue(OperationDS.OP_CODE, operationDto.getCode());
@@ -768,20 +760,20 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Diffusion and Publication
         diffusionViewForm.setValue(OperationDS.OP_PUBLISHER, ExternalItemUtils.getExternalItemListToString(operationDto.getPublisher()));
-        staticRelPolUsAc.setValue(operationDto.getRelPolUsAc(), operationDto.getRelPolUsAcUrl());
+        diffusionViewForm.setValue(OperationDS.OP_RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar()) ? getConstants().yes() : getConstants().no());
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
         diffusionViewForm.setValue(OperationDS.OP_UPDATE_FREQ, ExternalItemUtils.getExternalItemListToString(operationDto.getUpdateFrequency()));
         diffusionViewForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
         diffusionViewForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
-        staticRevPolicyItem.setValue(operationDto.getRevPolicy(), operationDto.getRevPolicyUrl());
-        staticRevPracticeItem.setValue(operationDto.getRevPractice(), operationDto.getRevPracticeUrl());
+        diffusionViewForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
+        diffusionViewForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
 
         diffusionViewForm.setValue(OperationDS.OP_COMMON_METADATA, operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getCodeId() : "");
 
         // Annotations
-        staticCommentItem.setValue(operationDto.getComment(), operationDto.getCommentUrl());
-        staticNotesItem.setValue(operationDto.getNotes(), operationDto.getNotesUrl());
+        annotationsViewForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
+        annotationsViewForm.setValue(OperationDS.OP_NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
     }
 
     private void setEditionForm(OperationDto operationDto) {
@@ -819,19 +811,19 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Diffusion and Publication
         publisherItem.clearValue();
-        relPolUsAc.setValue(operationDto.getRelPolUsAc(), operationDto.getRelPolUsAcUrl());
+        diffusionEditionForm.setValue(OperationDS.OP_RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
         releaseCalendar.setValue(operationDto.getReleaseCalendar());
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
         updateFrequencyItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(operationDto.getUpdateFrequency()));
         diffusionEditionForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
         diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
-        revPolicyItem.setValue(operationDto.getRevPolicy(), operationDto.getRevPolicyUrl());
-        revPracticeItem.setValue(operationDto.getRevPractice(), operationDto.getRevPracticeUrl());
+        diffusionEditionForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
+        diffusionEditionForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
         commonMetadataItem.setValue(operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getCodeId() : null);
 
         // Annotations
-        commentItem.setValue(operationDto.getComment(), operationDto.getCommentUrl());
-        notesItem.setValue(operationDto.getNotes(), operationDto.getNotesUrl());
+        annotationsEditionForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
+        annotationsEditionForm.setValue(OperationDS.OP_NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
 
         identifiersEditionForm.markForRedraw();
         productionEditionForm.markForRedraw();

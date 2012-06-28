@@ -30,10 +30,9 @@ import org.siemac.metamac.web.common.client.utils.TimeVariableWebUtils;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextAndUrlItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 
@@ -89,23 +88,23 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // PRODUCTION DESCRIPTORS
     private GroupDynamicForm                productionViewForm;
     private GroupDynamicForm                productionEditionForm;
-    private MultiLanguageTextAreaAndUrlItem docMethodItem;
+    private MultilanguageRichTextEditorItem docMethodItem;
     private CustomSelectItem                collMethodItem;
     private CustomSelectItem                surveySourceItem;
     private ExternalMultipleSelectItem      infSuppliersOrganItem;
     private ExternalMultipleSelectItem      infSuppliersConceptsItem;
     private CustomSelectItem                freqCollItem;
-    private MultiLanguageTextAreaAndUrlItem dataValidationItem;
-    private MultiLanguageTextAreaAndUrlItem dataCompilationItem;
-    private MultiLanguageTextAreaAndUrlItem adjustmentItem;
-    private MultiLanguageTextAreaAndUrlItem costBurdenItem;
+    private MultilanguageRichTextEditorItem dataValidationItem;
+    private MultilanguageRichTextEditorItem dataCompilationItem;
+    private MultilanguageRichTextEditorItem adjustmentItem;
+    private MultilanguageRichTextEditorItem costBurdenItem;
     private CustomSelectItem                costItem;
 
-    private ViewMultiLanguageTextAndUrlItem staticDocMethodItem;
-    private ViewMultiLanguageTextAndUrlItem staticDataValidationItem;
-    private ViewMultiLanguageTextAndUrlItem staticDataCompilationItem;
-    private ViewMultiLanguageTextAndUrlItem staticAdjustmentItem;
-    private ViewMultiLanguageTextAndUrlItem staticCostBurdenItem;
+    private ViewMultiLanguageTextItem       staticDocMethodItem;
+    private ViewMultiLanguageTextItem       staticDataValidationItem;
+    private ViewMultiLanguageTextItem       staticDataCompilationItem;
+    private ViewMultiLanguageTextItem       staticAdjustmentItem;
+    private ViewMultiLanguageTextItem       staticCostBurdenItem;
 
     // DIFFUSION AND PUBLICATION
     private GroupDynamicForm                diffusionViewForm;
@@ -114,42 +113,42 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // QUALITY DESCRIPTORS
     private GroupDynamicForm                qualityViewForm;
     private GroupDynamicForm                qualityEditionForm;
-    private MultiLanguageTextAreaAndUrlItem qualityDocItem;
-    private MultiLanguageTextAreaAndUrlItem qualityAssureItem;
-    private MultiLanguageTextAreaAndUrlItem qualityAssesmentItem;
-    private MultiLanguageTextAreaAndUrlItem userNeedsItem;
-    private MultiLanguageTextAreaAndUrlItem userSatItem;
-    private MultiLanguageTextAreaAndUrlItem completenessItem;
-    private MultiLanguageTextAreaAndUrlItem timelinessItem;
-    private MultiLanguageTextAreaAndUrlItem punctualityItem;
-    private MultiLanguageTextAreaAndUrlItem accuracyOverallItem;
-    private MultiLanguageTextAreaAndUrlItem samplingErrItem;
-    private MultiLanguageTextAreaAndUrlItem nonSamplingErrItem;
-    private MultiLanguageTextAreaAndUrlItem coherXDomItem;
-    private MultiLanguageTextAreaAndUrlItem coherInternalItem;
+    private MultilanguageRichTextEditorItem qualityDocItem;
+    private MultilanguageRichTextEditorItem qualityAssureItem;
+    private MultilanguageRichTextEditorItem qualityAssesmentItem;
+    private MultilanguageRichTextEditorItem userNeedsItem;
+    private MultilanguageRichTextEditorItem userSatItem;
+    private MultilanguageRichTextEditorItem completenessItem;
+    private MultilanguageRichTextEditorItem timelinessItem;
+    private MultilanguageRichTextEditorItem punctualityItem;
+    private MultilanguageRichTextEditorItem accuracyOverallItem;
+    private MultilanguageRichTextEditorItem samplingErrItem;
+    private MultilanguageRichTextEditorItem nonSamplingErrItem;
+    private MultilanguageRichTextEditorItem coherXDomItem;
+    private MultilanguageRichTextEditorItem coherInternalItem;
 
-    private ViewMultiLanguageTextAndUrlItem staticQualityDocItem;
-    private ViewMultiLanguageTextAndUrlItem staticQualityAssureItem;
-    private ViewMultiLanguageTextAndUrlItem staticQualityAssesmentItem;
-    private ViewMultiLanguageTextAndUrlItem staticUserNeedsItem;
-    private ViewMultiLanguageTextAndUrlItem staticUserSatItem;
-    private ViewMultiLanguageTextAndUrlItem staticCompletenessItem;
-    private ViewMultiLanguageTextAndUrlItem staticTimelinessItem;
-    private ViewMultiLanguageTextAndUrlItem staticPunctualityItem;
-    private ViewMultiLanguageTextAndUrlItem staticAccuracyOverallItem;
-    private ViewMultiLanguageTextAndUrlItem staticSamplingErrItem;
-    private ViewMultiLanguageTextAndUrlItem statocNonSamplingErrItem;
-    private ViewMultiLanguageTextAndUrlItem staticCoherXDomItem;
-    private ViewMultiLanguageTextAndUrlItem staticCoherInternalItem;
+    private ViewMultiLanguageTextItem       staticQualityDocItem;
+    private ViewMultiLanguageTextItem       staticQualityAssureItem;
+    private ViewMultiLanguageTextItem       staticQualityAssesmentItem;
+    private ViewMultiLanguageTextItem       staticUserNeedsItem;
+    private ViewMultiLanguageTextItem       staticUserSatItem;
+    private ViewMultiLanguageTextItem       staticCompletenessItem;
+    private ViewMultiLanguageTextItem       staticTimelinessItem;
+    private ViewMultiLanguageTextItem       staticPunctualityItem;
+    private ViewMultiLanguageTextItem       staticAccuracyOverallItem;
+    private ViewMultiLanguageTextItem       staticSamplingErrItem;
+    private ViewMultiLanguageTextItem       statocNonSamplingErrItem;
+    private ViewMultiLanguageTextItem       staticCoherXDomItem;
+    private ViewMultiLanguageTextItem       staticCoherInternalItem;
 
     // ANNOTATIONS
     private GroupDynamicForm                annotationsViewForm;
     private GroupDynamicForm                annotationsEditionForm;
-    private MultiLanguageTextAreaAndUrlItem commentItem;
-    private MultiLanguageTextAreaAndUrlItem notesItem;
+    private MultilanguageRichTextEditorItem commentItem;
+    private MultilanguageRichTextEditorItem notesItem;
 
-    private ViewMultiLanguageTextAndUrlItem staticCommentItem;
-    private ViewMultiLanguageTextAndUrlItem staticNotesItem;
+    private ViewMultiLanguageTextItem       staticCommentItem;
+    private ViewMultiLanguageTextItem       staticNotesItem;
 
     private List<ExternalItemBtDto>         conceptSchemes;
     private List<ExternalItemBtDto>         codeLists;
@@ -273,8 +272,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setInstanceType(OperationsListUtils.getInstanceTypeDto(instanceTypeItem.getValueAsString(), instanceTypeDtos));
 
         // Production descriptors
-        instanceDto.setDocMethod(docMethodItem.getTextValue());
-        instanceDto.setDocMethodUrl(docMethodItem.getUrlValue());
+        instanceDto.setDocMethod(docMethodItem.getValue());
         instanceDto.setSurveySource(OperationsListUtils.getSurveySourceDto(surveySourceItem.getValueAsString(), surveySourceDtos));
         instanceDto.setCollMethod(OperationsListUtils.getCollMethodDto(collMethodItem.getValueAsString(), collMethodDtos));
         instanceDto.getInformationSuppliers().clear();
@@ -282,50 +280,31 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getInformationSuppliers().addAll(infSuppliersConceptsItem.getSelectedExternalItems(infSuppliersConcepts));
         instanceDto.getFreqColl().clear();
         instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(freqCollCodes, freqCollItem.getValues()));
-        instanceDto.setDataValidation(dataValidationItem.getTextValue());
-        instanceDto.setDataValidationUrl(dataValidationItem.getUrlValue());
-        instanceDto.setDataCompilation(dataCompilationItem.getTextValue());
-        instanceDto.setDataCompilationUrl(dataCompilationItem.getUrlValue());
-        instanceDto.setAdjustment(adjustmentItem.getTextValue());
-        instanceDto.setAdjustmentUrl(adjustmentItem.getUrlValue());
-        instanceDto.setCostBurden(costBurdenItem.getTextValue());
-        instanceDto.setCostBurdenUrl(costBurdenItem.getUrlValue());
+        instanceDto.setDataValidation(dataValidationItem.getValue());
+        instanceDto.setDataCompilation(dataCompilationItem.getValue());
+        instanceDto.setAdjustment(adjustmentItem.getValue());
+        instanceDto.setCostBurden(costBurdenItem.getValue());
         instanceDto.getCost().clear();
         instanceDto.getCost().addAll(OperationsListUtils.getCostDtos(costItem.getValues(), costDtos));
 
         // QUALITY DESCRIPTORS
-        instanceDto.setQualityDoc(qualityDocItem.getTextValue());
-        instanceDto.setQualityDocUrl(qualityDocItem.getUrlValue());
-        instanceDto.setQualityAssure(qualityAssureItem.getTextValue());
-        instanceDto.setQualityAssureUrl(qualityAssureItem.getUrlValue());
-        instanceDto.setQualityAssmnt(qualityAssesmentItem.getTextValue());
-        instanceDto.setQualityAssmntUrl(qualityAssesmentItem.getUrlValue());
-        instanceDto.setUserNeeds(userNeedsItem.getTextValue());
-        instanceDto.setUserNeedsUrl(userNeedsItem.getUrlValue());
-        instanceDto.setUserSat(userSatItem.getTextValue());
-        instanceDto.setUserSatUrl(userSatItem.getUrlValue());
-        instanceDto.setCompleteness(completenessItem.getTextValue());
-        instanceDto.setCompletenessUrl(completenessItem.getUrlValue());
-        instanceDto.setTimeliness(timelinessItem.getTextValue());
-        instanceDto.setTimelinessUrl(timelinessItem.getUrlValue());
-        instanceDto.setPunctuality(punctualityItem.getTextValue());
-        instanceDto.setPunctualityUrl(punctualityItem.getUrlValue());
-        instanceDto.setAccuracyOverall(accuracyOverallItem.getTextValue());
-        instanceDto.setAccuracyOverallUrl(accuracyOverallItem.getUrlValue());
-        instanceDto.setSamplingErr(samplingErrItem.getTextValue());
-        instanceDto.setSamplingErrUrl(samplingErrItem.getUrlValue());
-        instanceDto.setNonsamplingErr(nonSamplingErrItem.getTextValue());
-        instanceDto.setNonsamplingErrUrl(nonSamplingErrItem.getUrlValue());
-        instanceDto.setCoherXDomain(coherXDomItem.getTextValue());
-        instanceDto.setCoherXDomainUrl(coherXDomItem.getUrlValue());
-        instanceDto.setCoherInternal(coherInternalItem.getTextValue());
-        instanceDto.setCoherInternalUrl(coherInternalItem.getUrlValue());
+        instanceDto.setQualityDoc(qualityDocItem.getValue());
+        instanceDto.setQualityAssure(qualityAssureItem.getValue());
+        instanceDto.setQualityAssmnt(qualityAssesmentItem.getValue());
+        instanceDto.setUserNeeds(userNeedsItem.getValue());
+        instanceDto.setUserSat(userSatItem.getValue());
+        instanceDto.setCompleteness(completenessItem.getValue());
+        instanceDto.setTimeliness(timelinessItem.getValue());
+        instanceDto.setPunctuality(punctualityItem.getValue());
+        instanceDto.setAccuracyOverall(accuracyOverallItem.getValue());
+        instanceDto.setSamplingErr(samplingErrItem.getValue());
+        instanceDto.setNonsamplingErr(nonSamplingErrItem.getValue());
+        instanceDto.setCoherXDomain(coherXDomItem.getValue());
+        instanceDto.setCoherInternal(coherInternalItem.getValue());
 
         // ANNOTATIONS
-        instanceDto.setComment(commentItem.getTextValue());
-        instanceDto.setCommentUrl(commentItem.getUrlValue());
-        instanceDto.setNotes(notesItem.getTextValue());
-        instanceDto.setNotesUrl(commentItem.getUrlValue());
+        instanceDto.setComment(commentItem.getValue());
+        instanceDto.setNotes(notesItem.getValue());
 
         return instanceDto;
     }
@@ -375,15 +354,15 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionViewForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getConstants().instanceInternalInventoryDate());
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getConstants().instanceProcStatus());
-        staticDocMethodItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
+        staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         ViewTextItem surveySource = new ViewTextItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
         ViewTextItem collMethod = new ViewTextItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         ViewTextItem informationSuppliers = new ViewTextItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliers());
         ViewTextItem freqColl = new ViewTextItem(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
-        staticDataValidationItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
-        staticDataCompilationItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
-        staticAdjustmentItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
-        staticCostBurdenItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
+        staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
+        staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
+        staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
+        staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
         ViewTextItem cost = new ViewTextItem(InstanceDS.COST, getConstants().instanceCost());
         productionViewForm.setFields(internalInventoryDate, procStatus, staticDocMethodItem, surveySource, collMethod, informationSuppliers, freqColl, staticDataValidationItem,
                 staticDataCompilationItem, staticAdjustmentItem, staticCostBurdenItem, cost);
@@ -395,26 +374,26 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Quality descriptors
         qualityViewForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        staticQualityDocItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
-        staticQualityAssureItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
-        staticQualityAssesmentItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
-        staticUserNeedsItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
-        staticUserSatItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
-        staticCompletenessItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
-        staticTimelinessItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
-        staticPunctualityItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
-        staticAccuracyOverallItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
-        staticSamplingErrItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
-        statocNonSamplingErrItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
-        staticCoherXDomItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
-        staticCoherInternalItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
+        staticQualityDocItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
+        staticQualityAssureItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
+        staticQualityAssesmentItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
+        staticUserNeedsItem = new ViewMultiLanguageTextItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
+        staticUserSatItem = new ViewMultiLanguageTextItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
+        staticCompletenessItem = new ViewMultiLanguageTextItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
+        staticTimelinessItem = new ViewMultiLanguageTextItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
+        staticPunctualityItem = new ViewMultiLanguageTextItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
+        staticAccuracyOverallItem = new ViewMultiLanguageTextItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
+        staticSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
+        statocNonSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
+        staticCoherXDomItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
+        staticCoherInternalItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
         qualityViewForm.setFields(staticQualityDocItem, staticQualityAssureItem, staticQualityAssesmentItem, staticUserNeedsItem, staticUserSatItem, staticCompletenessItem, staticTimelinessItem,
                 staticPunctualityItem, staticAccuracyOverallItem, staticSamplingErrItem, statocNonSamplingErrItem, staticCoherXDomItem, staticCoherInternalItem);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        staticCommentItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.COMMENTS, getConstants().instanceComments());
-        staticNotesItem = new ViewMultiLanguageTextAndUrlItem(InstanceDS.NOTES, getConstants().instanceNotes());
+        staticCommentItem = new ViewMultiLanguageTextItem(InstanceDS.COMMENTS, getConstants().instanceComments());
+        staticNotesItem = new ViewMultiLanguageTextItem(InstanceDS.NOTES, getConstants().instanceNotes());
         annotationsViewForm.setFields(staticCommentItem, staticNotesItem);
 
         mainFormLayout.addViewCanvas(identifiersViewForm);
@@ -501,7 +480,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem staticProcStatus = new ViewTextItem(InstanceDS.PROC_STATUS_VIEW, getConstants().instanceProcStatus());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
-        docMethodItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
+        docMethodItem = new MultilanguageRichTextEditorItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         surveySourceItem = new CustomSelectItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
         collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         infSuppliersOrganItem = new ExternalMultipleSelectItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliersOrg());
@@ -524,10 +503,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         });
         freqCollItem = new CustomSelectItem(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
         freqCollItem.setMultiple(true);
-        dataValidationItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
-        dataCompilationItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
-        adjustmentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
-        costBurdenItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
+        dataValidationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
+        dataCompilationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
+        adjustmentItem = new MultilanguageRichTextEditorItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
+        costBurdenItem = new MultilanguageRichTextEditorItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
         costItem = new CustomSelectItem(InstanceDS.COST, getConstants().instanceCost());
         costItem.setMultiple(true);
         productionEditionForm.setFields(internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem, infSuppliersConceptsItem,
@@ -540,26 +519,26 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Quality Descriptors
         qualityEditionForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        qualityDocItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
-        qualityAssureItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
-        qualityAssesmentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
-        userNeedsItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
-        userSatItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
-        completenessItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
-        timelinessItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
-        punctualityItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
-        accuracyOverallItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
-        samplingErrItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
-        nonSamplingErrItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
-        coherXDomItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
-        coherInternalItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
+        qualityDocItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
+        qualityAssureItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
+        qualityAssesmentItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
+        userNeedsItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
+        userSatItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
+        completenessItem = new MultilanguageRichTextEditorItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
+        timelinessItem = new MultilanguageRichTextEditorItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
+        punctualityItem = new MultilanguageRichTextEditorItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
+        accuracyOverallItem = new MultilanguageRichTextEditorItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
+        samplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
+        nonSamplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
+        coherXDomItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
+        coherInternalItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
         qualityEditionForm.setFields(qualityDocItem, qualityAssureItem, qualityAssesmentItem, userNeedsItem, userSatItem, completenessItem, timelinessItem, punctualityItem, accuracyOverallItem,
                 samplingErrItem, nonSamplingErrItem, coherXDomItem, coherInternalItem);
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        commentItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.COMMENTS, getConstants().instanceComments());
-        notesItem = new MultiLanguageTextAreaAndUrlItem(InstanceDS.NOTES, getConstants().instanceNotes());
+        commentItem = new MultilanguageRichTextEditorItem(InstanceDS.COMMENTS, getConstants().instanceComments());
+        notesItem = new MultilanguageRichTextEditorItem(InstanceDS.NOTES, getConstants().instanceNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         mainFormLayout.addEditionCanvas(identifiersEditionForm);
@@ -602,39 +581,42 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionViewForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate());
         productionViewForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
 
-        // Diffusion and Publication
-        diffusionViewForm.setValue(InstanceDS.INVENTORY_DATE, instanceDto.getInventoryDate());
-        staticDocMethodItem.setValue(instanceDto.getDocMethod(), instanceDto.getDocMethodUrl());
+        productionViewForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));
         productionViewForm.setValue(InstanceDS.SURVEY_SOURCE, instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getIdentifier() : "");
         productionViewForm.setValue(InstanceDS.COLL_METHOD, instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getIdentifier() : "");
         productionViewForm.setValue(InstanceDS.INFORMATION_SUPPLIERS, ExternalItemUtils.getExternalItemListToString(instanceDto.getInformationSuppliers()));
         productionViewForm.setValue(InstanceDS.FREQ_COLL, ExternalItemUtils.getExternalItemListToString(instanceDto.getFreqColl()));
-        staticDataValidationItem.setValue(instanceDto.getDataValidation(), instanceDto.getDataValidationUrl());
-        staticDataCompilationItem.setValue(instanceDto.getDataCompilation(), instanceDto.getDataCompilationUrl());
-        staticAdjustmentItem.setValue(instanceDto.getAdjustment(), instanceDto.getAdjustmentUrl());
-        staticCostBurdenItem.setValue(instanceDto.getCostBurden(), instanceDto.getCostBurdenUrl());
+
+        productionViewForm.setValue(InstanceDS.DATA_VALIDATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataValidation()));
+        productionViewForm.setValue(InstanceDS.DATA_COMPILATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataCompilation()));
+        productionViewForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));
+        productionViewForm.setValue(InstanceDS.COST_BURDEN, RecordUtils.getInternationalStringRecord(instanceDto.getCostBurden()));
+
         productionViewForm.setValue(InstanceDS.COST, OperationsListUtils.getCostDtoListToString(instanceDto.getCost()));
 
+        // Diffusion and Publication
+        diffusionViewForm.setValue(InstanceDS.INVENTORY_DATE, instanceDto.getInventoryDate());
+
         // Quality Descriptors
-        staticQualityDocItem.setValue(instanceDto.getQualityDoc(), instanceDto.getQualityDocUrl());
-        staticQualityAssureItem.setValue(instanceDto.getQualityAssure(), instanceDto.getQualityAssureUrl());
-        staticQualityAssesmentItem.setValue(instanceDto.getQualityAssmnt(), instanceDto.getQualityAssmntUrl());
-        staticUserNeedsItem.setValue(instanceDto.getUserNeeds(), instanceDto.getUserNeedsUrl());
-        staticUserSatItem.setValue(instanceDto.getUserSat(), instanceDto.getUserSatUrl());
-        staticCompletenessItem.setValue(instanceDto.getCompleteness(), instanceDto.getCompletenessUrl());
-        staticTimelinessItem.setValue(instanceDto.getTimeliness(), instanceDto.getTimelinessUrl());
-        staticPunctualityItem.setValue(instanceDto.getPunctuality(), instanceDto.getPunctualityUrl());
-        staticAccuracyOverallItem.setValue(instanceDto.getAccuracyOverall(), instanceDto.getAccuracyOverallUrl());
-        staticSamplingErrItem.setValue(instanceDto.getSamplingErr(), instanceDto.getSamplingErrUrl());
-        statocNonSamplingErrItem.setValue(instanceDto.getNonsamplingErr(), instanceDto.getNonsamplingErrUrl());
-        staticCoherXDomItem.setValue(instanceDto.getCoherXDomain(), instanceDto.getCoherXDomainUrl());
-        staticCoherInternalItem.setValue(instanceDto.getCoherInternal(), instanceDto.getCoherInternalUrl());
+        qualityViewForm.setValue(InstanceDS.QUALITY_DOC, RecordUtils.getInternationalStringRecord(instanceDto.getQualityDoc()));
+        qualityViewForm.setValue(InstanceDS.QUALITY_ASSURE, RecordUtils.getInternationalStringRecord(instanceDto.getQualityAssure()));
+        qualityViewForm.setValue(InstanceDS.QUALITY_ASSMNT, RecordUtils.getInternationalStringRecord(instanceDto.getQualityAssmnt()));
+        qualityViewForm.setValue(InstanceDS.USER_NEEDS, RecordUtils.getInternationalStringRecord(instanceDto.getUserNeeds()));
+        qualityViewForm.setValue(InstanceDS.USER_SAT, RecordUtils.getInternationalStringRecord(instanceDto.getUserSat()));
+        qualityViewForm.setValue(InstanceDS.COMPLETENESS, RecordUtils.getInternationalStringRecord(instanceDto.getCompleteness()));
+        qualityViewForm.setValue(InstanceDS.TIMELINESS, RecordUtils.getInternationalStringRecord(instanceDto.getTimeliness()));
+        qualityViewForm.setValue(InstanceDS.PUNCTUALITY, RecordUtils.getInternationalStringRecord(instanceDto.getPunctuality()));
+        qualityViewForm.setValue(InstanceDS.ACCURACY_OVERALL, RecordUtils.getInternationalStringRecord(instanceDto.getAccuracyOverall()));
+        qualityViewForm.setValue(InstanceDS.SAMPLING_ERROR, RecordUtils.getInternationalStringRecord(instanceDto.getSamplingErr()));
+        qualityViewForm.setValue(InstanceDS.NONSAMPLING_ERR, RecordUtils.getInternationalStringRecord(instanceDto.getNonsamplingErr()));
+        qualityViewForm.setValue(InstanceDS.COHER_X_DOM, RecordUtils.getInternationalStringRecord(instanceDto.getCoherXDomain()));
+        qualityViewForm.setValue(InstanceDS.COHER_INTERNAL, RecordUtils.getInternationalStringRecord(instanceDto.getCoherInternal()));
         qualityViewForm.redraw();
         qualityViewForm.setRedrawOnResize(true);
 
         // Annotations
-        staticCommentItem.setValue(instanceDto.getComment(), instanceDto.getCommentUrl());
-        staticNotesItem.setValue(instanceDto.getNotes(), instanceDto.getNotesUrl());
+        annotationsViewForm.setValue(InstanceDS.COMMENTS, RecordUtils.getInternationalStringRecord(instanceDto.getComment()));
+        annotationsViewForm.setValue(InstanceDS.NOTES, RecordUtils.getInternationalStringRecord(instanceDto.getNotes()));
     }
 
     private void setEditionForm(InstanceDto instanceDto) {
@@ -671,39 +653,39 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionEditionForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
         productionEditionForm.setValue(InstanceDS.PROC_STATUS_VIEW, instanceDto.getProcStatus().getName());
 
-        docMethodItem.setValue(instanceDto.getDocMethod(), instanceDto.getDocMethodUrl());
+        productionEditionForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));
         surveySourceItem.setValue(instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getId() : "");
         collMethodItem.setValue(instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getId() : "");
         infSuppliersConceptsItem.clearValue();
         infSuppliersConceptsItem.clearValue();
         freqCollItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getFreqColl()));
-        dataValidationItem.setValue(instanceDto.getDataValidation(), instanceDto.getDataValidationUrl());
-        dataCompilationItem.setValue(instanceDto.getDataCompilation(), instanceDto.getDataCompilationUrl());
-        adjustmentItem.setValue(instanceDto.getAdjustment(), instanceDto.getAdjustmentUrl());
-        costBurdenItem.setValue(instanceDto.getCostBurden(), instanceDto.getCostBurdenUrl());
+        productionEditionForm.setValue(InstanceDS.DATA_VALIDATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataValidation()));
+        productionEditionForm.setValue(InstanceDS.DATA_COMPILATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataCompilation()));
+        productionEditionForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));
+        productionEditionForm.setValue(InstanceDS.COST_BURDEN, RecordUtils.getInternationalStringRecord(instanceDto.getCostBurden()));
         costItem.setValues(getCostIds(instanceDto.getCost()));
 
         // Diffusion and Publication
         diffusionEditionForm.setValue(InstanceDS.INVENTORY_DATE, instanceDto.getInventoryDate());
 
         // Quality Descriptors
-        qualityDocItem.setValue(instanceDto.getQualityDoc(), instanceDto.getQualityDocUrl());
-        qualityAssureItem.setValue(instanceDto.getQualityAssure(), instanceDto.getQualityAssureUrl());
-        qualityAssesmentItem.setValue(instanceDto.getQualityAssmnt(), instanceDto.getQualityAssmntUrl());
-        userNeedsItem.setValue(instanceDto.getUserNeeds(), instanceDto.getUserNeedsUrl());
-        userSatItem.setValue(instanceDto.getUserSat(), instanceDto.getUserSatUrl());
-        completenessItem.setValue(instanceDto.getCompleteness(), instanceDto.getCompletenessUrl());
-        timelinessItem.setValue(instanceDto.getTimeliness(), instanceDto.getTimelinessUrl());
-        punctualityItem.setValue(instanceDto.getPunctuality(), instanceDto.getPunctualityUrl());
-        accuracyOverallItem.setValue(instanceDto.getAccuracyOverall(), instanceDto.getAccuracyOverallUrl());
-        samplingErrItem.setValue(instanceDto.getSamplingErr(), instanceDto.getSamplingErrUrl());
-        nonSamplingErrItem.setValue(instanceDto.getNonsamplingErr(), instanceDto.getNonsamplingErrUrl());
-        coherXDomItem.setValue(instanceDto.getCoherXDomain(), instanceDto.getCoherXDomainUrl());
-        coherInternalItem.setValue(instanceDto.getCoherInternal(), instanceDto.getCoherInternalUrl());
+        qualityEditionForm.setValue(InstanceDS.QUALITY_DOC, RecordUtils.getInternationalStringRecord(instanceDto.getQualityDoc()));
+        qualityEditionForm.setValue(InstanceDS.QUALITY_ASSURE, RecordUtils.getInternationalStringRecord(instanceDto.getQualityAssure()));
+        qualityEditionForm.setValue(InstanceDS.QUALITY_ASSMNT, RecordUtils.getInternationalStringRecord(instanceDto.getQualityAssmnt()));
+        qualityEditionForm.setValue(InstanceDS.USER_NEEDS, RecordUtils.getInternationalStringRecord(instanceDto.getUserNeeds()));
+        qualityEditionForm.setValue(InstanceDS.USER_SAT, RecordUtils.getInternationalStringRecord(instanceDto.getUserSat()));
+        qualityEditionForm.setValue(InstanceDS.COMPLETENESS, RecordUtils.getInternationalStringRecord(instanceDto.getCompleteness()));
+        qualityEditionForm.setValue(InstanceDS.TIMELINESS, RecordUtils.getInternationalStringRecord(instanceDto.getTimeliness()));
+        qualityEditionForm.setValue(InstanceDS.PUNCTUALITY, RecordUtils.getInternationalStringRecord(instanceDto.getPunctuality()));
+        qualityEditionForm.setValue(InstanceDS.ACCURACY_OVERALL, RecordUtils.getInternationalStringRecord(instanceDto.getAccuracyOverall()));
+        qualityEditionForm.setValue(InstanceDS.SAMPLING_ERROR, RecordUtils.getInternationalStringRecord(instanceDto.getSamplingErr()));
+        qualityEditionForm.setValue(InstanceDS.NONSAMPLING_ERR, RecordUtils.getInternationalStringRecord(instanceDto.getNonsamplingErr()));
+        qualityEditionForm.setValue(InstanceDS.COHER_X_DOM, RecordUtils.getInternationalStringRecord(instanceDto.getCoherXDomain()));
+        qualityEditionForm.setValue(InstanceDS.COHER_INTERNAL, RecordUtils.getInternationalStringRecord(instanceDto.getCoherInternal()));
 
         // Annotations
-        commentItem.setValue(instanceDto.getComment(), instanceDto.getCommentUrl());
-        notesItem.setValue(instanceDto.getNotes(), instanceDto.getNotesUrl());
+        annotationsEditionForm.setValue(InstanceDS.COMMENTS, RecordUtils.getInternationalStringRecord(instanceDto.getComment()));
+        annotationsEditionForm.setValue(InstanceDS.NOTES, RecordUtils.getInternationalStringRecord(instanceDto.getNotes()));
 
         identifiersEditionForm.markForRedraw();
         productionEditionForm.markForRedraw();
