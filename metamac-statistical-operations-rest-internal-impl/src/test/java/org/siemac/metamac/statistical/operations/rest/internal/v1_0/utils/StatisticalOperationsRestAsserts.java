@@ -8,6 +8,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 
 public class StatisticalOperationsRestAsserts {
 
@@ -122,18 +123,33 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
     }
 
-    public static void assertEqualsFamilies(FamiliesNoPagedResult expecteds, FamiliesNoPagedResult actuals) {
+    public static void assertEqualsFamiliesNoPagedResult(FamiliesNoPagedResult expecteds, FamiliesNoPagedResult actuals) {
         MetamacRestAsserts.assertEqualsNoPagedResult(expecteds, actuals);
         assertEquals(expecteds.getItems().size(), actuals.getItems().size());
         for (Family expected : expecteds.getItems()) {
-            boolean existsFamily = false;
+            boolean exists = false;
             for (Family actual : actuals.getItems()) {
                 if (expected.getId().equals(actual.getId())) {
-                    existsFamily = true;
+                    exists = true;
                     assertEqualsFamily(expected, actual);
                 }
             }
-            assertTrue(existsFamily);
+            assertTrue(exists);
+        }
+    }
+    
+    public static void assertEqualsOperationsPagedResult(OperationsPagedResult expecteds, OperationsPagedResult actuals) {
+        MetamacRestAsserts.assertEqualsPagedResult(expecteds, actuals);
+        assertEquals(expecteds.getItems().size(), actuals.getItems().size());
+        for (Operation expected : expecteds.getItems()) {
+            boolean exists = false;
+            for (Operation actual : actuals.getItems()) {
+                if (expected.getId().equals(actual.getId())) {
+                    exists = true;
+                    assertEqualsOperation(expected, actual);
+                }
+            }
+            assertTrue(exists);
         }
     }
 }

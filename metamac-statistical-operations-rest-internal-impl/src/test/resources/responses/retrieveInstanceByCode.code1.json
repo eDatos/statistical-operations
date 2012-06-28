@@ -1,19 +1,19 @@
 {
-  "id": "Instance1",
+  "id": "instance1",
   "kind": "statisticalOperations#instance",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/Instance1"
+    "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1"
   },
   "title": {
     "texts": [
       {
         "locale": "es",
-        "label": "Título 1 en español"
+        "label": "Título instance instance1"
       },
       {
         "locale": "en",
-        "label": "Title 1 in English"
+        "label": "Title instance instance1"
       }
     ]
   },
@@ -30,61 +30,61 @@
     ]
   },
   "survey": {
-    "id": "Operation1",
+    "id": "operation1",
     "kind": "statisticalOperations#operation",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1"
     },
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título operation Operation1"
+          "locale": "en",
+          "label": "Title operation operation1"
         },
         {
-          "locale": "en",
-          "label": "Title operation Operation1"
+          "locale": "es",
+          "label": "Título operation operation1"
         }
       ]
     }
   },
   "successor": {
-    "id": "instanceCode22",
+    "id": "instance22",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
     },
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title instance instanceCode22"
+          "locale": "es",
+          "label": "Título instance instance22"
         },
         {
-          "locale": "es",
-          "label": "Título instance instanceCode22"
+          "locale": "en",
+          "label": "Title instance instance22"
         }
       ]
     }
   },
   "predecessor": {
-    "id": "instanceCode333",
+    "id": "instance333",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
     },
     "title": {
       "texts": [
         {
           "locale": "en",
-          "label": "Title instance instanceCode333"
+          "label": "Title instance instance333"
         },
         {
           "locale": "es",
-          "label": "Título instance instanceCode333"
+          "label": "Título instance instance333"
         }
       ]
     }
@@ -104,30 +104,30 @@
   "statisticalPopulation": {
     "texts": [
       {
-        "locale": "en",
-        "label": "StatisticalPopulation 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Carga de Estadísticas 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "StatisticalPopulation 1 in English"
       }
     ]
   },
   "statisticalUnits": [
-    {
-      "id": "statisticalUnit22",
-      "kind": "DATASTRUCTURE",
-      "link": {
-        "rel": "self",
-        "href": "http://statisticalUnit22"
-      }
-    },
     {
       "id": "statisticalUnit1",
       "kind": "DATASTRUCTURE",
       "link": {
         "rel": "self",
         "href": "http://statisticalUnit1"
+      }
+    },
+    {
+      "id": "statisticalUnit22",
+      "kind": "DATASTRUCTURE",
+      "link": {
+        "rel": "self",
+        "href": "http://statisticalUnit22"
       }
     }
   ],
@@ -185,12 +185,12 @@
   "statConcDef": {
     "texts": [
       {
-        "locale": "es",
-        "label": "StatConcDef 1 en español"
-      },
-      {
         "locale": "en",
         "label": "StatConcDef 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "StatConcDef 1 en español"
       }
     ]
   },
@@ -204,19 +204,19 @@
       }
     },
     {
-      "id": "statConcDefList333",
-      "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList333"
-      }
-    },
-    {
       "id": "statConcDefList1",
       "kind": "CODELIST",
       "link": {
         "rel": "self",
         "href": "http://statConcDefList1"
+      }
+    },
+    {
+      "id": "statConcDefList333",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList333"
       }
     }
   ],
@@ -234,19 +234,19 @@
   },
   "classSystemLists": [
     {
-      "id": "statConcDefList22",
-      "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList22"
-      }
-    },
-    {
       "id": "statConcDefList1",
       "kind": "CODELIST",
       "link": {
         "rel": "self",
         "href": "http://statConcDefList1"
+      }
+    },
+    {
+      "id": "statConcDefList22",
+      "kind": "CODELIST",
+      "link": {
+        "rel": "self",
+        "href": "http://statConcDefList22"
       }
     }
   ],
@@ -284,12 +284,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título surveySource surveySource1"
-        },
-        {
           "locale": "en",
           "label": "Title surveySource surveySource1"
+        },
+        {
+          "locale": "es",
+          "label": "Título surveySource surveySource1"
         }
       ]
     }
@@ -352,24 +352,24 @@
   "dataCompilation": {
     "texts": [
       {
-        "locale": "en",
-        "label": "DataCompilation 1 in English"
-      },
-      {
         "locale": "es",
         "label": "DataCompilation 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "DataCompilation 1 in English"
       }
     ]
   },
   "adjustment": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Adjustment 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Adjustment 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Adjustment 1 in English"
       }
     ]
   },
@@ -387,31 +387,31 @@
   },
   "costs": [
     {
-      "id": "cost333",
+      "id": "cost1",
       "title": {
         "texts": [
           {
             "locale": "es",
-            "label": "Título cost cost333"
+            "label": "Título cost cost1"
           },
           {
             "locale": "en",
-            "label": "Title cost cost333"
+            "label": "Title cost cost1"
           }
         ]
       }
     },
     {
-      "id": "cost1",
+      "id": "cost333",
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "Title cost cost1"
+            "label": "Title cost cost333"
           },
           {
             "locale": "es",
-            "label": "Título cost cost1"
+            "label": "Título cost cost333"
           }
         ]
       }
@@ -421,12 +421,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título cost cost4444"
-          },
-          {
             "locale": "en",
             "label": "Title cost cost4444"
+          },
+          {
+            "locale": "es",
+            "label": "Título cost cost4444"
           }
         ]
       }
@@ -436,12 +436,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título cost cost22"
-          },
-          {
             "locale": "en",
             "label": "Title cost cost22"
+          },
+          {
+            "locale": "es",
+            "label": "Título cost cost22"
           }
         ]
       }
@@ -451,12 +451,12 @@
   "qualityDoc": {
     "texts": [
       {
-        "locale": "en",
-        "label": "QualityDoc 1 in English"
-      },
-      {
         "locale": "es",
         "label": "QualityDoc 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "QualityDoc 1 in English"
       }
     ]
   },
@@ -499,36 +499,36 @@
   "userSat": {
     "texts": [
       {
-        "locale": "en",
-        "label": "UserSat 1 in English"
-      },
-      {
         "locale": "es",
         "label": "UserSat 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "UserSat 1 in English"
       }
     ]
   },
   "completeness": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Completeness 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Completeness 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Completeness 1 en español"
       }
     ]
   },
   "timeliness": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Timeliness 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Timeliness 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Timeliness 1 en español"
       }
     ]
   },
@@ -547,12 +547,12 @@
   "accuracyOverall": {
     "texts": [
       {
-        "locale": "es",
-        "label": "AccuracyOverall 1 en español"
-      },
-      {
         "locale": "en",
         "label": "AccuracyOverall 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "AccuracyOverall 1 en español"
       }
     ]
   },
@@ -571,24 +571,24 @@
   "nonsamplingErr": {
     "texts": [
       {
-        "locale": "es",
-        "label": "NonsamplingErr 1 en español"
-      },
-      {
         "locale": "en",
         "label": "NonsamplingErr 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "NonsamplingErr 1 en español"
       }
     ]
   },
   "coherXDom": {
     "texts": [
       {
-        "locale": "es",
-        "label": "CoherXDom 1 en español"
-      },
-      {
         "locale": "en",
         "label": "CoherXDom 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "CoherXDom 1 en español"
       }
     ]
   },
@@ -619,12 +619,12 @@
   "notes": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Notes 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Notas 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Notes 1 in English"
       }
     ]
   },
@@ -632,7 +632,7 @@
     "kind": "statisticalOperations#operation",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1"
     }
   }
 }

@@ -1,19 +1,19 @@
 {
-  "id": "Family1",
+  "id": "family1",
   "kind": "statisticalOperations#family",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/families/Family1"
+    "href": "http://localhost:9001/internal/v1.0/families/family1"
   },
   "title": {
     "texts": [
       {
         "locale": "es",
-        "label": "Título 1 en español"
+        "label": "Título family family1"
       },
       {
         "locale": "en",
-        "label": "Title 1 in English"
+        "label": "Title family family1"
       }
     ]
   },
@@ -32,12 +32,12 @@
   "description": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Descripción 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Description 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Descripción 1 en español"
       }
     ]
   },
@@ -56,7 +56,7 @@
       "kind": "statisticalOperations#operations",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/Family1/operations"
+        "href": "http://localhost:9001/internal/v1.0/families/family1/operations"
       }
     }
   ]

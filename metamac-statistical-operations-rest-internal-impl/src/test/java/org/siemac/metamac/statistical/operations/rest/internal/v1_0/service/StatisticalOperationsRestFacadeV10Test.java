@@ -27,6 +27,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationCode1Matcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationCode1PaginatorMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
@@ -47,9 +48,9 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     private static String                             NOT_EXISTS         = "NOT_EXISTS";
 
     // Operations
-    public static String                              OPERATION_CODE1    = "Operation1";
-    public static String                              FAMILY_CODE1       = "Family1";
-    public static String                              INSTANCE_CODE1     = "Instance1";
+    public static String                              OPERATION_CODE1    = "operation1";
+    public static String                              FAMILY_CODE1       = "family1";
+    public static String                              INSTANCE_CODE1     = "instance1";
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -343,7 +344,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         FamiliesNoPagedResult familiesNoPagedResult = statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(OPERATION_CODE1);
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsFamiliesNoPagedResult(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
     }
 
     @Test

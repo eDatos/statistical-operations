@@ -1,71 +1,71 @@
 {
-  "id": "Operation1",
+  "id": "operation1",
   "kind": "statisticalOperations#operation",
   "link": {
     "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/operations/Operation1"
+    "href": "http://localhost:9001/internal/v1.0/operations/operation1"
   },
   "title": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Título operation Operation1"
+        "locale": "en",
+        "label": "Title operation operation1"
       },
       {
-        "locale": "en",
-        "label": "Title operation Operation1"
+        "locale": "es",
+        "label": "Título operation operation1"
       }
     ]
   },
   "acronym": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Acronym 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Acrónimo 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Acronym 1 in English"
       }
     ]
   },
   "families": [
     {
-      "id": "familyCode22",
+      "id": "family2",
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/familyCode22"
+        "href": "http://localhost:9001/internal/v1.0/families/family2"
       },
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "Title family familyCode22"
+            "label": "Title family family2"
           },
           {
             "locale": "es",
-            "label": "Título family familyCode22"
+            "label": "Título family family2"
           }
         ]
       }
     },
     {
-      "id": "familyCode1",
+      "id": "family1",
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/familyCode1"
+        "href": "http://localhost:9001/internal/v1.0/families/family1"
       },
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título family familyCode1"
+            "locale": "en",
+            "label": "Title family family1"
           },
           {
-            "locale": "en",
-            "label": "Title family familyCode1"
+            "locale": "es",
+            "label": "Título family family1"
           }
         ]
       }
@@ -81,14 +81,6 @@
   },
   "secondarySubjectAreas": [
     {
-      "id": "secundarySubjectArea1",
-      "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea1"
-      }
-    },
-    {
       "id": "secundarySubjectArea22",
       "kind": "CATEGORY",
       "link": {
@@ -102,6 +94,14 @@
       "link": {
         "rel": "self",
         "href": "http://secundarySubjectArea333"
+      }
+    },
+    {
+      "id": "secundarySubjectArea1",
+      "kind": "CATEGORY",
+      "link": {
+        "rel": "self",
+        "href": "http://secundarySubjectArea1"
       }
     }
   ],
@@ -131,81 +131,81 @@
   },
   "instances": [
     {
+      "id": "instance4444",
+      "kind": "statisticalOperations#instance",
+      "link": {
+        "rel": "self",
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444"
+      },
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title instance instance4444"
+          },
+          {
+            "locale": "es",
+            "label": "Título instance instance4444"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance22",
+      "kind": "statisticalOperations#instance",
+      "link": {
+        "rel": "self",
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
+      },
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title instance instance22"
+          },
+          {
+            "locale": "es",
+            "label": "Título instance instance22"
+          }
+        ]
+      }
+    },
+    {
       "id": "instance1",
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instance1"
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1"
       },
       "title": {
         "texts": [
-          {
-            "locale": "en",
-            "label": "Title instance instance1"
-          },
           {
             "locale": "es",
             "label": "Título instance instance1"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance1"
           }
         ]
       }
     },
     {
-      "id": "instanceCode1",
+      "id": "instance333",
       "kind": "statisticalOperations#instance",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode1"
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
       },
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title instance instanceCode1"
+            "locale": "es",
+            "label": "Título instance instance333"
           },
           {
-            "locale": "es",
-            "label": "Título instance instanceCode1"
-          }
-        ]
-      }
-    },
-    {
-      "id": "instanceCode22",
-      "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
-      },
-      "title": {
-        "texts": [
-          {
             "locale": "en",
-            "label": "Title instance instanceCode22"
-          },
-          {
-            "locale": "es",
-            "label": "Título instance instanceCode22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "instanceCode333",
-      "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
-      },
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Title instance instanceCode333"
-          },
-          {
-            "locale": "es",
-            "label": "Título instance instanceCode333"
+            "label": "Title instance instance333"
           }
         ]
       }
@@ -231,12 +231,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título officialityType officialityTypeIdentifier"
-        },
-        {
           "locale": "en",
           "label": "Title officialityType officialityTypeIdentifier"
+        },
+        {
+          "locale": "es",
+          "label": "Título officialityType officialityTypeIdentifier"
         }
       ]
     }
@@ -288,19 +288,19 @@
   ],
   "regionalContributors": [
     {
-      "id": "regionalContributor1",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalContributor1"
-      }
-    },
-    {
       "id": "regionalContributor22",
       "kind": "AGENCY",
       "link": {
         "rel": "self",
         "href": "http://regionalContributor22"
+      }
+    },
+    {
+      "id": "regionalContributor1",
+      "kind": "AGENCY",
+      "link": {
+        "rel": "self",
+        "href": "http://regionalContributor1"
       }
     }
   ],
@@ -309,14 +309,6 @@
   "status": "DESIGN",
   "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
-    {
-      "id": "publisher1",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://publisher1"
-      }
-    },
     {
       "id": "publisher333",
       "kind": "AGENCY",
@@ -331,6 +323,14 @@
       "link": {
         "rel": "self",
         "href": "http://publisher22"
+      }
+    },
+    {
+      "id": "publisher1",
+      "kind": "AGENCY",
+      "link": {
+        "rel": "self",
+        "href": "http://publisher1"
       }
     }
   ],
@@ -383,41 +383,41 @@
     }
   ],
   "currentInternalInstance": {
-    "id": "instanceCode22",
+    "id": "instance22",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode22"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
     },
     "title": {
       "texts": [
         {
           "locale": "en",
-          "label": "Title instance instanceCode22"
+          "label": "Title instance instance22"
         },
         {
           "locale": "es",
-          "label": "Título instance instanceCode22"
+          "label": "Título instance instance22"
         }
       ]
     }
   },
   "currentInstance": {
-    "id": "instanceCode333",
+    "id": "instance333",
     "kind": "statisticalOperations#instance",
     "link": {
       "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances/instanceCode333"
+      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
     },
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title instance instanceCode333"
+          "locale": "es",
+          "label": "Título instance instance333"
         },
         {
-          "locale": "es",
-          "label": "Título instance instanceCode333"
+          "locale": "en",
+          "label": "Title instance instance333"
         }
       ]
     }
@@ -426,24 +426,24 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "es",
-        "label": "RevPolicy 1 en español"
-      },
-      {
         "locale": "en",
         "label": "RevPolicy 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "RevPolicy 1 en español"
       }
     ]
   },
   "revPractice": {
     "texts": [
       {
-        "locale": "es",
-        "label": "RevPractice 1 en español"
-      },
-      {
         "locale": "en",
         "label": "RevPractice 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "RevPractice 1 en español"
       }
     ]
   },
@@ -483,14 +483,14 @@
       "kind": "statisticalOperations#instances",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/instances"
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances"
       }
     },
     {
       "kind": "statisticalOperations#families",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/Operation1/families"
+        "href": "http://localhost:9001/internal/v1.0/operations/operation1/families"
       }
     }
   ]

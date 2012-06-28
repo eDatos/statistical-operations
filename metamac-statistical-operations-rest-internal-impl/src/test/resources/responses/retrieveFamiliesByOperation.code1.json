@@ -3,33 +3,33 @@
   "total": 2,
   "items": [
     {
-      "id": "Family1",
+      "id": "family1",
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/Family1"
+        "href": "http://localhost:9001/internal/v1.0/families/family1"
       },
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title 1 in English"
+            "locale": "es",
+            "label": "Título family family1"
           },
           {
-            "locale": "es",
-            "label": "Título 1 en español"
+            "locale": "en",
+            "label": "Title family family1"
           }
         ]
       },
       "acronym": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Acrónimo 1 en español"
-          },
-          {
             "locale": "en",
             "label": "Acronym 1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "Acrónimo 1 en español"
           }
         ]
       },
@@ -60,39 +60,39 @@
           "kind": "statisticalOperations#operations",
           "link": {
             "rel": "self",
-            "href": "http://localhost:9001/internal/v1.0/families/Family1/operations"
+            "href": "http://localhost:9001/internal/v1.0/families/family1/operations"
           }
         }
       ]
     },
     {
-      "id": "Family2",
+      "id": "family2",
       "kind": "statisticalOperations#family",
       "link": {
         "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/Family2"
+        "href": "http://localhost:9001/internal/v1.0/families/family2"
       },
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title 2 in English"
+            "locale": "es",
+            "label": "Título family family2"
           },
           {
-            "locale": "es",
-            "label": "Título 2 en español"
+            "locale": "en",
+            "label": "Title family family2"
           }
         ]
       },
       "acronym": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Acrónimo 2 en español"
-          },
-          {
             "locale": "en",
             "label": "Acronym 2 in English"
+          },
+          {
+            "locale": "es",
+            "label": "Acrónimo 2 en español"
           }
         ]
       },
@@ -108,9 +108,9 @@
           }
         ]
       },
-      "internalInventoryDate": "2011-01-03T06:16:17.000+0000",
+      "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
       "procStatus": "PUBLISH_EXTERNALLY",
-      "inventoryDate": "2013-05-14T22:15:14.000+0000",
+      "inventoryDate": "2013-02-04T13:15:14.000+0000",
       "parent": {
         "kind": "statisticalOperations#families",
         "link": {
@@ -123,7 +123,7 @@
           "kind": "statisticalOperations#operations",
           "link": {
             "rel": "self",
-            "href": "http://localhost:9001/internal/v1.0/families/Family2/operations"
+            "href": "http://localhost:9001/internal/v1.0/families/family2/operations"
           }
         }
       ]
