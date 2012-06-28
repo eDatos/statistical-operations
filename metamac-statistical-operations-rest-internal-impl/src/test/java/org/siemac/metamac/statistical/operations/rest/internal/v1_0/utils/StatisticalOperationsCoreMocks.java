@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
@@ -103,11 +104,14 @@ public class StatisticalOperationsCoreMocks {
         return family;
     }
     
-    public static List<Family> mockFamiliesOperation1() {
+    public static PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> mockFamiliesOperation1() {
+        
         List<Family> families = new ArrayList<Family>();
         families.add(mockFamily1());
         families.add(mockFamily2());
-        return families;
+        
+        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesPagedResult = new PagedResult<Family>(families, 0, 2, 2, 2, -1);
+        return familiesPagedResult;
     }
 
     public static Instance mockInstance1() {

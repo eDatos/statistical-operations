@@ -27,7 +27,8 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.FindFamiliesByOperationCode1Matcher;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationCode1Matcher;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationCode1PaginatorMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestMocks;
@@ -80,8 +81,9 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         // Families
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
-        when(statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperationCode1Matcher()))).thenReturn(
-                StatisticalOperationsCoreMocks.mockFamiliesOperation1());
+        when(
+                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperationCode1Matcher()),
+                        argThat(new FindFamiliesByOperationCode1PaginatorMatcher()))).thenReturn(StatisticalOperationsCoreMocks.mockFamiliesOperation1());
         // Instances
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockInstance1());
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
@@ -332,13 +334,6 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
-    }
-
-    // TODO testear findOperations
-    @Test
-    @Ignore
-    public void testFindOperations() throws Exception {
-        // org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations operations = statisticalOperationsRestFacadeClient.findOperations();
     }
 
     @Test

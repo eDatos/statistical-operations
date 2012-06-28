@@ -13,16 +13,6 @@
  	
 	<resources base="URL_RESOURCES_BASE">
 		<resource id="statisticalOperationsRestFacadeV10">
-			<resource path="/operations">
-				<method name="GET" id="findOperations">
-	                <request>
-	                </request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:operations"/> 
-                        <representation mediaType="application/json" element="domain:operations"/> 
-	                </response>
-				</method>
-			</resource>
 			<resource path="operations/{code}">
 				<method name="GET" id="retrieveOperationByCode">
 					<request>
