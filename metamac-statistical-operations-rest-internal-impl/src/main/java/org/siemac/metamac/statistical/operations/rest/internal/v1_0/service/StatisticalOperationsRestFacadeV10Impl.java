@@ -1,12 +1,15 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.ext.MessageContext;
+import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
+import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
@@ -15,8 +18,10 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.exception.RestException;
+import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -67,6 +72,35 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Transform and return
             Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
             return operation;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+
+    @Override
+    public FamiliesNoPagedResult retrieveFamiliesByOperation(String code) {
+        try {
+            // TODO Validation of parameters. validar code?
+
+            // Validate operation exists and it is published
+            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, code);
+            if (operationEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationEntity.getProcStatus()))) {
+                // Operation not found
+                Error error = getError(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+                throw new RestException(error, Status.NOT_FOUND);
+            }
+
+            // Retrieve families
+            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
+                    .withProperty(FamilyProperties.operations().code()).eq(code).withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
+                    .build();
+            List<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntities = statisticalOperationsBaseService.findFamilyByCondition(serviceContextRestInternal,
+                    conditionalCriteria);
+
+            // Transform and return
+            FamiliesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesNoPagedResult(familiesEntities, getApiUrl());
+            return familiesNoPagedResult;
 
         } catch (MetamacException e) {
             throw manageException(e);

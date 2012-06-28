@@ -1,5 +1,8 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
@@ -23,7 +26,6 @@ public class StatisticalOperationsCoreMocks {
     public static Operation mockOperation1() {
 
         Operation operation = new Operation();
-
         operation.setCode("Operation1");
         operation.setTitle(mockInternationalString("es", "Título operation Operation1", "en", "Title operation Operation1"));
         operation.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
@@ -76,7 +78,6 @@ public class StatisticalOperationsCoreMocks {
     public static Family mockFamily1() {
 
         Family family = new Family();
-
         family.setCode("Family1");
         family.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         family.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));
@@ -87,11 +88,31 @@ public class StatisticalOperationsCoreMocks {
         family.addOperation(mockOperation1());
         return family;
     }
+    
+    public static Family mockFamily2() {
+
+        Family family = new Family();
+        family.setCode("Family2");
+        family.setTitle(mockInternationalString("es", "Título 2 en español", "en", "Title 2 in English"));
+        family.setAcronym(mockInternationalString("es", "Acrónimo 2 en español", "en", "Acronym 2 in English"));
+        family.setDescription(mockInternationalString("es", "Descripción 2 en español", "en", "Description 2 in English"));
+        family.setInternalInventoryDate(new DateTime(2011, 1, 3, 6, 16, 17, 0));
+        family.setProcStatus(ProcStatusEnum.PUBLISH_EXTERNALLY);
+        family.setInventoryDate(new DateTime(2013, 5, 14, 23, 15, 14, 0));
+        family.addOperation(mockOperation1());
+        return family;
+    }
+    
+    public static List<Family> mockFamiliesOperation1() {
+        List<Family> families = new ArrayList<Family>();
+        families.add(mockFamily1());
+        families.add(mockFamily2());
+        return families;
+    }
 
     public static Instance mockInstance1() {
 
         Instance instance = new Instance();
-
         instance.setCode("Instance1");
         instance.setTitle(mockInternationalString("es", "Título 1 en español", "en", "Title 1 in English"));
         instance.setAcronym(mockInternationalString("es", "Acrónimo 1 en español", "en", "Acronym 1 in English"));

@@ -1,8 +1,10 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -118,5 +120,20 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getchildren(), actual.getchildren());
+    }
+
+    public static void assertEqualsFamilies(FamiliesNoPagedResult expecteds, FamiliesNoPagedResult actuals) {
+        MetamacRestAsserts.assertEqualsNoPagedResult(expecteds, actuals);
+        assertEquals(expecteds.getItems().size(), actuals.getItems().size());
+        for (Family expected : expecteds.getItems()) {
+            boolean existsFamily = false;
+            for (Family actual : actuals.getItems()) {
+                if (expected.getId().equals(actual.getId())) {
+                    existsFamily = true;
+                    assertEqualsFamily(expected, actual);
+                }
+            }
+            assertTrue(existsFamily);
+        }
     }
 }

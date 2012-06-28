@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -22,9 +23,11 @@ import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.FindFamiliesByOperationCode1Matcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestAsserts;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsRestMocks;
@@ -43,9 +46,9 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     private static String                             NOT_EXISTS         = "NOT_EXISTS";
 
     // Operations
-    private static String                             OPERATION_CODE1    = "Operation1";
-    private static String                             FAMILY_CODE1       = "Family1";
-    private static String                             INSTANCE_CODE1     = "Instance1";
+    public static String                              OPERATION_CODE1    = "Operation1";
+    public static String                              FAMILY_CODE1       = "Family1";
+    public static String                              INSTANCE_CODE1     = "Instance1";
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -77,6 +80,8 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         // Families
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
+        when(statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperationCode1Matcher()))).thenReturn(
+                StatisticalOperationsCoreMocks.mockFamiliesOperation1());
         // Instances
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockInstance1());
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
@@ -90,7 +95,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, new ByteArrayInputStream(new byte[0]));
     }
-    
+
     @Test
     public void testRetrieveOperationByCodeXml() throws Exception {
 
@@ -336,6 +341,47 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         // org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations operations = statisticalOperationsRestFacadeClient.findOperations();
     }
 
+    @Test
+    public void testRetrieveFamiliesByOperationXml() throws Exception {
+
+        // Retrieve
+        FamiliesNoPagedResult familiesNoPagedResult = statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(OPERATION_CODE1);
+
+        // Validation
+        StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveFamiliesByOperationXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamiliesByOperationByCode(OPERATION_CODE1);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.code1.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveFamiliesByOperationJsonWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveFamiliesByOperationByCode(OPERATION_CODE1);
+        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.code1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveFamiliesByOperationErrorNotExistsXml() throws Exception {
+        try {
+            statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(NOT_EXISTS);
+        } catch (Exception e) {
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationByCode.notFound.xml");
+            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
+            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+        }
+    }
+
     private String getRequestUriRetrieveOperationByCode(String code) {
         return baseApi + "/operations/" + code;
     }
@@ -346,5 +392,9 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
     private String getRequestUriRetrieveInstanceByCode(String operationCode, String code) {
         return baseApi + "/operations/" + operationCode + "/instances/" + code;
+    }
+
+    private String getRequestUriRetrieveFamiliesByOperationByCode(String code) {
+        return baseApi + "/operations/" + code + "/families";
     }
 }

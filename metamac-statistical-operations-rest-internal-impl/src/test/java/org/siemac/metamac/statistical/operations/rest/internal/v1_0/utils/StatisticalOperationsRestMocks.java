@@ -1,5 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
+import java.math.BigInteger;
+
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
@@ -7,6 +9,7 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -16,7 +19,6 @@ public class StatisticalOperationsRestMocks {
     public static Operation mockOperation1(String baseApi) {
 
         Operation operation = new Operation();
-
         operation.setId("Operation1");
         operation.setKind(RestInternalConstants.KIND_OPERATION);
         operation.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1"));
@@ -75,7 +77,6 @@ public class StatisticalOperationsRestMocks {
     public static Family mockFamily1(String baseApi) {
 
         Family family = new Family();
-
         family.setId("Family1");
         family.setKind(RestInternalConstants.KIND_FAMILY);
         family.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/families/Family1"));
@@ -89,11 +90,27 @@ public class StatisticalOperationsRestMocks {
         family.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/families/Family1/operations", Boolean.FALSE, null));
         return family;
     }
+    
+    public static Family mockFamily2(String baseApi) {
+
+        Family family = new Family();
+        family.setId("Family2");
+        family.setKind(RestInternalConstants.KIND_FAMILY);
+        family.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/families/Family2"));
+        family.setTitle(MetamacRestMocks.mockInternationalString("es", "Título 2 en español", "en", "Title 2 in English"));
+        family.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo 2 en español", "en", "Acronym 2 in English"));
+        family.setDescription(MetamacRestMocks.mockInternationalString("es", "Descripción 2 en español", "en", "Description 2 in English"));
+        family.setInternalInventoryDate(new DateTime(2011, 1, 3, 6, 16, 17, 0).toDate());
+        family.setProcStatus(ProcStatusEnum.PUBLISH_EXTERNALLY.name());
+        family.setInventoryDate(new DateTime(2013, 5, 14, 23, 15, 14, 0).toDate());
+        family.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/families", Boolean.FALSE, null));
+        family.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/families/Family2/operations", Boolean.FALSE, null));
+        return family;
+    }
 
     public static Instance mockInstance1(String baseApi) {
 
         Instance instance = new Instance();
-
         instance.setId("Instance1");
         instance.setKind(RestInternalConstants.KIND_INSTANCE);
         instance.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/Operation1/instances/Instance1"));
@@ -156,8 +173,19 @@ public class StatisticalOperationsRestMocks {
         instance.getchildren(); // no children
         return instance;
     }
+    
+    public static FamiliesNoPagedResult mockFamiliesNoPagedResultByOperation1(String baseApi) {
+        FamiliesNoPagedResult familiesResult = new FamiliesNoPagedResult();
+        familiesResult.setKind(RestInternalConstants.KIND_FAMILIES);
+        familiesResult.setTotal(BigInteger.valueOf(2));
+        familiesResult.getItems().add(mockFamily1(baseApi));
+        familiesResult.getItems().add(mockFamily2(baseApi));
+        return familiesResult;
+    }
 
     private static RelatedResource mockFamily(String id, String baseApi) {
         return MetamacRestMocks.mockRelatedResource(id, RestInternalConstants.KIND_FAMILY, RestInternalConstants.LINK_SELF, baseApi + "/families/" + id, Boolean.TRUE, "family");
     }
+
+
 }

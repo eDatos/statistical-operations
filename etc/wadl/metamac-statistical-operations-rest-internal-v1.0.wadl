@@ -38,6 +38,21 @@
 	                </response>
 				</method>
 			</resource>
+			<resource path="operations/{code}/families">
+				<method name="GET" id="retrieveFamiliesByOperation">
+					<request>
+						<param name="code" style="template"/>
+					</request>
+	                <response status="200">
+						<representation mediaType="application/xml" element="domain:familiesNoPagedResult"/> 
+                        <representation mediaType="application/json" element="domain:familiesNoPagedResult"/> 
+	                </response>
+					<response status="404 500">
+						<representation mediaType="application/xml" element="common:error"/> 
+                        <representation mediaType="application/json" element="common:error"/> 
+	                </response>
+				</method>
+			</resource>
 			<resource path="operations/{operationCode}/instances/{code}">
 				<method name="GET" id="retrieveInstanceByCode">
 					<request>

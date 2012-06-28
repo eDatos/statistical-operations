@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -27,6 +28,7 @@ import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -102,6 +104,25 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setParent(toFamilyParent(apiUrl));
         target.getchildren().addAll(toFamilyChildren(source, apiUrl));
         return target;
+    }
+
+    @Override
+    public FamiliesNoPagedResult toFamiliesNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl) {
+
+        FamiliesNoPagedResult targets = new FamiliesNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_FAMILIES);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.Family source : sources) {
+                Family target = toFamily(source, apiUrl);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+        
+        return targets;
     }
 
     @Override
