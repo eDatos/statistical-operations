@@ -85,7 +85,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Retrieve families by criteria
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
                     .withProperty(FamilyProperties.operations().code()).eq(code).withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
-                    .build();
+                    .distinctRoot().build();
             PagingParameter pagingParameter = PagingParameter.noLimits();
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(serviceContextRestInternal,
                     conditionalCriteria, pagingParameter);
@@ -129,7 +129,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Find only this family and published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
                     .withProperty(OperationProperties.families().code()).eq(code).withProperty(OperationProperties.procStatus())
-                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).build();
+                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
             
             // Retrieve

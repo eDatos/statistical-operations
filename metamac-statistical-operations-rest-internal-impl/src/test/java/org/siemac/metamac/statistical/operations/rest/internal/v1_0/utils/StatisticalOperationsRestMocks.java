@@ -89,11 +89,11 @@ public class StatisticalOperationsRestMocks {
             operationsPagedResult.getItems().add(mockOperation5(baseApi));
             operationsPagedResult.getItems().add(mockOperation6(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(0));
-            operationsPagedResult.setLimit(BigInteger.valueOf(100));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=100&offset=0");
+            operationsPagedResult.setLimit(BigInteger.valueOf(1000));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=1000&offset=0");
             operationsPagedResult.setPrevious(null);
             operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=100&offset=0");
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=1000&offset=0");
         } else if ("2".equals(limit) && "0".equals(offset)) {
             operationsPagedResult.getItems().add(mockOperation1(baseApi));
             operationsPagedResult.getItems().add(mockOperation2(baseApi));

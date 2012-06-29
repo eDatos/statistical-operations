@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
+import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria.Operator;
 import org.mockito.ArgumentMatcher;
 
 public abstract class ConditionalCriteriasMatcher extends ArgumentMatcher<List<ConditionalCriteria>> {
@@ -30,11 +31,14 @@ public abstract class ConditionalCriteriasMatcher extends ArgumentMatcher<List<C
         return true;
     }
 
-    private Boolean isEqualsConditionalCriteria(ConditionalCriteria expected, ConditionalCriteria actual) {
-        if (!expected.getPropertyFullName().equals(actual.getPropertyFullName())) {
+    private boolean isEqualsConditionalCriteria(ConditionalCriteria expected, ConditionalCriteria actual) {
+        if (!expected.getOperator().equals(actual.getOperator())) {
             return false;
         }
-        if (!expected.getOperator().equals(actual.getOperator())) {
+        if (Operator.DistinctRoot.equals(expected.getOperator())) {
+            return true;
+        }
+        if (!expected.getPropertyFullName().equals(actual.getPropertyFullName())) {
             return false;
         }
         if (!Arrays.equals(toArray(expected.getFirstOperant()), toArray(actual.getFirstOperant()))) {

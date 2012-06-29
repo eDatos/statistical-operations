@@ -84,12 +84,12 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         // Operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 25, 0);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 100, 0);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 2, 0);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 2, 2);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 2, 4);
-        mockitoFindOperationsByCondition(statisticalOperationsBaseService, 2, 7);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 25, 0);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 1000, 0);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 2, 0);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 2, 2);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 2, 4);
+        mockitoFindOperationsByFamily(statisticalOperationsBaseService, 2, 7);
         // Families
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
@@ -101,7 +101,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
     }
 
-    private void mockitoFindOperationsByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
+    private void mockitoFindOperationsByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
         when(
                 statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamily1Matcher()),
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(

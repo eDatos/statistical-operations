@@ -82,7 +82,7 @@ public class StatisticalOperationsCoreMocks {
         int startRow = -1;
         int rowCount = -1;
         int pageSize = -1;
-        if ((limit == null || "100".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+        if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
             startRow = 0;
             rowCount = 6;
             pageSize = 6;
@@ -113,8 +113,8 @@ public class StatisticalOperationsCoreMocks {
         } else if ("2".equals(limit) && "7".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
-            rowCount = pageSize;
             // no results            
+            rowCount = 0;
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
         }

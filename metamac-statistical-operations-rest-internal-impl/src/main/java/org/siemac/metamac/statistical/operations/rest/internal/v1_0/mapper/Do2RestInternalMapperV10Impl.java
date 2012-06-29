@@ -96,15 +96,13 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         OperationsPagedResult targetPagedResult = new OperationsPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
-        if (sourcesPagedResult == null) {
-            targetPagedResult.setTotal(BigInteger.ZERO);
-        } else {
-            for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
-                Operation target = toOperation(source, apiUrl);
-                targetPagedResult.getItems().add(target);
-            }
+        // Values
+        for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
+            Operation target = toOperation(source, apiUrl);
+            targetPagedResult.getItems().add(target);
         }
-        
+
+        // Pagination
         // TODO pasar a librería común (transformPagedResult)
         targetPagedResult.setOffset(BigInteger.valueOf(sourcesPagedResult.getStartRow()));
         targetPagedResult.setLimit(BigInteger.valueOf(limit));
@@ -113,7 +111,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         targetPagedResult.setLast(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
         if (sourcesPagedResult.getRowCount() > 0) {
             targetPagedResult.setPrevious(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow())));
-            targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows())));
+            targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit,
+                    PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows())));
         }
         return targetPagedResult;
     }

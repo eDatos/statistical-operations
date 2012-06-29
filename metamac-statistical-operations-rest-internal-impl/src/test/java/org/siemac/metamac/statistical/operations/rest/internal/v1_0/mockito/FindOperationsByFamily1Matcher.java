@@ -14,7 +14,7 @@ public class FindOperationsByFamily1Matcher extends ConditionalCriteriasMatcher 
         String familyCode = StatisticalOperationsRestFacadeV10Test.FAMILY_CODE1;
         List<ConditionalCriteria> expected = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
                 .withProperty(OperationProperties.families().code()).eq(familyCode)
-                .withProperty(OperationProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).build();
+                .withProperty(OperationProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
         return super.matches(expected, actual);
     }
 }
