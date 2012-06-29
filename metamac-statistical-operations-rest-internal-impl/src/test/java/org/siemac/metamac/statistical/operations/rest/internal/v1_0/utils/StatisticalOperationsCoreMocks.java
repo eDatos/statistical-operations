@@ -12,8 +12,8 @@ import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.vo.domain.ExternalItem;
-import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.domain.statistical.operations.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -76,6 +76,53 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
     }
 
+<<<<<<< .mine
+    public static PagedResult<Operation> mockOperationsFamily1(String limit, String offset) {
+
+        List<Operation> operations = new ArrayList<Operation>();
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        if ((limit == null || "100".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+            startRow = 0;
+            rowCount = 6;
+            pageSize = 6;
+            operations.add(mockOperation1());
+            operations.add(mockOperation2());
+            operations.add(mockOperation3());
+            operations.add(mockOperation4());
+            operations.add(mockOperation5());
+            operations.add(mockOperation6());            
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation1());
+            operations.add(mockOperation2());
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation3());
+            operations.add(mockOperation4());
+        } else if ("2".equals(limit) && "4".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation5());
+            operations.add(mockOperation6());            
+        } else if ("2".equals(limit) && "7".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            // no results            
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, 6, -1);
+    }
+=======
     public static PagedResult<Operation> mockOperationsFamily1(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
@@ -121,6 +168,7 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, 6, -1);
     }
+>>>>>>> .r38314
 
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
