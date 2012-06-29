@@ -36,7 +36,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.InstanceType</class-b>
 		<field>
 			<a>id</a>
@@ -49,7 +49,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.SurveySource</class-b>
 		<field>
 			<a>id</a>
@@ -62,7 +62,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.OfficialityType</class-b>
 		<field>
 			<a>id</a>
@@ -75,7 +75,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.CollMethodDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.CollMethod</class-b>
 		<field>
 			<a>id</a>
@@ -88,7 +88,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.CostDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.CostDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Cost</class-b>
 		<field>
 			<a>id</a>
@@ -132,7 +132,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.FamilyDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.FamilyDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Family</class-b>
 		<field>
 			<a>id</a>
@@ -145,7 +145,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.OperationDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.OperationDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Operation</class-b>
 		<field>
 			<a>id</a>
@@ -158,7 +158,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.InstanceDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.InstanceDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Instance</class-b>
 		<field>
 			<a>id</a>
@@ -171,7 +171,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Family</class-b>
 		<field>
 			<a>id</a>
@@ -184,7 +184,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Operation</class-b>
 		<field>
 			<a>id</a>
@@ -197,7 +197,7 @@
 	</mapping>
 	
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.InstanceBaseDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.Instance</class-b>
 		<field>
 			<a>id</a>
