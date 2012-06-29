@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.shared;
 
-import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;

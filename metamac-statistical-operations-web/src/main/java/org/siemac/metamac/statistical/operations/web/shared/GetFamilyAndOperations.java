@@ -2,8 +2,8 @@ package org.siemac.metamac.statistical.operations.web.shared;
 
 import java.util.List;
 
-import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
-import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
-import org.siemac.metamac.domain.statistical.operations.dto.OperationBaseDto;
-import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;

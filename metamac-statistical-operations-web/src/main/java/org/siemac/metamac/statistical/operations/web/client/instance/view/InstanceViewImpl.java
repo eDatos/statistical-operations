@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
-import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
-import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
-import org.siemac.metamac.domain.statistical.operations.dto.InstanceDto;
-import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
-import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
-import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;

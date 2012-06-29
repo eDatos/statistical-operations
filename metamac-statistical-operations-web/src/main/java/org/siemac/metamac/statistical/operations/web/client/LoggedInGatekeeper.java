@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.siemac.metamac.domain.statistical.operations.enume.domain.StatisticalOperationsRoleEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;

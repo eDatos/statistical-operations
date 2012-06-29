@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.operation.view.hand
 
 import java.util.List;
 
-import org.siemac.metamac.domain.statistical.operations.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

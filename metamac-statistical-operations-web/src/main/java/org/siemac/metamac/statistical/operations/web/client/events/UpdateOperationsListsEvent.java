@@ -2,12 +2,12 @@ package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 
-import org.siemac.metamac.domain.statistical.operations.dto.CollMethodDto;
-import org.siemac.metamac.domain.statistical.operations.dto.CostDto;
-import org.siemac.metamac.domain.statistical.operations.dto.InstanceTypeDto;
-import org.siemac.metamac.domain.statistical.operations.dto.OfficialityTypeDto;
-import org.siemac.metamac.domain.statistical.operations.dto.SurveySourceDto;
-import org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;

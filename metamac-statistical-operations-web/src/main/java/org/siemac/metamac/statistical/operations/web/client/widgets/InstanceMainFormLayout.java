@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 
 public class InstanceMainFormLayout extends BasePublicationMainFormLayout {

@@ -5,8 +5,8 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.domain.statistical.operations.dto.FamilyBaseDto;
-import org.siemac.metamac.domain.statistical.operations.dto.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;

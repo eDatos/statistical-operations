@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
-import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.widgets.form.InternationalMainFormLayout;
