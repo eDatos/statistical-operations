@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
 import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
@@ -21,6 +22,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Link;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
+import org.siemac.metamac.rest.search.PagedResultUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -32,6 +34,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -87,6 +90,35 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
+    public OperationsPagedResult toOperationsPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
+
+        OperationsPagedResult targetPagedResult = new OperationsPagedResult();
+        targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
+
+        if (sourcesPagedResult == null) {
+            targetPagedResult.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
+                Operation target = toOperation(source, apiUrl);
+                targetPagedResult.getItems().add(target);
+            }
+        }
+        
+        // TODO pasar a librería común (transformPagedResult)
+        targetPagedResult.setOffset(BigInteger.valueOf(sourcesPagedResult.getStartRow()));
+        targetPagedResult.setLimit(BigInteger.valueOf(limit));
+        targetPagedResult.setTotal(BigInteger.valueOf(sourcesPagedResult.getTotalRows()));
+        targetPagedResult.setFirst(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, 0));
+        targetPagedResult.setLast(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
+        if (sourcesPagedResult.getRowCount() > 0) {
+            targetPagedResult.setPrevious(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow())));
+            targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows())));
+        }
+        return targetPagedResult;
+    }
+
+    @Override
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl) {
         if (source == null) {
             return null;
@@ -121,7 +153,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             }
             targets.setTotal(BigInteger.valueOf(sources.size()));
         }
-        
+
         return targets;
     }
 
@@ -570,9 +602,27 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return createLinkHref(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
     }
 
+    // API/families/FAMILY_ID/operations?limit=?&offset=?
+    private String createLinkHrefFamilyChildrenOperations(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Family family, int limit, int offset) {
+        if (offset < 0) {
+            return null;
+        }
+        String linkFamily = createLinkHrefFamily(apiUrl, family);
+        String linkFamilyOperations = createLinkHref(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
+        linkFamilyOperations = createLinkHrefWithQueryParam(linkFamilyOperations, RestInternalConstants.QUERY_PARAM_LIMIT, String.valueOf(limit));
+        linkFamilyOperations = createLinkHrefWithQueryParam(linkFamilyOperations, RestInternalConstants.QUERY_PARAM_OFFSET, String.valueOf(offset));
+        return linkFamilyOperations;
+    }
+
     private String createLinkHref(String baseLink, String additionalPath) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(baseLink);
         uriComponentsBuilder = uriComponentsBuilder.pathSegment(additionalPath);
+        return uriComponentsBuilder.build().toUriString();
+    }
+
+    private String createLinkHrefWithQueryParam(String baseLink, String queryParam, String queryParamValue) {
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(baseLink);
+        uriComponentsBuilder = uriComponentsBuilder.queryParam(queryParam, queryParamValue);
         return uriComponentsBuilder.build().toUriString();
     }
 

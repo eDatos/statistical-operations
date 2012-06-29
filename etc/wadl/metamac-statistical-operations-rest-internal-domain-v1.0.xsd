@@ -49,6 +49,16 @@
             <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="OperationsPagedResult">
+        <xs:complexContent>
+            <xs:extension base="common:PagedResult">
+                <xs:sequence>
+                    <xs:element name="items" type="tns:Operation" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>         
        
     <xs:complexType name="Family">
         <xs:sequence>
@@ -135,6 +145,7 @@
 
     <!-- Elements -->
     <xs:element name="operation" type="tns:Operation" />
+    <xs:element name="operationsPagedResult" type="tns:OperationsPagedResult" />
     <xs:element name="family" type="tns:Family" />
     <xs:element name="familiesNoPagedResult" type="tns:FamiliesNoPagedResult" />
     <xs:element name="instance" type="tns:Instance" />

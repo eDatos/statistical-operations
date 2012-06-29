@@ -1,5 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,22 @@ public class StatisticalOperationsCoreMocks {
         return mockOperation("2", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
+    public static Operation mockOperation3() {
+        return mockOperation("3", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
+    
+    public static Operation mockOperation4() {
+        return mockOperation("4", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+
+    public static Operation mockOperation5() {
+        return mockOperation("5", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+
+    public static Operation mockOperation6() {
+        return mockOperation("6", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
+
     public static Family mockFamily1() {
         return mockFamily("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
@@ -44,16 +62,65 @@ public class StatisticalOperationsCoreMocks {
         return mockInstance("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    public static PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> mockFamiliesOperation1() {
+    public static PagedResult<Family> mockFamiliesOperation1() {
 
         List<Family> families = new ArrayList<Family>();
         families.add(mockFamily1());
         families.add(mockFamily2());
 
-        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesPagedResult = new PagedResult<Family>(families, 0, 2, 2, 2, -1);
-        return familiesPagedResult;
+        int startRow = 0;
+        int rowCount = 2;
+        int pageSize = 2;
+        int totalRows = 2;
+
+        return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
     }
 
+    public static PagedResult<Operation> mockOperationsFamily1(String limit, String offset) {
+
+        List<Operation> operations = new ArrayList<Operation>();
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        if ((limit == null || "100".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+            startRow = 0;
+            rowCount = 6;
+            pageSize = 6;
+            operations.add(mockOperation1());
+            operations.add(mockOperation2());
+            operations.add(mockOperation3());
+            operations.add(mockOperation4());
+            operations.add(mockOperation5());
+            operations.add(mockOperation6());            
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation1());
+            operations.add(mockOperation2());
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation3());
+            operations.add(mockOperation4());
+        } else if ("2".equals(limit) && "4".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            operations.add(mockOperation5());
+            operations.add(mockOperation6());            
+        } else if ("2".equals(limit) && "7".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            // no results            
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, 6, -1);
+    }
 
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
@@ -71,7 +138,7 @@ public class StatisticalOperationsCoreMocks {
 
         return internationalString;
     }
-    
+
     /**
      * Operation with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */
@@ -86,7 +153,7 @@ public class StatisticalOperationsCoreMocks {
         operation.addInstance(mockInstanceRelatedEntity("333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1)));
         return operation;
     }
-    
+
     /**
      * Family with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */

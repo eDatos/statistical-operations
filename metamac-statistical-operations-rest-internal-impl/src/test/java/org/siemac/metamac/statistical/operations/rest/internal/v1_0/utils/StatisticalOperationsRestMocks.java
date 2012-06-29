@@ -1,5 +1,7 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
+import static org.junit.Assert.fail;
+
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
@@ -13,6 +15,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 
 public class StatisticalOperationsRestMocks {
 
@@ -25,7 +28,19 @@ public class StatisticalOperationsRestMocks {
     }
 
     public static Operation mockOperation3(String baseApi) {
-        return mockOperation(baseApi, "3", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockOperation(baseApi, "3", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
+
+    public static Operation mockOperation4(String baseApi) {
+        return mockOperation(baseApi, "4", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+
+    public static Operation mockOperation5(String baseApi) {
+        return mockOperation(baseApi, "5", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+
+    public static Operation mockOperation6(String baseApi) {
+        return mockOperation(baseApi, "6", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
     public static Family mockFamily1(String baseApi) {
@@ -47,6 +62,77 @@ public class StatisticalOperationsRestMocks {
         familiesResult.getItems().add(mockFamily1(baseApi));
         familiesResult.getItems().add(mockFamily2(baseApi));
         return familiesResult;
+    }
+
+    public static OperationsPagedResult mockOperationsPagedResultByFamily1(String baseApi, String limit, String offset) {
+        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+        operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operationsPagedResult.setTotal(BigInteger.valueOf(6));
+        if (limit == null && (offset == null || "0".equals(offset))) {
+            operationsPagedResult.getItems().add(mockOperation1(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2(baseApi));
+            operationsPagedResult.getItems().add(mockOperation3(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4(baseApi));
+            operationsPagedResult.getItems().add(mockOperation5(baseApi));
+            operationsPagedResult.getItems().add(mockOperation6(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(0));
+            operationsPagedResult.setLimit(BigInteger.valueOf(25));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=25&offset=0");
+            operationsPagedResult.setPrevious(null);
+            operationsPagedResult.setNext(null);
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=25&offset=0");
+        } else if ("10000".equals(limit) && offset == null) {
+            operationsPagedResult.getItems().add(mockOperation1(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2(baseApi));
+            operationsPagedResult.getItems().add(mockOperation3(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4(baseApi));
+            operationsPagedResult.getItems().add(mockOperation5(baseApi));
+            operationsPagedResult.getItems().add(mockOperation6(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(0));
+            operationsPagedResult.setLimit(BigInteger.valueOf(100));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=100&offset=0");
+            operationsPagedResult.setPrevious(null);
+            operationsPagedResult.setNext(null);
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=100&offset=0");
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation1(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPrevious(null);
+            operationsPagedResult.setNext(baseApi + "/families/family1/operations?limit=2&offset=2");
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation3(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPrevious(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setNext(baseApi + "/families/family1/operations?limit=2&offset=4");
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+        } else if ("2".equals(limit) && "4".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation5(baseApi));
+            operationsPagedResult.getItems().add(mockOperation6(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPrevious(baseApi + "/families/family1/operations?limit=2&offset=2");
+            operationsPagedResult.setNext(null);
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+        } else if ("2".equals(limit) && "7".equals(offset)) {
+            // no results
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPrevious(null);
+            operationsPagedResult.setNext(null);
+            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+        return operationsPagedResult;
     }
 
     private static RelatedResource mockFamilyRelatedResource(String subId, String baseApi) {

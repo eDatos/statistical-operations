@@ -20,13 +20,17 @@ import org.siemac.metamac.domain.statistical.operations.enume.domain.ProcStatusE
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.exception.RestException;
+import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
+import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
+import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,6 +110,35 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Transform
             Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
             return family;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+
+    @Override
+    public OperationsPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
+        try {
+            // TODO Validation of parameters. validar code?
+
+            // Validate family exists and it is published
+            org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(code);
+
+            // Retrieve operations by criteria
+            SculptorCriteria sculptorCriteria = RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            // Find only this family and published
+            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
+                    .withProperty(OperationProperties.families().code()).eq(code).withProperty(OperationProperties.procStatus())
+                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).build();
+            conditionalCriteria.addAll(sculptorCriteria.getConditions());
+            
+            // Retrieve
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operationsEntitiesResult = statisticalOperationsBaseService.findOperationByCondition(
+                    serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
+
+            // Transform
+            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            return operationsPagedResult;
 
         } catch (MetamacException e) {
             throw manageException(e);
