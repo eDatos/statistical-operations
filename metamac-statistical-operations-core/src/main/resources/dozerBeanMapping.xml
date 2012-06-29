@@ -23,7 +23,7 @@
 	<!-- Lists -->
 
 	<mapping>
-		<class-a>org.siemac.metamac.domain.statistical.operations.dto.SurveyTypeDto</class-a>
+		<class-a>org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto</class-a>
   		<class-b>org.siemac.metamac.statistical.operations.core.domain.SurveyType</class-b>
 		<field>
 			<a>id</a>
