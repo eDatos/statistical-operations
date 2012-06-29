@@ -6,6 +6,7 @@
     <!-- Specify the paths for translatable code -->
     <source path='core/security/shared' />
     <source path='core/constants' />
-    <source path='enume/domain' />
+    <source path='core/enume/domain' />
+    <source path='core/dto' />
 
 </module>

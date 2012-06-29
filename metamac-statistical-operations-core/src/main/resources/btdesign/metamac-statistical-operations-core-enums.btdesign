@@ -1,0 +1,37 @@
+Application StatisticalOperationsEnums {
+    basePackage=org.siemac.metamac.statistical.operations
+
+    Module enums {    	
+
+		basePackage=org.siemac.metamac.statistical.operations.core.enume
+    	
+    	"ProcStatus Enum is used to specify the valid states of the entities"
+    	enum ProcStatusEnum {
+    		DRAFT,
+    		PUBLISH_INTERNALLY,
+    		PUBLISH_EXTERNALLY
+    	}
+    	
+    	"Status Enum is used to specify the statistical state of the survey"
+    	enum StatusEnum {
+    		PLANNING,
+    		DESIGN,
+    		PRODUCTION,
+    		OUT_OF_PRINT
+    	}
+    	
+    	
+    	enum StatisticalOperationsRoleEnum {
+    		TECNICO_APOYO_PRODUCCION,
+    		TECNICO_PRODUCCION,
+    		TECNICO_APOYO_DIFUSION,
+    		TECNICO_DIFUSION,
+    		TECNICO_APOYO_PLANIFICACION,
+    		TECNICO_PLANIFICACION,
+    		ADMINISTRADOR,
+    		ANY_ROLE_ALLOWED
+    	}
+
+    }
+
+}

@@ -1,6 +1,6 @@
 import "classpath:/btdesign/metamac-core-common-dtos.btdesign"
-import "classpath:/btdesign/metamac-api-domain-dtos-statistical-operations.btdesign"
-import "classpath:/btdesign/metamac-api-domain-enums-statistical-operations.btdesign"
+import "classpath:/btdesign/metamac-statistical-operations-core-dtos.btdesign"
+import "classpath:/btdesign/metamac-statistical-operations-core-enums.btdesign"
 import "classpath:/btdesign/export/metamac-core-common-basictype.btdesign"
 import "classpath:/btdesign/export/metamac-core-common-vo.btdesign"
 import "classpath:/btdesign/export/metamac-core-common-entity.btdesign"
@@ -527,20 +527,5 @@ Application StatisticalOperations {
 				findByCondition(PagingParameter pagingParameter);
 			}
 		} 
-	}
-	
-	Module enume {
-		basePackage=org.siemac.metamac.domain.statistical.operations.enume
-		
-		enum StatisticalOperationsRoleEnum {
-    		TECNICO_APOYO_PRODUCCION,
-    		TECNICO_PRODUCCION,
-    		TECNICO_APOYO_DIFUSION,
-    		TECNICO_DIFUSION,
-    		TECNICO_APOYO_PLANIFICACION,
-    		TECNICO_PLANIFICACION,
-    		ADMINISTRADOR,
-    		ANY_ROLE_ALLOWED
-    	}
-	}
+	}	
 }

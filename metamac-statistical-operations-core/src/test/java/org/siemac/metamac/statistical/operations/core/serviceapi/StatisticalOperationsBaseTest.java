@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.common.test.MetamacBaseTests;
-import org.siemac.metamac.domain.statistical.operations.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
 import org.siemac.metamac.sso.client.SsoClientConstants;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 
 public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
 
