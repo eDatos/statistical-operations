@@ -277,6 +277,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
     @Test
     public void testRetrieveOperationsByFamilyJsonWithoutJaxbTransformation() throws Exception {
+        // TODO probar con noLimits
         {
             // With limit = 2, offset = 4
             String limit = "2";

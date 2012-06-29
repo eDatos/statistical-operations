@@ -2,7 +2,6 @@ package org.siemac.metamac.statistical.operations.rest.internal;
 
 public class RestInternalConstants {
 
-    public static String  LINK_SELF               = "self";
     public static String  LINK_SUBPATH_OPERATIONS = "operations";
     public static String  LINK_SUBPATH_FAMILIES   = "families";
     public static String  LINK_SUBPATH_INSTANCES  = "instances";

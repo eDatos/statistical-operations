@@ -1,10 +1,7 @@
 {
   "id": "instance1",
   "kind": "statisticalOperations#instance",
-  "link": {
-    "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1"
-  },
+  "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
   "title": {
     "texts": [
       {
@@ -32,10 +29,7 @@
   "survey": {
     "id": "operation1",
     "kind": "statisticalOperations#operation",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1"
-    },
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
     "title": {
       "texts": [
         {
@@ -52,10 +46,7 @@
   "successor": {
     "id": "instance22",
     "kind": "statisticalOperations#instance",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
-    },
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
     "title": {
       "texts": [
         {
@@ -72,19 +63,16 @@
   "predecessor": {
     "id": "instance333",
     "kind": "statisticalOperations#instance",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
-    },
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title instance instance333"
-        },
-        {
           "locale": "es",
           "label": "Título instance instance333"
+        },
+        {
+          "locale": "en",
+          "label": "Title instance instance333"
         }
       ]
     }
@@ -104,40 +92,31 @@
   "statisticalPopulation": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Carga de Estadísticas 1 en español"
-      },
-      {
         "locale": "en",
         "label": "StatisticalPopulation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Carga de Estadísticas 1 en español"
       }
     ]
   },
   "statisticalUnits": [
     {
-      "id": "statisticalUnit1",
-      "kind": "DATASTRUCTURE",
-      "link": {
-        "rel": "self",
-        "href": "http://statisticalUnit1"
-      }
-    },
-    {
       "id": "statisticalUnit22",
       "kind": "DATASTRUCTURE",
-      "link": {
-        "rel": "self",
-        "href": "http://statisticalUnit22"
-      }
+      "selfLink": "http://statisticalUnit22"
+    },
+    {
+      "id": "statisticalUnit1",
+      "kind": "DATASTRUCTURE",
+      "selfLink": "http://statisticalUnit1"
     }
   ],
   "geographicGranularity": {
     "id": "geographicGranularity",
     "kind": "CODELIST",
-    "link": {
-      "rel": "self",
-      "href": "http://geographicGranularity"
-    }
+    "selfLink": "http://geographicGranularity"
   },
   "geographicComparability": {
     "texts": [
@@ -154,20 +133,17 @@
   "temporalGranularity": {
     "id": "temporalGranularity",
     "kind": "CODELIST",
-    "link": {
-      "rel": "self",
-      "href": "http://temporalGranularity"
-    }
+    "selfLink": "http://temporalGranularity"
   },
   "temporalComparability": {
     "texts": [
       {
-        "locale": "en",
-        "label": "temporalComparability 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Comparando Temporal 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "temporalComparability 1 in English"
       }
     ]
   },
@@ -176,59 +152,47 @@
     {
       "id": "unitMeasure1",
       "kind": "CONCEPT",
-      "link": {
-        "rel": "self",
-        "href": "http://unitMeasure1"
-      }
+      "selfLink": "http://unitMeasure1"
     }
   ],
   "statConcDef": {
     "texts": [
       {
-        "locale": "en",
-        "label": "StatConcDef 1 in English"
-      },
-      {
         "locale": "es",
         "label": "StatConcDef 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "StatConcDef 1 in English"
       }
     ]
   },
   "statConcDefLists": [
     {
-      "id": "statConcDefList22",
+      "id": "statConcDefList333",
       "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList22"
-      }
+      "selfLink": "http://statConcDefList333"
     },
     {
       "id": "statConcDefList1",
       "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList1"
-      }
+      "selfLink": "http://statConcDefList1"
     },
     {
-      "id": "statConcDefList333",
+      "id": "statConcDefList22",
       "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList333"
-      }
+      "selfLink": "http://statConcDefList22"
     }
   ],
   "classSystem": {
     "texts": [
       {
-        "locale": "en",
-        "label": "ClassSystem 1 in English"
-      },
-      {
         "locale": "es",
         "label": "ClassSystem 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "ClassSystem 1 in English"
       }
     ]
   },
@@ -236,18 +200,12 @@
     {
       "id": "statConcDefList1",
       "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList1"
-      }
+      "selfLink": "http://statConcDefList1"
     },
     {
       "id": "statConcDefList22",
       "kind": "CODELIST",
-      "link": {
-        "rel": "self",
-        "href": "http://statConcDefList22"
-      }
+      "selfLink": "http://statConcDefList22"
     }
   ],
   "instanceType": {
@@ -255,12 +213,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title instanceType instanceType1"
-        },
-        {
           "locale": "es",
           "label": "Título instanceType instanceType1"
+        },
+        {
+          "locale": "en",
+          "label": "Title instanceType instanceType1"
         }
       ]
     }
@@ -284,12 +242,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title surveySource surveySource1"
-        },
-        {
           "locale": "es",
           "label": "Título surveySource surveySource1"
+        },
+        {
+          "locale": "en",
+          "label": "Title surveySource surveySource1"
         }
       ]
     }
@@ -299,12 +257,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título collMethod collMethod1"
-        },
-        {
           "locale": "en",
           "label": "Title collMethod collMethod1"
+        },
+        {
+          "locale": "es",
+          "label": "Título collMethod collMethod1"
         }
       ]
     }
@@ -313,63 +271,54 @@
     {
       "id": "informationSupplier1",
       "kind": "COMMON_METADATA",
-      "link": {
-        "rel": "self",
-        "href": "http://informationSupplier1"
-      }
+      "selfLink": "http://informationSupplier1"
     }
   ],
   "freqColls": [
     {
       "id": "freqColl22",
       "kind": "CATEGORY_SCHEME",
-      "link": {
-        "rel": "self",
-        "href": "http://freqColl22"
-      }
+      "selfLink": "http://freqColl22"
     },
     {
       "id": "freqColl1",
       "kind": "CATEGORY_SCHEME",
-      "link": {
-        "rel": "self",
-        "href": "http://freqColl1"
-      }
+      "selfLink": "http://freqColl1"
     }
   ],
   "dataValidation": {
     "texts": [
       {
-        "locale": "en",
-        "label": "DataValidation 1 in English"
-      },
-      {
         "locale": "es",
         "label": "DataValidation 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "DataValidation 1 in English"
       }
     ]
   },
   "dataCompilation": {
     "texts": [
       {
-        "locale": "es",
-        "label": "DataCompilation 1 en español"
-      },
-      {
         "locale": "en",
         "label": "DataCompilation 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "DataCompilation 1 en español"
       }
     ]
   },
   "adjustment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Adjustment 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Adjustment 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Adjustment 1 en español"
       }
     ]
   },
@@ -387,6 +336,21 @@
   },
   "costs": [
     {
+      "id": "cost22",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título cost cost22"
+          },
+          {
+            "locale": "en",
+            "label": "Title cost cost22"
+          }
+        ]
+      }
+    },
+    {
       "id": "cost1",
       "title": {
         "texts": [
@@ -397,21 +361,6 @@
           {
             "locale": "en",
             "label": "Title cost cost1"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cost333",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Title cost cost333"
-          },
-          {
-            "locale": "es",
-            "label": "Título cost cost333"
           }
         ]
       }
@@ -432,16 +381,16 @@
       }
     },
     {
-      "id": "cost22",
+      "id": "cost333",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title cost cost22"
+            "locale": "es",
+            "label": "Título cost cost333"
           },
           {
-            "locale": "es",
-            "label": "Título cost cost22"
+            "locale": "en",
+            "label": "Title cost cost333"
           }
         ]
       }
@@ -451,24 +400,24 @@
   "qualityDoc": {
     "texts": [
       {
-        "locale": "es",
-        "label": "QualityDoc 1 en español"
-      },
-      {
         "locale": "en",
         "label": "QualityDoc 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "QualityDoc 1 en español"
       }
     ]
   },
   "qualityAssure": {
     "texts": [
       {
-        "locale": "es",
-        "label": "QualityAssure 1 en español"
-      },
-      {
         "locale": "en",
         "label": "QualityAssure 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "QualityAssure 1 en español"
       }
     ]
   },
@@ -487,12 +436,12 @@
   "userNeeds": {
     "texts": [
       {
-        "locale": "en",
-        "label": "UserNeeds 1 in English"
-      },
-      {
         "locale": "es",
         "label": "UserNeeds 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "UserNeeds 1 in English"
       }
     ]
   },
@@ -535,24 +484,24 @@
   "punctuality": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Punctuality 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Punctuality 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Punctuality 1 in English"
       }
     ]
   },
   "accuracyOverall": {
     "texts": [
       {
-        "locale": "en",
-        "label": "AccuracyOverall 1 in English"
-      },
-      {
         "locale": "es",
         "label": "AccuracyOverall 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "AccuracyOverall 1 in English"
       }
     ]
   },
@@ -571,68 +520,65 @@
   "nonsamplingErr": {
     "texts": [
       {
-        "locale": "en",
-        "label": "NonsamplingErr 1 in English"
-      },
-      {
         "locale": "es",
         "label": "NonsamplingErr 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "NonsamplingErr 1 in English"
       }
     ]
   },
   "coherXDom": {
     "texts": [
       {
-        "locale": "en",
-        "label": "CoherXDom 1 in English"
-      },
-      {
         "locale": "es",
         "label": "CoherXDom 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "CoherXDom 1 in English"
       }
     ]
   },
   "coherInternal": {
     "texts": [
       {
-        "locale": "en",
-        "label": "CoherInternal 1 in English"
-      },
-      {
         "locale": "es",
         "label": "CoherInternal 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "CoherInternal 1 in English"
       }
     ]
   },
   "comment": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Comments 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Comentarios 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Comments 1 in English"
       }
     ]
   },
   "notes": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Notas 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Notes 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Notas 1 en español"
       }
     ]
   },
   "parent": {
     "kind": "statisticalOperations#operation",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1"
-    }
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1"
   }
 }

@@ -15,7 +15,7 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
-        MetamacRestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
+        assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsRelatedResources(expected.getFamilies(), actual.getFamilies());
@@ -57,7 +57,7 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsFamily(Family expected, Family actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
-        MetamacRestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
+        assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
@@ -71,7 +71,7 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsInstance(Instance expected, Instance actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getKind(), actual.getKind());
-        MetamacRestAsserts.assertEqualsLink(expected.getLink(), actual.getLink());
+        assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsRelatedResource(expected.getSurvey(), actual.getSurvey());

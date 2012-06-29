@@ -77,10 +77,10 @@ public class StatisticalOperationsRestMocks {
             operationsPagedResult.getItems().add(mockOperation6(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(0));
             operationsPagedResult.setLimit(BigInteger.valueOf(25));
-            operationsPagedResult.setFirst(null);
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(null);
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
         } else if ("10000".equals(limit) && offset == null) {
             operationsPagedResult.getItems().add(mockOperation1(baseApi));
             operationsPagedResult.getItems().add(mockOperation2(baseApi));
@@ -90,45 +90,45 @@ public class StatisticalOperationsRestMocks {
             operationsPagedResult.getItems().add(mockOperation6(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(0));
             operationsPagedResult.setLimit(BigInteger.valueOf(1000));
-            operationsPagedResult.setFirst(null);
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(null);
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
         } else if ("2".equals(limit) && "0".equals(offset)) {
             operationsPagedResult.getItems().add(mockOperation1(baseApi));
             operationsPagedResult.getItems().add(mockOperation2(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
-            operationsPagedResult.setFirst(null);
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(baseApi + "/families/family1/operations?limit=2&offset=2");
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(baseApi + "/families/family1/operations?limit=2&offset=2");
+            operationsPagedResult.setLastLink(baseApi + "/families/family1/operations?limit=2&offset=4");
         } else if ("2".equals(limit) && "2".equals(offset)) {
             operationsPagedResult.getItems().add(mockOperation3(baseApi));
             operationsPagedResult.getItems().add(mockOperation4(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setNext(baseApi + "/families/family1/operations?limit=2&offset=4");
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=4");
+            operationsPagedResult.setFirstLink(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setNextLink(baseApi + "/families/family1/operations?limit=2&offset=4");
+            operationsPagedResult.setLastLink(baseApi + "/families/family1/operations?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
             operationsPagedResult.getItems().add(mockOperation5(baseApi));
             operationsPagedResult.getItems().add(mockOperation6(baseApi));
             operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(baseApi + "/families/family1/operations?limit=2&offset=2");
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(null);
+            operationsPagedResult.setFirstLink(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(baseApi + "/families/family1/operations?limit=2&offset=2");
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
         } else if ("2".equals(limit) && "7".equals(offset)) {
             // no results
             operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(null);
+            operationsPagedResult.setFirstLink(baseApi + "/families/family1/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
         }
@@ -136,12 +136,12 @@ public class StatisticalOperationsRestMocks {
     }
 
     private static RelatedResource mockFamilyRelatedResource(String subId, String baseApi) {
-        return MetamacRestMocks.mockRelatedResource("family" + subId, RestInternalConstants.KIND_FAMILY, RestInternalConstants.LINK_SELF, baseApi + "/families/family" + subId, Boolean.TRUE, "family");
+        return MetamacRestMocks.mockRelatedResource("family" + subId, RestInternalConstants.KIND_FAMILY, baseApi + "/families/family" + subId, Boolean.TRUE, "family");
     }
 
     private static RelatedResource mockInstanceRelatedResource(String operationId, String subId, String baseApi) {
-        return MetamacRestMocks.mockRelatedResource("instance" + subId, RestInternalConstants.KIND_INSTANCE, RestInternalConstants.LINK_SELF, baseApi + "/operations/" + operationId
-                + "/instances/instance" + subId, Boolean.TRUE, "instance");
+        return MetamacRestMocks.mockRelatedResource("instance" + subId, RestInternalConstants.KIND_INSTANCE, baseApi + "/operations/" + operationId + "/instances/instance" + subId, Boolean.TRUE,
+                "instance");
     }
 
     private static Operation mockOperation(String baseApi, String subCode, ProcStatusEnum procStatus) {
@@ -149,71 +149,53 @@ public class StatisticalOperationsRestMocks {
         Operation operation = new Operation();
         operation.setId("operation" + subCode);
         operation.setKind(RestInternalConstants.KIND_OPERATION);
-        operation.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/operation" + subCode));
+        operation.setSelfLink(baseApi + "/operations/operation" + subCode);
         operation.setTitle(MetamacRestMocks.mockInternationalString("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
         operation.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
         operation.getFamilies().add(mockFamilyRelatedResource("1", baseApi));
         operation.getFamilies().add(mockFamilyRelatedResource("2", baseApi));
-        operation.setSubjectArea(MetamacRestMocks.mockRelatedResource("subjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://subjectArea1", Boolean.FALSE,
-                null));
+        operation.setSubjectArea(MetamacRestMocks.mockRelatedResource("subjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), "http://subjectArea1", Boolean.FALSE, null));
         operation.getSecondarySubjectAreas().add(
-                MetamacRestMocks.mockRelatedResource("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea1",
-                        Boolean.FALSE, null));
+                MetamacRestMocks.mockRelatedResource("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY.name(), "http://secundarySubjectArea1", Boolean.FALSE, null));
         operation.getSecondarySubjectAreas().add(
-                MetamacRestMocks.mockRelatedResource("secundarySubjectArea22", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea22",
-                        Boolean.FALSE, null));
+                MetamacRestMocks.mockRelatedResource("secundarySubjectArea22", TypeExternalArtefactsEnum.CATEGORY.name(), "http://secundarySubjectArea22", Boolean.FALSE, null));
         operation.getSecondarySubjectAreas().add(
-                MetamacRestMocks.mockRelatedResource("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY.name(), RestInternalConstants.LINK_SELF, "http://secundarySubjectArea333",
-                        Boolean.FALSE, null));
+                MetamacRestMocks.mockRelatedResource("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY.name(), "http://secundarySubjectArea333", Boolean.FALSE, null));
         operation.setObjective(MetamacRestMocks.mockInternationalString("es", "Objetivo " + subCode + " en español", "en", "Objective " + subCode + " in English"));
         operation.setDescription(MetamacRestMocks.mockInternationalString("es", "Descripción " + subCode + " en español", "en", "Description " + subCode + " in English"));
         operation.getInstances().add(mockInstanceRelatedResource(operation.getId(), "1", baseApi));
         operation.getInstances().add(mockInstanceRelatedResource(operation.getId(), "22", baseApi));
         operation.getInstances().add(mockInstanceRelatedResource(operation.getId(), "333", baseApi));
         operation.getInstances().add(mockInstanceRelatedResource(operation.getId(), "4444", baseApi));
-        operation.setSurveyType(MetamacRestMocks.mockRelatedResource("surveyIdentifier", null, null, null, Boolean.TRUE, "survey"));
-        operation.setOfficialityType(MetamacRestMocks.mockRelatedResource("officialityTypeIdentifier", null, null, null, Boolean.TRUE, "officialityType"));
+        operation.setSurveyType(MetamacRestMocks.mockRelatedResource("surveyIdentifier", null, null, Boolean.TRUE, "survey"));
+        operation.setOfficialityType(MetamacRestMocks.mockRelatedResource("officialityTypeIdentifier", null, null, Boolean.TRUE, "officialityType"));
         operation.setIndicatorSystem(Boolean.TRUE);
-        operation.getProducers().add(
-                MetamacRestMocks.mockRelatedResource("producer1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer1", Boolean.FALSE, null));
-        operation.getProducers().add(
-                MetamacRestMocks.mockRelatedResource("producer22", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://producer22", Boolean.FALSE, null));
+        operation.getProducers().add(MetamacRestMocks.mockRelatedResource("producer1", TypeExternalArtefactsEnum.AGENCY.name(), "http://producer1", Boolean.FALSE, null));
+        operation.getProducers().add(MetamacRestMocks.mockRelatedResource("producer22", TypeExternalArtefactsEnum.AGENCY.name(), "http://producer22", Boolean.FALSE, null));
         operation.getRegionalResponsibles().add(
-                MetamacRestMocks.mockRelatedResource("regionalResponsible1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible1", Boolean.FALSE,
-                        null));
+                MetamacRestMocks.mockRelatedResource("regionalResponsible1", TypeExternalArtefactsEnum.AGENCY.name(), "http://regionalResponsible1", Boolean.FALSE, null));
         operation.getRegionalResponsibles().add(
-                MetamacRestMocks.mockRelatedResource("regionalResponsible22", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible22", Boolean.FALSE,
-                        null));
+                MetamacRestMocks.mockRelatedResource("regionalResponsible22", TypeExternalArtefactsEnum.AGENCY.name(), "http://regionalResponsible22", Boolean.FALSE, null));
         operation.getRegionalResponsibles().add(
-                MetamacRestMocks.mockRelatedResource("regionalResponsible333", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalResponsible333",
-                        Boolean.FALSE, null));
+                MetamacRestMocks.mockRelatedResource("regionalResponsible333", TypeExternalArtefactsEnum.AGENCY.name(), "http://regionalResponsible333", Boolean.FALSE, null));
         operation.getRegionalContributors().add(
-                MetamacRestMocks.mockRelatedResource("regionalContributor1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalContributor1", Boolean.FALSE,
-                        null));
+                MetamacRestMocks.mockRelatedResource("regionalContributor1", TypeExternalArtefactsEnum.AGENCY.name(), "http://regionalContributor1", Boolean.FALSE, null));
         operation.getRegionalContributors().add(
-                MetamacRestMocks.mockRelatedResource("regionalContributor22", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://regionalContributor22", Boolean.FALSE,
-                        null));
+                MetamacRestMocks.mockRelatedResource("regionalContributor22", TypeExternalArtefactsEnum.AGENCY.name(), "http://regionalContributor22", Boolean.FALSE, null));
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(StatusEnum.DESIGN.name());
         operation.setProcStatus(procStatus.name());
-        operation.getPublishers().add(
-                MetamacRestMocks.mockRelatedResource("publisher1", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher1", Boolean.FALSE, null));
-        operation.getPublishers().add(
-                MetamacRestMocks.mockRelatedResource("publisher22", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher22", Boolean.FALSE, null));
-        operation.getPublishers().add(
-                MetamacRestMocks.mockRelatedResource("publisher333", TypeExternalArtefactsEnum.AGENCY.name(), RestInternalConstants.LINK_SELF, "http://publisher333", Boolean.FALSE, null));
+        operation.getPublishers().add(MetamacRestMocks.mockRelatedResource("publisher1", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher1", Boolean.FALSE, null));
+        operation.getPublishers().add(MetamacRestMocks.mockRelatedResource("publisher22", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher22", Boolean.FALSE, null));
+        operation.getPublishers().add(MetamacRestMocks.mockRelatedResource("publisher333", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher333", Boolean.FALSE, null));
         operation.setRelPolUsAc(MetamacRestMocks.mockInternationalString("es", "RelPolUsAc " + subCode + " en español", "en", "RelPolUsAc " + subCode + " in English"));
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
-        operation.getUpdateFrequencies().add(
-                MetamacRestMocks.mockRelatedResource("updateFrequency1", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency1", Boolean.FALSE, null));
-        operation.getUpdateFrequencies().add(
-                MetamacRestMocks.mockRelatedResource("updateFrequency22", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency22", Boolean.FALSE, null));
-        operation.getUpdateFrequencies().add(
-                MetamacRestMocks.mockRelatedResource("updateFrequency333", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency333", Boolean.FALSE, null));
-        operation.getUpdateFrequencies().add(
-                MetamacRestMocks.mockRelatedResource("updateFrequency4444", TypeExternalArtefactsEnum.CODE.name(), RestInternalConstants.LINK_SELF, "http://updateFrequency4444", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(MetamacRestMocks.mockRelatedResource("updateFrequency1", TypeExternalArtefactsEnum.CODE.name(), "http://updateFrequency1", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(MetamacRestMocks.mockRelatedResource("updateFrequency22", TypeExternalArtefactsEnum.CODE.name(), "http://updateFrequency22", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(MetamacRestMocks.mockRelatedResource("updateFrequency333", TypeExternalArtefactsEnum.CODE.name(), "http://updateFrequency333", Boolean.FALSE, null));
+        operation.getUpdateFrequencies().add(MetamacRestMocks.mockRelatedResource("updateFrequency4444", TypeExternalArtefactsEnum.CODE.name(), "http://updateFrequency4444", Boolean.FALSE, null));
         operation.setCurrentInternalInstance(mockInstanceRelatedResource(operation.getId(), "22", baseApi));
         operation.setCurrentInstance(mockInstanceRelatedResource(operation.getId(), "333", baseApi));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
@@ -222,13 +204,9 @@ public class StatisticalOperationsRestMocks {
         // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
         operation.setComment(MetamacRestMocks.mockInternationalString("es", "Comentarios " + subCode + " en español", "en", "Comments " + subCode + " in English"));
         operation.setNotes(MetamacRestMocks.mockInternationalString("es", "Notas " + subCode + " en español", "en", "Notes " + subCode + " in English"));
-        operation.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/operations", Boolean.FALSE, null));
-        operation.getchildren().add(
-                MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/operations/operation" + subCode + "/families",
-                        Boolean.FALSE, null));
-        operation.getchildren().add(
-                MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_INSTANCES, RestInternalConstants.LINK_SELF, baseApi + "/operations/operation" + subCode + "/instances",
-                        Boolean.FALSE, null));
+        operation.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, baseApi + "/operations", Boolean.FALSE, null));
+        operation.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, baseApi + "/operations/operation" + subCode + "/families", Boolean.FALSE, null));
+        operation.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_INSTANCES, baseApi + "/operations/operation" + subCode + "/instances", Boolean.FALSE, null));
         return operation;
     }
 
@@ -237,17 +215,15 @@ public class StatisticalOperationsRestMocks {
         Family family = new Family();
         family.setId("family" + subCode);
         family.setKind(RestInternalConstants.KIND_FAMILY);
-        family.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/families/family" + subCode));
+        family.setSelfLink(baseApi + "/families/family" + subCode);
         family.setTitle(MetamacRestMocks.mockInternationalString("es", "Título family family" + subCode, "en", "Title family family" + subCode));
         family.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
         family.setDescription(MetamacRestMocks.mockInternationalString("es", "Descripción " + subCode + " en español", "en", "Description " + subCode + " in English"));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         family.setProcStatus(procStatus.name());
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
-        family.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, RestInternalConstants.LINK_SELF, baseApi + "/families", Boolean.FALSE, null));
-        family.getchildren().add(
-                MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, RestInternalConstants.LINK_SELF, baseApi + "/families/family" + subCode + "/operations",
-                        Boolean.FALSE, null));
+        family.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_FAMILIES, baseApi + "/families", Boolean.FALSE, null));
+        family.getchildren().add(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subCode + "/operations", Boolean.FALSE, null));
         return family;
     }
 
@@ -256,65 +232,48 @@ public class StatisticalOperationsRestMocks {
         Instance instance = new Instance();
         instance.setId("instance" + subCode);
         instance.setKind(RestInternalConstants.KIND_INSTANCE);
-        instance.setLink(MetamacRestMocks.mockLink(RestInternalConstants.LINK_SELF, baseApi + "/operations/" + operation + "/instances/instance" + subCode));
+        instance.setSelfLink(baseApi + "/operations/" + operation + "/instances/instance" + subCode);
         instance.setTitle(MetamacRestMocks.mockInternationalString("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
         instance.setAcronym(MetamacRestMocks.mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
-        instance.setSurvey(MetamacRestMocks.mockRelatedResource(operation, RestInternalConstants.KIND_OPERATION, RestInternalConstants.LINK_SELF, baseApi + "/operations/" + operation, Boolean.TRUE,
-                "operation"));
+        instance.setSurvey(MetamacRestMocks.mockRelatedResource(operation, RestInternalConstants.KIND_OPERATION, baseApi + "/operations/" + operation, Boolean.TRUE, "operation"));
         instance.setPredecessor(mockInstanceRelatedResource(operation, "333", baseApi));
         instance.setSuccessor(mockInstanceRelatedResource(operation, "22", baseApi));
         instance.setDataDescription(MetamacRestMocks.mockInternationalString("es", "Descripción de Datos " + subCode + " en español", "en", "DataDescription " + subCode + " in English"));
         instance.setStatisticalPopulation(MetamacRestMocks.mockInternationalString("es", "Carga de Estadísticas " + subCode + " en español", "en", "StatisticalPopulation " + subCode + " in English"));
-        instance.getStatisticalUnits().add(
-                MetamacRestMocks.mockRelatedResource("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE.name(), RestInternalConstants.LINK_SELF, "http://statisticalUnit1", Boolean.FALSE,
-                        null));
-        instance.getStatisticalUnits().add(
-                MetamacRestMocks.mockRelatedResource("statisticalUnit22", TypeExternalArtefactsEnum.DATASTRUCTURE.name(), RestInternalConstants.LINK_SELF, "http://statisticalUnit22", Boolean.FALSE,
-                        null));
-        instance.setGeographicGranularity(MetamacRestMocks.mockRelatedResource("geographicGranularity", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF,
-                "http://geographicGranularity", Boolean.FALSE, null));
+        instance.getStatisticalUnits().add(MetamacRestMocks.mockRelatedResource("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE.name(), "http://statisticalUnit1", Boolean.FALSE, null));
+        instance.getStatisticalUnits().add(MetamacRestMocks.mockRelatedResource("statisticalUnit22", TypeExternalArtefactsEnum.DATASTRUCTURE.name(), "http://statisticalUnit22", Boolean.FALSE, null));
+        instance.setGeographicGranularity(MetamacRestMocks.mockRelatedResource("geographicGranularity", TypeExternalArtefactsEnum.CODELIST.name(), "http://geographicGranularity", Boolean.FALSE, null));
         instance.setGeographicComparability(MetamacRestMocks.mockInternationalString("es", "Comparando Geográficos " + subCode + " en español", "en", "geographicComparability " + subCode
                 + " in English"));
-        instance.setTemporalGranularity(MetamacRestMocks.mockRelatedResource("temporalGranularity", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF,
-                "http://temporalGranularity", Boolean.FALSE, null));
+        instance.setTemporalGranularity(MetamacRestMocks.mockRelatedResource("temporalGranularity", TypeExternalArtefactsEnum.CODELIST.name(), "http://temporalGranularity", Boolean.FALSE, null));
         instance.setTemporalComparability(MetamacRestMocks.mockInternationalString("es", "Comparando Temporal " + subCode + " en español", "en", "temporalComparability " + subCode + " in English"));
         instance.setBasePeriod("2012");
-        instance.getUnitMeasures().add(
-                MetamacRestMocks.mockRelatedResource("unitMeasure1", TypeExternalArtefactsEnum.CONCEPT.name(), RestInternalConstants.LINK_SELF, "http://unitMeasure1", Boolean.FALSE, null));
+        instance.getUnitMeasures().add(MetamacRestMocks.mockRelatedResource("unitMeasure1", TypeExternalArtefactsEnum.CONCEPT.name(), "http://unitMeasure1", Boolean.FALSE, null));
         instance.setStatConcDef(MetamacRestMocks.mockInternationalString("es", "StatConcDef " + subCode + " en español", "en", "StatConcDef " + subCode + " in English"));
-        instance.getStatConcDefLists().add(
-                MetamacRestMocks.mockRelatedResource("statConcDefList1", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF, "http://statConcDefList1", Boolean.FALSE, null));
-        instance.getStatConcDefLists().add(
-                MetamacRestMocks.mockRelatedResource("statConcDefList22", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF, "http://statConcDefList22", Boolean.FALSE, null));
-        instance.getStatConcDefLists()
-                .add(MetamacRestMocks.mockRelatedResource("statConcDefList333", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF, "http://statConcDefList333", Boolean.FALSE,
-                        null));
+        instance.getStatConcDefLists().add(MetamacRestMocks.mockRelatedResource("statConcDefList1", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList1", Boolean.FALSE, null));
+        instance.getStatConcDefLists().add(MetamacRestMocks.mockRelatedResource("statConcDefList22", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList22", Boolean.FALSE, null));
+        instance.getStatConcDefLists().add(MetamacRestMocks.mockRelatedResource("statConcDefList333", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList333", Boolean.FALSE, null));
         instance.setClassSystem(MetamacRestMocks.mockInternationalString("es", "ClassSystem " + subCode + " en español", "en", "ClassSystem " + subCode + " in English"));
-        instance.getClassSystemLists().add(
-                MetamacRestMocks.mockRelatedResource("statConcDefList1", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF, "http://statConcDefList1", Boolean.FALSE, null));
-        instance.getClassSystemLists().add(
-                MetamacRestMocks.mockRelatedResource("statConcDefList22", TypeExternalArtefactsEnum.CODELIST.name(), RestInternalConstants.LINK_SELF, "http://statConcDefList22", Boolean.FALSE, null));
-        instance.setInstanceType(MetamacRestMocks.mockRelatedResource("instanceType1", null, null, null, Boolean.TRUE, "instanceType"));
+        instance.getClassSystemLists().add(MetamacRestMocks.mockRelatedResource("statConcDefList1", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList1", Boolean.FALSE, null));
+        instance.getClassSystemLists().add(MetamacRestMocks.mockRelatedResource("statConcDefList22", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList22", Boolean.FALSE, null));
+        instance.setInstanceType(MetamacRestMocks.mockRelatedResource("instanceType1", null, null, Boolean.TRUE, "instanceType"));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         instance.setProcStatus(procStatus.name());
         instance.setDocMethod(MetamacRestMocks.mockInternationalString("es", "DocMethod " + subCode + " en español", "en", "DocMethod " + subCode + " in English"));
-        instance.setSurveySource(MetamacRestMocks.mockRelatedResource("surveySource1", null, null, null, Boolean.TRUE, "surveySource"));
-        instance.setCollMethod(MetamacRestMocks.mockRelatedResource("collMethod1", null, null, null, Boolean.TRUE, "collMethod"));
+        instance.setSurveySource(MetamacRestMocks.mockRelatedResource("surveySource1", null, null, Boolean.TRUE, "surveySource"));
+        instance.setCollMethod(MetamacRestMocks.mockRelatedResource("collMethod1", null, null, Boolean.TRUE, "collMethod"));
         instance.getInformationSuppliers().add(
-                MetamacRestMocks.mockRelatedResource("informationSupplier1", TypeExternalArtefactsEnum.COMMON_METADATA.name(), RestInternalConstants.LINK_SELF, "http://informationSupplier1",
-                        Boolean.FALSE, null));
-        instance.getFreqColls().add(
-                MetamacRestMocks.mockRelatedResource("freqColl1", TypeExternalArtefactsEnum.CATEGORY_SCHEME.name(), RestInternalConstants.LINK_SELF, "http://freqColl1", Boolean.FALSE, null));
-        instance.getFreqColls().add(
-                MetamacRestMocks.mockRelatedResource("freqColl22", TypeExternalArtefactsEnum.CATEGORY_SCHEME.name(), RestInternalConstants.LINK_SELF, "http://freqColl22", Boolean.FALSE, null));
+                MetamacRestMocks.mockRelatedResource("informationSupplier1", TypeExternalArtefactsEnum.COMMON_METADATA.name(), "http://informationSupplier1", Boolean.FALSE, null));
+        instance.getFreqColls().add(MetamacRestMocks.mockRelatedResource("freqColl1", TypeExternalArtefactsEnum.CATEGORY_SCHEME.name(), "http://freqColl1", Boolean.FALSE, null));
+        instance.getFreqColls().add(MetamacRestMocks.mockRelatedResource("freqColl22", TypeExternalArtefactsEnum.CATEGORY_SCHEME.name(), "http://freqColl22", Boolean.FALSE, null));
         instance.setDataValidation(MetamacRestMocks.mockInternationalString("es", "DataValidation " + subCode + " en español", "en", "DataValidation " + subCode + " in English"));
         instance.setDataCompilation(MetamacRestMocks.mockInternationalString("es", "DataCompilation " + subCode + " en español", "en", "DataCompilation " + subCode + " in English"));
         instance.setAdjustment(MetamacRestMocks.mockInternationalString("es", "Adjustment " + subCode + " en español", "en", "Adjustment " + subCode + " in English"));
         instance.setCostBurden(MetamacRestMocks.mockInternationalString("es", "CostBurden " + subCode + " en español", "en", "CostBurden " + subCode + " in English"));
-        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost1", null, null, null, Boolean.TRUE, "cost"));
-        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost22", null, null, null, Boolean.TRUE, "cost"));
-        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost333", null, null, null, Boolean.TRUE, "cost"));
-        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost4444", null, null, null, Boolean.TRUE, "cost"));
+        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost1", null, null, Boolean.TRUE, "cost"));
+        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost22", null, null, Boolean.TRUE, "cost"));
+        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost333", null, null, Boolean.TRUE, "cost"));
+        instance.getCosts().add(MetamacRestMocks.mockRelatedResource("cost4444", null, null, Boolean.TRUE, "cost"));
         instance.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         instance.setQualityDoc(MetamacRestMocks.mockInternationalString("es", "QualityDoc " + subCode + " en español", "en", "QualityDoc " + subCode + " in English"));
         instance.setQualityAssure(MetamacRestMocks.mockInternationalString("es", "QualityAssure " + subCode + " en español", "en", "QualityAssure " + subCode + " in English"));
@@ -331,7 +290,7 @@ public class StatisticalOperationsRestMocks {
         instance.setCoherInternal(MetamacRestMocks.mockInternationalString("es", "CoherInternal " + subCode + " en español", "en", "CoherInternal " + subCode + " in English"));
         instance.setComment(MetamacRestMocks.mockInternationalString("es", "Comentarios " + subCode + " en español", "en", "Comments " + subCode + " in English"));
         instance.setNotes(MetamacRestMocks.mockInternationalString("es", "Notas " + subCode + " en español", "en", "Notes " + subCode + " in English"));
-        instance.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATION, RestInternalConstants.LINK_SELF, baseApi + "/operations/" + operation, Boolean.FALSE, null));
+        instance.setParent(MetamacRestMocks.mockRelatedResource(null, RestInternalConstants.KIND_OPERATION, baseApi + "/operations/" + operation, Boolean.FALSE, null));
         instance.getchildren(); // no children
         return instance;
     }

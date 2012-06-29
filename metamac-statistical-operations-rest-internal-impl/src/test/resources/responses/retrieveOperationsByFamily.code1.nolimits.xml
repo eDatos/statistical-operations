@@ -4,12 +4,10 @@
     <ns2:limit>25</ns2:limit>
     <ns2:offset>0</ns2:offset>
     <ns2:total>6</ns2:total>
-    <ns2:first>http://localhost:9001/internal/v1.0/families/family1/operations?limit=25&amp;offset=0</ns2:first>
-    <ns2:last>http://localhost:9001/internal/v1.0/families/family1/operations?limit=25&amp;offset=0</ns2:last>
     <items>
         <id>operation1</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
         <title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -31,109 +29,109 @@
             </ns2:text>
         </acronym>
         <family>
-            <ns2:id>family1</ns2:id>
-            <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
-            <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family1</ns2:label>
-                </ns2:text>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family1</ns2:label>
-                </ns2:text>
-            </ns2:title>
-        </family>
-        <family>
             <ns2:id>family2</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
             <ns2:title>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título family family2</ns2:label>
+                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title family family2</ns2:label>
                 </ns2:text>
+            </ns2:title>
+        </family>
+        <family>
+            <ns2:id>family1</ns2:id>
+            <ns2:kind>statisticalOperations#family</ns2:kind>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
+            <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family2</ns2:label>
+                    <ns2:label>Título family family1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family1</ns2:label>
                 </ns2:text>
             </ns2:title>
         </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
         <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea22</ns2:id>
+            <ns2:id>secundarySubjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea333</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea1</ns2:id>
+            <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Objective 1 in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Objetivo 1 en español</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Objective 1 in English</ns2:label>
+            </ns2:text>
         </objective>
         <description>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Descripción 1 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Description 1 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Descripción 1 en español</ns2:label>
             </ns2:text>
         </description>
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance4444</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance4444</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance4444</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance22</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance22</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance22</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -148,7 +146,7 @@
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -188,58 +186,58 @@
         </officialityType>
         <indicatorSystem>true</indicatorSystem>
         <producer>
-            <ns2:id>producer1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
-        </producer>
-        <producer>
             <ns2:id>producer22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
+        </producer>
+        <producer>
+            <ns2:id>producer1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
         </producer>
         <regionalResponsible>
             <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
-        </regionalResponsible>
-        <regionalResponsible>
-            <ns2:id>regionalResponsible333</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
+        </regionalResponsible>
+        <regionalResponsible>
+            <ns2:id>regionalResponsible333</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
         </regionalResponsible>
         <regionalContributor>
             <ns2:id>regionalContributor22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
         </regionalContributor>
         <regionalContributor>
             <ns2:id>regionalContributor1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
         <status>DESIGN</status>
         <procStatus>PUBLISH_INTERNALLY</procStatus>
         <publisher>
+            <ns2:id>publisher333</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
+        </publisher>
+        <publisher>
             <ns2:id>publisher22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
-        </publisher>
-        <publisher>
-            <ns2:id>publisher333</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
@@ -254,44 +252,44 @@
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
-            <ns2:id>updateFrequency4444</ns2:id>
+            <ns2:id>updateFrequency22</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency333</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
-            <ns2:id>updateFrequency22</ns2:id>
+            <ns2:id>updateFrequency4444</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance22</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance22</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance22</ns2:label>
                 </ns2:text>
             </ns2:title>
         </currentInternalInstance>
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -346,21 +344,21 @@
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation1/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/families</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>operation2</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation2</selfLink>
         <title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -373,33 +371,18 @@
         </title>
         <acronym>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Acronym 2 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Acrónimo 2 en español</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Acronym 2 in English</ns2:label>
+            </ns2:text>
         </acronym>
-        <family>
-            <ns2:id>family2</ns2:id>
-            <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
-            <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family2</ns2:label>
-                </ns2:text>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family2</ns2:label>
-                </ns2:text>
-            </ns2:title>
-        </family>
         <family>
             <ns2:id>family1</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -411,50 +394,65 @@
                 </ns2:text>
             </ns2:title>
         </family>
+        <family>
+            <ns2:id>family2</ns2:id>
+            <ns2:kind>statisticalOperations#family</ns2:kind>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
+            <ns2:title>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título family family2</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family2</ns2:label>
+                </ns2:text>
+            </ns2:title>
+        </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea333</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Objetivo 2 en español</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Objective 2 in English</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Objetivo 2 en español</ns2:label>
+            </ns2:text>
         </objective>
         <description>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Descripción 2 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Description 2 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Descripción 2 en español</ns2:label>
             </ns2:text>
         </description>
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance4444</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -469,45 +467,45 @@
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance22</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance22</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance22</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance22</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance1</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance1</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance1</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
@@ -541,56 +539,56 @@
         <producer>
             <ns2:id>producer22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
         </producer>
         <producer>
             <ns2:id>producer1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
         </producer>
-        <regionalResponsible>
-            <ns2:id>regionalResponsible1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
-        </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
+        </regionalResponsible>
+        <regionalResponsible>
+            <ns2:id>regionalResponsible1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
         </regionalResponsible>
         <regionalContributor>
             <ns2:id>regionalContributor1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
         </regionalContributor>
         <regionalContributor>
             <ns2:id>regionalContributor22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
         <status>DESIGN</status>
         <procStatus>PUBLISH_INTERNALLY</procStatus>
         <publisher>
-            <ns2:id>publisher22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
-        </publisher>
-        <publisher>
             <ns2:id>publisher333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
+        </publisher>
+        <publisher>
+            <ns2:id>publisher22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
@@ -605,121 +603,121 @@
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
-            <ns2:id>updateFrequency22</ns2:id>
+            <ns2:id>updateFrequency333</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
-        </updateFrequency>
-        <updateFrequency>
-            <ns2:id>updateFrequency4444</ns2:id>
-            <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
-            <ns2:id>updateFrequency333</ns2:id>
+            <ns2:id>updateFrequency22</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
+        </updateFrequency>
+        <updateFrequency>
+            <ns2:id>updateFrequency4444</ns2:id>
+            <ns2:kind>CODE</ns2:kind>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance22</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance22</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance22</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance22</ns2:label>
                 </ns2:text>
             </ns2:title>
         </currentInternalInstance>
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </currentInstance>
         <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
         <revPolicy>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>RevPolicy 2 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>RevPolicy 2 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>RevPolicy 2 en español</ns2:label>
             </ns2:text>
         </revPolicy>
         <revPractice>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>RevPractice 2 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>RevPractice 2 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>RevPractice 2 in English</ns2:label>
             </ns2:text>
         </revPractice>
         <comment>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Comentarios 2 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Comments 2 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Comentarios 2 en español</ns2:label>
             </ns2:text>
         </comment>
         <notes>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Notas 2 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Notes 2 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Notas 2 en español</ns2:label>
             </ns2:text>
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation2/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2/families</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>operation3</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation3</selfLink>
         <title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Título operation operation3</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Title operation operation3</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation3</ns2:label>
             </ns2:text>
         </title>
         <acronym>
@@ -733,9 +731,24 @@
             </ns2:text>
         </acronym>
         <family>
+            <ns2:id>family1</ns2:id>
+            <ns2:kind>statisticalOperations#family</ns2:kind>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
+            <ns2:title>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título family family1</ns2:label>
+                </ns2:text>
+            </ns2:title>
+        </family>
+        <family>
             <ns2:id>family2</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -747,40 +760,25 @@
                 </ns2:text>
             </ns2:title>
         </family>
-        <family>
-            <ns2:id>family1</ns2:id>
-            <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
-            <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family1</ns2:label>
-                </ns2:text>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family1</ns2:label>
-                </ns2:text>
-            </ns2:title>
-        </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
+        <secondarySubjectAreas>
+            <ns2:id>secundarySubjectArea1</ns2:id>
+            <ns2:kind>CATEGORY</ns2:kind>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
+        </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea333</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
-        </secondarySubjectAreas>
-        <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea1</ns2:id>
-            <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
             <ns2:text>
@@ -794,33 +792,33 @@
         </objective>
         <description>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Description 3 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Descripción 3 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Description 3 in English</ns2:label>
             </ns2:text>
         </description>
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance4444</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance4444</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance4444</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance4444</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -835,7 +833,7 @@
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -850,15 +848,15 @@
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
@@ -866,12 +864,12 @@
             <ns2:id>surveyIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title survey surveyIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título survey surveyIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title survey surveyIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </surveyType>
@@ -879,50 +877,50 @@
             <ns2:id>officialityTypeIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title officialityType officialityTypeIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </officialityType>
         <indicatorSystem>true</indicatorSystem>
         <producer>
-            <ns2:id>producer22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
-        </producer>
-        <producer>
             <ns2:id>producer1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
+        </producer>
+        <producer>
+            <ns2:id>producer22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
         </producer>
         <regionalResponsible>
-            <ns2:id>regionalResponsible22</ns2:id>
+            <ns2:id>regionalResponsible333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
-            <ns2:id>regionalResponsible333</ns2:id>
+            <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
         </regionalResponsible>
         <regionalContributor>
             <ns2:id>regionalContributor22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
         </regionalContributor>
         <regionalContributor>
             <ns2:id>regionalContributor1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
@@ -931,17 +929,17 @@
         <publisher>
             <ns2:id>publisher333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
-        </publisher>
-        <publisher>
-            <ns2:id>publisher1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
+        </publisher>
+        <publisher>
+            <ns2:id>publisher1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
@@ -956,29 +954,29 @@
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
+            <ns2:id>updateFrequency333</ns2:id>
+            <ns2:kind>CODE</ns2:kind>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
+        </updateFrequency>
+        <updateFrequency>
             <ns2:id>updateFrequency22</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency4444</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
-        </updateFrequency>
-        <updateFrequency>
-            <ns2:id>updateFrequency333</ns2:id>
-            <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -993,15 +991,15 @@
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </currentInstance>
@@ -1038,31 +1036,31 @@
         </comment>
         <notes>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Notas 3 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Notes 3 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Notas 3 en español</ns2:label>
             </ns2:text>
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation3/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3/families</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>operation4</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation4</selfLink>
         <title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -1075,33 +1073,18 @@
         </title>
         <acronym>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Acronym 4 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Acrónimo 4 en español</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Acronym 4 in English</ns2:label>
+            </ns2:text>
         </acronym>
-        <family>
-            <ns2:id>family1</ns2:id>
-            <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
-            <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family1</ns2:label>
-                </ns2:text>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family1</ns2:label>
-                </ns2:text>
-            </ns2:title>
-        </family>
         <family>
             <ns2:id>family2</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1113,34 +1096,49 @@
                 </ns2:text>
             </ns2:title>
         </family>
+        <family>
+            <ns2:id>family1</ns2:id>
+            <ns2:kind>statisticalOperations#family</ns2:kind>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
+            <ns2:title>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título family family1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family1</ns2:label>
+                </ns2:text>
+            </ns2:title>
+        </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
+        <secondarySubjectAreas>
+            <ns2:id>secundarySubjectArea333</ns2:id>
+            <ns2:kind>CATEGORY</ns2:kind>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
+        </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
-        </secondarySubjectAreas>
-        <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea333</ns2:id>
-            <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Objetivo 4 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Objective 4 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Objetivo 4 en español</ns2:label>
             </ns2:text>
         </objective>
         <description>
@@ -1156,7 +1154,7 @@
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance4444</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1171,7 +1169,7 @@
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1186,30 +1184,30 @@
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance1</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance1</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance1</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
@@ -1217,12 +1215,12 @@
             <ns2:id>surveyIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title survey surveyIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título survey surveyIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title survey surveyIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </surveyType>
@@ -1230,69 +1228,69 @@
             <ns2:id>officialityTypeIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title officialityType officialityTypeIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </officialityType>
         <indicatorSystem>true</indicatorSystem>
         <producer>
-            <ns2:id>producer22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
-        </producer>
-        <producer>
             <ns2:id>producer1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
+        </producer>
+        <producer>
+            <ns2:id>producer22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
         </producer>
         <regionalResponsible>
-            <ns2:id>regionalResponsible22</ns2:id>
+            <ns2:id>regionalResponsible333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
-            <ns2:id>regionalResponsible333</ns2:id>
+            <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
         </regionalResponsible>
-        <regionalContributor>
-            <ns2:id>regionalContributor22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
-        </regionalContributor>
         <regionalContributor>
             <ns2:id>regionalContributor1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
+        </regionalContributor>
+        <regionalContributor>
+            <ns2:id>regionalContributor22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
         <status>DESIGN</status>
         <procStatus>PUBLISH_INTERNALLY</procStatus>
         <publisher>
+            <ns2:id>publisher22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
+        </publisher>
+        <publisher>
             <ns2:id>publisher333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
-        </publisher>
-        <publisher>
-            <ns2:id>publisher22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
@@ -1307,29 +1305,29 @@
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
-            <ns2:id>updateFrequency22</ns2:id>
-            <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
-        </updateFrequency>
-        <updateFrequency>
             <ns2:id>updateFrequency333</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency4444</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
+        </updateFrequency>
+        <updateFrequency>
+            <ns2:id>updateFrequency22</ns2:id>
+            <ns2:kind>CODE</ns2:kind>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1344,37 +1342,37 @@
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances/instance333</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance333</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance333</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance333</ns2:label>
                 </ns2:text>
             </ns2:title>
         </currentInstance>
         <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
         <revPolicy>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>RevPolicy 4 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>RevPolicy 4 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>RevPolicy 4 en español</ns2:label>
             </ns2:text>
         </revPolicy>
         <revPractice>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>RevPractice 4 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>RevPractice 4 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>RevPractice 4 en español</ns2:label>
             </ns2:text>
         </revPractice>
         <comment>
@@ -1389,39 +1387,39 @@
         </comment>
         <notes>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Notes 4 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Notas 4 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Notes 4 in English</ns2:label>
             </ns2:text>
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation4/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4/families</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>operation5</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation5</selfLink>
         <title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Título operation operation5</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Title operation operation5</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation5</ns2:label>
             </ns2:text>
         </title>
         <acronym>
@@ -1435,24 +1433,9 @@
             </ns2:text>
         </acronym>
         <family>
-            <ns2:id>family2</ns2:id>
-            <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
-            <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family2</ns2:label>
-                </ns2:text>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título family family2</ns2:label>
-                </ns2:text>
-            </ns2:title>
-        </family>
-        <family>
             <ns2:id>family1</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1464,65 +1447,80 @@
                 </ns2:text>
             </ns2:title>
         </family>
+        <family>
+            <ns2:id>family2</ns2:id>
+            <ns2:kind>statisticalOperations#family</ns2:kind>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
+            <ns2:title>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título family family2</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family2</ns2:label>
+                </ns2:text>
+            </ns2:title>
+        </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
+        <secondarySubjectAreas>
+            <ns2:id>secundarySubjectArea333</ns2:id>
+            <ns2:kind>CATEGORY</ns2:kind>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
+        </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
-        </secondarySubjectAreas>
-        <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea333</ns2:id>
-            <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Objetivo 5 en español</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Objective 5 in English</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Objetivo 5 en español</ns2:label>
+            </ns2:text>
         </objective>
         <description>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Descripción 5 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Description 5 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Descripción 5 en español</ns2:label>
             </ns2:text>
         </description>
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance4444</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance4444</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance4444</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance4444</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1537,7 +1535,7 @@
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1552,7 +1550,7 @@
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1581,106 +1579,106 @@
             <ns2:id>officialityTypeIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title officialityType officialityTypeIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título officialityType officialityTypeIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </officialityType>
         <indicatorSystem>true</indicatorSystem>
         <producer>
-            <ns2:id>producer1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
-        </producer>
-        <producer>
             <ns2:id>producer22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
         </producer>
-        <regionalResponsible>
-            <ns2:id>regionalResponsible333</ns2:id>
+        <producer>
+            <ns2:id>producer1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
-        </regionalResponsible>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
+        </producer>
         <regionalResponsible>
             <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
         </regionalResponsible>
-        <regionalContributor>
-            <ns2:id>regionalContributor1</ns2:id>
+        <regionalResponsible>
+            <ns2:id>regionalResponsible333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
-        </regionalContributor>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
+        </regionalResponsible>
         <regionalContributor>
             <ns2:id>regionalContributor22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
+        </regionalContributor>
+        <regionalContributor>
+            <ns2:id>regionalContributor1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
         <status>DESIGN</status>
         <procStatus>PUBLISH_INTERNALLY</procStatus>
         <publisher>
-            <ns2:id>publisher22</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
-        </publisher>
-        <publisher>
             <ns2:id>publisher1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
+        </publisher>
+        <publisher>
+            <ns2:id>publisher22</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>RelPolUsAc 5 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>RelPolUsAc 5 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>RelPolUsAc 5 in English</ns2:label>
             </ns2:text>
         </relPolUsAc>
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
-            <ns2:id>updateFrequency1</ns2:id>
+            <ns2:id>updateFrequency333</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency4444</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
-            <ns2:id>updateFrequency333</ns2:id>
+            <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency22</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1695,7 +1693,7 @@
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1750,45 +1748,45 @@
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation5/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5/families</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>operation6</id>
         <kind>statisticalOperations#operation</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6"/>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation6</selfLink>
         <title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Título operation operation6</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Title operation operation6</ns2:label>
             </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation6</ns2:label>
+            </ns2:text>
         </title>
         <acronym>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Acronym 6 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Acrónimo 6 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Acronym 6 in English</ns2:label>
             </ns2:text>
         </acronym>
         <family>
             <ns2:id>family1</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1803,46 +1801,46 @@
         <family>
             <ns2:id>family2</ns2:id>
             <ns2:kind>statisticalOperations#family</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title family family2</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título family family2</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title family family2</ns2:label>
                 </ns2:text>
             </ns2:title>
         </family>
         <subjectArea>
             <ns2:id>subjectArea1</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://subjectArea1"/>
+            <ns2:selfLink>http://subjectArea1</ns2:selfLink>
         </subjectArea>
-        <secondarySubjectAreas>
-            <ns2:id>secundarySubjectArea1</ns2:id>
-            <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea1"/>
-        </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea333</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea333"/>
+            <ns2:selfLink>http://secundarySubjectArea333</ns2:selfLink>
+        </secondarySubjectAreas>
+        <secondarySubjectAreas>
+            <ns2:id>secundarySubjectArea1</ns2:id>
+            <ns2:kind>CATEGORY</ns2:kind>
+            <ns2:selfLink>http://secundarySubjectArea1</ns2:selfLink>
         </secondarySubjectAreas>
         <secondarySubjectAreas>
             <ns2:id>secundarySubjectArea22</ns2:id>
             <ns2:kind>CATEGORY</ns2:kind>
-            <ns2:link rel="self" href="http://secundarySubjectArea22"/>
+            <ns2:selfLink>http://secundarySubjectArea22</ns2:selfLink>
         </secondarySubjectAreas>
         <objective>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Objective 6 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Objetivo 6 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Objective 6 in English</ns2:label>
             </ns2:text>
         </objective>
         <description>
@@ -1858,22 +1856,22 @@
         <instance>
             <ns2:id>instance4444</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance4444"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance4444</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>es</ns2:locale>
-                    <ns2:label>Título instance instance4444</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
                     <ns2:label>Title instance instance4444</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>es</ns2:locale>
+                    <ns2:label>Título instance instance4444</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -1888,22 +1886,22 @@
         <instance>
             <ns2:id>instance1</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance1"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance1</ns2:selfLink>
             <ns2:title>
-                <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title instance instance1</ns2:label>
-                </ns2:text>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título instance instance1</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title instance instance1</ns2:label>
                 </ns2:text>
             </ns2:title>
         </instance>
         <instance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -1919,12 +1917,12 @@
             <ns2:id>surveyIdentifier</ns2:id>
             <ns2:title>
                 <ns2:text>
-                    <ns2:locale>en</ns2:locale>
-                    <ns2:label>Title survey surveyIdentifier</ns2:label>
-                </ns2:text>
-                <ns2:text>
                     <ns2:locale>es</ns2:locale>
                     <ns2:label>Título survey surveyIdentifier</ns2:label>
+                </ns2:text>
+                <ns2:text>
+                    <ns2:locale>en</ns2:locale>
+                    <ns2:label>Title survey surveyIdentifier</ns2:label>
                 </ns2:text>
             </ns2:title>
         </surveyType>
@@ -1943,39 +1941,39 @@
         </officialityType>
         <indicatorSystem>true</indicatorSystem>
         <producer>
-            <ns2:id>producer1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer1"/>
-        </producer>
-        <producer>
             <ns2:id>producer22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://producer22"/>
+            <ns2:selfLink>http://producer22</ns2:selfLink>
+        </producer>
+        <producer>
+            <ns2:id>producer1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://producer1</ns2:selfLink>
         </producer>
         <regionalResponsible>
             <ns2:id>regionalResponsible333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible333"/>
+            <ns2:selfLink>http://regionalResponsible333</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible22"/>
+            <ns2:selfLink>http://regionalResponsible22</ns2:selfLink>
         </regionalResponsible>
         <regionalResponsible>
             <ns2:id>regionalResponsible1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalResponsible1"/>
+            <ns2:selfLink>http://regionalResponsible1</ns2:selfLink>
         </regionalResponsible>
-        <regionalContributor>
-            <ns2:id>regionalContributor1</ns2:id>
-            <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor1"/>
-        </regionalContributor>
         <regionalContributor>
             <ns2:id>regionalContributor22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://regionalContributor22"/>
+            <ns2:selfLink>http://regionalContributor22</ns2:selfLink>
+        </regionalContributor>
+        <regionalContributor>
+            <ns2:id>regionalContributor1</ns2:id>
+            <ns2:kind>AGENCY</ns2:kind>
+            <ns2:selfLink>http://regionalContributor1</ns2:selfLink>
         </regionalContributor>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
         <currentlyActive>false</currentlyActive>
@@ -1984,54 +1982,54 @@
         <publisher>
             <ns2:id>publisher333</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher333"/>
+            <ns2:selfLink>http://publisher333</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher22</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher22"/>
+            <ns2:selfLink>http://publisher22</ns2:selfLink>
         </publisher>
         <publisher>
             <ns2:id>publisher1</ns2:id>
             <ns2:kind>AGENCY</ns2:kind>
-            <ns2:link rel="self" href="http://publisher1"/>
+            <ns2:selfLink>http://publisher1</ns2:selfLink>
         </publisher>
         <relPolUsAc>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>RelPolUsAc 6 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>RelPolUsAc 6 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>RelPolUsAc 6 in English</ns2:label>
             </ns2:text>
         </relPolUsAc>
         <releaseCalendar>true</releaseCalendar>
         <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
         <updateFrequency>
-            <ns2:id>updateFrequency1</ns2:id>
-            <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency1"/>
-        </updateFrequency>
-        <updateFrequency>
             <ns2:id>updateFrequency22</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency22"/>
+            <ns2:selfLink>http://updateFrequency22</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
-            <ns2:id>updateFrequency4444</ns2:id>
+            <ns2:id>updateFrequency1</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency4444"/>
+            <ns2:selfLink>http://updateFrequency1</ns2:selfLink>
         </updateFrequency>
         <updateFrequency>
             <ns2:id>updateFrequency333</ns2:id>
             <ns2:kind>CODE</ns2:kind>
-            <ns2:link rel="self" href="http://updateFrequency333"/>
+            <ns2:selfLink>http://updateFrequency333</ns2:selfLink>
+        </updateFrequency>
+        <updateFrequency>
+            <ns2:id>updateFrequency4444</ns2:id>
+            <ns2:kind>CODE</ns2:kind>
+            <ns2:selfLink>http://updateFrequency4444</ns2:selfLink>
         </updateFrequency>
         <currentInternalInstance>
             <ns2:id>instance22</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance22"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance22</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>en</ns2:locale>
@@ -2046,7 +2044,7 @@
         <currentInstance>
             <ns2:id>instance333</ns2:id>
             <ns2:kind>statisticalOperations#instance</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances/instance333"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances/instance333</ns2:selfLink>
             <ns2:title>
                 <ns2:text>
                     <ns2:locale>es</ns2:locale>
@@ -2061,12 +2059,12 @@
         <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
         <revPolicy>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>RevPolicy 6 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>RevPolicy 6 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>RevPolicy 6 in English</ns2:label>
             </ns2:text>
         </revPolicy>
         <revPractice>
@@ -2081,12 +2079,12 @@
         </revPractice>
         <comment>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>Comentarios 6 en español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>Comments 6 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Comentarios 6 en español</ns2:label>
             </ns2:text>
         </comment>
         <notes>
@@ -2101,15 +2099,15 @@
         </notes>
         <parent>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#instances</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/instances"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/instances</ns2:selfLink>
         </child>
         <child>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/operations/operation6/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6/families</ns2:selfLink>
         </child>
     </items>
 </operationsPagedResult>

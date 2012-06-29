@@ -1,10 +1,7 @@
 {
   "id": "operation1",
   "kind": "statisticalOperations#operation",
-  "link": {
-    "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/operations/operation1"
-  },
+  "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
   "title": {
     "texts": [
       {
@@ -31,32 +28,9 @@
   },
   "families": [
     {
-      "id": "family2",
-      "kind": "statisticalOperations#family",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/family2"
-      },
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Title family family2"
-          },
-          {
-            "locale": "es",
-            "label": "Título family family2"
-          }
-        ]
-      }
-    },
-    {
       "id": "family1",
       "kind": "statisticalOperations#family",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/family1"
-      },
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
       "title": {
         "texts": [
           {
@@ -69,63 +43,68 @@
           }
         ]
       }
+    },
+    {
+      "id": "family2",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family2",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title family family2"
+          },
+          {
+            "locale": "es",
+            "label": "Título family family2"
+          }
+        ]
+      }
     }
   ],
   "subjectArea": {
     "id": "subjectArea1",
     "kind": "CATEGORY",
-    "link": {
-      "rel": "self",
-      "href": "http://subjectArea1"
-    }
+    "selfLink": "http://subjectArea1"
   },
   "secondarySubjectAreas": [
     {
-      "id": "secundarySubjectArea22",
-      "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea22"
-      }
-    },
-    {
       "id": "secundarySubjectArea333",
       "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea333"
-      }
+      "selfLink": "http://secundarySubjectArea333"
     },
     {
       "id": "secundarySubjectArea1",
       "kind": "CATEGORY",
-      "link": {
-        "rel": "self",
-        "href": "http://secundarySubjectArea1"
-      }
+      "selfLink": "http://secundarySubjectArea1"
+    },
+    {
+      "id": "secundarySubjectArea22",
+      "kind": "CATEGORY",
+      "selfLink": "http://secundarySubjectArea22"
     }
   ],
   "objective": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Objetivo 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Objective 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Objetivo 1 en español"
       }
     ]
   },
   "description": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Description 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Descripción 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Description 1 in English"
       }
     ]
   },
@@ -133,19 +112,16 @@
     {
       "id": "instance4444",
       "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444"
-      },
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title instance instance4444"
-          },
-          {
             "locale": "es",
             "label": "Título instance instance4444"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance4444"
           }
         ]
       }
@@ -153,10 +129,7 @@
     {
       "id": "instance22",
       "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
-      },
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
       "title": {
         "texts": [
           {
@@ -173,19 +146,16 @@
     {
       "id": "instance1",
       "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1"
-      },
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance1"
-          },
-          {
             "locale": "en",
             "label": "Title instance instance1"
+          },
+          {
+            "locale": "es",
+            "label": "Título instance instance1"
           }
         ]
       }
@@ -193,10 +163,7 @@
     {
       "id": "instance333",
       "kind": "statisticalOperations#instance",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
-      },
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
       "title": {
         "texts": [
           {
@@ -231,12 +198,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "Title officialityType officialityTypeIdentifier"
-        },
-        {
           "locale": "es",
           "label": "Título officialityType officialityTypeIdentifier"
+        },
+        {
+          "locale": "en",
+          "label": "Title officialityType officialityTypeIdentifier"
         }
       ]
     }
@@ -244,64 +211,43 @@
   "indicatorSystem": true,
   "producers": [
     {
-      "id": "producer1",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://producer1"
-      }
-    },
-    {
       "id": "producer22",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://producer22"
-      }
+      "selfLink": "http://producer22"
+    },
+    {
+      "id": "producer1",
+      "kind": "AGENCY",
+      "selfLink": "http://producer1"
     }
   ],
   "regionalResponsibles": [
     {
+      "id": "regionalResponsible333",
+      "kind": "AGENCY",
+      "selfLink": "http://regionalResponsible333"
+    },
+    {
       "id": "regionalResponsible22",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalResponsible22"
-      }
+      "selfLink": "http://regionalResponsible22"
     },
     {
       "id": "regionalResponsible1",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalResponsible1"
-      }
-    },
-    {
-      "id": "regionalResponsible333",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalResponsible333"
-      }
+      "selfLink": "http://regionalResponsible1"
     }
   ],
   "regionalContributors": [
     {
-      "id": "regionalContributor22",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalContributor22"
-      }
-    },
-    {
       "id": "regionalContributor1",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://regionalContributor1"
-      }
+      "selfLink": "http://regionalContributor1"
+    },
+    {
+      "id": "regionalContributor22",
+      "kind": "AGENCY",
+      "selfLink": "http://regionalContributor22"
     }
   ],
   "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
@@ -310,39 +256,30 @@
   "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
     {
+      "id": "publisher1",
+      "kind": "AGENCY",
+      "selfLink": "http://publisher1"
+    },
+    {
       "id": "publisher333",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://publisher333"
-      }
+      "selfLink": "http://publisher333"
     },
     {
       "id": "publisher22",
       "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://publisher22"
-      }
-    },
-    {
-      "id": "publisher1",
-      "kind": "AGENCY",
-      "link": {
-        "rel": "self",
-        "href": "http://publisher1"
-      }
+      "selfLink": "http://publisher22"
     }
   ],
   "relPolUsAc": {
     "texts": [
       {
-        "locale": "en",
-        "label": "RelPolUsAc 1 in English"
-      },
-      {
         "locale": "es",
         "label": "RelPolUsAc 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "RelPolUsAc 1 in English"
       }
     ]
   },
@@ -352,43 +289,28 @@
     {
       "id": "updateFrequency4444",
       "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency4444"
-      }
-    },
-    {
-      "id": "updateFrequency1",
-      "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency1"
-      }
-    },
-    {
-      "id": "updateFrequency333",
-      "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency333"
-      }
+      "selfLink": "http://updateFrequency4444"
     },
     {
       "id": "updateFrequency22",
       "kind": "CODE",
-      "link": {
-        "rel": "self",
-        "href": "http://updateFrequency22"
-      }
+      "selfLink": "http://updateFrequency22"
+    },
+    {
+      "id": "updateFrequency333",
+      "kind": "CODE",
+      "selfLink": "http://updateFrequency333"
+    },
+    {
+      "id": "updateFrequency1",
+      "kind": "CODE",
+      "selfLink": "http://updateFrequency1"
     }
   ],
   "currentInternalInstance": {
     "id": "instance22",
     "kind": "statisticalOperations#instance",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22"
-    },
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
     "title": {
       "texts": [
         {
@@ -405,10 +327,7 @@
   "currentInstance": {
     "id": "instance333",
     "kind": "statisticalOperations#instance",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333"
-    },
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
     "title": {
       "texts": [
         {
@@ -426,12 +345,12 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "en",
-        "label": "RevPolicy 1 in English"
-      },
-      {
         "locale": "es",
         "label": "RevPolicy 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "RevPolicy 1 in English"
       }
     ]
   },
@@ -450,48 +369,39 @@
   "comment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Comentarios 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Comments 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Comentarios 1 en español"
       }
     ]
   },
   "notes": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Notas 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Notes 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Notas 1 en español"
       }
     ]
   },
   "parent": {
     "kind": "statisticalOperations#operations",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/operations"
-    }
+    "selfLink": "http://localhost:9001/internal/v1.0/operations"
   },
   "children": [
     {
       "kind": "statisticalOperations#instances",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/instances"
-      }
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances"
     },
     {
       "kind": "statisticalOperations#families",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/operations/operation1/families"
-      }
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/families"
     }
   ]
 }

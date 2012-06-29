@@ -1,43 +1,40 @@
 {
   "id": "family1",
   "kind": "statisticalOperations#family",
-  "link": {
-    "rel": "self",
-    "href": "http://localhost:9001/internal/v1.0/families/family1"
-  },
+  "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
   "title": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Título family family1"
-      },
-      {
         "locale": "en",
         "label": "Title family family1"
+      },
+      {
+        "locale": "es",
+        "label": "Título family family1"
       }
     ]
   },
   "acronym": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Acrónimo 1 en español"
-      },
-      {
         "locale": "en",
         "label": "Acronym 1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "Acrónimo 1 en español"
       }
     ]
   },
   "description": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Description 1 in English"
-      },
-      {
         "locale": "es",
         "label": "Descripción 1 en español"
+      },
+      {
+        "locale": "en",
+        "label": "Description 1 in English"
       }
     ]
   },
@@ -46,18 +43,12 @@
   "inventoryDate": "2013-02-04T13:15:14.000+0000",
   "parent": {
     "kind": "statisticalOperations#families",
-    "link": {
-      "rel": "self",
-      "href": "http://localhost:9001/internal/v1.0/families"
-    }
+    "selfLink": "http://localhost:9001/internal/v1.0/families"
   },
   "children": [
     {
       "kind": "statisticalOperations#operations",
-      "link": {
-        "rel": "self",
-        "href": "http://localhost:9001/internal/v1.0/families/family1/operations"
-      }
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family1/operations"
     }
   ]
 }

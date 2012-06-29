@@ -5,7 +5,7 @@
     <items>
         <id>family1</id>
         <kind>statisticalOperations#family</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/families/family1"/>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
         <title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -41,17 +41,17 @@
         <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
         <parent>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family1/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1/operations</ns2:selfLink>
         </child>
     </items>
     <items>
         <id>family2</id>
         <kind>statisticalOperations#family</kind>
-        <link rel="self" href="http://localhost:9001/internal/v1.0/families/family2"/>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family2</selfLink>
         <title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -64,22 +64,22 @@
         </title>
         <acronym>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Acronym 2 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Acrónimo 2 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Acronym 2 in English</ns2:label>
             </ns2:text>
         </acronym>
         <description>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>Description 2 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>Descripción 2 en español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Description 2 in English</ns2:label>
             </ns2:text>
         </description>
         <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
@@ -87,11 +87,11 @@
         <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
         <parent>
             <ns2:kind>statisticalOperations#families</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families</ns2:selfLink>
         </parent>
         <child>
             <ns2:kind>statisticalOperations#operations</ns2:kind>
-            <ns2:link rel="self" href="http://localhost:9001/internal/v1.0/families/family2/operations"/>
+            <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2/operations</ns2:selfLink>
         </child>
     </items>
 </familiesNoPagedResult>

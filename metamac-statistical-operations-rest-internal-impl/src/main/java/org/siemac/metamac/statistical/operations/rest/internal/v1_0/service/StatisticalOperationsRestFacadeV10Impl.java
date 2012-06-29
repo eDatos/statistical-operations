@@ -91,7 +91,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, pagingParameter);
 
             // Transform
-            FamiliesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
+            FamiliesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
             return familiesNoPagedResult;
 
         } catch (MetamacException e) {
@@ -137,7 +137,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {
