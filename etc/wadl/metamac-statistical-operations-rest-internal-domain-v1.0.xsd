@@ -54,7 +54,7 @@
         <xs:complexContent>
             <xs:extension base="common:PagedResult">
                 <xs:sequence>
-                    <xs:element name="items" type="tns:Operation" maxOccurs="unbounded" />
+                    <xs:element name="items" type="common:RelatedResource" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -80,7 +80,7 @@
         <xs:complexContent>
             <xs:extension base="common:NoPagedResult">
                 <xs:sequence>
-                    <xs:element name="items" type="tns:Family" maxOccurs="unbounded" />
+                    <xs:element name="items" type="common:RelatedResource" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

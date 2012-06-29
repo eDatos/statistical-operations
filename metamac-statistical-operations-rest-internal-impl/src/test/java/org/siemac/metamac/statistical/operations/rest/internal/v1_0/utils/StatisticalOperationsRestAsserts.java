@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -126,12 +127,12 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsFamiliesNoPagedResult(FamiliesNoPagedResult expecteds, FamiliesNoPagedResult actuals) {
         MetamacRestAsserts.assertEqualsNoPagedResult(expecteds, actuals);
         assertEquals(expecteds.getItems().size(), actuals.getItems().size());
-        for (Family expected : expecteds.getItems()) {
+        for (RelatedResource expected : expecteds.getItems()) {
             boolean exists = false;
-            for (Family actual : actuals.getItems()) {
+            for (RelatedResource actual : actuals.getItems()) {
                 if (expected.getId().equals(actual.getId())) {
                     exists = true;
-                    assertEqualsFamily(expected, actual);
+                    MetamacRestAsserts.assertEqualsRelatedResource(expected, actual);
                 }
             }
             assertTrue(exists);
@@ -141,12 +142,12 @@ public class StatisticalOperationsRestAsserts {
     public static void assertEqualsOperationsPagedResult(OperationsPagedResult expecteds, OperationsPagedResult actuals) {
         MetamacRestAsserts.assertEqualsPagedResult(expecteds, actuals);
         assertEquals(expecteds.getItems().size(), actuals.getItems().size());
-        for (Operation expected : expecteds.getItems()) {
+        for (RelatedResource expected : expecteds.getItems()) {
             boolean exists = false;
-            for (Operation actual : actuals.getItems()) {
+            for (RelatedResource actual : actuals.getItems()) {
                 if (expected.getId().equals(actual.getId())) {
                     exists = true;
-                    assertEqualsOperation(expected, actual);
+                    MetamacRestAsserts.assertEqualsRelatedResource(expected, actual);
                 }
             }
             assertTrue(exists);

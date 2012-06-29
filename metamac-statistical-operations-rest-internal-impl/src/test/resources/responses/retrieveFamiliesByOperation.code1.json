@@ -17,44 +17,7 @@
             "label": "Título family family1"
           }
         ]
-      },
-      "acronym": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Acronym 1 in English"
-          },
-          {
-            "locale": "es",
-            "label": "Acrónimo 1 en español"
-          }
-        ]
-      },
-      "description": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "Descripción 1 en español"
-          },
-          {
-            "locale": "en",
-            "label": "Description 1 in English"
-          }
-        ]
-      },
-      "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
-      "procStatus": "PUBLISH_INTERNALLY",
-      "inventoryDate": "2013-02-04T13:15:14.000+0000",
-      "parent": {
-        "kind": "statisticalOperations#families",
-        "selfLink": "http://localhost:9001/internal/v1.0/families"
-      },
-      "children": [
-        {
-          "kind": "statisticalOperations#operations",
-          "selfLink": "http://localhost:9001/internal/v1.0/families/family1/operations"
-        }
-      ]
+      }
     },
     {
       "id": "family2",
@@ -71,44 +34,7 @@
             "label": "Título family family2"
           }
         ]
-      },
-      "acronym": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Acronym 2 in English"
-          },
-          {
-            "locale": "es",
-            "label": "Acrónimo 2 en español"
-          }
-        ]
-      },
-      "description": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "Descripción 2 en español"
-          },
-          {
-            "locale": "en",
-            "label": "Description 2 in English"
-          }
-        ]
-      },
-      "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
-      "procStatus": "PUBLISH_EXTERNALLY",
-      "inventoryDate": "2013-02-04T13:15:14.000+0000",
-      "parent": {
-        "kind": "statisticalOperations#families",
-        "selfLink": "http://localhost:9001/internal/v1.0/families"
-      },
-      "children": [
-        {
-          "kind": "statisticalOperations#operations",
-          "selfLink": "http://localhost:9001/internal/v1.0/families/family2/operations"
-        }
-      ]
+      }
     }
   ]
 }

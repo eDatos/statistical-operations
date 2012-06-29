@@ -277,7 +277,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
     @Test
     public void testRetrieveOperationsByFamilyJsonWithoutJaxbTransformation() throws Exception {
-        // TODO probar con noLimits
+        {
+            // With limit = null, offset = null
+            String limit = null;
+            String offset = null;
+            String requestUri = getRequestUriRetrieveOperationsByFamilyByCode(FAMILY_CODE1, limit, offset);
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationsByFamily.code1.nolimits.json");
+
+            // Request and validate
+            testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+        }
         {
             // With limit = 2, offset = 4
             String limit = "2";
