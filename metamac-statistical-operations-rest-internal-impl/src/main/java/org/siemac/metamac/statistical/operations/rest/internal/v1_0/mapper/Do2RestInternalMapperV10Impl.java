@@ -15,7 +15,6 @@ import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.vo.domain.ExternalItem;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -29,6 +28,7 @@ import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
@@ -90,37 +90,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-<<<<<<< .mine
-    public OperationsPagedResult toOperationsPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
-
-        OperationsPagedResult targetPagedResult = new OperationsPagedResult();
-        targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
-
-        if (sourcesPagedResult == null) {
-            targetPagedResult.setTotal(BigInteger.ZERO);
-        } else {
-            for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
-                Operation target = toOperation(source, apiUrl);
-                targetPagedResult.getItems().add(target);
-            }
-        }
-        
-        // TODO pasar a librería común (transformPagedResult)
-        targetPagedResult.setOffset(BigInteger.valueOf(sourcesPagedResult.getStartRow()));
-        targetPagedResult.setLimit(BigInteger.valueOf(limit));
-        targetPagedResult.setTotal(BigInteger.valueOf(sourcesPagedResult.getTotalRows()));
-        targetPagedResult.setFirst(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, 0));
-        targetPagedResult.setLast(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
-        if (sourcesPagedResult.getRowCount() > 0) {
-            targetPagedResult.setPrevious(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow())));
-            targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows())));
-        }
-        return targetPagedResult;
-    }
-
-    @Override
-=======
     public OperationsPagedResult toOperationsPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
 
@@ -149,7 +118,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
->>>>>>> .r38314
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl) {
         if (source == null) {
             return null;
