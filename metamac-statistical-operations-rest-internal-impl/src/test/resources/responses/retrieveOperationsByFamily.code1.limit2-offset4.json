@@ -5,7 +5,6 @@
   "total": 6,
   "first": "http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&offset=0",
   "previous": "http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&offset=2",
-  "last": "http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&offset=4",
   "items": [
     {
       "id": "operation5",
@@ -29,12 +28,12 @@
       "acronym": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Acronym 5 in English"
-          },
-          {
             "locale": "es",
             "label": "Acrónimo 5 en español"
+          },
+          {
+            "locale": "en",
+            "label": "Acronym 5 in English"
           }
         ]
       },
@@ -69,12 +68,12 @@
           "title": {
             "texts": [
               {
-                "locale": "en",
-                "label": "Title family family2"
-              },
-              {
                 "locale": "es",
                 "label": "Título family family2"
+              },
+              {
+                "locale": "en",
+                "label": "Title family family2"
               }
             ]
           }
@@ -90,19 +89,19 @@
       },
       "secondarySubjectAreas": [
         {
-          "id": "secundarySubjectArea22",
-          "kind": "CATEGORY",
-          "link": {
-            "rel": "self",
-            "href": "http://secundarySubjectArea22"
-          }
-        },
-        {
           "id": "secundarySubjectArea1",
           "kind": "CATEGORY",
           "link": {
             "rel": "self",
             "href": "http://secundarySubjectArea1"
+          }
+        },
+        {
+          "id": "secundarySubjectArea22",
+          "kind": "CATEGORY",
+          "link": {
+            "rel": "self",
+            "href": "http://secundarySubjectArea22"
           }
         },
         {
@@ -117,12 +116,12 @@
       "objective": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Objective 5 in English"
-          },
-          {
             "locale": "es",
             "label": "Objetivo 5 en español"
+          },
+          {
+            "locale": "en",
+            "label": "Objective 5 in English"
           }
         ]
       },
@@ -169,12 +168,12 @@
           "title": {
             "texts": [
               {
-                "locale": "en",
-                "label": "Title instance instance22"
-              },
-              {
                 "locale": "es",
                 "label": "Título instance instance22"
+              },
+              {
+                "locale": "en",
+                "label": "Title instance instance22"
               }
             ]
           }
@@ -189,12 +188,12 @@
           "title": {
             "texts": [
               {
-                "locale": "en",
-                "label": "Title instance instance1"
-              },
-              {
                 "locale": "es",
                 "label": "Título instance instance1"
+              },
+              {
+                "locale": "en",
+                "label": "Title instance instance1"
               }
             ]
           }
@@ -209,12 +208,12 @@
           "title": {
             "texts": [
               {
-                "locale": "en",
-                "label": "Title instance instance333"
-              },
-              {
                 "locale": "es",
                 "label": "Título instance instance333"
+              },
+              {
+                "locale": "en",
+                "label": "Title instance instance333"
               }
             ]
           }
@@ -240,12 +239,12 @@
         "title": {
           "texts": [
             {
-              "locale": "en",
-              "label": "Title officialityType officialityTypeIdentifier"
-            },
-            {
               "locale": "es",
               "label": "Título officialityType officialityTypeIdentifier"
+            },
+            {
+              "locale": "en",
+              "label": "Title officialityType officialityTypeIdentifier"
             }
           ]
         }
@@ -297,19 +296,19 @@
       ],
       "regionalContributors": [
         {
-          "id": "regionalContributor22",
-          "kind": "AGENCY",
-          "link": {
-            "rel": "self",
-            "href": "http://regionalContributor22"
-          }
-        },
-        {
           "id": "regionalContributor1",
           "kind": "AGENCY",
           "link": {
             "rel": "self",
             "href": "http://regionalContributor1"
+          }
+        },
+        {
+          "id": "regionalContributor22",
+          "kind": "AGENCY",
+          "link": {
+            "rel": "self",
+            "href": "http://regionalContributor22"
           }
         }
       ],
@@ -318,6 +317,14 @@
       "status": "DESIGN",
       "procStatus": "PUBLISH_INTERNALLY",
       "publishers": [
+        {
+          "id": "publisher22",
+          "kind": "AGENCY",
+          "link": {
+            "rel": "self",
+            "href": "http://publisher22"
+          }
+        },
         {
           "id": "publisher333",
           "kind": "AGENCY",
@@ -333,25 +340,17 @@
             "rel": "self",
             "href": "http://publisher1"
           }
-        },
-        {
-          "id": "publisher22",
-          "kind": "AGENCY",
-          "link": {
-            "rel": "self",
-            "href": "http://publisher22"
-          }
         }
       ],
       "relPolUsAc": {
         "texts": [
           {
-            "locale": "en",
-            "label": "RelPolUsAc 5 in English"
-          },
-          {
             "locale": "es",
             "label": "RelPolUsAc 5 en español"
+          },
+          {
+            "locale": "en",
+            "label": "RelPolUsAc 5 in English"
           }
         ]
       },
@@ -359,11 +358,11 @@
       "releaseCalendarAccess": "http://releaseCalendarAccess1",
       "updateFrequencies": [
         {
-          "id": "updateFrequency4444",
+          "id": "updateFrequency1",
           "kind": "CODE",
           "link": {
             "rel": "self",
-            "href": "http://updateFrequency4444"
+            "href": "http://updateFrequency1"
           }
         },
         {
@@ -375,11 +374,11 @@
           }
         },
         {
-          "id": "updateFrequency1",
+          "id": "updateFrequency4444",
           "kind": "CODE",
           "link": {
             "rel": "self",
-            "href": "http://updateFrequency1"
+            "href": "http://updateFrequency4444"
           }
         },
         {
@@ -401,12 +400,12 @@
         "title": {
           "texts": [
             {
-              "locale": "en",
-              "label": "Title instance instance22"
-            },
-            {
               "locale": "es",
               "label": "Título instance instance22"
+            },
+            {
+              "locale": "en",
+              "label": "Title instance instance22"
             }
           ]
         }
@@ -421,12 +420,12 @@
         "title": {
           "texts": [
             {
-              "locale": "en",
-              "label": "Title instance instance333"
-            },
-            {
               "locale": "es",
               "label": "Título instance instance333"
+            },
+            {
+              "locale": "en",
+              "label": "Title instance instance333"
             }
           ]
         }
@@ -447,12 +446,12 @@
       "revPractice": {
         "texts": [
           {
-            "locale": "es",
-            "label": "RevPractice 5 en español"
-          },
-          {
             "locale": "en",
             "label": "RevPractice 5 in English"
+          },
+          {
+            "locale": "es",
+            "label": "RevPractice 5 en español"
           }
         ]
       },
@@ -514,24 +513,24 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título operation operation6"
-          },
-          {
             "locale": "en",
             "label": "Title operation operation6"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation6"
           }
         ]
       },
       "acronym": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Acrónimo 6 en español"
-          },
-          {
             "locale": "en",
             "label": "Acronym 6 in English"
+          },
+          {
+            "locale": "es",
+            "label": "Acrónimo 6 en español"
           }
         ]
       },
@@ -546,12 +545,12 @@
           "title": {
             "texts": [
               {
-                "locale": "es",
-                "label": "Título family family1"
-              },
-              {
                 "locale": "en",
                 "label": "Title family family1"
+              },
+              {
+                "locale": "es",
+                "label": "Título family family1"
               }
             ]
           }
@@ -566,12 +565,12 @@
           "title": {
             "texts": [
               {
-                "locale": "es",
-                "label": "Título family family2"
-              },
-              {
                 "locale": "en",
                 "label": "Title family family2"
+              },
+              {
+                "locale": "es",
+                "label": "Título family family2"
               }
             ]
           }
@@ -614,12 +613,12 @@
       "objective": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Objective 6 in English"
-          },
-          {
             "locale": "es",
             "label": "Objetivo 6 en español"
+          },
+          {
+            "locale": "en",
+            "label": "Objective 6 in English"
           }
         ]
       },
@@ -722,12 +721,12 @@
         "title": {
           "texts": [
             {
-              "locale": "en",
-              "label": "Title survey surveyIdentifier"
-            },
-            {
               "locale": "es",
               "label": "Título survey surveyIdentifier"
+            },
+            {
+              "locale": "en",
+              "label": "Title survey surveyIdentifier"
             }
           ]
         }
@@ -737,12 +736,12 @@
         "title": {
           "texts": [
             {
-              "locale": "es",
-              "label": "Título officialityType officialityTypeIdentifier"
-            },
-            {
               "locale": "en",
               "label": "Title officialityType officialityTypeIdentifier"
+            },
+            {
+              "locale": "es",
+              "label": "Título officialityType officialityTypeIdentifier"
             }
           ]
         }
@@ -750,19 +749,19 @@
       "indicatorSystem": true,
       "producers": [
         {
-          "id": "producer1",
-          "kind": "AGENCY",
-          "link": {
-            "rel": "self",
-            "href": "http://producer1"
-          }
-        },
-        {
           "id": "producer22",
           "kind": "AGENCY",
           "link": {
             "rel": "self",
             "href": "http://producer22"
+          }
+        },
+        {
+          "id": "producer1",
+          "kind": "AGENCY",
+          "link": {
+            "rel": "self",
+            "href": "http://producer1"
           }
         }
       ],
@@ -794,19 +793,19 @@
       ],
       "regionalContributors": [
         {
-          "id": "regionalContributor1",
-          "kind": "AGENCY",
-          "link": {
-            "rel": "self",
-            "href": "http://regionalContributor1"
-          }
-        },
-        {
           "id": "regionalContributor22",
           "kind": "AGENCY",
           "link": {
             "rel": "self",
             "href": "http://regionalContributor22"
+          }
+        },
+        {
+          "id": "regionalContributor1",
+          "kind": "AGENCY",
+          "link": {
+            "rel": "self",
+            "href": "http://regionalContributor1"
           }
         }
       ],
@@ -815,14 +814,6 @@
       "status": "DESIGN",
       "procStatus": "PUBLISH_EXTERNALLY",
       "publishers": [
-        {
-          "id": "publisher22",
-          "kind": "AGENCY",
-          "link": {
-            "rel": "self",
-            "href": "http://publisher22"
-          }
-        },
         {
           "id": "publisher1",
           "kind": "AGENCY",
@@ -837,6 +828,14 @@
           "link": {
             "rel": "self",
             "href": "http://publisher333"
+          }
+        },
+        {
+          "id": "publisher22",
+          "kind": "AGENCY",
+          "link": {
+            "rel": "self",
+            "href": "http://publisher22"
           }
         }
       ],
@@ -856,11 +855,11 @@
       "releaseCalendarAccess": "http://releaseCalendarAccess1",
       "updateFrequencies": [
         {
-          "id": "updateFrequency333",
+          "id": "updateFrequency22",
           "kind": "CODE",
           "link": {
             "rel": "self",
-            "href": "http://updateFrequency333"
+            "href": "http://updateFrequency22"
           }
         },
         {
@@ -872,19 +871,19 @@
           }
         },
         {
+          "id": "updateFrequency333",
+          "kind": "CODE",
+          "link": {
+            "rel": "self",
+            "href": "http://updateFrequency333"
+          }
+        },
+        {
           "id": "updateFrequency4444",
           "kind": "CODE",
           "link": {
             "rel": "self",
             "href": "http://updateFrequency4444"
-          }
-        },
-        {
-          "id": "updateFrequency22",
-          "kind": "CODE",
-          "link": {
-            "rel": "self",
-            "href": "http://updateFrequency22"
           }
         }
       ],
@@ -932,12 +931,12 @@
       "revPolicy": {
         "texts": [
           {
-            "locale": "es",
-            "label": "RevPolicy 6 en español"
-          },
-          {
             "locale": "en",
             "label": "RevPolicy 6 in English"
+          },
+          {
+            "locale": "es",
+            "label": "RevPolicy 6 en español"
           }
         ]
       },
@@ -956,12 +955,12 @@
       "comment": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Comments 6 in English"
-          },
-          {
             "locale": "es",
             "label": "Comentarios 6 en español"
+          },
+          {
+            "locale": "en",
+            "label": "Comments 6 in English"
           }
         ]
       },

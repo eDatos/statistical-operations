@@ -107,12 +107,24 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         targetPagedResult.setOffset(BigInteger.valueOf(sourcesPagedResult.getStartRow()));
         targetPagedResult.setLimit(BigInteger.valueOf(limit));
         targetPagedResult.setTotal(BigInteger.valueOf(sourcesPagedResult.getTotalRows()));
-        targetPagedResult.setFirst(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, 0));
-        targetPagedResult.setLast(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
+        // first page: only if it is not first page
+        if (sourcesPagedResult.getStartRow() >= limit) {
+            targetPagedResult.setFirst(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, 0));
+        }
+        // last page: only if it is not last page
+        if (sourcesPagedResult.getStartRow() + limit < sourcesPagedResult.getTotalRows()) {
+            targetPagedResult.setLast(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
+        }
+        // previous and next page
         if (sourcesPagedResult.getRowCount() > 0) {
-            targetPagedResult.setPrevious(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow())));
-            targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit,
-                    PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows())));
+            int previousOffset = PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow());
+            if (PagedResultUtils.NO_OFFSET != previousOffset) {
+                targetPagedResult.setPrevious(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, previousOffset));
+            }
+            int nextOffset = PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows());
+            if (PagedResultUtils.NO_OFFSET != nextOffset) {
+                targetPagedResult.setNext(createLinkHrefFamilyChildrenOperations(apiUrl, family, limit, nextOffset));
+            }
         }
         return targetPagedResult;
     }
