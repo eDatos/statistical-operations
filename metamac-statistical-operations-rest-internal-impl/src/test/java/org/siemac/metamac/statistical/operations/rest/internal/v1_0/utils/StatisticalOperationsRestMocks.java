@@ -1,7 +1,5 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
-import static org.junit.Assert.fail;
-
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
@@ -15,7 +13,6 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 
 public class StatisticalOperationsRestMocks {
 
@@ -50,44 +47,6 @@ public class StatisticalOperationsRestMocks {
         familiesResult.getItems().add(mockFamily1(baseApi));
         familiesResult.getItems().add(mockFamily2(baseApi));
         return familiesResult;
-    }
-
-    // TODO first, last...
-    public static OperationsPagedResult mockOperationsPagedResultByFamily1(String baseApi, String limit, String offset) {
-        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
-        operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
-        operationsPagedResult.setTotal(BigInteger.valueOf(3));
-        if (limit == null && offset == null) {
-            operationsPagedResult.getItems().add(mockOperation1(baseApi));
-            operationsPagedResult.getItems().add(mockOperation2(baseApi));
-            operationsPagedResult.getItems().add(mockOperation3(baseApi));
-            operationsPagedResult.setOffset(BigInteger.valueOf(3));
-            operationsPagedResult.setLimit(null);
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=0");
-        } else if ("2".equals(limit) && "0".equals(offset)) {
-            operationsPagedResult.getItems().add(mockOperation1(baseApi));
-            operationsPagedResult.getItems().add(mockOperation2(baseApi));
-            operationsPagedResult.setOffset(BigInteger.valueOf(0));
-            operationsPagedResult.setLimit(BigInteger.valueOf(2));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(null);
-            operationsPagedResult.setNext(baseApi + "/families/family1/operations?limit=2&offset=2");
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=2");
-        } else if ("2".equals(limit) && "1".equals(offset)) {
-            operationsPagedResult.getItems().add(mockOperation3(baseApi));
-            operationsPagedResult.setOffset(BigInteger.valueOf(1));
-            operationsPagedResult.setLimit(BigInteger.valueOf(2));
-            operationsPagedResult.setFirst(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setPrevious(baseApi + "/families/family1/operations?limit=2&offset=0");
-            operationsPagedResult.setNext(null);
-            operationsPagedResult.setLast(baseApi + "/families/family1/operations?limit=2&offset=2");
-        } else {
-            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
-        }
-        return operationsPagedResult;
     }
 
     private static RelatedResource mockFamilyRelatedResource(String subId, String baseApi) {
