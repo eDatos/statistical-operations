@@ -73,8 +73,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
-        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).ignoreCaseEq(code)
-                .distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).eq(code).distinctRoot().build();
 
         // Find
         List<Family> result = findFamilyByCondition(ctx, conditions);
@@ -263,8 +262,8 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
-        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).ignoreCaseEq(code)
-                .distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).eq(code).distinctRoot()
+                .build();
 
         // Find
         List<Operation> result = findOperationByCondition(ctx, conditions);
@@ -420,8 +419,8 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
-        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).ignoreCaseEq(code)
-                .distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).eq(code).distinctRoot()
+                .build();
 
         // Find
         List<Instance> result = findInstanceByCondition(ctx, conditions);
