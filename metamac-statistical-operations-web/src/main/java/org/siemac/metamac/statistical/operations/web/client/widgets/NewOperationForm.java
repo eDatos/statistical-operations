@@ -48,11 +48,14 @@ public class NewOperationForm extends CustomDynamicForm {
         title.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
+        releaseCalendar.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
         subjectAreasItem = new ExternalSelectItem("op-subject", getConstants().operationSubjectArea(), FORM_ITEM_CUSTOM_WIDTH);
+        subjectAreasItem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         subjectAreasItem.setRequired(true);
 
         indSystem = new CustomCheckboxItem("op-ind-sys", getConstants().operationIndicatorSystem());
+        indSystem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         indSystem.setTitleStyle("requiredFormLabel");
 
         saveButton = new ButtonItem("op-save", getConstants().actionCreateOperation());
