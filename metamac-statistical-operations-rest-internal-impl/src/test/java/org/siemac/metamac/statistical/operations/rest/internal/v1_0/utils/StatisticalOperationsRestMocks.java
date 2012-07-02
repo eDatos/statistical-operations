@@ -8,14 +8,14 @@ import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 
 public class StatisticalOperationsRestMocks {
 
@@ -59,8 +59,8 @@ public class StatisticalOperationsRestMocks {
         return mockInstance(baseApi, "1", "operation1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    public static FamiliesNoPagedResult mockFamiliesNoPagedResultByOperation1(String baseApi) {
-        FamiliesNoPagedResult familiesResult = new FamiliesNoPagedResult();
+    public static RelatedResourcesNoPagedResult mockFamiliesNoPagedResultByOperation1(String baseApi) {
+        RelatedResourcesNoPagedResult familiesResult = new RelatedResourcesNoPagedResult();
         familiesResult.setKind(RestInternalConstants.KIND_FAMILIES);
         familiesResult.setTotal(BigInteger.valueOf(2));
         familiesResult.getItems().add(mockFamily1RelatedResource(baseApi));
@@ -68,8 +68,8 @@ public class StatisticalOperationsRestMocks {
         return familiesResult;
     }
     
-    public static OperationsPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset) {
-        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+    public static RelatedResourcesPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset) {
+        RelatedResourcesPagedResult operationsPagedResult = new RelatedResourcesPagedResult();
         operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
         operationsPagedResult.setTotal(BigInteger.valueOf(9));
         if (limit == null && (offset == null || "0".equals(offset))) {
@@ -144,8 +144,8 @@ public class StatisticalOperationsRestMocks {
         return operationsPagedResult;
     }
 
-    public static OperationsPagedResult mockOperationsPagedResultByFamily1(String baseApi, String limit, String offset) {
-        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+    public static RelatedResourcesPagedResult mockOperationsPagedResultByFamily1(String baseApi, String limit, String offset) {
+        RelatedResourcesPagedResult operationsPagedResult = new RelatedResourcesPagedResult();
         operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
         operationsPagedResult.setTotal(BigInteger.valueOf(6));
         if (limit == null && (offset == null || "0".equals(offset))) {
@@ -215,8 +215,8 @@ public class StatisticalOperationsRestMocks {
         return operationsPagedResult;
     }
     
-    public static OperationsPagedResult mockOperationsPagedResultByFamily2(String baseApi, String limit, String offset) {
-        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+    public static RelatedResourcesPagedResult mockOperationsPagedResultByFamily2(String baseApi, String limit, String offset) {
+        RelatedResourcesPagedResult operationsPagedResult = new RelatedResourcesPagedResult();
         operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
         operationsPagedResult.setTotal(BigInteger.valueOf(4));
         if ("1".equals(limit) && "2".equals(offset)) {

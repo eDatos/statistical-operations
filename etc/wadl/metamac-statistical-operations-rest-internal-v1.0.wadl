@@ -35,8 +35,8 @@
 						<param name="offset" style="query" required="false"/>
 					</request>
 	                <response status="200">
-						<representation mediaType="application/xml" element="domain:operationsPagedResult"/> 
-                        <representation mediaType="application/json" element="domain:operationsPagedResult"/> 
+						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
 	                </response>
 					<response status="404 500">
 						<representation mediaType="application/xml" element="common:error"/> 
@@ -50,8 +50,8 @@
 						<param name="code" style="template"/>
 					</request>
 	                <response status="200">
-						<representation mediaType="application/xml" element="domain:familiesNoPagedResult"/> 
-                        <representation mediaType="application/json" element="domain:familiesNoPagedResult"/> 
+						<representation mediaType="application/xml" element="common:relatedResourcesNoPagedResult"/> 
+                        <representation mediaType="application/json" element="common:relatedResourcesNoPagedResult"/> 
 	                </response>
 					<response status="404 500">
 						<representation mediaType="application/xml" element="common:error"/> 
@@ -98,8 +98,8 @@
 						<param name="offset" style="query" required="false"/>
 					</request>
 	                <response status="200">
-						<representation mediaType="application/xml" element="domain:operationsPagedResult"/> 
-                        <representation mediaType="application/json" element="domain:operationsPagedResult"/> 
+						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
 	                </response>
 					<response status="404 500">
 						<representation mediaType="application/xml" element="common:error"/> 

@@ -18,6 +18,8 @@ import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
@@ -26,11 +28,9 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +75,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public OperationsPagedResult findOperations(String limit, String offset) {
+    public RelatedResourcesPagedResult findOperations(String limit, String offset) {
         try {
             // TODO Validation of parameters. delegar en servicio?
 
@@ -91,7 +91,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            RelatedResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {
@@ -100,7 +100,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public FamiliesNoPagedResult retrieveFamiliesByOperation(String code) {
+    public RelatedResourcesNoPagedResult retrieveFamiliesByOperation(String code) {
         try {
             // TODO Validation of parameters. validar code o delegar en servicio?
 
@@ -116,7 +116,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, pagingParameter);
 
             // Transform
-            FamiliesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
+            RelatedResourcesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
             return familiesNoPagedResult;
 
         } catch (MetamacException e) {
@@ -142,7 +142,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public OperationsPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
+    public RelatedResourcesPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
         try {
             // TODO Validation of parameters. validar code o delegar en servicio?
 
@@ -162,7 +162,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            RelatedResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {

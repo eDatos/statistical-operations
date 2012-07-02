@@ -20,6 +20,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -30,11 +32,9 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -89,9 +89,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-    public OperationsPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
+    public RelatedResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
 
-        OperationsPagedResult targetPagedResult = new OperationsPagedResult();
+        RelatedResourcesPagedResult targetPagedResult = new RelatedResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
         // Pagination
@@ -107,10 +107,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-    public OperationsPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
+    public RelatedResourcesPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
 
-        OperationsPagedResult targetPagedResult = new OperationsPagedResult();
+        RelatedResourcesPagedResult targetPagedResult = new RelatedResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
         // Pagination
@@ -146,9 +146,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-    public FamiliesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl) {
+    public RelatedResourcesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl) {
 
-        FamiliesNoPagedResult targets = new FamiliesNoPagedResult();
+        RelatedResourcesNoPagedResult targets = new RelatedResourcesNoPagedResult();
         targets.setKind(RestInternalConstants.KIND_FAMILIES);
 
         if (sources == null) {
