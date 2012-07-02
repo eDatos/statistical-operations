@@ -13,21 +13,6 @@
  	
 	<resources base="URL_RESOURCES_BASE">
 		<resource id="statisticalOperationsRestFacadeV10">
-			<resource path="operations/{code}">
-				<method name="GET" id="retrieveOperationByCode">
-					<request>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:operation"/> 
-                        <representation mediaType="application/json" element="domain:operation"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
 			<resource path="operations">
 				<method name="GET" id="findOperations">
 					<request>
@@ -44,6 +29,21 @@
 	                </response>
 				</method>
 			</resource>				
+			<resource path="operations/{code}">
+				<method name="GET" id="retrieveOperationByCode">
+					<request>
+						<param name="code" style="template"/>
+					</request>
+	                <response status="200">
+						<representation mediaType="application/xml" element="domain:operation"/> 
+                        <representation mediaType="application/json" element="domain:operation"/> 
+	                </response>
+					<response status="404 500">
+						<representation mediaType="application/xml" element="common:error"/> 
+                        <representation mediaType="application/json" element="common:error"/> 
+	                </response>
+				</method>
+			</resource>
 			<resource path="operations/{code}/families">
 				<method name="GET" id="retrieveFamiliesByOperation">
 					<request>
@@ -75,21 +75,6 @@
 	                </response>
 				</method>
 			</resource>
-			<resource path="families/{code}">
-				<method name="GET" id="retrieveFamilyByCode">
-					<request>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:family"/> 
-                        <representation mediaType="application/json" element="domain:family"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
 			<resource path="families">
 				<method name="GET" id="findFamilies">
 					<request>
@@ -106,6 +91,21 @@
 	                </response>
 				</method>
 			</resource>				
+			<resource path="families/{code}">
+				<method name="GET" id="retrieveFamilyByCode">
+					<request>
+						<param name="code" style="template"/>
+					</request>
+	                <response status="200">
+						<representation mediaType="application/xml" element="domain:family"/> 
+                        <representation mediaType="application/json" element="domain:family"/> 
+	                </response>
+					<response status="404 500">
+						<representation mediaType="application/xml" element="common:error"/> 
+                        <representation mediaType="application/json" element="common:error"/> 
+	                </response>
+				</method>
+			</resource>
 			<resource path="families/{code}/operations">
 				<method name="GET" id="retrieveOperationsByFamily">
 					<request>
