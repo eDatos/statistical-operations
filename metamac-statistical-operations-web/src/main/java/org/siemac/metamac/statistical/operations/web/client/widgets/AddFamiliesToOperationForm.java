@@ -28,7 +28,8 @@ public class AddFamiliesToOperationForm extends DynamicForm {
         families.setMultiple(true);
 
         addButton = new ButtonItem("fam-save", OperationsWeb.getConstants().actionAdd());
-        addButton.setAlign(Alignment.RIGHT);
+        addButton.setColSpan(2);
+        addButton.setAlign(Alignment.CENTER);
         addButton.setWidth(110);
 
         setHeight100();

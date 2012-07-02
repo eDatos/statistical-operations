@@ -24,6 +24,8 @@ import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
 
+    private static final int        FORM_ITEM_CUSTOM_WIDTH = 300;
+
     private RequiredTextItem        identifier;
     private RequiredTextItem        title;
     private CustomCheckboxItem      releaseCalendar;
@@ -39,20 +41,23 @@ public class NewOperationForm extends CustomDynamicForm {
         setValidateOnChange(true);
 
         identifier = new RequiredTextItem("op-id", getConstants().operationIdentifier());
+        identifier.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
         title = new RequiredTextItem("op-title", getConstants().operationTitle());
+        title.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
 
-        subjectAreasItem = new ExternalSelectItem("op-subject", getConstants().operationSubjectArea());
+        subjectAreasItem = new ExternalSelectItem("op-subject", getConstants().operationSubjectArea(), FORM_ITEM_CUSTOM_WIDTH);
         subjectAreasItem.setRequired(true);
 
         indSystem = new CustomCheckboxItem("op-ind-sys", getConstants().operationIndicatorSystem());
         indSystem.setTitleStyle("requiredFormLabel");
 
         saveButton = new ButtonItem("op-save", getConstants().actionCreateOperation());
-        saveButton.setAlign(Alignment.RIGHT);
+        saveButton.setColSpan(2);
+        saveButton.setAlign(Alignment.CENTER);
         saveButton.setWidth(110);
 
         setHeight100();

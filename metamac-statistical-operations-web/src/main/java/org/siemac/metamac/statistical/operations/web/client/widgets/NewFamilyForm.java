@@ -34,7 +34,8 @@ public class NewFamilyForm extends CustomDynamicForm {
         title.setWidth(200);
 
         saveButton = new ButtonItem("fam-save", OperationsWeb.getConstants().actionCreateFamily());
-        saveButton.setAlign(Alignment.RIGHT);
+        saveButton.setColSpan(2);
+        saveButton.setAlign(Alignment.CENTER);
         saveButton.setWidth(110);
 
         setHeight100();

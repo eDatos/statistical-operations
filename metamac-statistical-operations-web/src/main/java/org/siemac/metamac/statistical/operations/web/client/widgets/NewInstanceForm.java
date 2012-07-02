@@ -34,7 +34,8 @@ public class NewInstanceForm extends CustomDynamicForm {
         title.setWidth(200);
 
         saveButton = new ButtonItem("op-save", OperationsWeb.getConstants().actionCreateInstance());
-        saveButton.setAlign(Alignment.RIGHT);
+        saveButton.setColSpan(2);
+        saveButton.setAlign(Alignment.CENTER);
         saveButton.setWidth(110);
 
         setHeight100();
