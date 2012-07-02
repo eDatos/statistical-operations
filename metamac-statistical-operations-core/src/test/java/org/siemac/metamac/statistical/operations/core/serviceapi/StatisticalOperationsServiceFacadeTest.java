@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.siemac.metamac.common.test.utils.DirtyDatabase;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
@@ -47,6 +48,8 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -54,6 +57,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
+@TransactionConfiguration(transactionManager="txManager", defaultRollback=true)
 public class StatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
     @Autowired
@@ -67,12 +71,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllSurveyTypes() throws MetamacException {
         List<SurveyTypeDto> surveyTypesList = statisticalOperationsServiceFacade.findAllSurveyTypes(getServiceContextAdministrador());
         assertTrue(!surveyTypesList.isEmpty());
     }
 
     @Test
+	@Transactional
     public void testFindSurveyTypeById() throws MetamacException {
         SurveyTypeDto surveyTypeDto = statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(surveyTypeDto);
@@ -83,12 +89,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllInstanceTypes() throws MetamacException {
         List<InstanceTypeDto> instanceTypesList = statisticalOperationsServiceFacade.findAllInstanceTypes(getServiceContextAdministrador());
         assertTrue(!instanceTypesList.isEmpty());
     }
 
     @Test
+	@Transactional
     public void testFindInstanceTypeById() throws MetamacException {
         InstanceTypeDto instanceTypeDto = statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(instanceTypeDto);
@@ -99,12 +107,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllSurveySources() throws MetamacException {
         List<SurveySourceDto> surveySourcesList = statisticalOperationsServiceFacade.findAllSurveySources(getServiceContextAdministrador());
         assertTrue(!surveySourcesList.isEmpty());
     }
 
     @Test
+	@Transactional
     public void testFindSurveySourceById() throws MetamacException {
         SurveySourceDto surveySourceDto = statisticalOperationsServiceFacade.findSurveySourceById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(surveySourceDto);
@@ -115,12 +125,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllOfficialityTypes() throws MetamacException {
         List<OfficialityTypeDto> officialityTypesList = statisticalOperationsServiceFacade.findAllOfficialityTypes(getServiceContextAdministrador());
         assertTrue(!officialityTypesList.isEmpty());
     }
 
     @Test
+	@Transactional
     public void testFindOfficialityTypeById() throws MetamacException {
         OfficialityTypeDto officialityTypeDto = statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(officialityTypeDto);
@@ -131,6 +143,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllCollMethods() throws Exception {
         List<CollMethodDto> collMethodsList = statisticalOperationsServiceFacade.findAllCollMethods(getServiceContextAdministrador());
         assertTrue(!collMethodsList.isEmpty());
@@ -138,6 +151,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindCollMethodById() throws Exception {
         CollMethodDto collMethodDto = statisticalOperationsServiceFacade.findCollMethodById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(collMethodDto);
@@ -149,6 +163,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testFindAllCosts() throws Exception {
         List<CostDto> costsList = statisticalOperationsServiceFacade.findAllCosts(getServiceContextAdministrador());
         assertTrue(!costsList.isEmpty());
@@ -156,6 +171,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindCostById() throws Exception {
         CostDto costDto = statisticalOperationsServiceFacade.findCostById(getServiceContextAdministrador(), Long.valueOf(1));
         assertNotNull(costDto);
@@ -167,6 +183,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testCreateFamily() throws MetamacException {
         int familiesBefore = statisticalOperationsServiceFacade.findAllFamilies(getServiceContextAdministrador()).size();
 
@@ -180,6 +197,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testCreateFamilyDuplicatedCode() throws MetamacException {
         FamilyDto persistedFamilyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
 
@@ -194,6 +212,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamily() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
 
@@ -232,6 +251,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamilyCodeUnmodifiable() throws MetamacException {
         // Create operation
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -258,6 +278,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamilyWithoutDescription() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
 
@@ -287,6 +308,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamilyWithoutLocalisedString() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
 
@@ -317,6 +339,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamilyWithOperations() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
 
@@ -372,6 +395,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateFamilyOptimisticLockingError() throws Exception {
         Long id = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate()).getId();
 
@@ -406,6 +430,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteFamily() throws MetamacException {
         // Create family
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
@@ -424,6 +449,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteFamilyWithOperations() throws MetamacException {
         // Create family
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
@@ -457,6 +483,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteFamilyInternallyPublished() throws MetamacException {
         // Create family
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
@@ -485,6 +512,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteFamilyExternallyPublished() throws MetamacException {
         // Create family
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
@@ -516,6 +544,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindAllFamilies() throws MetamacException {
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
 
@@ -525,6 +554,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamilyByCondition() throws MetamacException {
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
@@ -535,6 +565,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamilyByConditionCode() throws MetamacException {
 
         // Insert data
@@ -576,6 +607,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
     
     @Test
+	@Transactional
     public void testFindFamilyByConditionOperationCode() throws MetamacException {
 
         // Insert data
@@ -618,6 +650,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
     
     @Test
+	@Transactional
     public void testFindFamilyByConditionOperationId() throws MetamacException {
 
         // Insert data
@@ -660,6 +693,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamilyByConditionPaginated() throws MetamacException {
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
@@ -693,6 +727,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamilyById() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
 
@@ -703,6 +738,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamilyByCode() throws Exception {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
 
@@ -714,6 +750,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishInternallyFamilyError() throws MetamacException {
         FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
         int familiesBefore = statisticalOperationsServiceFacade.findAllFamilies(getServiceContextAdministrador()).size();
@@ -735,6 +772,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishInternallyFamily() throws MetamacException {
         // Create operation with ProcStatus PUBLISH_EXTERNALLY
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -766,6 +804,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishExternallyFamily() throws MetamacException {
 
         // Create operation with ProcStatus PUBLISH_EXTERNALLY
@@ -810,6 +849,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationsForFamily() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -826,6 +866,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testAddOperationForFamily() throws MetamacException {
 
         // Create operation
@@ -849,6 +890,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testRemoveOperationForFamily() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -879,6 +921,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testCreateOperation() throws MetamacException {
 
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -890,6 +933,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testCreateOperationDuplicatedCode() throws MetamacException {
         OperationDto persistedOperationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
 
@@ -904,6 +948,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperation() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         assertNotNull(operationDto);
@@ -946,6 +991,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationCodeUnmodifiable() throws MetamacException {
         // Create operation
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -963,6 +1009,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationWithDescriptionWithoutLocales() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         assertNotNull(operationDto);
@@ -981,6 +1028,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationStatus() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         assertNotNull(operationDto);
@@ -1001,6 +1049,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationWithExternalItems() throws Exception {
         // Create operation
         int externalItemsBefore = externalItemRepository.findAll().size();
@@ -1055,6 +1104,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationWithoutExternalItemsPreviuslySave() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1093,6 +1143,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testCreateOperationWithIncorrectReleaseCalendarAccess() throws MetamacException {
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
@@ -1111,6 +1162,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationWithList() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoWithOfficialityType());
         assertNotNull(operationDto);
@@ -1140,6 +1192,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateOperationOptimisticLockingError() throws Exception {
         Long id = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
 
@@ -1174,6 +1227,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperationWithList() throws Exception {
         // Create operation with officiality type
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoWithOfficialityType());
@@ -1201,6 +1255,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperationWithProducer() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         assertNotNull(operationDto);
@@ -1217,6 +1272,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperation() throws MetamacException {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         assertNotNull(operationDto);
@@ -1233,6 +1289,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperationWithFamilies() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1269,6 +1326,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperationInternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1292,6 +1350,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteOperationExternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1316,6 +1375,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindAllOperations() throws MetamacException {
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         List<OperationBaseDto> operations = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador());
@@ -1323,6 +1383,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationsByCondition() throws MetamacException {
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1333,6 +1394,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationByConditionCode() throws MetamacException {
 
         // Insert data
@@ -1374,6 +1436,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationByConditionFamilyCode() throws MetamacException {
 
         // Insert data
@@ -1416,6 +1479,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
     
     @Test
+	@Transactional
     public void testFindOperationByConditionFamilyId() throws MetamacException {
 
         // Insert data
@@ -1458,6 +1522,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationsByConditionPaginated() throws MetamacException {
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1491,6 +1556,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationById() throws MetamacException {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
 
@@ -1501,6 +1567,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationByCode() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
 
@@ -1512,6 +1579,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishInternallyOperation() throws MetamacException {
 
         // Create and Publish operation
@@ -1529,6 +1597,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishExternallyOperation() throws MetamacException {
 
         // Create and Publish operation
@@ -1556,6 +1625,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindFamiliesForOperation() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1573,6 +1643,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstancesForOperation() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1595,6 +1666,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     // }
 
     @Test
+	@Transactional
     public void testAddFamilyForOperation() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1618,6 +1690,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testRemoveFamilyForOperation() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
@@ -1647,6 +1720,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      **************************************************************************/
 
     @Test
+	@Transactional
     public void testCreateInstance() throws MetamacException, InterruptedException {
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
 
@@ -1669,6 +1743,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testCreateInstanceDuplicatedCode() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1689,6 +1764,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testCreateInstanceError() throws MetamacException {
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
 
@@ -1710,6 +1786,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateInstance() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1744,6 +1821,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateInstanceCodeUnmodifiable() throws MetamacException {
         // Create operation
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1767,6 +1845,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateInstanceWithExternalItemBt() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1796,6 +1875,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+    @DirtyDatabase
     public void testUpdateInstancesOrder() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1844,6 +1924,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testUpdateInstanceOptimisticLockingError() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
@@ -1880,6 +1961,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1903,6 +1985,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+    @DirtyDatabase
     public void testCheckInstancesOrderAfterRemoveInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -1973,6 +2056,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+    @DirtyDatabase
     public void testCheckCurrentInstances() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2090,6 +2174,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     // }
 
     @Test
+	@Transactional
     public void testDeleteInstanceInternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2120,6 +2205,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testDeleteInstanceExternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2149,6 +2235,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindAllInstances() throws MetamacException {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
@@ -2160,6 +2247,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstanceByCondition() throws MetamacException {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
@@ -2175,6 +2263,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     
     @Test
+	@Transactional
     public void testFindInstanceByConditionOperationCode() throws MetamacException {
 
         // Insert data
@@ -2216,6 +2305,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
     
     @Test
+	@Transactional
     public void testFindInstanceByConditionOperationId() throws MetamacException {
 
         // Insert data
@@ -2257,6 +2347,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstanceByConditionPaginated() throws MetamacException {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
@@ -2293,6 +2384,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstanceById() throws MetamacException {
         // Create instance
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2306,6 +2398,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstanceByCode() throws Exception {
         // Create instance
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2320,6 +2413,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishInternallyInstance() throws MetamacException {
         // Service doesn't check if the associated operation is PUBLISHED_INTERNALLY because it's a requirement for create it.
 
@@ -2349,6 +2443,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testPublishExternallyInstance() throws MetamacException {
         // Create a PUBLISH_EXTERNALLY Operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2383,6 +2478,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindOperationForInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
@@ -2403,6 +2499,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Test
+	@Transactional
     public void testFindInstanceBaseById() throws MetamacException {
         // Create instance
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
