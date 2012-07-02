@@ -21,11 +21,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
+import org.siemac.metamac.rest.RestConstants;
 import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
-import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -529,10 +529,10 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         String url = baseApi + "/families/" + code + "/operations";
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(url);
         if (limit != null) {
-            uriComponentsBuilder = uriComponentsBuilder.queryParam(RestInternalConstants.QUERY_PARAM_LIMIT, limit);
+            uriComponentsBuilder = uriComponentsBuilder.queryParam(RestConstants.LINK_QUERY_PARAM_LIMIT, limit);
         }
         if (offset != null) {
-            uriComponentsBuilder = uriComponentsBuilder.queryParam(RestInternalConstants.QUERY_PARAM_OFFSET, offset);
+            uriComponentsBuilder = uriComponentsBuilder.queryParam(RestConstants.LINK_QUERY_PARAM_OFFSET, offset);
         }
         return uriComponentsBuilder.build().toUriString();
     }

@@ -20,7 +20,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
-import org.siemac.metamac.rest.search.PagedResultUtils;
+import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
+import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -35,7 +36,6 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Insta
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationsPagedResult;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
@@ -95,35 +95,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         OperationsPagedResult targetPagedResult = new OperationsPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
+        // Pagination
+        String baseLink = toOperationsByFamilyLink(family, apiUrl);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+
         // Values
         for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
             RelatedResource target = toRelatedResource(source, apiUrl);
             targetPagedResult.getItems().add(target);
-        }
-
-        // Pagination
-        // TODO pasar a librería común (transformPagedResult)
-        targetPagedResult.setOffset(BigInteger.valueOf(sourcesPagedResult.getStartRow()));
-        targetPagedResult.setLimit(BigInteger.valueOf(limit));
-        targetPagedResult.setTotal(BigInteger.valueOf(sourcesPagedResult.getTotalRows()));
-        // first page: only if it is not first page
-        if (sourcesPagedResult.getStartRow() >= limit) {
-            targetPagedResult.setFirstLink(toOperationsByFamilyLink(apiUrl, family, limit, 0));
-        }
-        // last page: only if it is not last page
-        if (sourcesPagedResult.getStartRow() + limit < sourcesPagedResult.getTotalRows()) {
-            targetPagedResult.setLastLink(toOperationsByFamilyLink(apiUrl, family, limit, PagedResultUtils.getOffsetLastPage(limit, sourcesPagedResult.getTotalRows())));
-        }
-        // previous and next page
-        if (sourcesPagedResult.getRowCount() > 0) {
-            int previousOffset = PagedResultUtils.getOffsetPreviousPage(limit, sourcesPagedResult.getStartRow());
-            if (PagedResultUtils.NO_OFFSET != previousOffset) {
-                targetPagedResult.setPreviousLink(toOperationsByFamilyLink(apiUrl, family, limit, previousOffset));
-            }
-            int nextOffset = PagedResultUtils.getOffsetNextPage(limit, sourcesPagedResult.getStartRow(), sourcesPagedResult.getTotalRows());
-            if (PagedResultUtils.NO_OFFSET != nextOffset) {
-                targetPagedResult.setNextLink(toOperationsByFamilyLink(apiUrl, family, limit, nextOffset));
-            }
         }
         return targetPagedResult;
     }
@@ -505,72 +484,48 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     // API/operations
     private String toOperationsLink(String apiUrl) {
-        return createLink(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
+        return RestUtils.createLink(apiUrl, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
     }
 
     // API/operations/OPERATION_ID
     private String toOperationLink(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkOperations = toOperationsLink(apiUrl);
-        return createLink(linkOperations, operation.getCode());
+        return RestUtils.createLink(linkOperations, operation.getCode());
     }
 
     // API/operations/OPERATION_ID/instances
     private String toInstancesLink(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkOperation = toOperationLink(apiUrl, operation);
-        return createLink(linkOperation, RestInternalConstants.LINK_SUBPATH_INSTANCES);
+        return RestUtils.createLink(linkOperation, RestInternalConstants.LINK_SUBPATH_INSTANCES);
     }
 
     // API/operations/OPERATION_ID/instances/INSTANCE_ID
     private String toInstanceLink(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Instance instance) {
         String linkOperation = toInstancesLink(apiUrl, instance.getOperation());
-        return createLink(linkOperation, instance.getCode());
+        return RestUtils.createLink(linkOperation, instance.getCode());
     }
 
     // API/families
     private String toFamiliesLink(String apiUrl) {
-        return createLink(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES);
+        return RestUtils.createLink(apiUrl, RestInternalConstants.LINK_SUBPATH_FAMILIES);
     }
 
     // API/families/family
     private String toFamilyLink(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Family family) {
         String linkFamilies = toFamiliesLink(apiUrl);
-        return createLink(linkFamilies, family.getCode());
+        return RestUtils.createLink(linkFamilies, family.getCode());
     }
 
     // API/operations/OPERATION_ID/families
     private String toFamiliesByOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
         String linkFamily = toOperationLink(apiUrl, operation);
-        return createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_FAMILIES);
+        return RestUtils.createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_FAMILIES);
     }
 
     // API/families/FAMILY_ID/operations
     private String toOperationsByFamilyLink(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
         String linkFamily = toFamilyLink(apiUrl, family);
-        return createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
-    }
-
-    // API/families/FAMILY_ID/operations?limit=?&offset=?
-    private String toOperationsByFamilyLink(String apiUrl, org.siemac.metamac.statistical.operations.core.domain.Family family, int limit, int offset) {
-        if (offset < 0) {
-            return null;
-        }
-        String linkFamily = toFamilyLink(apiUrl, family);
-        String linkFamilyOperations = createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
-        linkFamilyOperations = createLinkWithQueryParam(linkFamilyOperations, RestInternalConstants.QUERY_PARAM_LIMIT, String.valueOf(limit));
-        linkFamilyOperations = createLinkWithQueryParam(linkFamilyOperations, RestInternalConstants.QUERY_PARAM_OFFSET, String.valueOf(offset));
-        return linkFamilyOperations;
-    }
-
-    private String createLink(String baseLink, String additionalPath) {
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(baseLink);
-        uriComponentsBuilder = uriComponentsBuilder.pathSegment(additionalPath);
-        return uriComponentsBuilder.build().toUriString();
-    }
-
-    private String createLinkWithQueryParam(String baseLink, String queryParam, String queryParamValue) {
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(baseLink);
-        uriComponentsBuilder = uriComponentsBuilder.queryParam(queryParam, queryParamValue);
-        return uriComponentsBuilder.build().toUriString();
+        return RestUtils.createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
     }
 
     private org.siemac.metamac.statistical.operations.core.domain.Instance getInstanceInProcStatus(List<org.siemac.metamac.statistical.operations.core.domain.Instance> instances,
