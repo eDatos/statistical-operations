@@ -16,7 +16,6 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.exception.RestException;
@@ -24,6 +23,7 @@ import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamiliesNoPagedResult;
@@ -60,7 +60,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Override
     public Operation retrieveOperationByCode(String code) {
         try {
-            // TODO Validation of parameters. validar code?
+            // TODO Validation of parameters. validar code o delegar en servicio?
 
             // Retrieve
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(code);
@@ -75,9 +75,34 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
+    public OperationsPagedResult findOperations(String limit, String offset) {
+        try {
+            // TODO Validation of parameters. delegar en servicio?
+
+            // Retrieve operations by criteria
+            SculptorCriteria sculptorCriteria = RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            // Find only published
+            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
+                    .withProperty(OperationProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+            conditionalCriteria.addAll(sculptorCriteria.getConditions());
+
+            // Retrieve
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operationsEntitiesResult = statisticalOperationsBaseService.findOperationByCondition(
+                    serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
+
+            // Transform
+            OperationsPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            return operationsPagedResult;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+
+    @Override
     public FamiliesNoPagedResult retrieveFamiliesByOperation(String code) {
         try {
-            // TODO Validation of parameters. validar code?
+            // TODO Validation of parameters. validar code o delegar en servicio?
 
             // Retrieve operation to check exists and it is published
             retrieveOperationEntityPublishedInternalOrExternally(code);
@@ -102,7 +127,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Override
     public Family retrieveFamilyByCode(String code) {
         try {
-            // TODO Validation of parameters. validar code?
+            // TODO Validation of parameters. validar code o delegar en servicio?
 
             // Retrieve
             org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = retrieveFamilyEntityPublishedInternalOrExternally(code);
@@ -119,7 +144,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Override
     public OperationsPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
         try {
-            // TODO Validation of parameters. validar code?
+            // TODO Validation of parameters. validar code o delegar en servicio?
 
             // Validate family exists and it is published
             org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(code);
@@ -131,7 +156,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     .withProperty(OperationProperties.families().code()).eq(code).withProperty(OperationProperties.procStatus())
                     .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
-            
+
             // Retrieve
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operationsEntitiesResult = statisticalOperationsBaseService.findOperationByCondition(
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
@@ -148,7 +173,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     @Override
     public Instance retrieveInstanceByCode(String operationCode, String code) {
         try {
-            // TODO Validation of parameters. validar code?
+            // TODO Validation of parameters. validar code o delegar en servicio?
 
             org.siemac.metamac.statistical.operations.core.domain.Instance instanceEntity = statisticalOperationsBaseService.findInstanceByCode(serviceContextRestInternal, code);
             if (instanceEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceEntity.getProcStatus()))) {

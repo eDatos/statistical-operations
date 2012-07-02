@@ -1,0 +1,161 @@
+{
+  "kind": "statisticalOperations#operations",
+  "limit": 25,
+  "offset": 0,
+  "total": 9,
+  "items": [
+    {
+      "id": "operation1",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título operation operation1"
+          },
+          {
+            "locale": "en",
+            "label": "Title operation operation1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation2",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation2",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation2"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation3",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation3",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título operation operation3"
+          },
+          {
+            "locale": "en",
+            "label": "Title operation operation3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation4",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation4",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation4"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation5",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation5",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation5"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation6",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation6",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation6"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation7",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation7",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation7"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation8",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation8",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation8"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation9",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation9",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation9"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation9"
+          }
+        ]
+      }
+    }
+  ]
+}

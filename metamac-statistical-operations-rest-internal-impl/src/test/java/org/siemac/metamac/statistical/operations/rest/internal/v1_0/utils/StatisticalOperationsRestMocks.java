@@ -67,6 +67,82 @@ public class StatisticalOperationsRestMocks {
         familiesResult.getItems().add(mockFamily2RelatedResource(baseApi));
         return familiesResult;
     }
+    
+    public static OperationsPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset) {
+        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+        operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operationsPagedResult.setTotal(BigInteger.valueOf(9));
+        if (limit == null && (offset == null || "0".equals(offset))) {
+            operationsPagedResult.getItems().add(mockOperation1RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation3RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation5RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation6RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation7RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation8RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation9RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(0));
+            operationsPagedResult.setLimit(BigInteger.valueOf(25));
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
+        } else if ("10000".equals(limit) && offset == null) {
+            operationsPagedResult.getItems().add(mockOperation1RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation3RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation5RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation6RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation7RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation8RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation9RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(0));
+            operationsPagedResult.setLimit(BigInteger.valueOf(1000));
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation1RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation2RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirstLink(null);
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(baseApi + "/operations?limit=2&offset=2");
+            operationsPagedResult.setLastLink(baseApi + "/operations?limit=2&offset=8");
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation3RelatedResource(baseApi));
+            operationsPagedResult.getItems().add(mockOperation4RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirstLink(baseApi + "/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(baseApi + "/operations?limit=2&offset=0");
+            operationsPagedResult.setNextLink(baseApi + "/operations?limit=2&offset=4");
+            operationsPagedResult.setLastLink(baseApi + "/operations?limit=2&offset=8");
+        } else if ("2".equals(limit) && "8".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation9RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirstLink(baseApi + "/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(baseApi + "/operations?limit=2&offset=6");
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
+        } else if ("2".equals(limit) && "9".equals(offset)) {
+            // no results
+            operationsPagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+            operationsPagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+            operationsPagedResult.setFirstLink(baseApi + "/operations?limit=2&offset=0");
+            operationsPagedResult.setPreviousLink(null);
+            operationsPagedResult.setNextLink(null);
+            operationsPagedResult.setLastLink(null);
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+        return operationsPagedResult;
+    }
 
     public static OperationsPagedResult mockOperationsPagedResultByFamily1(String baseApi, String limit, String offset) {
         OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
@@ -133,6 +209,24 @@ public class StatisticalOperationsRestMocks {
             operationsPagedResult.setPreviousLink(null);
             operationsPagedResult.setNextLink(null);
             operationsPagedResult.setLastLink(null);
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+        return operationsPagedResult;
+    }
+    
+    public static OperationsPagedResult mockOperationsPagedResultByFamily2(String baseApi, String limit, String offset) {
+        OperationsPagedResult operationsPagedResult = new OperationsPagedResult();
+        operationsPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operationsPagedResult.setTotal(BigInteger.valueOf(4));
+        if ("1".equals(limit) && "2".equals(offset)) {
+            operationsPagedResult.getItems().add(mockOperation8RelatedResource(baseApi));
+            operationsPagedResult.setOffset(BigInteger.valueOf(2));
+            operationsPagedResult.setLimit(BigInteger.valueOf(1));
+            operationsPagedResult.setFirstLink(baseApi + "/families/family2/operations?limit=1&offset=0");
+            operationsPagedResult.setPreviousLink(baseApi + "/families/family2/operations?limit=1&offset=1");
+            operationsPagedResult.setNextLink(baseApi + "/families/family2/operations?limit=1&offset=3");
+            operationsPagedResult.setLastLink(baseApi + "/families/family2/operations?limit=1&offset=3");
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
         }
@@ -326,6 +420,18 @@ public class StatisticalOperationsRestMocks {
     
     private static RelatedResource mockOperation6RelatedResource(String baseApi) {
         return mockOperationRelatedResource("6", baseApi);
+    }
+    
+    private static RelatedResource mockOperation7RelatedResource(String baseApi) {
+        return mockOperationRelatedResource("7", baseApi);
+    }
+    
+    private static RelatedResource mockOperation8RelatedResource(String baseApi) {
+        return mockOperationRelatedResource("8", baseApi);
+    }
+    
+    private static RelatedResource mockOperation9RelatedResource(String baseApi) {
+        return mockOperationRelatedResource("9", baseApi);
     }
     
     private static RelatedResource mockFamily1RelatedResource(String baseApi) {

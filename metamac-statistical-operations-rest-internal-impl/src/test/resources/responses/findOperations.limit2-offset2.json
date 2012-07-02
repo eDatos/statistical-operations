@@ -1,0 +1,46 @@
+{
+  "kind": "statisticalOperations#operations",
+  "limit": 2,
+  "offset": 2,
+  "total": 9,
+  "firstLink": "http://localhost:9001/internal/v1.0/operations?limit=2&offset=0",
+  "previousLink": "http://localhost:9001/internal/v1.0/operations?limit=2&offset=0",
+  "nextLink": "http://localhost:9001/internal/v1.0/operations?limit=2&offset=4",
+  "lastLink": "http://localhost:9001/internal/v1.0/operations?limit=2&offset=8",
+  "items": [
+    {
+      "id": "operation3",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation3",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title operation operation3"
+          },
+          {
+            "locale": "es",
+            "label": "Título operation operation3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation4",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation4",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título operation operation4"
+          },
+          {
+            "locale": "en",
+            "label": "Title operation operation4"
+          }
+        ]
+      }
+    }
+  ]
+}

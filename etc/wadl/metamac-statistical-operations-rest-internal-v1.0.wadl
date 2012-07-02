@@ -28,6 +28,22 @@
 	                </response>
 				</method>
 			</resource>
+			<resource path="operations">
+				<method name="GET" id="findOperations">
+					<request>
+						<param name="limit" style="query" required="false"/>
+						<param name="offset" style="query" required="false"/>
+					</request>
+	                <response status="200">
+						<representation mediaType="application/xml" element="domain:operationsPagedResult"/> 
+                        <representation mediaType="application/json" element="domain:operationsPagedResult"/> 
+	                </response>
+					<response status="404 500">
+						<representation mediaType="application/xml" element="common:error"/> 
+                        <representation mediaType="application/json" element="common:error"/> 
+	                </response>
+				</method>
+			</resource>				
 			<resource path="operations/{code}/families">
 				<method name="GET" id="retrieveFamiliesByOperation">
 					<request>

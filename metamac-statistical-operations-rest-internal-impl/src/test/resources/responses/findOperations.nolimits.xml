@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operationsPagedResult xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <ns2:kind>statisticalOperations#operations</ns2:kind>
+    <ns2:limit>25</ns2:limit>
+    <ns2:offset>0</ns2:offset>
+    <ns2:total>9</ns2:total>
+    <items>
+        <ns2:id>operation1</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation1</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation1</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation2</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation2</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation2</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation2</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation3</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation3</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation3</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation3</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation4</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation4</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation4</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation4</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation5</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation5</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation5</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation5</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation6</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation6</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation6</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation6</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation7</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation7</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation7</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation7</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation8</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation8</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation8</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation8</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+    <items>
+        <ns2:id>operation9</ns2:id>
+        <ns2:kind>statisticalOperations#operation</ns2:kind>
+        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation9</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>Title operation operation9</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>Título operation operation9</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </items>
+</operationsPagedResult>

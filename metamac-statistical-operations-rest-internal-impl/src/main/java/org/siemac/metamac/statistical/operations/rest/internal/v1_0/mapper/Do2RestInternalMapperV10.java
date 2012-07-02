@@ -14,6 +14,7 @@ public interface Do2RestInternalMapperV10 {
 
     // Entities
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl);
+    public OperationsPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
     public OperationsPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl);
     public FamiliesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl);
