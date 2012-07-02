@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<relatedResourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#instances</kind>
+    <limit>2</limit>
+    <offset>2</offset>
+    <total>5</total>
+    <firstLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0</firstLink>
+    <previousLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0</previousLink>
+    <nextLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4</nextLink>
+    <lastLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4</lastLink>
+    <items>
+        <id>instance3</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance3</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance3</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance4</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance4</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance4</label>
+            </text>
+        </title>
+    </items>
+</relatedResourcesPagedResult>

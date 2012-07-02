@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<relatedResourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#instances</kind>
+    <limit>25</limit>
+    <offset>0</offset>
+    <total>5</total>
+    <items>
+        <id>instance1</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance1</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance1</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance2</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance2</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance2</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance2</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance3</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance3</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance3</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance4</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance4</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance4</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance5</id>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance5</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title instance instance5</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título instance instance5</label>
+            </text>
+        </title>
+    </items>
+</relatedResourcesPagedResult>

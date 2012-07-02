@@ -242,6 +242,25 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getchildren().addAll(toInstanceChildren(source, apiUrl));
         return target;
     }
+    
+    @Override
+    public RelatedResourcesPagedResult toInstancesPagedResult(org.siemac.metamac.statistical.operations.core.domain.Operation operation, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sourcesPagedResult, Integer limit, String apiUrl) {
+
+        RelatedResourcesPagedResult targetPagedResult = new RelatedResourcesPagedResult();
+        targetPagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
+
+        // Pagination
+        String baseLink = toInstancesLink(apiUrl, operation);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+
+        // Values
+        for (org.siemac.metamac.statistical.operations.core.domain.Instance source : sourcesPagedResult.getValues()) {
+            RelatedResource target = toRelatedResource(source, apiUrl);
+            targetPagedResult.getItems().add(target);
+        }
+        return targetPagedResult;
+    }
+    
     // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
     @Override
     public Error toError(Exception exception) {

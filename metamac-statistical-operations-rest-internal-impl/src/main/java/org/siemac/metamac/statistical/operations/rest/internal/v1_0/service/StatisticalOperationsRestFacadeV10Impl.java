@@ -24,6 +24,7 @@ import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
@@ -100,6 +101,36 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
 
+    // TODO parámetro "query" con criterios de búsqueda METAMAC-753
+    @Override
+    public RelatedResourcesPagedResult findInstances(String operationCode, String limit, String offset) {
+        try {
+            // TODO Validation of parameters. delegar en servicio?
+
+            // Retrieve operation to check exists and it is published
+            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(operationCode);
+
+            // Retrieve instances by criteria
+            SculptorCriteria sculptorCriteria = RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            // Find for operation and only published
+            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
+                    .withProperty(InstanceProperties.operation().code()).eq(operationCode).withProperty(InstanceProperties.procStatus())
+                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+            conditionalCriteria.addAll(sculptorCriteria.getConditions());
+
+            // Retrieve
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> instancesEntitiesResult = statisticalOperationsBaseService.findInstanceByCondition(serviceContextRestInternal,
+                    conditionalCriteria, sculptorCriteria.getPagingParameter());
+
+            // Transform
+            RelatedResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            return instancesPagedResult;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+
     @Override
     public RelatedResourcesNoPagedResult retrieveFamiliesByOperation(String code) {
         try {
@@ -141,7 +172,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             throw manageException(e);
         }
     }
-    
+
     // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
     public RelatedResourcesPagedResult findFamilies(String limit, String offset) {
@@ -156,8 +187,8 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(
-                    serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(serviceContextRestInternal,
+                    conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
             RelatedResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());

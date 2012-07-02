@@ -1,0 +1,93 @@
+{
+  "kind": "statisticalOperations#instances",
+  "limit": 25,
+  "offset": 0,
+  "total": 5,
+  "items": [
+    {
+      "id": "instance1",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título instance instance1"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance2",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance2",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título instance instance2"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance3",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título instance instance3"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance4",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título instance instance4"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance5",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance5",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título instance instance5"
+          },
+          {
+            "locale": "en",
+            "label": "Title instance instance5"
+          }
+        ]
+      }
+    }
+  ]
+}

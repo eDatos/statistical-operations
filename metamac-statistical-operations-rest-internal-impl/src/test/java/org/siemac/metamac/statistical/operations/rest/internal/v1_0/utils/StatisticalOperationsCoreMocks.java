@@ -85,6 +85,18 @@ public class StatisticalOperationsCoreMocks {
     public static Instance mockInstance1() {
         return mockInstance("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
+    public static Instance mockInstance2() {
+        return mockInstance("2", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+    public static Instance mockInstance3() {
+        return mockInstance("3", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+    public static Instance mockInstance4() {
+        return mockInstance("4", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
+    public static Instance mockInstance5() {
+        return mockInstance("5", ProcStatusEnum.PUBLISH_INTERNALLY);
+    }
 
     public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
 
@@ -246,7 +258,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
     }
     
-    public static PagedResult<Family> mockFamiliesPagedResultByOperation1() {
+    public static PagedResult<Family> mockFamiliesNoPagedResultByOperation1() {
 
         List<Family> families = new ArrayList<Family>();
         families.add(mockFamily1());
@@ -260,6 +272,50 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
     }
 
+    public static PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset) {
+
+        List<Instance> instances = new ArrayList<Instance>();
+        int total = 5;
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+            startRow = 0;
+            rowCount = total;
+            pageSize = total;
+            instances.add(mockInstance1());
+            instances.add(mockInstance2());
+            instances.add(mockInstance3());
+            instances.add(mockInstance4());
+            instances.add(mockInstance5());
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            instances.add(mockInstance1());
+            instances.add(mockInstance2());
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            instances.add(mockInstance3());
+            instances.add(mockInstance4());
+        } else if ("2".equals(limit) && "4".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            instances.add(mockInstance5());
+        } else if ("2".equals(limit) && "9".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            // no results
+            rowCount = 0;
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
+    }
 
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
