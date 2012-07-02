@@ -273,9 +273,10 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
             @Override
             public void onWaitSuccess(UpdateFamilyOperationsResult result) {
                 operationBaseDtos = result.getOperationDtos();
-                getView().setOperations(operationBaseDtos);
+                // getView().setOperations(operationBaseDtos);
                 getView().closeOperationsWindow();
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().operationsAddedToFamily()), MessageTypeEnum.SUCCESS);
+                retrieveFamily(idFamily);
             }
         });
     }
