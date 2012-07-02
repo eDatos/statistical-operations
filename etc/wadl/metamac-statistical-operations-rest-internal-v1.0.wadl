@@ -15,6 +15,9 @@
 		<resource id="statisticalOperationsRestFacadeV10">
 			<resource path="operations">
 				<method name="GET" id="findOperations">
+					<doc>
+           				<![CDATA[Returns paged list operations, according to criteria]]>
+         			</doc>
 					<request>
 						<param name="limit" style="query" required="false"/>
 						<param name="offset" style="query" required="false"/>
