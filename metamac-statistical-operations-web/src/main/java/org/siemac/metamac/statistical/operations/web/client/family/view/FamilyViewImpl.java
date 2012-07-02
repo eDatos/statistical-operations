@@ -226,9 +226,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FamilyDS.ACRONYM, OperationsWeb.getConstants().familyAcronym());
         ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
-        ViewTextItem status = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getConstants().familyProcStatus());
+        ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getConstants().familyProcStatus());
         ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, OperationsWeb.getConstants().familyInventoryDate());
-        familyViewForm.setFields(code, title, acronym, description, internalInventoryDate, status, inventoryDate);
+        familyViewForm.setFields(code, title, acronym, procStatus, description, internalInventoryDate, inventoryDate);
         // Add to main layout
         mainFormLayout.addViewCanvas(familyViewForm);
     }

@@ -6,6 +6,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
@@ -117,7 +118,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             public void onRecordClick(RecordClickEvent event) {
                 if (event.getFieldNum() != 0) {
                     OperationRecord record = (OperationRecord) event.getRecord();
-                    goToOperation(record.getId());
+                    goToOperation(record.getCode());
                 }
             }
         }));
@@ -155,9 +156,9 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     }
 
     @Override
-    public void goToOperation(Long idOperation) {
-        if (idOperation != null) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, idOperation.toString()));
+    public void goToOperation(String operationCode) {
+        if (!StringUtils.isBlank(operationCode)) {
+            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode));
         }
     }
 

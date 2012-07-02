@@ -11,7 +11,7 @@ public interface FamilyListUiHandlers extends UiHandlers {
     void retrieveFamilyList(int firstResult, int maxResults);
 
     void saveFamily(FamilyDto familyDto);
-    void goToFamily(Long idFamily);
+    void goToFamily(String familyCode);
     void deleteFamilies(List<Long> familyIds);
 
 }

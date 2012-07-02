@@ -6,10 +6,12 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
@@ -26,7 +28,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganis
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
@@ -76,10 +77,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             UpdateFrequencyCodesHandler {
 
     private final DispatchAsync                dispatcher;
-    private final PlaceManager                 placeManager;
 
-    private Long                               idOperation;
-    private Long                               idInstance;
+    private OperationBaseDto                   operationBaseDto;
     private InstanceDto                        instanceDto;
 
     private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
@@ -122,11 +121,9 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @Inject
-    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
+    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
         super(eventBus, instanceView, instanceProxy);
         this.dispatcher = dispatcher;
-        this.placeManager = placeManager;
         this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
@@ -179,17 +176,9 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void prepareFromRequest(PlaceRequest request) {
         super.prepareFromRequest(request);
-        String id = request.getParameter(PlaceRequestParams.instanceParam, null);
-        if (id != null) {
-            idInstance = Long.valueOf(id);
-            retrieveInstance(idInstance);
-            // Get operation id
-            String operation = PlaceRequestUtils.getOperationParamFromUrl(placeManager);
-            if (operation != null) {
-                idOperation = Long.valueOf(operation);
-            } else {
-                OperationsWeb.showErrorPage();
-            }
+        String instanceCode = request.getParameter(PlaceRequestParams.instanceParam, null);
+        if (!StringUtils.isBlank(instanceCode)) {
+            retrieveInstance(instanceCode);
         } else {
             OperationsWeb.showErrorPage();
         }
@@ -197,7 +186,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void saveInstance(InstanceDto instanceToSave) {
-        dispatcher.execute(new SaveInstanceAction(idOperation, instanceToSave), new WaitingAsyncCallback<SaveInstanceResult>() {
+        dispatcher.execute(new SaveInstanceAction(operationBaseDto.getId(), instanceToSave), new WaitingAsyncCallback<SaveInstanceResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -212,8 +201,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         });
     }
 
-    private void retrieveInstance(Long idInstance) {
-        dispatcher.execute(new GetInstanceAction(idInstance), new WaitingAsyncCallback<GetInstanceResult>() {
+    private void retrieveInstance(String instanceCode) {
+        dispatcher.execute(new GetInstanceAction(instanceCode), new WaitingAsyncCallback<GetInstanceResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -222,11 +211,11 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             }
             @Override
             public void onWaitSuccess(GetInstanceResult result) {
-                if (idOperation == null || !idOperation.equals(result.getOperationBaseDto().getId())) {
-                    // TODO Show error page if operationId does not correspond with the instance operation
-                }
-                idOperation = result.getOperationBaseDto().getId();
+                // if (idOperation == null || !idOperation.equals(result.getOperationBaseDto().getId())) {
+                // TODO Show error page if operationId does not correspond with the instance operation
+                // }
                 instanceDto = result.getInstanceDto();
+                operationBaseDto = result.getOperationBaseDto();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));
                 getView().setInstance(instanceDto, result.getOperationBaseDto().getCode());
             }

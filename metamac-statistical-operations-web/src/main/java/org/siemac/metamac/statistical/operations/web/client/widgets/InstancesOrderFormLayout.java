@@ -95,6 +95,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         textItem.setValue(instancesTitleList);
         list.setData(records);
         list.sort(InstanceRecord.ORDER, SortDirection.DESCENDING);
+        setViewMode();
     }
 
     public void addInstance(InstanceDto instanceDto) {

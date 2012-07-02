@@ -30,8 +30,8 @@ public class GetFamilyAndOperationsActionHandler extends SecurityActionHandler<G
     @Override
     public GetFamilyAndOperationsResult executeSecurityAction(GetFamilyAndOperationsAction action) throws ActionException {
         try {
-            FamilyDto familyDto = statisticalOperationsServiceFacade.findFamilyById(ServiceContextHolder.getCurrentServiceContext(), action.getFamilyId());
-            List<OperationBaseDto> operationDtos = statisticalOperationsServiceFacade.findOperationsForFamily(ServiceContextHolder.getCurrentServiceContext(), action.getFamilyId());
+            FamilyDto familyDto = statisticalOperationsServiceFacade.findFamilyByCode(ServiceContextHolder.getCurrentServiceContext(), action.getFamilyCode());
+            List<OperationBaseDto> operationDtos = statisticalOperationsServiceFacade.findOperationsForFamily(ServiceContextHolder.getCurrentServiceContext(), familyDto.getId());
             return new GetFamilyAndOperationsResult(familyDto, operationDtos);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

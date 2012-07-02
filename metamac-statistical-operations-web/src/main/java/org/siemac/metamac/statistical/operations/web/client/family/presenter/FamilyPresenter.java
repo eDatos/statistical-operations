@@ -6,6 +6,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.ArrayList;
 import java.util.List;
 
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
@@ -60,7 +61,6 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
 
-    private Long                               idFamily;
     private FamilyDto                          familyDto;
     private List<OperationBaseDto>             operationBaseDtos;
 
@@ -124,7 +124,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
             @Override
             public void onRecordClick(RecordClickEvent event) {
                 OperationRecord record = (OperationRecord) event.getRecord();
-                goToOperation(record.getId());
+                goToOperation(record.getCode());
             }
         }));
 
@@ -198,17 +198,16 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     @Override
     public void prepareFromRequest(PlaceRequest request) {
         super.prepareFromRequest(request);
-        String id = request.getParameter(PlaceRequestParams.familyParam, null);
-        if (id != null) {
-            idFamily = Long.valueOf(id);
-            retrieveFamily(idFamily);
+        String familyCode = request.getParameter(PlaceRequestParams.familyParam, null);
+        if (!StringUtils.isBlank(familyCode)) {
+            retrieveFamily(familyCode);
         } else {
             OperationsWeb.showErrorPage();
         }
     }
 
-    private void retrieveFamily(Long idFamily) {
-        dispatcher.execute(new GetFamilyAndOperationsAction(idFamily), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
+    private void retrieveFamily(String familyCode) {
+        dispatcher.execute(new GetFamilyAndOperationsAction(familyCode), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -255,15 +254,15 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     @Override
-    public void goToOperation(Long idOperation) {
-        if (idOperation != null) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, idOperation.toString()));
+    public void goToOperation(String operationCode) {
+        if (!StringUtils.isBlank(operationCode)) {
+            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode));
         }
     }
 
     @Override
     public void updateFamilyOperations(List<Long> operationsToAdd, List<Long> operationsToRemove) {
-        dispatcher.execute(new UpdateFamilyOperationsAction(idFamily, operationsToAdd, operationsToRemove), new WaitingAsyncCallback<UpdateFamilyOperationsResult>() {
+        dispatcher.execute(new UpdateFamilyOperationsAction(familyDto.getId(), operationsToAdd, operationsToRemove), new WaitingAsyncCallback<UpdateFamilyOperationsResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -273,10 +272,9 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
             @Override
             public void onWaitSuccess(UpdateFamilyOperationsResult result) {
                 operationBaseDtos = result.getOperationDtos();
-                // getView().setOperations(operationBaseDtos);
                 getView().closeOperationsWindow();
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().operationsAddedToFamily()), MessageTypeEnum.SUCCESS);
-                retrieveFamily(idFamily);
+                retrieveFamily(familyDto.getCode());
             }
         });
     }

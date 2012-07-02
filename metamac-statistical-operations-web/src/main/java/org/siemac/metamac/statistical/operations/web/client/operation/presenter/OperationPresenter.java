@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
@@ -96,7 +97,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
 
-    private Long                               idOperation;
     private OperationDto                       operationDto;
     private List<InstanceBaseDto>              instanceBaseDtos;
     private List<FamilyBaseDto>                familyBaseDtos;
@@ -187,7 +187,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onRecordClick(RecordClickEvent event) {
                 FamilyRecord record = (FamilyRecord) event.getRecord();
-                goToFamily(record.getId());
+                goToFamily(record.getCode());
             }
         }));
 
@@ -197,7 +197,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             public void onRecordClick(RecordClickEvent event) {
                 if (event.getFieldNum() != 0) {
                     InstanceRecord record = (InstanceRecord) event.getRecord();
-                    goToInstance(record.getId());
+                    goToInstance(record.getCode());
                 }
             }
         }));
@@ -290,10 +290,9 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void prepareFromRequest(PlaceRequest request) {
         super.prepareFromRequest(request);
-        String id = request.getParameter(PlaceRequestParams.operationParam, null);
-        if (id != null) {
-            idOperation = Long.valueOf(id);
-            retrieveOperation(idOperation);
+        String operationCode = request.getParameter(PlaceRequestParams.operationParam, null);
+        if (!StringUtils.isBlank(operationCode)) {
+            retrieveOperation(operationCode);
         } else {
             OperationsWeb.showErrorPage();
         }
@@ -317,10 +316,10 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     @Override
-    public void goToFamily(Long idFamily) {
-        if (idFamily != null) {
+    public void goToFamily(String familyCode) {
+        if (!StringUtils.isBlank(familyCode)) {
             PlaceRequest familyListRequest = new PlaceRequest(NameTokens.familyListPage);
-            PlaceRequest familyRequest = new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, idFamily.toString());
+            PlaceRequest familyRequest = new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, familyCode);
             List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
             placeRequestHierarchy.add(familyListRequest);
             placeRequestHierarchy.add(familyRequest);
@@ -330,7 +329,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void saveInstance(InstanceDto instanceDto) {
-        dispatcher.execute(new SaveInstanceAction(idOperation, instanceDto), new WaitingAsyncCallback<SaveInstanceResult>() {
+        dispatcher.execute(new SaveInstanceAction(operationDto.getId(), instanceDto), new WaitingAsyncCallback<SaveInstanceResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -341,15 +340,15 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             public void onWaitSuccess(SaveInstanceResult result) {
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().instanceSaved()), MessageTypeEnum.SUCCESS);
                 getView().closeInstanceWindow();
-                retrieveOperation(idOperation);
+                retrieveOperation(operationDto.getCode());
             }
         });
     }
 
     @Override
-    public void goToInstance(Long idInstance) {
-        if (idInstance != null) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.instancePage).with(PlaceRequestParams.instanceParam, idInstance.toString()));
+    public void goToInstance(String instanceCode) {
+        if (!StringUtils.isBlank(instanceCode)) {
+            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.instancePage).with(PlaceRequestParams.instanceParam, instanceCode));
         }
     }
 
@@ -365,7 +364,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
             @Override
             public void onWaitSuccess(DeleteInstanceListResult result) {
-                retrieveOperation(idOperation);
+                retrieveOperation(operationDto.getCode());
                 String message = instanceIds.size() > 1 ? getMessages().instancesDeleted() : getMessages().instanceDeleted();
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(message), MessageTypeEnum.SUCCESS);
             }
@@ -374,7 +373,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void updateOperationFamilies(List<Long> familiesToAdd, List<Long> familiesToRemove) {
-        dispatcher.execute(new UpdateOperationFamiliesAction(idOperation, familiesToAdd, familiesToRemove), new WaitingAsyncCallback<UpdateOperationFamiliesResult>() {
+        dispatcher.execute(new UpdateOperationFamiliesAction(operationDto.getId(), familiesToAdd, familiesToRemove), new WaitingAsyncCallback<UpdateOperationFamiliesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -383,7 +382,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
             @Override
             public void onWaitSuccess(UpdateOperationFamiliesResult result) {
-                retrieveOperation(idOperation);
+                retrieveOperation(operationDto.getCode());
                 getView().closeFamiliesWindow();
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().familiesAddedToOperation()), MessageTypeEnum.SUCCESS);
             }
@@ -396,8 +395,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         getView().setCategorySchemes(event.getCategorySchemes());
     }
 
-    private void retrieveOperation(Long idOperation) {
-        dispatcher.execute(new GetOperationAndInstancesAction(idOperation), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
+    private void retrieveOperation(String operationCode) {
+        dispatcher.execute(new GetOperationAndInstancesAction(operationCode), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -428,7 +427,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     private void retrieveInstances() {
-        dispatcher.execute(new GetInstanceListAction(idOperation), new WaitingAsyncCallback<GetInstanceListResult>() {
+        dispatcher.execute(new GetInstanceListAction(operationDto.getId()), new WaitingAsyncCallback<GetInstanceListResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -597,7 +596,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void updateInstancesOrder(List<Long> instancesIds) {
-        dispatcher.execute(new UpdateInstancesOrderAction(idOperation, instancesIds), new WaitingAsyncCallback<UpdateInstancesOrderResult>() {
+        dispatcher.execute(new UpdateInstancesOrderAction(operationDto.getId(), instancesIds), new WaitingAsyncCallback<UpdateInstancesOrderResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {

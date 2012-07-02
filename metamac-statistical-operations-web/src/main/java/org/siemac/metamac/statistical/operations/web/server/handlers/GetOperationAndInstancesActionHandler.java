@@ -31,9 +31,9 @@ public class GetOperationAndInstancesActionHandler extends SecurityActionHandler
     @Override
     public GetOperationAndInstancesResult executeSecurityAction(GetOperationAndInstancesAction action) throws ActionException {
         try {
-            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-            List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-            List<InstanceBaseDto> instanceDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationByCode(ServiceContextHolder.getCurrentServiceContext(), action.getOperationCode());
+            List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHolder.getCurrentServiceContext(), operationDto.getId());
+            List<InstanceBaseDto> instanceDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHolder.getCurrentServiceContext(), operationDto.getId());
             return new GetOperationAndInstancesResult(operationDto, instanceDtos, familyBaseDtos);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);

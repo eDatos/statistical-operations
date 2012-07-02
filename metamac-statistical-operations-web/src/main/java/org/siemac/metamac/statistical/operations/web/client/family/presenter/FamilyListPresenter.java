@@ -5,6 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
@@ -114,7 +115,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             public void onRecordClick(RecordClickEvent event) {
                 if (event.getFieldNum() != 0) {
                     FamilyRecord record = (FamilyRecord) event.getRecord();
-                    goToFamily(record.getId());
+                    goToFamily(record.getCode());
                 }
             }
         }));
@@ -152,9 +153,9 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     }
 
     @Override
-    public void goToFamily(Long idFamily) {
-        if (idFamily != null) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, idFamily.toString()));
+    public void goToFamily(String familyCode) {
+        if (!StringUtils.isBlank(familyCode)) {
+            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, familyCode));
         }
     }
 

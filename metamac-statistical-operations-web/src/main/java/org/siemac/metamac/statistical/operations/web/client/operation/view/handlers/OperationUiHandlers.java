@@ -10,9 +10,9 @@ import com.gwtplatform.mvp.client.UiHandlers;
 public interface OperationUiHandlers extends UiHandlers {
 
     void saveOperation(OperationDto operationDto);
-    void goToFamily(Long idFamily);
+    void goToFamily(String familyCode);
     void saveInstance(InstanceDto instanceDto);
-    void goToInstance(Long idInstance);
+    void goToInstance(String instanceCode);
     void deleteInstances(List<Long> instanceIds);
     void updateOperationFamilies(List<Long> familiesToAdd, List<Long> familiesToRemove);
 
