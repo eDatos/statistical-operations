@@ -69,26 +69,24 @@ public class StatisticalOperationsCoreMocks {
     public static Family mockFamily2() {
         return mockFamily("2", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
+    
+    public static Family mockFamily3() {
+        return mockFamily("3", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
+    
+    public static Family mockFamily4() {
+        return mockFamily("4", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
+    
+    public static Family mockFamily5() {
+        return mockFamily("5", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    }
 
     public static Instance mockInstance1() {
         return mockInstance("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    public static PagedResult<Family> mockFamiliesOperation1() {
-
-        List<Family> families = new ArrayList<Family>();
-        families.add(mockFamily1());
-        families.add(mockFamily2());
-
-        int startRow = 0;
-        int rowCount = 2;
-        int pageSize = 2;
-        int totalRows = 2;
-
-        return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
-    }
-
-    public static PagedResult<Operation> mockOperations(String limit, String offset) {
+    public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 9;
@@ -137,7 +135,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Operation> mockOperationsFamily1(String limit, String offset) {
+    public static PagedResult<Operation> mockOperationsPagedResultByFamily1(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 6;
@@ -184,7 +182,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
     
-    public static PagedResult<Operation> mockOperationsFamily2(String limit, String offset) {
+    public static PagedResult<Operation> mockOperationsPagedResultByFamily2(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 4;
@@ -202,6 +200,66 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
+    
+    public static PagedResult<Family> mockFamiliesPagedResult(String limit, String offset) {
+
+        List<Family> families = new ArrayList<Family>();
+        int total = 5;
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+            startRow = 0;
+            rowCount = total;
+            pageSize = total;
+            families.add(mockFamily1());
+            families.add(mockFamily2());
+            families.add(mockFamily3());
+            families.add(mockFamily4());
+            families.add(mockFamily5());
+        } else if ("2".equals(limit) && "0".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            families.add(mockFamily1());
+            families.add(mockFamily2());
+        } else if ("2".equals(limit) && "2".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            families.add(mockFamily3());
+            families.add(mockFamily4());
+        } else if ("2".equals(limit) && "4".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            rowCount = pageSize;
+            families.add(mockFamily5());
+        } else if ("2".equals(limit) && "9".equals(offset)) {
+            pageSize = Integer.valueOf(limit).intValue();
+            startRow = Integer.valueOf(offset).intValue();
+            // no results
+            rowCount = 0;
+        } else {
+            fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
+    }
+    
+    public static PagedResult<Family> mockFamiliesPagedResultByOperation1() {
+
+        List<Family> families = new ArrayList<Family>();
+        families.add(mockFamily1());
+        families.add(mockFamily2());
+
+        int startRow = 0;
+        int rowCount = 2;
+        int pageSize = 2;
+        int totalRows = 2;
+
+        return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
+    }
+
 
     private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
@@ -372,7 +430,7 @@ public class StatisticalOperationsCoreMocks {
         return operation;
     }
 
-    public static Family mockFamily(String subCode, ProcStatusEnum procStatus) {
+    private static Family mockFamily(String subCode, ProcStatusEnum procStatus) {
 
         Family family = new Family();
         family.setCode("family" + subCode);
@@ -386,7 +444,7 @@ public class StatisticalOperationsCoreMocks {
         return family;
     }
 
-    public static Instance mockInstance(String subCode, ProcStatusEnum procStatus) {
+    private static Instance mockInstance(String subCode, ProcStatusEnum procStatus) {
 
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);

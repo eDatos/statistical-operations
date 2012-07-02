@@ -35,6 +35,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperation1Matcher;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindOperationsByFamilyMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindOperationsMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
@@ -81,60 +82,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
     @Before
     public void setUp() throws Exception {
-
-        // MOCKS
-        StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
-        // Retrieve operations
-        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
-        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
-        // Retrieve operations by family
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 25, 0);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 1000, 0);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 0);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 2);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 4);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 7);
-        mockitoFindOperationsByFamily(statisticalOperationsBaseService, FAMILY_CODE2, 1, 2);
-        // Find operations
-        mockitoFindOperations(statisticalOperationsBaseService, 25, 0);
-        mockitoFindOperations(statisticalOperationsBaseService, 1000, 0);
-        mockitoFindOperations(statisticalOperationsBaseService, 2, 0);
-        mockitoFindOperations(statisticalOperationsBaseService, 2, 2);
-        mockitoFindOperations(statisticalOperationsBaseService, 2, 8);
-        mockitoFindOperations(statisticalOperationsBaseService, 2, 9);
-        // Retrieve family
-        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
-        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE2))).thenReturn(StatisticalOperationsCoreMocks.mockFamily2());
-        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
-        when(
-                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperation1Matcher()),
-                        argThat(new PagingParameterMatcher(PagingParameter.noLimits())))).thenReturn(StatisticalOperationsCoreMocks.mockFamiliesOperation1());
-        // Retrieve instance
-        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockInstance1());
-        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
-    }
-
-    private void mockitoFindOperationsByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
-        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> pagedResultOperations = null;
-        if (FAMILY_CODE1.equals(family)) {
-            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsFamily1(String.valueOf(limit), String.valueOf(offset));
-        } else if (FAMILY_CODE2.equals(family)) {
-            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsFamily2(String.valueOf(limit), String.valueOf(offset));
-        } else {
-            fail("family non supported. Family = " + family);
-        }
-        // Mock
-        when(
-                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamilyMatcher(family)), argThat(new PagingParameterMatcher(
-                        PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResultOperations);
-
-    }
-
-    private void mockitoFindOperations(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
-        when(
-                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsMatcher()),
-                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
-                StatisticalOperationsCoreMocks.mockOperations(String.valueOf(limit), String.valueOf(offset)));
+        setUpMockito();
     }
 
     @Test
@@ -326,7 +274,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
         }
     }
-    
+
     @Test
     public void testRetrieveOperationsByFamilyXml() throws Exception {
 
@@ -606,6 +554,108 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     }
 
     @Test
+    public void testFindFamiliesXml() throws Exception {
+
+        {
+            // without limits
+            String limit = null;
+            String offset = null;
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // without limits, first page
+            String limit = "10000";
+            String offset = null;
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // without limits, first page
+            String limit = null;
+            String offset = "0";
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // first page with pagination
+            String limit = "2";
+            String offset = "0";
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // second page with pagination
+            String limit = "2";
+            String offset = "2";
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // last page with pagination
+            String limit = "2";
+            String offset = "4";
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+        {
+            // no results
+            String limit = "2";
+            String offset = "9";
+            RelatedResourcesPagedResult familiesPagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), familiesPagedResult);
+        }
+    }
+
+    @Test
+    public void testFindFamiliesXmlWithoutJaxbTransformation() throws Exception {
+        {
+            // without limits
+            String limit = null;
+            String offset = null;
+            String requestUri = getRequestUriFindFamilies(limit, offset);
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.xml");
+
+            // Request and validate
+            testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+        }
+        {
+            // second page with pagination
+            String limit = "2";
+            String offset = "2";
+            String requestUri = getRequestUriFindFamilies(limit, offset);
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.xml");
+
+            // Request and validate
+            testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+        }
+    }
+
+    @Test
+    public void testFindFamiliesJsonWithoutJaxbTransformation() throws Exception {
+        {
+            // without limits
+            String limit = null;
+            String offset = null;
+            String requestUri = getRequestUriFindFamilies(limit, offset);
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.json");
+
+            // Request and validate
+            testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+        }
+        {
+            // second page with pagination
+            String limit = "2";
+            String offset = "2";
+            String requestUri = getRequestUriFindFamilies(limit, offset);
+            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.json");
+
+            // Request and validate
+            testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+        }
+    }
+
+    @Test
     public void testRetrieveFamiliesByOperationXml() throws Exception {
 
         // Retrieve
@@ -618,7 +668,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveFamiliesByOperationXmlWithoutJaxbTransformation() throws Exception {
 
-        String requestUri = getRequestUriRetrieveFamiliesByOperationByCode(OPERATION_CODE1);
+        String requestUri = getRequestUriRetrieveFamiliesByOperation(OPERATION_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.code1.xml");
 
         // Request and validate
@@ -628,7 +678,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveFamiliesByOperationJsonWithoutJaxbTransformation() throws Exception {
 
-        String requestUri = getRequestUriRetrieveFamiliesByOperationByCode(OPERATION_CODE1);
+        String requestUri = getRequestUriRetrieveFamiliesByOperation(OPERATION_CODE1);
         InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.code1.json");
 
         // Request and validate
@@ -656,16 +706,23 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.LINK_QUERY_PARAM_OFFSET, offset);
         return url;
     }
-    
+
     private String getRequestUriRetrieveFamilyByCode(String code) {
         return baseApi + "/families/" + code;
+    }
+
+    private String getRequestUriFindFamilies(String limit, String offset) {
+        String url = baseApi + "/families";
+        url = RestUtils.createLinkWithQueryParam(url, RestConstants.LINK_QUERY_PARAM_LIMIT, limit);
+        url = RestUtils.createLinkWithQueryParam(url, RestConstants.LINK_QUERY_PARAM_OFFSET, offset);
+        return url;
     }
 
     private String getRequestUriRetrieveInstanceByCode(String operationCode, String code) {
         return baseApi + "/operations/" + operationCode + "/instances/" + code;
     }
 
-    private String getRequestUriRetrieveFamiliesByOperationByCode(String code) {
+    private String getRequestUriRetrieveFamiliesByOperation(String code) {
         return baseApi + "/operations/" + code + "/families";
     }
 
@@ -674,5 +731,86 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.LINK_QUERY_PARAM_LIMIT, limit);
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.LINK_QUERY_PARAM_OFFSET, offset);
         return url;
+    }
+
+    private void setUpMockito() throws MetamacException {
+        // MOCKS
+        StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
+        // Retrieve operations
+        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
+        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
+        // Retrieve operations by family
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 25, 0);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 1000, 0);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 0);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 2);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 4);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE1, 2, 7);
+        mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_CODE2, 1, 2);
+        // Find operations
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 25, 0);
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 1000, 0);
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 2, 0);
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 2, 2);
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 2, 8);
+        mockitoFindOperationByCondition(statisticalOperationsBaseService, 2, 9);
+        // Retrieve family
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_CODE2))).thenReturn(StatisticalOperationsCoreMocks.mockFamily2());
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
+        mockitoFindFamilyByConditionByOperation(statisticalOperationsBaseService, OPERATION_CODE1);
+        // Find families
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 25, 0);
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 1000, 0);
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 2, 0);
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 2, 2);
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 2, 4);
+        mockitoFindFamilyByCondition(statisticalOperationsBaseService, 2, 9);
+        // Retrieve instance
+        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockInstance1());
+        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
+    }
+
+    private void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
+        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> pagedResultOperations = null;
+        if (FAMILY_CODE1.equals(family)) {
+            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
+        } else if (FAMILY_CODE2.equals(family)) {
+            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily2(String.valueOf(limit), String.valueOf(offset));
+        } else {
+            fail("family non supported. Family = " + family);
+        }
+        // Mock
+        when(
+                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamilyMatcher(family)), argThat(new PagingParameterMatcher(
+                        PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResultOperations);
+
+    }
+
+    private void mockitoFindOperationByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
+        when(
+                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsMatcher()),
+                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
+                StatisticalOperationsCoreMocks.mockOperationsPagedResult(String.valueOf(limit), String.valueOf(offset)));
+    }
+
+    private void mockitoFindFamilyByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation) throws MetamacException {
+        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> pagedResult = null;
+        if (OPERATION_CODE1.equals(operation)) {
+            pagedResult = StatisticalOperationsCoreMocks.mockFamiliesPagedResultByOperation1();
+        } else {
+            fail("Operation non supported. Operation = " + operation);
+        }
+        // Mock
+        when(
+                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperation1Matcher()),
+                        argThat(new PagingParameterMatcher(PagingParameter.noLimits())))).thenReturn(pagedResult);
+    }
+    
+    private void mockitoFindFamilyByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
+        when(
+                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesMatcher()),
+                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
+                StatisticalOperationsCoreMocks.mockFamiliesPagedResult(String.valueOf(limit), String.valueOf(offset)));
     }
 }

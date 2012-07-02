@@ -144,6 +144,24 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getchildren().addAll(toFamilyChildren(source, apiUrl));
         return target;
     }
+    
+    @Override
+    public RelatedResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sourcesPagedResult, Integer limit, String apiUrl) {
+
+        RelatedResourcesPagedResult targetPagedResult = new RelatedResourcesPagedResult();
+        targetPagedResult.setKind(RestInternalConstants.KIND_FAMILIES);
+
+        // Pagination
+        String baseLink = toFamiliesLink(apiUrl);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+
+        // Values
+        for (org.siemac.metamac.statistical.operations.core.domain.Family source : sourcesPagedResult.getValues()) {
+            RelatedResource target = toRelatedResource(source, apiUrl);
+            targetPagedResult.getItems().add(target);
+        }
+        return targetPagedResult;
+    }
 
     @Override
     public RelatedResourcesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl) {

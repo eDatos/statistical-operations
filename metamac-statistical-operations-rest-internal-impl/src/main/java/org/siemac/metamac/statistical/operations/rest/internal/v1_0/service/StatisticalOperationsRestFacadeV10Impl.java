@@ -74,6 +74,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
 
+    // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
     public RelatedResourcesPagedResult findOperations(String limit, String offset) {
         try {
@@ -135,6 +136,32 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             // Transform
             Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
             return family;
+
+        } catch (MetamacException e) {
+            throw manageException(e);
+        }
+    }
+    
+    // TODO parámetro "query" con criterios de búsqueda METAMAC-753
+    @Override
+    public RelatedResourcesPagedResult findFamilies(String limit, String offset) {
+        try {
+            // TODO Validation of parameters. delegar en servicio?
+
+            // Retrieve families by criteria
+            SculptorCriteria sculptorCriteria = RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            // Find only published
+            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
+                    .withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+            conditionalCriteria.addAll(sculptorCriteria.getConditions());
+
+            // Retrieve
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(
+                    serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
+
+            // Transform
+            RelatedResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            return familiesPagedResult;
 
         } catch (MetamacException e) {
             throw manageException(e);

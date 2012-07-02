@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<relatedResourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#families</kind>
+    <limit>25</limit>
+    <offset>0</offset>
+    <total>5</total>
+    <items>
+        <id>family1</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title family family1</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título family family1</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family2</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family2</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title family family2</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título family family2</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family3</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>Título family family3</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>Title family family3</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family4</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title family family4</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título family family4</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family5</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family5</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title family family5</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título family family5</label>
+            </text>
+        </title>
+    </items>
+</relatedResourcesPagedResult>

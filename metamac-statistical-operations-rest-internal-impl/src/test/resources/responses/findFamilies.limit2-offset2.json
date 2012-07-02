@@ -1,0 +1,46 @@
+{
+  "kind": "statisticalOperations#families",
+  "limit": 2,
+  "offset": 2,
+  "total": 5,
+  "firstLink": "http://localhost:9001/internal/v1.0/families?limit=2&offset=0",
+  "previousLink": "http://localhost:9001/internal/v1.0/families?limit=2&offset=0",
+  "nextLink": "http://localhost:9001/internal/v1.0/families?limit=2&offset=4",
+  "lastLink": "http://localhost:9001/internal/v1.0/families?limit=2&offset=4",
+  "items": [
+    {
+      "id": "family3",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family3",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title family family3"
+          },
+          {
+            "locale": "es",
+            "label": "Título family family3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family4",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family4",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título family family4"
+          },
+          {
+            "locale": "en",
+            "label": "Title family family4"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "kind": "statisticalOperations#families",
+  "limit": 25,
+  "offset": 0,
+  "total": 5,
+  "items": [
+    {
+      "id": "family1",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title family family1"
+          },
+          {
+            "locale": "es",
+            "label": "Título family family1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family2",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family2",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título family family2"
+          },
+          {
+            "locale": "en",
+            "label": "Title family family2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family3",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family3",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título family family3"
+          },
+          {
+            "locale": "en",
+            "label": "Title family family3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family4",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family4",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title family family4"
+          },
+          {
+            "locale": "es",
+            "label": "Título family family4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family5",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family5",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "Title family family5"
+          },
+          {
+            "locale": "es",
+            "label": "Título family family5"
+          }
+        ]
+      }
+    }
+  ]
+}

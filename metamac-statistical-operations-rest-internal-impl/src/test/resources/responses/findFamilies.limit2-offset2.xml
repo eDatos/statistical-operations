@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<relatedResourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#families</kind>
+    <limit>2</limit>
+    <offset>2</offset>
+    <total>5</total>
+    <firstLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0</firstLink>
+    <previousLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0</previousLink>
+    <nextLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4</nextLink>
+    <lastLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4</lastLink>
+    <items>
+        <id>family3</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>Title family family3</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>Título family family3</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family4</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>Título family family4</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>Title family family4</label>
+            </text>
+        </title>
+    </items>
+</relatedResourcesPagedResult>

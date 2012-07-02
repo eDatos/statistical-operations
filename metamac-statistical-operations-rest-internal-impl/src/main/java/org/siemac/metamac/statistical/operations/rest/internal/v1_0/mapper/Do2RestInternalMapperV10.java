@@ -12,12 +12,17 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Opera
 
 public interface Do2RestInternalMapperV10 {
 
-    // Entities
+    // Operations
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl);
     public RelatedResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
     public RelatedResourcesPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
+    
+    // Families
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl);
+    public RelatedResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sources, Integer limit, String apiUrl);
     public RelatedResourcesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl);
+    
+    // Instances
     public Instance toInstance(org.siemac.metamac.statistical.operations.core.domain.Instance source, String apiUrl);
     
     // Other
