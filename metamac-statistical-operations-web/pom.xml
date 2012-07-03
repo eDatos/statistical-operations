@@ -260,7 +260,6 @@
                     <debugPort>9997</debugPort>
                     <compileSourcesArtifacts>
                         <artifact>org.siemac.metamac:metamac-core-common:jar:client</artifact>
-                        <artifact>org.siemac.metamac:metamac-api-domain:jar:client</artifact>
                         <artifact>org.siemac.metamac.metamac-sso:metamac-sso-client:jar</artifact>
                         <artifact>org.siemac.metamac.metamac-statistical-operations:metamac-statistical-operations-core:jar:client</artifact>
                     </compileSourcesArtifacts>
