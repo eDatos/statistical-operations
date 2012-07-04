@@ -71,6 +71,8 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getStringValue());
+                case TITLE:
+                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getStringValue());
                 case OPERATION_CODE:
                     return new SculptorPropertyCriteria(FamilyProperties.operations().code(), propertyRestriction.getStringValue());
                 case OPERATION_ID:
@@ -100,6 +102,8 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getStringValue());
+                case TITLE:
+                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getStringValue());
                 case FAMILY_CODE:
                     return new SculptorPropertyCriteria(OperationProperties.families().code(), propertyRestriction.getStringValue());
                 case FAMILY_ID:
@@ -129,6 +133,8 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             switch (propertyNameCriteria) {
                 case CODE:
                     return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getStringValue());
+                case TITLE:
+                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getStringValue());
                 case OPERATION_CODE:
                     return new SculptorPropertyCriteria(InstanceProperties.operation().code(), propertyRestriction.getStringValue());
                 case OPERATION_ID:

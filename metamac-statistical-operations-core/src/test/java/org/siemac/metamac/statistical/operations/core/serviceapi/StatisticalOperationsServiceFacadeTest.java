@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.siemac.metamac.common.test.utils.MetamacMocks;
 import org.siemac.metamac.common.test.utils.DirtyDatabase;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
@@ -603,6 +604,66 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
+
+    }
+    
+    @Test
+    @Transactional
+    public void testFindFamilyByConditionTitle() throws MetamacException {
+
+        // Insert data
+        FamilyDto familyDto01 = createFamilyDto();
+        familyDto01.setCode("familyDto01");
+        familyDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        
+        FamilyDto familyDto02 = createFamilyDto();
+        familyDto02.setCode("familyDto02");
+        familyDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        
+        FamilyDto familyDto03 = createFamilyDto();
+        familyDto03.setCode("familyDto03");
+        familyDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+
+        statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto01);
+        statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto02);
+        statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto03);
+
+        // Find "vida" or "quality" --> familyDto02 and familyDto03
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "quality", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Find "vida" or "index" --> familyDto01, familyDto02 and familyDto03
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(3, result.getResults().size());
+
+        // Find "vida" --> familyDto02 and familyDto03
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+
+        result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+
+        // Find title "index" or code "familyDto02"--> familyDto01 and familyDto02
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.CODE.name(), "familyDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+        
+        result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
 
     }
     
@@ -1433,6 +1494,75 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
 
+    }
+    
+    @Test
+    @Transactional
+    public void testFindOperationByConditionTitle() throws MetamacException {
+
+        // Insert data
+        OperationDto operationDto01 = createOperationDto();
+        operationDto01.setCode("operationDto01");
+        operationDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        
+        OperationDto operationDto02 = createOperationDto();
+        operationDto02.setCode("operationDto02");
+        operationDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        
+        OperationDto operationDto03 = createOperationDto();
+        operationDto03.setCode("operationDto03");
+        operationDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+
+        statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
+        statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto02);
+        statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto03);
+
+        // Find "vida" or "quality" --> operationDto02 and operationDto03
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "quality", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Find "vida" or "index" --> operationDto01, operationDto02 and operationDto03
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(3, result.getResults().size());
+
+        // Find "vida" --> operationDto02 and operationDto03
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+
+        // Find title "index" or code "operationDto02"--> operationDto01 and operationDto02
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+        
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Find title "index" or "consumo"--> operationDto01
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "consumo", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+        
+        result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
     }
 
     @Test
@@ -2300,6 +2430,79 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         criteria = new MetamacCriteria();
         criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.OPERATION_CODE.name(), operation02.getCode(), OperationType.EQ));
 
+        result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(1, result.getResults().size());
+    }
+    
+    
+    @Test
+    @Transactional
+    public void testFindInstanceByConditionTitle() throws MetamacException {
+
+        // Operation 01 --> Instance 01 and Instance 02
+        OperationDto operation01 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation01.getId());
+        
+        InstanceDto instanceDto01 = createInstanceDto();
+        instanceDto01.setCode("instanceDto01");
+        instanceDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        
+        InstanceDto instanceDto02 = createInstanceDto();
+        instanceDto02.setCode("instanceDto02");
+        instanceDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        
+        InstanceDto instanceDto03 = createInstanceDto();
+        instanceDto03.setCode("instanceDto03");
+        instanceDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto01);
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto02);
+        statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto03);
+        
+        // Find "vida" or "quality" --> instanceDto02 and instanceDto03
+        MetamacCriteria criteria = new MetamacCriteria();
+        MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "quality", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        MetamacCriteriaResult<InstanceBaseDto> result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Find "vida" or "index" --> instanceDto01, instanceDto02 and instanceDto03
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+
+        result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(3, result.getResults().size());
+
+        // Find "vida" --> instanceDto02 and instanceDto03
+        criteria = new MetamacCriteria();
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "vida", OperationType.ILIKE));
+
+        result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+
+        // Find title "index" or code "instanceDto02"--> instanceDto01 and instanceDto02
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.CODE.name(), "instanceDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+        
+        result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
+        assertEquals(2, result.getResults().size());
+        
+        // Find title "index" or "consumo"--> instanceDto01
+        criteria = new MetamacCriteria();
+        disjunction = new MetamacCriteriaDisjunctionRestriction();
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "consumo", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(InstanceCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
+        criteria.setRestriction(disjunction);
+        
         result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(1, result.getResults().size());
     }

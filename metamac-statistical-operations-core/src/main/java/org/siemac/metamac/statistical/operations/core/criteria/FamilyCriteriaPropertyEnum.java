@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.core.criteria;
 public enum FamilyCriteriaPropertyEnum  {
 
     CODE,
+    TITLE,
     OPERATION_CODE,
     OPERATION_ID;
     
