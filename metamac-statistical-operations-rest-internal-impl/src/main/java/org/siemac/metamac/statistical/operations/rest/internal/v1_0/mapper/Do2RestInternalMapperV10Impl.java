@@ -454,7 +454,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         RelatedResource target = new RelatedResource();
         target.setId(source.getCodeId()); // TODO próximamente se cambiará por urn en ExternalItem
         target.setKind(source.getType().name());
-        target.setSelfLink(source.getUriInt());
+        target.setSelfLink(source.getUriInt()); // TODO proximamente no tendra el endpoint, y se tendria que annadirselo
         target.setTitle(null); // TODO se añadirá Title a ExternalItem
         return target;
     }
