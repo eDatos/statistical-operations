@@ -11,7 +11,7 @@ public class ModalWindow extends Window {
         setShowMinimizeButton(false);
         setIsModal(true);
         setShowModalMask(true);
-        centerInPage();
+        setAutoCenter(true);
         addCloseClickHandler(new CloseClickHandler() {
 
             @Override
