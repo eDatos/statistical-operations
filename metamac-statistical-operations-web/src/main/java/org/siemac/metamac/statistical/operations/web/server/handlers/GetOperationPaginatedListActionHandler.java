@@ -1,9 +1,14 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
+import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaConjunctionRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction.OperationType;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
@@ -35,6 +40,13 @@ public class GetOperationPaginatedListActionHandler extends SecurityActionHandle
             criteria.getPaginator().setFirstResult(action.getFirstResult());
             criteria.getPaginator().setMaximumResultSize(action.getMaxResults());
             criteria.getPaginator().setCountTotalResults(true);
+
+            MetamacCriteriaConjunctionRestriction conjuction = new MetamacCriteriaConjunctionRestriction();
+            if (!StringUtils.isBlank(action.getOperationCode())) {
+                conjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), action.getOperationCode(), OperationType.ILIKE));
+            }
+            criteria.setRestriction(conjuction);
+
             MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(ServiceContextHolder.getCurrentServiceContext(), criteria);
             return new GetOperationPaginatedListResult(result.getResults(), result.getPaginatorResult().getFirstResult(), result.getPaginatorResult().getTotalResults());
         } catch (MetamacException e) {

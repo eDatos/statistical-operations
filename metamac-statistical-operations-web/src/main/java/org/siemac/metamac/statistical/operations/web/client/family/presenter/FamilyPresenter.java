@@ -20,8 +20,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyFamilyAction;
@@ -83,17 +83,17 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     public interface FamilyView extends View, HasUiHandlers<FamilyUiHandlers> {
 
         // Family
-        void setFamily(FamilyDto familyDto, List<OperationBaseDto> operationBaseDtos);
+        void setFamily(FamilyDto familyDto);
         FamilyDto getFamily(FamilyDto familyDto);
         HasClickHandlers getSave();
         void onFamilySaved(FamilyDto familyDto);
         HasClickHandlers getPublishFamilyInternally();
         HasClickHandlers getPublishFamilyExternally();
         boolean validate();
+
         // Operations
         HasRecordClickHandlers getSelectedOperation();
-        void setOperations(List<OperationBaseDto> operationBaseDtos);
-        void setAllOperations(List<OperationBaseDto> operationBaseDtos);
+        void setOperations(List<OperationBaseDto> operations, int firstResult, int totalResults);
         com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getAddOperations();
         List<Long> getSelectedOperationIds();
         boolean validateAddOperations();
@@ -219,19 +219,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
                 familyDto = result.getFamilyDto();
                 operationBaseDtos = result.getOperationBaseDtos();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleStatisticalFamily(familyDto.getCode()));
-                dispatcher.execute(new GetOperationListAction(), new WaitingAsyncCallback<GetOperationListResult>() {
-
-                    @Override
-                    public void onWaitFailure(Throwable caught) {
-                        ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-                    }
-                    @Override
-                    public void onWaitSuccess(GetOperationListResult result) {
-                        // Make sure the operation list is set before setting family operations
-                        getView().setAllOperations(result.getOperationBaseDtos());
-                        getView().setFamily(familyDto, operationBaseDtos);
-                    }
-                });
+                getView().setFamily(familyDto);
             }
         });
     }
@@ -315,6 +303,21 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familyExternallyPublished()), MessageTypeEnum.SUCCESS);
+            }
+        });
+    }
+
+    @Override
+    public void retrievePaginatedOperations(int firstResult, int maxResults, String operationCode) {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, operationCode), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetOperationPaginatedListResult result) {
+                getView().setOperations(result.getOperationBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
             }
         });
     }

@@ -12,7 +12,6 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
@@ -45,6 +44,10 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> implements FamilyPresenter.FamilyView {
 
+    public static final int           OPERATION_LIST_MAX_RESULTS = 17;
+
+    private FamilyUiHandlers          uiHandlers;
+
     private VLayout                   panel;
 
     private FamilyMainFormLayout      mainFormLayout;
@@ -61,10 +64,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     // Add operations to family modal
     private ModalWindow               window;
-    private AddOperationsToFamilyForm addOperationsToFamilyForm;
-
-    private List<OperationBaseDto>    operationDtos;
-    private List<OperationBaseDto>    allOperations;
+    private AddOperationsToFamilyForm addOperationsToFamilyForm  = new AddOperationsToFamilyForm();
 
     public FamilyViewImpl() {
         super();
@@ -85,7 +85,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
         // Operations
 
-        addOperationsToFamilyForm = new AddOperationsToFamilyForm();
         operationToolStrip = new ToolStrip();
         operationToolStrip.setWidth100();
         editToolStripButton = new ToolStripButton(OperationsWeb.getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
@@ -96,9 +95,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
                 window = new ModalWindow();
                 window.setTitle(OperationsWeb.getConstants().actionAddOperationsToFamily());
                 window.setAutoSize(true);
-                addOperationsToFamilyForm.clearValues();
-                addOperationsToFamilyForm.setOperationsValueMap(allOperations);
-                addOperationsToFamilyForm.setOperations(operationDtos);
+                // Load family operations
+                uiHandlers.retrievePaginatedOperations(0, OPERATION_LIST_MAX_RESULTS, null);
+
                 window.addItem(addOperationsToFamilyForm);
                 window.show();
             }
@@ -149,15 +148,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     }
 
     @Override
-    public void setFamily(FamilyDto familyDto, List<OperationBaseDto> operationDtos) {
-        // Set Family
-        setFamily(familyDto);
-
-        // Set Operations
-        setOperations(operationDtos);
-    }
-
-    @Override
     public FamilyDto getFamily(FamilyDto familyDto) {
         familyDto.setCode(familyEditionForm.getValueAsString(FamilyDS.CODE));
         familyDto.setTitle(titleItem.getValue());
@@ -167,8 +157,8 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     }
 
     @Override
-    public void setAllOperations(List<OperationBaseDto> operationDtos) {
-        allOperations = operationDtos;
+    public void setOperations(List<OperationBaseDto> operations, int firstResult, int totalResults) {
+        addOperationsToFamilyForm.setOperations(operations, firstResult, totalResults);
     }
 
     private void setViewForm(FamilyDto familyDto) {
@@ -192,20 +182,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         familyEditionForm.setValue(FamilyDS.PROC_STATUS_VIEW, familyDto.getProcStatus().toString());
         familyEditionForm.setValue(FamilyDS.INVENTORY_DATE, familyDto.getInventoryDate());
         familyEditionForm.markForRedraw();
-    }
-
-    @Override
-    public void setOperations(List<OperationBaseDto> operationBaseDtos) {
-        this.operationDtos = operationBaseDtos;
-        // Set operations in listGrid
-        operationListGrid.selectAllRecords();
-        operationListGrid.removeSelectedData();
-        operationListGrid.deselectAllRecords();
-        if (operationBaseDtos != null) {
-            for (OperationBaseDto operationBaseDto : operationBaseDtos) {
-                operationListGrid.addData(RecordUtils.getOperationRecord(operationBaseDto));
-            }
-        }
     }
 
     @Override
@@ -304,7 +280,8 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         window.destroy();
     }
 
-    private void setFamily(FamilyDto familyDto) {
+    @Override
+    public void setFamily(FamilyDto familyDto) {
         mainFormLayout.setViewMode();
         mainFormLayout.updatePublishSection(familyDto.getProcStatus());
         // Set Family
@@ -333,6 +310,12 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     private boolean canFamilyCodeBeEdited(DynamicForm form) {
         // Family code can be edited only when ProcStatus is DRAFT
         return (form.getValue(FamilyDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(form.getValue(FamilyDS.PROC_STATUS_VIEW)));
+    }
+
+    @Override
+    public void setUiHandlers(FamilyUiHandlers uiHandlers) {
+        this.uiHandlers = uiHandlers;
+        this.addOperationsToFamilyForm.setUiHandlers(uiHandlers);
     }
 
 }

@@ -181,7 +181,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void retrieveOperationList(int firstResult, int maxResults) {
-        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, null), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {

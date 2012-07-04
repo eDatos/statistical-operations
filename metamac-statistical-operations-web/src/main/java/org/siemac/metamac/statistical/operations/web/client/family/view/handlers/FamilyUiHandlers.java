@@ -8,6 +8,8 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface FamilyUiHandlers extends UiHandlers {
 
+    void retrievePaginatedOperations(int firstResult, int maxResults, String operationCode);
+
     void saveFamily(FamilyDto familyDto);
     void goToOperation(String operationCode);
     void updateFamilyOperations(List<Long> operationsToAdd, List<Long> operationsToRemove);
