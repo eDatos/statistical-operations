@@ -79,7 +79,6 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
         });
 
         sourceList.getListGrid().setFields(codeField, titleField);
-        sourceList.getListGrid().setDataSource(new OperationDS());
         sourceList.getListGrid().addRecordDoubleClickHandler(new RecordDoubleClickHandler() {
 
             @Override
@@ -90,7 +89,6 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
         });
 
         targetList.setFields(codeField, deleteField);
-        targetList.setDataSource(new OperationDS());
 
         rightImg.addClickHandler(new ClickHandler() {
 

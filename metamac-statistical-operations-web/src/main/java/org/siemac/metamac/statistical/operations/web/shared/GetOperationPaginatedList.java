@@ -18,7 +18,7 @@ public class GetOperationPaginatedList {
     int                    maxResults;
 
     @In(3)
-    String                 operationCode;
+    String                 operation;
 
     @Out(1)
     List<OperationBaseDto> operationBaseDtos;
