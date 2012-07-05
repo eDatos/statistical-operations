@@ -1,11 +1,9 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
@@ -22,6 +20,7 @@ import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
+import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
@@ -275,14 +274,11 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         return familyEntity;
     }
 
-    // TODO pasar a librería común?
     /**
      * Get Base API url
      */
     private String getApiUrl() {
-        UriInfo uriInfo = context.getUriInfo();
-        URI uri = uriInfo.getBaseUri();
-        return uri.toString();
+        return RestUtils.getApiUrl(context);
     }
 
     /**
