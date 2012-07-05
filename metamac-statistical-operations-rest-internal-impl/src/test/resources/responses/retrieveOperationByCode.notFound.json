@@ -1,1 +1,1 @@
-{"errorItems":[{"parameters":["NOT_EXISTS"],"code":"exception.operations.operation.not_found"}]}
+{"errorItems":[{ "message": "Operation not found with code {0}","parameters":["NOT_EXISTS"],"code":"exception.rest-operations.operation.not_found"}]}

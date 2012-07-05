@@ -11,7 +11,6 @@ import java.util.Set;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
-import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.vo.domain.ExternalItem;
@@ -22,6 +21,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResource;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
+import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
+import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -295,9 +296,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
                 errorItems.add(errorItem);
             }
         } else {
-            ErrorItem errorItem = new ErrorItem();
-            errorItem.setCode(CommonServiceExceptionType.UNKNOWN.getCode());
-            errorItem.setMessage(exception.getMessage());
+            ErrorItem errorItem = RestExceptionUtils.getErrorItem(RestCommonServiceExceptionType.UNKNOWN);
             errorItems.add(errorItem);
         }
         return errorItems;
