@@ -18,7 +18,6 @@ import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
-import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class AddOperationsToFamilyWindow extends CustomWindow {
 
@@ -31,7 +30,7 @@ public class AddOperationsToFamilyWindow extends CustomWindow {
     private SearchOperationPaginatedDragAndDropItem operationsItem;
     private ButtonItem                              addButton;
 
-    private List<OperationBaseDto>                  inicialSelectedOperations;
+    private List<OperationBaseDto>                  initialSelectedOperations;
 
     public AddOperationsToFamilyWindow(FamilyUiHandlers familyUiHandlers) {
         super(OperationsWeb.getConstants().actionAddOperationsToFamily());
@@ -68,7 +67,7 @@ public class AddOperationsToFamilyWindow extends CustomWindow {
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                 if (form.validate(false)) {
                     List<Long> selectedOperationIds = getSelectedOperationIds();
-                    List<Long> initialFamilyOperationsId = getOperationIds(inicialSelectedOperations);
+                    List<Long> initialFamilyOperationsId = getOperationIds(initialSelectedOperations);
                     // Operations to add
                     List<Long> operationsToAdd = new ArrayList<Long>();
                     for (Long id : selectedOperationIds) {
@@ -78,7 +77,7 @@ public class AddOperationsToFamilyWindow extends CustomWindow {
                     }
                     // Operations to remove
                     List<Long> operationsToRemove = new ArrayList<Long>();
-                    for (OperationBaseDto operationBaseDto : inicialSelectedOperations) {
+                    for (OperationBaseDto operationBaseDto : initialSelectedOperations) {
                         if (!selectedOperationIds.contains(operationBaseDto.getId())) {
                             operationsToRemove.add(operationBaseDto.getId());
                         }
@@ -88,7 +87,6 @@ public class AddOperationsToFamilyWindow extends CustomWindow {
                     } else {
                         ShowMessageEvent.fire(AddOperationsToFamilyWindow.this, ErrorUtils.getMessageList(OperationsWeb.getMessages().operationAddedToFamily()), MessageTypeEnum.SUCCESS);
                     }
-
                     destroy();
                 }
             }
@@ -111,16 +109,12 @@ public class AddOperationsToFamilyWindow extends CustomWindow {
     }
 
     public void setSelectedOperations(List<OperationBaseDto> operations) {
-        this.inicialSelectedOperations = operations;
+        this.initialSelectedOperations = operations;
         operationsItem.setTargetOperations(operations);
     }
 
     public List<Long> getSelectedOperationIds() {
         return operationsItem.getSelectedOperations();
-    }
-
-    public HasClickHandlers getAdd() {
-        return addButton;
     }
 
     public void setUiHandlers(FamilyUiHandlers uiHandlers) {
