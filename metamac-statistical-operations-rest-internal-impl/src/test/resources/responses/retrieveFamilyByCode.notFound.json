@@ -1,1 +1,1 @@
-{"errorItems":[{ "message": "Family not found with code {0}","parameters":["NOT_EXISTS"],"code":"exception.rest-operations.family.not_found"}]}
+{"errorItems":[{ "message": "Family not found with code {0}","parameters":["NOT_EXISTS"],"code":"exception.rest_operations.family.not_found"}]}

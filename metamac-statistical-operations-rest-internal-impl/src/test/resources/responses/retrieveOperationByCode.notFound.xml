@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <error xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <errorItems code="exception.rest-operations.operation.not_found">
+    <errorItems code="exception.rest_operations.operation.not_found">
         <message>Operation not found with code {0}</message>
         <parameters>NOT_EXISTS</parameters>
     </errorItems>
