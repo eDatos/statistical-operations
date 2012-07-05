@@ -6,6 +6,7 @@ import com.smartgwt.client.data.fields.DataSourceTextField;
 public class FamilyDS extends DataSource {
 
     // IDENTIFIERS
+    public static final String ID                      = "id";
     public static final String CODE                    = "code";
     public static final String CODE_VIEW               = "code-view";   // Not mapped in DTO
     public static final String TITLE                   = "title";

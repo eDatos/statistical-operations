@@ -1,14 +1,10 @@
 package org.siemac.metamac.statistical.operations.web.client.model;
 
+import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
+
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class FamilyRecord extends ListGridRecord {
-
-    public static final String ID          = "id";
-    public static final String CODE        = "code";
-    public static final String TITLE       = "title";
-    public static final String DESCRIPTION = "description";
-    public static final String STATUS      = "status";
 
     public FamilyRecord() {
         super();
@@ -24,43 +20,43 @@ public class FamilyRecord extends ListGridRecord {
     }
 
     public Long getId() {
-        return getAttributeAsLong(ID);
+        return getAttributeAsLong(FamilyDS.ID);
     }
 
     public void setId(Long value) {
-        setAttribute(ID, value);
+        setAttribute(FamilyDS.ID, value);
     }
 
     public String getCode() {
-        return getAttributeAsString(CODE);
+        return getAttributeAsString(FamilyDS.CODE);
     }
 
     public void setCode(String value) {
-        setAttribute(CODE, value);
+        setAttribute(FamilyDS.CODE, value);
     }
 
     public String getTitle() {
-        return getAttributeAsString(TITLE);
+        return getAttributeAsString(FamilyDS.TITLE);
     }
 
     public void setTitle(String value) {
-        setAttribute(TITLE, value);
+        setAttribute(FamilyDS.TITLE, value);
     }
 
     public String getDescription() {
-        return getAttributeAsString(DESCRIPTION);
+        return getAttributeAsString(FamilyDS.DESCRIPTION);
     }
 
     public void setDescription(String value) {
-        setAttribute(DESCRIPTION, value);
+        setAttribute(FamilyDS.DESCRIPTION, value);
     }
 
     public String getStatus() {
-        return getAttributeAsString(STATUS);
+        return getAttributeAsString(FamilyDS.PROC_STATUS);
     }
 
     public void setStatus(String value) {
-        setAttribute(STATUS, value);
+        setAttribute(FamilyDS.PROC_STATUS, value);
     }
 
 }

@@ -12,9 +12,9 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyForm;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
@@ -44,27 +44,28 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> implements FamilyPresenter.FamilyView {
 
-    public static final int           OPERATION_LIST_MAX_RESULTS = 17;
+    public static final int             OPERATION_LIST_MAX_RESULTS = 17;
 
-    private FamilyUiHandlers          uiHandlers;
+    private FamilyUiHandlers            uiHandlers;
 
-    private VLayout                   panel;
+    private VLayout                     panel;
 
-    private FamilyMainFormLayout      mainFormLayout;
-    private GroupDynamicForm          familyViewForm;
-    private GroupDynamicForm          familyEditionForm;
+    private FamilyMainFormLayout        mainFormLayout;
+    private GroupDynamicForm            familyViewForm;
+    private GroupDynamicForm            familyEditionForm;
 
-    private MultiLanguageTextItem     titleItem;
-    private MultiLanguageTextItem     acronymItem;
-    private MultiLanguageTextAreaItem descriptionItem;
+    private MultiLanguageTextItem       titleItem;
+    private MultiLanguageTextItem       acronymItem;
+    private MultiLanguageTextAreaItem   descriptionItem;
 
-    private ToolStrip                 operationToolStrip;
-    private ToolStripButton           editToolStripButton;
-    private ListGrid                  operationListGrid;
+    private ToolStrip                   operationToolStrip;
+    private ToolStripButton             editToolStripButton;
+    private ListGrid                    operationListGrid;
+
+    private List<OperationBaseDto>      operationBaseDtos;
 
     // Add operations to family modal
-    private ModalWindow               window;
-    private AddOperationsToFamilyForm addOperationsToFamilyForm  = new AddOperationsToFamilyForm();
+    private AddOperationsToFamilyWindow addOperationsToFamilyWindow;
 
     public FamilyViewImpl() {
         super();
@@ -92,14 +93,11 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
             @Override
             public void onClick(ClickEvent event) {
-                window = new ModalWindow();
-                window.setTitle(OperationsWeb.getConstants().actionAddOperationsToFamily());
-                window.setAutoSize(true);
                 // Load family operations
                 uiHandlers.retrievePaginatedOperations(0, OPERATION_LIST_MAX_RESULTS, null);
 
-                window.addItem(addOperationsToFamilyForm);
-                window.show();
+                addOperationsToFamilyWindow = new AddOperationsToFamilyWindow(uiHandlers);
+                addOperationsToFamilyWindow.setSelectedOperations(operationBaseDtos);
             }
         });
         editToolStripButton.setVisibility(ClientSecurityUtils.canAddOperationToFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
@@ -109,7 +107,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         operationsTitleLabel.setStyleName("sectionTitleLeftMargin");
 
         operationListGrid = new ListGrid();
-        operationListGrid.setHeight(150);
+        operationListGrid.setHeight(300);
         ListGridField identifierField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField titleAlternativeField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().familyAcronym());
@@ -125,7 +123,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         panel.addMember(operationsTitleLabel);
         panel.addMember(operationsLayout);
     }
-
     @Override
     public Widget asWidget() {
         return panel;
@@ -158,7 +155,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     @Override
     public void setOperations(List<OperationBaseDto> operations, int firstResult, int totalResults) {
-        addOperationsToFamilyForm.setOperations(operations, firstResult, totalResults);
+        addOperationsToFamilyWindow.setOperations(operations, firstResult, totalResults);
     }
 
     private void setViewForm(FamilyDto familyDto) {
@@ -261,34 +258,33 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     }
 
     @Override
-    public com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getAddOperations() {
-        return addOperationsToFamilyForm.getAdd();
+    public void setFamily(FamilyDto familyDto, List<OperationBaseDto> operationBaseDtos) {
+        // Family
+        setFamily(familyDto);
+
+        // Operations
+        setFamilyOperations(operationBaseDtos);
     }
 
-    @Override
-    public List<Long> getSelectedOperationIds() {
-        return addOperationsToFamilyForm.getSelectedOperationIds();
-    }
-
-    @Override
-    public boolean validateAddOperations() {
-        return addOperationsToFamilyForm.validate();
-    }
-
-    @Override
-    public void closeOperationsWindow() {
-        window.destroy();
-    }
-
-    @Override
-    public void setFamily(FamilyDto familyDto) {
+    private void setFamily(FamilyDto familyDto) {
         mainFormLayout.setViewMode();
         mainFormLayout.updatePublishSection(familyDto.getProcStatus());
-        // Set Family
         mainFormLayout.setTitleLabelContents(InternationalStringUtils.getLocalisedString(familyDto.getTitle()));
-        // Form
         setViewForm(familyDto);
         setEditionForm(familyDto);
+    }
+
+    private void setFamilyOperations(List<OperationBaseDto> operationBaseDtos) {
+        this.operationBaseDtos = operationBaseDtos;
+        // Set operations in listGrid
+        operationListGrid.selectAllRecords();
+        operationListGrid.removeSelectedData();
+        operationListGrid.deselectAllRecords();
+        if (operationBaseDtos != null) {
+            for (OperationBaseDto operationBaseDto : operationBaseDtos) {
+                operationListGrid.addData(RecordUtils.getOperationRecord(operationBaseDto));
+            }
+        }
     }
 
     @Override
@@ -315,7 +311,6 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     @Override
     public void setUiHandlers(FamilyUiHandlers uiHandlers) {
         this.uiHandlers = uiHandlers;
-        this.addOperationsToFamilyForm.setUiHandlers(uiHandlers);
     }
 
 }
