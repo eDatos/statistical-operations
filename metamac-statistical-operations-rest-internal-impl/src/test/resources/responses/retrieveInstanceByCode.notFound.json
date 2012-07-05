@@ -1,1 +1,1 @@
-{"errorItems":[{ "message": "Instance not found with code {0}","parameters":["NOT_EXISTS"],"code":"exception.rest_operations.instance.not_found"}]}
+{"errorItems":[{ "message": "Instance not found with code {0}","parameters":["NOT_EXISTS"],"code":"exception.operations.instance.not_found"}]}
