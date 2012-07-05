@@ -17,6 +17,9 @@ public class GetFamilyPaginatedList {
     @In(2)
     int                 maxResults;
 
+    @In(3)
+    String              family;
+
     @Out(1)
     List<FamilyBaseDto> familyBaseDtos;
 

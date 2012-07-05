@@ -195,7 +195,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void retrieveFamilyList(int firstResult, int maxResults) {
-        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults), new AsyncCallback<GetFamilyPaginatedListResult>() {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, null), new AsyncCallback<GetFamilyPaginatedListResult>() {
 
             @Override
             public void onFailure(Throwable caught) {

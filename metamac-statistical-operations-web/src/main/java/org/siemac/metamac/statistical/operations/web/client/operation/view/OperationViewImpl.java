@@ -16,8 +16,8 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
@@ -26,7 +26,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurity
 import org.siemac.metamac.statistical.operations.web.client.utils.EnumUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationForm;
+import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
@@ -75,6 +75,10 @@ import com.smartgwt.client.widgets.toolbar.ToolStrip;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
+
+    public static final int                 FAMILY_LIST_MAX_RESULTS = 17;
+
+    private OperationUiHandlers             uiHandlers;
 
     private VLayout                         panel;
 
@@ -153,11 +157,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private ToolStripButton                 editFamiliesToolStripButton;
     private ListGrid                        familyListGrid;
     // Families modal window
-    private ModalWindow                     familiesWindow;
-    private AddFamiliesToOperationForm      addFamiliesToOperationForm;
+    private AddFamiliesToOperationWindow    addFamiliesToOperationWindow;
 
     private List<FamilyBaseDto>             familyBaseDtos;
-    private List<FamilyBaseDto>             allFamilies;
 
     private List<SurveyTypeDto>             surveyTypeDtos;
     private List<OfficialityTypeDto>        officialityTypeDtos;
@@ -252,7 +254,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // FAMILIES
 
-        addFamiliesToOperationForm = new AddFamiliesToOperationForm();
         familiesToolStrip = new ToolStrip();
         familiesToolStrip.setWidth100();
         editFamiliesToolStripButton = new ToolStripButton(getConstants().actionEdit(), GlobalResources.RESOURCE.editListGrid().getURL());
@@ -260,14 +261,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public void onClick(ClickEvent event) {
-                familiesWindow = new ModalWindow();
-                familiesWindow.setTitle(getConstants().actionAddFamiliesToOperation());
-                familiesWindow.setAutoSize(true);
-                addFamiliesToOperationForm.clearValues();
-                addFamiliesToOperationForm.setFamiliesValueMap(allFamilies);
-                addFamiliesToOperationForm.setFamilies(familyBaseDtos);
-                familiesWindow.addItem(addFamiliesToOperationForm);
-                familiesWindow.show();
+                // Load operation families
+                uiHandlers.retrievePaginatedFamilies(0, FAMILY_LIST_MAX_RESULTS, null);
+
+                addFamiliesToOperationWindow = new AddFamiliesToOperationWindow(uiHandlers);
+                addFamiliesToOperationWindow.setSelectedFamilies(familyBaseDtos);
             }
         });
         familiesToolStrip.addButton(editFamiliesToolStripButton);
@@ -277,10 +275,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         familyListGrid = new ListGrid();
         familyListGrid.setHeight(150);
-        ListGridField identifierFamilyField = new ListGridField(FamilyRecord.CODE, getConstants().familyIdentifier());
-        ListGridField titleFamilyField = new ListGridField(FamilyRecord.TITLE, getConstants().familyTitle());
-        ListGridField descriptionFamilyField = new ListGridField(FamilyRecord.DESCRIPTION, getConstants().familyDescription());
-        ListGridField statusFamilyField = new ListGridField(FamilyRecord.STATUS, getConstants().familyProcStatus());
+        ListGridField identifierFamilyField = new ListGridField(FamilyDS.CODE, getConstants().familyIdentifier());
+        ListGridField titleFamilyField = new ListGridField(FamilyDS.TITLE, getConstants().familyTitle());
+        ListGridField descriptionFamilyField = new ListGridField(FamilyDS.DESCRIPTION, getConstants().familyDescription());
+        ListGridField statusFamilyField = new ListGridField(FamilyDS.PROC_STATUS, getConstants().familyProcStatus());
         familyListGrid.setFields(identifierFamilyField, titleFamilyField, descriptionFamilyField, statusFamilyField);
 
         VLayout familiesListGridLayout = new VLayout();
@@ -351,7 +349,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         setInstances(instanceBaseDtos);
 
         // Set Families
-        setFamilies(familyBaseDtos);
+        setOperationFamilies(familyBaseDtos);
     }
 
     @Override
@@ -477,8 +475,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         deselectInstance();
     }
 
-    @Override
-    public void setFamilies(List<FamilyBaseDto> familyBaseDtos) {
+    public void setOperationFamilies(List<FamilyBaseDto> familyBaseDtos) {
         this.familyBaseDtos = familyBaseDtos;
         // Set families in listGrid
         familyListGrid.selectAllRecords();
@@ -828,31 +825,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getAddFamilies() {
-        return addFamiliesToOperationForm.getAdd();
-    }
-
-    @Override
-    public List<Long> getSelectedFamilyIds() {
-        return addFamiliesToOperationForm.getSelectedFamilyIds();
-    }
-
-    @Override
-    public boolean validateAddFamilies() {
-        return addFamiliesToOperationForm.validate();
-    }
-
-    @Override
-    public void closeFamiliesWindow() {
-        familiesWindow.destroy();
-    }
-
-    @Override
-    public void setAllFamilies(List<FamilyBaseDto> familyBaseDtos) {
-        allFamilies = familyBaseDtos;
-    }
-
-    @Override
     public HasClickHandlers getPublishOperationInternally() {
         return mainFormLayout.getPublishInternally();
     }
@@ -989,27 +961,22 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return (productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(productionEditionForm.getValue(OperationDS.OP_PROC_STATUS_VIEW)));
     }
 
-    /**
-     * Validate those metadata that are required is operation status is PUBLISH_INTERNALLY (if status is PUBLISH_EXTERNALLY, metadata should be required too)
-     * 
-     * @return
-     */
-    // private RequiredIfValidator getRequiredIfInternallyPublished() {
-    // return new RequiredIfValidator(new RequiredIfFunction() {
-    //
-    // @Override
-    // public boolean execute(FormItem formItem, Object value) {
-    // return isOperationInternallyPublished() || isOperationExternallyPublished();
-    // }
-    // });
-    // }
-
     public boolean isOperationInternallyPublished() {
         return ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationDto.getProcStatus());
     }
 
     public boolean isOperationExternallyPublished() {
         return ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationDto.getProcStatus());
+    }
+
+    @Override
+    public void setUiHandlers(OperationUiHandlers uiHandlers) {
+        this.uiHandlers = uiHandlers;
+    }
+
+    @Override
+    public void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults) {
+        addFamiliesToOperationWindow.setFamilies(familyBaseDtos, firstResult, totalResults);
     }
 
 }

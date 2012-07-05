@@ -9,6 +9,7 @@ import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
@@ -72,10 +73,10 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
             }
         });
         familyListGrid.setHeight(720);
-        ListGridField codeField = new ListGridField(FamilyRecord.CODE, OperationsWeb.getConstants().familyIdentifier());
-        ListGridField titleField = new ListGridField(FamilyRecord.TITLE, OperationsWeb.getConstants().familyTitle());
-        ListGridField descriptionField = new ListGridField(FamilyRecord.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
-        ListGridField statusField = new ListGridField(FamilyRecord.STATUS, OperationsWeb.getConstants().familyProcStatus());
+        ListGridField codeField = new ListGridField(FamilyDS.CODE, OperationsWeb.getConstants().familyIdentifier());
+        ListGridField titleField = new ListGridField(FamilyDS.TITLE, OperationsWeb.getConstants().familyTitle());
+        ListGridField descriptionField = new ListGridField(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        ListGridField statusField = new ListGridField(FamilyDS.PROC_STATUS, OperationsWeb.getConstants().familyProcStatus());
         familyListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField);
         familyListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 

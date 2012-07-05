@@ -1,9 +1,14 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
+import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction.OperationType;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
@@ -35,6 +40,14 @@ public class GetFamilyPaginatedListActionHandler extends SecurityActionHandler<G
             criteria.getPaginator().setFirstResult(action.getFirstResult());
             criteria.getPaginator().setMaximumResultSize(action.getMaxResults());
             criteria.getPaginator().setCountTotalResults(true);
+
+            MetamacCriteriaDisjunctionRestriction disjuction = new MetamacCriteriaDisjunctionRestriction();
+            if (!StringUtils.isBlank(action.getFamily())) {
+                disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.CODE.name(), action.getFamily(), OperationType.ILIKE));
+                disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), action.getFamily(), OperationType.ILIKE));
+            }
+            criteria.setRestriction(disjuction);
+
             MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(ServiceContextHolder.getCurrentServiceContext(), criteria);
             return new GetFamilyPaginatedListResult(result.getResults(), result.getPaginatorResult().getFirstResult(), result.getPaginatorResult().getTotalResults());
         } catch (MetamacException e) {

@@ -38,8 +38,8 @@ import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAc
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
@@ -122,7 +122,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         // Operations
         void setOperation(OperationDto operationDto, List<InstanceBaseDto> instanceBaseDtos, List<FamilyBaseDto> familyBaseDtos);
         OperationDto getOperation(OperationDto operationDto);
-        HasRecordClickHandlers getSelectedFamily();
         HasClickHandlers getSave();
         void onOperationSaved(OperationDto operationDto);
         boolean validate();
@@ -154,13 +153,10 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         void closeInstanceWindow();
         HasClickHandlers getDeleteInstance();
         List<Long> getSelectedInstances();
+
         // Families
-        void setFamilies(List<FamilyBaseDto> familyBaseDtos);
-        com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getAddFamilies();
-        List<Long> getSelectedFamilyIds();
-        boolean validateAddFamilies();
-        void closeFamiliesWindow();
-        void setAllFamilies(List<FamilyBaseDto> familyBaseDtos);
+        HasRecordClickHandlers getSelectedFamily();
+        void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults);
     }
 
     @Inject
@@ -227,37 +223,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onClick(ClickEvent event) {
                 deleteInstances(getView().getSelectedInstances());
-            }
-        }));
-
-        registerHandler(getView().getAddFamilies().addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
-
-            @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                if (getView().validateAddFamilies()) {
-                    List<Long> selectedFamilyIds = getView().getSelectedFamilyIds();
-                    List<Long> operationFamiliesId = getFamilyIds(familyBaseDtos);
-                    // Families to add
-                    List<Long> familiesToAdd = new ArrayList<Long>();
-                    for (Long id : selectedFamilyIds) {
-                        if (!operationFamiliesId.contains(id)) {
-                            familiesToAdd.add(id);
-                        }
-                    }
-                    // Families to remove
-                    List<Long> familiesToRemove = new ArrayList<Long>();
-                    for (FamilyBaseDto familyBaseDto : familyBaseDtos) {
-                        if (!selectedFamilyIds.contains(familyBaseDto.getId())) {
-                            familiesToRemove.add(familyBaseDto.getId());
-                        }
-                    }
-                    if (!familiesToAdd.isEmpty() || !familiesToRemove.isEmpty()) {
-                        updateOperationFamilies(familiesToAdd, familiesToRemove);
-                    } else {
-                        getView().closeFamiliesWindow();
-                        ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().familiesAddedToOperation()), MessageTypeEnum.SUCCESS);
-                    }
-                }
             }
         }));
 
@@ -377,13 +342,11 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                getView().closeFamiliesWindow();
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorAddToOperation()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(UpdateOperationFamiliesResult result) {
                 retrieveOperation(operationDto.getCode());
-                getView().closeFamiliesWindow();
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().familiesAddedToOperation()), MessageTypeEnum.SUCCESS);
             }
         });
@@ -409,19 +372,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                 instanceBaseDtos = result.getInstanceBaseDtos();
                 familyBaseDtos = result.getFamilyBaseDtos();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleStatisticalOperation(operationDto.getCode()));
-                dispatcher.execute(new GetFamilyListAction(), new WaitingAsyncCallback<GetFamilyListResult>() {
-
-                    @Override
-                    public void onWaitFailure(Throwable caught) {
-                        ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
-                    }
-                    @Override
-                    public void onWaitSuccess(GetFamilyListResult result) {
-                        // Make sure the family list is set before setting operation families
-                        getView().setAllFamilies(result.getFamilyBaseDtos());
-                        getView().setOperation(operationDto, instanceBaseDtos, familyBaseDtos);
-                    }
-                });
+                getView().setOperation(operationDto, instanceBaseDtos, familyBaseDtos);
             }
         });
     }
@@ -438,14 +389,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                 getView().setInstances(result.getInstanceBaseDtos());
             }
         });
-    }
-
-    private List<Long> getFamilyIds(List<FamilyBaseDto> familyBaseDtos) {
-        List<Long> familyIds = new ArrayList<Long>();
-        for (FamilyBaseDto familyBaseDto : familyBaseDtos) {
-            familyIds.add(familyBaseDto.getId());
-        }
-        return familyIds;
     }
 
     private void publishOperationInternally() {
@@ -605,6 +548,22 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitSuccess(UpdateInstancesOrderResult result) {
                 getView().setInstances(result.getInstances());
+            }
+        });
+    }
+
+    @Override
+    public void retrievePaginatedFamilies(int firstResult, int maxResults, String family) {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new WaitingAsyncCallback<GetFamilyPaginatedListResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
+            }
+
+            @Override
+            public void onWaitSuccess(GetFamilyPaginatedListResult result) {
+                getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
             }
         });
     }

@@ -15,6 +15,7 @@ public interface OperationUiHandlers extends UiHandlers {
     void goToInstance(String instanceCode);
     void deleteInstances(List<Long> instanceIds);
     void updateOperationFamilies(List<Long> familiesToAdd, List<Long> familiesToRemove);
+    void retrievePaginatedFamilies(int firstResult, int maxResults, String family);
 
     void populateSubjects(String uri);
     void populateSecondarySubjects(String scehemUri);
