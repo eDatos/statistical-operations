@@ -13,8 +13,8 @@
 	<groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
 	<artifactId>metamac-statistical-operations-rest-internal-impl</artifactId>
 	<packaging>jar</packaging>
-	<name>METAMAC :: STATISTICAL OPERATIONS :: REST :: IMPL</name>
-	<description>METAMAC :: STATISTICAL OPERATIONS :: REST :: IMPL</description>
+	<name>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</name>
+	<description>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</description>
 
 	<dependencies>
         <!-- Metamac -->
