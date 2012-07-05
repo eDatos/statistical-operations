@@ -1,148 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns="http://wadl.dev.java.net/2009/02" 
-			 xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0"
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<wadl:application
+			 xmlns:wadl="http://wadl.dev.java.net/2009/02"
 			 xmlns:domain="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain"
-			 xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain"
-			 xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://www.w3.org/Submission/wadl/wadl.xsd">
+			 xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain">
  	
-	<grammars>
- 		<include href="metamac-statistical-operations-rest-internal-domain-v1.0.xsd" />
- 		<include href="metamac-rest-api:metamac-rest-common-domain-v1.0.xsd" />
- 	</grammars>
+	<wadl:grammars>
+ 		<wadl:include href="metamac-statistical-operations-rest-internal-domain-v1.0.xsd" />
+ 		<wadl:include href="metamac-rest-api:metamac-rest-common-domain-v1.0.xsd" />
+ 	</wadl:grammars>
  	
-	<resources base="URL_RESOURCES_BASE">
-		<resource id="statisticalOperationsRestFacadeV10">
-			<resource path="operations">
-				<method name="GET" id="findOperations">
-					<doc>
+	<wadl:resources base="URL_RESOURCES_BASE">
+		<wadl:resource id="statisticalOperationsRestFacadeV10">
+			<wadl:resource path="operations">
+				<wadl:method name="GET" id="findOperations">
+					<wadl:doc>
            				<![CDATA[Returns paged list operations, according to criteria]]>
-         			</doc>
-					<request>
-						<param name="limit" style="query" required="false"/>
-						<param name="offset" style="query" required="false"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
-                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>				
-			<resource path="operations/{code}">
-				<method name="GET" id="retrieveOperationByCode">
-					<request>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:operation"/> 
-                        <representation mediaType="application/json" element="domain:operation"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
-			<resource path="operations/{code}/families">
-				<method name="GET" id="retrieveFamiliesByOperation">
-					<request>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="common:relatedResourcesNoPagedResult"/> 
-                        <representation mediaType="application/json" element="common:relatedResourcesNoPagedResult"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
-			<resource path="operations/{operationCode}/instances">
-				<method name="GET" id="findInstances">
-					<request>
-						<param name="operationCode" style="template"/>
-						<param name="limit" style="query" required="false"/>
-						<param name="offset" style="query" required="false"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
-                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>				
-			<resource path="operations/{operationCode}/instances/{code}">
-				<method name="GET" id="retrieveInstanceByCode">
-					<request>
-						<param name="operationCode" style="template"/>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:instance"/> 
-                        <representation mediaType="application/json" element="domain:instance"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
-			<resource path="families">
-				<method name="GET" id="findFamilies">
-					<request>
-						<param name="limit" style="query" required="false"/>
-						<param name="offset" style="query" required="false"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
-                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>				
-			<resource path="families/{code}">
-				<method name="GET" id="retrieveFamilyByCode">
-					<request>
-						<param name="code" style="template"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="domain:family"/> 
-                        <representation mediaType="application/json" element="domain:family"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>
-			<resource path="families/{code}/operations">
-				<method name="GET" id="retrieveOperationsByFamily">
-					<request>
-						<param name="code" style="template"/>
-						<param name="limit" style="query" required="false"/>
-						<param name="offset" style="query" required="false"/>
-					</request>
-	                <response status="200">
-						<representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
-                        <representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
-	                </response>
-					<response status="404 500">
-						<representation mediaType="application/xml" element="common:error"/> 
-                        <representation mediaType="application/json" element="common:error"/> 
-	                </response>
-				</method>
-			</resource>				
-		</resource>
-	</resources>  
-</application>
+         			</wadl:doc>
+					<wadl:request>
+						<wadl:param name="limit" style="query" required="false"/>
+						<wadl:param name="offset" style="query" required="false"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>				
+			<wadl:resource path="operations/{code}">
+				<wadl:method name="GET" id="retrieveOperationByCode">
+					<wadl:request>
+						<wadl:param name="code" style="template"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="domain:operation"/> 
+                        <wadl:representation mediaType="application/json" element="domain:operation"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>
+			<wadl:resource path="operations/{code}/families">
+				<wadl:method name="GET" id="retrieveFamiliesByOperation">
+					<wadl:request>
+						<wadl:param name="code" style="template"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:relatedResourcesNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:relatedResourcesNoPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>
+			<wadl:resource path="operations/{operationCode}/instances">
+				<wadl:method name="GET" id="findInstances">
+					<wadl:request>
+						<wadl:param name="operationCode" style="template"/>
+						<wadl:param name="limit" style="query" required="false"/>
+						<wadl:param name="offset" style="query" required="false"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>				
+			<wadl:resource path="operations/{operationCode}/instances/{code}">
+				<wadl:method name="GET" id="retrieveInstanceByCode">
+					<wadl:request>
+						<wadl:param name="operationCode" style="template"/>
+						<wadl:param name="code" style="template"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="domain:instance"/> 
+                        <wadl:representation mediaType="application/json" element="domain:instance"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>
+			<wadl:resource path="families">
+				<wadl:method name="GET" id="findFamilies">
+					<wadl:request>
+						<wadl:param name="limit" style="query" required="false"/>
+						<wadl:param name="offset" style="query" required="false"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>				
+			<wadl:resource path="families/{code}">
+				<wadl:method name="GET" id="retrieveFamilyByCode">
+					<wadl:request>
+						<wadl:param name="code" style="template"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="domain:family"/> 
+                        <wadl:representation mediaType="application/json" element="domain:family"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>
+			<wadl:resource path="families/{code}/operations">
+				<wadl:method name="GET" id="retrieveOperationsByFamily">
+					<wadl:request>
+						<wadl:param name="code" style="template"/>
+						<wadl:param name="limit" style="query" required="false"/>
+						<wadl:param name="offset" style="query" required="false"/>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:relatedResourcesPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:relatedResourcesPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>				
+		</wadl:resource>
+	</wadl:resources>  
+</wadl:application>
