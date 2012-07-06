@@ -18,32 +18,15 @@
     "texts": [
       {
         "locale": "es",
-        "label": "Acrónimo 1 en español"
+        "label": "acronym 1 en español"
       },
       {
         "locale": "en",
-        "label": "Acronym 1 in English"
+        "label": "acronym 1 in English"
       }
     ]
   },
   "families": [
-    {
-      "id": "family1",
-      "kind": "statisticalOperations#family",
-      "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "Title family family1"
-          },
-          {
-            "locale": "es",
-            "label": "Título family family1"
-          }
-        ]
-      }
-    },
     {
       "id": "family2",
       "kind": "statisticalOperations#family",
@@ -51,12 +34,29 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title family family2"
-          },
-          {
             "locale": "es",
             "label": "Título family family2"
+          },
+          {
+            "locale": "en",
+            "label": "Title family family2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "family1",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "Título family family1"
+          },
+          {
+            "locale": "en",
+            "label": "Title family family1"
           }
         ]
       }
@@ -74,25 +74,25 @@
       "selfLink": "http://secundarySubjectArea333"
     },
     {
-      "id": "secundarySubjectArea1",
-      "kind": "CATEGORY",
-      "selfLink": "http://secundarySubjectArea1"
-    },
-    {
       "id": "secundarySubjectArea22",
       "kind": "CATEGORY",
       "selfLink": "http://secundarySubjectArea22"
+    },
+    {
+      "id": "secundarySubjectArea1",
+      "kind": "CATEGORY",
+      "selfLink": "http://secundarySubjectArea1"
     }
   ],
   "objective": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Objective 1 in English"
+        "locale": "es",
+        "label": "objetive 1 en español"
       },
       {
-        "locale": "es",
-        "label": "Objetivo 1 en español"
+        "locale": "en",
+        "label": "objetive 1 in English"
       }
     ]
   },
@@ -100,11 +100,11 @@
     "texts": [
       {
         "locale": "es",
-        "label": "Descripción 1 en español"
+        "label": "description 1 en español"
       },
       {
         "locale": "en",
-        "label": "Description 1 in English"
+        "label": "description 1 in English"
       }
     ]
   },
@@ -167,12 +167,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance333"
-          },
-          {
             "locale": "en",
             "label": "Title instance instance333"
+          },
+          {
+            "locale": "es",
+            "label": "Título instance instance333"
           }
         ]
       }
@@ -198,12 +198,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título officialityType officialityTypeIdentifier"
-        },
-        {
           "locale": "en",
           "label": "Title officialityType officialityTypeIdentifier"
+        },
+        {
+          "locale": "es",
+          "label": "Título officialityType officialityTypeIdentifier"
         }
       ]
     }
@@ -228,26 +228,26 @@
       "selfLink": "http://regionalResponsible333"
     },
     {
-      "id": "regionalResponsible22",
-      "kind": "AGENCY",
-      "selfLink": "http://regionalResponsible22"
-    },
-    {
       "id": "regionalResponsible1",
       "kind": "AGENCY",
       "selfLink": "http://regionalResponsible1"
+    },
+    {
+      "id": "regionalResponsible22",
+      "kind": "AGENCY",
+      "selfLink": "http://regionalResponsible22"
     }
   ],
   "regionalContributors": [
     {
-      "id": "regionalContributor1",
-      "kind": "AGENCY",
-      "selfLink": "http://regionalContributor1"
-    },
-    {
       "id": "regionalContributor22",
       "kind": "AGENCY",
       "selfLink": "http://regionalContributor22"
+    },
+    {
+      "id": "regionalContributor1",
+      "kind": "AGENCY",
+      "selfLink": "http://regionalContributor1"
     }
   ],
   "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
@@ -255,6 +255,11 @@
   "status": "DESIGN",
   "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
+    {
+      "id": "publisher22",
+      "kind": "AGENCY",
+      "selfLink": "http://publisher22"
+    },
     {
       "id": "publisher1",
       "kind": "AGENCY",
@@ -264,33 +269,23 @@
       "id": "publisher333",
       "kind": "AGENCY",
       "selfLink": "http://publisher333"
-    },
-    {
-      "id": "publisher22",
-      "kind": "AGENCY",
-      "selfLink": "http://publisher22"
     }
   ],
   "relPolUsAc": {
     "texts": [
       {
-        "locale": "es",
-        "label": "RelPolUsAc 1 en español"
+        "locale": "en",
+        "label": "relPolUsAc 1 in English"
       },
       {
-        "locale": "en",
-        "label": "RelPolUsAc 1 in English"
+        "locale": "es",
+        "label": "relPolUsAc 1 en español"
       }
     ]
   },
   "releaseCalendar": true,
   "releaseCalendarAccess": "http://releaseCalendarAccess1",
   "updateFrequencies": [
-    {
-      "id": "updateFrequency4444",
-      "kind": "CODE",
-      "selfLink": "http://updateFrequency4444"
-    },
     {
       "id": "updateFrequency22",
       "kind": "CODE",
@@ -305,6 +300,11 @@
       "id": "updateFrequency1",
       "kind": "CODE",
       "selfLink": "http://updateFrequency1"
+    },
+    {
+      "id": "updateFrequency4444",
+      "kind": "CODE",
+      "selfLink": "http://updateFrequency4444"
     }
   ],
   "currentInternalInstance": {
@@ -331,12 +331,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "Título instance instance333"
-        },
-        {
           "locale": "en",
           "label": "Title instance instance333"
+        },
+        {
+          "locale": "es",
+          "label": "Título instance instance333"
         }
       ]
     }
@@ -345,12 +345,12 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "es",
-        "label": "RevPolicy 1 en español"
+        "locale": "en",
+        "label": "revPolicy 1 in English"
       },
       {
-        "locale": "en",
-        "label": "RevPolicy 1 in English"
+        "locale": "es",
+        "label": "revPolicy 1 en español"
       }
     ]
   },
@@ -358,23 +358,23 @@
     "texts": [
       {
         "locale": "en",
-        "label": "RevPractice 1 in English"
+        "label": "revPractice 1 in English"
       },
       {
         "locale": "es",
-        "label": "RevPractice 1 en español"
+        "label": "revPractice 1 en español"
       }
     ]
   },
   "comment": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Comments 1 in English"
+        "locale": "es",
+        "label": "comment 1 en español"
       },
       {
-        "locale": "es",
-        "label": "Comentarios 1 en español"
+        "locale": "en",
+        "label": "comment 1 in English"
       }
     ]
   },
@@ -382,11 +382,11 @@
     "texts": [
       {
         "locale": "en",
-        "label": "Notes 1 in English"
+        "label": "notes 1 in English"
       },
       {
         "locale": "es",
-        "label": "Notas 1 en español"
+        "label": "notes 1 en español"
       }
     ]
   },

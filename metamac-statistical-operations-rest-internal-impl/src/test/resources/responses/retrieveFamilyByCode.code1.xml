@@ -5,32 +5,32 @@
     <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
     <title>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>Título family family1</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>Title family family1</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>Título family family1</ns2:label>
         </ns2:text>
     </title>
     <acronym>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
-            <ns2:label>Acrónimo 1 en español</ns2:label>
+            <ns2:label>acronym 1 en español</ns2:label>
         </ns2:text>
         <ns2:text>
             <ns2:locale>en</ns2:locale>
-            <ns2:label>Acronym 1 in English</ns2:label>
+            <ns2:label>acronym 1 in English</ns2:label>
         </ns2:text>
     </acronym>
     <description>
         <ns2:text>
             <ns2:locale>en</ns2:locale>
-            <ns2:label>Description 1 in English</ns2:label>
+            <ns2:label>description 1 in English</ns2:label>
         </ns2:text>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
-            <ns2:label>Descripción 1 en español</ns2:label>
+            <ns2:label>description 1 en español</ns2:label>
         </ns2:text>
     </description>
     <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>

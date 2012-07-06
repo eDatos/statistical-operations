@@ -317,7 +317,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
     }
 
-    private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
+    private static InternationalString mockInternationalString2(String locale1, String label1, String locale2, String label2) {
 
         InternationalString internationalString = new InternationalString();
 
@@ -340,7 +340,7 @@ public class StatisticalOperationsCoreMocks {
     private static Operation mockOperationRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
-        operation.setTitle(mockInternationalString("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
+        operation.setTitle(mockInternationalString2("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
         operation.setProcStatus(procStatus);
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0)));
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3)));
@@ -363,7 +363,7 @@ public class StatisticalOperationsCoreMocks {
     private static Family mockFamilyRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Family family = new Family();
         family.setCode("family" + subCode);
-        family.setTitle(mockInternationalString("es", "Título family family" + subCode, "en", "Title family family" + subCode));
+        family.setTitle(mockInternationalString2("es", "Título family family" + subCode, "en", "Title family family" + subCode));
         family.setProcStatus(procStatus);
         return family;
     }
@@ -374,7 +374,7 @@ public class StatisticalOperationsCoreMocks {
     private static Instance mockInstanceRelatedEntity(String subCode, ProcStatusEnum procStatus, Integer order) {
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
-        instance.setTitle(mockInternationalString("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
+        instance.setTitle(mockInternationalString2("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
         instance.setProcStatus(procStatus);
         instance.setOrder(order);
         return instance;
@@ -382,42 +382,42 @@ public class StatisticalOperationsCoreMocks {
 
     private static SurveyType mockSurveyType(String code) {
         SurveyType surveyType = new SurveyType();
-        surveyType.setDescription(mockInternationalString("es", "Título survey " + code, "en", "Title survey " + code));
+        surveyType.setDescription(mockInternationalString2("es", "Título survey " + code, "en", "Title survey " + code));
         surveyType.setIdentifier(code);
         return surveyType;
     }
 
     private static OfficialityType mockOfficialityType(String code) {
         OfficialityType officialityType = new OfficialityType();
-        officialityType.setDescription(mockInternationalString("es", "Título officialityType " + code, "en", "Title officialityType " + code));
+        officialityType.setDescription(mockInternationalString2("es", "Título officialityType " + code, "en", "Title officialityType " + code));
         officialityType.setIdentifier(code);
         return officialityType;
     }
 
     private static InstanceType mockInstanceType(String code) {
         InstanceType instanceType = new InstanceType();
-        instanceType.setDescription(mockInternationalString("es", "Título instanceType " + code, "en", "Title instanceType " + code));
+        instanceType.setDescription(mockInternationalString2("es", "Título instanceType " + code, "en", "Title instanceType " + code));
         instanceType.setIdentifier(code);
         return instanceType;
     }
 
     private static SurveySource mockSurveySource(String code) {
         SurveySource surveySource = new SurveySource();
-        surveySource.setDescription(mockInternationalString("es", "Título surveySource " + code, "en", "Title surveySource " + code));
+        surveySource.setDescription(mockInternationalString2("es", "Título surveySource " + code, "en", "Title surveySource " + code));
         surveySource.setIdentifier(code);
         return surveySource;
     }
 
     private static CollMethod mockCollMethod(String code) {
         CollMethod collMethod = new CollMethod();
-        collMethod.setDescription(mockInternationalString("es", "Título collMethod " + code, "en", "Title collMethod " + code));
+        collMethod.setDescription(mockInternationalString2("es", "Título collMethod " + code, "en", "Title collMethod " + code));
         collMethod.setIdentifier(code);
         return collMethod;
     }
 
     private static Cost mockCost(String code) {
         Cost cost = new Cost();
-        cost.setDescription(mockInternationalString("es", "Título cost " + code, "en", "Title cost " + code));
+        cost.setDescription(mockInternationalString2("es", "Título cost " + code, "en", "Title cost " + code));
         cost.setIdentifier(code);
         return cost;
     }
@@ -434,8 +434,8 @@ public class StatisticalOperationsCoreMocks {
 
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
-        operation.setTitle(mockInternationalString("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
-        operation.setAcronym(mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
+        operation.setTitle(mockInternationalString2("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
+        operation.setAcronym(mockInternationalString("acronym", subCode));
         if (families != null) {
             for (int i = 0; i < families.length; i++) {
                 Family family = families[i];
@@ -446,8 +446,8 @@ public class StatisticalOperationsCoreMocks {
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea1"));
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea22", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea22"));
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea333"));
-        operation.setObjective(mockInternationalString("es", "Objetivo " + subCode + " en español", "en", "Objective " + subCode + " in English"));
-        operation.setDescription(mockInternationalString("es", "Descripción " + subCode + " en español", "en", "Description " + subCode + " in English"));
+        operation.setObjective(mockInternationalString("objetive", subCode));
+        operation.setDescription(mockInternationalString("description", subCode));
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0)));
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3)));
         operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2)));
@@ -469,7 +469,7 @@ public class StatisticalOperationsCoreMocks {
         operation.getPublisher().add(mockExternalItem("publisher1", TypeExternalArtefactsEnum.AGENCY, "http://publisher1"));
         operation.getPublisher().add(mockExternalItem("publisher22", TypeExternalArtefactsEnum.AGENCY, "http://publisher22"));
         operation.getPublisher().add(mockExternalItem("publisher333", TypeExternalArtefactsEnum.AGENCY, "http://publisher333"));
-        operation.setRelPolUsAc(mockInternationalString("es", "RelPolUsAc " + subCode + " en español", "en", "RelPolUsAc " + subCode + " in English"));
+        operation.setRelPolUsAc(mockInternationalString("relPolUsAc", subCode));
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency1", TypeExternalArtefactsEnum.CODE, "http://updateFrequency1"));
@@ -477,11 +477,11 @@ public class StatisticalOperationsCoreMocks {
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency333", TypeExternalArtefactsEnum.CODE, "http://updateFrequency333"));
         operation.getUpdateFrequency().add(mockExternalItem("updateFrequency4444", TypeExternalArtefactsEnum.CODE, "http://updateFrequency4444"));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
-        operation.setRevPolicy(mockInternationalString("es", "RevPolicy " + subCode + " en español", "en", "RevPolicy " + subCode + " in English"));
-        operation.setRevPractice(mockInternationalString("es", "RevPractice " + subCode + " en español", "en", "RevPractice " + subCode + " in English"));
+        operation.setRevPolicy(mockInternationalString("revPolicy", subCode));
+        operation.setRevPractice(mockInternationalString("revPractice", subCode));
         // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
-        operation.setComment(mockInternationalString("es", "Comentarios " + subCode + " en español", "en", "Comments " + subCode + " in English"));
-        operation.setNotes(mockInternationalString("es", "Notas " + subCode + " en español", "en", "Notes " + subCode + " in English"));
+        operation.setComment(mockInternationalString("comment", subCode));
+        operation.setNotes(mockInternationalString("notes", subCode));
 
         return operation;
     }
@@ -490,9 +490,9 @@ public class StatisticalOperationsCoreMocks {
 
         Family family = new Family();
         family.setCode("family" + subCode);
-        family.setTitle(mockInternationalString("es", "Título family family" + subCode, "en", "Title family family" + subCode));
-        family.setAcronym(mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
-        family.setDescription(mockInternationalString("es", "Descripción " + subCode + " en español", "en", "Description " + subCode + " in English"));
+        family.setTitle(mockInternationalString2("es", "Título family family" + subCode, "en", "Title family family" + subCode));
+        family.setAcronym(mockInternationalString("acronym", subCode));
+        family.setDescription(mockInternationalString("description", subCode));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
@@ -504,61 +504,66 @@ public class StatisticalOperationsCoreMocks {
 
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
-        instance.setTitle(mockInternationalString("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
-        instance.setAcronym(mockInternationalString("es", "Acrónimo " + subCode + " en español", "en", "Acronym " + subCode + " in English"));
+        instance.setTitle(mockInternationalString2("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
+        instance.setAcronym(mockInternationalString("acronym", subCode));
         instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
         instance.setOrder(Integer.valueOf(2));
-        instance.setDataDescription(mockInternationalString("es", "Descripción de Datos " + subCode + " en español", "en", "DataDescription " + subCode + " in English"));
-        instance.setStatisticalPopulation(mockInternationalString("es", "Carga de Estadísticas " + subCode + " en español", "en", "StatisticalPopulation " + subCode + " in English"));
+        instance.setDataDescription(mockInternationalString("dataDescription", subCode));
+        instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
         instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE, "http://statisticalUnit1"));
         instance.addStatisticalUnit(mockExternalItem("statisticalUnit22", TypeExternalArtefactsEnum.DATASTRUCTURE, "http://statisticalUnit22"));
         instance.setGeographicGranularity(mockExternalItemBt("geographicGranularity", TypeExternalArtefactsEnum.CODELIST, "http://geographicGranularity"));
-        instance.setGeographicComparability(mockInternationalString("es", "Comparando Geográficos " + subCode + " en español", "en", "geographicComparability " + subCode + " in English"));
+        instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
         instance.setTemporalGranularity(mockExternalItemBt("temporalGranularity", TypeExternalArtefactsEnum.CODELIST, "http://temporalGranularity"));
-        instance.setTemporalComparability(mockInternationalString("es", "Comparando Temporal " + subCode + " en español", "en", "temporalComparability " + subCode + " in English"));
+        instance.setTemporalComparability(mockInternationalString("temporalComparability", subCode));
         instance.setBasePeriod("2012");
         instance.addUnitMeasure(mockExternalItem("unitMeasure1", TypeExternalArtefactsEnum.CONCEPT, "http://unitMeasure1"));
-        instance.setStatConcDef(mockInternationalString("es", "StatConcDef " + subCode + " en español", "en", "StatConcDef " + subCode + " in English"));
+        instance.setStatConcDef(mockInternationalString("statConcDef", subCode));
         instance.addStatConcDefList(mockExternalItem("statConcDefList1", TypeExternalArtefactsEnum.CODELIST, "http://statConcDefList1"));
         instance.addStatConcDefList(mockExternalItem("statConcDefList22", TypeExternalArtefactsEnum.CODELIST, "http://statConcDefList22"));
         instance.addStatConcDefList(mockExternalItem("statConcDefList333", TypeExternalArtefactsEnum.CODELIST, "http://statConcDefList333"));
-        instance.setClassSystem(mockInternationalString("es", "ClassSystem " + subCode + " en español", "en", "ClassSystem " + subCode + " in English"));
+        instance.setClassSystem(mockInternationalString("classSystem", subCode));
         instance.addClassSystemList(mockExternalItem("statConcDefList1", TypeExternalArtefactsEnum.CODELIST, "http://statConcDefList1"));
         instance.addClassSystemList(mockExternalItem("statConcDefList22", TypeExternalArtefactsEnum.CODELIST, "http://statConcDefList22"));
         instance.setInstanceType(mockInstanceType("instanceType1"));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         instance.setProcStatus(procStatus);
-        instance.setDocMethod(mockInternationalString("es", "DocMethod " + subCode + " en español", "en", "DocMethod " + subCode + " in English"));
+        instance.setDocMethod(mockInternationalString("docMethod", subCode));
         instance.setSurveySource(mockSurveySource("surveySource1"));
         instance.setCollMethod(mockCollMethod("collMethod1"));
         instance.addInformationSupplier(mockExternalItem("informationSupplier1", TypeExternalArtefactsEnum.COMMON_METADATA, "http://informationSupplier1"));
         instance.addFreqColl(mockExternalItem("freqColl1", TypeExternalArtefactsEnum.CATEGORY_SCHEME, "http://freqColl1"));
         instance.addFreqColl(mockExternalItem("freqColl22", TypeExternalArtefactsEnum.CATEGORY_SCHEME, "http://freqColl22"));
-        instance.setDataValidation(mockInternationalString("es", "DataValidation " + subCode + " en español", "en", "DataValidation " + subCode + " in English"));
-        instance.setDataCompilation(mockInternationalString("es", "DataCompilation " + subCode + " en español", "en", "DataCompilation " + subCode + " in English"));
-        instance.setAdjustment(mockInternationalString("es", "Adjustment " + subCode + " en español", "en", "Adjustment " + subCode + " in English"));
-        instance.setCostBurden(mockInternationalString("es", "CostBurden " + subCode + " en español", "en", "CostBurden " + subCode + " in English"));
+        instance.setDataValidation(mockInternationalString("dataValidation", subCode));
+        instance.setDataCompilation(mockInternationalString("dataCompilation", subCode));
+        instance.setAdjustment(mockInternationalString("adjustment", subCode));
+        instance.setCostBurden(mockInternationalString("costBurden", subCode));
         instance.addCost(mockCost("cost1"));
         instance.addCost(mockCost("cost22"));
         instance.addCost(mockCost("cost333"));
         instance.addCost(mockCost("cost4444"));
         instance.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
-        instance.setQualityDoc(mockInternationalString("es", "QualityDoc " + subCode + " en español", "en", "QualityDoc " + subCode + " in English"));
-        instance.setQualityAssure(mockInternationalString("es", "QualityAssure " + subCode + " en español", "en", "QualityAssure " + subCode + " in English"));
-        instance.setQualityAssmnt(mockInternationalString("es", "QualityAssmnt " + subCode + " en español", "en", "QualityAssmnt " + subCode + " in English"));
-        instance.setUserNeeds(mockInternationalString("es", "UserNeeds " + subCode + " en español", "en", "UserNeeds " + subCode + " in English"));
-        instance.setUserSat(mockInternationalString("es", "UserSat " + subCode + " en español", "en", "UserSat " + subCode + " in English"));
-        instance.setCompleteness(mockInternationalString("es", "Completeness " + subCode + " en español", "en", "Completeness " + subCode + " in English"));
-        instance.setTimeliness(mockInternationalString("es", "Timeliness " + subCode + " en español", "en", "Timeliness " + subCode + " in English"));
-        instance.setPunctuality(mockInternationalString("es", "Punctuality " + subCode + " en español", "en", "Punctuality " + subCode + " in English"));
-        instance.setAccuracyOverall(mockInternationalString("es", "AccuracyOverall " + subCode + " en español", "en", "AccuracyOverall " + subCode + " in English"));
-        instance.setSamplingErr(mockInternationalString("es", "SamplingErr " + subCode + " en español", "en", "SamplingErr " + subCode + " in English"));
-        instance.setNonsamplingErr(mockInternationalString("es", "NonsamplingErr " + subCode + " en español", "en", "NonsamplingErr " + subCode + " in English"));
-        instance.setCoherXDomain(mockInternationalString("es", "CoherXDom " + subCode + " en español", "en", "CoherXDom " + subCode + " in English"));
-        instance.setCoherInternal(mockInternationalString("es", "CoherInternal " + subCode + " en español", "en", "CoherInternal " + subCode + " in English"));
-        instance.setComment(mockInternationalString("es", "Comentarios " + subCode + " en español", "en", "Comments " + subCode + " in English"));
-        instance.setNotes(mockInternationalString("es", "Notas " + subCode + " en español", "en", "Notes " + subCode + " in English"));
+        instance.setQualityDoc(mockInternationalString("qualityDoc", subCode));
+        instance.setQualityAssure(mockInternationalString("qualityAssure", subCode));
+        instance.setQualityAssmnt(mockInternationalString("qualityAssmnt", subCode));
+        instance.setUserNeeds(mockInternationalString("userNeeds", subCode));
+        instance.setUserSat(mockInternationalString("userSat", subCode));
+        instance.setCompleteness(mockInternationalString("completeness", subCode));
+        instance.setTimeliness(mockInternationalString("timeliness", subCode));
+        instance.setPunctuality(mockInternationalString("punctuality", subCode));
+        instance.setAccuracyOverall(mockInternationalString("accuracyOverall", subCode));
+        instance.setSamplingErr(mockInternationalString("samplingErr", subCode));
+        instance.setNonsamplingErr(mockInternationalString("nonsamplingErr", subCode));
+        instance.setCoherXDomain(mockInternationalString("coherXDom", subCode));
+        instance.setCoherInternal(mockInternationalString("coherInternal", subCode));
+        instance.setComment(mockInternationalString("comment", subCode));
+        instance.setNotes(mockInternationalString("notes", subCode));
 
         return instance;
+    }
+    
+    private static InternationalString mockInternationalString(String metadata, String subCode) {
+        String subTitle = metadata + " " + subCode;
+        return mockInternationalString2("es", subTitle + " en español", "en", subTitle + " in English");
     }
 }

@@ -5,12 +5,12 @@
   "title": {
     "texts": [
       {
-        "locale": "en",
-        "label": "Title family family1"
-      },
-      {
         "locale": "es",
         "label": "Título family family1"
+      },
+      {
+        "locale": "en",
+        "label": "Title family family1"
       }
     ]
   },
@@ -18,23 +18,23 @@
     "texts": [
       {
         "locale": "en",
-        "label": "Acronym 1 in English"
+        "label": "acronym 1 in English"
       },
       {
         "locale": "es",
-        "label": "Acrónimo 1 en español"
+        "label": "acronym 1 en español"
       }
     ]
   },
   "description": {
     "texts": [
       {
-        "locale": "es",
-        "label": "Descripción 1 en español"
+        "locale": "en",
+        "label": "description 1 in English"
       },
       {
-        "locale": "en",
-        "label": "Description 1 in English"
+        "locale": "es",
+        "label": "description 1 en español"
       }
     ]
   },
