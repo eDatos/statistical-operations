@@ -70,14 +70,14 @@ Application StatisticalOperationsDto {
        	
        	"Dto for OperationDto"
        	DataTransferObject OperationDto extends @AuditableDto  {
-       		- @ExternalItemBtDto commonMetadata nullable;
+       		- @ExternalItemDto commonMetadata nullable;
        		
        		String code;
        		- @InternationalStringDto title;
        		- @InternationalStringDto acronym nullable;
        		
-       		- @ExternalItemBtDto subjectArea nullable;
-       		- Set<@ExternalItemBtDto> secondarySubjectAreas;
+       		- @ExternalItemDto subjectArea nullable;
+       		- Set<@ExternalItemDto> secondarySubjectAreas;
        		
        		- @InternationalStringDto objective nullable;
        		- @InternationalStringDto description nullable;
@@ -86,19 +86,19 @@ Application StatisticalOperationsDto {
        		- @OfficialityTypeDto officialityType nullable;
        		Boolean indicatorSystem;
        		
-       		- Set<@ExternalItemBtDto> producer;
-       		- Set<@ExternalItemBtDto> regionalResponsible;
-       		- Set<@ExternalItemBtDto> regionalContributor;
+       		- Set<@ExternalItemDto> producer;
+       		- Set<@ExternalItemDto> regionalResponsible;
+       		- Set<@ExternalItemDto> regionalContributor;
 			JAVADATE internalInventoryDate nullable;
 			Boolean currentlyActive;
        		- @ProcStatusEnum procStatus not nullable;
        		- @StatusEnum status not nullable;
        		
-       		- Set<@ExternalItemBtDto> publisher;
+       		- Set<@ExternalItemDto> publisher;
        		- @InternationalStringDto relPolUsAc nullable;
        		Boolean releaseCalendar;
        		String releaseCalendarAccess nullable;
-       		- Set<@ExternalItemBtDto> updateFrequency;
+       		- Set<@ExternalItemDto> updateFrequency;
        		- @InstanceBaseDto currentInstance nullable;
        		- @InstanceBaseDto currentInternalInstance nullable;
        		JAVADATE inventoryDate nullable;
@@ -137,17 +137,17 @@ Application StatisticalOperationsDto {
        		
        		- @InternationalStringDto dataDescription nullable;
        		- @InternationalStringDto statisticalPopulation nullable;
-       		- Set<@ExternalItemBtDto> statisticalUnit;
-       		- @ExternalItemBtDto geographicGranularity nullable;
+       		- Set<@ExternalItemDto> statisticalUnit;
+       		- @ExternalItemDto geographicGranularity nullable;
        		- @InternationalStringDto geographicComparability nullable;
-       		- @ExternalItemBtDto temporalGranularity nullable;
+       		- @ExternalItemDto temporalGranularity nullable;
        		- @InternationalStringDto temporalComparability nullable;
        		String basePeriod nullable;
-       		- Set<@ExternalItemBtDto> unitMeasure;
+       		- Set<@ExternalItemDto> unitMeasure;
        		- @InternationalStringDto statConcDef nullable;
-       		- Set<@ExternalItemBtDto> statConcDefList;
+       		- Set<@ExternalItemDto> statConcDefList;
        		- @InternationalStringDto classSystem nullable;
-       		- Set<@ExternalItemBtDto> classSystemList;
+       		- Set<@ExternalItemDto> classSystemList;
        		
        		- @InstanceTypeDto instanceType nullable;
        		
@@ -156,8 +156,8 @@ Application StatisticalOperationsDto {
        		- @InternationalStringDto docMethod nullable;
        		- @SurveySourceDto surveySource nullable;
        		- @CollMethodDto collMethod nullable;
-       		- Set<@ExternalItemBtDto> informationSuppliers;
-       		- Set<@ExternalItemBtDto> freqColl;
+       		- Set<@ExternalItemDto> informationSuppliers;
+       		- Set<@ExternalItemDto> freqColl;
        		- @InternationalStringDto dataValidation nullable;
        		- @InternationalStringDto dataCompilation nullable;
        		- @InternationalStringDto adjustment nullable;

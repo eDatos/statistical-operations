@@ -22,6 +22,7 @@ public class ServiceExceptionParameters {
     public static final String OPERATION_PROC_STATUS             = "operation.proc_status";
     public static final String OPERATION_STATUS                  = "operation.status";
     public static final String OPERATION_SUBJECT_AREA            = "operation.subject_area";
+    public static final String OPERATION_SECONDARY_SUBJECT_AREAS = "operation.secondary_subject_areas";
     public static final String OPERATION_SURVEY_TYPE             = "operation.survey_type";
     public static final String OPERATION_INDICATOR_SYSTEM        = "operation.indicator_system";
     public static final String OPERATION_RELEASE_CALENDAR_ACCESS = "operation.release_calendar_access";
@@ -33,6 +34,8 @@ public class ServiceExceptionParameters {
     public static final String OPERATION_OFFICIALITY_TYPE        = "operation.officiality_type";
     public static final String OPERATION_PRODUCER                = "operation.producer";
     public static final String OPERATION_REGIONAL_RESPONSIBLE    = "operation.regional_responsible";
+    public static final String OPERATION_REGIONAL_CONTRIBUTOR    = "operation.regional_contributor";
+    public static final String OPERATION_UPDATE_FREQUENCY        = "operation.update_frequency";
     public static final String OPERATION_CURRENTLY_ACTIVE        = "operation.currently_active";
     public static final String OPERATION_PUBLISHER               = "operation.publisher";
     public static final String OPERATION_INTERNAL_INVENTORY_DATE = "operation.internal_inventory_date";
@@ -44,11 +47,19 @@ public class ServiceExceptionParameters {
     public static final String INSTANCE_ACRONYM                  = "instance.acronym";
     public static final String INSTANCE_DESCRIPTION              = "instance.description";
     public static final String INSTANCE_STATISTICAL_POPULATION   = "instance.statistical_population";
+    public static final String INSTANCE_STATISTICAL_UNIT         = "instance.statistical_unit";
+    public static final String INSTANCE_GEOGRAPHIC_GRANULARITY   = "instance.geographic_granularity";
     public static final String INSTANCE_GEOGRAPHIC_COMPARABILITY = "instance.geographic_comparability";
+    public static final String INSTANCE_TEMPORAL_GRANULARITY     = "instance.temporal_granularity";
     public static final String INSTANCE_TEMPORAL_COMPARABILITY   = "instance.temporal_comparability";
+    public static final String INSTANCE_UNIT_MEASURE             = "instance.unit_measure";
     public static final String INSTANCE_STAT_CONC_DEF            = "instance.stat_conc_def";
+    public static final String INSTANCE_STAT_CONC_DEF_LIST       = "instance.stat_conc_def_list";
     public static final String INSTANCE_CLASS_SYSTEM             = "instance.class_system";
+    public static final String INSTANCE_CLASS_SYSTEM_LIST        = "instance.class_system_list";
     public static final String INSTANCE_DOC_METHOD               = "instance.doc_method";
+    public static final String INSTANCE_INFORMATION_SUPPLIERS    = "instance.information_suppliers";
+    public static final String INSTANCE_FREQ_COLL                = "instance.freq_coll";
     public static final String INSTANCE_DATA_VALIDATION          = "instance.data_validation";
     public static final String INSTANCE_DATA_COMPILATION         = "instance.data_compilation";
     public static final String INSTANCE_ADJUSTMENT               = "instance.adjustment";

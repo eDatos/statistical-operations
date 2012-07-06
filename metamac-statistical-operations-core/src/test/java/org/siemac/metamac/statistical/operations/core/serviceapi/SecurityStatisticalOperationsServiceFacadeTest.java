@@ -10,7 +10,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
@@ -1392,11 +1392,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        ExternalItemBtDto subjectArea = new ExternalItemBtDto();
-        subjectArea.setCodeId("PRUEBA");
-        subjectArea.setType(TypeExternalArtefactsEnum.CATEGORY);
-        subjectArea.setUriInt("uri:internal:todo");
-        operationDto.setSubjectArea(subjectArea);
+        operationDto.setSubjectArea(new ExternalItemDto("/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -1426,38 +1422,17 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        ExternalItemBtDto producer01 = new ExternalItemBtDto();
-        producer01.setCodeId("ISTAC");
-        producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer01.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer01);
-
-        ExternalItemBtDto producer02 = new ExternalItemBtDto();
-        producer02.setCodeId("INE");
-        producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer02.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer02);
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:INE", TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        ExternalItemBtDto regionalResponsible01 = new ExternalItemBtDto();
-        regionalResponsible01.setCodeId("ISTAC");
-        regionalResponsible01.setType(TypeExternalArtefactsEnum.AGENCY);
-        regionalResponsible01.setUriInt("uri:interna:todo");
-        operationDto.addRegionalResponsible(regionalResponsible01);
+        operationDto.addRegionalResponsible(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        ExternalItemBtDto publisher01 = new ExternalItemBtDto();
-        publisher01.setCodeId("ISTAC");
-        publisher01.setType(TypeExternalArtefactsEnum.AGENCY);
-        publisher01.setUriInt("uri:interna:todo");
-        operationDto.addPublisher(publisher01);
+        operationDto.addPublisher(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        ExternalItemBtDto commonMetadata = new ExternalItemBtDto();
-        commonMetadata.setCodeId("ISTAC");
-        commonMetadata.setType(TypeExternalArtefactsEnum.AGENCY);
-        commonMetadata.setUriInt("uri:interna:todo");
-        operationDto.setCommonMetadata(commonMetadata);
+        operationDto.setCommonMetadata(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         return operationDto;
     }

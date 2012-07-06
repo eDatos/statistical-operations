@@ -15,12 +15,11 @@ import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
+import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
@@ -621,7 +620,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
         // Create instances
-        Instance instance01 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         Instance instance02 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         Instance instance03 = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
 
@@ -742,8 +741,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setCurrentlyActive(false);
 
         // SUBJECT_AREA
-        ExternalItemBt subjectArea = new ExternalItemBt("uri:internal:todo", "PRUEBA", TypeExternalArtefactsEnum.CATEGORY);
-        operation.setSubjectArea(subjectArea);
+        operation.setSubjectArea(new ExternalItem("/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
 
         // INDICATOR_SYSTEM
         operation.setIndicatorSystem(false);
@@ -797,23 +795,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        ExternalItem producer01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operation.addProducer(producer01);
-
-        ExternalItem producer02 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "INE", TypeExternalArtefactsEnum.AGENCY));
-        operation.addProducer(producer02);
+        operation.addProducer(new ExternalItem("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(new ExternalItem("/uri/test/agency", "URN:AGENCY:INE", TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        ExternalItem regionalResponsible01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operation.addRegionalResponsible(regionalResponsible01);
+        operation.addRegionalResponsible(new ExternalItem("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        ExternalItem publisher01 = new ExternalItem(new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operation.addPublisher(publisher01);
+        operation.addPublisher(new ExternalItem("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        ExternalItemBt commonMetadata = new ExternalItemBt("uri:internal:todo", "ISTAC", TypeExternalArtefactsEnum.AGENCY);
-        operation.setCommonMetadata(commonMetadata);
+        operation.setCommonMetadata(new ExternalItem("/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
 
         // OFFICIALITY_TYPE
         operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));

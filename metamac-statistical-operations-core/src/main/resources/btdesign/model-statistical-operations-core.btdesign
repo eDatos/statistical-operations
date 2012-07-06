@@ -1,8 +1,6 @@
 import "classpath:/btdesign/metamac-core-common-dtos.btdesign"
 import "classpath:/btdesign/metamac-statistical-operations-core-dtos.btdesign"
 import "classpath:/btdesign/metamac-statistical-operations-core-enums.btdesign"
-import "classpath:/btdesign/export/metamac-core-common-basictype.btdesign"
-import "classpath:/btdesign/export/metamac-core-common-vo.btdesign"
 import "classpath:/btdesign/export/metamac-core-common-entity.btdesign"
 
 
@@ -317,7 +315,7 @@ Application StatisticalOperations {
 			
 			gap
 			
-			- @ExternalItemBt commonMetadata nullable;
+			- @ExternalItem commonMetadata nullable cascade="all" databaseColumn="COMMON_METADATA_FK";
 			
 			"Metadata CODE"
        		String code;
@@ -329,7 +327,7 @@ Application StatisticalOperations {
        		"Related families"
        		- Set<@Family> families cascade="none" <-> operations;
        		"Subject areas and subject codes. Its type is CATEGORY"
-       		- @ExternalItemBt subjectArea nullable;
+       		- @ExternalItem subjectArea nullable cascade="all" databaseColumn="SUBJECT_AREA_FK";
        		"Metadata SECONDARY_SUBJECT_AREAS. Its type is CATEGORY"
        		- Set<@ExternalItem> secondarySubjectAreas databaseColumn="SECUN_SUBJECT_AREAS_FK" databaseJoinTable="TB_EI_SECONDARY_AREAS" cascade="all-delete-orphan";
        		
@@ -431,11 +429,11 @@ Application StatisticalOperations {
        		"Metadata STATISTICAL_UNIT. Its type is CONCEPT"
        		- Set<@ExternalItem> statisticalUnit databaseColumn="STATISTICAL_UNIT_FK" databaseJoinTable="TB_EI_STATISTICAL_UNITS"  cascade="all-delete-orphan";
        		"Metadata GEOGRAPHIC_GRANULARITY. Its type is CODE"
-       		- @ExternalItemBt geographicGranularity nullable;
+       		- @ExternalItem geographicGranularity nullable cascade="all" databaseColumn="GEOGRAPHIC_GRANULARITY_FK";
        		"Metadata GEOGRAPHIC_COMPARABILITY"
        		- @InternationalString geographicComparability cascade="all" nullable databaseColumn="GEOGRAPHIC_COMPARABILITY_FK";
        		"Metadata TEMPORAL_GRANULARITY. Its type is CODE"
-       		- @ExternalItemBt temporalGranularity nullable;
+       		- @ExternalItem temporalGranularity nullable cascade="all" databaseColumn="TEMPORAL_GRANULARITY_FK";
        		"Metadata TEMPORAL_COMPARABILITY"
        		- @InternationalString temporalComparability cascade="all" nullable databaseColumn="TEMPORAL_COMPARABILITY_FK";
        		"Metadata BASE_PERIOD. Its type is CODE"

@@ -100,8 +100,8 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     @Override
     protected List<String> getTablesToRemoveContent() {
         List<String> tables = new ArrayList<String>();
-        tables.add("TB_INSTANCES_COSTS");
-        tables.add("TB_FAMILIES_OPERATIONS");
+        tables.add("TB_LOCALISED_STRINGS");
+        
         tables.add("TB_EI_UPDATE_FREQUENCY");
         tables.add("TB_EI_UNITS_MEASURE");
         tables.add("TB_EI_STATISTICAL_UNITS");
@@ -114,10 +114,14 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
         tables.add("TB_EI_FREQ_COLL");
         tables.add("TB_EI_CONC_DEF_LISTS");
         tables.add("TB_EI_CLASS_SYSTEM_LISTS");
-        tables.add("TB_EXTERNAL_ITEMS");
-        tables.add("TB_LOCALISED_STRINGS");
+        
+        tables.add("TB_INSTANCES_COSTS");
         tables.add("TB_INSTANCES");
+        tables.add("TB_FAMILIES_OPERATIONS");
         tables.add("TB_OPERATIONS");
+        
+        tables.add("TB_EXTERNAL_ITEMS");
+        
         tables.add("TB_FAMILIES");
         tables.add("TB_INTERNATIONAL_STRINGS");
         

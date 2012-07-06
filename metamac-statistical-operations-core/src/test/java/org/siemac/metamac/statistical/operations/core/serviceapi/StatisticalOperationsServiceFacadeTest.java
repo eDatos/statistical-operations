@@ -13,20 +13,20 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.siemac.metamac.common.test.utils.MetamacMocks;
 import org.siemac.metamac.common.test.utils.DirtyDatabase;
+import org.siemac.metamac.common.test.utils.MetamacMocks;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction.OperationType;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
+import org.siemac.metamac.core.common.ent.domain.ExternalItemRepository;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.core.common.vo.domain.ExternalItemRepository;
 import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.InstanceCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaPropertyEnum;
@@ -1118,16 +1118,12 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoWithProducer());
 
         int externalItemsAfter = externalItemRepository.findAll().size();
-        assertEquals(externalItemsBefore + 2, externalItemsAfter);
+        assertEquals(externalItemsBefore + 3, externalItemsAfter);
 
         // ADD PRODUCER
         externalItemsBefore = externalItemRepository.findAll().size();
 
-        ExternalItemBtDto producerUpdated = new ExternalItemBtDto();
-        producerUpdated.setCodeId("ISTAC_MOD");
-        producerUpdated.setType(TypeExternalArtefactsEnum.AGENCY);
-        producerUpdated.setUriInt("uri:internal_mod:todo");
-        operationDto.addProducer(producerUpdated);
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?mod", "URN:AGENCY:ISTAC?MOD", TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1137,17 +1133,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         externalItemsBefore = externalItemRepository.findAll().size();
 
         operationDto.getProducer().clear();
-        ExternalItemBtDto producer01 = new ExternalItemBtDto();
-        producer01.setCodeId("ISTAC_FOR_REMOVE");
-        producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer01.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer01);
-
-        ExternalItemBtDto producer02 = new ExternalItemBtDto();
-        producer02.setCodeId("INE_FOR_REMOVE");
-        producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer02.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer02);
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1173,17 +1160,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // ADD REGIONAL CONTRIBUTOR
         int externalItemsBefore = externalItemRepository.findAll().size();
 
-        ExternalItemBtDto regionalContributor01 = new ExternalItemBtDto();
-        regionalContributor01.setCodeId("ISTAC_REMOVE");
-        regionalContributor01.setType(TypeExternalArtefactsEnum.AGENCY);
-        regionalContributor01.setUriInt("uri:internal_remove:todo");
-        operationDto.addRegionalContributor(regionalContributor01);
-
-        ExternalItemBtDto regionalContributor02 = new ExternalItemBtDto();
-        regionalContributor02.setCodeId("INE_REMOVE");
-        regionalContributor02.setType(TypeExternalArtefactsEnum.AGENCY);
-        regionalContributor02.setUriInt("uri:internal_remove:todo");
-        operationDto.addRegionalContributor(regionalContributor02);
+        operationDto.addRegionalContributor(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalContributor(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
@@ -1194,7 +1172,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         externalItemsBefore = externalItemRepository.findAll().size();
 
         operationDto.getRegionalContributor().clear();
-        operationDto.getRegionalContributor().addAll(new ArrayList<ExternalItemBtDto>());
+        operationDto.getRegionalContributor().addAll(new ArrayList<ExternalItemDto>());
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
@@ -2839,7 +2817,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setReleaseCalendar(false);
 
         // RELEASE_CALENDAR_ACCESS
-        operationDto.setReleaseCalendarAccess("http://www.draft.com");
+        operationDto.setReleaseCalendarAccess("http://www.test.com");
 
         // SURVEY_TYPE
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
@@ -2848,11 +2826,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        ExternalItemBtDto subjectArea = new ExternalItemBtDto();
-        subjectArea.setCodeId("PRUEBA");
-        subjectArea.setType(TypeExternalArtefactsEnum.CATEGORY);
-        subjectArea.setUriInt("uri:internal:todo");
-        operationDto.setSubjectArea(subjectArea);
+        operationDto.setSubjectArea(new ExternalItemDto("/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -2882,38 +2856,17 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        ExternalItemBtDto producer01 = new ExternalItemBtDto();
-        producer01.setCodeId("ISTAC");
-        producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer01.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer01);
-
-        ExternalItemBtDto producer02 = new ExternalItemBtDto();
-        producer02.setCodeId("INE");
-        producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer02.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer02);
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:INE", TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        ExternalItemBtDto regionalResponsible01 = new ExternalItemBtDto();
-        regionalResponsible01.setCodeId("ISTAC");
-        regionalResponsible01.setType(TypeExternalArtefactsEnum.AGENCY);
-        regionalResponsible01.setUriInt("uri:interna:todo");
-        operationDto.addRegionalResponsible(regionalResponsible01);
+        operationDto.addRegionalResponsible(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        ExternalItemBtDto publisher01 = new ExternalItemBtDto();
-        publisher01.setCodeId("ISTAC");
-        publisher01.setType(TypeExternalArtefactsEnum.AGENCY);
-        publisher01.setUriInt("uri:interna:todo");
-        operationDto.addPublisher(publisher01);
+        operationDto.addPublisher(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        ExternalItemBtDto commonMetadata = new ExternalItemBtDto();
-        commonMetadata.setCodeId("ISTAC");
-        commonMetadata.setType(TypeExternalArtefactsEnum.AGENCY);
-        commonMetadata.setUriInt("uri:interna:todo");
-        operationDto.setCommonMetadata(commonMetadata);
+        operationDto.setCommonMetadata(new ExternalItemDto("/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
 
         return operationDto;
     }
@@ -2922,17 +2875,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = createOperationDto();
 
         // PRODUCER
-        ExternalItemBtDto producer01 = new ExternalItemBtDto();
-        producer01.setCodeId("ISTAC_FOR_REMOVE");
-        producer01.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer01.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer01);
-
-        ExternalItemBtDto producer02 = new ExternalItemBtDto();
-        producer02.setCodeId("INE_FOR_REMOVE");
-        producer02.setType(TypeExternalArtefactsEnum.AGENCY);
-        producer02.setUriInt("uri:interna:todo");
-        operationDto.addProducer(producer02);
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
 
         return operationDto;
     }
@@ -2978,11 +2922,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instanceDto = createInstanceDto();
 
         // GEOGRAPHIC_GRANULARITY
-        ExternalItemBtDto geographicGranularity = new ExternalItemBtDto();
-        geographicGranularity.setCodeId("GEOGRAPHIC_GRANULARITY");
-        geographicGranularity.setType(TypeExternalArtefactsEnum.CONCEPT);
-        geographicGranularity.setUriInt("uri:interna:todo");
-        instanceDto.setGeographicGranularity(geographicGranularity);
+        instanceDto.setGeographicGranularity(new ExternalItemDto("/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", TypeExternalArtefactsEnum.CONCEPT));
 
         return instanceDto;
 

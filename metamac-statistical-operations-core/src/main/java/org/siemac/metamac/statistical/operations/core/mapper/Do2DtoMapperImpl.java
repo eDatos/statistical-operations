@@ -4,13 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.dozer.DozerBeanMapper;
-import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
+import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
-import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -203,7 +202,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         OperationDto target = getMapper().map(source, OperationDto.class);
 
         // APP_COMMON_METADATA
-        target.setCommonMetadata(externalItemBtToDto(source.getCommonMetadata()));
+        target.setCommonMetadata(externalItemToDto(source.getCommonMetadata()));
 
         // CODE
         // Not necessary
@@ -215,7 +214,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         target.setAcronym(internationalStringToDto(source.getAcronym()));
 
         // SUBJECT_AREA
-        target.setSubjectArea(externalItemBtToDto(source.getSubjectArea()));
+        target.setSubjectArea(externalItemToDto(source.getSubjectArea()));
 
         // SECONDARY_SUBJECT_AREAS
         target.getSecondarySubjectAreas().addAll(externalItemListToDto(source.getSecondarySubjectAreas()));
@@ -367,13 +366,13 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         target.getStatisticalUnit().addAll(externalItemListToDto(source.getStatisticalUnit()));
 
         // GEOGRAPHIC_GRANULARITY
-        target.setGeographicGranularity(externalItemBtToDto(source.getGeographicGranularity()));
+        target.setGeographicGranularity(externalItemToDto(source.getGeographicGranularity()));
 
         // GEOGRAPHIC_COMPARABILITY
         target.setGeographicComparability(internationalStringToDto(source.getGeographicComparability()));
 
         // TEMPORAL_GRANULARITY
-        target.setTemporalGranularity(externalItemBtToDto(source.getTemporalGranularity()));
+        target.setTemporalGranularity(externalItemToDto(source.getTemporalGranularity()));
 
         // TEMPORAL_COMPARABILITY
         target.setTemporalComparability(internationalStringToDto(source.getTemporalComparability()));
@@ -579,9 +578,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         return internationalStringDto;
     }
 
-    private Set<ExternalItemBtDto> externalItemListToDto(Set<ExternalItem> statisticalUnit) {
+    private Set<ExternalItemDto> externalItemListToDto(Set<ExternalItem> statisticalUnit) {
 
-        HashSet<ExternalItemBtDto> result = new HashSet<ExternalItemBtDto>();
+        HashSet<ExternalItemDto> result = new HashSet<ExternalItemDto>();
 
         for (ExternalItem externalItem : statisticalUnit) {
             result.add(externalItemToDto(externalItem));
@@ -590,25 +589,16 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         return result;
     }
 
-    private ExternalItemBtDto externalItemBtToDto(ExternalItemBt externalItem) {
-        if (externalItem == null) {
+    private ExternalItemDto externalItemToDto(ExternalItem source) {
+        if (source == null) {
             return null;
         }
 
-        ExternalItemBtDto result = new ExternalItemBtDto(externalItem.getUriInt(), externalItem.getCodeId(), externalItem.getType());
+        ExternalItemDto target = new ExternalItemDto(source.getUri(), source.getUrn(), source.getType(), internationalStringToDto(source.getTitle()), source.getManagementAppUrl());
 
-        return result;
+        return target;
     }
 
-    private ExternalItemBtDto externalItemToDto(ExternalItem externalItem) {
-        if (externalItem == null) {
-            return null;
-        }
-
-        ExternalItemBtDto result = new ExternalItemBtDto(externalItem.getExt().getUriInt(), externalItem.getExt().getCodeId(), externalItem.getExt().getType());
-
-        return result;
-    }
 
     private Set<CostDto> costListToDto(Set<Cost> costList) {
         if (costList == null) {
