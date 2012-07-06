@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<relatedResourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
     <kind>statisticalOperations#operations</kind>
     <limit>25</limit>
     <offset>0</offset>
@@ -94,4 +94,4 @@
             </text>
         </title>
     </items>
-</relatedResourcesPagedResult>
+</resourcesPagedResult>

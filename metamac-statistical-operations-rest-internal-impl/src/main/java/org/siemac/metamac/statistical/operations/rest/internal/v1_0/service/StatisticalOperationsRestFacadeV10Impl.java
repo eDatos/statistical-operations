@@ -14,8 +14,8 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
-import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
@@ -75,7 +75,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public RelatedResourcesPagedResult findOperations(String limit, String offset) {
+    public ResourcesPagedResult findOperations(String limit, String offset) {
         try {
             // TODO Validation of parameters. delegar en servicio?
 
@@ -91,7 +91,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            RelatedResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {
@@ -101,7 +101,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public RelatedResourcesPagedResult findInstances(String operationCode, String limit, String offset) {
+    public ResourcesPagedResult findInstances(String operationCode, String limit, String offset) {
         try {
             // TODO Validation of parameters. delegar en servicio?
 
@@ -121,7 +121,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            RelatedResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return instancesPagedResult;
 
         } catch (MetamacException e) {
@@ -130,7 +130,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public RelatedResourcesNoPagedResult retrieveFamiliesByOperation(String code) {
+    public ResourcesNoPagedResult retrieveFamiliesByOperation(String code) {
         try {
             // TODO Validation of parameters. validar code o delegar en servicio?
 
@@ -146,7 +146,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, pagingParameter);
 
             // Transform
-            RelatedResourcesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
+            ResourcesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
             return familiesNoPagedResult;
 
         } catch (MetamacException e) {
@@ -173,7 +173,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public RelatedResourcesPagedResult findFamilies(String limit, String offset) {
+    public ResourcesPagedResult findFamilies(String limit, String offset) {
         try {
             // TODO Validation of parameters. delegar en servicio?
 
@@ -189,7 +189,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            RelatedResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return familiesPagedResult;
 
         } catch (MetamacException e) {
@@ -198,7 +198,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public RelatedResourcesPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
+    public ResourcesPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
         try {
             // TODO Validation of parameters. validar code o delegar en servicio?
 
@@ -218,7 +218,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            RelatedResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, sculptorCriteria.getLimit(), getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {

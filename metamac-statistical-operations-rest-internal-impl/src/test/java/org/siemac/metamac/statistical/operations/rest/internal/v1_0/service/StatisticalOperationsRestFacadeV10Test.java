@@ -27,8 +27,8 @@ import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.mockito.PagingParameterMatcher;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
-import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesNoPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.RelatedResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
@@ -181,50 +181,50 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             // without limits
             String limit = null;
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = "10000";
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = null;
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // first page with pagination
             String limit = "2";
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // second page with pagination
             String limit = "2";
             String offset = "2";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // last page with pagination
             String limit = "2";
             String offset = "8";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // no results
             String limit = "2";
             String offset = "9";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findOperations(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
         }
     }
 
@@ -283,57 +283,57 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             // without limits, family 1
             String limit = null;
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = "10000";
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = null;
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // first page with pagination
             String limit = "2";
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // second page with pagination
             String limit = "2";
             String offset = "2";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // second page with pagination, family 2
             String limit = "1";
             String offset = "2";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE2, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily2(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE2, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily2(baseApi, limit, offset), pagedResult);
         }
         {
             // last page, with pagination
             String limit = "2";
             String offset = "4";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
         {
             // no results
             String limit = "2";
             String offset = "7";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.retrieveOperationsByFamily(FAMILY_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
         }
     }
 
@@ -562,50 +562,50 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             // without limits
             String limit = null;
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = "10000";
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = null;
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // first page with pagination
             String limit = "2";
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // second page with pagination
             String limit = "2";
             String offset = "2";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // last page with pagination
             String limit = "2";
             String offset = "4";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
         {
             // no results
             String limit = "2";
             String offset = "9";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findInstances(OPERATION_CODE1, limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
         }
     }
 
@@ -675,50 +675,50 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             // without limits
             String limit = null;
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = "10000";
             String offset = null;
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // without limits, first page
             String limit = null;
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // first page with pagination
             String limit = "2";
             String offset = "0";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // second page with pagination
             String limit = "2";
             String offset = "2";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // last page with pagination
             String limit = "2";
             String offset = "4";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
         {
             // no results
             String limit = "2";
             String offset = "9";
-            RelatedResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
-            MetamacRestAsserts.assertEqualsRelatedResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            ResourcesPagedResult pagedResult = statisticalOperationsRestFacadeClientXml.findFamilies(limit, offset);
+            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
         }
     }
 
@@ -774,10 +774,10 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamiliesByOperationXml() throws Exception {
 
         // Retrieve
-        RelatedResourcesNoPagedResult familiesNoPagedResult = statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(OPERATION_CODE1);
+        ResourcesNoPagedResult familiesNoPagedResult = statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(OPERATION_CODE1);
 
         // Validation
-        MetamacRestAsserts.assertEqualsRelatedResourcesNoPagedResult(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
+        MetamacRestAsserts.assertEqualsResourcesNoPagedResult(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
     }
 
     @Test

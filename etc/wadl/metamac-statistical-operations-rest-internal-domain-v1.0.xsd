@@ -12,41 +12,41 @@
             <xs:element name="selfLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="family" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="subjectArea" type="common:RelatedResource" />
-            <xs:element name="secondarySubjectAreas" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="family" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="subjectArea" type="common:Resource" />
+            <xs:element name="secondarySubjectAreas" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="instance" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="surveyType" type="common:RelatedResource" />
-            <xs:element name="officialityType" type="common:RelatedResource" />
+            <xs:element name="instance" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="surveyType" type="common:Resource" />
+            <xs:element name="officialityType" type="common:Resource" />
             <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
-            <xs:element name="producer" type="common:RelatedResource" maxOccurs="unbounded" />
-            <xs:element name="regionalResponsible" type="common:RelatedResource" maxOccurs="unbounded" />
-            <xs:element name="regionalContributor" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="producer" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="regionalResponsible" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="regionalContributor" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
             <xs:element name="status" type="xs:string" />
             <xs:element name="procStatus" type="xs:string" />
-            <xs:element name="publisher" type="common:RelatedResource" maxOccurs="unbounded" />
+            <xs:element name="publisher" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="relPolUsAc" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
             <xs:element name="releaseCalendarAccess" type="xs:string" minOccurs="0"/>
-            <xs:element name="updateFrequency" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="currentInternalInstance" type="common:RelatedResource" minOccurs="0"/>
-            <xs:element name="currentInstance" type="common:RelatedResource" minOccurs="0"/>
+            <xs:element name="updateFrequency" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="currentInternalInstance" type="common:Resource" minOccurs="0"/>
+            <xs:element name="currentInstance" type="common:Resource" minOccurs="0"/>
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="revPolicy" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="revPractice" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="contact" type="common:RelatedResource" maxOccurs="unbounded" />
+            <xs:element name="contact" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="legalActs" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="confidentialityPolicy" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="parent" type="common:RelatedResource" />
-            <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" />
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType> 
        
@@ -61,8 +61,8 @@
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="xs:string" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
-            <xs:element name="parent" type="common:RelatedResource" />
-            <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" />
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
@@ -73,35 +73,35 @@
             <xs:element name="selfLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="survey" type="common:RelatedResource" />
-            <xs:element name="successor" type="common:RelatedResource" minOccurs="0"/>
-            <xs:element name="predecessor" type="common:RelatedResource" minOccurs="0"/>
+            <xs:element name="survey" type="common:Resource" />
+            <xs:element name="successor" type="common:Resource" minOccurs="0"/>
+            <xs:element name="predecessor" type="common:Resource" minOccurs="0"/>
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="statisticalPopulation" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="statisticalUnit" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="geographicGranularity" type="common:RelatedResource" minOccurs="0"/>
+            <xs:element name="statisticalUnit" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="geographicGranularity" type="common:Resource" minOccurs="0"/>
             <xs:element name="geographicComparability" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="temporalGranularity" type="common:RelatedResource" minOccurs="0"/>
+            <xs:element name="temporalGranularity" type="common:Resource" minOccurs="0"/>
             <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="basePeriod" type="xs:string" minOccurs="0"/>
-            <xs:element name="unitMeasure" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="unitMeasure" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="statConcDef" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="statConcDefList" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="statConcDefList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="classSystem" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="classSystemList" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="instanceType" type="common:RelatedResource" />
+            <xs:element name="classSystemList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="instanceType" type="common:Resource" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="xs:string" />
             <xs:element name="docMethod" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="surveySource" type="common:RelatedResource" minOccurs="0"/>
-            <xs:element name="collMethod" type="common:RelatedResource" minOccurs="0"/>
-            <xs:element name="informationSuppliers" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="freqColl" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="surveySource" type="common:Resource" minOccurs="0"/>
+            <xs:element name="collMethod" type="common:Resource" minOccurs="0"/>
+            <xs:element name="informationSuppliers" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="freqColl" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="dataValidation" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="dataCompilation" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="adjustment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="costBurden" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="cost" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="cost" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="qualityDoc" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="qualityAssure" type="common:InternationalString" minOccurs="0"/>
@@ -118,8 +118,8 @@
             <xs:element name="coherInternal" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="parent" type="common:RelatedResource" />
-            <xs:element name="child" type="common:RelatedResource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
