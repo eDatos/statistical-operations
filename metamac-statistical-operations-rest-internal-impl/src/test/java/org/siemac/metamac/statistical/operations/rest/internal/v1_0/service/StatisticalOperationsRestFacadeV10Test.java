@@ -34,9 +34,9 @@ import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOper
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperation1Matcher;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesMatcher;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindInstancesByOperation1Matcher;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindInstancesByOperationMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindOperationsByFamilyMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindOperationsMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.StatisticalOperationsCoreMocks;
@@ -932,7 +932,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         }
         // Mock
         when(
-                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperation1Matcher()),
+                statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesByOperationMatcher(operation)),
                         argThat(new PagingParameterMatcher(PagingParameter.noLimits())))).thenReturn(pagedResult);
     }
 
@@ -952,7 +952,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         }
         // Mock
         when(
-                statisticalOperationsBaseService.findInstanceByCondition(any(ServiceContext.class), argThat(new FindInstancesByOperation1Matcher()),
+                statisticalOperationsBaseService.findInstanceByCondition(any(ServiceContext.class), argThat(new FindInstancesByOperationMatcher(operation)),
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResult);
     }
 }
