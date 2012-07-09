@@ -1954,7 +1954,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Test
 	@Transactional
-    public void testUpdateInstanceWithExternalItemBt() throws Exception {
+    public void testUpdateInstanceWithExternalItem() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
