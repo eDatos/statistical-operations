@@ -6,7 +6,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
@@ -128,18 +128,18 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         HasClickHandlers getPublishOperationInternally();
         HasClickHandlers getPublishOperationExternally();
 
-        void setCategorySchemes(List<ExternalItemBtDto> schemes);
-        void setSubjects(List<ExternalItemBtDto> subjects);
-        void setSecondarySubjetcs(List<ExternalItemBtDto> secondarySubjects);
+        void setCategorySchemes(List<ExternalItemDto> schemes);
+        void setSubjects(List<ExternalItemDto> subjects);
+        void setSecondarySubjetcs(List<ExternalItemDto> secondarySubjects);
 
-        void setOrganisationSchemes(List<ExternalItemBtDto> schemes);
-        void setProducers(List<ExternalItemBtDto> organisations);
-        void setRegionalResposibles(List<ExternalItemBtDto> organisations);
-        void setRegionalContributors(List<ExternalItemBtDto> organisations);
-        void setPublishers(List<ExternalItemBtDto> organisations);
-        void setUpdateFrequencyCodes(List<ExternalItemBtDto> codes);
+        void setOrganisationSchemes(List<ExternalItemDto> schemes);
+        void setProducers(List<ExternalItemDto> organisations);
+        void setRegionalResposibles(List<ExternalItemDto> organisations);
+        void setRegionalContributors(List<ExternalItemDto> organisations);
+        void setPublishers(List<ExternalItemDto> organisations);
+        void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
-        void setCommonMetadataList(List<ExternalItemBtDto> commonMetadataList);
+        void setCommonMetadataList(List<ExternalItemDto> commonMetadataList);
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 

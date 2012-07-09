@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.operation.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -237,12 +237,12 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     }
 
     @Override
-    public void setCategorySchemes(List<ExternalItemBtDto> schemes) {
+    public void setCategorySchemes(List<ExternalItemDto> schemes) {
         this.newOperationForm.setSubjectAreasSchemes(schemes);
     }
 
     @Override
-    public void setSubjects(List<ExternalItemBtDto> subjects) {
+    public void setSubjects(List<ExternalItemDto> subjects) {
         this.newOperationForm.setSubjetcAreas(subjects);
     }
 

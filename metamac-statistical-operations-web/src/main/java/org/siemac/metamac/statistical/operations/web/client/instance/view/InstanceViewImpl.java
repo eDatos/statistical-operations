@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
@@ -148,14 +148,14 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private ViewMultiLanguageTextItem       staticCommentItem;
     private ViewMultiLanguageTextItem       staticNotesItem;
 
-    private List<ExternalItemBtDto>         conceptSchemes;
-    private List<ExternalItemBtDto>         codeLists;
+    private List<ExternalItemDto>           conceptSchemes;
+    private List<ExternalItemDto>           codeLists;
 
-    private List<ExternalItemBtDto>         statisticalUnitConcepts;
-    private List<ExternalItemBtDto>         infSuppliersOrganisations;
-    private List<ExternalItemBtDto>         infSuppliersConcepts;
-    private List<ExternalItemBtDto>         temporalGranularityCodes;
-    private List<ExternalItemBtDto>         freqCollCodes;
+    private List<ExternalItemDto>           statisticalUnitConcepts;
+    private List<ExternalItemDto>           infSuppliersOrganisations;
+    private List<ExternalItemDto>           infSuppliersConcepts;
+    private List<ExternalItemDto>           temporalGranularityCodes;
+    private List<ExternalItemDto>           freqCollCodes;
 
     private List<InstanceTypeDto>           instanceTypeDtos;
     private List<SurveySourceDto>           surveySourceDtos;
@@ -252,19 +252,19 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setStatisticalPopulation(statisticalPopulationItem.getValue());
         instanceDto.getStatisticalUnit().clear();
         instanceDto.getStatisticalUnit().addAll(statisticalUnitItem.getSelectedExternalItems(statisticalUnitConcepts));
-        instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemBtDtoFromCodeId(codeLists, geographicalGranularityItem.getValueAsString()));
+        instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemDtoFromCodeId(codeLists, geographicalGranularityItem.getValueAsString()));
         instanceDto.setGeographicComparability(geographicalComparabilityItem.getValue());
-        instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemBtDtoFromCodeId(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
+        instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemDtoFromCodeId(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
         instanceDto.setTemporalComparability(temporalComparabilityItem.getValue());
         instanceDto.setBasePeriod(contentEditionForm.getValueAsString(InstanceDS.BASE_PERIOD));
         instanceDto.getUnitMeasure().clear();
-        instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(codeLists, unitMeasureItem.getValues()));
+        instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(codeLists, unitMeasureItem.getValues()));
         instanceDto.setStatConcDef(statConcDefItem.getValue());
         instanceDto.getStatConcDefList().clear();
-        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(conceptSchemes, statConcDefListItem.getValues()));
+        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(conceptSchemes, statConcDefListItem.getValues()));
         instanceDto.setClassSystem(classSystemItem.getValue());
         instanceDto.getClassSystemList().clear();
-        instanceDto.getClassSystemList().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(codeLists, classSystemListItem.getValues()));
+        instanceDto.getClassSystemList().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(codeLists, classSystemListItem.getValues()));
 
         // Class descriptors
         instanceDto.setInstanceType(OperationsListUtils.getInstanceTypeDto(instanceTypeItem.getValueAsString(), instanceTypeDtos));
@@ -277,7 +277,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getInformationSuppliers().addAll(infSuppliersOrganItem.getSelectedExternalItems(infSuppliersOrganisations));
         instanceDto.getInformationSuppliers().addAll(infSuppliersConceptsItem.getSelectedExternalItems(infSuppliersConcepts));
         instanceDto.getFreqColl().clear();
-        instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(freqCollCodes, freqCollItem.getValues()));
+        instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(freqCollCodes, freqCollItem.getValues()));
         instanceDto.setDataValidation(dataValidationItem.getValue());
         instanceDto.setDataCompilation(dataCompilationItem.getValue());
         instanceDto.setAdjustment(adjustmentItem.getValue());
@@ -561,9 +561,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentViewForm.setValue(InstanceDS.DATA_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getDataDescription()));
         contentViewForm.setValue(InstanceDS.STATISTICAL_POPULATION, RecordUtils.getInternationalStringRecord(instanceDto.getStatisticalPopulation()));
         contentViewForm.setValue(InstanceDS.STATISTIAL_UNIT, ExternalItemUtils.getExternalItemListToString(instanceDto.getStatisticalUnit()));
-        contentViewForm.setValue(InstanceDS.GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getCodeId() : "");
+        contentViewForm.setValue(InstanceDS.GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getUrn() : "");
         contentViewForm.setValue(InstanceDS.GEOGRAPHIC_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getGeographicComparability()));
-        contentViewForm.setValue(InstanceDS.TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getCodeId() : "");
+        contentViewForm.setValue(InstanceDS.TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getUrn() : "");
         contentViewForm.setValue(InstanceDS.TEMPORAL_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getTemporalComparability()));
         contentViewForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
         contentViewForm.setValue(InstanceDS.UNIT_MEASURE, ExternalItemUtils.getExternalItemListToString(instanceDto.getUnitMeasure()));
@@ -631,9 +631,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         dataDescriptionItem.setValue(instanceDto.getDataDescription());
         statisticalPopulationItem.setValue(instanceDto.getStatisticalPopulation());
         statisticalUnitItem.clearValue();
-        geographicalGranularityItem.setValue(instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getCodeId() : "");
+        geographicalGranularityItem.setValue(instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getUrn() : "");
         geographicalComparabilityItem.setValue(instanceDto.getGeographicComparability());
-        temporalGranularityItem.setValue(instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getCodeId() : "");
+        temporalGranularityItem.setValue(instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getUrn() : "");
         temporalComparabilityItem.setValue(instanceDto.getTemporalComparability());
         contentEditionForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
         unitMeasureItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getUnitMeasure()));
@@ -720,12 +720,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     }
 
     @Override
-    public void setOrganisationScheme(List<ExternalItemBtDto> schemes) {
+    public void setOrganisationScheme(List<ExternalItemDto> schemes) {
         infSuppliersOrganItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
     }
 
     @Override
-    public void setConceptScheme(List<ExternalItemBtDto> schemes) {
+    public void setConceptScheme(List<ExternalItemDto> schemes) {
         this.conceptSchemes = schemes;
         LinkedHashMap<String, String> map = ExternalItemUtils.getExternalItemsHashMap(schemes);
         statisticalUnitItem.setSchemesValueMap(map);
@@ -734,25 +734,25 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     }
 
     @Override
-    public void setInfSuppliersOrg(List<ExternalItemBtDto> organisations) {
+    public void setInfSuppliersOrg(List<ExternalItemDto> organisations) {
         this.infSuppliersOrganisations = organisations;
         infSuppliersOrganItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
-    public void setInfSuppliersConcept(List<ExternalItemBtDto> concepts) {
+    public void setInfSuppliersConcept(List<ExternalItemDto> concepts) {
         this.infSuppliersConcepts = concepts;
         infSuppliersConceptsItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(concepts));
     }
 
     @Override
-    public void setStatisticalUnitConcepts(List<ExternalItemBtDto> concepts) {
+    public void setStatisticalUnitConcepts(List<ExternalItemDto> concepts) {
         this.statisticalUnitConcepts = concepts;
         statisticalUnitItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(concepts));
     }
 
     @Override
-    public void setCodeLists(List<ExternalItemBtDto> codeLists) {
+    public void setCodeLists(List<ExternalItemDto> codeLists) {
         this.codeLists = codeLists;
         LinkedHashMap<String, String> map = ExternalItemUtils.getExternalItemsHashMap(codeLists);
         geographicalGranularityItem.setValueMap(map);
@@ -761,13 +761,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     }
 
     @Override
-    public void setTemporalGranularityCodes(List<ExternalItemBtDto> codes) {
+    public void setTemporalGranularityCodes(List<ExternalItemDto> codes) {
         this.temporalGranularityCodes = codes;
         temporalGranularityItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(codes));
     }
 
     @Override
-    public void setFreqCollCodes(List<ExternalItemBtDto> codes) {
+    public void setFreqCollCodes(List<ExternalItemDto> codes) {
         this.freqCollCodes = codes;
         freqCollItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(codes));
     }

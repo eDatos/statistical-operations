@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -23,7 +23,7 @@ public class UpdateCategorySchemesEvent extends GwtEvent<UpdateCategorySchemesEv
     }
 
     // TODO HasEventBus should be used instead of HasHandlers ¿?
-    public static void fire(HasHandlers source, List<ExternalItemBtDto> categorySchemes) {
+    public static void fire(HasHandlers source, List<ExternalItemDto> categorySchemes) {
         if (TYPE != null) {
             source.fireEvent(new UpdateCategorySchemesEvent(categorySchemes));
         }
@@ -34,13 +34,13 @@ public class UpdateCategorySchemesEvent extends GwtEvent<UpdateCategorySchemesEv
         handler.onUpdateCategorySchemes(this);
     }
 
-    private final List<ExternalItemBtDto> categorySchemes;
+    private final List<ExternalItemDto> categorySchemes;
 
-    public UpdateCategorySchemesEvent(List<ExternalItemBtDto> categorySchemes) {
+    public UpdateCategorySchemesEvent(List<ExternalItemDto> categorySchemes) {
         this.categorySchemes = categorySchemes;
     }
 
-    public List<ExternalItemBtDto> getCategorySchemes() {
+    public List<ExternalItemDto> getCategorySchemes() {
         return categorySchemes;
     }
 

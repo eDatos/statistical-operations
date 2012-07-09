@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeResult;
@@ -26,7 +26,7 @@ public class GetOrganisationsFromSchemeActionHandler extends SecurityActionHandl
 
     @Override
     public GetOrganisationsFromSchemeResult executeSecurityAction(GetOrganisationsFromSchemeAction action) throws ActionException {
-        List<ExternalItemBtDto> organisations = metamacCoreCommonService.retrieveOrganisationScheme(ServiceContextHolder.getCurrentServiceContext(), action.getOrganisationSchemeUri());
+        List<ExternalItemDto> organisations = metamacCoreCommonService.retrieveOrganisationScheme(ServiceContextHolder.getCurrentServiceContext(), action.getOrganisationSchemeUri());
         return new GetOrganisationsFromSchemeResult(organisations);
     }
 

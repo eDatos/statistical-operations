@@ -5,7 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
@@ -59,7 +59,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -105,15 +104,15 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         InstanceDto getInstance(InstanceDto instanceDto);
 
         void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
-        void setOrganisationScheme(List<ExternalItemBtDto> schemes);
-        void setConceptScheme(List<ExternalItemBtDto> schemes);
-        void setCodeLists(List<ExternalItemBtDto> codeLists);
+        void setOrganisationScheme(List<ExternalItemDto> schemes);
+        void setConceptScheme(List<ExternalItemDto> schemes);
+        void setCodeLists(List<ExternalItemDto> codeLists);
 
-        void setInfSuppliersOrg(List<ExternalItemBtDto> organisations);
-        void setInfSuppliersConcept(List<ExternalItemBtDto> concepts);
-        void setStatisticalUnitConcepts(List<ExternalItemBtDto> concepts);
-        void setTemporalGranularityCodes(List<ExternalItemBtDto> codes);
-        void setFreqCollCodes(List<ExternalItemBtDto> codes);
+        void setInfSuppliersOrg(List<ExternalItemDto> organisations);
+        void setInfSuppliersConcept(List<ExternalItemDto> concepts);
+        void setStatisticalUnitConcepts(List<ExternalItemDto> concepts);
+        void setTemporalGranularityCodes(List<ExternalItemDto> codes);
+        void setFreqCollCodes(List<ExternalItemDto> codes);
 
         boolean validate();
         HasClickHandlers getPublishInstanceInternally();

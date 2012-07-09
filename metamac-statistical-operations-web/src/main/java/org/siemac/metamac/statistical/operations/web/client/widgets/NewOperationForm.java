@@ -4,7 +4,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
@@ -24,16 +24,16 @@ import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
 
-    private static final int        FORM_ITEM_CUSTOM_WIDTH = 300;
+    private static final int      FORM_ITEM_CUSTOM_WIDTH = 300;
 
-    private RequiredTextItem        identifier;
-    private RequiredTextItem        title;
-    private CustomCheckboxItem      releaseCalendar;
-    private ExternalSelectItem      subjectAreasItem;
-    private CustomCheckboxItem      indSystem;
-    private ButtonItem              saveButton;
+    private RequiredTextItem      identifier;
+    private RequiredTextItem      title;
+    private CustomCheckboxItem    releaseCalendar;
+    private ExternalSelectItem    subjectAreasItem;
+    private CustomCheckboxItem    indSystem;
+    private ButtonItem            saveButton;
 
-    private List<ExternalItemBtDto> subjectAreas;
+    private List<ExternalItemDto> subjectAreas;
 
     public NewOperationForm() {
         super();
@@ -96,11 +96,11 @@ public class NewOperationForm extends CustomDynamicForm {
         return subjectAreasItem;
     }
 
-    public void setSubjectAreasSchemes(List<ExternalItemBtDto> schemes) {
+    public void setSubjectAreasSchemes(List<ExternalItemDto> schemes) {
         subjectAreasItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
     }
 
-    public void setSubjetcAreas(List<ExternalItemBtDto> subjects) {
+    public void setSubjetcAreas(List<ExternalItemDto> subjects) {
         this.subjectAreas = subjects;
         subjectAreasItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(subjects));
     }

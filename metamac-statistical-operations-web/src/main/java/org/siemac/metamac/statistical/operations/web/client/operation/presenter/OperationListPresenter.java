@@ -5,7 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
@@ -89,8 +89,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
         List<Long> getSelectedOperations();
         void onOperationSaved(OperationDto operationDto);
 
-        void setCategorySchemes(List<ExternalItemBtDto> schemes);
-        void setSubjects(List<ExternalItemBtDto> subjects);
+        void setCategorySchemes(List<ExternalItemDto> schemes);
+        void setSubjects(List<ExternalItemDto> subjects);
     }
 
     @Inject

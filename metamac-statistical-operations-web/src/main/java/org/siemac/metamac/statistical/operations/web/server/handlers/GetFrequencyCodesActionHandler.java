@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import java.util.List;
 
 import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
@@ -39,9 +39,9 @@ public class GetFrequencyCodesActionHandler extends SecurityActionHandler<GetFre
                 INSTANCE_TEMPORAL_GRANULARITY);
         String freqColl = ((ConfigurationServiceImpl) ApplicationContextProvider.getApplicationContext().getBean("configurationService")).getProperties().getProperty(INSTANCE_FREQ_COLL);
         // Codes
-        List<ExternalItemBtDto> updateFrequencyCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), updateFrequency);
-        List<ExternalItemBtDto> temporalGranularityCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), temporalGranularity);
-        List<ExternalItemBtDto> freqCollCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), freqColl);
+        List<ExternalItemDto> updateFrequencyCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), updateFrequency);
+        List<ExternalItemDto> temporalGranularityCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), temporalGranularity);
+        List<ExternalItemDto> freqCollCodes = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), freqColl);
         return new GetFrequencyCodesResult(updateFrequencyCodes, temporalGranularityCodes, freqCollCodes);
     }
 

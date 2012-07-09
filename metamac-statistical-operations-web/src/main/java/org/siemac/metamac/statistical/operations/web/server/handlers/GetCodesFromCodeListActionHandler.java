@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.serviceapi.MetamacCoreCommonService;
 import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListResult;
@@ -26,7 +26,7 @@ public class GetCodesFromCodeListActionHandler extends SecurityActionHandler<Get
 
     @Override
     public GetCodesFromCodeListResult executeSecurityAction(GetCodesFromCodeListAction action) throws ActionException {
-        List<ExternalItemBtDto> concepts = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), action.getCodeListUri());
+        List<ExternalItemDto> concepts = metamacCoreCommonService.retrieveCodelist(ServiceContextHolder.getCurrentServiceContext(), action.getCodeListUri());
         return new GetCodesFromCodeListResult(concepts);
     }
 

@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.events;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -23,7 +23,7 @@ public class UpdateFrequencyCodesEvent extends GwtEvent<UpdateFrequencyCodesEven
     }
 
     // TODO HasEventBus should be used instead of HasHandlers ¿?
-    public static void fire(HasHandlers source, List<ExternalItemBtDto> updateFrequencyCodes, List<ExternalItemBtDto> temporalGranularityCodes, List<ExternalItemBtDto> freqCollCodes) {
+    public static void fire(HasHandlers source, List<ExternalItemDto> updateFrequencyCodes, List<ExternalItemDto> temporalGranularityCodes, List<ExternalItemDto> freqCollCodes) {
         if (TYPE != null) {
             source.fireEvent(new UpdateFrequencyCodesEvent(updateFrequencyCodes, temporalGranularityCodes, freqCollCodes));
         }
@@ -34,25 +34,25 @@ public class UpdateFrequencyCodesEvent extends GwtEvent<UpdateFrequencyCodesEven
         handler.onUpdateFrequencyCodes(this);
     }
 
-    private final List<ExternalItemBtDto> updateFrequencyCodes;
-    private final List<ExternalItemBtDto> temporalGranularityCodes;
-    private final List<ExternalItemBtDto> freqCollCodes;
+    private final List<ExternalItemDto> updateFrequencyCodes;
+    private final List<ExternalItemDto> temporalGranularityCodes;
+    private final List<ExternalItemDto> freqCollCodes;
 
-    public UpdateFrequencyCodesEvent(List<ExternalItemBtDto> updateFrequencyCodes, List<ExternalItemBtDto> temporalGranularityCodes, List<ExternalItemBtDto> freqCollCodes) {
+    public UpdateFrequencyCodesEvent(List<ExternalItemDto> updateFrequencyCodes, List<ExternalItemDto> temporalGranularityCodes, List<ExternalItemDto> freqCollCodes) {
         this.updateFrequencyCodes = updateFrequencyCodes;
         this.temporalGranularityCodes = temporalGranularityCodes;
         this.freqCollCodes = freqCollCodes;
     }
 
-    public List<ExternalItemBtDto> getUpdateFrequencyCodes() {
+    public List<ExternalItemDto> getUpdateFrequencyCodes() {
         return updateFrequencyCodes;
     }
 
-    public List<ExternalItemBtDto> getTemporalGranularityCodes() {
+    public List<ExternalItemDto> getTemporalGranularityCodes() {
         return temporalGranularityCodes;
     }
 
-    public List<ExternalItemBtDto> getFreqCollCodes() {
+    public List<ExternalItemDto> getFreqCollCodes() {
         return freqCollCodes;
     }
 

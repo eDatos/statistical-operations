@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
@@ -164,14 +164,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private List<SurveyTypeDto>             surveyTypeDtos;
     private List<OfficialityTypeDto>        officialityTypeDtos;
 
-    private List<ExternalItemBtDto>         subjects;
-    private List<ExternalItemBtDto>         secondarySubjects;
-    private List<ExternalItemBtDto>         producers;
-    private List<ExternalItemBtDto>         regionalResponsibles;
-    private List<ExternalItemBtDto>         regionalContributors;
-    private List<ExternalItemBtDto>         publishers;
-    private List<ExternalItemBtDto>         commonMetadataList;
-    private List<ExternalItemBtDto>         updateFrequencyCodes;
+    private List<ExternalItemDto>           subjects;
+    private List<ExternalItemDto>           secondarySubjects;
+    private List<ExternalItemDto>           producers;
+    private List<ExternalItemDto>           regionalResponsibles;
+    private List<ExternalItemDto>           regionalContributors;
+    private List<ExternalItemDto>           publishers;
+    private List<ExternalItemDto>           commonMetadataList;
+    private List<ExternalItemDto>           updateFrequencyCodes;
 
     public OperationViewImpl() {
         super();
@@ -388,10 +388,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
         operationDto.getUpdateFrequency().clear();
-        operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemBtDtoListFromCodeIds(updateFrequencyCodes, updateFrequencyItem.getValues()));
+        operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(updateFrequencyCodes, updateFrequencyItem.getValues()));
         operationDto.setRevPolicy(revPolicyItem.getValue());
         operationDto.setRevPractice(revPracticeItem.getValue());
-        operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemBtDtoFromCodeId(commonMetadataList, commonMetadataItem.getValueAsString()));
+        operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemDtoFromCodeId(commonMetadataList, commonMetadataItem.getValueAsString()));
 
         // ANNOTATIONS
         operationDto.setComment(commentItem.getValue());
@@ -732,7 +732,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersViewForm.setValue(OperationDS.OP_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
 
         // Content Classifiers
-        classificationViewForm.setValue(OperationDS.OP_SUBJECT, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getCodeId());
+        classificationViewForm.setValue(OperationDS.OP_SUBJECT, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getUrn());
         classificationViewForm.setValue(OperationDS.OP_SUBJECT_SECONDARY, ExternalItemUtils.getExternalItemListToString(operationDto.getSecondarySubjectAreas()));
 
         // Content Descriptors
@@ -764,7 +764,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionViewForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionViewForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
 
-        diffusionViewForm.setValue(OperationDS.OP_COMMON_METADATA, operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getCodeId() : "");
+        diffusionViewForm.setValue(OperationDS.OP_COMMON_METADATA, operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getUrn() : "");
 
         // Annotations
         annotationsViewForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
@@ -814,7 +814,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         diffusionEditionForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionEditionForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
-        commonMetadataItem.setValue(operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getCodeId() : null);
+        commonMetadataItem.setValue(operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getUrn() : null);
 
         // Annotations
         annotationsEditionForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
@@ -857,37 +857,37 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setSubjects(List<ExternalItemBtDto> subjects) {
+    public void setSubjects(List<ExternalItemDto> subjects) {
         this.subjects = subjects;
         LinkedHashMap<String, String> subjectsMap = new LinkedHashMap<String, String>();
-        for (ExternalItemBtDto subject : subjects) {
-            subjectsMap.put(subject.getCodeId(), subject.getCodeId());
+        for (ExternalItemDto subject : subjects) {
+            subjectsMap.put(subject.getUrn(), subject.getUrn());
         }
         subjectItem.setItemsValueMap(subjectsMap);
     }
 
     @Override
-    public void setSecondarySubjetcs(List<ExternalItemBtDto> secondarySubjects) {
+    public void setSecondarySubjetcs(List<ExternalItemDto> secondarySubjects) {
         this.secondarySubjects = secondarySubjects;
         LinkedHashMap<String, String> secondarySubjectsMap = new LinkedHashMap<String, String>();
-        for (ExternalItemBtDto subject : secondarySubjects) {
-            secondarySubjectsMap.put(subject.getCodeId(), subject.getCodeId());
+        for (ExternalItemDto subject : secondarySubjects) {
+            secondarySubjectsMap.put(subject.getUrn(), subject.getUrn());
         }
         secondarySubjectItem.setItemsValueMap(secondarySubjectsMap);
     }
 
     @Override
-    public void setCategorySchemes(List<ExternalItemBtDto> schemes) {
+    public void setCategorySchemes(List<ExternalItemDto> schemes) {
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-        for (ExternalItemBtDto scheme : schemes) {
-            map.put(scheme.getCodeId(), scheme.getCodeId());
+        for (ExternalItemDto scheme : schemes) {
+            map.put(scheme.getUrn(), scheme.getUrn());
         }
         subjectItem.setSchemesValueMap(map);
         secondarySubjectItem.setSchemesValueMap(map);
     }
 
     @Override
-    public void setOrganisationSchemes(List<ExternalItemBtDto> schemes) {
+    public void setOrganisationSchemes(List<ExternalItemDto> schemes) {
         producerItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
         regionalResponsibleItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
         regionalContributorItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
@@ -903,37 +903,37 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setProducers(List<ExternalItemBtDto> organisations) {
+    public void setProducers(List<ExternalItemDto> organisations) {
         this.producers = organisations;
         producerItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
-    public void setRegionalResposibles(List<ExternalItemBtDto> organisations) {
+    public void setRegionalResposibles(List<ExternalItemDto> organisations) {
         this.regionalResponsibles = organisations;
         regionalResponsibleItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
-    public void setRegionalContributors(List<ExternalItemBtDto> organisations) {
+    public void setRegionalContributors(List<ExternalItemDto> organisations) {
         this.regionalContributors = organisations;
         regionalContributorItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
-    public void setPublishers(List<ExternalItemBtDto> organisations) {
+    public void setPublishers(List<ExternalItemDto> organisations) {
         this.publishers = organisations;
         publisherItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
-    public void setCommonMetadataList(List<ExternalItemBtDto> commonMetadataList) {
+    public void setCommonMetadataList(List<ExternalItemDto> commonMetadataList) {
         this.commonMetadataList = commonMetadataList;
         commonMetadataItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(commonMetadataList));
     }
 
     @Override
-    public void setUpdateFrequencyCodes(List<ExternalItemBtDto> codes) {
+    public void setUpdateFrequencyCodes(List<ExternalItemDto> codes) {
         this.updateFrequencyCodes = codes;
         updateFrequencyItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(codes));
     }

@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.shared;
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemBtDto;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.Out;
@@ -11,12 +11,12 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetFrequencyCodes {
 
     @Out(1)
-    List<ExternalItemBtDto> updateFrequencyCodes;
+    List<ExternalItemDto> updateFrequencyCodes;
 
     @Out(2)
-    List<ExternalItemBtDto> temporalGranularityCodes;
+    List<ExternalItemDto> temporalGranularityCodes;
 
     @Out(3)
-    List<ExternalItemBtDto> freqCollCodes;
+    List<ExternalItemDto> freqCollCodes;
 
 }
