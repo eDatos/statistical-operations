@@ -5,8 +5,8 @@ import static org.siemac.metamac.statistical.operations.core.enume.domain.Statis
 import static org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION;
 import static org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum.TECNICO_PRODUCCION;
 
-import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.statistical.operations.core.security.shared.SharedSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 
