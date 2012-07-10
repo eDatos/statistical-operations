@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.family.presenter;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.util.shared.StringUtils;
@@ -208,7 +209,12 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     @Override
     public void goToOperation(String operationCode) {
         if (!StringUtils.isBlank(operationCode)) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode));
+            PlaceRequest operationListRequest = new PlaceRequest(NameTokens.operationListPage);
+            PlaceRequest operationRequest = new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode);
+            List<PlaceRequest> placeRequests = new ArrayList<PlaceRequest>();
+            placeRequests.add(operationListRequest);
+            placeRequests.add(operationRequest);
+            placeManager.revealPlaceHierarchy(placeRequests);
         }
     }
 
