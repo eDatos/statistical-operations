@@ -16,7 +16,6 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -79,10 +78,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         statisticalOperationsRestFacadeClientJson = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class);
         WebClient.client(statisticalOperationsRestFacadeClientJson).accept(APPLICATION_JSON);
 
-    }
-
-    @Before
-    public void setUp() throws Exception {
+        // Mockito
         setUpMockito();
     }
 
@@ -855,9 +851,10 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         return url;
     }
 
-    private void setUpMockito() throws MetamacException {
+    private static void setUpMockito() throws MetamacException {
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
+        
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_CODE1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
@@ -900,7 +897,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_CODE1, 2, 9);
     }
 
-    private void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
+    private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> pagedResultOperations = null;
         if (FAMILY_CODE1.equals(family)) {
             pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
@@ -916,14 +913,14 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
     }
 
-    private void mockitoFindOperationByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
+    private static void mockitoFindOperationByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
         when(
                 statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsMatcher()),
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
                 StatisticalOperationsCoreMocks.mockOperationsPagedResult(String.valueOf(limit), String.valueOf(offset)));
     }
 
-    private void mockitoFindFamilyByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation) throws MetamacException {
+    private static void mockitoFindFamilyByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> pagedResult = null;
         if (OPERATION_CODE1.equals(operation)) {
             pagedResult = StatisticalOperationsCoreMocks.mockFamiliesNoPagedResultByOperation1();
@@ -936,14 +933,14 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
                         argThat(new PagingParameterMatcher(PagingParameter.noLimits())))).thenReturn(pagedResult);
     }
 
-    private void mockitoFindFamilyByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
+    private static void mockitoFindFamilyByCondition(StatisticalOperationsBaseService statisticalOperationsBaseService, int limit, int offset) throws MetamacException {
         when(
                 statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesMatcher()),
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
                 StatisticalOperationsCoreMocks.mockFamiliesPagedResult(String.valueOf(limit), String.valueOf(offset)));
     }
 
-    private void mockitoFindInstanceByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation, int limit, int offset) throws MetamacException {
+    private static void mockitoFindInstanceByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> pagedResult = null;
         if (OPERATION_CODE1.equals(operation)) {
             pagedResult = StatisticalOperationsCoreMocks.mockInstancesPagedResultByOperation1(String.valueOf(limit), String.valueOf(offset));
