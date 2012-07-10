@@ -3,7 +3,7 @@
     <kind>statisticalOperations#operations</kind>
     <limit>25</limit>
     <offset>0</offset>
-    <total>9</total>
+    <total>10</total>
     <items>
         <id>operation1</id>
         <kind>statisticalOperations#operation</kind>
@@ -139,4 +139,19 @@
             </text>
         </title>
     </items>
+    <items>
+        <id>operation10</id>
+        <kind>statisticalOperations#operation</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation10</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>operation10 in English</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>operation10 en Español</label>
+            </text>
+        </title>
+    </items>    
 </resourcesPagedResult>

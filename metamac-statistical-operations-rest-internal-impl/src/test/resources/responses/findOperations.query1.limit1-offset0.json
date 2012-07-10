@@ -1,0 +1,27 @@
+{
+  "kind": "statisticalOperations#operations",
+  "limit": 1,
+  "offset": 0,
+  "total": 1,
+  "nextLink": "http://localhost:9001/internal/v1.0/operations?query=CODE LIKE \"1\"&limit=1&offset=1",
+  "lastLink": "http://localhost:9001/internal/v1.0/operations?query=CODE LIKE \"1\"&limit=1&offset=1",
+  "items": [
+    {
+      "id": "operation1",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "operation1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "operation1 in English"
+          }
+        ]
+      }
+    } 
+  ]
+}

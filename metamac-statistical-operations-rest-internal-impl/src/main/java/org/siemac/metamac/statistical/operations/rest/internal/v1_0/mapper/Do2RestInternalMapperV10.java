@@ -14,19 +14,19 @@ public interface Do2RestInternalMapperV10 {
 
     // Operations
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl);
-    public ResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
+    public ResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit, String apiUrl);
     public ResourcesPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, Integer limit, String apiUrl);
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit, String apiUrl);
 
     // Families
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl);
-    public ResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sources, Integer limit, String apiUrl);
+    public ResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String query, String orderBy, Integer limit, String apiUrl);
     public ResourcesNoPagedResult toFamiliesByOperationNoPagedResult(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl);
 
     // Instances
     public Instance toInstance(org.siemac.metamac.statistical.operations.core.domain.Instance source, String apiUrl);
     public ResourcesPagedResult toInstancesPagedResult(org.siemac.metamac.statistical.operations.core.domain.Operation operation,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, Integer limit, String apiUrl);
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, String query, String orderBy, Integer limit, String apiUrl);
 
     // Other
     public Error toError(Exception exception);

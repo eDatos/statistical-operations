@@ -22,43 +22,48 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestFacadeV10Test;
 
 public class StatisticalOperationsCoreMocks {
 
     public static Operation mockOperation1() {
-        return mockOperation("1", ProcStatusEnum.PUBLISH_INTERNALLY, mockFamily1RelatedEntity(), mockFamily2RelatedEntity());
+        return mockOperation("1", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity(), mockFamily2RelatedEntity());
     }
 
     public static Operation mockOperation2() {
-        return mockOperation("2", ProcStatusEnum.PUBLISH_INTERNALLY, mockFamily1RelatedEntity());
+        return mockOperation("2", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation3() {
-        return mockOperation("3", ProcStatusEnum.PUBLISH_EXTERNALLY, mockFamily1RelatedEntity());
+        return mockOperation("3", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation4() {
-        return mockOperation("4", ProcStatusEnum.PUBLISH_INTERNALLY, mockFamily1RelatedEntity());
+        return mockOperation("4", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation5() {
-        return mockOperation("5", ProcStatusEnum.PUBLISH_INTERNALLY, mockFamily1RelatedEntity());
+        return mockOperation("5", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation6() {
-        return mockOperation("6", ProcStatusEnum.PUBLISH_EXTERNALLY, mockFamily1RelatedEntity());
+        return mockOperation("6", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation7() {
-        return mockOperation("7", ProcStatusEnum.PUBLISH_EXTERNALLY, mockFamily2RelatedEntity());
+        return mockOperation("7", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
     }
 
     public static Operation mockOperation8() {
-        return mockOperation("8", ProcStatusEnum.PUBLISH_EXTERNALLY, mockFamily2RelatedEntity());
+        return mockOperation("8", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
     }
 
     public static Operation mockOperation9() {
-        return mockOperation("9", ProcStatusEnum.PUBLISH_EXTERNALLY, mockFamily2RelatedEntity());
+        return mockOperation("9", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
+    }
+
+    public static Operation mockOperation10() {
+        return mockOperation("10", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.FALSE, mockFamily2RelatedEntity());
     }
 
     public static Family mockFamily1() {
@@ -100,7 +105,7 @@ public class StatisticalOperationsCoreMocks {
     public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
-        int total = 9;
+        int total = 10;
         int startRow = -1;
         int rowCount = -1;
         int pageSize = -1;
@@ -117,6 +122,7 @@ public class StatisticalOperationsCoreMocks {
             operations.add(mockOperation7());
             operations.add(mockOperation8());
             operations.add(mockOperation9());
+            operations.add(mockOperation10());
         } else if ("2".equals(limit) && "0".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -134,6 +140,7 @@ public class StatisticalOperationsCoreMocks {
             startRow = Integer.valueOf(offset).intValue();
             rowCount = pageSize;
             operations.add(mockOperation9());
+            operations.add(mockOperation10());
         } else if ("2".equals(limit) && "9".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -143,6 +150,65 @@ public class StatisticalOperationsCoreMocks {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
         }
 
+        return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
+    }
+
+    public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset, String query) {
+
+        // Without query
+        if (query == null) {
+            return mockOperationsPagedResult(limit, offset);
+        }
+
+        // With query
+        List<Operation> operations = new ArrayList<Operation>();
+        int total = -1;
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_CODE_LIKE_1;
+        String querySupported2 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_CODE_LIKE_1_AND_INDICATORS_SYSTEM;
+        if (querySupported1.equals(query)) {
+            total = 2;
+            startRow = -1;
+            rowCount = -1;
+            pageSize = -1;
+            if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+                startRow = 0;
+                rowCount = total;
+                pageSize = total;
+                operations.add(mockOperation1());
+                operations.add(mockOperation10());
+            } else if ("1".equals(limit) && "0".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                operations.add(mockOperation1());
+            } else if ("1".equals(limit) && "1".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                operations.add(mockOperation10());
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else if (querySupported2.equals(query)) {
+            total = 1;
+            startRow = -1;
+            rowCount = -1;
+            pageSize = -1;
+            if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+                startRow = 0;
+                rowCount = total;
+                pageSize = total;
+                operations.add(mockOperation1());
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else {
+            fail("Query not supported = " + query);
+        }
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
@@ -408,7 +474,7 @@ public class StatisticalOperationsCoreMocks {
         return new ExternalItem(uri, code, type, mockInternationalString(code, null), null);
     }
 
-    private static Operation mockOperation(String subCode, ProcStatusEnum procStatus, Family... families) {
+    private static Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
 
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
@@ -432,7 +498,7 @@ public class StatisticalOperationsCoreMocks {
         operation.addInstance(mockInstanceRelatedEntity("333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1)));
         operation.setSurveyType(mockSurveyType("surveyIdentifier"));
         operation.setOfficialityType(mockOfficialityType("officialityType"));
-        operation.setIndicatorSystem(Boolean.TRUE);
+        operation.setIndicatorSystem(isIndicatorsSystem);
         operation.getProducer().add(mockExternalItem("producer1", TypeExternalArtefactsEnum.AGENCY, "http://producer1"));
         operation.getProducer().add(mockExternalItem("producer22", TypeExternalArtefactsEnum.AGENCY, "http://producer22"));
         operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible1", TypeExternalArtefactsEnum.AGENCY, "http://regionalResponsible1"));

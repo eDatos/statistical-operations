@@ -123,6 +123,19 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:simpleType name="OperationCriteriaPropertyRestriction">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="IS_INDICATORS_SYSTEM" />
+            <xs:enumeration value="CODE" />
+        </xs:restriction>
+    </xs:simpleType>    
+    
+	<xs:simpleType name="OperationCriteriaPropertyOrder">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="CODE" />
+        </xs:restriction>
+    </xs:simpleType>  
+    
     <!-- Elements -->
     <xs:element name="operation" type="tns:Operation" />
     <xs:element name="family" type="tns:Family" />

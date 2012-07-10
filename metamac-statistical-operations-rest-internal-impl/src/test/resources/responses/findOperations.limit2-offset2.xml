@@ -3,7 +3,7 @@
     <kind>statisticalOperations#operations</kind>
     <limit>2</limit>
     <offset>2</offset>
-    <total>9</total>
+    <total>10</total>
     <firstLink>http://localhost:9001/internal/v1.0/operations?limit=2&amp;offset=0</firstLink>
     <previousLink>http://localhost:9001/internal/v1.0/operations?limit=2&amp;offset=0</previousLink>
     <nextLink>http://localhost:9001/internal/v1.0/operations?limit=2&amp;offset=4</nextLink>

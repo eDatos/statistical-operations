@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#operations</kind>
+    <limit>1</limit>
+    <offset>0</offset>
+    <total>2</total>
+    <nextLink>http://localhost:9001/internal/v1.0/operations?query=CODE LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</nextLink>
+    <lastLink>http://localhost:9001/internal/v1.0/operations?query=CODE LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</lastLink>
+    <items>
+        <id>operation1</id>
+        <kind>statisticalOperations#operation</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>operation1 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>operation1 in English</label>
+            </text>
+        </title>
+    </items>
+</resourcesPagedResult>

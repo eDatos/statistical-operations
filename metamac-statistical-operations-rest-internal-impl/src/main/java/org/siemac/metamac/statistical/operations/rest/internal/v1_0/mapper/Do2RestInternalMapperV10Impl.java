@@ -89,14 +89,15 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-    public ResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
+    public ResourcesPagedResult toOperationsPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, String query, String orderBy, Integer limit,
+            String apiUrl) {
 
         ResourcesPagedResult targetPagedResult = new ResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
         // Pagination
         String baseLink = toOperationsLink(apiUrl);
-        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, query, orderBy, limit, baseLink);
 
         // Values
         for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
@@ -108,14 +109,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     @Override
     public ResourcesPagedResult toOperationsByFamilyPagedResult(org.siemac.metamac.statistical.operations.core.domain.Family family,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, Integer limit, String apiUrl) {
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, String query, String orderBy, Integer limit, String apiUrl) {
 
         ResourcesPagedResult targetPagedResult = new ResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
 
         // Pagination
         String baseLink = toOperationsByFamilyLink(family, apiUrl);
-        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, query, orderBy, limit, baseLink);
 
         // Values
         for (org.siemac.metamac.statistical.operations.core.domain.Operation source : sourcesPagedResult.getValues()) {
@@ -144,16 +145,17 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getchildren().addAll(toFamilyChildren(source, apiUrl));
         return target;
     }
-    
+
     @Override
-    public ResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sourcesPagedResult, Integer limit, String apiUrl) {
+    public ResourcesPagedResult toFamiliesPagedResult(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sourcesPagedResult, String query, String orderBy, Integer limit,
+            String apiUrl) {
 
         ResourcesPagedResult targetPagedResult = new ResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_FAMILIES);
 
         // Pagination
         String baseLink = toFamiliesLink(apiUrl);
-        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, query, orderBy, limit, baseLink);
 
         // Values
         for (org.siemac.metamac.statistical.operations.core.domain.Family source : sourcesPagedResult.getValues()) {
@@ -242,16 +244,17 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getchildren().addAll(toInstanceChildren(source, apiUrl));
         return target;
     }
-    
+
     @Override
-    public ResourcesPagedResult toInstancesPagedResult(org.siemac.metamac.statistical.operations.core.domain.Operation operation, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sourcesPagedResult, Integer limit, String apiUrl) {
+    public ResourcesPagedResult toInstancesPagedResult(org.siemac.metamac.statistical.operations.core.domain.Operation operation,
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sourcesPagedResult, String query, String orderBy, Integer limit, String apiUrl) {
 
         ResourcesPagedResult targetPagedResult = new ResourcesPagedResult();
         targetPagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
 
         // Pagination
         String baseLink = toInstancesLink(apiUrl, operation);
-        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, limit, baseLink);
+        SculptorCriteria2RestCriteria.toPagedResult(sourcesPagedResult, targetPagedResult, query, orderBy, limit, baseLink);
 
         // Values
         for (org.siemac.metamac.statistical.operations.core.domain.Instance source : sourcesPagedResult.getValues()) {
@@ -260,7 +263,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return targetPagedResult;
     }
-    
+
     // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
     @Override
     public Error toError(Exception exception) {
@@ -444,7 +447,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return targets;
     }
-    
+
     private Resource toResource(ExternalItem source) {
         if (source == null) {
             return null;

@@ -17,6 +17,8 @@
            				<![CDATA[Returns paged list operations, according to criteria]]>
          			</wadl:doc>
 					<wadl:request>
+						<wadl:param name="query" style="query" required="false"/>
+						<wadl:param name="orderBy" style="query" required="false"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>

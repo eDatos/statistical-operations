@@ -1,0 +1,42 @@
+{
+  "kind": "statisticalOperations#operations",
+  "limit": 25,
+  "offset": 0,
+  "total": 2,
+  "items": [
+    {
+      "id": "operation1",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "operation1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "operation1 in English"
+          }
+        ]
+      }
+    },
+	{
+      "id": "operation10",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation10",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "operation10 in English"
+          },
+          {
+            "locale": "es",
+            "label": "operation10 en Español"
+          }
+        ]
+      }
+    }    
+  ]
+}

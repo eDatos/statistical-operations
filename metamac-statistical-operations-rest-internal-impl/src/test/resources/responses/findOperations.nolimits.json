@@ -2,7 +2,7 @@
   "kind": "statisticalOperations#operations",
   "limit": 25,
   "offset": 0,
-  "total": 9,
+  "total": 10,
   "items": [
     {
       "id": "operation1",
@@ -156,6 +156,23 @@
           }
         ]
       }
-    }
+    },
+	{
+      "id": "operation10",
+      "kind": "statisticalOperations#operation",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation10",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "operation10 in English"
+          },
+          {
+            "locale": "es",
+            "label": "operation10 en Español"
+          }
+        ]
+      }
+    }    
   ]
 }
