@@ -217,7 +217,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public void onClick(ClickEvent event) {
-                getUiHandlers().updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
+                uiHandlers.updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
             }
         });
 
@@ -604,7 +604,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populateSubjects(event.getValue().toString());
+                    uiHandlers.populateSubjects(event.getValue().toString());
                 }
             }
         });
@@ -614,7 +614,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populateSecondarySubjects(event.getValue().toString());
+                    uiHandlers.populateSecondarySubjects(event.getValue().toString());
                 }
             }
         });
@@ -646,7 +646,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populateProducers(event.getValue().toString());
+                    uiHandlers.populateProducers(event.getValue().toString());
                 }
             }
         });
@@ -657,7 +657,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populateRegionalResposibles(event.getValue().toString());
+                    uiHandlers.populateRegionalResposibles(event.getValue().toString());
                 }
             }
         });
@@ -667,7 +667,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populateRegionalContributors(event.getValue().toString());
+                    uiHandlers.populateRegionalContributors(event.getValue().toString());
                 }
             }
         });
@@ -690,7 +690,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    getUiHandlers().populatePublishers(event.getValue().toString());
+                    uiHandlers.populatePublishers(event.getValue().toString());
                 }
             }
         });
