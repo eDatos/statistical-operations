@@ -12,11 +12,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title family family1"
+            "label": "family1 in English"
           },
           {
             "locale": "es",
-            "label": "Título family family1"
+            "label": "family1 en Español"
           }
         ]
       }
@@ -29,11 +29,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título family family2"
+            "label": "family2 en Español"
           },
           {
             "locale": "en",
-            "label": "Title family family2"
+            "label": "family2 in English"
           }
         ]
       }
@@ -46,11 +46,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título family family3"
+            "label": "family3 en Español"
           },
           {
             "locale": "en",
-            "label": "Title family family3"
+            "label": "family3 in English"
           }
         ]
       }
@@ -63,11 +63,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title family family4"
+            "label": "family4 in English"
           },
           {
             "locale": "es",
-            "label": "Título family family4"
+            "label": "family4 en Español"
           }
         ]
       }
@@ -79,12 +79,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title family family5"
+            "locale": "es",
+            "label": "family5 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título family family5"
+            "locale": "en",
+            "label": "family5 in English"
           }
         ]
       }

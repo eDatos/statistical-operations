@@ -16,11 +16,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title family family3"
+            "label": "family3 in English"
           },
           {
             "locale": "es",
-            "label": "Título family family3"
+            "label": "family3 en Español"
           }
         ]
       }
@@ -33,11 +33,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título family family4"
+            "label": "family4 en Español"
           },
           {
             "locale": "en",
-            "label": "Title family family4"
+            "label": "family4 in English"
           }
         ]
       }

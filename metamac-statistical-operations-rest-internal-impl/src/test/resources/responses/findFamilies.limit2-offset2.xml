@@ -14,12 +14,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title family family3</label>
+                <locale>es</locale>
+                <label>family3 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título family family3</label>
+                <locale>en</locale>
+                <label>family3 in English</label>
             </text>
         </title>
     </items>
@@ -29,12 +29,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título family family4</label>
+                <locale>en</locale>
+                <label>family4 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title family family4</label>
+                <locale>es</locale>
+                <label>family4 en Español</label>
             </text>
         </title>
     </items>

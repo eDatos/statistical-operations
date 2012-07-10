@@ -11,12 +11,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance1"
+            "locale": "en",
+            "label": "instance1 in English"
           },
           {
-            "locale": "en",
-            "label": "Title instance instance1"
+            "locale": "es",
+            "label": "instance1 en Español"
           }
         ]
       }
@@ -28,12 +28,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance2"
+            "locale": "en",
+            "label": "instance2 in English"
           },
           {
-            "locale": "en",
-            "label": "Title instance instance2"
+            "locale": "es",
+            "label": "instance2 en Español"
           }
         ]
       }
@@ -45,12 +45,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance3"
+            "locale": "en",
+            "label": "instance3 in English"
           },
           {
-            "locale": "en",
-            "label": "Title instance instance3"
+            "locale": "es",
+            "label": "instance3 en Español"
           }
         ]
       }
@@ -62,12 +62,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance4"
+            "locale": "en",
+            "label": "instance4 in English"
           },
           {
-            "locale": "en",
-            "label": "Title instance instance4"
+            "locale": "es",
+            "label": "instance4 en Español"
           }
         ]
       }
@@ -79,12 +79,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título instance instance5"
+            "locale": "en",
+            "label": "instance5 in English"
           },
           {
-            "locale": "en",
-            "label": "Title instance instance5"
+            "locale": "es",
+            "label": "instance5 en Español"
           }
         ]
       }

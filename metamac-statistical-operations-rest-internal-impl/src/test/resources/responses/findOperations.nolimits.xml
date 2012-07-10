@@ -10,12 +10,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation1</label>
+                <locale>es</locale>
+                <label>operation1 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation1</label>
+                <locale>en</locale>
+                <label>operation1 in English</label>
             </text>
         </title>
     </items>
@@ -25,12 +25,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation2</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation2</label>
+                <locale>en</locale>
+                <label>operation2 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation2</label>
+                <locale>es</locale>
+                <label>operation2 en Español</label>
             </text>
         </title>
     </items>
@@ -41,11 +41,11 @@
         <title>
             <text>
                 <locale>es</locale>
-                <label>Título operation operation3</label>
+                <label>operation3 en Español</label>
             </text>
             <text>
                 <locale>en</locale>
-                <label>Title operation operation3</label>
+                <label>operation3 in English</label>
             </text>
         </title>
     </items>
@@ -55,12 +55,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation4</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation4</label>
+                <locale>en</locale>
+                <label>operation4 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation4</label>
+                <locale>es</locale>
+                <label>operation4 en Español</label>
             </text>
         </title>
     </items>
@@ -71,11 +71,11 @@
         <title>
             <text>
                 <locale>es</locale>
-                <label>Título operation operation5</label>
+                <label>operation5 en Español</label>
             </text>
             <text>
                 <locale>en</locale>
-                <label>Title operation operation5</label>
+                <label>operation5 in English</label>
             </text>
         </title>
     </items>
@@ -85,12 +85,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation6</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation6</label>
+                <locale>es</locale>
+                <label>operation6 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation6</label>
+                <locale>en</locale>
+                <label>operation6 in English</label>
             </text>
         </title>
     </items>
@@ -100,12 +100,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation7</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation7</label>
+                <locale>en</locale>
+                <label>operation7 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation7</label>
+                <locale>es</locale>
+                <label>operation7 en Español</label>
             </text>
         </title>
     </items>
@@ -115,12 +115,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation8</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation8</label>
+                <locale>en</locale>
+                <label>operation8 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation8</label>
+                <locale>es</locale>
+                <label>operation8 en Español</label>
             </text>
         </title>
     </items>
@@ -131,11 +131,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title operation operation9</label>
+                <label>operation9 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título operation operation9</label>
+                <label>operation9 en Español</label>
             </text>
         </title>
     </items>

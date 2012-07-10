@@ -11,11 +11,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title family family1</label>
+                <label>family1 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título family family1</label>
+                <label>family1 en Español</label>
             </text>
         </title>
     </items>
@@ -25,12 +25,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/families/family2</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title family family2</label>
+                <locale>es</locale>
+                <label>family2 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título family family2</label>
+                <locale>en</locale>
+                <label>family2 in English</label>
             </text>
         </title>
     </items>
@@ -41,11 +41,11 @@
         <title>
             <text>
                 <locale>es</locale>
-                <label>Título family family3</label>
+                <label>family3 en Español</label>
             </text>
             <text>
                 <locale>en</locale>
-                <label>Title family family3</label>
+                <label>family3 in English</label>
             </text>
         </title>
     </items>
@@ -56,11 +56,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title family family4</label>
+                <label>family4 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título family family4</label>
+                <label>family4 en Español</label>
             </text>
         </title>
     </items>
@@ -70,12 +70,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/families/family5</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title family family5</label>
+                <locale>es</locale>
+                <label>family5 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título family family5</label>
+                <locale>en</locale>
+                <label>family5 in English</label>
             </text>
         </title>
     </items>

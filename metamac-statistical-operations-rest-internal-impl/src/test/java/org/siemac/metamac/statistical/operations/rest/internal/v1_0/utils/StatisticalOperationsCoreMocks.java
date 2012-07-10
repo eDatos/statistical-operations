@@ -7,11 +7,10 @@ import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
-import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
+import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -69,15 +68,15 @@ public class StatisticalOperationsCoreMocks {
     public static Family mockFamily2() {
         return mockFamily("2", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
-    
+
     public static Family mockFamily3() {
         return mockFamily("3", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
-    
+
     public static Family mockFamily4() {
         return mockFamily("4", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
-    
+
     public static Family mockFamily5() {
         return mockFamily("5", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
@@ -193,7 +192,7 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
-    
+
     public static PagedResult<Operation> mockOperationsPagedResultByFamily2(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
@@ -212,7 +211,7 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
-    
+
     public static PagedResult<Family> mockFamiliesPagedResult(String limit, String offset) {
 
         List<Family> families = new ArrayList<Family>();
@@ -257,7 +256,7 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
     }
-    
+
     public static PagedResult<Family> mockFamiliesNoPagedResultByOperation1() {
 
         List<Family> families = new ArrayList<Family>();
@@ -317,30 +316,13 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
     }
 
-    private static InternationalString mockInternationalString2(String locale1, String label1, String locale2, String label2) {
-
-        InternationalString internationalString = new InternationalString();
-
-        LocalisedString internationalStringLocale1 = new LocalisedString();
-        internationalStringLocale1.setLocale(locale1);
-        internationalStringLocale1.setLabel(label1);
-        internationalString.addText(internationalStringLocale1);
-
-        LocalisedString internationalStringLocale2 = new LocalisedString();
-        internationalStringLocale2.setLocale(locale2);
-        internationalStringLocale2.setLabel(label2);
-        internationalString.addText(internationalStringLocale2);
-
-        return internationalString;
-    }
-
     /**
      * Operation with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */
     private static Operation mockOperationRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
-        operation.setTitle(mockInternationalString2("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
+        operation.setTitle(mockInternationalString("operation", subCode));
         operation.setProcStatus(procStatus);
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0)));
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3)));
@@ -363,7 +345,7 @@ public class StatisticalOperationsCoreMocks {
     private static Family mockFamilyRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Family family = new Family();
         family.setCode("family" + subCode);
-        family.setTitle(mockInternationalString2("es", "Título family family" + subCode, "en", "Title family family" + subCode));
+        family.setTitle(mockInternationalString("family", subCode));
         family.setProcStatus(procStatus);
         return family;
     }
@@ -374,7 +356,7 @@ public class StatisticalOperationsCoreMocks {
     private static Instance mockInstanceRelatedEntity(String subCode, ProcStatusEnum procStatus, Integer order) {
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
-        instance.setTitle(mockInternationalString2("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
+        instance.setTitle(mockInternationalString("instance", subCode));
         instance.setProcStatus(procStatus);
         instance.setOrder(order);
         return instance;
@@ -382,59 +364,55 @@ public class StatisticalOperationsCoreMocks {
 
     private static SurveyType mockSurveyType(String code) {
         SurveyType surveyType = new SurveyType();
-        surveyType.setDescription(mockInternationalString2("es", "Título survey " + code, "en", "Title survey " + code));
+        surveyType.setDescription(mockInternationalString(code, null));
         surveyType.setIdentifier(code);
         return surveyType;
     }
 
     private static OfficialityType mockOfficialityType(String code) {
         OfficialityType officialityType = new OfficialityType();
-        officialityType.setDescription(mockInternationalString2("es", "Título officialityType " + code, "en", "Title officialityType " + code));
+        officialityType.setDescription(mockInternationalString(code, null));
         officialityType.setIdentifier(code);
         return officialityType;
     }
 
     private static InstanceType mockInstanceType(String code) {
         InstanceType instanceType = new InstanceType();
-        instanceType.setDescription(mockInternationalString2("es", "Título instanceType " + code, "en", "Title instanceType " + code));
+        instanceType.setDescription(mockInternationalString(code, null));
         instanceType.setIdentifier(code);
         return instanceType;
     }
 
     private static SurveySource mockSurveySource(String code) {
         SurveySource surveySource = new SurveySource();
-        surveySource.setDescription(mockInternationalString2("es", "Título surveySource " + code, "en", "Title surveySource " + code));
+        surveySource.setDescription(mockInternationalString(code, null));
         surveySource.setIdentifier(code);
         return surveySource;
     }
 
     private static CollMethod mockCollMethod(String code) {
         CollMethod collMethod = new CollMethod();
-        collMethod.setDescription(mockInternationalString2("es", "Título collMethod " + code, "en", "Title collMethod " + code));
+        collMethod.setDescription(mockInternationalString(code, null));
         collMethod.setIdentifier(code);
         return collMethod;
     }
 
     private static Cost mockCost(String code) {
         Cost cost = new Cost();
-        cost.setDescription(mockInternationalString2("es", "Título cost " + code, "en", "Title cost " + code));
+        cost.setDescription(mockInternationalString(code, null));
         cost.setIdentifier(code);
         return cost;
     }
 
-    private static ExternalItemBt mockExternalItemBt(String code, TypeExternalArtefactsEnum type, String uri) {
-        return new ExternalItemBt(uri, code, type);
-    }
-
     private static ExternalItem mockExternalItem(String code, TypeExternalArtefactsEnum type, String uri) {
-        return new ExternalItem(new ExternalItemBt(uri, code, type));
+        return new ExternalItem(uri, code, type, mockInternationalString(code, null), null);
     }
 
     private static Operation mockOperation(String subCode, ProcStatusEnum procStatus, Family... families) {
 
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
-        operation.setTitle(mockInternationalString2("es", "Título operation operation" + subCode, "en", "Title operation operation" + subCode));
+        operation.setTitle(mockInternationalString("operation", subCode));
         operation.setAcronym(mockInternationalString("acronym", subCode));
         if (families != null) {
             for (int i = 0; i < families.length; i++) {
@@ -442,7 +420,7 @@ public class StatisticalOperationsCoreMocks {
                 operation.addFamily(family);
             }
         }
-        operation.setSubjectArea(mockExternalItemBt("subjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://subjectArea1"));
+        operation.setSubjectArea(mockExternalItem("subjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://subjectArea1"));
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea1", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea1"));
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea22", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea22"));
         operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea333", TypeExternalArtefactsEnum.CATEGORY, "http://secundarySubjectArea333"));
@@ -453,7 +431,7 @@ public class StatisticalOperationsCoreMocks {
         operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2)));
         operation.addInstance(mockInstanceRelatedEntity("333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1)));
         operation.setSurveyType(mockSurveyType("surveyIdentifier"));
-        operation.setOfficialityType(mockOfficialityType("officialityTypeIdentifier"));
+        operation.setOfficialityType(mockOfficialityType("officialityType"));
         operation.setIndicatorSystem(Boolean.TRUE);
         operation.getProducer().add(mockExternalItem("producer1", TypeExternalArtefactsEnum.AGENCY, "http://producer1"));
         operation.getProducer().add(mockExternalItem("producer22", TypeExternalArtefactsEnum.AGENCY, "http://producer22"));
@@ -490,7 +468,7 @@ public class StatisticalOperationsCoreMocks {
 
         Family family = new Family();
         family.setCode("family" + subCode);
-        family.setTitle(mockInternationalString2("es", "Título family family" + subCode, "en", "Title family family" + subCode));
+        family.setTitle(mockInternationalString("family", subCode));
         family.setAcronym(mockInternationalString("acronym", subCode));
         family.setDescription(mockInternationalString("description", subCode));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
@@ -504,7 +482,7 @@ public class StatisticalOperationsCoreMocks {
 
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
-        instance.setTitle(mockInternationalString2("es", "Título instance instance" + subCode, "en", "Title instance instance" + subCode));
+        instance.setTitle(mockInternationalString("instance", subCode));
         instance.setAcronym(mockInternationalString("acronym", subCode));
         instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
         instance.setOrder(Integer.valueOf(2));
@@ -512,9 +490,9 @@ public class StatisticalOperationsCoreMocks {
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
         instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", TypeExternalArtefactsEnum.DATASTRUCTURE, "http://statisticalUnit1"));
         instance.addStatisticalUnit(mockExternalItem("statisticalUnit22", TypeExternalArtefactsEnum.DATASTRUCTURE, "http://statisticalUnit22"));
-        instance.setGeographicGranularity(mockExternalItemBt("geographicGranularity", TypeExternalArtefactsEnum.CODELIST, "http://geographicGranularity"));
+        instance.setGeographicGranularity(mockExternalItem("geographicGranularity", TypeExternalArtefactsEnum.CODELIST, "http://geographicGranularity"));
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
-        instance.setTemporalGranularity(mockExternalItemBt("temporalGranularity", TypeExternalArtefactsEnum.CODELIST, "http://temporalGranularity"));
+        instance.setTemporalGranularity(mockExternalItem("temporalGranularity", TypeExternalArtefactsEnum.CODELIST, "http://temporalGranularity"));
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subCode));
         instance.setBasePeriod("2012");
         instance.addUnitMeasure(mockExternalItem("unitMeasure1", TypeExternalArtefactsEnum.CONCEPT, "http://unitMeasure1"));
@@ -561,9 +539,26 @@ public class StatisticalOperationsCoreMocks {
 
         return instance;
     }
-    
+
     private static InternationalString mockInternationalString(String metadata, String subCode) {
-        String subTitle = metadata + " " + subCode;
-        return mockInternationalString2("es", subTitle + " en español", "en", subTitle + " in English");
+        String subTitle = subCode != null ? metadata + subCode : metadata;
+        return mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
+    }
+
+    private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
+
+        InternationalString internationalString = new InternationalString();
+
+        LocalisedString internationalStringLocale1 = new LocalisedString();
+        internationalStringLocale1.setLocale(locale1);
+        internationalStringLocale1.setLabel(label1);
+        internationalString.addText(internationalStringLocale1);
+
+        LocalisedString internationalStringLocale2 = new LocalisedString();
+        internationalStringLocale2.setLocale(locale2);
+        internationalStringLocale2.setLabel(label2);
+        internationalString.addText(internationalStringLocale2);
+
+        return internationalString;
     }
 }

@@ -6,11 +6,11 @@
     "texts": [
       {
         "locale": "es",
-        "label": "Título family family1"
+        "label": "family1 en Español"
       },
       {
         "locale": "en",
-        "label": "Title family family1"
+        "label": "family1 in English"
       }
     ]
   },
@@ -18,11 +18,11 @@
     "texts": [
       {
         "locale": "en",
-        "label": "acronym 1 in English"
+        "label": "acronym1 in English"
       },
       {
         "locale": "es",
-        "label": "acronym 1 en español"
+        "label": "acronym1 en Español"
       }
     ]
   },
@@ -30,11 +30,11 @@
     "texts": [
       {
         "locale": "en",
-        "label": "description 1 in English"
+        "label": "description1 in English"
       },
       {
         "locale": "es",
-        "label": "description 1 en español"
+        "label": "description1 en Español"
       }
     ]
   },

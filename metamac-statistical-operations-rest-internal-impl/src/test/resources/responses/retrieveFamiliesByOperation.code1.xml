@@ -5,30 +5,30 @@
     <items>
         <id>family1</id>
         <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
+        <selfLink>http://localhost:9101/internal/v1.0/families/family1</selfLink>
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title family family1</label>
+                <label>family1 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título family family1</label>
+                <label>family1 en Español</label>
             </text>
         </title>
     </items>
     <items>
         <id>family2</id>
         <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/families/family2</selfLink>
+        <selfLink>http://localhost:9101/internal/v1.0/families/family2</selfLink>
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title family family2</label>
+                <label>family2 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título family family2</label>
+                <label>family2 en Español</label>
             </text>
         </title>
     </items>

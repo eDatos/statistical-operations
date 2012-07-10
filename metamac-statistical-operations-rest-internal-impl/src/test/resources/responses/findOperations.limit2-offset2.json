@@ -15,12 +15,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title operation operation3"
+            "locale": "es",
+            "label": "operation3 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título operation operation3"
+            "locale": "en",
+            "label": "operation3 in English"
           }
         ]
       }
@@ -33,11 +33,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título operation operation4"
+            "label": "operation4 en Español"
           },
           {
             "locale": "en",
-            "label": "Title operation operation4"
+            "label": "operation4 in English"
           }
         ]
       }

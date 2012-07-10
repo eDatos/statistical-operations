@@ -14,12 +14,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation3</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation3</label>
+                <locale>es</locale>
+                <label>operation3 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation3</label>
+                <locale>en</locale>
+                <label>operation3 in English</label>
             </text>
         </title>
     </items>
@@ -29,12 +29,12 @@
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation4</selfLink>
         <title>
             <text>
-                <locale>es</locale>
-                <label>Título operation operation4</label>
+                <locale>en</locale>
+                <label>operation4 in English</label>
             </text>
             <text>
-                <locale>en</locale>
-                <label>Title operation operation4</label>
+                <locale>es</locale>
+                <label>operation4 en Español</label>
             </text>
         </title>
     </items>

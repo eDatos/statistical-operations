@@ -10,10 +10,9 @@ import java.util.Set;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
-import org.siemac.metamac.core.common.bt.domain.ExternalItemBt;
+import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
-import org.siemac.metamac.core.common.vo.domain.ExternalItem;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -440,21 +439,21 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             return targets;
         }
         for (ExternalItem source : sources) {
-            Resource target = toResource(source.getExt());
+            Resource target = toResource(source);
             targets.add(target);
         }
         return targets;
     }
-
-    private Resource toResource(ExternalItemBt source) {
+    
+    private Resource toResource(ExternalItem source) {
         if (source == null) {
             return null;
         }
         Resource target = new Resource();
-        target.setId(source.getCodeId()); // TODO próximamente se cambiará por urn en ExternalItem
+        target.setId(source.getUrn());
         target.setKind(source.getType().name());
-        target.setSelfLink(source.getUriInt()); // TODO proximamente no tendra el endpoint, y se tendria que annadirselo
-        target.setTitle(null); // TODO se añadirá Title a ExternalItem
+        target.setSelfLink(source.getUri()); // TODO añadir endpoint METAMAC-785
+        target.setTitle(toInternationalString(source.getTitle()));
         return target;
     }
 

@@ -11,12 +11,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título operation operation1"
+            "locale": "en",
+            "label": "operation1 in English"
           },
           {
-            "locale": "en",
-            "label": "Title operation operation1"
+            "locale": "es",
+            "label": "operation1 en Español"
           }
         ]
       }
@@ -29,11 +29,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título operation operation2"
+            "label": "operation2 en Español"
           },
           {
             "locale": "en",
-            "label": "Title operation operation2"
+            "label": "operation2 in English"
           }
         ]
       }
@@ -46,11 +46,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título operation operation3"
+            "label": "operation3 en Español"
           },
           {
             "locale": "en",
-            "label": "Title operation operation3"
+            "label": "operation3 in English"
           }
         ]
       }
@@ -62,12 +62,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título operation operation4"
+            "locale": "en",
+            "label": "operation4 in English"
           },
           {
-            "locale": "en",
-            "label": "Title operation operation4"
+            "locale": "es",
+            "label": "operation4 en Español"
           }
         ]
       }
@@ -80,11 +80,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation5"
+            "label": "operation5 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation5"
+            "label": "operation5 en Español"
           }
         ]
       }
@@ -96,12 +96,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title operation operation6"
+            "locale": "es",
+            "label": "operation6 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título operation operation6"
+            "locale": "en",
+            "label": "operation6 in English"
           }
         ]
       }

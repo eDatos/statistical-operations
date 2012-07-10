@@ -12,11 +12,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título operation operation1"
+            "label": "operation1 en Español"
           },
           {
             "locale": "en",
-            "label": "Title operation operation1"
+            "label": "operation1 in English"
           }
         ]
       }
@@ -28,12 +28,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title operation operation2"
+            "locale": "es",
+            "label": "operation2 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título operation operation2"
+            "locale": "en",
+            "label": "operation2 in English"
           }
         ]
       }
@@ -45,12 +45,12 @@
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "Título operation operation3"
+            "locale": "en",
+            "label": "operation3 in English"
           },
           {
-            "locale": "en",
-            "label": "Title operation operation3"
+            "locale": "es",
+            "label": "operation3 en Español"
           }
         ]
       }
@@ -62,12 +62,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title operation operation4"
+            "locale": "es",
+            "label": "operation4 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título operation operation4"
+            "locale": "en",
+            "label": "operation4 in English"
           }
         ]
       }
@@ -80,11 +80,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation5"
+            "label": "operation5 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation5"
+            "label": "operation5 en Español"
           }
         ]
       }
@@ -97,11 +97,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation6"
+            "label": "operation6 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation6"
+            "label": "operation6 en Español"
           }
         ]
       }
@@ -114,11 +114,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation7"
+            "label": "operation7 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation7"
+            "label": "operation7 en Español"
           }
         ]
       }
@@ -131,11 +131,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation8"
+            "label": "operation8 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation8"
+            "label": "operation8 en Español"
           }
         ]
       }
@@ -148,11 +148,11 @@
         "texts": [
           {
             "locale": "en",
-            "label": "Title operation operation9"
+            "label": "operation9 in English"
           },
           {
             "locale": "es",
-            "label": "Título operation operation9"
+            "label": "operation9 en Español"
           }
         ]
       }

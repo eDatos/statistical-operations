@@ -11,11 +11,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title instance instance1</label>
+                <label>instance1 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título instance instance1</label>
+                <label>instance1 en Español</label>
             </text>
         </title>
     </items>
@@ -26,11 +26,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title instance instance2</label>
+                <label>instance2 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título instance instance2</label>
+                <label>instance2 en Español</label>
             </text>
         </title>
     </items>
@@ -41,11 +41,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title instance instance3</label>
+                <label>instance3 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título instance instance3</label>
+                <label>instance3 en Español</label>
             </text>
         </title>
     </items>
@@ -56,11 +56,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title instance instance4</label>
+                <label>instance4 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título instance instance4</label>
+                <label>instance4 en Español</label>
             </text>
         </title>
     </items>
@@ -71,11 +71,11 @@
         <title>
             <text>
                 <locale>en</locale>
-                <label>Title instance instance5</label>
+                <label>instance5 in English</label>
             </text>
             <text>
                 <locale>es</locale>
-                <label>Título instance instance5</label>
+                <label>instance5 en Español</label>
             </text>
         </title>
     </items>

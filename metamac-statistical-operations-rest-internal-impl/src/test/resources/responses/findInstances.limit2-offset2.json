@@ -15,12 +15,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "Title instance instance3"
+            "locale": "es",
+            "label": "instance3 en Español"
           },
           {
-            "locale": "es",
-            "label": "Título instance instance3"
+            "locale": "en",
+            "label": "instance3 in English"
           }
         ]
       }
@@ -33,11 +33,11 @@
         "texts": [
           {
             "locale": "es",
-            "label": "Título instance instance4"
+            "label": "instance4 en Español"
           },
           {
             "locale": "en",
-            "label": "Title instance instance4"
+            "label": "instance4 in English"
           }
         ]
       }
