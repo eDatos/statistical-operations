@@ -135,7 +135,7 @@ public class StatisticalOperationsRestMocks {
         }
         return pagedResult;
     }
-    
+
     public static ResourcesPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset, String query) {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
@@ -148,15 +148,6 @@ public class StatisticalOperationsRestMocks {
                 pagedResult.getItems().add(mockOperation10Resource(baseApi));
                 pagedResult.setOffset(BigInteger.valueOf(0));
                 pagedResult.setLimit(BigInteger.valueOf(25));
-                pagedResult.setFirstLink(null);
-                pagedResult.setPreviousLink(null);
-                pagedResult.setNextLink(null);
-                pagedResult.setLastLink(null);
-            } else if ("10000".equals(limit) && offset == null) {
-                pagedResult.getItems().add(mockOperation1Resource(baseApi));
-                pagedResult.getItems().add(mockOperation10Resource(baseApi));
-                pagedResult.setOffset(BigInteger.valueOf(0));
-                pagedResult.setLimit(BigInteger.valueOf(1000));
                 pagedResult.setFirstLink(null);
                 pagedResult.setPreviousLink(null);
                 pagedResult.setNextLink(null);
@@ -296,7 +287,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.getItems().add(mockFamily2Resource(baseApi));
             pagedResult.getItems().add(mockFamily3Resource(baseApi));
             pagedResult.getItems().add(mockFamily4Resource(baseApi));
-            pagedResult.getItems().add(mockFamily5Resource(baseApi));
+            pagedResult.getItems().add(mockFamily15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(0));
             pagedResult.setLimit(BigInteger.valueOf(25));
             pagedResult.setFirstLink(null);
@@ -308,7 +299,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.getItems().add(mockFamily2Resource(baseApi));
             pagedResult.getItems().add(mockFamily3Resource(baseApi));
             pagedResult.getItems().add(mockFamily4Resource(baseApi));
-            pagedResult.getItems().add(mockFamily5Resource(baseApi));
+            pagedResult.getItems().add(mockFamily15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(0));
             pagedResult.setLimit(BigInteger.valueOf(1000));
             pagedResult.setFirstLink(null);
@@ -334,7 +325,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.setNextLink(baseApi + "/families?limit=2&offset=4");
             pagedResult.setLastLink(baseApi + "/families?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
-            pagedResult.getItems().add(mockFamily5Resource(baseApi));
+            pagedResult.getItems().add(mockFamily15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             pagedResult.setFirstLink(baseApi + "/families?limit=2&offset=0");
@@ -351,6 +342,47 @@ public class StatisticalOperationsRestMocks {
             pagedResult.setLastLink(null);
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+        return pagedResult;
+    }
+
+    public static ResourcesPagedResult mockFamiliesPagedResult(String baseApi, String limit, String offset, String query) {
+        ResourcesPagedResult pagedResult = new ResourcesPagedResult();
+        pagedResult.setKind(RestInternalConstants.KIND_FAMILIES);
+
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_CODE_LIKE_1;
+        if (querySupported1.equals(query)) {
+            pagedResult.setTotal(BigInteger.valueOf(2));
+            if (limit == null && (offset == null || "0".equals(offset))) {
+                pagedResult.getItems().add(mockFamily1Resource(baseApi));
+                pagedResult.getItems().add(mockFamily15Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(0));
+                pagedResult.setLimit(BigInteger.valueOf(25));
+                pagedResult.setFirstLink(null);
+                pagedResult.setPreviousLink(null);
+                pagedResult.setNextLink(null);
+                pagedResult.setLastLink(null);
+            } else if ("1".equals(limit) && "0".equals(offset)) {
+                pagedResult.getItems().add(mockFamily1Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+                pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+                pagedResult.setFirstLink(null);
+                pagedResult.setPreviousLink(null);
+                pagedResult.setNextLink(baseApi + "/families?query=" + query + "&limit=1&offset=1");
+                pagedResult.setLastLink(baseApi + "/families?query=" + query + "&limit=1&offset=1");
+            } else if ("1".equals(limit) && "1".equals(offset)) {
+                pagedResult.getItems().add(mockFamily15Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+                pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+                pagedResult.setFirstLink(baseApi + "/families?query=" + query + "&limit=1&offset=0");
+                pagedResult.setPreviousLink(baseApi + "/families?query=" + query + "&limit=1&offset=0");
+                pagedResult.setNextLink(null);
+                pagedResult.setLastLink(null);
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else {
+            fail("Query not supported = " + query);
         }
         return pagedResult;
     }
@@ -642,8 +674,8 @@ public class StatisticalOperationsRestMocks {
         return mockFamilyResource("4", baseApi);
     }
 
-    private static Resource mockFamily5Resource(String baseApi) {
-        return mockFamilyResource("5", baseApi);
+    private static Resource mockFamily15Resource(String baseApi) {
+        return mockFamilyResource("15", baseApi);
     }
 
     private static Resource mockInstance1Resource(String baseApi) {

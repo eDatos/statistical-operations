@@ -65,17 +65,17 @@
         </title>
     </items>
     <items>
-        <id>family5</id>
+        <id>family15</id>
         <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/families/family5</selfLink>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family15</selfLink>
         <title>
             <text>
                 <locale>es</locale>
-                <label>family5 en Español</label>
+                <label>family15 en Español</label>
             </text>
             <text>
                 <locale>en</locale>
-                <label>family5 in English</label>
+                <label>family15 in English</label>
             </text>
         </title>
     </items>

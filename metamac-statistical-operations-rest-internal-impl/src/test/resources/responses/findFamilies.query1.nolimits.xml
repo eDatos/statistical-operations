@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#families</kind>
+    <limit>25</limit>
+    <offset>0</offset>
+    <total>2</total>
+    <items>
+        <id>family1</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>family1 in English</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>family1 en Español</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>family15</id>
+        <kind>statisticalOperations#family</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/families/family15</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>family15 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>family15 in English</label>
+            </text>
+        </title>
+    </items>
+</resourcesPagedResult>

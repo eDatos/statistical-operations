@@ -167,15 +167,17 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
 
-    // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public ResourcesPagedResult findFamilies(String limit, String offset) {
+    public ResourcesPagedResult findFamilies(String query, String orderBy, String limit, String offset) {
         try {
             // Retrieve families by criteria
-            SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getFamilyCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
             // Find only published
-            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
-                    .withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+            ConditionalCriteria conditionalCriteriaProcStatus = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
+                    .withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle();
+
+            List<ConditionalCriteria> conditionalCriteria = new ArrayList<ConditionalCriteria>();
+            conditionalCriteria.add(conditionalCriteriaProcStatus);
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
@@ -183,7 +185,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, null, null, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return familiesPagedResult;
 
         } catch (MetamacException e) {

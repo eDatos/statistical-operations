@@ -98,6 +98,8 @@
 			<wadl:resource path="families">
 				<wadl:method name="GET" id="findFamilies">
 					<wadl:request>
+						<wadl:param name="query" style="query" required="false"/>
+						<wadl:param name="orderBy" style="query" required="false"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>

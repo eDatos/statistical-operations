@@ -82,8 +82,8 @@ public class StatisticalOperationsCoreMocks {
         return mockFamily("4", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
-    public static Family mockFamily5() {
-        return mockFamily("5", ProcStatusEnum.PUBLISH_EXTERNALLY);
+    public static Family mockFamily15() {
+        return mockFamily("15", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
     public static Instance mockInstance1() {
@@ -293,7 +293,7 @@ public class StatisticalOperationsCoreMocks {
             families.add(mockFamily2());
             families.add(mockFamily3());
             families.add(mockFamily4());
-            families.add(mockFamily5());
+            families.add(mockFamily15());
         } else if ("2".equals(limit) && "0".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -310,7 +310,7 @@ public class StatisticalOperationsCoreMocks {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
             rowCount = pageSize;
-            families.add(mockFamily5());
+            families.add(mockFamily15());
         } else if ("2".equals(limit) && "9".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -318,6 +318,52 @@ public class StatisticalOperationsCoreMocks {
             rowCount = 0;
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
+    }
+
+    public static PagedResult<Family> mockFamiliesPagedResult(String limit, String offset, String query) {
+
+        // No queries
+        if (query == null) {
+            return mockFamiliesPagedResult(limit, offset);
+        }
+
+        // With queries
+        int total = -1;
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        List<Family> families = new ArrayList<Family>();
+
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_CODE_LIKE_1;
+        if (querySupported1.equals(query)) {
+            total = 2;
+            startRow = -1;
+            rowCount = -1;
+            pageSize = -1;
+            if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+                startRow = 0;
+                rowCount = total;
+                pageSize = total;
+                families.add(mockFamily1());
+                families.add(mockFamily15());
+            } else if ("1".equals(limit) && "0".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                families.add(mockFamily1());
+            } else if ("1".equals(limit) && "1".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                families.add(mockFamily15());
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else {
+            fail("Query non supported = " + query);
         }
 
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
