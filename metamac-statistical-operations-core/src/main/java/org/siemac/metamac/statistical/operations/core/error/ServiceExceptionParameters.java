@@ -8,6 +8,7 @@ public class ServiceExceptionParameters {
 
     public static final String FAMILY_TITLE                      = "family.title";
     public static final String FAMILY_CODE                       = "family.code";
+    public static final String FAMILY_URN                        = "family.urn";
     public static final String FAMILY_ACRONYM                    = "family.acronym";
     public static final String FAMILY_DESCRIPTION                = "family.description";
     public static final String FAMILY_PROC_STATUS                = "family.proc_status";
@@ -15,6 +16,7 @@ public class ServiceExceptionParameters {
     public static final String FAMILY_INVENTORY_DATE             = "family.inventory_date";
 
     public static final String OPERATION_CODE                    = "operation.code";
+    public static final String OPERATION_URN                     = "operation.urn";
     public static final String OPERATION_TITLE                   = "operation.title";
     public static final String OPERATION_ACRONYM                 = "operation.acronym";
     public static final String OPERATION_OBJECTIVE               = "operation.objective";
@@ -43,6 +45,7 @@ public class ServiceExceptionParameters {
     public static final String OPERATION_COMMON_METADATA         = "operation.common_metadata";
 
     public static final String INSTANCE_CODE                     = "instance.code";
+    public static final String INSTANCE_URN                     = "instance.urn";
     public static final String INSTANCE_TITLE                    = "instance.title";
     public static final String INSTANCE_ACRONYM                  = "instance.acronym";
     public static final String INSTANCE_DESCRIPTION              = "instance.description";

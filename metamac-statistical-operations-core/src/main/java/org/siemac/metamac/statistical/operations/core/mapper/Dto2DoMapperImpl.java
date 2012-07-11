@@ -219,6 +219,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // CODE
         target.setCode(source.getCode());
 
+        // URN
+        // Not necessary. It can't be manually modified
+
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), ServiceExceptionParameters.FAMILY_TITLE));
 
@@ -260,6 +263,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // CODE
         target.setCode(source.getCode());
 
+        // URN
+        // Not necessary. It can't be manually modified
+
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), ServiceExceptionParameters.OPERATION_TITLE));
 
@@ -277,7 +283,8 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // SECONDARY_SUBJECT_AREAS
         target.getSecondarySubjectAreas().clear();
-        target.getSecondarySubjectAreas().addAll(externalItemListToEntity(source.getSecondarySubjectAreas(), target.getSecondarySubjectAreas(), ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS));
+        target.getSecondarySubjectAreas().addAll(
+                externalItemListToEntity(source.getSecondarySubjectAreas(), target.getSecondarySubjectAreas(), ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS));
 
         // OBJECTIVE
         target.setObjective(internationalStringToEntity(source.getObjective(), target.getObjective(), ServiceExceptionParameters.OPERATION_OBJECTIVE));
@@ -389,6 +396,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // CODE
         target.setCode(source.getCode());
 
+        // URN
+        // Not necessary. It can't be manually modified
+
         // TITLE
         target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), ServiceExceptionParameters.INSTANCE_TITLE));
 
@@ -471,7 +481,8 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // INFORMATION_SUPPLIERS
         target.getInformationSuppliers().clear();
-        target.getInformationSuppliers().addAll(externalItemListToEntity(source.getInformationSuppliers(), target.getInformationSuppliers(), ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS));
+        target.getInformationSuppliers()
+                .addAll(externalItemListToEntity(source.getInformationSuppliers(), target.getInformationSuppliers(), ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS));
 
         // FREQ_COLL
         target.getFreqColl().clear();
@@ -589,7 +600,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             }
             return null;
         }
-        
+
         if (target == null) {
             target = new ExternalItem(source.getUri(), source.getUrn(), source.getType(), internationalStringToEntity(source.getTitle(), null, metadataName), source.getManagementAppUrl());
         } else {
@@ -599,10 +610,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             target.setManagementAppUrl(source.getManagementAppUrl());
             target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), metadataName));
         }
-        
+
         return target;
     }
-
 
     /**
      * Delete the externalItem of an externalItemList

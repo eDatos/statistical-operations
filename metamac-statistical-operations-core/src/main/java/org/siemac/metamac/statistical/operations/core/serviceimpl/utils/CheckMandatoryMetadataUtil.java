@@ -36,6 +36,7 @@ public class CheckMandatoryMetadataUtil {
         }
 
         ValidationUtils.checkMetadataRequired(family.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
+        ValidationUtils.checkMetadataRequired(family.getUrn(), ServiceExceptionParameters.FAMILY_URN, exceptions);
         ValidationUtils.checkMetadataRequired(family.getTitle(), ServiceExceptionParameters.FAMILY_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(family.getProcStatus(), ServiceExceptionParameters.FAMILY_PROC_STATUS, exceptions);
         
@@ -103,6 +104,7 @@ public class CheckMandatoryMetadataUtil {
         }
 
         ValidationUtils.checkMetadataRequired(operation.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
+        ValidationUtils.checkMetadataRequired(operation.getUrn(), ServiceExceptionParameters.OPERATION_URN, exceptions);
         ValidationUtils.checkMetadataRequired(operation.getTitle(), ServiceExceptionParameters.OPERATION_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(operation.getProcStatus(), ServiceExceptionParameters.OPERATION_PROC_STATUS, exceptions);
         ValidationUtils.checkMetadataRequired(operation.getStatus(), ServiceExceptionParameters.OPERATION_STATUS, exceptions);
@@ -182,6 +184,7 @@ public class CheckMandatoryMetadataUtil {
         }
 
         ValidationUtils.checkMetadataRequired(instance.getOrder(), ServiceExceptionParameters.INSTANCE_ORDER, exceptions);
+        ValidationUtils.checkMetadataRequired(instance.getUrn(), ServiceExceptionParameters.INSTANCE_URN, exceptions);
         ValidationUtils.checkMetadataRequired(instance.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
         ValidationUtils.checkMetadataRequired(instance.getTitle(), ServiceExceptionParameters.INSTANCE_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(instance.getProcStatus(), ServiceExceptionParameters.INSTANCE_PROC_STATUS, exceptions);

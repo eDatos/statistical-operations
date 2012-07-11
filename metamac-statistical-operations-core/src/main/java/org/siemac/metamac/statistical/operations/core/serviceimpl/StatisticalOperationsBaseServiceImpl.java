@@ -16,6 +16,7 @@ import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
+import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyRepository;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
@@ -92,6 +93,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Family createFamily(ServiceContext ctx, Family family) throws MetamacException {
         // Fill metadata
         family.setProcStatus(ProcStatusEnum.DRAFT);
+        family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
 
         // Validations
         validateFamilyCodeUnique(ctx, family.getCode(), null);
@@ -108,6 +110,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
         Set<Operation> operations = family.getOperations();
         if (ProcStatusEnum.DRAFT.equals(family.getProcStatus())) {
+            family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
             validateFamilyCodeUnique(ctx, family.getCode(), family.getId());
             CheckMandatoryMetadataUtil.checkCreateFamily(family);
         }
@@ -281,6 +284,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Operation createOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Fill metadata
+        operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
         operation.setProcStatus(ProcStatusEnum.DRAFT);
         operation.setStatus(StatusEnum.PLANNING);
         operation.setCurrentlyActive(Boolean.FALSE);
@@ -297,6 +301,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Operation updateOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Validations
         if (ProcStatusEnum.DRAFT.equals(operation.getProcStatus())) {
+            operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
             validateOperationCodeUnique(ctx, operation.getCode(), operation.getId());
             CheckMandatoryMetadataUtil.checkCreateOperation(operation);
         }
@@ -446,6 +451,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         Integer order = operation.getInstances().size();
 
         // Fill metadata
+        instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(operation.getCode(), instance.getCode()));
         instance.setOperation(operation);
         instance.setOrder(order);
         instance.setProcStatus(ProcStatusEnum.DRAFT);
@@ -470,6 +476,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
         Operation operation = instance.getOperation();
         if (ProcStatusEnum.DRAFT.equals(instance.getProcStatus())) {
+            instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(operation.getCode(), instance.getCode()));
             validateInstanceCodeUnique(ctx, instance.getCode(), instance.getId());
             CheckMandatoryMetadataUtil.checkCreateInstance(instance);
         }

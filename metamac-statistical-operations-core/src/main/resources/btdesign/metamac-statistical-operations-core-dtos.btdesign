@@ -47,6 +47,7 @@ Application StatisticalOperationsDto {
        	"Dto for FamilytDto"
        	DataTransferObject FamilyDto extends @AuditableDto  {
 			String code required;	
+			String urn nullable;
        		-@InternationalStringDto title required;
        		-@InternationalStringDto acronym nullable;
        		-@InternationalStringDto description nullable;
@@ -62,6 +63,7 @@ Application StatisticalOperationsDto {
        	"Dto for FamilyBaseDto"
        	DataTransferObject FamilyBaseDto extends @AuditableDto  {
 			String code;	
+			String urn nullable;
        		-@InternationalStringDto title;
        		-@InternationalStringDto description nullable;
        		-@ProcStatusEnum procStatus required;
@@ -73,6 +75,7 @@ Application StatisticalOperationsDto {
        		- @ExternalItemDto commonMetadata nullable;
        		
        		String code;
+       		String urn nullable;
        		- @InternationalStringDto title;
        		- @InternationalStringDto acronym nullable;
        		
@@ -121,6 +124,7 @@ Application StatisticalOperationsDto {
        	"Dto for OperationBaseDto"
        	DataTransferObject OperationBaseDto extends @AuditableDto  {
        		String code;
+       		String urn nullable;
        		-@InternationalStringDto title;
        		-@InternationalStringDto acronym nullable;
        		-@ProcStatusEnum procStatus required;
@@ -132,6 +136,7 @@ Application StatisticalOperationsDto {
        	DataTransferObject InstanceDto extends @AuditableDto  {
 			Integer order;
        		String code;
+       		String urn nullable;
        		- @InternationalStringDto title;
        		- @InternationalStringDto acronym nullable;
        		
@@ -189,6 +194,7 @@ Application StatisticalOperationsDto {
        	"Dto for InstanceBaseDto"
        	DataTransferObject InstanceBaseDto extends @AuditableDto  {
        		String code;
+       		String urn nullable;
        		-@InternationalStringDto title;
        		-@ProcStatusEnum procStatus required;
        		-@InternationalStringDto description nullable;

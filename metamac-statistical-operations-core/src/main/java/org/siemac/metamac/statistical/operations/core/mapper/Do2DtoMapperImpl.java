@@ -149,6 +149,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // CODE
         // Not necessary
 
+        // URN
+        // Not necessary
+
         // TITLE
         target.setTitle(internationalStringToDto(source.getTitle()));
 
@@ -166,7 +169,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
 
         // INVENTORY_DATE
         // Not necessary
-        
+
         target.setOptimisticLockingVersion(source.getVersion());
 
         return target;
@@ -180,6 +183,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         FamilyBaseDto target = getMapper().map(source, FamilyBaseDto.class);
 
         // IDENTIFIER
+        // Not necessary
+
+        // URN
         // Not necessary
 
         // TITLE
@@ -205,6 +211,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         target.setCommonMetadata(externalItemToDto(source.getCommonMetadata()));
 
         // CODE
+        // Not necessary
+
+        // URN
         // Not necessary
 
         // TITLE
@@ -305,7 +314,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         target.setNotes(internationalStringToDto(source.getNotes()));
         // NOTES_URL
         // Not necessary
-        
+
         target.setOptimisticLockingVersion(source.getVersion());
 
         return target;
@@ -319,6 +328,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         OperationBaseDto target = getMapper().map(source, OperationBaseDto.class);
 
         // CODE
+        // Not necessary
+
+        // URN
         // Not necessary
 
         // TITLE
@@ -345,6 +357,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // CODE
+        // Not necessary
+
+        // URN
         // Not necessary
 
         // TITLE
@@ -527,7 +542,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         target.setOptimisticLockingVersion(source.getVersion());
-        
+
         return target;
     }
 
@@ -540,6 +555,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         InstanceBaseDto target = getMapper().map(source, InstanceBaseDto.class);
 
         // CODE
+        // Not necessary
+
+        // URN
         // Not necessary
 
         // TITLE
@@ -598,7 +616,6 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
 
         return target;
     }
-
 
     private Set<CostDto> costListToDto(Set<Cost> costList) {
         if (costList == null) {

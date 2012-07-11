@@ -280,6 +280,8 @@ Application StatisticalOperations {
 			
 			"Semantic identifier"
        		String code;
+       		"URN"
+       		String urn;
        		"TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"TITLE_ALTERNATIVE"
@@ -319,6 +321,8 @@ Application StatisticalOperations {
 			
 			"Metadata CODE"
        		String code;
+       		"URN"
+       		String urn;
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"
@@ -414,6 +418,8 @@ Application StatisticalOperations {
 			
 			"Metadata CODE"
        		String code;
+       		"URN"
+       		String urn;
        		"Metadata TITLE"
        		- @InternationalString title cascade="all" databaseColumn="TITLE_FK";
        		"Metadata TITLE_ALTERNATIVE"
