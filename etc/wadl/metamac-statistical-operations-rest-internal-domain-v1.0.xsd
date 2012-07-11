@@ -134,6 +134,7 @@
     <xs:simpleType name="OperationCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">
             <xs:enumeration value="CODE" />
+            <xs:enumeration value="TITLE" />
             <xs:enumeration value="PROC_STATUS" />
             <xs:enumeration value="IS_INDICATORS_SYSTEM" />
         </xs:restriction>
@@ -148,6 +149,7 @@
     <xs:simpleType name="FamilyCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">
             <xs:enumeration value="CODE" />
+            <xs:enumeration value="TITLE" />
             <xs:enumeration value="PROC_STATUS" />
         </xs:restriction>
     </xs:simpleType>    
