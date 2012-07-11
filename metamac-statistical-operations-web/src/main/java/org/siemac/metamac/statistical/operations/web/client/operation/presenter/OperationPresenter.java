@@ -400,8 +400,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
             @Override
             public void onWaitSuccess(PublishInternallyOperationResult result) {
-                operationDto = result.getOperationSaved();
-                getView().onOperationSaved(operationDto);
+                retrieveOperation(operationDto.getCode());
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationInternallyPublished()), MessageTypeEnum.SUCCESS);
             }
         });
@@ -416,8 +415,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
             @Override
             public void onWaitSuccess(PublishExternallyOperationResult result) {
-                operationDto = result.getOperationSaved();
-                getView().onOperationSaved(operationDto);
+                retrieveOperation(operationDto.getCode());
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationExternallyPublished()), MessageTypeEnum.SUCCESS);
             }
         });
