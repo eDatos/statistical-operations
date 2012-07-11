@@ -11,50 +11,50 @@ import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ProcStatus;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestFacadeV10Test;
 
 public class StatisticalOperationsRestMocks {
 
     public static Operation mockOperation1(String baseApi) {
-        return mockOperation(baseApi, "1", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockOperation(baseApi, "1", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static Operation mockOperation2(String baseApi) {
-        return mockOperation(baseApi, "2", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockOperation(baseApi, "2", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static Operation mockOperation3(String baseApi) {
-        return mockOperation(baseApi, "3", ProcStatusEnum.PUBLISH_EXTERNALLY);
+        return mockOperation(baseApi, "3", ProcStatus.PUBLISH_EXTERNALLY);
     }
 
     public static Operation mockOperation4(String baseApi) {
-        return mockOperation(baseApi, "4", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockOperation(baseApi, "4", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static Operation mockOperation5(String baseApi) {
-        return mockOperation(baseApi, "5", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockOperation(baseApi, "5", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static Operation mockOperation6(String baseApi) {
-        return mockOperation(baseApi, "6", ProcStatusEnum.PUBLISH_EXTERNALLY);
+        return mockOperation(baseApi, "6", ProcStatus.PUBLISH_EXTERNALLY);
     }
 
     public static Family mockFamily1(String baseApi) {
-        return mockFamily(baseApi, "1", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockFamily(baseApi, "1", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static Family mockFamily2(String baseApi) {
-        return mockFamily(baseApi, "2", ProcStatusEnum.PUBLISH_EXTERNALLY);
+        return mockFamily(baseApi, "2", ProcStatus.PUBLISH_EXTERNALLY);
     }
 
     public static Instance mockInstance1(String baseApi) {
-        return mockInstance(baseApi, "1", "operation1", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance(baseApi, "1", "operation1", ProcStatus.PUBLISH_INTERNALLY);
     }
 
     public static ResourcesPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset) {
@@ -477,7 +477,7 @@ public class StatisticalOperationsRestMocks {
         return MetamacRestMocks.mockResource("instance" + subId, RestInternalConstants.KIND_INSTANCE, baseApi + "/operations/" + operationId + "/instances/instance" + subId);
     }
 
-    private static Operation mockOperation(String baseApi, String subCode, ProcStatusEnum procStatus) {
+    private static Operation mockOperation(String baseApi, String subCode, ProcStatus procStatus) {
 
         Operation operation = new Operation();
         operation.setId("operation" + subCode);
@@ -510,7 +510,7 @@ public class StatisticalOperationsRestMocks {
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(StatusEnum.DESIGN.name());
-        operation.setProcStatus(procStatus.name());
+        operation.setProcStatus(procStatus);
         operation.getPublishers().add(MetamacRestMocks.mockResource("publisher1", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher1"));
         operation.getPublishers().add(MetamacRestMocks.mockResource("publisher22", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher22"));
         operation.getPublishers().add(MetamacRestMocks.mockResource("publisher333", TypeExternalArtefactsEnum.AGENCY.name(), "http://publisher333"));
@@ -535,7 +535,7 @@ public class StatisticalOperationsRestMocks {
         return operation;
     }
 
-    private static Family mockFamily(String baseApi, String subCode, ProcStatusEnum procStatus) {
+    private static Family mockFamily(String baseApi, String subCode, ProcStatus procStatus) {
 
         Family family = new Family();
         family.setId("family" + subCode);
@@ -545,14 +545,14 @@ public class StatisticalOperationsRestMocks {
         family.setAcronym(mockInternationalString("acronym", subCode));
         family.setDescription(mockInternationalString("description", subCode));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
-        family.setProcStatus(procStatus.name());
+        family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         family.setParent(MetamacRestMocks.mockResourceWithoutTitle(null, RestInternalConstants.KIND_FAMILIES, baseApi + "/families"));
         family.getchildren().add(MetamacRestMocks.mockResourceWithoutTitle(null, RestInternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subCode + "/operations"));
         return family;
     }
 
-    private static Instance mockInstance(String baseApi, String subCode, String operation, ProcStatusEnum procStatus) {
+    private static Instance mockInstance(String baseApi, String subCode, String operation, ProcStatus procStatus) {
 
         Instance instance = new Instance();
         instance.setId("instance" + subCode);
@@ -582,7 +582,7 @@ public class StatisticalOperationsRestMocks {
         instance.getClassSystemLists().add(MetamacRestMocks.mockResource("statConcDefList22", TypeExternalArtefactsEnum.CODELIST.name(), "http://statConcDefList22"));
         instance.setInstanceType(MetamacRestMocks.mockResource("instanceType1", null, null));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
-        instance.setProcStatus(procStatus.name());
+        instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalString("docMethod", subCode));
         instance.setSurveySource(MetamacRestMocks.mockResource("surveySource1", null, null));
         instance.setCollMethod(MetamacRestMocks.mockResource("collMethod1", null, null));

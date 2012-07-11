@@ -27,7 +27,7 @@
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
             <xs:element name="status" type="xs:string" />
-            <xs:element name="procStatus" type="xs:string" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="publisher" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="relPolUsAc" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
@@ -59,7 +59,7 @@
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="description" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
-            <xs:element name="procStatus" type="xs:string" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="parent" type="common:Resource" />
             <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
@@ -91,7 +91,7 @@
             <xs:element name="classSystemList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="instanceType" type="common:Resource" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
-            <xs:element name="procStatus" type="xs:string" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="docMethod" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="surveySource" type="common:Resource" minOccurs="0"/>
             <xs:element name="collMethod" type="common:Resource" minOccurs="0"/>
@@ -122,6 +122,14 @@
             <xs:element name="child" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:simpleType name="ProcStatus">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="CODE" />
+            <xs:enumeration value="PUBLISH_INTERNALLY" />
+            <xs:enumeration value="PUBLISH_EXTERNALLY" />
+        </xs:restriction>
+    </xs:simpleType> 
 
     <xs:simpleType name="OperationCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">

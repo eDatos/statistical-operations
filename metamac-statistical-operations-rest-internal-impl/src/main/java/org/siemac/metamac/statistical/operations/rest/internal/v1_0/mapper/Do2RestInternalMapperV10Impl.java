@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.core.Response.Status;
+
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
@@ -21,6 +23,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
+import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
 import org.siemac.metamac.rest.utils.RestUtils;
@@ -32,9 +35,11 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ProcStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -69,7 +74,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
         target.setStatus(source.getStatus() != null ? source.getStatus().name() : null);
-        target.setProcStatus(source.getProcStatus().name());
+        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.getPublishers().addAll(toResourcesExternalItems(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
         target.setReleaseCalendar(source.getReleaseCalendar());
@@ -139,7 +144,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setDescription(toInternationalString(source.getDescription()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
-        target.setProcStatus(source.getProcStatus().name());
+        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setParent(toFamilyParent(apiUrl));
         target.getchildren().addAll(toFamilyChildren(source, apiUrl));
@@ -213,7 +218,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getClassSystemLists().addAll(toResourcesExternalItems(source.getClassSystemList()));
         target.setInstanceType(toResource(source.getInstanceType()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
-        target.setProcStatus(source.getProcStatus().name());
+        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
         target.setSurveySource(toResource(source.getSurveySource()));
         target.setCollMethod(toResource(source.getCollMethod()));
@@ -608,4 +613,20 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return null;
     }
+    
+    private ProcStatus toProcStatus(ProcStatusEnum source) {
+        if (source == null) {
+            return null;
+        }
+        switch (source) {
+            case PUBLISH_INTERNALLY:
+                return ProcStatus.PUBLISH_INTERNALLY;
+            case PUBLISH_EXTERNALLY:
+                return ProcStatus.PUBLISH_EXTERNALLY;
+            default:
+                Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
