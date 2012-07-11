@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2SculptorCriteriaMapper {
 
     private RestCriteria2SculptorCriteria<Operation> operationCriteriaMapper = null;
-    private RestCriteria2SculptorCriteria<Family> familyCriteriaMapper    = null;
+    private RestCriteria2SculptorCriteria<Family>    familyCriteriaMapper    = null;
 
     public RestCriteria2SculptorCriteriaMapperImpl() {
         operationCriteriaMapper = new RestCriteria2SculptorCriteria<Operation>(Operation.class, OperationCriteriaPropertyOrder.class, OperationCriteriaPropertyRestriction.class,
@@ -54,9 +54,11 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 case CODE:
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), ProcStatusEnum.valueOf(propertyRestriction.getValue()));
+                    ProcStatusEnum procStatus = propertyRestriction.getValue() != null ? ProcStatusEnum.valueOf(propertyRestriction.getValue()) : null;
+                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), procStatus);
                 case IS_INDICATORS_SYSTEM:
-                    return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), Boolean.valueOf(propertyRestriction.getValue()));
+                    Boolean isIndicatorsSystem = propertyRestriction.getValue() != null ? Boolean.valueOf(propertyRestriction.getValue()) : null;
+                    return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), isIndicatorsSystem);
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -80,7 +82,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             return OperationProperties.id();
         }
     }
-    
+
     private class FamilyCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -90,7 +92,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 case CODE:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), ProcStatusEnum.valueOf(propertyRestriction.getValue()));
+                    ProcStatusEnum value = propertyRestriction.getValue() != null ? ProcStatusEnum.valueOf(propertyRestriction.getValue()) : null;
+                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), value);
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -114,7 +117,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             return FamilyProperties.id();
         }
     }
-    
+
     private RestException toRestExceptionParameterIncorrect(String parameter) {
         Error error = RestExceptionUtils.getError(RestCommonServiceExceptionType.PARAMETER_INCORRECT, parameter);
         return new RestException(error, Status.INTERNAL_SERVER_ERROR);
