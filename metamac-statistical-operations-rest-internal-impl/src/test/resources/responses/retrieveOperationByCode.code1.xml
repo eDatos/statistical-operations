@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
     <id>operation1</id>
+    <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</urn>
     <kind>statisticalOperations#operation</kind>
     <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
     <title>

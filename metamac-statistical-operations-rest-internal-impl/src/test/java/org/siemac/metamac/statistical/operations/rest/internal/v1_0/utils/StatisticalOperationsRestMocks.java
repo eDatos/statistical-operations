@@ -481,6 +481,7 @@ public class StatisticalOperationsRestMocks {
 
         Operation operation = new Operation();
         operation.setId("operation" + subCode);
+        operation.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getId());
         operation.setKind(RestInternalConstants.KIND_OPERATION);
         operation.setSelfLink(baseApi + "/operations/operation" + subCode);
         operation.setTitle(mockInternationalString("operation", subCode));
@@ -539,6 +540,7 @@ public class StatisticalOperationsRestMocks {
 
         Family family = new Family();
         family.setId("family" + subCode);
+        family.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getId());
         family.setKind(RestInternalConstants.KIND_FAMILY);
         family.setSelfLink(baseApi + "/families/family" + subCode);
         family.setTitle(mockInternationalString("family", subCode));
@@ -556,6 +558,7 @@ public class StatisticalOperationsRestMocks {
 
         Instance instance = new Instance();
         instance.setId("instance" + subCode);
+        instance.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation + "." + instance.getId());
         instance.setKind(RestInternalConstants.KIND_INSTANCE);
         instance.setSelfLink(baseApi + "/operations/" + operation + "/instances/instance" + subCode);
         instance.setTitle(mockInternationalString("instance", subCode));

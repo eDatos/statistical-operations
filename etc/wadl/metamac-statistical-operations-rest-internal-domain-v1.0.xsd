@@ -8,6 +8,7 @@
     <xs:complexType name="Operation">
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
             <xs:element name="kind" type="xs:string" />
             <xs:element name="selfLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
@@ -53,6 +54,7 @@
     <xs:complexType name="Family">
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
             <xs:element name="kind" type="xs:string" />
             <xs:element name="selfLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
@@ -69,6 +71,7 @@
     <xs:complexType name="Instance">
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
             <xs:element name="kind" type="xs:string" />
             <xs:element name="selfLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />

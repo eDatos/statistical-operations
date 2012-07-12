@@ -55,6 +55,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Operation target = new Operation();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_OPERATION);
         target.setSelfLink(toOperationLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -138,6 +139,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Family target = new Family();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_FAMILY);
         target.setSelfLink(toFamilyLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -196,6 +198,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Instance target = new Instance();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -457,8 +460,11 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         if (source == null) {
             return null;
         }
+        // TODO 
+//      target.setId(source.getCode());
+//      target.setUrn(source.getUrn());
         Resource target = new Resource();
-        target.setId(source.getUrn());
+        target.setId(source.getUrn());		
         target.setKind(source.getType().name());
         target.setSelfLink(source.getUri()); // TODO añadir endpoint METAMAC-785
         target.setTitle(toInternationalString(source.getTitle()));

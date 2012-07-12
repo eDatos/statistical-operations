@@ -11,6 +11,7 @@ import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -517,13 +518,15 @@ public class StatisticalOperationsCoreMocks {
     }
 
     private static ExternalItem mockExternalItem(String code, TypeExternalArtefactsEnum type, String uri) {
-        return new ExternalItem(uri, code, type, mockInternationalString(code, null), null);
+        // TODO urn
+        return new ExternalItem(code, uri, code, type, mockInternationalString(code, null), null);
     }
 
     private static Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
 
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
+        operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
         operation.setTitle(mockInternationalString("operation", subCode));
         operation.setAcronym(mockInternationalString("acronym", subCode));
         if (families != null) {
@@ -580,6 +583,7 @@ public class StatisticalOperationsCoreMocks {
 
         Family family = new Family();
         family.setCode("family" + subCode);
+        family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
         family.setTitle(mockInternationalString("family", subCode));
         family.setAcronym(mockInternationalString("acronym", subCode));
         family.setDescription(mockInternationalString("description", subCode));
@@ -593,10 +597,11 @@ public class StatisticalOperationsCoreMocks {
     private static Instance mockInstance(String subCode, ProcStatusEnum procStatus) {
 
         Instance instance = new Instance();
+        instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
         instance.setCode("instance" + subCode);
+        instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(instance.getOperation().getCode(), instance.getCode()));
         instance.setTitle(mockInternationalString("instance", subCode));
         instance.setAcronym(mockInternationalString("acronym", subCode));
-        instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
         instance.setOrder(Integer.valueOf(2));
         instance.setDataDescription(mockInternationalString("dataDescription", subCode));
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));

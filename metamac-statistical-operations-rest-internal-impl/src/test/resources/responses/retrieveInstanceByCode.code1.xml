@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <instance xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
     <id>instance1</id>
+    <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</urn>
     <kind>statisticalOperations#instance</kind>
     <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
     <title>

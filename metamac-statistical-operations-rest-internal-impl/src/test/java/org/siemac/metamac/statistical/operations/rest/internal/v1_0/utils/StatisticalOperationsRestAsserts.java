@@ -11,6 +11,7 @@ public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsOperation(Operation expected, Operation actual) {
         assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
         assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
@@ -53,6 +54,7 @@ public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsFamily(Family expected, Family actual) {
         assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
         assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
@@ -67,6 +69,7 @@ public class StatisticalOperationsRestAsserts {
 
     public static void assertEqualsInstance(Instance expected, Instance actual) {
         assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
         assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
