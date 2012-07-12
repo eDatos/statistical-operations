@@ -103,7 +103,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         if (result.size() == 0) {
             throw new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND, urn);
         } else if (result.size() > 1) {
-            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + urn);
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with urn " + urn);
         }
 
         // Return unique result
@@ -317,7 +317,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         if (result.size() == 0) {
             throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, urn);
         } else if (result.size() > 1) {
-            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + urn);
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with urn " + urn);
         }
 
         // Return unique result
@@ -499,7 +499,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         if (result.size() == 0) {
             throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, urn);
         } else if (result.size() > 1) {
-            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + urn);
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with urn " + urn);
         }
 
         // Return unique result
