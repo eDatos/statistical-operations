@@ -61,10 +61,10 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public Operation retrieveOperationByCode(String code) {
+    public Operation retrieveOperationById(String id) {
         try {
             // Retrieve
-            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(code);
+            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(id);
 
             // Transform
             Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
@@ -103,16 +103,16 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
 
     // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public ResourcesPagedResult findInstances(String operationCode, String limit, String offset) {
+    public ResourcesPagedResult findInstances(String operationId, String limit, String offset) {
         try {
             // Retrieve operation to check exists and it is published
-            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(operationCode);
+            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(operationId);
 
             // Retrieve instances by criteria
             SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
             // Find for operation and only published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
-                    .withProperty(InstanceProperties.operation().code()).eq(operationCode).withProperty(InstanceProperties.procStatus())
+                    .withProperty(InstanceProperties.operation().code()).eq(operationId).withProperty(InstanceProperties.procStatus())
                     .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
@@ -130,14 +130,14 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public ResourcesNoPagedResult retrieveFamiliesByOperation(String code) {
+    public ResourcesNoPagedResult retrieveFamiliesByOperation(String id) {
         try {
             // Retrieve operation to check exists and it is published
-            retrieveOperationEntityPublishedInternalOrExternally(code);
+            retrieveOperationEntityPublishedInternalOrExternally(id);
 
             // Retrieve families by criteria
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
-                    .withProperty(FamilyProperties.operations().code()).eq(code).withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
+                    .withProperty(FamilyProperties.operations().code()).eq(id).withProperty(FamilyProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
                     .distinctRoot().build();
             PagingParameter pagingParameter = PagingParameter.noLimits();
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(serviceContextRestInternal,
@@ -153,10 +153,10 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public Family retrieveFamilyByCode(String code) {
+    public Family retrieveFamilyById(String id) {
         try {
             // Retrieve
-            org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = retrieveFamilyEntityPublishedInternalOrExternally(code);
+            org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = retrieveFamilyEntityPublishedInternalOrExternally(id);
 
             // Transform
             Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
@@ -194,16 +194,16 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public ResourcesPagedResult retrieveOperationsByFamily(String code, String limit, String offset) {
+    public ResourcesPagedResult retrieveOperationsByFamily(String id, String limit, String offset) {
         try {
             // Validate family exists and it is published
-            org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(code);
+            org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(id);
 
             // Retrieve operations by criteria
             SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
             // Find only this family and published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
-                    .withProperty(OperationProperties.families().code()).eq(code).withProperty(OperationProperties.procStatus())
+                    .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus())
                     .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
@@ -221,12 +221,12 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public Instance retrieveInstanceByCode(String operationCode, String code) {
+    public Instance retrieveInstanceById(String operationId, String id) {
         try {
-            org.siemac.metamac.statistical.operations.core.domain.Instance instanceEntity = statisticalOperationsBaseService.findInstanceByCode(serviceContextRestInternal, code);
+            org.siemac.metamac.statistical.operations.core.domain.Instance instanceEntity = statisticalOperationsBaseService.findInstanceByCode(serviceContextRestInternal, id);
             if (instanceEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceEntity.getProcStatus()))) {
                 // Instance not found
-                Error error = RestExceptionUtils.getError(RestServiceExceptionType.INSTANCE_NOT_FOUND, code);
+                Error error = RestExceptionUtils.getError(RestServiceExceptionType.INSTANCE_NOT_FOUND, id);
                 throw new RestException(error, Status.NOT_FOUND);
             }
 
@@ -240,7 +240,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     /**
-     * Retrieve operation by code and check it is published externally or internally
+     * Retrieve operation by code (id in Api) and check it is published externally or internally
      */
     private org.siemac.metamac.statistical.operations.core.domain.Operation retrieveOperationEntityPublishedInternalOrExternally(String code) throws MetamacException {
         org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, code);
@@ -253,7 +253,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     /**
-     * Retrieve family by code and check it is published externally or internally
+     * Retrieve family by code (id in Api) and check it is published externally or internally
      */
     private org.siemac.metamac.statistical.operations.core.domain.Family retrieveFamilyEntityPublishedInternalOrExternally(String code) throws MetamacException {
         org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = statisticalOperationsBaseService.findFamilyByCode(serviceContextRestInternal, code);

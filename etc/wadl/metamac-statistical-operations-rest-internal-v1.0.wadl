@@ -32,10 +32,10 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>				
-			<wadl:resource path="operations/{code}">
-				<wadl:method name="GET" id="retrieveOperationByCode">
+			<wadl:resource path="operations/{id}">
+				<wadl:method name="GET" id="retrieveOperationById">
 					<wadl:request>
-						<wadl:param name="code" style="template"/>
+						<wadl:param name="id" style="template"/>
 					</wadl:request>
 	                <wadl:response status="200">
 						<wadl:representation mediaType="application/xml" element="domain:operation"/> 
@@ -47,10 +47,10 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>
-			<wadl:resource path="operations/{code}/families">
+			<wadl:resource path="operations/{id}/families">
 				<wadl:method name="GET" id="retrieveFamiliesByOperation">
 					<wadl:request>
-						<wadl:param name="code" style="template"/>
+						<wadl:param name="id" style="template"/>
 					</wadl:request>
 	                <wadl:response status="200">
 						<wadl:representation mediaType="application/xml" element="common:resourcesNoPagedResult"/> 
@@ -62,10 +62,10 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>
-			<wadl:resource path="operations/{operationCode}/instances">
+			<wadl:resource path="operations/{operationId}/instances">
 				<wadl:method name="GET" id="findInstances">
 					<wadl:request>
-						<wadl:param name="operationCode" style="template"/>
+						<wadl:param name="operationId" style="template"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>
@@ -79,11 +79,11 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>				
-			<wadl:resource path="operations/{operationCode}/instances/{code}">
-				<wadl:method name="GET" id="retrieveInstanceByCode">
+			<wadl:resource path="operations/{operationId}/instances/{id}">
+				<wadl:method name="GET" id="retrieveInstanceById">
 					<wadl:request>
-						<wadl:param name="operationCode" style="template"/>
-						<wadl:param name="code" style="template"/>
+						<wadl:param name="operationId" style="template"/>
+						<wadl:param name="id" style="template"/>
 					</wadl:request>
 	                <wadl:response status="200">
 						<wadl:representation mediaType="application/xml" element="domain:instance"/> 
@@ -113,10 +113,10 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>				
-			<wadl:resource path="families/{code}">
-				<wadl:method name="GET" id="retrieveFamilyByCode">
+			<wadl:resource path="families/{id}">
+				<wadl:method name="GET" id="retrieveFamilyById">
 					<wadl:request>
-						<wadl:param name="code" style="template"/>
+						<wadl:param name="id" style="template"/>
 					</wadl:request>
 	                <wadl:response status="200">
 						<wadl:representation mediaType="application/xml" element="domain:family"/> 
@@ -128,10 +128,10 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>
-			<wadl:resource path="families/{code}/operations">
+			<wadl:resource path="families/{id}/operations">
 				<wadl:method name="GET" id="retrieveOperationsByFamily">
 					<wadl:request>
-						<wadl:param name="code" style="template"/>
+						<wadl:param name="id" style="template"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>

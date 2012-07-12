@@ -51,7 +51,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
         public SculptorPropertyCriteria retrieveProperty(MetamacRestQueryPropertyRestriction propertyRestriction) throws RestException {
             OperationCriteriaPropertyRestriction propertyNameCriteria = OperationCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
-                case CODE:
+                case ID:
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getValue());
@@ -71,7 +71,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
         public Property retrievePropertyOrder(MetamacRestOrder order) throws RestException {
             OperationCriteriaPropertyOrder propertyNameCriteria = OperationCriteriaPropertyOrder.fromValue(order.getPropertyName());
             switch (propertyNameCriteria) {
-                case CODE:
+                case ID:
                     return OperationProperties.code();
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
@@ -91,7 +91,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
         public SculptorPropertyCriteria retrieveProperty(MetamacRestQueryPropertyRestriction propertyRestriction) throws RestException {
             FamilyCriteriaPropertyRestriction propertyNameCriteria = FamilyCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
-                case CODE:
+                case ID:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue());
@@ -108,7 +108,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
         public Property retrievePropertyOrder(MetamacRestOrder order) throws RestException {
             FamilyCriteriaPropertyOrder propertyNameCriteria = FamilyCriteriaPropertyOrder.fromValue(order.getPropertyName());
             switch (propertyNameCriteria) {
-                case CODE:
+                case ID:
                     return FamilyProperties.code();
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());

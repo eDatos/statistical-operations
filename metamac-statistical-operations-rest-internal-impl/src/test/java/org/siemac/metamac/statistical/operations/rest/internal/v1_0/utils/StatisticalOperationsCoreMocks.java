@@ -168,8 +168,8 @@ public class StatisticalOperationsCoreMocks {
         int rowCount = -1;
         int pageSize = -1;
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_CODE_LIKE_1;
-        String querySupported2 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_CODE_LIKE_1_AND_INDICATORS_SYSTEM;
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
+        String querySupported2 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
         if (querySupported1.equals(query)) {
             total = 2;
             startRow = -1;
@@ -338,7 +338,7 @@ public class StatisticalOperationsCoreMocks {
         int pageSize = -1;
         List<Family> families = new ArrayList<Family>();
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_CODE_LIKE_1;
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             total = 2;
             startRow = -1;

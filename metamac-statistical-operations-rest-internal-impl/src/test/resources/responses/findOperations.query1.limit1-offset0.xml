@@ -4,8 +4,8 @@
     <limit>1</limit>
     <offset>0</offset>
     <total>2</total>
-    <nextLink>http://localhost:9001/internal/v1.0/operations?query=CODE LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</nextLink>
-    <lastLink>http://localhost:9001/internal/v1.0/operations?query=CODE LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</lastLink>
+    <nextLink>http://localhost:9001/internal/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</nextLink>
+    <lastLink>http://localhost:9001/internal/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</lastLink>
     <items>
         <id>operation1</id>
         <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</urn>
