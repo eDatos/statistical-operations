@@ -809,6 +809,18 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(familyDto.getCode().equals(familyRetrieved.getCode()));
 
     }
+    
+    @Test
+    @Transactional
+    public void testFindFamilyByUrn() throws Exception {
+        FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
+
+        FamilyDto familyRetrieved = statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextAdministrador(), familyDto.getUrn());
+
+        assertNotNull(familyRetrieved);
+        assertTrue(familyDto.getUrn().equals(familyRetrieved.getUrn()));
+    }
+
 
     @Test
 	@Transactional
@@ -1683,8 +1695,19 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         assertNotNull(operationRetrieved);
         assertTrue(operationDto.getCode().equals(operationRetrieved.getCode()));
-
     }
+    
+    @Test
+    @Transactional
+    public void testFindOperationByUrn() throws Exception {
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto());
+
+        OperationDto operationRetrieved = statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextAdministrador(), operationDto.getUrn());
+
+        assertNotNull(operationRetrieved);
+        assertTrue(operationDto.getUrn().equals(operationRetrieved.getUrn()));
+    }
+
 
     @Test
 	@Transactional
@@ -2590,7 +2613,21 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         assertNotNull(instanceRetrieved);
         assertTrue(instanceDto.getCode().equals(instanceRetrieved.getCode()));
+    }
+    
+    @Test
+    @Transactional
+    public void testFindInstanceByUrn() throws Exception {
+        // Create instance
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
 
+        InstanceDto instanceRetrieved = statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextAdministrador(), instanceDto.getUrn());
+
+        assertNotNull(instanceRetrieved);
+        assertTrue(instanceDto.getUrn().equals(instanceRetrieved.getUrn()));
+        
     }
 
     @Test

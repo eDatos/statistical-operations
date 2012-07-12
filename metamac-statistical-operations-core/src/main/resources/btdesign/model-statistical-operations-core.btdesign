@@ -52,6 +52,7 @@ Application StatisticalOperations {
        		MetamacCriteriaResult<@FamilyBaseDto> findFamilyByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@FamilyDto findFamilyById(Long id) throws MetamacException;
        		@FamilyDto findFamilyByCode(String code) throws MetamacException;
+       		@FamilyDto findFamilyByUrn(String urn) throws MetamacException;
        		@FamilyDto publishInternallyFamily(Long familyId) throws MetamacException;
        		@FamilyDto publishExternallyFamily(Long familyId) throws MetamacException;
        		List<@OperationBaseDto> findOperationsForFamily(Long familyId) throws MetamacException;
@@ -67,6 +68,7 @@ Application StatisticalOperations {
        		MetamacCriteriaResult<@OperationBaseDto> findOperationsByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@OperationDto findOperationById(Long id) throws MetamacException;
        		@OperationDto findOperationByCode(String code) throws MetamacException;
+       		@OperationDto findOperationByUrn(String urn) throws MetamacException;
        		@OperationDto publishInternallyOperation(Long operationId) throws MetamacException;
        		@OperationDto publishExternallyOperation(Long operationId) throws MetamacException;
        		List<@FamilyBaseDto> findFamiliesForOperation(Long operationId) throws MetamacException;
@@ -83,6 +85,7 @@ Application StatisticalOperations {
        		MetamacCriteriaResult<@InstanceBaseDto> findInstanceByCondition(MetamacCriteria criteria)  throws MetamacException;
        		@InstanceDto findInstanceById(Long id) throws MetamacException;
        		@InstanceDto findInstanceByCode(String code) throws MetamacException;
+       		@InstanceDto findInstanceByUrn(String urn) throws MetamacException;
        		@InstanceBaseDto findInstanceBaseById(Long id) throws MetamacException;
        		@InstanceDto publishInternallyInstance(Long instanceId) throws MetamacException;
        		@InstanceDto publishExternallyInstance(Long instanceId) throws MetamacException;
@@ -103,6 +106,7 @@ Application StatisticalOperations {
        		"Family" 
        		@Family findFamilyById(Long id) throws MetamacException;
        		@Family findFamilyByCode(String code) throws MetamacException;
+       		@Family findFamilyByUrn(String urn) throws MetamacException;
     		@Family createFamily(@Family family) throws MetamacException;
        		@Family updateFamily(@Family family) throws MetamacException;
     		deleteFamily(Long familyId) throws MetamacException;
@@ -118,6 +122,7 @@ Application StatisticalOperations {
 			"Operation"			
 			@Operation findOperationById(Long id) throws MetamacException;
 			@Operation findOperationByCode(String code) throws MetamacException;
+			@Operation findOperationByUrn(String urn) throws MetamacException;
 			@Operation createOperation(@Operation operation) throws MetamacException;
        		@Operation updateOperation(@Operation operation) throws MetamacException;
 			deleteOperation(Long operationId) throws MetamacException;
@@ -130,6 +135,7 @@ Application StatisticalOperations {
 			"Instance"		
 			@Instance findInstanceById(Long id) throws MetamacException;
 			@Instance findInstanceByCode(String code) throws MetamacException;
+			@Instance findInstanceByUrn(String urn) throws MetamacException;
 			@Instance createInstance(Long operationId, @Instance instance) throws MetamacException;
        		@Instance updateInstance(@Instance instance) throws MetamacException;
        		List<@Instance> updateInstancesOrder(Long operationId, List<Long> instancesIdList) throws MetamacException;

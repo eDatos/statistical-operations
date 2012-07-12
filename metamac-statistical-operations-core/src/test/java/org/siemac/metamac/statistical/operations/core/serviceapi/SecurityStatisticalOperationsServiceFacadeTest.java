@@ -312,8 +312,21 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoDifusion(), familyCode);
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoPlanificacion(), familyCode);
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoProduccion(), familyCode);
+    }
+    
+    @Test
+    public void testFindFamilyByUrn() throws Exception {
+        String familyUrn = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getUrn();
+
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoApoyoDifusion(), familyUrn);
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoApoyoPlanificacion(), familyUrn);
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoApoyoProduccion(), familyUrn);
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoDifusion(), familyUrn);
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoPlanificacion(), familyUrn);
+        statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoProduccion(), familyUrn);
         
     }
+
 
     @Test
     public void testPublishInternallyFamily() throws Exception {
@@ -618,8 +631,20 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoDifusion(), operationCode);
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoPlanificacion(), operationCode);
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoProduccion(), operationCode);
-        
     }
+    
+    @Test
+    public void testFindOperationByUrn() throws Exception {
+        String operationUrn = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getUrn();
+
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoApoyoDifusion(), operationUrn);
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoApoyoPlanificacion(), operationUrn);
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoApoyoProduccion(), operationUrn);
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoDifusion(), operationUrn);
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoPlanificacion(), operationUrn);
+        statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoProduccion(), operationUrn);
+    }
+
 
     @Test
     public void testPublishInternallyOperation() throws Exception {
@@ -1146,6 +1171,20 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoDifusion(), instanceCode);
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoPlanificacion(), instanceCode);
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoProduccion(), instanceCode);
+    }
+    
+    @Test
+    public void testFindInstanceByUrn() throws Exception {
+        Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
+        statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
+        String instanceUrn = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto()).getUrn();
+
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoApoyoDifusion(), instanceUrn);
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoApoyoPlanificacion(), instanceUrn);
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoApoyoProduccion(), instanceUrn);
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoDifusion(), instanceUrn);
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoPlanificacion(), instanceUrn);
+        statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoProduccion(), instanceUrn);
         
     }
 
@@ -1465,5 +1504,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         return instanceDto;
     }
+
 
 }

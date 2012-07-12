@@ -245,6 +245,21 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return familyDto;
     }
+    
+    @Override
+    public FamilyDto findFamilyByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Family family = getStatisticalOperationsBaseService().findFamilyByUrn(ctx, urn);
+
+        // Transform to dto
+        FamilyDto familyDto = do2DtoMapper.familyToDto(family);
+
+        // Return
+        return familyDto;
+    }
 
     @Override
     public FamilyDto createFamily(ServiceContext ctx, FamilyDto familyDto) throws MetamacException {
@@ -508,6 +523,22 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return operationDto;
     }
+    
+    @Override
+    public OperationDto findOperationByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Operation operation = getStatisticalOperationsBaseService().findOperationByUrn(ctx, urn);
+
+        // Transform to dto
+        OperationDto operationDto = operationToDto(ctx, operation);
+
+        // Return
+        return operationDto;
+
+    }
 
     @Override
     public OperationDto publishInternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
@@ -742,6 +773,22 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return instanceDto;
     }
+    
+    @Override
+    public InstanceDto findInstanceByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Security
+        SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
+
+        // Service call
+        Instance instance = getStatisticalOperationsBaseService().findInstanceByUrn(ctx, urn);
+
+        // Transform to dto
+        InstanceDto instanceDto = do2DtoMapper.instanceToDto(instance);
+
+        // Return
+        return instanceDto;
+
+    }
 
     @Override
     public InstanceDto publishInternallyInstance(ServiceContext ctx, Long instanceId) throws MetamacException {
@@ -890,5 +937,8 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         checkAccessOperationByCode(ctx, operation.getCode(), roles);
 
     }
+
+
+
 
 }

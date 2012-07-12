@@ -90,6 +90,27 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     }
 
     @Override
+    public Family findFamilyByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.urn()).eq(urn).distinctRoot().build();
+
+        // Find
+        List<Family> result = findFamilyByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND, urn);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + urn);
+        }
+
+        // Return unique result
+        return result.get(0);
+    }
+
+    @Override
     public Family createFamily(ServiceContext ctx, Family family) throws MetamacException {
         // Fill metadata
         family.setProcStatus(ProcStatusEnum.DRAFT);
@@ -282,6 +303,28 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     }
 
     @Override
+    public Operation findOperationByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.urn()).eq(urn).distinctRoot()
+                .build();
+
+        // Find
+        List<Operation> result = findOperationByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, urn);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + urn);
+        }
+
+        // Return unique result
+        return result.get(0);
+    }
+
+    @Override
     public Operation createOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Fill metadata
         operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
@@ -301,7 +344,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Operation updateOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Validations
         if (ProcStatusEnum.DRAFT.equals(operation.getProcStatus())) {
-            // We don't need to update the instances URN because we can't create instances in a draft operation 
+            // We don't need to update the instances URN because we can't create instances in a draft operation
             operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
             validateOperationCodeUnique(ctx, operation.getCode(), operation.getId());
             CheckMandatoryMetadataUtil.checkCreateOperation(operation);
@@ -435,6 +478,28 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
             throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, code);
         } else if (result.size() > 1) {
             throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + code);
+        }
+
+        // Return unique result
+        return result.get(0);
+    }
+
+    @Override
+    public Instance findInstanceByUrn(ServiceContext ctx, String urn) throws MetamacException {
+        // Validations
+        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+
+        // Prepare criteria
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.urn()).eq(urn).distinctRoot()
+                .build();
+
+        // Find
+        List<Instance> result = findInstanceByCondition(ctx, conditions);
+
+        if (result.size() == 0) {
+            throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, urn);
+        } else if (result.size() > 1) {
+            throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + urn);
         }
 
         // Return unique result

@@ -4,6 +4,7 @@ public class ServiceExceptionParameters {
 
     public static final String ID                                = "id";
     public static final String CODE                              = "code";
+    public static final String URN                               = "urn";
     public static final String INSTANCES_ID_LIST_SIZE            = "intances_id_list.size";
 
     public static final String FAMILY_TITLE                      = "family.title";
@@ -45,7 +46,7 @@ public class ServiceExceptionParameters {
     public static final String OPERATION_COMMON_METADATA         = "operation.common_metadata";
 
     public static final String INSTANCE_CODE                     = "instance.code";
-    public static final String INSTANCE_URN                     = "instance.urn";
+    public static final String INSTANCE_URN                      = "instance.urn";
     public static final String INSTANCE_TITLE                    = "instance.title";
     public static final String INSTANCE_ACRONYM                  = "instance.acronym";
     public static final String INSTANCE_DESCRIPTION              = "instance.description";
