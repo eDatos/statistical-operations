@@ -301,6 +301,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     public Operation updateOperation(ServiceContext ctx, Operation operation) throws MetamacException {
         // Validations
         if (ProcStatusEnum.DRAFT.equals(operation.getProcStatus())) {
+            // We don't need to update the instances URN because we can't create instances in a draft operation 
             operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
             validateOperationCodeUnique(ctx, operation.getCode(), operation.getId());
             CheckMandatoryMetadataUtil.checkCreateOperation(operation);

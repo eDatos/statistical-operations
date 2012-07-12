@@ -148,6 +148,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
+            // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
                 ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
@@ -172,6 +173,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
+            // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
                 ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
@@ -196,6 +198,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
             OptimisticLockingUtils.checkVersion(target.getVersion(), source.getOptimisticLockingVersion());
 
             // Metadata unmodifiable
+            // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
                 ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);

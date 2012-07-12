@@ -160,6 +160,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testCreateFamily() throws Exception {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
         assertNotNull(family);
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getCode(), family.getUrn());
     }
 
     @Test
@@ -239,6 +240,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testCreateOperation() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
     }
 
     @Test
@@ -467,6 +469,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation.getCode() + "." + instance.getCode(), instance.getUrn());
         assertNotNull(instance);
     }
 
