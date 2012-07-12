@@ -1392,7 +1392,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(new ExternalItemDto("/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -1422,17 +1422,17 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:INE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:INE", TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.addRegionalResponsible(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operationDto.addPublisher(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         return operationDto;
     }

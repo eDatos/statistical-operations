@@ -1123,7 +1123,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // ADD PRODUCER
         externalItemsBefore = externalItemRepository.findAll().size();
 
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?mod", "URN:AGENCY:ISTAC?MOD", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency?mod", "URN:AGENCY:ISTAC?MOD", TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1133,8 +1133,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         externalItemsBefore = externalItemRepository.findAll().size();
 
         operationDto.getProducer().clear();
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1160,8 +1160,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // ADD REGIONAL CONTRIBUTOR
         int externalItemsBefore = externalItemRepository.findAll().size();
 
-        operationDto.addRegionalContributor(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addRegionalContributor(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalContributor(new ExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalContributor(new ExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
@@ -2826,7 +2826,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(new ExternalItemDto("/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -2856,17 +2856,17 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:INE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE", TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.addRegionalResponsible(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operationDto.addPublisher(new ExternalItemDto("/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
+        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
 
         return operationDto;
     }
@@ -2875,8 +2875,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = createOperationDto();
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", TypeExternalArtefactsEnum.AGENCY));
 
         return operationDto;
     }
@@ -2922,7 +2922,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instanceDto = createInstanceDto();
 
         // GEOGRAPHIC_GRANULARITY
-        instanceDto.setGeographicGranularity(new ExternalItemDto("/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", TypeExternalArtefactsEnum.CONCEPT));
+        instanceDto.setGeographicGranularity(new ExternalItemDto("GEOGRAPHIC_GRANULARITY", "/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", TypeExternalArtefactsEnum.CONCEPT));
 
         return instanceDto;
 
