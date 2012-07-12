@@ -3,6 +3,6 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 1. Parar Tomcat
 
 2. Cambios en Base de datos
-	- Ejecutar script de updates-in-release/01-operations-delete_ml_url.sql que elimina las columnas innecesarias de URL por cambio de componente en la web para los tipos de dato ML+URL.
+	- No enviar el script de updates-in-release porque falta migrar inserts posiblemente no tengan datos. Mandar BBDD completa. Si se quejan se manda la actualización. 
 
 99. Reiniciar Tomcat
