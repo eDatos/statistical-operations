@@ -19,7 +19,6 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetFrequenc
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesByCodeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
@@ -56,7 +55,6 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAct
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesByCodeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
@@ -116,7 +114,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetOperationsListsAction.class, GetOperationsListsActionHandler.class);
         bindHandler(SaveOperationAction.class, SaveOperationActionHandler.class);
         bindHandler(GetOperationAndInstancesAction.class, GetOperationAndInstancesActionHandler.class);
-        bindHandler(GetOperationAndInstancesByCodeAction.class, GetOperationAndInstancesByCodeActionHandler.class);
         bindHandler(DeleteOperationListAction.class, DeleteOperationListActionHandler.class);
         bindHandler(UpdateOperationFamiliesAction.class, UpdateOperationFamiliesActionHandler.class);
         bindHandler(PublishInternallyOperationAction.class, PublishInternallyOperationActionHandler.class);
