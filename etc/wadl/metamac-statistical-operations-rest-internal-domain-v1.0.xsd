@@ -128,7 +128,6 @@
     
     <xs:simpleType name="ProcStatus">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="ID" />
             <xs:enumeration value="PUBLISH_INTERNALLY" />
             <xs:enumeration value="PUBLISH_EXTERNALLY" />
         </xs:restriction>
@@ -137,6 +136,7 @@
     <xs:simpleType name="OperationCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">
             <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />
             <xs:enumeration value="TITLE" />
             <xs:enumeration value="PROC_STATUS" />
             <xs:enumeration value="IS_INDICATORS_SYSTEM" />
@@ -152,6 +152,7 @@
     <xs:simpleType name="FamilyCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">
             <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />            
             <xs:enumeration value="TITLE" />
             <xs:enumeration value="PROC_STATUS" />
         </xs:restriction>

@@ -53,6 +53,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             switch (propertyNameCriteria) {
                 case ID:
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue());
+                case URN:
+                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getValue());
                 case PROC_STATUS:
@@ -93,6 +95,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             switch (propertyNameCriteria) {
                 case ID:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue());
+                case URN:
+                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue());
                 case PROC_STATUS:
