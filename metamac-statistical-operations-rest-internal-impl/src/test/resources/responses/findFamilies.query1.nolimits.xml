@@ -6,6 +6,7 @@
     <total>2</total>
     <items>
         <id>family1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
         <title>
@@ -21,6 +22,7 @@
     </items>
     <items>
         <id>family15</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family15</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family15</selfLink>
         <title>

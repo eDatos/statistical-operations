@@ -10,6 +10,7 @@
   "items": [
     {
       "id": "family3",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3",
       "kind": "statisticalOperations#family",
       "selfLink": "http://localhost:9001/internal/v1.0/families/family3",
       "title": {
@@ -27,6 +28,7 @@
     },
     {
       "id": "family4",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4",
       "kind": "statisticalOperations#family",
       "selfLink": "http://localhost:9001/internal/v1.0/families/family4",
       "title": {

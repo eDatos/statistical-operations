@@ -46,8 +46,8 @@
             <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="parent" type="common:Resource" />
-            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="child" type="common:ResourceLink" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType> 
        
@@ -63,8 +63,8 @@
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
-            <xs:element name="parent" type="common:Resource" />
-            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="child" type="common:ResourceLink" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
@@ -122,7 +122,7 @@
             <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="parent" type="common:Resource" />
-            <xs:element name="child" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="child" type="common:ResourceLink" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     

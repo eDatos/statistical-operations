@@ -20,6 +20,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
@@ -318,6 +319,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Resource target = new Resource();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_OPERATION);
         target.setSelfLink(toOperationLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -342,6 +344,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Resource target = new Resource();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_FAMILY);
         target.setSelfLink(toFamilyLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -366,6 +369,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Resource target = new Resource();
         target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(RestInternalConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
@@ -460,35 +464,33 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         if (source == null) {
             return null;
         }
-        // TODO 
-//      target.setId(source.getCode());
-//      target.setUrn(source.getUrn());
         Resource target = new Resource();
-        target.setId(source.getUrn());		
+        target.setId(source.getCode());
+        target.setUrn(source.getUrn());
         target.setKind(source.getType().name());
         target.setSelfLink(source.getUri()); // TODO añadir endpoint METAMAC-785
         target.setTitle(toInternationalString(source.getTitle()));
         return target;
     }
 
-    private Resource toOperationParent(String apiUrl) {
-        Resource target = new Resource();
+    private ResourceLink toOperationParent(String apiUrl) {
+        ResourceLink target = new ResourceLink();
         target.setKind(RestInternalConstants.KIND_OPERATIONS);
         target.setSelfLink(toOperationsLink(apiUrl));
         return target;
     }
 
-    private List<Resource> toOperationChildren(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
-        List<Resource> targets = new ArrayList<Resource>();
+    private List<ResourceLink> toOperationChildren(org.siemac.metamac.statistical.operations.core.domain.Operation operation, String apiUrl) {
+        List<ResourceLink> targets = new ArrayList<ResourceLink>();
 
         // Instances
-        Resource instancesTarget = new Resource();
+        ResourceLink instancesTarget = new ResourceLink();
         instancesTarget.setKind(RestInternalConstants.KIND_INSTANCES);
         instancesTarget.setSelfLink(toInstancesLink(apiUrl, operation));
         targets.add(instancesTarget);
 
         // Families
-        Resource familiesTarget = new Resource();
+        ResourceLink familiesTarget = new ResourceLink();
         familiesTarget.setKind(RestInternalConstants.KIND_FAMILIES);
         familiesTarget.setSelfLink(toFamiliesByOperationLink(operation, apiUrl));
         targets.add(familiesTarget);
@@ -496,18 +498,18 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return targets;
     }
 
-    private Resource toFamilyParent(String apiUrl) {
-        Resource target = new Resource();
+    private ResourceLink toFamilyParent(String apiUrl) {
+        ResourceLink target = new ResourceLink();
         target.setKind(RestInternalConstants.KIND_FAMILIES);
         target.setSelfLink(toFamiliesLink(apiUrl));
         return target;
     }
 
-    private List<Resource> toFamilyChildren(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
-        List<Resource> targets = new ArrayList<Resource>();
+    private List<ResourceLink> toFamilyChildren(org.siemac.metamac.statistical.operations.core.domain.Family family, String apiUrl) {
+        List<ResourceLink> targets = new ArrayList<ResourceLink>();
 
         // Operations of family
-        Resource operationsTarget = new Resource();
+        ResourceLink operationsTarget = new ResourceLink();
         operationsTarget.setKind(RestInternalConstants.KIND_OPERATIONS);
         operationsTarget.setSelfLink(toOperationsByFamilyLink(family, apiUrl));
         targets.add(operationsTarget);
@@ -516,14 +518,15 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     private Resource toInstanceParent(org.siemac.metamac.statistical.operations.core.domain.Instance instance, String apiUrl) {
-        Resource target = new Resource();
-        target.setKind(RestInternalConstants.KIND_OPERATION);
-        target.setSelfLink(toOperationLink(apiUrl, instance.getOperation()));
+        
+        // Operation
+        Resource target = toResource(instance.getOperation(), apiUrl);
+        
         return target;
     }
 
-    private List<Resource> toInstanceChildren(org.siemac.metamac.statistical.operations.core.domain.Instance instance, String apiUrl) {
-        List<Resource> targets = new ArrayList<Resource>();
+    private List<ResourceLink> toInstanceChildren(org.siemac.metamac.statistical.operations.core.domain.Instance instance, String apiUrl) {
+        List<ResourceLink> targets = new ArrayList<ResourceLink>();
         // No children
         return targets;
     }
@@ -619,7 +622,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return null;
     }
-    
+
     private ProcStatus toProcStatus(ProcStatusEnum source) {
         if (source == null) {
             return null;

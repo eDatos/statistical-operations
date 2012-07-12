@@ -6,6 +6,7 @@
     <total>5</total>
     <items>
         <id>family1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
         <title>
@@ -21,6 +22,7 @@
     </items>
     <items>
         <id>family2</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family2</selfLink>
         <title>
@@ -36,6 +38,7 @@
     </items>
     <items>
         <id>family3</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
         <title>
@@ -51,6 +54,7 @@
     </items>
     <items>
         <id>family4</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
         <title>
@@ -66,6 +70,7 @@
     </items>
     <items>
         <id>family15</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family15</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family15</selfLink>
         <title>

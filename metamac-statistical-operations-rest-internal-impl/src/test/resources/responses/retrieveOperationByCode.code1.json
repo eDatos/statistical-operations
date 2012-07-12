@@ -6,12 +6,12 @@
   "title": {
     "texts": [
       {
-        "locale": "en",
-        "label": "operation1 in English"
-      },
-      {
         "locale": "es",
         "label": "operation1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "operation1 in English"
       }
     ]
   },
@@ -29,24 +29,8 @@
   },
   "families": [
     {
-      "id": "family2",
-      "kind": "statisticalOperations#family",
-      "selfLink": "http://localhost:9001/internal/v1.0/families/family2",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "family2 in English"
-          },
-          {
-            "locale": "es",
-            "label": "family2 en Español"
-          }
-        ]
-      }
-    },
-    {
       "id": "family1",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1",
       "kind": "statisticalOperations#family",
       "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
       "title": {
@@ -61,10 +45,29 @@
           }
         ]
       }
+    },
+    {
+      "id": "family2",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2",
+      "kind": "statisticalOperations#family",
+      "selfLink": "http://localhost:9001/internal/v1.0/families/family2",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "family2 in English"
+          },
+          {
+            "locale": "es",
+            "label": "family2 en Español"
+          }
+        ]
+      }
     }
   ],
   "subjectArea": {
     "id": "subjectArea1",
+    "urn": "urn:subjectArea1",
     "kind": "CATEGORY",
     "selfLink": "http://subjectArea1",
     "title": {
@@ -83,6 +86,7 @@
   "secondarySubjectAreas": [
     {
       "id": "secundarySubjectArea22",
+      "urn": "urn:secundarySubjectArea22",
       "kind": "CATEGORY",
       "selfLink": "http://secundarySubjectArea22",
       "title": {
@@ -99,24 +103,8 @@
       }
     },
     {
-      "id": "secundarySubjectArea1",
-      "kind": "CATEGORY",
-      "selfLink": "http://secundarySubjectArea1",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "secundarySubjectArea1 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "secundarySubjectArea1 in English"
-          }
-        ]
-      }
-    },
-    {
       "id": "secundarySubjectArea333",
+      "urn": "urn:secundarySubjectArea333",
       "kind": "CATEGORY",
       "selfLink": "http://secundarySubjectArea333",
       "title": {
@@ -131,17 +119,35 @@
           }
         ]
       }
+    },
+    {
+      "id": "secundarySubjectArea1",
+      "urn": "urn:secundarySubjectArea1",
+      "kind": "CATEGORY",
+      "selfLink": "http://secundarySubjectArea1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "secundarySubjectArea1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "secundarySubjectArea1 en Español"
+          }
+        ]
+      }
     }
   ],
   "objective": {
     "texts": [
       {
-        "locale": "es",
-        "label": "objetive1 en Español"
-      },
-      {
         "locale": "en",
         "label": "objetive1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "objetive1 en Español"
       }
     ]
   },
@@ -160,6 +166,7 @@
   "instances": [
     {
       "id": "instance4444",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4444",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444",
       "title": {
@@ -177,6 +184,7 @@
     },
     {
       "id": "instance22",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
       "title": {
@@ -194,23 +202,25 @@
     },
     {
       "id": "instance1",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "instance1 in English"
-          },
-          {
             "locale": "es",
             "label": "instance1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "instance1 in English"
           }
         ]
       }
     },
     {
       "id": "instance333",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
       "title": {
@@ -232,12 +242,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "surveyIdentifier en Español"
-        },
-        {
           "locale": "en",
           "label": "surveyIdentifier in English"
+        },
+        {
+          "locale": "es",
+          "label": "surveyIdentifier en Español"
         }
       ]
     }
@@ -261,6 +271,7 @@
   "producers": [
     {
       "id": "producer22",
+      "urn": "urn:producer22",
       "kind": "AGENCY",
       "selfLink": "http://producer22",
       "title": {
@@ -278,6 +289,7 @@
     },
     {
       "id": "producer1",
+      "urn": "urn:producer1",
       "kind": "AGENCY",
       "selfLink": "http://producer1",
       "title": {
@@ -297,40 +309,25 @@
   "regionalResponsibles": [
     {
       "id": "regionalResponsible1",
+      "urn": "urn:regionalResponsible1",
       "kind": "AGENCY",
       "selfLink": "http://regionalResponsible1",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "regionalResponsible1 in English"
-          },
-          {
             "locale": "es",
             "label": "regionalResponsible1 en Español"
-          }
-        ]
-      }
-    },
-    {
-      "id": "regionalResponsible333",
-      "kind": "AGENCY",
-      "selfLink": "http://regionalResponsible333",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "regionalResponsible333 in English"
           },
           {
-            "locale": "es",
-            "label": "regionalResponsible333 en Español"
+            "locale": "en",
+            "label": "regionalResponsible1 in English"
           }
         ]
       }
     },
     {
       "id": "regionalResponsible22",
+      "urn": "urn:regionalResponsible22",
       "kind": "AGENCY",
       "selfLink": "http://regionalResponsible22",
       "title": {
@@ -345,28 +342,30 @@
           }
         ]
       }
-    }
-  ],
-  "regionalContributors": [
+    },
     {
-      "id": "regionalContributor1",
+      "id": "regionalResponsible333",
+      "urn": "urn:regionalResponsible333",
       "kind": "AGENCY",
-      "selfLink": "http://regionalContributor1",
+      "selfLink": "http://regionalResponsible333",
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "regionalContributor1 in English"
+            "label": "regionalResponsible333 in English"
           },
           {
             "locale": "es",
-            "label": "regionalContributor1 en Español"
+            "label": "regionalResponsible333 en Español"
           }
         ]
       }
-    },
+    }
+  ],
+  "regionalContributors": [
     {
       "id": "regionalContributor22",
+      "urn": "urn:regionalContributor22",
       "kind": "AGENCY",
       "selfLink": "http://regionalContributor22",
       "title": {
@@ -381,6 +380,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "regionalContributor1",
+      "urn": "urn:regionalContributor1",
+      "kind": "AGENCY",
+      "selfLink": "http://regionalContributor1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "regionalContributor1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "regionalContributor1 en Español"
+          }
+        ]
+      }
     }
   ],
   "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
@@ -389,24 +406,8 @@
   "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
     {
-      "id": "publisher1",
-      "kind": "AGENCY",
-      "selfLink": "http://publisher1",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "publisher1 in English"
-          },
-          {
-            "locale": "es",
-            "label": "publisher1 en Español"
-          }
-        ]
-      }
-    },
-    {
       "id": "publisher22",
+      "urn": "urn:publisher22",
       "kind": "AGENCY",
       "selfLink": "http://publisher22",
       "title": {
@@ -424,6 +425,7 @@
     },
     {
       "id": "publisher333",
+      "urn": "urn:publisher333",
       "kind": "AGENCY",
       "selfLink": "http://publisher333",
       "title": {
@@ -435,6 +437,24 @@
           {
             "locale": "es",
             "label": "publisher333 en Español"
+          }
+        ]
+      }
+    },
+    {
+      "id": "publisher1",
+      "urn": "urn:publisher1",
+      "kind": "AGENCY",
+      "selfLink": "http://publisher1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "publisher1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "publisher1 in English"
           }
         ]
       }
@@ -456,7 +476,26 @@
   "releaseCalendarAccess": "http://releaseCalendarAccess1",
   "updateFrequencies": [
     {
+      "id": "updateFrequency1",
+      "urn": "urn:updateFrequency1",
+      "kind": "CODE",
+      "selfLink": "http://updateFrequency1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "updateFrequency1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "updateFrequency1 in English"
+          }
+        ]
+      }
+    },
+    {
       "id": "updateFrequency333",
+      "urn": "urn:updateFrequency333",
       "kind": "CODE",
       "selfLink": "http://updateFrequency333",
       "title": {
@@ -473,24 +512,8 @@
       }
     },
     {
-      "id": "updateFrequency4444",
-      "kind": "CODE",
-      "selfLink": "http://updateFrequency4444",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "updateFrequency4444 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "updateFrequency4444 in English"
-          }
-        ]
-      }
-    },
-    {
       "id": "updateFrequency22",
+      "urn": "urn:updateFrequency22",
       "kind": "CODE",
       "selfLink": "http://updateFrequency22",
       "title": {
@@ -507,18 +530,19 @@
       }
     },
     {
-      "id": "updateFrequency1",
+      "id": "updateFrequency4444",
+      "urn": "urn:updateFrequency4444",
       "kind": "CODE",
-      "selfLink": "http://updateFrequency1",
+      "selfLink": "http://updateFrequency4444",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "updateFrequency1 en Español"
+            "locale": "en",
+            "label": "updateFrequency4444 in English"
           },
           {
-            "locale": "en",
-            "label": "updateFrequency1 in English"
+            "locale": "es",
+            "label": "updateFrequency4444 en Español"
           }
         ]
       }
@@ -526,6 +550,7 @@
   ],
   "currentInternalInstance": {
     "id": "instance22",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22",
     "kind": "statisticalOperations#instance",
     "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
     "title": {
@@ -543,6 +568,7 @@
   },
   "currentInstance": {
     "id": "instance333",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333",
     "kind": "statisticalOperations#instance",
     "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
     "title": {
@@ -562,12 +588,12 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "en",
-        "label": "revPolicy1 in English"
-      },
-      {
         "locale": "es",
         "label": "revPolicy1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "revPolicy1 in English"
       }
     ]
   },
@@ -586,24 +612,24 @@
   "comment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "comment1 en Español"
-      },
-      {
         "locale": "en",
         "label": "comment1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "comment1 en Español"
       }
     ]
   },
   "notes": {
     "texts": [
       {
-        "locale": "en",
-        "label": "notes1 in English"
-      },
-      {
         "locale": "es",
         "label": "notes1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "notes1 in English"
       }
     ]
   },

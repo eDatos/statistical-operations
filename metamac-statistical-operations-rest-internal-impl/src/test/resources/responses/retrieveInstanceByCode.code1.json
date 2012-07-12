@@ -6,12 +6,12 @@
   "title": {
     "texts": [
       {
-        "locale": "en",
-        "label": "instance1 in English"
-      },
-      {
         "locale": "es",
         "label": "instance1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "instance1 in English"
       }
     ]
   },
@@ -29,23 +29,25 @@
   },
   "survey": {
     "id": "operation1",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1",
     "kind": "statisticalOperations#operation",
     "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "operation1 in English"
-        },
-        {
           "locale": "es",
           "label": "operation1 en Español"
+        },
+        {
+          "locale": "en",
+          "label": "operation1 in English"
         }
       ]
     }
   },
   "successor": {
     "id": "instance22",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22",
     "kind": "statisticalOperations#instance",
     "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22",
     "title": {
@@ -63,6 +65,7 @@
   },
   "predecessor": {
     "id": "instance333",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333",
     "kind": "statisticalOperations#instance",
     "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333",
     "title": {
@@ -81,58 +84,60 @@
   "dataDescription": {
     "texts": [
       {
-        "locale": "es",
-        "label": "dataDescription1 en Español"
-      },
-      {
         "locale": "en",
         "label": "dataDescription1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "dataDescription1 en Español"
       }
     ]
   },
   "statisticalPopulation": {
     "texts": [
       {
-        "locale": "en",
-        "label": "statisticalPopulation1 in English"
-      },
-      {
         "locale": "es",
         "label": "statisticalPopulation1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "statisticalPopulation1 in English"
       }
     ]
   },
   "statisticalUnits": [
     {
-      "id": "statisticalUnit1",
-      "kind": "DATASTRUCTURE",
-      "selfLink": "http://statisticalUnit1",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "statisticalUnit1 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "statisticalUnit1 in English"
-          }
-        ]
-      }
-    },
-    {
       "id": "statisticalUnit22",
+      "urn": "urn:statisticalUnit22",
       "kind": "DATASTRUCTURE",
       "selfLink": "http://statisticalUnit22",
       "title": {
         "texts": [
           {
+            "locale": "es",
+            "label": "statisticalUnit22 en Español"
+          },
+          {
             "locale": "en",
             "label": "statisticalUnit22 in English"
+          }
+        ]
+      }
+    },
+    {
+      "id": "statisticalUnit1",
+      "urn": "urn:statisticalUnit1",
+      "kind": "DATASTRUCTURE",
+      "selfLink": "http://statisticalUnit1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "statisticalUnit1 in English"
           },
           {
             "locale": "es",
-            "label": "statisticalUnit22 en Español"
+            "label": "statisticalUnit1 en Español"
           }
         ]
       }
@@ -140,6 +145,7 @@
   ],
   "geographicGranularity": {
     "id": "geographicGranularity",
+    "urn": "urn:geographicGranularity",
     "kind": "CODELIST",
     "selfLink": "http://geographicGranularity",
     "title": {
@@ -158,17 +164,18 @@
   "geographicComparability": {
     "texts": [
       {
-        "locale": "es",
-        "label": "geographicComparability1 en Español"
-      },
-      {
         "locale": "en",
         "label": "geographicComparability1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "geographicComparability1 en Español"
       }
     ]
   },
   "temporalGranularity": {
     "id": "temporalGranularity",
+    "urn": "urn:temporalGranularity",
     "kind": "CODELIST",
     "selfLink": "http://temporalGranularity",
     "title": {
@@ -187,12 +194,12 @@
   "temporalComparability": {
     "texts": [
       {
-        "locale": "en",
-        "label": "temporalComparability1 in English"
-      },
-      {
         "locale": "es",
         "label": "temporalComparability1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "temporalComparability1 in English"
       }
     ]
   },
@@ -200,6 +207,7 @@
   "unitMeasures": [
     {
       "id": "unitMeasure1",
+      "urn": "urn:unitMeasure1",
       "kind": "CONCEPT",
       "selfLink": "http://unitMeasure1",
       "title": {
@@ -219,35 +227,19 @@
   "statConcDef": {
     "texts": [
       {
-        "locale": "es",
-        "label": "statConcDef1 en Español"
-      },
-      {
         "locale": "en",
         "label": "statConcDef1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "statConcDef1 en Español"
       }
     ]
   },
   "statConcDefLists": [
     {
-      "id": "statConcDefList333",
-      "kind": "CODELIST",
-      "selfLink": "http://statConcDefList333",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "statConcDefList333 in English"
-          },
-          {
-            "locale": "es",
-            "label": "statConcDefList333 en Español"
-          }
-        ]
-      }
-    },
-    {
       "id": "statConcDefList22",
+      "urn": "urn:statConcDefList22",
       "kind": "CODELIST",
       "selfLink": "http://statConcDefList22",
       "title": {
@@ -264,18 +256,37 @@
       }
     },
     {
+      "id": "statConcDefList333",
+      "urn": "urn:statConcDefList333",
+      "kind": "CODELIST",
+      "selfLink": "http://statConcDefList333",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "statConcDefList333 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "statConcDefList333 in English"
+          }
+        ]
+      }
+    },
+    {
       "id": "statConcDefList1",
+      "urn": "urn:statConcDefList1",
       "kind": "CODELIST",
       "selfLink": "http://statConcDefList1",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "statConcDefList1 in English"
-          },
-          {
             "locale": "es",
             "label": "statConcDefList1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "statConcDefList1 in English"
           }
         ]
       }
@@ -284,46 +295,48 @@
   "classSystem": {
     "texts": [
       {
-        "locale": "en",
-        "label": "classSystem1 in English"
-      },
-      {
         "locale": "es",
         "label": "classSystem1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "classSystem1 in English"
       }
     ]
   },
   "classSystemLists": [
     {
       "id": "statConcDefList1",
+      "urn": "urn:statConcDefList1",
       "kind": "CODELIST",
       "selfLink": "http://statConcDefList1",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "statConcDefList1 in English"
-          },
-          {
             "locale": "es",
             "label": "statConcDefList1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "statConcDefList1 in English"
           }
         ]
       }
     },
     {
       "id": "statConcDefList22",
+      "urn": "urn:statConcDefList22",
       "kind": "CODELIST",
       "selfLink": "http://statConcDefList22",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "statConcDefList22 en Español"
-          },
-          {
             "locale": "en",
             "label": "statConcDefList22 in English"
+          },
+          {
+            "locale": "es",
+            "label": "statConcDefList22 en Español"
           }
         ]
       }
@@ -334,12 +347,12 @@
     "title": {
       "texts": [
         {
-          "locale": "es",
-          "label": "instanceType1 en Español"
-        },
-        {
           "locale": "en",
           "label": "instanceType1 in English"
+        },
+        {
+          "locale": "es",
+          "label": "instanceType1 en Español"
         }
       ]
     }
@@ -349,12 +362,12 @@
   "docMethod": {
     "texts": [
       {
-        "locale": "en",
-        "label": "docMethod1 in English"
-      },
-      {
         "locale": "es",
         "label": "docMethod1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "docMethod1 in English"
       }
     ]
   },
@@ -363,12 +376,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "surveySource1 in English"
-        },
-        {
           "locale": "es",
           "label": "surveySource1 en Español"
+        },
+        {
+          "locale": "en",
+          "label": "surveySource1 in English"
         }
       ]
     }
@@ -391,6 +404,7 @@
   "informationSuppliers": [
     {
       "id": "informationSupplier1",
+      "urn": "urn:informationSupplier1",
       "kind": "COMMON_METADATA",
       "selfLink": "http://informationSupplier1",
       "title": {
@@ -409,24 +423,8 @@
   ],
   "freqColls": [
     {
-      "id": "freqColl1",
-      "kind": "CATEGORY_SCHEME",
-      "selfLink": "http://freqColl1",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "freqColl1 in English"
-          },
-          {
-            "locale": "es",
-            "label": "freqColl1 en Español"
-          }
-        ]
-      }
-    },
-    {
       "id": "freqColl22",
+      "urn": "urn:freqColl22",
       "kind": "CATEGORY_SCHEME",
       "selfLink": "http://freqColl22",
       "title": {
@@ -438,6 +436,24 @@
           {
             "locale": "en",
             "label": "freqColl22 in English"
+          }
+        ]
+      }
+    },
+    {
+      "id": "freqColl1",
+      "urn": "urn:freqColl1",
+      "kind": "CATEGORY_SCHEME",
+      "selfLink": "http://freqColl1",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "freqColl1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "freqColl1 in English"
           }
         ]
       }
@@ -458,70 +474,40 @@
   "dataCompilation": {
     "texts": [
       {
-        "locale": "es",
-        "label": "dataCompilation1 en Español"
-      },
-      {
         "locale": "en",
         "label": "dataCompilation1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "dataCompilation1 en Español"
       }
     ]
   },
   "adjustment": {
     "texts": [
       {
-        "locale": "es",
-        "label": "adjustment1 en Español"
-      },
-      {
         "locale": "en",
         "label": "adjustment1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "adjustment1 en Español"
       }
     ]
   },
   "costBurden": {
     "texts": [
       {
-        "locale": "en",
-        "label": "costBurden1 in English"
-      },
-      {
         "locale": "es",
         "label": "costBurden1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "costBurden1 in English"
       }
     ]
   },
   "costs": [
-    {
-      "id": "cost1",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "cost1 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "cost1 in English"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cost4444",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "cost4444 in English"
-          },
-          {
-            "locale": "es",
-            "label": "cost4444 en Español"
-          }
-        ]
-      }
-    },
     {
       "id": "cost333",
       "title": {
@@ -551,18 +537,48 @@
           }
         ]
       }
+    },
+    {
+      "id": "cost4444",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "cost4444 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "cost4444 in English"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "cost1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "cost1 en Español"
+          }
+        ]
+      }
     }
   ],
   "inventoryDate": "2013-02-04T13:15:14.000+0000",
   "qualityDoc": {
     "texts": [
       {
-        "locale": "es",
-        "label": "qualityDoc1 en Español"
-      },
-      {
         "locale": "en",
         "label": "qualityDoc1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "qualityDoc1 en Español"
       }
     ]
   },
@@ -581,72 +597,72 @@
   "qualityAssmnt": {
     "texts": [
       {
-        "locale": "es",
-        "label": "qualityAssmnt1 en Español"
-      },
-      {
         "locale": "en",
         "label": "qualityAssmnt1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "qualityAssmnt1 en Español"
       }
     ]
   },
   "userNeeds": {
     "texts": [
       {
-        "locale": "en",
-        "label": "userNeeds1 in English"
-      },
-      {
         "locale": "es",
         "label": "userNeeds1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "userNeeds1 in English"
       }
     ]
   },
   "userSat": {
     "texts": [
       {
-        "locale": "en",
-        "label": "userSat1 in English"
-      },
-      {
         "locale": "es",
         "label": "userSat1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "userSat1 in English"
       }
     ]
   },
   "completeness": {
     "texts": [
       {
-        "locale": "en",
-        "label": "completeness1 in English"
-      },
-      {
         "locale": "es",
         "label": "completeness1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "completeness1 in English"
       }
     ]
   },
   "timeliness": {
     "texts": [
       {
-        "locale": "es",
-        "label": "timeliness1 en Español"
-      },
-      {
         "locale": "en",
         "label": "timeliness1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "timeliness1 en Español"
       }
     ]
   },
   "punctuality": {
     "texts": [
       {
-        "locale": "es",
-        "label": "punctuality1 en Español"
-      },
-      {
         "locale": "en",
         "label": "punctuality1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "punctuality1 en Español"
       }
     ]
   },
@@ -677,36 +693,36 @@
   "nonsamplingErr": {
     "texts": [
       {
-        "locale": "en",
-        "label": "nonsamplingErr1 in English"
-      },
-      {
         "locale": "es",
         "label": "nonsamplingErr1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "nonsamplingErr1 in English"
       }
     ]
   },
   "coherXDom": {
     "texts": [
       {
-        "locale": "es",
-        "label": "coherXDom1 en Español"
-      },
-      {
         "locale": "en",
         "label": "coherXDom1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "coherXDom1 en Español"
       }
     ]
   },
   "coherInternal": {
     "texts": [
       {
-        "locale": "en",
-        "label": "coherInternal1 in English"
-      },
-      {
         "locale": "es",
         "label": "coherInternal1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "coherInternal1 in English"
       }
     ]
   },
@@ -735,7 +751,21 @@
     ]
   },
   "parent": {
+    "id": "operation1",
+    "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1",
     "kind": "statisticalOperations#operation",
-    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1"
+    "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
+    "title": {
+      "texts": [
+        {
+          "locale": "es",
+          "label": "operation1 en Español"
+        },
+        {
+          "locale": "en",
+          "label": "operation1 in English"
+        }
+      ]
+    }
   }
 }

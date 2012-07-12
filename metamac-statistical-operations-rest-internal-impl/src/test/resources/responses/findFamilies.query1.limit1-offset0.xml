@@ -8,6 +8,7 @@
     <lastLink>http://localhost:9001/internal/v1.0/families?query=CODE LIKE &quot;1&quot;&amp;limit=1&amp;offset=1</lastLink>
     <items>
         <id>family1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
         <title>

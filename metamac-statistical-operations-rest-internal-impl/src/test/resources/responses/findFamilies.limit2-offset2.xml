@@ -10,6 +10,7 @@
     <lastLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4</lastLink>
     <items>
         <id>family3</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
         <title>
@@ -25,6 +26,7 @@
     </items>
     <items>
         <id>family4</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</urn>
         <kind>statisticalOperations#family</kind>
         <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
         <title>

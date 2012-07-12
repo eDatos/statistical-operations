@@ -6,6 +6,7 @@
     <total>2</total>
     <items>
         <id>operation1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
         <title>
@@ -21,6 +22,7 @@
     </items>
     <items>
         <id>operation10</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation10</selfLink>
         <title>
