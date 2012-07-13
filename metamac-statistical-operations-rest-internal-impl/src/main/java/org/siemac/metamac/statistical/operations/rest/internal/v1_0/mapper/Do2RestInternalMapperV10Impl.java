@@ -92,7 +92,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setComment(toInternationalString(source.getComment()));
         target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toOperationParent(apiUrl));
-        target.getchildren().addAll(toOperationChildren(source, apiUrl));
+        target.getChildren().addAll(toOperationChildren(source, apiUrl));
         return target;
     }
 
@@ -151,7 +151,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setParent(toFamilyParent(apiUrl));
-        target.getchildren().addAll(toFamilyChildren(source, apiUrl));
+        target.getChildren().addAll(toFamilyChildren(source, apiUrl));
         return target;
     }
 
@@ -251,7 +251,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setComment(toInternationalString(source.getComment()));
         target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toInstanceParent(source, apiUrl));
-        target.getchildren().addAll(toInstanceChildren(source, apiUrl));
+        target.getChildren().addAll(toInstanceChildren(source, apiUrl));
         return target;
     }
 

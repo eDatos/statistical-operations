@@ -41,8 +41,8 @@
         <ns2:kind>statisticalOperations#families</ns2:kind>
         <ns2:selfLink>http://localhost:9001/internal/v1.0/families</ns2:selfLink>
     </parent>
-    <child>
+    <children>
         <ns2:kind>statisticalOperations#operations</ns2:kind>
         <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1/operations</ns2:selfLink>
-    </child>
+    </children>
 </family>

@@ -15,5 +15,16 @@
 		     	       xmlType="xs:date" 
 		               parseMethod="org.apache.cxf.tools.common.DataTypeAdapter.parseDateTime" 
 					   printMethod="org.apache.cxf.tools.common.DataTypeAdapter.printDateTime" />
-	</jaxb:globalBindings> 
+	</jaxb:globalBindings>
+	
+	<!-- Avoid incorrect plurals -->
+ 	<jaxb:bindings node="//xs:complexType[@name='Operation']//xs:element[@name='children']">
+            <jaxb:property name="children"/>
+	</jaxb:bindings>
+ 	<jaxb:bindings node="//xs:complexType[@name='Family']//xs:element[@name='children']">
+            <jaxb:property name="children"/>
+	</jaxb:bindings>	 	
+ 	<jaxb:bindings node="//xs:complexType[@name='Instance']//xs:element[@name='children']">
+            <jaxb:property name="children"/>
+	</jaxb:bindings>	 		 
 </jaxb:bindings>
