@@ -10,6 +10,7 @@
   "items": [
     {
       "id": "instance3",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3",
       "title": {
@@ -27,6 +28,7 @@
     },
     {
       "id": "instance4",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4",
       "title": {

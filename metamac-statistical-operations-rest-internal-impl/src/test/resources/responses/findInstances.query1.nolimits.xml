@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#instances</kind>
+    <limit>25</limit>
+    <offset>0</offset>
+    <total>2</total>
+    <items>
+        <id>instance1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</urn>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>instance1 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instance1 in English</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instance15</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</urn>
+        <kind>statisticalOperations#instance</kind>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15</selfLink>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>instance15 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instance15 in English</label>
+            </text>
+        </title>
+    </items>
+</resourcesPagedResult>

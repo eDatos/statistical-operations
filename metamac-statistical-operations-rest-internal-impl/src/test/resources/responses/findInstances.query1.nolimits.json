@@ -1,0 +1,44 @@
+{
+  "kind": "statisticalOperations#instances",
+  "limit": 25,
+  "offset": 0,
+  "total": 2,
+  "items": [
+    {
+      "id": "instance1",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "instance1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "instance1 en Español"
+          }
+        ]
+      }
+    },
+    {
+      "id": "instance15",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15",
+      "kind": "statisticalOperations#instance",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "instance15 in English"
+          },
+          {
+            "locale": "es",
+            "label": "instance15 en Español"
+          }
+        ]
+      }
+    }
+  ]
+}

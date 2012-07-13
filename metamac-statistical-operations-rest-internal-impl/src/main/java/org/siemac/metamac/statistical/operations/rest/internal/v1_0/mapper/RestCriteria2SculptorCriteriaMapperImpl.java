@@ -14,11 +14,15 @@ import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCrite
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria.CriteriaCallback;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
+import org.siemac.metamac.statistical.operations.core.domain.Instance;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyOrder;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyOrder;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationCriteriaPropertyOrder;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationCriteriaPropertyRestriction;
 import org.springframework.stereotype.Component;
@@ -27,18 +31,26 @@ import org.springframework.stereotype.Component;
 public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2SculptorCriteriaMapper {
 
     private RestCriteria2SculptorCriteria<Operation> operationCriteriaMapper = null;
+    private RestCriteria2SculptorCriteria<Instance>  instanceCriteriaMapper  = null;
     private RestCriteria2SculptorCriteria<Family>    familyCriteriaMapper    = null;
 
     public RestCriteria2SculptorCriteriaMapperImpl() {
         operationCriteriaMapper = new RestCriteria2SculptorCriteria<Operation>(Operation.class, OperationCriteriaPropertyOrder.class, OperationCriteriaPropertyRestriction.class,
                 new OperationCriteriaCallback());
         familyCriteriaMapper = new RestCriteria2SculptorCriteria<Family>(Family.class, FamilyCriteriaPropertyOrder.class, FamilyCriteriaPropertyRestriction.class, new FamilyCriteriaCallback());
+        instanceCriteriaMapper = new RestCriteria2SculptorCriteria<Instance>(Instance.class, InstanceCriteriaPropertyOrder.class, InstanceCriteriaPropertyRestriction.class, new InstanceCriteriaCallback());
     }
 
     @Override
     public RestCriteria2SculptorCriteria<Operation> getOperationCriteriaMapper() {
         return operationCriteriaMapper;
     }
+    
+    @Override
+    public RestCriteria2SculptorCriteria<Instance> getInstanceCriteriaMapper() {
+        return instanceCriteriaMapper;
+    }
+
 
     @Override
     public RestCriteria2SculptorCriteria<Family> getFamilyCriteriaMapper() {
@@ -123,6 +135,45 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
         @Override
         public Property retrievePropertyOrderDefault() throws RestException {
             return FamilyProperties.id();
+        }
+    }
+    
+    private class InstanceCriteriaCallback implements CriteriaCallback {
+
+        @Override
+        public SculptorPropertyCriteria retrieveProperty(MetamacRestQueryPropertyRestriction propertyRestriction) throws RestException {
+            InstanceCriteriaPropertyRestriction propertyNameCriteria = InstanceCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
+            switch (propertyNameCriteria) {
+                case ID:
+                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getValue());
+                case URN:
+                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
+                case TITLE:
+                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getValue());
+                case PROC_STATUS:
+                    ProcStatusEnum value = propertyRestriction.getValue() != null ? ProcStatusEnum.valueOf(propertyRestriction.getValue()) : null;
+                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), value);
+                default:
+                    throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
+            }
+        }
+
+        @SuppressWarnings("rawtypes")
+        @Override
+        public Property retrievePropertyOrder(MetamacRestOrder order) throws RestException {
+            InstanceCriteriaPropertyOrder propertyNameCriteria = InstanceCriteriaPropertyOrder.fromValue(order.getPropertyName());
+            switch (propertyNameCriteria) {
+                case ID:
+                    return InstanceProperties.code();
+                default:
+                    throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
+            }
+        }
+
+        @SuppressWarnings("rawtypes")
+        @Override
+        public Property retrievePropertyOrderDefault() throws RestException {
+            return InstanceProperties.id();
         }
     }
 

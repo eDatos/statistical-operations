@@ -406,7 +406,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.getItems().add(mockInstance2Resource(baseApi));
             pagedResult.getItems().add(mockInstance3Resource(baseApi));
             pagedResult.getItems().add(mockInstance4Resource(baseApi));
-            pagedResult.getItems().add(mockInstance5Resource(baseApi));
+            pagedResult.getItems().add(mockInstance15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(0));
             pagedResult.setLimit(BigInteger.valueOf(25));
             pagedResult.setFirstLink(null);
@@ -418,7 +418,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.getItems().add(mockInstance2Resource(baseApi));
             pagedResult.getItems().add(mockInstance3Resource(baseApi));
             pagedResult.getItems().add(mockInstance4Resource(baseApi));
-            pagedResult.getItems().add(mockInstance5Resource(baseApi));
+            pagedResult.getItems().add(mockInstance15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(0));
             pagedResult.setLimit(BigInteger.valueOf(1000));
             pagedResult.setFirstLink(null);
@@ -444,7 +444,7 @@ public class StatisticalOperationsRestMocks {
             pagedResult.setNextLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=4");
             pagedResult.setLastLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
-            pagedResult.getItems().add(mockInstance5Resource(baseApi));
+            pagedResult.getItems().add(mockInstance15Resource(baseApi));
             pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             pagedResult.setFirstLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=0");
@@ -465,6 +465,48 @@ public class StatisticalOperationsRestMocks {
         return pagedResult;
     }
 
+    public static ResourcesPagedResult mockInstancesPagedResultByOperation1(String baseApi, String limit, String offset, String query) {
+        ResourcesPagedResult pagedResult = new ResourcesPagedResult();
+        pagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
+        String operation = StatisticalOperationsRestFacadeV10Test.OPERATION_1;
+        
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_INSTANCE_ID_LIKE_1;
+        if (querySupported1.equals(query)) {
+            pagedResult.setTotal(BigInteger.valueOf(2));
+            if (limit == null && (offset == null || "0".equals(offset))) {
+                pagedResult.getItems().add(mockInstance1Resource(baseApi));
+                pagedResult.getItems().add(mockInstance15Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(0));
+                pagedResult.setLimit(BigInteger.valueOf(25));
+                pagedResult.setFirstLink(null);
+                pagedResult.setPreviousLink(null);
+                pagedResult.setNextLink(null);
+                pagedResult.setLastLink(null);
+            } else if ("1".equals(limit) && "0".equals(offset)) {
+                pagedResult.getItems().add(mockInstance1Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+                pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+                pagedResult.setFirstLink(null);
+                pagedResult.setPreviousLink(null);
+                pagedResult.setNextLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=1");
+                pagedResult.setLastLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=1");
+            } else if ("1".equals(limit) && "1".equals(offset)) {
+                pagedResult.getItems().add(mockInstance15Resource(baseApi));
+                pagedResult.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
+                pagedResult.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
+                pagedResult.setFirstLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=0");
+                pagedResult.setPreviousLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=0");
+                pagedResult.setNextLink(null);
+                pagedResult.setLastLink(null);
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else {
+            fail("Query not supported = " + query);
+        }
+        return pagedResult;
+    }
+    
     private static Resource mockOperationResource(String subId, String baseApi) {
         String operationId = "operation" + subId;
         return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestInternalConstants.KIND_OPERATION, baseApi
@@ -705,8 +747,8 @@ public class StatisticalOperationsRestMocks {
         return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "4", baseApi);
     }
 
-    private static Resource mockInstance5Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "5", baseApi);
+    private static Resource mockInstance15Resource(String baseApi) {
+        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "15", baseApi);
     }
 
     private static InternationalString mockInternationalString(String metadata, String subsubTitle) {

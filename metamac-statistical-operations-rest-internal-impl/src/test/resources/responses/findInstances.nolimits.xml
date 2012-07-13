@@ -6,36 +6,39 @@
     <total>5</total>
     <items>
         <id>instance1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</urn>
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>instance1 in English</label>
-            </text>
-            <text>
                 <locale>es</locale>
                 <label>instance1 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instance1 in English</label>
             </text>
         </title>
     </items>
     <items>
         <id>instance2</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance2</urn>
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance2</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>instance2 in English</label>
-            </text>
-            <text>
                 <locale>es</locale>
                 <label>instance2 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instance2 in English</label>
             </text>
         </title>
     </items>
     <items>
         <id>instance3</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</urn>
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</selfLink>
         <title>
@@ -51,31 +54,33 @@
     </items>
     <items>
         <id>instance4</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</urn>
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>instance4 in English</label>
-            </text>
-            <text>
                 <locale>es</locale>
                 <label>instance4 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instance4 in English</label>
             </text>
         </title>
     </items>
     <items>
-        <id>instance5</id>
+        <id>instance15</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</urn>
         <kind>statisticalOperations#instance</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance5</selfLink>
+        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15</selfLink>
         <title>
             <text>
-                <locale>en</locale>
-                <label>instance5 in English</label>
+                <locale>es</locale>
+                <label>instance15 en Español</label>
             </text>
             <text>
-                <locale>es</locale>
-                <label>instance5 en Español</label>
+                <locale>en</locale>
+                <label>instance15 in English</label>
             </text>
         </title>
     </items>

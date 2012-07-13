@@ -99,8 +99,8 @@ public class StatisticalOperationsCoreMocks {
     public static Instance mockInstance4() {
         return mockInstance("4", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
-    public static Instance mockInstance5() {
-        return mockInstance("5", ProcStatusEnum.PUBLISH_INTERNALLY);
+    public static Instance mockInstance15() {
+        return mockInstance("15", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
     public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
@@ -399,7 +399,7 @@ public class StatisticalOperationsCoreMocks {
             instances.add(mockInstance2());
             instances.add(mockInstance3());
             instances.add(mockInstance4());
-            instances.add(mockInstance5());
+            instances.add(mockInstance15());
         } else if ("2".equals(limit) && "0".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -416,7 +416,7 @@ public class StatisticalOperationsCoreMocks {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
             rowCount = pageSize;
-            instances.add(mockInstance5());
+            instances.add(mockInstance15());
         } else if ("2".equals(limit) && "9".equals(offset)) {
             pageSize = Integer.valueOf(limit).intValue();
             startRow = Integer.valueOf(offset).intValue();
@@ -424,6 +424,52 @@ public class StatisticalOperationsCoreMocks {
             rowCount = 0;
         } else {
             fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+        }
+
+        return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
+    }
+    
+    public static PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset, String query) {
+
+        // No queries
+        if (query == null) {
+            return mockInstancesPagedResultByOperation1(limit, offset);
+        }
+
+        // With queries
+        int total = -1;
+        int startRow = -1;
+        int rowCount = -1;
+        int pageSize = -1;
+        List<Instance> instances = new ArrayList<Instance>();
+
+        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
+        if (querySupported1.equals(query)) {
+            total = 2;
+            startRow = -1;
+            rowCount = -1;
+            pageSize = -1;
+            if ((limit == null || "1000".equals(limit) || "25".equals(limit)) && (offset == null || "0".equals(offset))) {
+                startRow = 0;
+                rowCount = total;
+                pageSize = total;
+                instances.add(mockInstance1());
+                instances.add(mockInstance15());
+            } else if ("1".equals(limit) && "0".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                instances.add(mockInstance1());
+            } else if ("1".equals(limit) && "1".equals(offset)) {
+                pageSize = Integer.valueOf(limit).intValue();
+                startRow = Integer.valueOf(offset).intValue();
+                rowCount = pageSize;
+                instances.add(mockInstance15());
+            } else {
+                fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
+            }
+        } else {
+            fail("Query non supported = " + query);
         }
 
         return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);

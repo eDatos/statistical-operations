@@ -66,6 +66,8 @@
 				<wadl:method name="GET" id="findInstances">
 					<wadl:request>
 						<wadl:param name="operationId" style="template"/>
+						<wadl:param name="query" style="query" required="false"/>
+						<wadl:param name="orderBy" style="query" required="false"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>

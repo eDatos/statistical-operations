@@ -10,6 +10,7 @@
     <lastLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4</lastLink>
     <items>
         <id>instance3</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</urn>        
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</selfLink>
         <title>
@@ -25,6 +26,7 @@
     </items>
     <items>
         <id>instance4</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</urn>
         <kind>statisticalOperations#instance</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</selfLink>
         <title>

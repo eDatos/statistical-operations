@@ -6,6 +6,7 @@
   "items": [
     {
       "id": "instance1",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
       "title": {
@@ -23,6 +24,7 @@
     },
     {
       "id": "instance2",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance2",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance2",
       "title": {
@@ -40,6 +42,7 @@
     },
     {
       "id": "instance3",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3",
       "title": {
@@ -57,6 +60,7 @@
     },
     {
       "id": "instance4",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4",
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4",
       "title": {
@@ -73,18 +77,19 @@
       }
     },
     {
-      "id": "instance5",
+      "id": "instance15",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15",
       "kind": "statisticalOperations#instance",
-      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance5",
+      "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15",
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "instance5 in English"
+            "label": "instance15 in English"
           },
           {
             "locale": "es",
-            "label": "instance5 en Español"
+            "label": "instance15 en Español"
           }
         ]
       }

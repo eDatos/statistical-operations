@@ -149,6 +149,21 @@
         </xs:restriction>
     </xs:simpleType>  
     
+    <xs:simpleType name="InstanceCriteriaPropertyRestriction">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />            
+            <xs:enumeration value="TITLE" />
+            <xs:enumeration value="PROC_STATUS" />
+        </xs:restriction>
+    </xs:simpleType>    
+    
+    <xs:simpleType name="InstanceCriteriaPropertyOrder">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+        </xs:restriction>
+    </xs:simpleType>          
+    
     <xs:simpleType name="FamilyCriteriaPropertyRestriction">
         <xs:restriction base="xs:token">
             <xs:enumeration value="ID" />

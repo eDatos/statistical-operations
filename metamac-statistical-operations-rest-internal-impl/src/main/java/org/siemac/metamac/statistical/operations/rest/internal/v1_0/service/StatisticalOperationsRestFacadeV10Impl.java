@@ -101,19 +101,21 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
         }
     }
 
-    // TODO parámetro "query" con criterios de búsqueda METAMAC-753
     @Override
-    public ResourcesPagedResult findInstances(String operationId, String limit, String offset) {
+    public ResourcesPagedResult findInstances(String operationId, String query, String orderBy, String limit, String offset) {
         try {
             // Retrieve operation to check exists and it is published
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(operationId);
 
             // Retrieve instances by criteria
-            SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getInstanceCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
             // Find for operation and only published
-            List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
+            List<ConditionalCriteria> conditionalCriteriaOperationAndProcStatus = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
                     .withProperty(InstanceProperties.operation().code()).eq(operationId).withProperty(InstanceProperties.procStatus())
-                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).build();
+
+            List<ConditionalCriteria> conditionalCriteria = new ArrayList<ConditionalCriteria>();
+            conditionalCriteria.addAll(conditionalCriteriaOperationAndProcStatus);
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
@@ -121,7 +123,7 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, null, null, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return instancesPagedResult;
 
         } catch (MetamacException e) {
@@ -203,8 +205,8 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
             SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
             // Find only this family and published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
-                    .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus())
-                    .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+                    .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
+                    .distinctRoot().build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
