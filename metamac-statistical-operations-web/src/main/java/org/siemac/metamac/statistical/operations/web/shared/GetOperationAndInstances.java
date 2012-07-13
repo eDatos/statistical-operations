@@ -14,7 +14,7 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetOperationAndInstances {
 
     @In(1)
-    String                operationCode;
+    String                operationUrn;
 
     @Out(1)
     OperationDto          operationDto;

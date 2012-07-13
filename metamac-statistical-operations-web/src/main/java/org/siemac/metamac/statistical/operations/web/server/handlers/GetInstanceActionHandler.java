@@ -28,7 +28,7 @@ public class GetInstanceActionHandler extends SecurityActionHandler<GetInstanceA
     @Override
     public GetInstanceResult executeSecurityAction(GetInstanceAction action) throws ActionException {
         try {
-            InstanceDto instanceDto = statisticalOperationsServiceFacade.findInstanceByCode(ServiceContextHolder.getCurrentServiceContext(), action.getInstanceCode());
+            InstanceDto instanceDto = statisticalOperationsServiceFacade.findInstanceByUrn(ServiceContextHolder.getCurrentServiceContext(), action.getInstanceUrn());
             OperationBaseDto operationBaseDto = statisticalOperationsServiceFacade.findOperationForInstance(ServiceContextHolder.getCurrentServiceContext(), instanceDto.getId());
             return new GetInstanceResult(instanceDto, operationBaseDto);
         } catch (MetamacException e) {

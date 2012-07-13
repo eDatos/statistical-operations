@@ -6,6 +6,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.ArrayList;
 import java.util.List;
 
+import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
@@ -60,6 +61,7 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamil
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.utils.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
@@ -359,7 +361,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     private void retrieveOperation(String operationCode) {
-        dispatcher.execute(new GetOperationAndInstancesAction(operationCode), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
+        String operationUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_OPERATION_PREFIX, operationCode);
+        dispatcher.execute(new GetOperationAndInstancesAction(operationUrn), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {

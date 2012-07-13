@@ -11,7 +11,7 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetInstance {
 
     @In(1)
-    String           instanceCode;
+    String           instanceUrn;
 
     @Out(1)
     InstanceDto      instanceDto;

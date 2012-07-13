@@ -6,6 +6,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.ArrayList;
 import java.util.List;
 
+import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
@@ -32,6 +33,7 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperatio
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.utils.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
@@ -172,7 +174,8 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     private void retrieveFamily(String familyCode) {
-        dispatcher.execute(new GetFamilyAndOperationsAction(familyCode), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
+        String familyUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_FAMILY_PREFIX, familyCode);
+        dispatcher.execute(new GetFamilyAndOperationsAction(familyUrn), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {

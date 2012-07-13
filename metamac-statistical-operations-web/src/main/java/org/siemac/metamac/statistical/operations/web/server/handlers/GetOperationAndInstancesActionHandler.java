@@ -31,7 +31,7 @@ public class GetOperationAndInstancesActionHandler extends SecurityActionHandler
     @Override
     public GetOperationAndInstancesResult executeSecurityAction(GetOperationAndInstancesAction action) throws ActionException {
         try {
-            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationByCode(ServiceContextHolder.getCurrentServiceContext(), action.getOperationCode());
+            OperationDto operationDto = statisticalOperationsServiceFacade.findOperationByUrn(ServiceContextHolder.getCurrentServiceContext(), action.getOperationUrn());
             List<FamilyBaseDto> familyBaseDtos = statisticalOperationsServiceFacade.findFamiliesForOperation(ServiceContextHolder.getCurrentServiceContext(), operationDto.getId());
             List<InstanceBaseDto> instanceDtos = statisticalOperationsServiceFacade.findInstancesForOperation(ServiceContextHolder.getCurrentServiceContext(), operationDto.getId());
             return new GetOperationAndInstancesResult(operationDto, instanceDtos, familyBaseDtos);

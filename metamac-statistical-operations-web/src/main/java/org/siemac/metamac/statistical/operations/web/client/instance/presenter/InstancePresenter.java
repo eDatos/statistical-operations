@@ -5,6 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
+import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
@@ -28,6 +29,7 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganis
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
@@ -45,6 +47,7 @@ import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
+import org.siemac.metamac.web.common.client.utils.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
@@ -59,6 +62,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.TitleFunction;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -76,6 +80,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             UpdateFrequencyCodesHandler {
 
     private final DispatchAsync                dispatcher;
+    private final PlaceManager                 placeManager;
 
     private OperationBaseDto                   operationBaseDto;
     private InstanceDto                        instanceDto;
@@ -120,9 +125,11 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @Inject
-    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
+    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, PlaceManager placeManager,
+            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
         super(eventBus, instanceView, instanceProxy);
         this.dispatcher = dispatcher;
+        this.placeManager = placeManager;
         this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
@@ -175,9 +182,10 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void prepareFromRequest(PlaceRequest request) {
         super.prepareFromRequest(request);
+        String operationCode = PlaceRequestUtils.getOperationIdentifierParam(placeManager);
         String instanceCode = request.getParameter(PlaceRequestParams.instanceParam, null);
-        if (!StringUtils.isBlank(instanceCode)) {
-            retrieveInstance(instanceCode);
+        if (!StringUtils.isBlank(operationCode) && !StringUtils.isBlank(instanceCode)) {
+            retrieveInstance(operationCode, instanceCode);
         } else {
             OperationsWeb.showErrorPage();
         }
@@ -200,8 +208,9 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         });
     }
 
-    private void retrieveInstance(String instanceCode) {
-        dispatcher.execute(new GetInstanceAction(instanceCode), new WaitingAsyncCallback<GetInstanceResult>() {
+    private void retrieveInstance(String operationCode, String instanceCode) {
+        String instanceUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_INSTANCE_PREFIX, operationCode, instanceCode);
+        dispatcher.execute(new GetInstanceAction(instanceUrn), new WaitingAsyncCallback<GetInstanceResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -210,9 +219,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             }
             @Override
             public void onWaitSuccess(GetInstanceResult result) {
-                // if (idOperation == null || !idOperation.equals(result.getOperationBaseDto().getId())) {
-                // TODO Show error page if operationId does not correspond with the instance operation
-                // }
                 instanceDto = result.getInstanceDto();
                 operationBaseDto = result.getOperationBaseDto();
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));

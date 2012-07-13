@@ -13,7 +13,7 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetFamilyAndOperations {
 
     @In(1)
-    String                 familyCode;
+    String                 familyUrn;
 
     @Out(1)
     FamilyDto              familyDto;
