@@ -123,7 +123,8 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper.toInstancesPagedResult(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper
+                    .toInstancesPagedResult(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return instancesPagedResult;
 
         } catch (MetamacException e) {
@@ -196,17 +197,17 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
     }
 
     @Override
-    public ResourcesPagedResult retrieveOperationsByFamily(String id, String limit, String offset) {
+    public ResourcesPagedResult findOperationsByFamily(String id, String query, String orderBy, String limit, String offset) {
         try {
             // Validate family exists and it is published
             org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(id);
 
             // Retrieve operations by criteria
-            SculptorCriteria sculptorCriteria = null; // TODO: RestCriteria2SculptorCriteria.restCriteriaToSculptorCriteria(limit, offset);
+            SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getOperationCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
             // Find only this family and published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
                     .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus()).in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY)
-                    .distinctRoot().build();
+                    .build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
@@ -214,7 +215,8 @@ public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperat
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, null, null, sculptorCriteria.getLimit(), getApiUrl());
+            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(),
+                    getApiUrl());
             return operationsPagedResult;
 
         } catch (MetamacException e) {

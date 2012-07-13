@@ -131,9 +131,11 @@
 				</wadl:method>
 			</wadl:resource>
 			<wadl:resource path="families/{id}/operations">
-				<wadl:method name="GET" id="retrieveOperationsByFamily">
+				<wadl:method name="GET" id="findOperationsByFamily">
 					<wadl:request>
 						<wadl:param name="id" style="template"/>
+						<wadl:param name="query" style="query" required="false"/>
+						<wadl:param name="orderBy" style="query" required="false"/>
 						<wadl:param name="limit" style="query" required="false"/>
 						<wadl:param name="offset" style="query" required="false"/>
 					</wadl:request>

@@ -6,6 +6,7 @@
     <total>6</total>
     <items>
         <id>operation1</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
         <title>
@@ -21,6 +22,7 @@
     </items>
     <items>
         <id>operation2</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation2</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation2</selfLink>
         <title>
@@ -36,6 +38,7 @@
     </items>
     <items>
         <id>operation3</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation3</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation3</selfLink>
         <title>
@@ -51,6 +54,7 @@
     </items>
     <items>
         <id>operation4</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation4</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation4</selfLink>
         <title>
@@ -66,6 +70,7 @@
     </items>
     <items>
         <id>operation5</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation5</selfLink>
         <title>
@@ -81,6 +86,7 @@
     </items>
     <items>
         <id>operation6</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation6</selfLink>
         <title>

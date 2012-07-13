@@ -8,6 +8,7 @@
   "items": [
     {
       "id": "operation5",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5",
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation5",
       "title": {
@@ -25,6 +26,7 @@
     },
     {
       "id": "operation6",
+      "urn": "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6",
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation6",
       "title": {

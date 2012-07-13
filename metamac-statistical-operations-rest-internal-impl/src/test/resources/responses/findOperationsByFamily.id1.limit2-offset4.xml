@@ -8,6 +8,7 @@
     <previousLink>http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&amp;offset=2</previousLink>
     <items>
         <id>operation5</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation5</selfLink>
         <title>
@@ -23,6 +24,7 @@
     </items>
     <items>
         <id>operation6</id>
+        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</urn>
         <kind>statisticalOperations#operation</kind>
         <selfLink>http://localhost:9001/internal/v1.0/operations/operation6</selfLink>
         <title>
