@@ -252,19 +252,19 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setStatisticalPopulation(statisticalPopulationItem.getValue());
         instanceDto.getStatisticalUnit().clear();
         instanceDto.getStatisticalUnit().addAll(statisticalUnitItem.getSelectedExternalItems(statisticalUnitConcepts));
-        instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemDtoFromCodeId(codeLists, geographicalGranularityItem.getValueAsString()));
+        instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemDtoFromUrn(codeLists, geographicalGranularityItem.getValueAsString()));
         instanceDto.setGeographicComparability(geographicalComparabilityItem.getValue());
-        instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemDtoFromCodeId(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
+        instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemDtoFromUrn(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
         instanceDto.setTemporalComparability(temporalComparabilityItem.getValue());
         instanceDto.setBasePeriod(contentEditionForm.getValueAsString(InstanceDS.BASE_PERIOD));
         instanceDto.getUnitMeasure().clear();
-        instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(codeLists, unitMeasureItem.getValues()));
+        instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(codeLists, unitMeasureItem.getValues()));
         instanceDto.setStatConcDef(statConcDefItem.getValue());
         instanceDto.getStatConcDefList().clear();
-        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(conceptSchemes, statConcDefListItem.getValues()));
+        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(conceptSchemes, statConcDefListItem.getValues()));
         instanceDto.setClassSystem(classSystemItem.getValue());
         instanceDto.getClassSystemList().clear();
-        instanceDto.getClassSystemList().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(codeLists, classSystemListItem.getValues()));
+        instanceDto.getClassSystemList().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(codeLists, classSystemListItem.getValues()));
 
         // Class descriptors
         instanceDto.setInstanceType(OperationsListUtils.getInstanceTypeDto(instanceTypeItem.getValueAsString(), instanceTypeDtos));
@@ -277,7 +277,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getInformationSuppliers().addAll(infSuppliersOrganItem.getSelectedExternalItems(infSuppliersOrganisations));
         instanceDto.getInformationSuppliers().addAll(infSuppliersConceptsItem.getSelectedExternalItems(infSuppliersConcepts));
         instanceDto.getFreqColl().clear();
-        instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(freqCollCodes, freqCollItem.getValues()));
+        instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(freqCollCodes, freqCollItem.getValues()));
         instanceDto.setDataValidation(dataValidationItem.getValue());
         instanceDto.setDataCompilation(dataCompilationItem.getValue());
         instanceDto.setAdjustment(adjustmentItem.getValue());
@@ -636,11 +636,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         temporalGranularityItem.setValue(instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getUrn() : "");
         temporalComparabilityItem.setValue(instanceDto.getTemporalComparability());
         contentEditionForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
-        unitMeasureItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getUnitMeasure()));
+        unitMeasureItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getUnitMeasure()));
         statConcDefItem.setValue(instanceDto.getStatConcDef());
-        statConcDefListItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getStatConcDefList()));
+        statConcDefListItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getStatConcDefList()));
         classSystemItem.setValue(instanceDto.getClassSystem());
-        classSystemListItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getClassSystemList()));
+        classSystemListItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getClassSystemList()));
 
         // Class descriptors
         instanceTypeItem.setValue(instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getId().toString() : "");
@@ -656,7 +656,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         collMethodItem.setValue(instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getId() : "");
         infSuppliersConceptsItem.clearValue();
         infSuppliersConceptsItem.clearValue();
-        freqCollItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(instanceDto.getFreqColl()));
+        freqCollItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getFreqColl()));
         productionEditionForm.setValue(InstanceDS.DATA_VALIDATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataValidation()));
         productionEditionForm.setValue(InstanceDS.DATA_COMPILATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataCompilation()));
         productionEditionForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));

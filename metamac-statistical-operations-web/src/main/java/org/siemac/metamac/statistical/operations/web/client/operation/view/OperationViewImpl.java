@@ -23,7 +23,7 @@ import org.siemac.metamac.statistical.operations.web.client.operation.presenter.
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.EnumUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
@@ -388,10 +388,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
         operationDto.getUpdateFrequency().clear();
-        operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemDtoListFromCodeIds(updateFrequencyCodes, updateFrequencyItem.getValues()));
+        operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(updateFrequencyCodes, updateFrequencyItem.getValues()));
         operationDto.setRevPolicy(revPolicyItem.getValue());
         operationDto.setRevPractice(revPracticeItem.getValue());
-        operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemDtoFromCodeId(commonMetadataList, commonMetadataItem.getValueAsString()));
+        operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemDtoFromUrn(commonMetadataList, commonMetadataItem.getValueAsString()));
 
         // ANNOTATIONS
         operationDto.setComment(commentItem.getValue());
@@ -675,7 +675,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
         // currentlyActiveItem.setValidators(getRequiredIfInternallyPublished());
         statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
-        statusItem.setValueMap(EnumUtils.getStatusEnumHashMap());
+        statusItem.setValueMap(CommonUtils.getStatusEnumHashMap());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
         ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getConstants().operationProcStatus());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
@@ -809,7 +809,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionEditionForm.setValue(OperationDS.OP_RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
         releaseCalendar.setValue(operationDto.getReleaseCalendar());
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
-        updateFrequencyItem.setValues(ExternalItemUtils.getExternalItemsCodeIds(operationDto.getUpdateFrequency()));
+        updateFrequencyItem.setValues(ExternalItemUtils.getExternalItemsUrns(operationDto.getUpdateFrequency()));
         diffusionEditionForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
         diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         diffusionEditionForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
@@ -859,29 +859,18 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setSubjects(List<ExternalItemDto> subjects) {
         this.subjects = subjects;
-        LinkedHashMap<String, String> subjectsMap = new LinkedHashMap<String, String>();
-        for (ExternalItemDto subject : subjects) {
-            subjectsMap.put(subject.getUrn(), subject.getUrn());
-        }
-        subjectItem.setItemsValueMap(subjectsMap);
+        subjectItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(subjects));
     }
 
     @Override
     public void setSecondarySubjetcs(List<ExternalItemDto> secondarySubjects) {
         this.secondarySubjects = secondarySubjects;
-        LinkedHashMap<String, String> secondarySubjectsMap = new LinkedHashMap<String, String>();
-        for (ExternalItemDto subject : secondarySubjects) {
-            secondarySubjectsMap.put(subject.getUrn(), subject.getUrn());
-        }
-        secondarySubjectItem.setItemsValueMap(secondarySubjectsMap);
+        secondarySubjectItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(secondarySubjects));
     }
 
     @Override
     public void setCategorySchemes(List<ExternalItemDto> schemes) {
-        LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-        for (ExternalItemDto scheme : schemes) {
-            map.put(scheme.getUrn(), scheme.getUrn());
-        }
+        LinkedHashMap<String, String> map = ExternalItemUtils.getExternalItemsHashMap(schemes);
         subjectItem.setSchemesValueMap(map);
         secondarySubjectItem.setSchemesValueMap(map);
     }
