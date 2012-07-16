@@ -7,20 +7,26 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
+import org.fornax.cartridges.sculptor.framework.domain.LeafProperty;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.siemac.metamac.core.common.constants.CoreCommonConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.util.CoreCommonUtil;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
+import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
@@ -41,7 +47,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
-@TransactionConfiguration(transactionManager = "txManager", defaultRollback=true)
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsBaseServiceTestBase {
 
@@ -93,7 +99,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionType.FAMILY_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
-    
+
     @Test
     public void testFindFamilyByUrn() throws Exception {
         String family_urn = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily()).getUrn();
@@ -101,9 +107,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Family familyRetrieved = statisticalOperationsBaseService.findFamilyByUrn(getServiceContextAdministrador(), family_urn);
         assertNotNull(familyRetrieved);
         assertEquals(family_urn, familyRetrieved.getUrn());
-        
+
     }
-    
+
     @Test
     public void testFindFamilyByUrnNotExists() throws Exception {
         String urn = "not_exists";
@@ -114,7 +120,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionType.FAMILY_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
-
 
     @Test
     public void testSaveFamilyWithOperations() throws MetamacException {
@@ -152,6 +157,118 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
 
         assertTrue(familiesList.size() != 0);
+    }
+
+    @Test
+    @Transactional
+    public void testFindFamilyByConditionInventoryDate() throws MetamacException {
+
+        // Insert data
+        Family family01 = createFamily();
+        family01.setInventoryDate(new DateTime(2012, 2, 1, 12, 0, 0, 0));
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), family01);
+
+        Family family02 = createFamily();
+        family02.setInventoryDate(new DateTime(2012, 2, 5, 12, 0, 0, 0));
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), family02);
+
+        Family family03 = createFamily();
+        family03.setInventoryDate(new DateTime(2012, 1, 31, 12, 0, 0, 0));
+        statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), family03);
+
+        // Find from 01/02/2012 to 28/02/2012 --> family01 and family02
+        {
+            List<ConditionalCriteria> conditions = criteriaFor(Family.class)
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .greaterThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 2, 1, 12, 0, 0, 0)))
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .lessThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 2, 28, 12, 0, 0, 0))).distinctRoot().build();
+
+            List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
+            assertEquals(2, familiesList.size());
+            boolean family1Retrieved = false;
+            boolean family2Retrieved = false;
+            for (Iterator<Family> iterator = familiesList.iterator(); iterator.hasNext();) {
+                Family family = iterator.next();
+                if (family01.getCode().equals(family.getCode())) {
+                    family1Retrieved = true;
+                } else if (family02.getCode().equals(family.getCode())) {
+                    family2Retrieved = true;
+                }
+            }
+            assertTrue(family1Retrieved);
+            assertTrue(family2Retrieved);
+        }
+
+        // Find from 01/01/2012 to 28/02/2012 --> familyDto01, familyDto02 and familyDto03
+        {
+            List<ConditionalCriteria> conditions = criteriaFor(Family.class)
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .greaterThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 1, 1, 12, 0, 0, 0)))
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .lessThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 2, 28, 12, 0, 0, 0))).distinctRoot().build();
+
+            List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
+            assertEquals(3, familiesList.size());
+            boolean family1Retrieved = false;
+            boolean family2Retrieved = false;
+            boolean family3Retrieved = false;
+            for (Iterator<Family> iterator = familiesList.iterator(); iterator.hasNext();) {
+                Family family = iterator.next();
+                if (family01.getCode().equals(family.getCode())) {
+                    family1Retrieved = true;
+                } else if (family02.getCode().equals(family.getCode())) {
+                    family2Retrieved = true;
+                } else if (family03.getCode().equals(family.getCode())) {
+                    family3Retrieved = true;
+                }
+            }
+            assertTrue(family1Retrieved);
+            assertTrue(family2Retrieved);
+            assertTrue(family3Retrieved);
+        }
+
+        // Find from 01/01/2012 to 03/02/2012 --> familyDto01 and familyDto03
+        {
+            List<ConditionalCriteria> conditions = criteriaFor(Family.class)
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .greaterThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 1, 1, 12, 0, 0, 0)))
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .lessThanOrEqual(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 2, 3, 12, 0, 0, 0))).distinctRoot().build();
+
+            List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
+            assertEquals(2, familiesList.size());
+            boolean family1Retrieved = false;
+            boolean family3Retrieved = false;
+            for (Iterator<Family> iterator = familiesList.iterator(); iterator.hasNext();) {
+                Family family = iterator.next();
+                if (family01.getCode().equals(family.getCode())) {
+                    family1Retrieved = true;
+                } else if (family03.getCode().equals(family.getCode())) {
+                    family3Retrieved = true;
+                }
+            }
+            assertTrue(family1Retrieved);
+            assertTrue(family3Retrieved);
+        }
+
+        // Find from 01/02/2012 --> familyDto01
+        {
+            List<ConditionalCriteria> conditions = criteriaFor(Family.class)
+                    .withProperty(new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class))
+                    .eq(CoreCommonUtil.transformDateTimeToDate(new DateTime(2012, 2, 1, 12, 0, 0, 0))).distinctRoot().build();
+
+            List<Family> familiesList = statisticalOperationsBaseService.findFamilyByCondition(getServiceContextAdministrador(), conditions);
+            assertEquals(1, familiesList.size());
+            boolean family1Retrieved = false;
+            for (Iterator<Family> iterator = familiesList.iterator(); iterator.hasNext();) {
+                Family family = iterator.next();
+                if (family01.getCode().equals(family.getCode())) {
+                    family1Retrieved = true;
+                }
+            }
+            assertTrue(family1Retrieved);
+        }
     }
 
     @Test
@@ -257,7 +374,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionType.OPERATION_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
-    
+
     @Test
     public void testFindOperationByUrn() throws Exception {
         String operation_urn = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation()).getUrn();
@@ -265,9 +382,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operationRetrieved = statisticalOperationsBaseService.findOperationByUrn(getServiceContextAdministrador(), operation_urn);
         assertNotNull(operationRetrieved);
         assertEquals(operation_urn, operationRetrieved.getUrn());
-        
+
     }
-    
+
     @Test
     public void testFindOperationByUrnNotExists() throws Exception {
         String urn = "not_exists";
@@ -506,7 +623,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
             assertEquals(ServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
-    
+
     @Test
     public void testFindInstanceByUrn() throws Exception {
 
@@ -518,7 +635,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(instanceRetrieved);
         assertEquals(instance_urn, instanceRetrieved.getUrn());
     }
-    
+
     @Test
     public void testFindInstanceByUrnNotExists() throws Exception {
         String urn = "not_exists";

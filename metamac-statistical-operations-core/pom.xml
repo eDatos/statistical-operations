@@ -339,6 +339,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.jodatime</artifactId>
+            <version>${usertype.jodatime.version}</version>
+        </dependency>        
+        <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>${cglib-nodep.version}</version>
