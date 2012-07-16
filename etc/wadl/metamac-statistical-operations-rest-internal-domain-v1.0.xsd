@@ -27,7 +27,7 @@
             <xs:element name="regionalContributors" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
-            <xs:element name="status" type="xs:string" />
+            <xs:element name="status" type="tns:Status" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="publishers" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="relPolUsAc" type="common:InternationalString" minOccurs="0"/>
@@ -130,6 +130,15 @@
         <xs:restriction base="xs:token">
             <xs:enumeration value="PUBLISH_INTERNALLY" />
             <xs:enumeration value="PUBLISH_EXTERNALLY" />
+        </xs:restriction>
+    </xs:simpleType> 
+    
+    <xs:simpleType name="Status">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="PLANNING" />
+            <xs:enumeration value="DESIGN" />
+            <xs:enumeration value="PRODUCTION" />
+            <xs:enumeration value="OUT_OF_PRINT" />
         </xs:restriction>
     </xs:simpleType> 
 

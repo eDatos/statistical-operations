@@ -36,6 +36,7 @@ import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
@@ -76,7 +77,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getRegionalContributors().addAll(toResourcesExternalItems(source.getRegionalContributor()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
-        target.setStatus(source.getStatus() != null ? source.getStatus().name() : null);
+        target.setStatus(toStatus(source.getStatus()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.getPublishers().addAll(toResourcesExternalItems(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
@@ -639,4 +640,22 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
     }
 
+    private org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status toStatus(StatusEnum source) {
+        if (source == null) {
+            return null;
+        }
+        switch (source) {
+            case PLANNING:
+                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.PLANNING;
+            case DESIGN:
+                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.DESIGN;
+            case PRODUCTION:
+                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.PRODUCTION;
+            case OUT_OF_PRINT:
+                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.OUT_OF_PRINT;
+            default:
+                Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
