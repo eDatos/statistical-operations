@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Response.Status;
@@ -76,6 +77,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public static String                              QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " LIKE \"1\"";
     public static String                              QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " LIKE \"1\"";
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
 
@@ -87,12 +89,19 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
 
         // Rest clients
         // xml
-        statisticalOperationsRestFacadeClientXml = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class);
-        WebClient.client(statisticalOperationsRestFacadeClientXml).accept(APPLICATION_XML);
+        {
+            List providers = new ArrayList();
+            providers.add(new org.apache.cxf.jaxrs.provider.JAXBElementProvider());
+            statisticalOperationsRestFacadeClientXml = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class, providers, Boolean.TRUE);
+            WebClient.client(statisticalOperationsRestFacadeClientXml).accept(APPLICATION_XML);
+        }
         // json
-        statisticalOperationsRestFacadeClientJson = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class);
-        WebClient.client(statisticalOperationsRestFacadeClientJson).accept(APPLICATION_JSON);
-
+        {
+            List providers = new ArrayList();
+            providers.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
+            statisticalOperationsRestFacadeClientJson = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestFacadeV10.class, providers, Boolean.TRUE);
+            WebClient.client(statisticalOperationsRestFacadeClientJson).accept(APPLICATION_JSON);
+        }
         // Mockito
         setUpMockito();
     }
@@ -116,12 +125,15 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(baseApi), operation);
     }
 
-    // @Test
-    // public void testRetrieveOperationByIdJson() throws Exception {
-    // // NOTE: Throws exception. We dont support calls with jaxb transformation when media type is Json. @see METAMAC-675
-    // // Operation operation = statisticalOperationsRestFacadeClientJson.retrieveOperationById(OPERATION_1);
-    // // StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(baseApi), operation);
-    // }
+    @Test
+    public void testRetrieveOperationByIdJson() throws Exception {
+
+        // Retrieve
+        Operation operation = statisticalOperationsRestFacadeClientJson.retrieveOperationById(OPERATION_1);
+
+        // Validation
+        StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(baseApi), operation);
+    }
 
     @Test
     public void testRetrieveOperationByIdXmlWithoutJaxbTransformation() throws Exception {
@@ -149,7 +161,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.retrieveOperationById(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -542,7 +554,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.findOperationsByFamily(NOT_EXISTS, null, null, null, null);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -573,12 +585,15 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
 
-    // @Test
-    // public void testRetrieveFamilyByIdJson() throws Exception {
-    // // NOTE: Throws exception. We dont support calls with jaxb transformation when media type is Json. @see METAMAC-675
-    // // Family family = statisticalOperationsRestFacadeClientJson.retrieveFamilyById(FAMILY_1);
-    // // StatisticalOperationsRestAsserts.assertEqualsFamily(StatisticalOperationsRestMocks.mockFamily1(baseApi), family);
-    // }
+    @Test
+    public void testRetrieveFamilyByIdJson() throws Exception {
+
+        // Retrieve
+        Family family = statisticalOperationsRestFacadeClientJson.retrieveFamilyById(FAMILY_1);
+
+        // Validation
+        StatisticalOperationsRestAsserts.assertEqualsFamily(StatisticalOperationsRestMocks.mockFamily1(baseApi), family);
+    }
 
     @Test
     public void testRetrieveFamilyByIdJsonWithoutJaxbTransformation() throws Exception {
@@ -596,7 +611,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.retrieveFamilyById(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -658,13 +673,15 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
 
-    // @Test
-    // public void testRetrieveInstanceByIdJson() throws Exception {
-    //
-    // // NOTE: Throws exception. We dont support calls with jaxb transformation when media type is Json. @see METAMAC-675
-    // // Instance instance = statisticalOperationsRestFacadeClientJson.retrieveInstanceById(OPERATION_1, INSTANCE_1);
-    // // StatisticalOperationsRestAsserts.assertEqualsInstance(StatisticalOperationsRestMocks.mockInstance1(baseApi), instance);
-    // }
+    @Test
+    public void testRetrieveInstanceByIdJson() throws Exception {
+
+        // Retrieve
+        Instance instance = statisticalOperationsRestFacadeClientJson.retrieveInstanceById(OPERATION_1, INSTANCE_1);
+
+        // Validation
+        StatisticalOperationsRestAsserts.assertEqualsInstance(StatisticalOperationsRestMocks.mockInstance1(baseApi), instance);
+    }
 
     @Test
     public void testRetrieveInstanceByIdJsonWithoutJaxbTransformation() throws Exception {
@@ -682,7 +699,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.retrieveInstanceById(OPERATION_1, NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Instance not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -882,7 +899,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
         }
-        
+
         // Queries
         {
             // query by id, without limits
@@ -914,7 +931,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.findInstances(NOT_EXISTS, null, null, null, null);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -1144,7 +1161,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
-            
+
             assertEquals(1, error.getErrorItems().size());
             assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
             assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
@@ -1277,8 +1294,8 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         }
         // Mock
         when(
-                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamilyMatcher(family, null, null)), argThat(new PagingParameterMatcher(
-                        PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResultOperations);
+                statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamilyMatcher(family, null, null)),
+                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResultOperations);
 
     }
 
