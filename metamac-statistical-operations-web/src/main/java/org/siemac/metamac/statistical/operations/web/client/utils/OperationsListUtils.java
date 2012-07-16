@@ -5,15 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.siemac.metamac.core.common.dto.InternationalStringDto;
-import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
 import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
-import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 
 public class OperationsListUtils {
 
@@ -26,7 +24,7 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (SurveyTypeDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
     }
@@ -40,7 +38,7 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (InstanceTypeDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
     }
@@ -54,7 +52,7 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (OfficialityTypeDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
     }
@@ -68,7 +66,7 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (SurveySourceDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
     }
@@ -82,7 +80,7 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (CollMethodDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
     }
@@ -96,14 +94,9 @@ public class OperationsListUtils {
         LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
         hashMap.put(new String(), new String());
         for (CostDto type : list) {
-            hashMap.put(type.getId().toString(), type.getIdentifier() + getInternationalValue(type.getDescription()));
+            hashMap.put(type.getId().toString(), CommonWebUtils.getElementName(type.getIdentifier(), type.getDescription()));
         }
         return hashMap;
-    }
-
-    private static String getInternationalValue(InternationalStringDto internationalStringDto) {
-        String value = InternationalStringUtils.getLocalisedString(internationalStringDto);
-        return !StringUtils.isBlank(value) ? " - " + value : new String();
     }
 
     /**
