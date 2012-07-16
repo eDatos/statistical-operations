@@ -147,8 +147,20 @@
             <xs:enumeration value="ID" />
             <xs:enumeration value="URN" />
             <xs:enumeration value="TITLE" />
-            <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="SUBJECT_AREA_URN" />
+            <xs:enumeration value="SECONDARY_SUBJECT_AREA_URN" />
+            <xs:enumeration value="DESCRIPTION" />
+            <xs:enumeration value="SURVEY_TYPE_ID" />                  
+            <xs:enumeration value="OFFICIALITY_TYPE_ID" />
             <xs:enumeration value="IS_INDICATORS_SYSTEM" />
+            <xs:enumeration value="PRODUCER_URN" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
+            <xs:enumeration value="CURRENTLY_ACTIVE" />
+            <xs:enumeration value="STATUS" />
+            <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="PUBLISHER_URN" />
+            <xs:enumeration value="INVENTORY_DATE" />
         </xs:restriction>
     </xs:simpleType>    
     
@@ -163,7 +175,14 @@
             <xs:enumeration value="ID" />
             <xs:enumeration value="URN" />            
             <xs:enumeration value="TITLE" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="DATA_DESCRIPTION" />
+            <xs:enumeration value="GEOGRAPHIC_GRANULARITY_URN" />
+            <xs:enumeration value="TEMPORAL_GRANULARITY_URN" />
+            <xs:enumeration value="INSTANCE_TYPE_ID" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
             <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="INVENTORY_DATE" />
         </xs:restriction>
     </xs:simpleType>    
     
@@ -178,7 +197,11 @@
             <xs:enumeration value="ID" />
             <xs:enumeration value="URN" />            
             <xs:enumeration value="TITLE" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="DESCRIPTION" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
             <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="INVENTORY_DATE" />
         </xs:restriction>
     </xs:simpleType>    
     
