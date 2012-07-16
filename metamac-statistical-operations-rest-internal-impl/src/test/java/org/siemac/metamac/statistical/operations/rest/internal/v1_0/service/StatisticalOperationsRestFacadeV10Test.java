@@ -29,6 +29,8 @@ import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.mockito.PagingParameterMatcher;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
+import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
+import org.siemac.metamac.rest.common.v1_0.domain.LogicalOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.utils.RestUtils;
@@ -71,11 +73,12 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public static String                              FAMILY_1                                        = "family1";
     public static String                              FAMILY_2                                        = "family2";
     public static String                              INSTANCE_1                                      = "instance1";
-    public static String                              QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " LIKE \"1\"";
-    public static String                              QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " LIKE \"1\" AND "
-                                                                                                              + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM + " EQ \"true\"";
-    public static String                              QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " LIKE \"1\"";
-    public static String                              QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " LIKE \"1\"";
+    public static String                              QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                              QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
+                                                                                                              + LogicalOperator.AND + " " + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM
+                                                                                                              + " " + ComparisonOperator.EQ + " \"true\"";
+    public static String                              QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                              QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @BeforeClass
