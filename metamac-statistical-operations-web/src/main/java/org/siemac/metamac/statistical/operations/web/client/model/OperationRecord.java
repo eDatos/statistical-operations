@@ -1,7 +1,11 @@
 package org.siemac.metamac.statistical.operations.web.client.model;
 
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.web.common.client.resources.GlobalResources;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
@@ -11,7 +15,8 @@ public class OperationRecord extends ListGridRecord {
         super();
     }
 
-    public OperationRecord(Long id, String code, String title, String acronym, String status, Boolean indicatorsSystem) {
+    public OperationRecord(Long id, String code, String title, String acronym, String status, Boolean indicatorsSystem, ExternalItemDto subjectArea, SurveyTypeDto surveyTypeDto,
+            OfficialityTypeDto officialityTypeDto) {
         super();
         setId(id);
         setCode(code);
@@ -65,6 +70,18 @@ public class OperationRecord extends ListGridRecord {
         if (value != null && value) {
             setAttribute(OperationDS.OP_INDICATOR_SYSTEM, GlobalResources.RESOURCE.success().getURL());
         }
+    }
+
+    public void setSubjectArea(ExternalItemDto value) {
+        setAttribute(OperationDS.OP_SUBJECT_AREA, CommonWebUtils.getElementName(value.getCode(), value.getTitle()));
+    }
+
+    public void setSurveyType(SurveyTypeDto value) {
+        setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+    }
+
+    public void setOfficialityType(OfficialityTypeDto value) {
+        setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
     }
 
 }

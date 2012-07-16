@@ -94,8 +94,11 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());
         ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getConstants().operationStatus());
         ListGridField indicatorsSystem = new ListGridField(OperationDS.OP_INDICATOR_SYSTEM, OperationsWeb.getConstants().operationIndicatorSystem());
+        ListGridField subjectAreaField = new ListGridField(OperationDS.OP_SUBJECT_AREA, OperationsWeb.getConstants().operationSubjectArea());
+        ListGridField surveyType = new ListGridField(OperationDS.OP_SURVEY_TYPE, OperationsWeb.getConstants().operationSurveyType());
+        ListGridField officialityType = new ListGridField(OperationDS.OP_OFFICIALITY_TYPE, OperationsWeb.getConstants().operationOfficialityType());
         indicatorsSystem.setType(ListGridFieldType.IMAGE);
-        operationListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem);
+        operationListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem, subjectAreaField, surveyType, officialityType);
         operationListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override

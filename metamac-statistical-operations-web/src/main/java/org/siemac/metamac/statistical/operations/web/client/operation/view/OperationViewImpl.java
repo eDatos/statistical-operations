@@ -508,7 +508,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Classifiers
         classificationViewForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
-        ViewTextItem subject = new ViewTextItem(OperationDS.OP_SUBJECT, getConstants().operationSubjectArea());
+        ViewTextItem subject = new ViewTextItem(OperationDS.OP_SUBJECT_AREA, getConstants().operationSubjectArea());
         ViewTextItem secondarySubject = new ViewTextItem(OperationDS.OP_SUBJECT_SECONDARY, getConstants().operationSubjectAreasSecundary());
         classificationViewForm.setFields(subject, secondarySubject);
 
@@ -597,7 +597,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content classifiers
         classificationEditionForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
-        subjectItem = new ExternalSelectItem(OperationDS.OP_SUBJECT, getConstants().operationSubjectArea());
+        subjectItem = new ExternalSelectItem(OperationDS.OP_SUBJECT_AREA, getConstants().operationSubjectArea());
         subjectItem.setRequired(true);
         subjectItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -732,7 +732,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersViewForm.setValue(OperationDS.OP_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
 
         // Content Classifiers
-        classificationViewForm.setValue(OperationDS.OP_SUBJECT, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getUrn());
+        classificationViewForm.setValue(OperationDS.OP_SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getUrn());
         classificationViewForm.setValue(OperationDS.OP_SUBJECT_SECONDARY, ExternalItemUtils.getExternalItemListToString(operationDto.getSecondarySubjectAreas()));
 
         // Content Descriptors
