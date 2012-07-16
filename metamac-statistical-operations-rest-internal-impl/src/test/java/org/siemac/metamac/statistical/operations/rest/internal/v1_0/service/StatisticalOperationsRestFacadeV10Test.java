@@ -35,6 +35,7 @@ import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -146,10 +147,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveOperationByIdErrorNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.retrieveOperationById(NOT_EXISTS);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
@@ -159,6 +166,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         try {
             statisticalOperationsRestFacadeClientJson.retrieveOperationById(NOT_EXISTS);
         } catch (Exception e) {
+            // note: do not work 'extractErrorFromException'
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
@@ -532,10 +540,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testFindOperationsByFamilyErrorNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.findOperationsByFamily(NOT_EXISTS, null, null, null, null);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
@@ -580,10 +594,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamilyByIdErrorNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.retrieveFamilyById(NOT_EXISTS);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
@@ -602,6 +622,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         try {
             statisticalOperationsRestFacadeClientJson.retrieveFamilyById(NOT_EXISTS);
         } catch (Exception e) {
+            // note: do not work 'extractErrorFromException'
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
@@ -659,10 +680,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveInstanceByIdErrorNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.retrieveInstanceById(OPERATION_1, NOT_EXISTS);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Instance not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
@@ -681,6 +708,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
         try {
             statisticalOperationsRestFacadeClientJson.retrieveInstanceById(OPERATION_1, NOT_EXISTS);
         } catch (Exception e) {
+            // note: do not work 'extractErrorFromException'
             InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
@@ -884,10 +912,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testFindInstancesErrorOperationNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.findInstances(NOT_EXISTS, null, null, null, null);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
@@ -1108,10 +1142,16 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamiliesByOperationErrorNotExistsXml() throws Exception {
         try {
             statisticalOperationsRestFacadeClientXml.retrieveFamiliesByOperation(NOT_EXISTS);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestFacadeClientXml, e);
+            
+            assertEquals(1, error.getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
         } catch (Exception e) {
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.xml");
-            InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
-            MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
+            fail("Incorrect exception");
         }
     }
 
