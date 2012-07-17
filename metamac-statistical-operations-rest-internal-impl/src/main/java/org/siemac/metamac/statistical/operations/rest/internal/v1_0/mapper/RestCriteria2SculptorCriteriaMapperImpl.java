@@ -136,7 +136,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 case ID:
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue());
                 case URN:
-                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.urn(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue());
                 case ACRONYM:
@@ -184,7 +184,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 case ID:
                     return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getValue());
                 case URN:
-                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.urn(), propertyRestriction.getValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getValue());
                 case ACRONYM:
