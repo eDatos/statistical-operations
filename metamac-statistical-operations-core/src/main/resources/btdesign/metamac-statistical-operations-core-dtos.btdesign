@@ -1,206 +1,202 @@
+
 import "classpath:/btdesign/metamac-core-common-dtos.btdesign"
 import "classpath:/btdesign/metamac-statistical-operations-core-enums.btdesign"
 
 Application StatisticalOperationsDto {
     basePackage=org.siemac.metamac.statistical.operations
 
-	Module dtos {    	
-		basePackage=org.siemac.metamac.statistical.operations.core.dto
-		
-		"Dto for SurveyType"
-       	DataTransferObject SurveyTypeDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	"Dto for InstanceType"
-       	DataTransferObject InstanceTypeDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	"Dto for SurveySource"
-       	DataTransferObject SurveySourceDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	"Dto for OfficialityType"
-       	DataTransferObject OfficialityTypeDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	"Dto for CollMethod"
-       	DataTransferObject CollMethodDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	"Dto for Cost"
-       	DataTransferObject CostDto extends @IdentityDto  {
-       		String identifier;
-       		-@InternationalStringDto description nullable;
-       	}
-       	
-       	
-       	"Dto for FamilytDto"
-       	DataTransferObject FamilyDto extends @AuditableDto  {
-			String code required;	
-			String urn nullable;
-       		-@InternationalStringDto title required;
-       		-@InternationalStringDto acronym nullable;
-       		-@InternationalStringDto description nullable;
-       		JAVADATE internalInventoryDate nullable;
-       		-@ProcStatusEnum procStatus required;
-       		JAVADATE inventoryDate nullable;
-       		
-       		Long optimisticLockingVersion;
-       	}
-       	
-       	
-       	
-       	"Dto for FamilyBaseDto"
-       	DataTransferObject FamilyBaseDto extends @AuditableDto  {
-			String code;	
-			String urn nullable;
-       		-@InternationalStringDto title;
-       		-@InternationalStringDto description nullable;
-       		-@ProcStatusEnum procStatus required;
-       	}
-       	
-       	
-       	"Dto for OperationDto"
-       	DataTransferObject OperationDto extends @AuditableDto  {
-       		- @ExternalItemDto commonMetadata nullable;
-       		
-       		String code;
-       		String urn nullable;
-       		- @InternationalStringDto title;
-       		- @InternationalStringDto acronym nullable;
-       		
-       		- @ExternalItemDto subjectArea nullable;
-       		- Set<@ExternalItemDto> secondarySubjectAreas;
-       		
-       		- @InternationalStringDto objective nullable;
-       		- @InternationalStringDto description nullable;
-       		
-       		- @SurveyTypeDto surveyType nullable;
-       		- @OfficialityTypeDto officialityType nullable;
-       		Boolean indicatorSystem;
-       		
-       		- Set<@ExternalItemDto> producer;
-       		- Set<@ExternalItemDto> regionalResponsible;
-       		- Set<@ExternalItemDto> regionalContributor;
-			JAVADATE internalInventoryDate nullable;
-			Boolean currentlyActive;
-       		- @ProcStatusEnum procStatus not nullable;
-       		- @StatusEnum status not nullable;
-       		
-       		- Set<@ExternalItemDto> publisher;
-       		- @InternationalStringDto relPolUsAc nullable;
-       		Boolean releaseCalendar;
-       		String releaseCalendarAccess nullable;
-       		- Set<@ExternalItemDto> updateFrequency;
-       		- @InstanceBaseDto currentInstance nullable;
-       		- @InstanceBaseDto currentInternalInstance nullable;
-       		JAVADATE inventoryDate nullable;
-       		- @InternationalStringDto revPolicy nullable;
-       		- @InternationalStringDto revPractice nullable;
-       		// CONTAT: It comes from AppCommonMetadata
-       		
-       		// LEGAL_ACTS: It comes from AppCommonMetadata
-       		// DATA_SHARING: It comes from AppCommonMetadata
-       		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
-       		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
-       		
-       		- @InternationalStringDto comment  nullable;
-       		- @InternationalStringDto notes  nullable;
-       		
-       		Long optimisticLockingVersion;
-       	}
-       	
-       	
-       	"Dto for OperationBaseDto"
-       	DataTransferObject OperationBaseDto extends @AuditableDto  {
-       		String code;
-       		String urn nullable;
-       		-@InternationalStringDto title;
-       		-@InternationalStringDto acronym nullable;
-       		-@ProcStatusEnum procStatus required;
-       		Boolean indicatorSystem;
-       	}
-       	
-       	
-       	"Dto for InstanceDto"
-       	DataTransferObject InstanceDto extends @AuditableDto  {
-			Integer order;
-       		String code;
-       		String urn nullable;
-       		- @InternationalStringDto title;
-       		- @InternationalStringDto acronym nullable;
-       		
-       		- @InternationalStringDto dataDescription nullable;
-       		- @InternationalStringDto statisticalPopulation nullable;
-       		- Set<@ExternalItemDto> statisticalUnit;
-       		- @ExternalItemDto geographicGranularity nullable;
-       		- @InternationalStringDto geographicComparability nullable;
-       		- @ExternalItemDto temporalGranularity nullable;
-       		- @InternationalStringDto temporalComparability nullable;
-       		String basePeriod nullable;
-       		- Set<@ExternalItemDto> unitMeasure;
-       		- @InternationalStringDto statConcDef nullable;
-       		- Set<@ExternalItemDto> statConcDefList;
-       		- @InternationalStringDto classSystem nullable;
-       		- Set<@ExternalItemDto> classSystemList;
-       		
-       		- @InstanceTypeDto instanceType nullable;
-       		
-			JAVADATE internalInventoryDate nullable;
-			- @ProcStatusEnum procStatus not nullable;
-       		- @InternationalStringDto docMethod nullable;
-       		- @SurveySourceDto surveySource nullable;
-       		- @CollMethodDto collMethod nullable;
-       		- Set<@ExternalItemDto> informationSuppliers;
-       		- Set<@ExternalItemDto> freqColl;
-       		- @InternationalStringDto dataValidation nullable;
-       		- @InternationalStringDto dataCompilation nullable;
-       		- @InternationalStringDto adjustment nullable;
-       		- @InternationalStringDto costBurden nullable;
-       		- Set<@CostDto> cost;
-       		
-       		JAVADATE inventoryDate nullable;
-       		
-       		- @InternationalStringDto qualityDoc nullable;
-       		- @InternationalStringDto qualityAssure nullable;
-       		- @InternationalStringDto qualityAssmnt nullable;
-       		- @InternationalStringDto userNeeds nullable;
-       		- @InternationalStringDto userSat nullable;
-       		- @InternationalStringDto completeness nullable;
-       		- @InternationalStringDto timeliness nullable;
-       		- @InternationalStringDto punctuality  nullable;
-       		- @InternationalStringDto accuracyOverall  nullable;
-       		- @InternationalStringDto samplingErr  nullable;
-       		- @InternationalStringDto nonsamplingErr  nullable;
-       		- @InternationalStringDto coherXDomain  nullable;
-       		- @InternationalStringDto coherInternal  nullable;
-       		
-       		- @InternationalStringDto comment  nullable;
-       		- @InternationalStringDto notes  nullable;
-       	
-       		Long optimisticLockingVersion;	
-       	}
-       	
-       	"Dto for InstanceBaseDto"
-       	DataTransferObject InstanceBaseDto extends @AuditableDto  {
-       		String code;
-       		String urn nullable;
-       		-@InternationalStringDto title;
-       		-@ProcStatusEnum procStatus required;
-       		-@InternationalStringDto description nullable;
-       		Integer order;
-       	}
-       	
-	}
+    Module dtos {
+        basePackage=org.siemac.metamac.statistical.operations.core.dto
+        "Dto for SurveyType"
+        DataTransferObject SurveyTypeDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for InstanceType"
+        DataTransferObject InstanceTypeDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for SurveySource"
+        DataTransferObject SurveySourceDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for OfficialityType"
+        DataTransferObject OfficialityTypeDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for CollMethod"
+        DataTransferObject CollMethodDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for Cost"
+        DataTransferObject CostDto extends @IdentityDto {
+            String identifier;
+            - @InternationalStringDto description nullable;
+        }
+
+        "Dto for FamilytDto"
+        DataTransferObject FamilyDto extends @AuditableDto {
+            String code required;
+            String urn nullable;
+            - @InternationalStringDto title required;
+            - @InternationalStringDto acronym nullable;
+            - @InternationalStringDto description nullable;
+            JAVADATE internalInventoryDate nullable;
+            - @ProcStatusEnum procStatus required;
+            JAVADATE inventoryDate nullable;
+
+            Long optimisticLockingVersion;
+        }
+
+        "Dto for FamilyBaseDto"
+        DataTransferObject FamilyBaseDto extends @AuditableDto {
+            String code;
+            String urn nullable;
+            - @InternationalStringDto title;
+            - @InternationalStringDto description nullable;
+            - @ProcStatusEnum procStatus required;
+        }
+
+        "Dto for OperationDto"
+        DataTransferObject OperationDto extends @AuditableDto {
+            - @ExternalItemDto commonMetadata nullable;
+
+            String code;
+            String urn nullable;
+            - @InternationalStringDto title;
+            - @InternationalStringDto acronym nullable;
+
+            - @ExternalItemDto subjectArea nullable;
+            - Set<@ExternalItemDto> secondarySubjectAreas;
+
+            - @InternationalStringDto objective nullable;
+            - @InternationalStringDto description nullable;
+
+            - @SurveyTypeDto surveyType nullable;
+            - @OfficialityTypeDto officialityType nullable;
+            Boolean indicatorSystem;
+
+            - Set<@ExternalItemDto> producer;
+            - Set<@ExternalItemDto> regionalResponsible;
+            - Set<@ExternalItemDto> regionalContributor;
+            JAVADATE internalInventoryDate nullable;
+            Boolean currentlyActive;
+            - @ProcStatusEnum procStatus not nullable;
+            - @StatusEnum status not nullable;
+
+            - Set<@ExternalItemDto> publisher;
+            - @InternationalStringDto relPolUsAc nullable;
+            Boolean releaseCalendar;
+            String releaseCalendarAccess nullable;
+            - Set<@ExternalItemDto> updateFrequency;
+            - @InstanceBaseDto currentInstance nullable;
+            - @InstanceBaseDto currentInternalInstance nullable;
+            JAVADATE inventoryDate nullable;
+            - @InternationalStringDto revPolicy nullable;
+            - @InternationalStringDto revPractice nullable;
+            // CONTAT: It comes from AppCommonMetadata
+
+            // LEGAL_ACTS: It comes from AppCommonMetadata
+            // DATA_SHARING: It comes from AppCommonMetadata
+            // CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
+            // CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
+            - @InternationalStringDto comment nullable;
+            - @InternationalStringDto notes nullable;
+
+            Long optimisticLockingVersion;
+        }
+
+        "Dto for OperationBaseDto"
+        DataTransferObject OperationBaseDto extends @AuditableDto {
+            String code;
+            String urn nullable;
+            - @InternationalStringDto title;
+            - @InternationalStringDto acronym nullable;
+            - @ProcStatusEnum procStatus required;
+            Boolean indicatorSystem;
+            - @ExternalItemDto subjectArea nullable;
+            - @SurveyTypeDto surveyType nullable;
+            - @OfficialityTypeDto officialityType nullable;
+        }
+
+        "Dto for InstanceDto"
+        DataTransferObject InstanceDto extends @AuditableDto {
+            Integer order;
+            String code;
+            String urn nullable;
+            - @InternationalStringDto title;
+            - @InternationalStringDto acronym nullable;
+
+            - @InternationalStringDto dataDescription nullable;
+            - @InternationalStringDto statisticalPopulation nullable;
+            - Set<@ExternalItemDto> statisticalUnit;
+            - @ExternalItemDto geographicGranularity nullable;
+            - @InternationalStringDto geographicComparability nullable;
+            - @ExternalItemDto temporalGranularity nullable;
+            - @InternationalStringDto temporalComparability nullable;
+            String basePeriod nullable;
+            - Set<@ExternalItemDto> unitMeasure;
+            - @InternationalStringDto statConcDef nullable;
+            - Set<@ExternalItemDto> statConcDefList;
+            - @InternationalStringDto classSystem nullable;
+            - Set<@ExternalItemDto> classSystemList;
+
+            - @InstanceTypeDto instanceType nullable;
+
+            JAVADATE internalInventoryDate nullable;
+            - @ProcStatusEnum procStatus not nullable;
+            - @InternationalStringDto docMethod nullable;
+            - @SurveySourceDto surveySource nullable;
+            - @CollMethodDto collMethod nullable;
+            - Set<@ExternalItemDto> informationSuppliers;
+            - Set<@ExternalItemDto> freqColl;
+            - @InternationalStringDto dataValidation nullable;
+            - @InternationalStringDto dataCompilation nullable;
+            - @InternationalStringDto adjustment nullable;
+            - @InternationalStringDto costBurden nullable;
+            - Set<@CostDto> cost;
+
+            JAVADATE inventoryDate nullable;
+
+            - @InternationalStringDto qualityDoc nullable;
+            - @InternationalStringDto qualityAssure nullable;
+            - @InternationalStringDto qualityAssmnt nullable;
+            - @InternationalStringDto userNeeds nullable;
+            - @InternationalStringDto userSat nullable;
+            - @InternationalStringDto completeness nullable;
+            - @InternationalStringDto timeliness nullable;
+            - @InternationalStringDto punctuality nullable;
+            - @InternationalStringDto accuracyOverall nullable;
+            - @InternationalStringDto samplingErr nullable;
+            - @InternationalStringDto nonsamplingErr nullable;
+            - @InternationalStringDto coherXDomain nullable;
+            - @InternationalStringDto coherInternal nullable;
+
+            - @InternationalStringDto comment nullable;
+            - @InternationalStringDto notes nullable;
+
+            Long optimisticLockingVersion;
+        }
+
+        "Dto for InstanceBaseDto"
+        DataTransferObject InstanceBaseDto extends @AuditableDto {
+            String code;
+            String urn nullable;
+            - @InternationalStringDto title;
+            - @ProcStatusEnum procStatus required;
+            - @InternationalStringDto description nullable;
+            Integer order;
+        }
+
+    }
 
 }

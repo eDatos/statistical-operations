@@ -342,6 +342,15 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // PROC_STATUS
         // Not necessary
 
+        // SUBJECT_AREA
+        target.setSubjectArea(externalItemToDto(source.getSubjectArea()));
+
+        // SURVEY_TYPE
+        target.setSurveyType(surveyTypeToDto(source.getSurveyType()));
+
+        // OFFICIALITY_TYPE
+        target.setOfficialityType(officialityTypeToDto(source.getOfficialityType()));
+
         return target;
     }
 
