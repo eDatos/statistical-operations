@@ -24,6 +24,9 @@ public class OperationRecord extends ListGridRecord {
         setAcronym(acronym);
         setStatus(status);
         setIndicatorsSystem(indicatorsSystem);
+        setSubjectArea(subjectArea);
+        setSurveyType(surveyTypeDto);
+        setOfficialityType(officialityTypeDto);
     }
 
     public Long getId() {
@@ -73,15 +76,21 @@ public class OperationRecord extends ListGridRecord {
     }
 
     public void setSubjectArea(ExternalItemDto value) {
-        setAttribute(OperationDS.OP_SUBJECT_AREA, CommonWebUtils.getElementName(value.getCode(), value.getTitle()));
+        if (value != null) {
+            setAttribute(OperationDS.OP_SUBJECT_AREA, CommonWebUtils.getElementName(value.getCode(), value.getTitle()));
+        }
     }
 
     public void setSurveyType(SurveyTypeDto value) {
-        setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+        if (value != null) {
+            setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+        }
     }
 
     public void setOfficialityType(OfficialityTypeDto value) {
-        setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+        if (value != null) {
+            setAttribute(OperationDS.OP_OFFICIALITY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+        }
     }
 
 }
