@@ -561,9 +561,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentViewForm.setValue(InstanceDS.DATA_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getDataDescription()));
         contentViewForm.setValue(InstanceDS.STATISTICAL_POPULATION, RecordUtils.getInternationalStringRecord(instanceDto.getStatisticalPopulation()));
         contentViewForm.setValue(InstanceDS.STATISTIAL_UNIT, ExternalItemUtils.getExternalItemListToString(instanceDto.getStatisticalUnit()));
-        contentViewForm.setValue(InstanceDS.GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getUrn() : "");
+        contentViewForm
+                .setValue(InstanceDS.GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity() != null ? ExternalItemUtils.getExternalItemName(instanceDto.getGeographicGranularity()) : "");
         contentViewForm.setValue(InstanceDS.GEOGRAPHIC_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getGeographicComparability()));
-        contentViewForm.setValue(InstanceDS.TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getUrn() : "");
+        contentViewForm.setValue(InstanceDS.TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? ExternalItemUtils.getExternalItemName(instanceDto.getTemporalGranularity()) : "");
         contentViewForm.setValue(InstanceDS.TEMPORAL_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getTemporalComparability()));
         contentViewForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
         contentViewForm.setValue(InstanceDS.UNIT_MEASURE, ExternalItemUtils.getExternalItemListToString(instanceDto.getUnitMeasure()));
@@ -573,15 +574,18 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentViewForm.setValue(InstanceDS.CLASS_SYSTEM_LIST, ExternalItemUtils.getExternalItemListToString(instanceDto.getClassSystemList()));
 
         // Class descriptors
-        classViewForm.setValue(InstanceDS.INSTANCE_TYPE, instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getIdentifier() : "");
+        classViewForm.setValue(InstanceDS.INSTANCE_TYPE,
+                instanceDto.getInstanceType() != null ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription()) : "");
 
         // Production descriptors
         productionViewForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate());
         productionViewForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
 
         productionViewForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));
-        productionViewForm.setValue(InstanceDS.SURVEY_SOURCE, instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getIdentifier() : "");
-        productionViewForm.setValue(InstanceDS.COLL_METHOD, instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getIdentifier() : "");
+        productionViewForm.setValue(InstanceDS.SURVEY_SOURCE,
+                instanceDto.getSurveySource() != null ? CommonWebUtils.getElementName(instanceDto.getSurveySource().getIdentifier(), instanceDto.getSurveySource().getDescription()) : "");
+        productionViewForm.setValue(InstanceDS.COLL_METHOD,
+                instanceDto.getCollMethod() != null ? CommonWebUtils.getElementName(instanceDto.getCollMethod().getIdentifier(), instanceDto.getCollMethod().getDescription()) : "");
         productionViewForm.setValue(InstanceDS.INFORMATION_SUPPLIERS, ExternalItemUtils.getExternalItemListToString(instanceDto.getInformationSuppliers()));
         productionViewForm.setValue(InstanceDS.FREQ_COLL, ExternalItemUtils.getExternalItemListToString(instanceDto.getFreqColl()));
 
@@ -616,7 +620,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         annotationsViewForm.setValue(InstanceDS.COMMENTS, RecordUtils.getInternationalStringRecord(instanceDto.getComment()));
         annotationsViewForm.setValue(InstanceDS.NOTES, RecordUtils.getInternationalStringRecord(instanceDto.getNotes()));
     }
-
     private void setEditionForm(InstanceDto instanceDto) {
         // Identifiers
         code.setValue(instanceDto.getCode());

@@ -732,7 +732,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersViewForm.setValue(OperationDS.OP_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
 
         // Content Classifiers
-        classificationViewForm.setValue(OperationDS.OP_SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : operationDto.getSubjectArea().getUrn());
+        classificationViewForm.setValue(OperationDS.OP_SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : ExternalItemUtils.getExternalItemName(operationDto.getSubjectArea()));
         classificationViewForm.setValue(OperationDS.OP_SUBJECT_SECONDARY, ExternalItemUtils.getExternalItemListToString(operationDto.getSecondarySubjectAreas()));
 
         // Content Descriptors
@@ -740,8 +740,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         contentViewForm.setValue(OperationDS.OP_OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
 
         // Class Descriptors
-        classViewForm.setValue(OperationDS.OP_SURVEY_TYPE, operationDto.getSurveyType() == null ? "" : operationDto.getSurveyType().getIdentifier());
-        classViewForm.setValue(OperationDS.OP_OFFICIALITY_TYPE, operationDto.getOfficialityType() == null ? "" : operationDto.getOfficialityType().getIdentifier());
+        classViewForm.setValue(OperationDS.OP_SURVEY_TYPE,
+                operationDto.getSurveyType() == null ? "" : CommonWebUtils.getElementName(operationDto.getSurveyType().getIdentifier(), operationDto.getSurveyType().getDescription()));
+        classViewForm.setValue(OperationDS.OP_OFFICIALITY_TYPE,
+                operationDto.getOfficialityType() == null ? "" : CommonWebUtils.getElementName(operationDto.getOfficialityType().getIdentifier(), operationDto.getOfficialityType().getDescription()));
         classViewForm.setValue(OperationDS.OP_INDICATOR_SYSTEM, (operationDto.getIndicatorSystem() != null && operationDto.getIndicatorSystem()) ? getConstants().yes() : getConstants().no());
 
         // Production Descriptors
@@ -759,18 +761,18 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar()) ? getConstants().yes() : getConstants().no());
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
         diffusionViewForm.setValue(OperationDS.OP_UPDATE_FREQ, ExternalItemUtils.getExternalItemListToString(operationDto.getUpdateFrequency()));
-        diffusionViewForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
+        diffusionViewForm.setValue(OperationDS.OP_CURRENT_INSTANCE,
+                operationDto.getCurrentInstance() != null ? CommonWebUtils.getElementName(operationDto.getCurrentInstance().getCode(), operationDto.getCurrentInstance().getTitle()) : "");
         diffusionViewForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         diffusionViewForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionViewForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
 
-        diffusionViewForm.setValue(OperationDS.OP_COMMON_METADATA, operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getUrn() : "");
+        diffusionViewForm.setValue(OperationDS.OP_COMMON_METADATA, operationDto.getCommonMetadata() != null ? ExternalItemUtils.getExternalItemName(operationDto.getCommonMetadata()) : "");
 
         // Annotations
         annotationsViewForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
         annotationsViewForm.setValue(OperationDS.OP_NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
     }
-
     private void setEditionForm(OperationDto operationDto) {
         // Identifiers
         code.setValue(operationDto.getCode());
