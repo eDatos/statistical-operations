@@ -361,7 +361,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     private void retrieveOperation(String operationCode) {
-        String operationUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_OPERATION_PREFIX, operationCode);
+        String operationUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_OPERATION_PREFIX, operationCode);
         dispatcher.execute(new GetOperationAndInstancesAction(operationUrn), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
 
             @Override

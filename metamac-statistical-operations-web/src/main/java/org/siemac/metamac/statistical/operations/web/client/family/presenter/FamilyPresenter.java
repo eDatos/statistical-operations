@@ -174,7 +174,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     private void retrieveFamily(String familyCode) {
-        String familyUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_FAMILY_PREFIX, familyCode);
+        String familyUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_FAMILY_PREFIX, familyCode);
         dispatcher.execute(new GetFamilyAndOperationsAction(familyUrn), new WaitingAsyncCallback<GetFamilyAndOperationsResult>() {
 
             @Override

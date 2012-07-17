@@ -209,7 +209,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void retrieveInstance(String operationCode, String instanceCode) {
-        String instanceUrn = UrnUtils.generateURN(UrnConstants.URN_SIEMAC_CLASS_INSTANCE_PREFIX, operationCode, instanceCode);
+        String instanceUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_INSTANCE_PREFIX, operationCode, instanceCode);
         dispatcher.execute(new GetInstanceAction(instanceUrn), new WaitingAsyncCallback<GetInstanceResult>() {
 
             @Override
