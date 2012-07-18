@@ -5,12 +5,16 @@ import java.util.List;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
 
 @GenDispatch(isSecure = false)
-public class FindAllCommonMetadata {
+public class GetCommonMetadataConfigurations {
+
+    @In(1)
+    String query;
 
     @Out(1)
-    List<ExternalItemDto> commonMetadataList;
-
+    List<ExternalItemDto> configurations;
+    
 }

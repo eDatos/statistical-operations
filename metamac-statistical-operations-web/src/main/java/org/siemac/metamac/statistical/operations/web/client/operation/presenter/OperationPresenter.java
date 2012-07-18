@@ -39,6 +39,8 @@ import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAc
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
@@ -141,7 +143,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         void setPublishers(List<ExternalItemDto> organisations);
         void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
-        void setCommonMetadataList(List<ExternalItemDto> commonMetadataList);
+        void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList);
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
@@ -529,7 +531,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @ProxyEvent
     @Override
     public void onUpdateCommonMetadata(UpdateCommonMetadataEvent event) {
-        getView().setCommonMetadataList(event.getCommonMetadata());
+        getView().setCommonMetadataConfigurations(event.getCommonMetadata());
     }
 
     @ProxyEvent
@@ -565,6 +567,21 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitSuccess(GetFamilyPaginatedListResult result) {
                 getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveCommonMetadataConfigurations() {
+        dispatcher.execute(new GetCommonMetadataConfigurationsAction(null), new WaitingAsyncCallback<GetCommonMetadataConfigurationsResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingConfigurations()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetCommonMetadataConfigurationsResult result) {
+                getView().setCommonMetadataConfigurations(result.getConfigurations());
             }
         });
     }

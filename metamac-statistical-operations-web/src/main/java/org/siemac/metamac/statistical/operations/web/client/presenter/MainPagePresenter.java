@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
@@ -20,8 +19,6 @@ import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchem
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsResult;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllCommonMetadataAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllCommonMetadataResult;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesAction;
@@ -111,14 +108,14 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     @Override
     protected void onBind() {
         super.onBind();
-        // TODO Is this the proper place to load value lists?
         loadCodeLists();
+        loadOperationsLists();
+        loadFrequencyCodes();
+
+        // TODO These lists should not be load here!
         loadOrganisations();
         loadCategorySchemes();
         loadConceptSchemes();
-        loadCommonMetadata();
-        loadOperationsLists();
-        loadFrequencyCodes();
     }
 
     @Override
@@ -242,20 +239,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
             @Override
             public void onWaitSuccess(FindAllConceptSchemesResult result) {
                 UpdateConceptSchemesEvent.fire(MainPagePresenter.this, result.getConceptSchemes());
-            }
-        });
-    }
-
-    private void loadCommonMetadata() {
-        dispatcher.execute(new FindAllCommonMetadataAction(), new WaitingAsyncCallback<FindAllCommonMetadataResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(FindAllCommonMetadataResult result) {
-                UpdateCommonMetadataEvent.fire(MainPagePresenter.this, result.getCommonMetadataList());
             }
         });
     }

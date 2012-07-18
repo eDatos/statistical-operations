@@ -342,6 +342,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         instanceListGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateInstance(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
         editFamiliesToolStripButton.setVisibility(ClientSecurityUtils.canAddFamilyToOperation(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
 
+        // Load common metadata configurations
+        uiHandlers.retrieveCommonMetadataConfigurations();
+
         // Operation
         setOperation(operationDto);
 
@@ -918,7 +921,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setCommonMetadataList(List<ExternalItemDto> commonMetadataList) {
+    public void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList) {
         this.commonMetadataList = commonMetadataList;
         commonMetadataItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(commonMetadataList));
     }

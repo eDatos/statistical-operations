@@ -27,4 +27,6 @@ public interface OperationUiHandlers extends UiHandlers {
 
     void updateInstancesOrder(List<Long> instancesIds);
 
+    void retrieveCommonMetadataConfigurations();
+
 }
