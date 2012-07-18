@@ -19,8 +19,8 @@
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="instances" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="surveyType" type="common:MetadataComplexValue" />
-            <xs:element name="officialityType" type="common:MetadataComplexValue" />
+            <xs:element name="surveyType" type="common:SimpleItem" />
+            <xs:element name="officialityType" type="common:SimpleItem" />
             <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
             <xs:element name="producers" type="common:Resource" maxOccurs="unbounded" />
             <xs:element name="regionalResponsibles" type="common:Resource" maxOccurs="unbounded" />
@@ -92,19 +92,19 @@
             <xs:element name="statConcDefList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="classSystem" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="classSystemList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="instanceType" type="common:MetadataComplexValue" />
+            <xs:element name="instanceType" type="common:SimpleItem" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="docMethod" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="surveySource" type="common:MetadataComplexValue" minOccurs="0"/>
-            <xs:element name="collMethod" type="common:MetadataComplexValue" minOccurs="0"/>
+            <xs:element name="surveySource" type="common:SimpleItem" minOccurs="0"/>
+            <xs:element name="collMethod" type="common:SimpleItem" minOccurs="0"/>
             <xs:element name="informationSuppliers" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="freqColls" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="dataValidation" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="dataCompilation" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="adjustment" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="costBurden" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="costs" type="common:MetadataComplexValue" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="costs" type="common:SimpleItem" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="qualityDoc" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="qualityAssure" type="common:InternationalString" minOccurs="0"/>

@@ -19,7 +19,6 @@ import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
-import org.siemac.metamac.rest.common.v1_0.domain.MetadataComplexValue;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
@@ -71,8 +70,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
         target.getInstances().addAll(toResourcesInstances(source.getInstances(), apiUrl));
-        target.setSurveyType(toMetadataComplexValue(source.getSurveyType()));
-        target.setOfficialityType(toMetadataComplexValue(source.getOfficialityType()));
+        target.setSurveyType(toSimpleItem(source.getSurveyType()));
+        target.setOfficialityType(toSimpleItem(source.getOfficialityType()));
         target.setIndicatorSystem(source.getIndicatorSystem());
         target.getProducers().addAll(toResourcesExternalItems(source.getProducer()));
         target.getRegionalResponsibles().addAll(toResourcesExternalItems(source.getRegionalResponsible()));
@@ -224,19 +223,19 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.getStatConcDefLists().addAll(toResourcesExternalItems(source.getStatConcDefList()));
         target.setClassSystem(toInternationalString(source.getClassSystem()));
         target.getClassSystemLists().addAll(toResourcesExternalItems(source.getClassSystemList()));
-        target.setInstanceType(toMetadataComplexValue(source.getInstanceType()));
+        target.setInstanceType(toSimpleItem(source.getInstanceType()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
-        target.setSurveySource(toMetadataComplexValue(source.getSurveySource()));
-        target.setCollMethod(toMetadataComplexValue(source.getCollMethod()));
+        target.setSurveySource(toSimpleItem(source.getSurveySource()));
+        target.setCollMethod(toSimpleItem(source.getCollMethod()));
         target.getInformationSuppliers().addAll(toResourcesExternalItems(source.getInformationSuppliers()));
         target.getFreqColls().addAll(toResourcesExternalItems(source.getFreqColl()));
         target.setDataValidation(toInternationalString(source.getDataValidation()));
         target.setDataCompilation(toInternationalString(source.getDataCompilation()));
         target.setAdjustment(toInternationalString(source.getAdjustment()));
         target.setCostBurden(toInternationalString(source.getCostBurden()));
-        target.getCosts().addAll(toMetadataComplexValuesCosts(source.getCost()));
+        target.getCosts().addAll(toSimpleItemsCosts(source.getCost()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setQualityDoc(toInternationalString(source.getQualityDoc()));
         target.setQualityAssure(toInternationalString(source.getQualityAssure()));
@@ -410,73 +409,73 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(SurveyType source) {
+    private SimpleItem toSimpleItem(SurveyType source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(OfficialityType source) {
+    private SimpleItem toSimpleItem(OfficialityType source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(SurveySource source) {
+    private SimpleItem toSimpleItem(SurveySource source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(InstanceType source) {
+    private SimpleItem toSimpleItem(InstanceType source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(CollMethod source) {
+    private SimpleItem toSimpleItem(CollMethod source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private MetadataComplexValue toMetadataComplexValue(Cost source) {
+    private SimpleItem toSimpleItem(Cost source) {
         if (source == null) {
             return null;
         }
-        MetadataComplexValue target = new MetadataComplexValue();
+        SimpleItem target = new SimpleItem();
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 
-    private List<MetadataComplexValue> toMetadataComplexValuesCosts(Set<Cost> sources) {
-        List<MetadataComplexValue> targets = new ArrayList<MetadataComplexValue>();
+    private List<SimpleItem> toSimpleItemsCosts(Set<Cost> sources) {
+        List<SimpleItem> targets = new ArrayList<SimpleItem>();
         if (sources == null) {
             return targets;
         }
         for (Cost source : sources) {
-            MetadataComplexValue target = toMetadataComplexValue(source);
+            SimpleItem target = toSimpleItem(source);
             targets.add(target);
         }
         return targets;

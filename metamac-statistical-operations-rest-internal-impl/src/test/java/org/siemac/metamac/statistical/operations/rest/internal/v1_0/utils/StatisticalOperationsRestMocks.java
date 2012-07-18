@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
-import static org.junit.Assert.fail; 
+import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 
@@ -471,7 +471,7 @@ public class StatisticalOperationsRestMocks {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
         String operation = StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1;
-        
+
         String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_INSTANCE_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             pagedResult.setTotal(BigInteger.valueOf(2));
@@ -508,7 +508,7 @@ public class StatisticalOperationsRestMocks {
         }
         return pagedResult;
     }
-    
+
     public static SimpleItemsNoPagedResult mockSurveyTypesSimpleItemsNoPagedResult(String baseApi) {
         SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
         simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_SURVEY_TYPES);
@@ -517,7 +517,7 @@ public class StatisticalOperationsRestMocks {
         simpleItemsNoPagedResult.getItems().add(mockSurveyType2SimpleItem(baseApi));
         return simpleItemsNoPagedResult;
     }
-    
+
     private static Resource mockOperationResource(String subId, String baseApi) {
         String operationId = "operation" + subId;
         return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestInternalConstants.KIND_OPERATION, baseApi
@@ -557,8 +557,8 @@ public class StatisticalOperationsRestMocks {
         operation.getInstances().add(mockInstanceResource(operation.getId(), "22", baseApi));
         operation.getInstances().add(mockInstanceResource(operation.getId(), "333", baseApi));
         operation.getInstances().add(mockInstanceResource(operation.getId(), "4444", baseApi));
-        operation.setSurveyType(MetamacRestMocks.mockMetadataComplexValue("surveyIdentifier"));
-        operation.setOfficialityType(MetamacRestMocks.mockMetadataComplexValue("officialityType"));
+        operation.setSurveyType(MetamacRestMocks.mockSimpleItem("surveyIdentifier"));
+        operation.setOfficialityType(MetamacRestMocks.mockSimpleItem("officialityType"));
         operation.setIndicatorSystem(Boolean.TRUE);
         operation.getProducers().add(mockResourceFromExternalItem("producer1", TypeExternalArtefactsEnum.AGENCY));
         operation.getProducers().add(mockResourceFromExternalItem("producer22", TypeExternalArtefactsEnum.AGENCY));
@@ -643,12 +643,12 @@ public class StatisticalOperationsRestMocks {
         instance.setClassSystem(mockInternationalString("classSystem", subId));
         instance.getClassSystemLists().add(mockResourceFromExternalItem("statConcDefList1", TypeExternalArtefactsEnum.CODELIST));
         instance.getClassSystemLists().add(mockResourceFromExternalItem("statConcDefList22", TypeExternalArtefactsEnum.CODELIST));
-        instance.setInstanceType(MetamacRestMocks.mockMetadataComplexValue("instanceType1"));
+        instance.setInstanceType(MetamacRestMocks.mockSimpleItem("instanceType1"));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalString("docMethod", subId));
-        instance.setSurveySource(MetamacRestMocks.mockMetadataComplexValue("surveySource1"));
-        instance.setCollMethod(MetamacRestMocks.mockMetadataComplexValue("collMethod1"));
+        instance.setSurveySource(MetamacRestMocks.mockSimpleItem("surveySource1"));
+        instance.setCollMethod(MetamacRestMocks.mockSimpleItem("collMethod1"));
         instance.getInformationSuppliers().add(mockResourceFromExternalItem("informationSupplier1", TypeExternalArtefactsEnum.COMMON_METADATA));
         instance.getFreqColls().add(mockResourceFromExternalItem("freqColl1", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
         instance.getFreqColls().add(mockResourceFromExternalItem("freqColl22", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
@@ -656,10 +656,10 @@ public class StatisticalOperationsRestMocks {
         instance.setDataCompilation(mockInternationalString("dataCompilation", subId));
         instance.setAdjustment(mockInternationalString("adjustment", subId));
         instance.setCostBurden(mockInternationalString("costBurden", subId));
-        instance.getCosts().add(MetamacRestMocks.mockMetadataComplexValue("cost1"));
-        instance.getCosts().add(MetamacRestMocks.mockMetadataComplexValue("cost22"));
-        instance.getCosts().add(MetamacRestMocks.mockMetadataComplexValue("cost333"));
-        instance.getCosts().add(MetamacRestMocks.mockMetadataComplexValue("cost4444"));
+        instance.getCosts().add(MetamacRestMocks.mockSimpleItem("cost1"));
+        instance.getCosts().add(MetamacRestMocks.mockSimpleItem("cost22"));
+        instance.getCosts().add(MetamacRestMocks.mockSimpleItem("cost333"));
+        instance.getCosts().add(MetamacRestMocks.mockSimpleItem("cost4444"));
         instance.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         instance.setQualityDoc(mockInternationalString("qualityDoc", subId));
         instance.setQualityAssure(mockInternationalString("qualityAssure", subId));
@@ -763,18 +763,11 @@ public class StatisticalOperationsRestMocks {
     }
 
     private static SimpleItem mockSurveyType1SimpleItem(String baseApi) {
-        return mockSimpleItem("surveyType1", baseApi);
+        return MetamacRestMocks.mockSimpleItem("surveyType1");
     }
 
     private static SimpleItem mockSurveyType2SimpleItem(String baseApi) {
-        return mockSimpleItem("surveyType2", baseApi);
-    }
-
-    private static SimpleItem mockSimpleItem(String id, String baseApi) {
-        SimpleItem simpleItem = new SimpleItem();
-        simpleItem.setId(id);
-        simpleItem.setTitle(mockInternationalString(id, null));
-        return simpleItem;
+        return MetamacRestMocks.mockSimpleItem("surveyType2");
     }
 
     private static InternationalString mockInternationalString(String metadata, String subsubTitle) {
