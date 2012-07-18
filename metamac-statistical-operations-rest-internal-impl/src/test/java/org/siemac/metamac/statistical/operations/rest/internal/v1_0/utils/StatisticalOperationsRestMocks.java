@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.fail; 
 
 import java.math.BigInteger;
 
@@ -184,7 +184,7 @@ public class StatisticalOperationsRestMocks {
                 fail("Limit or offset non supported. Limit = " + limit + ". Offset = " + offset);
             }
         } else {
-            fail("Query not supported = " + offset);
+            fail("Query not supported = " + query);
         }
         return pagedResult;
     }

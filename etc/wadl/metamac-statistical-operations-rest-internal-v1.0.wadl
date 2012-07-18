@@ -10,7 +10,7 @@
  	</wadl:grammars>
  	
 	<wadl:resources base="URL_RESOURCES_BASE">
-		<wadl:resource id="statisticalOperationsRestFacadeV10">
+		<wadl:resource id="statisticalOperationsRestInternalFacadeV10">
 			<wadl:resource path="operations">
 				<wadl:method name="GET" id="findOperations">
 					<wadl:doc>

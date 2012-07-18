@@ -38,7 +38,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("statisticalOperationsRestFacadeV10")
-public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestFacadeV10 {
+public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestInternalFacadeV10 {
 
     @Autowired
     private StatisticalOperationsBaseService    statisticalOperationsBaseService;
