@@ -1,21 +1,22 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.view;
 
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
+import org.siemac.metamac.web.common.client.widgets.CustomToolStripButton;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
-import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationsToolStripViewImpl implements OperationsToolStripPresenterWidget.OperationsToolStripView {
 
-    private ToolStrip       toolStrip;
+    private ToolStrip             toolStrip;
 
-    private ToolStripButton familiesButton;
-    private ToolStripButton operationsButton;
+    private CustomToolStripButton familiesButton;
+    private CustomToolStripButton operationsButton;
 
     @Inject
     public OperationsToolStripViewImpl() {
@@ -24,11 +25,11 @@ public class OperationsToolStripViewImpl implements OperationsToolStripPresenter
         toolStrip.setWidth100();
         toolStrip.setAlign(Alignment.LEFT);
 
-        familiesButton = new ToolStripButton(OperationsWeb.getConstants().statisticalFamilies());
-        familiesButton.setAutoFit(true);
+        familiesButton = new CustomToolStripButton(OperationsWeb.getConstants().statisticalFamilies());
+        familiesButton.setID(ToolStripButtonEnum.FAMILIES.getValue());
 
-        operationsButton = new ToolStripButton(OperationsWeb.getConstants().statisticalOperations());
-        operationsButton.setAutoFit(true);
+        operationsButton = new CustomToolStripButton(OperationsWeb.getConstants().statisticalOperations());
+        operationsButton.setID(ToolStripButtonEnum.OPERATIONS.getValue());
 
         toolStrip.addButton(familiesButton);
         toolStrip.addButton(operationsButton);

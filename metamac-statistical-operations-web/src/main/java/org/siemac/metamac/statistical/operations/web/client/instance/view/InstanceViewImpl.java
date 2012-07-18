@@ -15,6 +15,7 @@ import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
@@ -39,6 +40,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -49,6 +51,8 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStrip;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> implements InstancePresenter.InstanceView {
 
@@ -202,6 +206,14 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     public void setInSlot(Object slot, Widget content) {
         if (slot == InstancePresenter.TYPE_SetContextAreaContentToolBar) {
             if (content != null) {
+                Canvas[] canvas = ((ToolStrip) content).getMembers();
+                for (int i = 0; i < canvas.length; i++) {
+                    if (canvas[i] instanceof ToolStripButton) {
+                        if (ToolStripButtonEnum.OPERATIONS.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                            ((ToolStripButton) canvas[i]).select();
+                        }
+                    }
+                }
                 panel.addMember(content, 0);
             }
         } else {

@@ -6,6 +6,7 @@ import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
@@ -29,6 +30,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Visibility;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -135,6 +137,14 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     public void setInSlot(Object slot, Widget content) {
         if (slot == FamilyPresenter.TYPE_SetContextAreaContentToolBar) {
             if (content != null) {
+                Canvas[] canvas = ((ToolStrip) content).getMembers();
+                for (int i = 0; i < canvas.length; i++) {
+                    if (canvas[i] instanceof ToolStripButton) {
+                        if (ToolStripButtonEnum.FAMILIES.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                            ((ToolStripButton) canvas[i]).select();
+                        }
+                    }
+                }
                 panel.addMember(content, 0);
             }
         } else {

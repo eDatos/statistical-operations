@@ -7,6 +7,7 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
@@ -24,6 +25,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.types.Visibility;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
@@ -33,6 +35,8 @@ import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
 import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStrip;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHandlers> implements OperationListPresenter.OperationListView {
 
@@ -133,6 +137,14 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     public void setInSlot(Object slot, Widget content) {
         if (slot == OperationListPresenter.TYPE_SetContextAreaContentToolBar) {
             if (content != null) {
+                Canvas[] canvas = ((ToolStrip) content).getMembers();
+                for (int i = 0; i < canvas.length; i++) {
+                    if (canvas[i] instanceof ToolStripButton) {
+                        if (ToolStripButtonEnum.OPERATIONS.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                            ((ToolStripButton) canvas[i]).select();
+                        }
+                    }
+                }
                 panel.addMember(content, 0);
             }
         } else {

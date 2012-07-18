@@ -6,6 +6,7 @@ import java.util.List;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
@@ -22,6 +23,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Visibility;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
@@ -29,6 +31,8 @@ import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
 import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStrip;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers> implements FamilyListPresenter.FamilyListView {
 
@@ -112,6 +116,14 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     public void setInSlot(Object slot, Widget content) {
         if (slot == FamilyListPresenter.TYPE_SetContextAreaContentToolBar) {
             if (content != null) {
+                Canvas[] canvas = ((ToolStrip) content).getMembers();
+                for (int i = 0; i < canvas.length; i++) {
+                    if (canvas[i] instanceof ToolStripButton) {
+                        if (ToolStripButtonEnum.FAMILIES.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                            ((ToolStripButton) canvas[i]).select();
+                        }
+                    }
+                }
                 panel.addMember(content, 0);
             }
         } else {

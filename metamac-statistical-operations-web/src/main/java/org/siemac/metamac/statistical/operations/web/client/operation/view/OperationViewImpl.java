@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
@@ -56,6 +57,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.SortDirection;
 import com.smartgwt.client.types.Visibility;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -312,6 +314,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     public void setInSlot(Object slot, Widget content) {
         if (slot == OperationPresenter.TYPE_SetContextAreaContentToolBar) {
             if (content != null) {
+                Canvas[] canvas = ((ToolStrip) content).getMembers();
+                for (int i = 0; i < canvas.length; i++) {
+                    if (canvas[i] instanceof ToolStripButton) {
+                        if (ToolStripButtonEnum.OPERATIONS.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                            ((ToolStripButton) canvas[i]).select();
+                        }
+                    }
+                }
                 panel.addMember(content, 0);
             }
         } else {
