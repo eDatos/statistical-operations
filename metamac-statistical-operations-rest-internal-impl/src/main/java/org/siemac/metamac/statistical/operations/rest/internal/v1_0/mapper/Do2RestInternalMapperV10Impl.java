@@ -24,6 +24,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItem;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -274,6 +276,26 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return targetPagedResult;
     }
+    
+
+    @Override
+    public SimpleItemsNoPagedResult toSurveyTypesNoPagedResult(List<SurveyType> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_SURVEY_TYPES);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.SurveyType source : sources) {
+                SimpleItem target = toSimpleItem(source, apiUrl);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
+
+    }
 
     // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
     @Override
@@ -375,6 +397,16 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setKind(RestInternalConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
+        return target;
+    }
+    
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.SurveyType source, String apiUrl) {
+        if (source == null) {
+            return null;
+        }
+        SimpleItem target = new SimpleItem();
+        target.setId(source.getIdentifier());
+        target.setTitle(toInternationalString(source.getDescription()));
         return target;
     }
 

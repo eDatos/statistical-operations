@@ -33,11 +33,13 @@ import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.LogicalOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
@@ -1172,6 +1174,29 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             fail("Incorrect exception");
         }
     }
+    
+    @Test
+    public void testRetrieveSurveyTypesXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveyTypes();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveyTypesSimpleItemsNoPagedResult(baseApi), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveSurveyTypesXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveSurveyTypes();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveSurveyTypes.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveSurveyTypesJsonWithoutJaxbTransformation
+
 
     private String getRequestUriRetrieveOperationById(String operationId) {
         return baseApi + "/operations/" + operationId;
@@ -1228,9 +1253,14 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         return url;
     }
 
+    private String getRequestUriRetrieveSurveyTypes() {
+        return baseApi + "/surveyTypes";
+    }
+
     private static void setUpMockito() throws MetamacException {
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
+        StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
@@ -1282,6 +1312,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 25, 0, QUERY_FAMILY_ID_LIKE_1);
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 0, QUERY_FAMILY_ID_LIKE_1);
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 1, QUERY_FAMILY_ID_LIKE_1);
+        // Lists
+        when(statisticalOperationsListsService.findAllSurveyTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.findAllSurveyTypes());
     }
 
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {

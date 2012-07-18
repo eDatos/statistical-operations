@@ -15,4 +15,5 @@ public class RestInternalConstants {
     public static String  KIND_FAMILY             = API_NAME + KIND_SEPARATOR + "family";
     public static String  KIND_INSTANCE           = API_NAME + KIND_SEPARATOR + "instance";
     public static String  KIND_INSTANCES          = API_NAME + KIND_SEPARATOR + "instances";
+    public static String  KIND_SURVEY_TYPES       = API_NAME + KIND_SEPARATOR + "surveyTypes";
 }

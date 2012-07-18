@@ -149,6 +149,20 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>				
+			<wadl:resource path="surveyTypes">
+				<wadl:method name="GET" id="retrieveSurveyTypes">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
 		</wadl:resource>
 	</wadl:resources>  
 </wadl:application>

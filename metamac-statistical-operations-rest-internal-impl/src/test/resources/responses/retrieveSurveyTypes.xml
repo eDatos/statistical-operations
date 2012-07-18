@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<simpleItemsNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#surveyTypes</kind>
+    <total>2</total>
+    <items>
+        <id>surveyType1</id>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>surveyType1 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>surveyType1 in English</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>surveyType2</id>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>surveyType2 in English</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>surveyType2 en Español</label>
+            </text>
+        </title>
+    </items>
+</simpleItemsNoPagedResult>

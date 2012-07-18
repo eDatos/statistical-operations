@@ -17,6 +17,7 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
@@ -24,8 +25,10 @@ import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
+import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -42,6 +45,9 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
 
     @Autowired
     private StatisticalOperationsBaseService    statisticalOperationsBaseService;
+
+    @Autowired
+    private StatisticalOperationsListsService   statisticalOperationsListsService;
 
     @Autowired
     private Do2RestInternalMapperV10            do2RestInternalMapper;
@@ -241,6 +247,17 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
         } catch (MetamacException e) {
             throw manageException(e);
         }
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveSurveyTypes() {
+
+        // Retrieve all survey types
+        List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toSurveyTypesNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
     }
 
     /**

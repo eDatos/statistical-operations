@@ -428,7 +428,7 @@ public class StatisticalOperationsCoreMocks {
 
         return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
     }
-    
+
     public static PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset, String query) {
 
         // No queries
@@ -705,6 +705,13 @@ public class StatisticalOperationsCoreMocks {
         instance.setNotes(mockInternationalString("notes", subCode));
 
         return instance;
+    }
+
+    public static List<SurveyType> findAllSurveyTypes() {
+        List<SurveyType> surveyTypes = new ArrayList<SurveyType>();
+        surveyTypes.add(mockSurveyType("surveyType1"));
+        surveyTypes.add(mockSurveyType("surveyType2"));
+        return surveyTypes;
     }
 
     private static InternationalString mockInternationalString(String metadata, String subCode) {

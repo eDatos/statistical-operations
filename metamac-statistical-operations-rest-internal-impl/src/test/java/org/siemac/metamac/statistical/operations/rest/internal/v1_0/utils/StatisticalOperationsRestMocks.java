@@ -11,6 +11,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItem;
+import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -507,6 +509,15 @@ public class StatisticalOperationsRestMocks {
         return pagedResult;
     }
     
+    public static SimpleItemsNoPagedResult mockSurveyTypesSimpleItemsNoPagedResult(String baseApi) {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_SURVEY_TYPES);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
+        simpleItemsNoPagedResult.getItems().add(mockSurveyType1SimpleItem(baseApi));
+        simpleItemsNoPagedResult.getItems().add(mockSurveyType2SimpleItem(baseApi));
+        return simpleItemsNoPagedResult;
+    }
+    
     private static Resource mockOperationResource(String subId, String baseApi) {
         String operationId = "operation" + subId;
         return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestInternalConstants.KIND_OPERATION, baseApi
@@ -749,6 +760,21 @@ public class StatisticalOperationsRestMocks {
 
     private static Resource mockInstance15Resource(String baseApi) {
         return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "15", baseApi);
+    }
+
+    private static SimpleItem mockSurveyType1SimpleItem(String baseApi) {
+        return mockSimpleItem("surveyType1", baseApi);
+    }
+
+    private static SimpleItem mockSurveyType2SimpleItem(String baseApi) {
+        return mockSimpleItem("surveyType2", baseApi);
+    }
+
+    private static SimpleItem mockSimpleItem(String id, String baseApi) {
+        SimpleItem simpleItem = new SimpleItem();
+        simpleItem.setId(id);
+        simpleItem.setTitle(mockInternationalString(id, null));
+        return simpleItem;
     }
 
     private static InternationalString mockInternationalString(String metadata, String subsubTitle) {

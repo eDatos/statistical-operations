@@ -7,5 +7,9 @@
     <bean id="statisticalOperationsBaseService" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService" />
     </bean>
+
+    <bean id="statisticalOperationsListsService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService" />
+    </bean>
     
 </beans>
