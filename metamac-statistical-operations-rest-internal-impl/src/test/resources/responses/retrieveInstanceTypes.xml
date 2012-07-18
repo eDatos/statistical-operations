@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<simpleItemsNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
+    <kind>statisticalOperations#instanceTypes</kind>
+    <total>2</total>
+    <items>
+        <id>instanceType1</id>
+        <title>
+            <text>
+                <locale>en</locale>
+                <label>instanceType1 in English</label>
+            </text>
+            <text>
+                <locale>es</locale>
+                <label>instanceType1 en Español</label>
+            </text>
+        </title>
+    </items>
+    <items>
+        <id>instanceType2</id>
+        <title>
+            <text>
+                <locale>es</locale>
+                <label>instanceType2 en Español</label>
+            </text>
+            <text>
+                <locale>en</locale>
+                <label>instanceType2 in English</label>
+            </text>
+        </title>
+    </items>
+</simpleItemsNoPagedResult>

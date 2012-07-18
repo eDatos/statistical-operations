@@ -11,7 +11,6 @@ import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.SimpleItem;
 import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
@@ -509,12 +508,58 @@ public class StatisticalOperationsRestMocks {
         return pagedResult;
     }
 
-    public static SimpleItemsNoPagedResult mockSurveyTypesSimpleItemsNoPagedResult(String baseApi) {
+    public static SimpleItemsNoPagedResult mockSurveyTypesSimpleItemsNoPagedResult() {
         SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
         simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_SURVEY_TYPES);
         simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
-        simpleItemsNoPagedResult.getItems().add(mockSurveyType1SimpleItem(baseApi));
-        simpleItemsNoPagedResult.getItems().add(mockSurveyType2SimpleItem(baseApi));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("surveyType1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("surveyType2"));
+        return simpleItemsNoPagedResult;
+    }
+    
+    public static SimpleItemsNoPagedResult mockOfficialityTypesSimpleItemsNoPagedResult() {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_OFFICIALITY_TYPES);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(3));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("officialityType1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("officialityType2"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("officialityType3"));
+        return simpleItemsNoPagedResult;
+    }
+    
+    public static SimpleItemsNoPagedResult mockInstanceTypesSimpleItemsNoPagedResult() {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_INSTANCE_TYPES);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("instanceType1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("instanceType2"));
+        return simpleItemsNoPagedResult;
+    }
+    
+    public static SimpleItemsNoPagedResult mockSurveySourcesSimpleItemsNoPagedResult() {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_SURVEY_SOURCES);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("surveySource1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("surveySource2"));
+        return simpleItemsNoPagedResult;
+    }
+    
+    public static SimpleItemsNoPagedResult mockCollMethodsSimpleItemsNoPagedResult() {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_COLL_METHODS);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("collMethod1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("collMethod2"));
+        return simpleItemsNoPagedResult;
+    }
+    
+    public static SimpleItemsNoPagedResult mockCostsSimpleItemsNoPagedResult() {
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = new SimpleItemsNoPagedResult();
+        simpleItemsNoPagedResult.setKind(RestInternalConstants.KIND_COSTS);
+        simpleItemsNoPagedResult.setTotal(BigInteger.valueOf(2));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("cost1"));
+        simpleItemsNoPagedResult.getItems().add(MetamacRestMocks.mockSimpleItem("cost2"));
         return simpleItemsNoPagedResult;
     }
 
@@ -760,14 +805,6 @@ public class StatisticalOperationsRestMocks {
 
     private static Resource mockInstance15Resource(String baseApi) {
         return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "15", baseApi);
-    }
-
-    private static SimpleItem mockSurveyType1SimpleItem(String baseApi) {
-        return MetamacRestMocks.mockSimpleItem("surveyType1");
-    }
-
-    private static SimpleItem mockSurveyType2SimpleItem(String baseApi) {
-        return MetamacRestMocks.mockSimpleItem("surveyType2");
     }
 
     private static InternationalString mockInternationalString(String metadata, String subsubTitle) {

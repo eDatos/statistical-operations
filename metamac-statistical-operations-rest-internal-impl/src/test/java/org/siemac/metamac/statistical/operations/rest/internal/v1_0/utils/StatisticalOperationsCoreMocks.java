@@ -707,11 +707,47 @@ public class StatisticalOperationsCoreMocks {
         return instance;
     }
 
-    public static List<SurveyType> findAllSurveyTypes() {
+    public static List<SurveyType> mockFindAllSurveyTypes() {
         List<SurveyType> surveyTypes = new ArrayList<SurveyType>();
         surveyTypes.add(mockSurveyType("surveyType1"));
         surveyTypes.add(mockSurveyType("surveyType2"));
         return surveyTypes;
+    }
+
+    public static List<OfficialityType> mockFindAllOfficialityTypes() {
+        List<OfficialityType> officialityTypes = new ArrayList<OfficialityType>();
+        officialityTypes.add(mockOfficialityType("officialityType1"));
+        officialityTypes.add(mockOfficialityType("officialityType2"));
+        officialityTypes.add(mockOfficialityType("officialityType3"));
+        return officialityTypes;
+    }
+
+    public static List<InstanceType> mockFindAllInstanceTypes() {
+        List<InstanceType> instanceTypes = new ArrayList<InstanceType>();
+        instanceTypes.add(mockInstanceType("instanceType1"));
+        instanceTypes.add(mockInstanceType("instanceType2"));
+        return instanceTypes;
+    }
+
+    public static List<SurveySource> mockFindAllSurveySources() {
+        List<SurveySource> surveySources = new ArrayList<SurveySource>();
+        surveySources.add(mockSurveySource("surveySource1"));
+        surveySources.add(mockSurveySource("surveySource2"));
+        return surveySources;
+    }
+
+    public static List<CollMethod> mockFindAllCollMethods() {
+        List<CollMethod> collMethods = new ArrayList<CollMethod>();
+        collMethods.add(mockCollMethod("collMethod1"));
+        collMethods.add(mockCollMethod("collMethod2"));
+        return collMethods;
+    }
+
+    public static List<Cost> mockFindAllCosts() {
+        List<Cost> costs = new ArrayList<Cost>();
+        costs.add(mockCost("cost1"));
+        costs.add(mockCost("cost2"));
+        return costs;
     }
 
     private static InternationalString mockInternationalString(String metadata, String subCode) {

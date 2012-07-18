@@ -1182,7 +1182,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveyTypes();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveyTypesSimpleItemsNoPagedResult(baseApi), simpleItemsNoPagedResult);
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveyTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
     }
 
     @Test
@@ -1196,6 +1196,116 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
     
     // TODO json? testRetrieveSurveyTypesJsonWithoutJaxbTransformation
+    
+    @Test
+    public void testRetrieveOfficialityTypesXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveOfficialityTypes();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockOfficialityTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveOfficialityTypesXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOfficialityTypes();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOfficialityTypes.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveOfficialityTypesJsonWithoutJaxbTransformation
+    
+    @Test
+    public void testRetrieveInstanceTypesXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveInstanceTypes();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockInstanceTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveInstanceTypesXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveInstanceTypes();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceTypes.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveInstanceTypesJsonWithoutJaxbTransformation
+    
+    @Test
+    public void testRetrieveSurveySourcesXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveySources();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveySourcesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveSurveySourcesXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveSurveySources();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveSurveySources.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveSurveySourcesJsonWithoutJaxbTransformation
+    
+    @Test
+    public void testRetrieveCollMethodsXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCollMethods();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockCollMethodsSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveCollMethodsXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveCollMethods();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveCollMethods.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveCollMethodsJsonWithoutJaxbTransformation
+    
+    @Test
+    public void testRetrieveCostsXml() throws Exception {
+
+        // Retrieve
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCosts();
+
+        // Validation
+        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockCostsSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+    }
+
+    @Test
+    public void testRetrieveCostsXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveCosts();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveCosts.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    // TODO json? testRetrieveCostsJsonWithoutJaxbTransformation
 
 
     private String getRequestUriRetrieveOperationById(String operationId) {
@@ -1256,6 +1366,26 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     private String getRequestUriRetrieveSurveyTypes() {
         return baseApi + "/surveyTypes";
     }
+    
+    private String getRequestUriRetrieveOfficialityTypes() {
+        return baseApi + "/officialityTypes";
+    }
+
+    private String getRequestUriRetrieveInstanceTypes() {
+        return baseApi + "/instanceTypes";
+    }
+
+    private String getRequestUriRetrieveSurveySources() {
+        return baseApi + "/surveySources";
+    }
+
+    private String getRequestUriRetrieveCollMethods() {
+        return baseApi + "/collMethods";
+    }
+
+    private String getRequestUriRetrieveCosts() {
+        return baseApi + "/costs";
+    }
 
     private static void setUpMockito() throws MetamacException {
         // MOCKS
@@ -1313,7 +1443,12 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 0, QUERY_FAMILY_ID_LIKE_1);
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 1, QUERY_FAMILY_ID_LIKE_1);
         // Lists
-        when(statisticalOperationsListsService.findAllSurveyTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.findAllSurveyTypes());
+        when(statisticalOperationsListsService.findAllSurveyTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllSurveyTypes());
+        when(statisticalOperationsListsService.findAllOfficialityTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllOfficialityTypes());
+        when(statisticalOperationsListsService.findAllInstanceTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllInstanceTypes());
+        when(statisticalOperationsListsService.findAllSurveySources(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllSurveySources());
+        when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCollMethods());
+        when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCosts());
     }
 
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {

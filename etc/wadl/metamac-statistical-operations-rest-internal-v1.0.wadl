@@ -163,6 +163,76 @@
 	                </wadl:response>
 				</wadl:method>
 			</wadl:resource>		
+			<wadl:resource path="officialityTypes">
+				<wadl:method name="GET" id="retrieveOfficialityTypes">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
+			<wadl:resource path="instanceTypes">
+				<wadl:method name="GET" id="retrieveInstanceTypes">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
+			<wadl:resource path="surveySources">
+				<wadl:method name="GET" id="retrieveSurveySources">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
+			<wadl:resource path="collMethods">
+				<wadl:method name="GET" id="retrieveCollMethods">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
+			<wadl:resource path="costs">
+				<wadl:method name="GET" id="retrieveCosts">
+					<wadl:request>
+					</wadl:request>
+	                <wadl:response status="200">
+						<wadl:representation mediaType="application/xml" element="common:simpleItemsNoPagedResult"/> 
+                        <wadl:representation mediaType="application/json" element="common:simpleItemsPagedResult"/> 
+	                </wadl:response>
+					<wadl:response status="404 500">
+						<wadl:representation mediaType="application/xml" element="common:error"/> 
+                        <wadl:representation mediaType="application/json" element="common:error"/> 
+	                </wadl:response>
+				</wadl:method>
+			</wadl:resource>		
 		</wadl:resource>
 	</wadl:resources>  
 </wadl:application>

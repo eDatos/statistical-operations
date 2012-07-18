@@ -16,4 +16,9 @@ public class RestInternalConstants {
     public static String  KIND_INSTANCE           = API_NAME + KIND_SEPARATOR + "instance";
     public static String  KIND_INSTANCES          = API_NAME + KIND_SEPARATOR + "instances";
     public static String  KIND_SURVEY_TYPES       = API_NAME + KIND_SEPARATOR + "surveyTypes";
+    public static String  KIND_OFFICIALITY_TYPES  = API_NAME + KIND_SEPARATOR + "officialityTypes";
+    public static String  KIND_INSTANCE_TYPES     = API_NAME + KIND_SEPARATOR + "instanceTypes";
+    public static String  KIND_SURVEY_SOURCES     = API_NAME + KIND_SEPARATOR + "surveySources";
+    public static String  KIND_COLL_METHODS       = API_NAME + KIND_SEPARATOR + "collMethods";
+    public static String  KIND_COSTS              = API_NAME + KIND_SEPARATOR + "costs";
 }

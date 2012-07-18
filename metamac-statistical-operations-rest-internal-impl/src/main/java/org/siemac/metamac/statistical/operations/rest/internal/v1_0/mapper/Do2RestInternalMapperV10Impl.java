@@ -275,7 +275,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         return targetPagedResult;
     }
-    
 
     @Override
     public SimpleItemsNoPagedResult toSurveyTypesNoPagedResult(List<SurveyType> sources, String apiUrl) {
@@ -286,14 +285,103 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             targets.setTotal(BigInteger.ZERO);
         } else {
             for (org.siemac.metamac.statistical.operations.core.domain.SurveyType source : sources) {
-                SimpleItem target = toSimpleItem(source, apiUrl);
+                SimpleItem target = toSimpleItem(source);
                 targets.getItems().add(target);
             }
             targets.setTotal(BigInteger.valueOf(sources.size()));
         }
 
         return targets;
+    }
 
+    @Override
+    public SimpleItemsNoPagedResult toOfficialityTypesNoPagedResult(List<OfficialityType> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_OFFICIALITY_TYPES);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.OfficialityType source : sources) {
+                SimpleItem target = toSimpleItem(source);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult toInstanceTypesNoPagedResult(List<InstanceType> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_INSTANCE_TYPES);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.InstanceType source : sources) {
+                SimpleItem target = toSimpleItem(source);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult toSurveySourcesNoPagedResult(List<SurveySource> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_SURVEY_SOURCES);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.SurveySource source : sources) {
+                SimpleItem target = toSimpleItem(source);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult toCollMethodsNoPagedResult(List<CollMethod> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_COLL_METHODS);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.CollMethod source : sources) {
+                SimpleItem target = toSimpleItem(source);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult toCostsNoPagedResult(List<Cost> sources, String apiUrl) {
+        SimpleItemsNoPagedResult targets = new SimpleItemsNoPagedResult();
+        targets.setKind(RestInternalConstants.KIND_COSTS);
+
+        if (sources == null) {
+            targets.setTotal(BigInteger.ZERO);
+        } else {
+            for (org.siemac.metamac.statistical.operations.core.domain.Cost source : sources) {
+                SimpleItem target = toSimpleItem(source);
+                targets.getItems().add(target);
+            }
+            targets.setTotal(BigInteger.valueOf(sources.size()));
+        }
+
+        return targets;
     }
 
     // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
@@ -398,8 +486,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         return target;
     }
-    
-    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.SurveyType source, String apiUrl) {
+
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.SurveyType source) {
         if (source == null) {
             return null;
         }
@@ -409,7 +497,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(SurveyType source) {
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.OfficialityType source) {
         if (source == null) {
             return null;
         }
@@ -419,7 +507,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(OfficialityType source) {
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.SurveySource source) {
         if (source == null) {
             return null;
         }
@@ -429,7 +517,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(SurveySource source) {
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.InstanceType source) {
         if (source == null) {
             return null;
         }
@@ -439,7 +527,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(InstanceType source) {
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.CollMethod source) {
         if (source == null) {
             return null;
         }
@@ -449,7 +537,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(CollMethod source) {
+    private SimpleItem toSimpleItem(org.siemac.metamac.statistical.operations.core.domain.Cost source) {
         if (source == null) {
             return null;
         }
@@ -459,17 +547,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private SimpleItem toSimpleItem(Cost source) {
-        if (source == null) {
-            return null;
-        }
-        SimpleItem target = new SimpleItem();
-        target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
-        return target;
-    }
-
-    private List<SimpleItem> toSimpleItemsCosts(Set<Cost> sources) {
+    private List<SimpleItem> toSimpleItemsCosts(Set<org.siemac.metamac.statistical.operations.core.domain.Cost> sources) {
         List<SimpleItem> targets = new ArrayList<SimpleItem>();
         if (sources == null) {
             return targets;
@@ -551,10 +629,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     private Resource toInstanceParent(org.siemac.metamac.statistical.operations.core.domain.Instance instance, String apiUrl) {
-        
+
         // Operation
         Resource target = toResource(instance.getOperation(), apiUrl);
-        
+
         return target;
     }
 

@@ -22,9 +22,14 @@ import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
 import org.siemac.metamac.rest.utils.RestUtils;
+import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
+import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
+import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
+import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
@@ -252,11 +257,63 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     @Override
     public SimpleItemsNoPagedResult retrieveSurveyTypes() {
 
-        // Retrieve all survey types
+        // Retrieve all
         List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
 
         // Transform
         SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toSurveyTypesNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveOfficialityTypes() {
+
+        // Retrieve all
+        List<OfficialityType> entitiesResult = statisticalOperationsListsService.findAllOfficialityTypes(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toOfficialityTypesNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveInstanceTypes() {
+        
+        // Retrieve all
+        List<InstanceType> entitiesResult = statisticalOperationsListsService.findAllInstanceTypes(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toInstanceTypesNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveSurveySources() {
+        // Retrieve all
+        List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toSurveySourcesNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveCollMethods() {
+        // Retrieve all
+        List<CollMethod> entitiesResult = statisticalOperationsListsService.findAllCollMethods(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toCollMethodsNoPagedResult(entitiesResult, getApiUrl());
+        return simpleItemsNoPagedResult;
+    }
+
+    @Override
+    public SimpleItemsNoPagedResult retrieveCosts() {
+        // Retrieve all
+        List<Cost> entitiesResult = statisticalOperationsListsService.findAllCosts(serviceContextRestInternal);
+
+        // Transform
+        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toCostsNoPagedResult(entitiesResult, getApiUrl());
         return simpleItemsNoPagedResult;
     }
 
