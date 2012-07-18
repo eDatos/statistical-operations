@@ -17,7 +17,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Insta
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ProcStatus;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestFacadeV10Test;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10Test;
 
 public class StatisticalOperationsRestMocks {
 
@@ -139,8 +139,8 @@ public class StatisticalOperationsRestMocks {
     public static ResourcesPagedResult mockOperationsPagedResult(String baseApi, String limit, String offset, String query) {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_OPERATIONS);
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
-        String querySupported2 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
+        String querySupported2 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
         if (querySupported1.equals(query)) {
             pagedResult.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
@@ -350,7 +350,7 @@ public class StatisticalOperationsRestMocks {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_FAMILIES);
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             pagedResult.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
@@ -400,7 +400,7 @@ public class StatisticalOperationsRestMocks {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
         pagedResult.setTotal(BigInteger.valueOf(5));
-        String operation = StatisticalOperationsRestFacadeV10Test.OPERATION_1;
+        String operation = StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1;
         if (limit == null && (offset == null || "0".equals(offset))) {
             pagedResult.getItems().add(mockInstance1Resource(baseApi));
             pagedResult.getItems().add(mockInstance2Resource(baseApi));
@@ -468,9 +468,9 @@ public class StatisticalOperationsRestMocks {
     public static ResourcesPagedResult mockInstancesPagedResultByOperation1(String baseApi, String limit, String offset, String query) {
         ResourcesPagedResult pagedResult = new ResourcesPagedResult();
         pagedResult.setKind(RestInternalConstants.KIND_INSTANCES);
-        String operation = StatisticalOperationsRestFacadeV10Test.OPERATION_1;
+        String operation = StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1;
         
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_INSTANCE_ID_LIKE_1;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_INSTANCE_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             pagedResult.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
@@ -732,23 +732,23 @@ public class StatisticalOperationsRestMocks {
     }
 
     private static Resource mockInstance1Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "1", baseApi);
+        return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "1", baseApi);
     }
 
     private static Resource mockInstance2Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "2", baseApi);
+        return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "2", baseApi);
     }
 
     private static Resource mockInstance3Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "3", baseApi);
+        return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "3", baseApi);
     }
 
     private static Resource mockInstance4Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "4", baseApi);
+        return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "4", baseApi);
     }
 
     private static Resource mockInstance15Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestFacadeV10Test.OPERATION_1, "15", baseApi);
+        return mockInstanceResource(StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1, "15", baseApi);
     }
 
     private static InternationalString mockInternationalString(String metadata, String subsubTitle) {

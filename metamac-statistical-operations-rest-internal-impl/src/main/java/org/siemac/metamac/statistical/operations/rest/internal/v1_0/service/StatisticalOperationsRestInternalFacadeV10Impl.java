@@ -37,8 +37,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("statisticalOperationsRestFacadeV10")
-public class StatisticalOperationsRestFacadeV10Impl implements StatisticalOperationsRestInternalFacadeV10 {
+@Service("statisticalOperationsRestInternalFacadeV10")
+public class StatisticalOperationsRestInternalFacadeV10Impl implements StatisticalOperationsRestInternalFacadeV10 {
 
     @Autowired
     private StatisticalOperationsBaseService    statisticalOperationsBaseService;

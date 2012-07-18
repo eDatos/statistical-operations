@@ -23,7 +23,7 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestFacadeV10Test;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10Test;
 
 public class StatisticalOperationsCoreMocks {
 
@@ -168,8 +168,8 @@ public class StatisticalOperationsCoreMocks {
         int rowCount = -1;
         int pageSize = -1;
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
-        String querySupported2 = StatisticalOperationsRestFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
+        String querySupported2 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
         if (querySupported1.equals(query)) {
             total = 2;
             startRow = -1;
@@ -338,7 +338,7 @@ public class StatisticalOperationsCoreMocks {
         int pageSize = -1;
         List<Family> families = new ArrayList<Family>();
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             total = 2;
             startRow = -1;
@@ -443,7 +443,7 @@ public class StatisticalOperationsCoreMocks {
         int pageSize = -1;
         List<Instance> instances = new ArrayList<Instance>();
 
-        String querySupported1 = StatisticalOperationsRestFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
+        String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
         if (querySupported1.equals(query)) {
             total = 2;
             startRow = -1;

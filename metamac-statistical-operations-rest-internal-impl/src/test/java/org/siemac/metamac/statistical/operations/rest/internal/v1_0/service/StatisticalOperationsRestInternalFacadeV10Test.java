@@ -56,7 +56,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils.Statis
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.util.UriUtils;
 
-public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest {
+public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestBaseTest {
 
     private static final String                       PORT                                            = ServerResource.PORT;
     private static String                             baseApi                                         = "http://localhost:" + PORT + "/internal/v1.0";
@@ -140,7 +140,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveOperationByIdXmlWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -150,7 +150,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveOperationByIdJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -180,7 +180,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             getStatisticalOperationsRestInternalFacadeClientJson().retrieveOperationById(NOT_EXISTS);
         } catch (Exception e) {
             // note: do not work 'extractErrorFromException'
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
@@ -189,7 +189,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveOperationByIdErrorNotExistsXmlWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveOperationById(NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
@@ -198,7 +198,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveOperationByIdErrorNotExistsJsonWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveOperationById(NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.notFound.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
@@ -308,7 +308,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindOperations(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -318,7 +318,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindOperations(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.limit2-offset2.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.limit2-offset2.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -331,7 +331,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -342,7 +342,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.limit1-offset0.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.limit1-offset0.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -358,7 +358,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = "METADATA_INCORRECT LIKE \"1\"";
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.parameterIncorrect.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.parameterIncorrect.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.INTERNAL_SERVER_ERROR, responseExpected);
@@ -369,7 +369,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = OperationCriteriaPropertyRestriction.ID + " OP_INCORRECT \"1\"";
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.queryIncorrect.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.queryIncorrect.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.INTERNAL_SERVER_ERROR, responseExpected);
@@ -383,7 +383,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindOperations(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -393,7 +393,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindOperations(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.limit2-offset2.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.limit2-offset2.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -405,7 +405,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -416,7 +416,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String requestUri = getRequestUriFindOperations(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.limit1-offset0.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperations.query1.limit1-offset0.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -508,7 +508,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindOperationsByFamily(FAMILY_1, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -518,7 +518,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "4";
             String requestUri = getRequestUriFindOperationsByFamily(FAMILY_1, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.limit2-offset4.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.limit2-offset4.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -532,7 +532,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindOperationsByFamily(FAMILY_1, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -542,7 +542,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "4";
             String requestUri = getRequestUriFindOperationsByFamily(FAMILY_1, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.limit2-offset4.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findOperationsByFamily.id1.limit2-offset4.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -580,7 +580,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamilyByIdXmlWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveFamilyById(FAMILY_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.id1.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.id1.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -600,7 +600,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamilyByIdJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveFamilyById(FAMILY_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.id1.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.id1.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -626,7 +626,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveFamilyByIdErrorNotExistsXmlWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveFamilyById(NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
@@ -639,7 +639,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             getStatisticalOperationsRestInternalFacadeClientJson().retrieveFamilyById(NOT_EXISTS);
         } catch (Exception e) {
             // note: do not work 'extractErrorFromException'
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
@@ -648,7 +648,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveFamilyByIdErrorNotExistsJsonWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveFamilyById(NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamilyById.notFound.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
@@ -668,7 +668,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveInstanceByIdXmlWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, INSTANCE_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -688,7 +688,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveInstanceByIdJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, INSTANCE_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -714,7 +714,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveInstanceByIdErrorNotExistsXmlWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
@@ -727,7 +727,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             getStatisticalOperationsRestInternalFacadeClientJson().retrieveInstanceById(OPERATION_1, NOT_EXISTS);
         } catch (Exception e) {
             // note: do not work 'extractErrorFromException'
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.json");
             InputStream responseActual = (InputStream) ((ServerWebApplicationException) e).getResponse().getEntity();
             MetamacRestAsserts.assertEqualsResponse(responseExpected, responseActual);
         }
@@ -736,7 +736,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     @Test
     public void testRetrieveInstanceByIdErrorNotExistsJsonWithoutJaxbTransformation() throws Exception {
         String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, NOT_EXISTS);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.notFound.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.NOT_FOUND, responseExpected);
@@ -837,7 +837,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindInstances(OPERATION_1, null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -847,7 +847,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindInstances(OPERATION_1, null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.limit2-offset2.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.limit2-offset2.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -860,7 +860,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_INSTANCE_ID_LIKE_1;
             String requestUri = getRequestUriFindInstances(OPERATION_1, query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -871,7 +871,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String requestUri = getRequestUriFindInstances(OPERATION_1, query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.limit1-offset0.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.limit1-offset0.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -885,7 +885,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindInstances(OPERATION_1, null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -895,7 +895,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindInstances(OPERATION_1, null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.limit2-offset2.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.limit2-offset2.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -908,7 +908,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_INSTANCE_ID_LIKE_1;
             String requestUri = getRequestUriFindInstances(OPERATION_1, query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -919,7 +919,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String requestUri = getRequestUriFindInstances(OPERATION_1, query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.limit1-offset0.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findInstances.query1.limit1-offset0.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -1037,7 +1037,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindFamilies(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1047,7 +1047,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindFamilies(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1060,7 +1060,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_FAMILY_ID_LIKE_1;
             String requestUri = getRequestUriFindFamilies(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.nolimits.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.nolimits.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1071,7 +1071,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String requestUri = getRequestUriFindFamilies(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.limit1-offset0.xml");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.limit1-offset0.xml");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1085,7 +1085,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = null;
             String offset = null;
             String requestUri = getRequestUriFindFamilies(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -1095,7 +1095,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String limit = "2";
             String offset = "2";
             String requestUri = getRequestUriFindFamilies(null, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.limit2-offset2.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -1108,7 +1108,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = null;
             String query = QUERY_FAMILY_ID_LIKE_1;
             String requestUri = getRequestUriFindFamilies(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.nolimits.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.nolimits.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -1119,7 +1119,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
             String offset = "0";
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String requestUri = getRequestUriFindFamilies(query, limit, offset);
-            InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.limit1-offset0.json");
+            InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/findFamilies.query1.limit1-offset0.json");
 
             // Request and validate
             testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
@@ -1140,7 +1140,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamiliesByOperationXmlWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveFamiliesByOperation(OPERATION_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.id1.xml");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.id1.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1150,7 +1150,7 @@ public class StatisticalOperationsRestFacadeV10Test extends MetamacRestBaseTest 
     public void testRetrieveFamiliesByOperationJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveFamiliesByOperation(OPERATION_1);
-        InputStream responseExpected = StatisticalOperationsRestFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.id1.json");
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveFamiliesByOperation.id1.json");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
