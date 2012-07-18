@@ -65,7 +65,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.getFamilies().addAll(toResourcesFamilies(source.getFamilies(), apiUrl));
-        target.setSubjectArea(toResource(source.getSubjectArea()));
+        target.setSubjectArea(toResourceExternalItem(source.getSubjectArea()));
         target.getSecondarySubjectAreas().addAll(toResourcesExternalItems(source.getSecondarySubjectAreas()));
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
@@ -213,9 +213,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setDataDescription(toInternationalString(source.getDataDescription()));
         target.setStatisticalPopulation(toInternationalString(source.getStatisticalPopulation()));
         target.getStatisticalUnits().addAll(toResourcesExternalItems(source.getStatisticalUnit()));
-        target.setGeographicGranularity(toResource(source.getGeographicGranularity()));
+        target.setGeographicGranularity(toResourceExternalItem(source.getGeographicGranularity()));
         target.setGeographicComparability(toInternationalString(source.getGeographicComparability()));
-        target.setTemporalGranularity(toResource(source.getTemporalGranularity()));
+        target.setTemporalGranularity(toResourceExternalItem(source.getTemporalGranularity()));
         target.setTemporalComparability(toInternationalString(source.getTemporalComparability()));
         target.setBasePeriod(source.getBasePeriod());
         target.getUnitMeasures().addAll(toResourcesExternalItems(source.getUnitMeasure()));
@@ -565,13 +565,13 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             return targets;
         }
         for (ExternalItem source : sources) {
-            Resource target = toResource(source);
+            Resource target = toResourceExternalItem(source);
             targets.add(target);
         }
         return targets;
     }
 
-    private Resource toResource(ExternalItem source) {
+    private Resource toResourceExternalItem(ExternalItem source) {
         if (source == null) {
             return null;
         }
