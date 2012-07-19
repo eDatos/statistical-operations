@@ -54,12 +54,12 @@
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "family2 in English"
-          },
-          {
             "locale": "es",
             "label": "family2 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "family2 in English"
           }
         ]
       }
@@ -69,16 +69,16 @@
     "id": "subjectArea1",
     "urn": "urn:subjectArea1",
     "kind": "CATEGORY",
-    "selfLink": "http://subjectArea1",
+    "selfLink": "http://localhost:8080/metamac-srm-web/subjectAreas/subjectArea1",
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "subjectArea1 in English"
-        },
-        {
           "locale": "es",
           "label": "subjectArea1 en Español"
+        },
+        {
+          "locale": "en",
+          "label": "subjectArea1 in English"
         }
       ]
     }
@@ -88,16 +88,16 @@
       "id": "secundarySubjectArea22",
       "urn": "urn:secundarySubjectArea22",
       "kind": "CATEGORY",
-      "selfLink": "http://secundarySubjectArea22",
+      "selfLink": "http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "secundarySubjectArea22 en Español"
-          },
-          {
             "locale": "en",
             "label": "secundarySubjectArea22 in English"
+          },
+          {
+            "locale": "es",
+            "label": "secundarySubjectArea22 en Español"
           }
         ]
       }
@@ -106,16 +106,16 @@
       "id": "secundarySubjectArea333",
       "urn": "urn:secundarySubjectArea333",
       "kind": "CATEGORY",
-      "selfLink": "http://secundarySubjectArea333",
+      "selfLink": "http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "secundarySubjectArea333 en Español"
-          },
-          {
             "locale": "en",
             "label": "secundarySubjectArea333 in English"
+          },
+          {
+            "locale": "es",
+            "label": "secundarySubjectArea333 en Español"
           }
         ]
       }
@@ -124,16 +124,16 @@
       "id": "secundarySubjectArea1",
       "urn": "urn:secundarySubjectArea1",
       "kind": "CATEGORY",
-      "selfLink": "http://secundarySubjectArea1",
+      "selfLink": "http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea1",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "secundarySubjectArea1 in English"
-          },
-          {
             "locale": "es",
             "label": "secundarySubjectArea1 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "secundarySubjectArea1 in English"
           }
         ]
       }
@@ -142,12 +142,12 @@
   "objective": {
     "texts": [
       {
-        "locale": "en",
-        "label": "objetive1 in English"
-      },
-      {
         "locale": "es",
         "label": "objetive1 en Español"
+      },
+      {
+        "locale": "en",
+        "label": "objetive1 in English"
       }
     ]
   },
@@ -257,12 +257,12 @@
     "title": {
       "texts": [
         {
-          "locale": "en",
-          "label": "officialityType in English"
-        },
-        {
           "locale": "es",
           "label": "officialityType en Español"
+        },
+        {
+          "locale": "en",
+          "label": "officialityType in English"
         }
       ]
     }
@@ -270,37 +270,37 @@
   "indicatorSystem": true,
   "producers": [
     {
-      "id": "producer22",
-      "urn": "urn:producer22",
+      "id": "producer1",
+      "urn": "urn:producer1",
       "kind": "AGENCY",
-      "selfLink": "http://producer22",
+      "selfLink": "http://localhost:8080/metamac-srm-web/producers/producer1",
       "title": {
         "texts": [
           {
             "locale": "es",
-            "label": "producer22 en Español"
+            "label": "producer1 en Español"
           },
           {
             "locale": "en",
-            "label": "producer22 in English"
+            "label": "producer1 in English"
           }
         ]
       }
     },
     {
-      "id": "producer1",
-      "urn": "urn:producer1",
+      "id": "producer22",
+      "urn": "urn:producer22",
       "kind": "AGENCY",
-      "selfLink": "http://producer1",
+      "selfLink": "http://localhost:8080/metamac-srm-web/producers/producer22",
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "producer1 in English"
+            "label": "producer22 in English"
           },
           {
             "locale": "es",
-            "label": "producer1 en Español"
+            "label": "producer22 en Español"
           }
         ]
       }
@@ -311,16 +311,16 @@
       "id": "regionalResponsible1",
       "urn": "urn:regionalResponsible1",
       "kind": "AGENCY",
-      "selfLink": "http://regionalResponsible1",
+      "selfLink": "http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "regionalResponsible1 en Español"
-          },
-          {
             "locale": "en",
             "label": "regionalResponsible1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "regionalResponsible1 en Español"
           }
         ]
       }
@@ -329,16 +329,16 @@
       "id": "regionalResponsible22",
       "urn": "urn:regionalResponsible22",
       "kind": "AGENCY",
-      "selfLink": "http://regionalResponsible22",
+      "selfLink": "http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "regionalResponsible22 in English"
-          },
-          {
             "locale": "es",
             "label": "regionalResponsible22 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "regionalResponsible22 in English"
           }
         ]
       }
@@ -347,16 +347,16 @@
       "id": "regionalResponsible333",
       "urn": "urn:regionalResponsible333",
       "kind": "AGENCY",
-      "selfLink": "http://regionalResponsible333",
+      "selfLink": "http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333",
       "title": {
         "texts": [
           {
-            "locale": "en",
-            "label": "regionalResponsible333 in English"
-          },
-          {
             "locale": "es",
             "label": "regionalResponsible333 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "regionalResponsible333 in English"
           }
         ]
       }
@@ -364,28 +364,10 @@
   ],
   "regionalContributors": [
     {
-      "id": "regionalContributor22",
-      "urn": "urn:regionalContributor22",
-      "kind": "AGENCY",
-      "selfLink": "http://regionalContributor22",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "regionalContributor22 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "regionalContributor22 in English"
-          }
-        ]
-      }
-    },
-    {
       "id": "regionalContributor1",
       "urn": "urn:regionalContributor1",
       "kind": "AGENCY",
-      "selfLink": "http://regionalContributor1",
+      "selfLink": "http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1",
       "title": {
         "texts": [
           {
@@ -398,6 +380,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "regionalContributor22",
+      "urn": "urn:regionalContributor22",
+      "kind": "AGENCY",
+      "selfLink": "http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
+            "label": "regionalContributor22 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "regionalContributor22 in English"
+          }
+        ]
+      }
     }
   ],
   "internalInventoryDate": "2012-12-01T13:15:14.000+0000",
@@ -406,28 +406,10 @@
   "procStatus": "PUBLISH_INTERNALLY",
   "publishers": [
     {
-      "id": "publisher22",
-      "urn": "urn:publisher22",
-      "kind": "AGENCY",
-      "selfLink": "http://publisher22",
-      "title": {
-        "texts": [
-          {
-            "locale": "en",
-            "label": "publisher22 in English"
-          },
-          {
-            "locale": "es",
-            "label": "publisher22 en Español"
-          }
-        ]
-      }
-    },
-    {
       "id": "publisher333",
       "urn": "urn:publisher333",
       "kind": "AGENCY",
-      "selfLink": "http://publisher333",
+      "selfLink": "http://localhost:8080/metamac-srm-web/publishers/publisher333",
       "title": {
         "texts": [
           {
@@ -445,16 +427,34 @@
       "id": "publisher1",
       "urn": "urn:publisher1",
       "kind": "AGENCY",
-      "selfLink": "http://publisher1",
+      "selfLink": "http://localhost:8080/metamac-srm-web/publishers/publisher1",
       "title": {
         "texts": [
           {
-            "locale": "es",
-            "label": "publisher1 en Español"
-          },
-          {
             "locale": "en",
             "label": "publisher1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "publisher1 en Español"
+          }
+        ]
+      }
+    },
+    {
+      "id": "publisher22",
+      "urn": "urn:publisher22",
+      "kind": "AGENCY",
+      "selfLink": "http://localhost:8080/metamac-srm-web/publishers/publisher22",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "publisher22 in English"
+          },
+          {
+            "locale": "es",
+            "label": "publisher22 en Español"
           }
         ]
       }
@@ -476,46 +476,10 @@
   "releaseCalendarAccess": "http://releaseCalendarAccess1",
   "updateFrequencies": [
     {
-      "id": "updateFrequency1",
-      "urn": "urn:updateFrequency1",
-      "kind": "CODE",
-      "selfLink": "http://updateFrequency1",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "updateFrequency1 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "updateFrequency1 in English"
-          }
-        ]
-      }
-    },
-    {
-      "id": "updateFrequency333",
-      "urn": "urn:updateFrequency333",
-      "kind": "CODE",
-      "selfLink": "http://updateFrequency333",
-      "title": {
-        "texts": [
-          {
-            "locale": "es",
-            "label": "updateFrequency333 en Español"
-          },
-          {
-            "locale": "en",
-            "label": "updateFrequency333 in English"
-          }
-        ]
-      }
-    },
-    {
       "id": "updateFrequency22",
       "urn": "urn:updateFrequency22",
       "kind": "CODE",
-      "selfLink": "http://updateFrequency22",
+      "selfLink": "http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22",
       "title": {
         "texts": [
           {
@@ -530,19 +494,55 @@
       }
     },
     {
-      "id": "updateFrequency4444",
-      "urn": "urn:updateFrequency4444",
+      "id": "updateFrequency333",
+      "urn": "urn:updateFrequency333",
       "kind": "CODE",
-      "selfLink": "http://updateFrequency4444",
+      "selfLink": "http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency333",
       "title": {
         "texts": [
           {
             "locale": "en",
-            "label": "updateFrequency4444 in English"
+            "label": "updateFrequency333 in English"
           },
           {
             "locale": "es",
+            "label": "updateFrequency333 en Español"
+          }
+        ]
+      }
+    },
+    {
+      "id": "updateFrequency1",
+      "urn": "urn:updateFrequency1",
+      "kind": "CODE",
+      "selfLink": "http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1",
+      "title": {
+        "texts": [
+          {
+            "locale": "en",
+            "label": "updateFrequency1 in English"
+          },
+          {
+            "locale": "es",
+            "label": "updateFrequency1 en Español"
+          }
+        ]
+      }
+    },
+    {
+      "id": "updateFrequency4444",
+      "urn": "urn:updateFrequency4444",
+      "kind": "CODE",
+      "selfLink": "http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444",
+      "title": {
+        "texts": [
+          {
+            "locale": "es",
             "label": "updateFrequency4444 en Español"
+          },
+          {
+            "locale": "en",
+            "label": "updateFrequency4444 in English"
           }
         ]
       }
@@ -588,12 +588,12 @@
   "revPolicy": {
     "texts": [
       {
-        "locale": "es",
-        "label": "revPolicy1 en Español"
-      },
-      {
         "locale": "en",
         "label": "revPolicy1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "revPolicy1 en Español"
       }
     ]
   },
@@ -624,12 +624,12 @@
   "notes": {
     "texts": [
       {
-        "locale": "es",
-        "label": "notes1 en Español"
-      },
-      {
         "locale": "en",
         "label": "notes1 in English"
+      },
+      {
+        "locale": "es",
+        "label": "notes1 en Español"
       }
     ]
   },

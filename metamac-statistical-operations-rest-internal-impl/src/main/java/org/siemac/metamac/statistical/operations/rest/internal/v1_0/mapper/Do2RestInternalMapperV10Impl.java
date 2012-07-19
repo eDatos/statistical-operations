@@ -10,8 +10,10 @@ import java.util.Set;
 
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
@@ -25,6 +27,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.SimpleItem;
 import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
+import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -44,6 +47,7 @@ import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Famil
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ProcStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,6 +55,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     // @Context
     // private MessageContext context; // Always null in this bean (not in Service)...
+
+    @Autowired
+    private ConfigurationService configurationService;
 
     @Override
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) {
@@ -65,26 +72,26 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.getFamilies().addAll(toResourcesFamilies(source.getFamilies(), apiUrl));
-        target.setSubjectArea(toResourceExternalItem(source.getSubjectArea()));
-        target.getSecondarySubjectAreas().addAll(toResourcesExternalItems(source.getSecondarySubjectAreas()));
+        target.setSubjectArea(toResourceExternalItemSrm(source.getSubjectArea()));
+        target.getSecondarySubjectAreas().addAll(toResourcesExternalItemsSrm(source.getSecondarySubjectAreas()));
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
         target.getInstances().addAll(toResourcesInstances(source.getInstances(), apiUrl));
         target.setSurveyType(toSimpleItem(source.getSurveyType()));
         target.setOfficialityType(toSimpleItem(source.getOfficialityType()));
         target.setIndicatorSystem(source.getIndicatorSystem());
-        target.getProducers().addAll(toResourcesExternalItems(source.getProducer()));
-        target.getRegionalResponsibles().addAll(toResourcesExternalItems(source.getRegionalResponsible()));
-        target.getRegionalContributors().addAll(toResourcesExternalItems(source.getRegionalContributor()));
+        target.getProducers().addAll(toResourcesExternalItemsSrm(source.getProducer()));
+        target.getRegionalResponsibles().addAll(toResourcesExternalItemsSrm(source.getRegionalResponsible()));
+        target.getRegionalContributors().addAll(toResourcesExternalItemsSrm(source.getRegionalContributor()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
         target.setStatus(toStatus(source.getStatus()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
-        target.getPublishers().addAll(toResourcesExternalItems(source.getPublisher()));
+        target.getPublishers().addAll(toResourcesExternalItemsSrm(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
         target.setReleaseCalendar(source.getReleaseCalendar());
         target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
-        target.getUpdateFrequencies().addAll(toResourcesExternalItems(source.getUpdateFrequency()));
+        target.getUpdateFrequencies().addAll(toResourcesExternalItemsSrm(source.getUpdateFrequency()));
         target.setCurrentInstance(toResource(getInstanceInProcStatus(source.getInstances(), ProcStatusEnum.PUBLISH_EXTERNALLY), apiUrl));
         target.setCurrentInternalInstance(toResource(getInstanceInProcStatus(source.getInstances(), ProcStatusEnum.PUBLISH_INTERNALLY), apiUrl));
         target.setInventoryDate(toDate(source.getInventoryDate()));
@@ -212,25 +219,25 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setSuccessor(toResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() + 1), apiUrl));
         target.setDataDescription(toInternationalString(source.getDataDescription()));
         target.setStatisticalPopulation(toInternationalString(source.getStatisticalPopulation()));
-        target.getStatisticalUnits().addAll(toResourcesExternalItems(source.getStatisticalUnit()));
-        target.setGeographicGranularity(toResourceExternalItem(source.getGeographicGranularity()));
+        target.getStatisticalUnits().addAll(toResourcesExternalItemsSrm(source.getStatisticalUnit()));
+        target.setGeographicGranularity(toResourceExternalItemSrm(source.getGeographicGranularity()));
         target.setGeographicComparability(toInternationalString(source.getGeographicComparability()));
-        target.setTemporalGranularity(toResourceExternalItem(source.getTemporalGranularity()));
+        target.setTemporalGranularity(toResourceExternalItemSrm(source.getTemporalGranularity()));
         target.setTemporalComparability(toInternationalString(source.getTemporalComparability()));
         target.setBasePeriod(source.getBasePeriod());
-        target.getUnitMeasures().addAll(toResourcesExternalItems(source.getUnitMeasure()));
+        target.getUnitMeasures().addAll(toResourcesExternalItemsSrm(source.getUnitMeasure()));
         target.setStatConcDef(toInternationalString(source.getStatConcDef()));
-        target.getStatConcDefLists().addAll(toResourcesExternalItems(source.getStatConcDefList()));
+        target.getStatConcDefLists().addAll(toResourcesExternalItemsSrm(source.getStatConcDefList()));
         target.setClassSystem(toInternationalString(source.getClassSystem()));
-        target.getClassSystemLists().addAll(toResourcesExternalItems(source.getClassSystemList()));
+        target.getClassSystemLists().addAll(toResourcesExternalItemsSrm(source.getClassSystemList()));
         target.setInstanceType(toSimpleItem(source.getInstanceType()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
         target.setSurveySource(toSimpleItem(source.getSurveySource()));
         target.setCollMethod(toSimpleItem(source.getCollMethod()));
-        target.getInformationSuppliers().addAll(toResourcesExternalItems(source.getInformationSuppliers()));
-        target.getFreqColls().addAll(toResourcesExternalItems(source.getFreqColl()));
+        target.getInformationSuppliers().addAll(toResourcesExternalItemsSrm(source.getInformationSuppliers()));
+        target.getFreqColls().addAll(toResourcesExternalItemsSrm(source.getFreqColl()));
         target.setDataValidation(toInternationalString(source.getDataValidation()));
         target.setDataCompilation(toInternationalString(source.getDataCompilation()));
         target.setAdjustment(toInternationalString(source.getAdjustment()));
@@ -559,19 +566,29 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return targets;
     }
 
-    private List<Resource> toResourcesExternalItems(Set<ExternalItem> sources) {
+    private List<Resource> toResourcesExternalItems(Set<ExternalItem> sources, String apiExternalItem) {
         List<Resource> targets = new ArrayList<Resource>();
         if (sources == null) {
             return targets;
         }
         for (ExternalItem source : sources) {
-            Resource target = toResourceExternalItem(source);
+            Resource target = toResourceExternalItem(source, apiExternalItem);
             targets.add(target);
         }
         return targets;
     }
 
-    private Resource toResourceExternalItem(ExternalItem source) {
+    private List<Resource> toResourcesExternalItemsSrm(Set<ExternalItem> sources) {
+        String apiExternalItem = getSrmEndpointInternalApi();
+        return toResourcesExternalItems(sources, apiExternalItem);
+    }
+
+    private Resource toResourceExternalItemSrm(ExternalItem source) {
+        String apiExternalItem = getSrmEndpointInternalApi();
+        return toResourceExternalItem(source, apiExternalItem);
+    }
+
+    private Resource toResourceExternalItem(ExternalItem source, String apiExternalItem) {
         if (source == null) {
             return null;
         }
@@ -579,7 +596,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
         target.setKind(source.getType().name());
-        target.setSelfLink(source.getUri()); // TODO añadir endpoint METAMAC-785
+        target.setSelfLink(RestUtils.createLink(apiExternalItem, source.getUri()));
         target.setTitle(toInternationalString(source.getTitle()));
         return target;
     }
@@ -766,5 +783,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
                 Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
                 throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private String getSrmEndpointInternalApi() {
+        String property = configurationService.getProperty(RestEndpointsConstants.SRM_INTERNAL_API);
+        if (StringUtils.isBlank(property)) {
+            Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
+            throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
+        }
+        return property;
     }
 }

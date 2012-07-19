@@ -667,16 +667,6 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
 
     @Test
-    public void testRetrieveInstanceByIdXmlWithoutJaxbTransformation() throws Exception {
-
-        String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, INSTANCE_1);
-        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.xml");
-
-        // Request and validate
-        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
-    }
-
-    @Test
     public void testRetrieveInstanceByIdJson() throws Exception {
 
         // Retrieve
@@ -684,6 +674,16 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
 
         // Validation
         StatisticalOperationsRestAsserts.assertEqualsInstance(StatisticalOperationsRestMocks.mockInstance1(baseApi), instance);
+    }
+
+    @Test
+    public void testRetrieveInstanceByIdXmlWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveInstanceById(OPERATION_1, INSTANCE_1);
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveInstanceById.id1.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
 
     @Test

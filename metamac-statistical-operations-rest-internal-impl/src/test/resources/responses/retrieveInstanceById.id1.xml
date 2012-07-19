@@ -6,22 +6,22 @@
     <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
     <title>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>instance1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>instance1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>instance1 in English</ns2:label>
         </ns2:text>
     </title>
     <acronym>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>acronym1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>acronym1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>acronym1 in English</ns2:label>
         </ns2:text>
     </acronym>
     <survey>
@@ -31,12 +31,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>operation1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>operation1 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>operation1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </survey>
@@ -47,12 +47,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance22 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>instance22 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>instance22 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </successor>
@@ -84,19 +84,35 @@
     </dataDescription>
     <statisticalPopulation>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>statisticalPopulation1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>statisticalPopulation1 in English</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>statisticalPopulation1 en Español</ns2:label>
+        </ns2:text>
     </statisticalPopulation>
+    <statisticalUnits>
+        <ns2:id>statisticalUnit22</ns2:id>
+        <ns2:urn>urn:statisticalUnit22</ns2:urn>
+        <ns2:kind>DATASTRUCTURE</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit22</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>statisticalUnit22 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>statisticalUnit22 en Español</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </statisticalUnits>
     <statisticalUnits>
         <ns2:id>statisticalUnit1</ns2:id>
         <ns2:urn>urn:statisticalUnit1</ns2:urn>
         <ns2:kind>DATASTRUCTURE</ns2:kind>
-        <ns2:selfLink>http://statisticalUnit1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -108,35 +124,19 @@
             </ns2:text>
         </ns2:title>
     </statisticalUnits>
-    <statisticalUnits>
-        <ns2:id>statisticalUnit22</ns2:id>
-        <ns2:urn>urn:statisticalUnit22</ns2:urn>
-        <ns2:kind>DATASTRUCTURE</ns2:kind>
-        <ns2:selfLink>http://statisticalUnit22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>statisticalUnit22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>statisticalUnit22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </statisticalUnits>
     <geographicGranularity>
         <ns2:id>geographicGranularity</ns2:id>
         <ns2:urn>urn:geographicGranularity</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://geographicGranularity</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/geographicGranularities/geographicGranularity</ns2:selfLink>
         <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>geographicGranularity in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>geographicGranularity en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>geographicGranularity in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </geographicGranularity>
@@ -154,7 +154,7 @@
         <ns2:id>temporalGranularity</ns2:id>
         <ns2:urn>urn:temporalGranularity</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://temporalGranularity</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/temporalGranularities/temporalGranularity</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -181,33 +181,49 @@
         <ns2:id>unitMeasure1</ns2:id>
         <ns2:urn>urn:unitMeasure1</ns2:urn>
         <ns2:kind>CONCEPT</ns2:kind>
-        <ns2:selfLink>http://unitMeasure1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/unitMeasures/unitMeasure1</ns2:selfLink>
         <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>unitMeasure1 in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>unitMeasure1 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>unitMeasure1 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </unitMeasures>
     <statConcDef>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>statConcDef1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>statConcDef1 in English</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>statConcDef1 en Español</ns2:label>
+        </ns2:text>
     </statConcDef>
+    <statConcDefList>
+        <ns2:id>statConcDefList22</ns2:id>
+        <ns2:urn>urn:statConcDefList22</ns2:urn>
+        <ns2:kind>CODELIST</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList22</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>statConcDefList22 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>statConcDefList22 in English</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </statConcDefList>
     <statConcDefList>
         <ns2:id>statConcDefList333</ns2:id>
         <ns2:urn>urn:statConcDefList333</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://statConcDefList333</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList333</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
@@ -220,76 +236,60 @@
         </ns2:title>
     </statConcDefList>
     <statConcDefList>
-        <ns2:id>statConcDefList22</ns2:id>
-        <ns2:urn>urn:statConcDefList22</ns2:urn>
-        <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://statConcDefList22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>statConcDefList22 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>statConcDefList22 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </statConcDefList>
-    <statConcDefList>
         <ns2:id>statConcDefList1</ns2:id>
         <ns2:urn>urn:statConcDefList1</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://statConcDefList1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList1</ns2:selfLink>
         <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>statConcDefList1 in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>statConcDefList1 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>statConcDefList1 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </statConcDefList>
     <classSystem>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>classSystem1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>classSystem1 in English</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>classSystem1 en Español</ns2:label>
+        </ns2:text>
     </classSystem>
     <classSystemList>
-        <ns2:id>statConcDefList22</ns2:id>
-        <ns2:urn>urn:statConcDefList22</ns2:urn>
+        <ns2:id>classSystemList22</ns2:id>
+        <ns2:urn>urn:classSystemList22</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://statConcDefList22</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList22</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>statConcDefList22 in English</ns2:label>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>classSystemList22 en Español</ns2:label>
             </ns2:text>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>statConcDefList22 en Español</ns2:label>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>classSystemList22 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </classSystemList>
     <classSystemList>
-        <ns2:id>statConcDefList1</ns2:id>
-        <ns2:urn>urn:statConcDefList1</ns2:urn>
+        <ns2:id>classSystemList1</ns2:id>
+        <ns2:urn>urn:classSystemList1</ns2:urn>
         <ns2:kind>CODELIST</ns2:kind>
-        <ns2:selfLink>http://statConcDefList1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
-                <ns2:label>statConcDefList1 in English</ns2:label>
+                <ns2:label>classSystemList1 in English</ns2:label>
             </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>statConcDefList1 en Español</ns2:label>
+                <ns2:label>classSystemList1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </classSystemList>
@@ -297,12 +297,12 @@
         <ns2:id>instanceType1</ns2:id>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instanceType1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>instanceType1 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>instanceType1 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </instanceType>
@@ -310,12 +310,12 @@
     <procStatus>PUBLISH_INTERNALLY</procStatus>
     <docMethod>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>docMethod1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>docMethod1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>docMethod1 in English</ns2:label>
         </ns2:text>
     </docMethod>
     <surveySource>
@@ -348,7 +348,7 @@
         <ns2:id>informationSupplier1</ns2:id>
         <ns2:urn>urn:informationSupplier1</ns2:urn>
         <ns2:kind>COMMON_METADATA</ns2:kind>
-        <ns2:selfLink>http://informationSupplier1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/informationSuppliers/informationSupplier1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
@@ -361,34 +361,34 @@
         </ns2:title>
     </informationSuppliers>
     <freqColls>
-        <ns2:id>freqColl22</ns2:id>
-        <ns2:urn>urn:freqColl22</ns2:urn>
-        <ns2:kind>CATEGORY_SCHEME</ns2:kind>
-        <ns2:selfLink>http://freqColl22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>freqColl22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>freqColl22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </freqColls>
-    <freqColls>
         <ns2:id>freqColl1</ns2:id>
         <ns2:urn>urn:freqColl1</ns2:urn>
         <ns2:kind>CATEGORY_SCHEME</ns2:kind>
-        <ns2:selfLink>http://freqColl1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl1</ns2:selfLink>
         <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>freqColl1 en Español</ns2:label>
+            </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>freqColl1 in English</ns2:label>
             </ns2:text>
+        </ns2:title>
+    </freqColls>
+    <freqColls>
+        <ns2:id>freqColl22</ns2:id>
+        <ns2:urn>urn:freqColl22</ns2:urn>
+        <ns2:kind>CATEGORY_SCHEME</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl22</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>freqColl22 in English</ns2:label>
+            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>freqColl1 en Español</ns2:label>
+                <ns2:label>freqColl22 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </freqColls>
@@ -414,24 +414,37 @@
     </dataCompilation>
     <adjustment>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>adjustment1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>adjustment1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>adjustment1 en Español</ns2:label>
         </ns2:text>
     </adjustment>
     <costBurden>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>costBurden1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>costBurden1 in English</ns2:label>
         </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>costBurden1 en Español</ns2:label>
+        </ns2:text>
     </costBurden>
+    <costs>
+        <ns2:id>cost22</ns2:id>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>cost22 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>cost22 en Español</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </costs>
     <costs>
         <ns2:id>cost4444</ns2:id>
         <ns2:title>
@@ -449,25 +462,12 @@
         <ns2:id>cost1</ns2:id>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>cost1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>cost1 in English</ns2:label>
             </ns2:text>
-        </ns2:title>
-    </costs>
-    <costs>
-        <ns2:id>cost22</ns2:id>
-        <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>cost22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>cost22 in English</ns2:label>
+                <ns2:label>cost1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </costs>
@@ -487,12 +487,12 @@
     <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
     <qualityDoc>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>qualityDoc1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>qualityDoc1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>qualityDoc1 in English</ns2:label>
         </ns2:text>
     </qualityDoc>
     <qualityAssure>
@@ -507,22 +507,22 @@
     </qualityAssure>
     <qualityAssmnt>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>qualityAssmnt1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>qualityAssmnt1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>qualityAssmnt1 en Español</ns2:label>
         </ns2:text>
     </qualityAssmnt>
     <userNeeds>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>userNeeds1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>userNeeds1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>userNeeds1 en Español</ns2:label>
         </ns2:text>
     </userNeeds>
     <userSat>
@@ -537,22 +537,22 @@
     </userSat>
     <completeness>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>completeness1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>completeness1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>completeness1 en Español</ns2:label>
         </ns2:text>
     </completeness>
     <timeliness>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>timeliness1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>timeliness1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>timeliness1 en Español</ns2:label>
         </ns2:text>
     </timeliness>
     <punctuality>
@@ -577,12 +577,12 @@
     </accuracyOverall>
     <samplingErr>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>samplingErr1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>samplingErr1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>samplingErr1 in English</ns2:label>
         </ns2:text>
     </samplingErr>
     <nonsamplingErr>
@@ -597,22 +597,22 @@
     </nonsamplingErr>
     <coherXDom>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>coherXDom1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>coherXDom1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>coherXDom1 en Español</ns2:label>
         </ns2:text>
     </coherXDom>
     <coherInternal>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>coherInternal1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>coherInternal1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>coherInternal1 in English</ns2:label>
         </ns2:text>
     </coherInternal>
     <comment>
@@ -627,12 +627,12 @@
     </comment>
     <notes>
         <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>notes1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>notes1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>notes1 in English</ns2:label>
         </ns2:text>
     </notes>
     <parent>
@@ -642,12 +642,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>operation1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>operation1 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>operation1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </parent>
