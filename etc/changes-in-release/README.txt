@@ -7,5 +7,10 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 
 3. Cambios en el data
     - Añadido fichero resources.xml en la ruta [DATA]/conf/static
-
+    
+	- Añadir al fichero [DATA_METAMAC]/common/static/endpoints.xml (crearlo si no existe), las siguientes entradas:
+	    <entry key="metamac.endpoints.statistical.operations.rest.internal">http://localhost:8080/metamac-statistical-operations-web</entry>
+	    <entry key="metamac.endpoints.statistical.operations.rest.external">http://localhost:8080/metamac-statistical-operations-external-web</entry>
+	    <entry key="metamac.endpoints.srm.rest.internal">http://localhost:8080/metamac-srm-web</entry>
+    	
 99. Reiniciar Tomcat
