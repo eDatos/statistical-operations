@@ -33,7 +33,7 @@
 
         <!-- Repeating the expression, since I can't find a way to refer to the other pointcuts. -->
         <aop:pointcut id="updatingServiceFacade"
-            expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*ServiceFacade.*(..)) and not (execution(public * org.siemac.metamac.statistical.operations..serviceapi.*.get*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..)))" />
+            expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*ServiceFacade.*(..)) and not (execution(public * org.siemac.metamac.statistical.operations..serviceapi.*.retrieve*(..)) or execution(public * org.siemac.metamac..serviceapi.*.find*(..)))" />
 
         <aop:advisor pointcut-ref="serviceFacadePointCut" advice-ref="txAdvice" order="1" />
         <aop:advisor pointcut-ref="serviceFacadePointCut" advice-ref="serviceContextStoreAdvice" order="2" />
