@@ -12,14 +12,13 @@ import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
-import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.FormErrorOrientation;
 import com.smartgwt.client.types.VerticalAlignment;
-import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
@@ -31,7 +30,7 @@ public class NewOperationForm extends CustomDynamicForm {
     private CustomCheckboxItem    releaseCalendar;
     private ExternalSelectItem    subjectAreasItem;
     private CustomCheckboxItem    indSystem;
-    private ButtonItem            saveButton;
+    private CustomButtonItem      saveButton;
 
     private List<ExternalItemDto> subjectAreas;
 
@@ -58,9 +57,7 @@ public class NewOperationForm extends CustomDynamicForm {
         indSystem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         indSystem.setTitleStyle("requiredFormLabel");
 
-        saveButton = new ButtonItem("op-save", getConstants().actionCreateOperation());
-        saveButton.setColSpan(2);
-        saveButton.setAlign(Alignment.CENTER);
+        saveButton = new CustomButtonItem("op-save", getConstants().actionCreateOperation());
         saveButton.setWidth(110);
 
         setHeight100();
