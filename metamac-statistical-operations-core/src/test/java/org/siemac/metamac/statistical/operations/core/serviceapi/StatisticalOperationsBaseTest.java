@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.common.test.MetamacBaseTests;
@@ -147,4 +148,9 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
         sequences.add("SEQ_COSTS");
         return sequences;
     }
+    
+    @Override
+    protected Map<String, String> getTablePrimaryKeys() {
+        return null;
+    }    
 }
