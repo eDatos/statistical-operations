@@ -73,6 +73,12 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
                     return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getStringValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getStringValue());
+                case ACRONYM:
+                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                case DESCRIPTION:
+                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getStringValue());
+                case PROC_STATUS:
+                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestriction.getEnumValue());
                 case OPERATION_CODE:
                     return new SculptorPropertyCriteria(FamilyProperties.operations().code(), propertyRestriction.getStringValue());
                 case OPERATION_ID:
@@ -104,6 +110,12 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
                     return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getStringValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getStringValue());
+                case ACRONYM:
+                    return new SculptorPropertyCriteria(OperationProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                case DESCRIPTION:
+                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getStringValue());
+                case PROC_STATUS:
+                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestriction.getEnumValue());
                 case FAMILY_CODE:
                     return new SculptorPropertyCriteria(OperationProperties.families().code(), propertyRestriction.getStringValue());
                 case FAMILY_ID:
@@ -135,6 +147,12 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
                     return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getStringValue());
                 case TITLE:
                     return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getStringValue());
+                case ACRONYM:
+                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                case DATA_DESCRIPTION:
+                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getStringValue());
+                case PROC_STATUS:
+                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestriction.getEnumValue());
                 case OPERATION_CODE:
                     return new SculptorPropertyCriteria(InstanceProperties.operation().code(), propertyRestriction.getStringValue());
                 case OPERATION_ID:

@@ -4,6 +4,9 @@ public enum OperationCriteriaPropertyEnum  {
 
     CODE,
     TITLE,
+    ACRONYM,
+    DESCRIPTION,
+    PROC_STATUS,
     FAMILY_CODE,
     FAMILY_ID;
     
