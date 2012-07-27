@@ -23,6 +23,7 @@ import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
@@ -92,7 +93,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
                 getUiHandlers().retrieveOperationList(firstResult, maxResults);
             }
         });
-        operationListGrid.setHeight(720);
+        operationListGrid.getListGrid().setAutoFitMaxRecords(OperationListPresenter.OPERATION_LIST_MAX_RESULTS);
+        operationListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().operationIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().operationTitle());
         ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().operationAcronym());

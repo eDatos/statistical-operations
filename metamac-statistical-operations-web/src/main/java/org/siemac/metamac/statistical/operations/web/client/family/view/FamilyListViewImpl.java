@@ -22,6 +22,7 @@ import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
@@ -76,7 +77,8 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
                 getUiHandlers().retrieveFamilyList(firstResult, maxResults);
             }
         });
-        familyListGrid.setHeight(720);
+        familyListGrid.getListGrid().setAutoFitMaxRecords(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS);
+        familyListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
         ListGridField codeField = new ListGridField(FamilyDS.CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(FamilyDS.TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField descriptionField = new ListGridField(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());

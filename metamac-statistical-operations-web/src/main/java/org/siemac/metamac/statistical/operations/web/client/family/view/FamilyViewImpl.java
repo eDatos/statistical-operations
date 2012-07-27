@@ -19,6 +19,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFo
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
@@ -29,6 +30,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -37,7 +39,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.layout.VLayout;
@@ -62,7 +63,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private ToolStrip                   operationToolStrip;
     private ToolStripButton             editToolStripButton;
-    private ListGrid                    operationListGrid;
+    private BaseCustomListGrid          operationListGrid;
 
     private List<OperationBaseDto>      operationBaseDtos;
 
@@ -108,8 +109,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         TitleLabel operationsTitleLabel = new TitleLabel(OperationsWeb.getConstants().operations());
         operationsTitleLabel.setStyleName("sectionTitleLeftMargin");
 
-        operationListGrid = new ListGrid();
-        operationListGrid.setHeight(300);
+        operationListGrid = new BaseCustomListGrid();
+        operationListGrid.setAutoFitMaxRecords(20);
+        operationListGrid.setAutoFitData(Autofit.VERTICAL);
         ListGridField identifierField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getConstants().familyIdentifier());
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getConstants().familyTitle());
         ListGridField titleAlternativeField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getConstants().familyAcronym());
@@ -125,6 +127,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         panel.addMember(operationsTitleLabel);
         panel.addMember(operationsLayout);
     }
+
     @Override
     public Widget asWidget() {
         return panel;

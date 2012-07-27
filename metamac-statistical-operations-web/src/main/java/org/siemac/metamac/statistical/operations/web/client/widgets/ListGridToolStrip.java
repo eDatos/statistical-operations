@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
+import org.siemac.metamac.web.common.client.widgets.DeleteConfirmationWindow;
 
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -20,7 +21,7 @@ public class ListGridToolStrip extends ToolStrip {
         super();
         setWidth100();
 
-        deleteConfirmationWindow = new DeleteConfirmationWindow(new String());
+        deleteConfirmationWindow = new DeleteConfirmationWindow(new String(), messageDeleteWindow);
         deleteConfirmationWindow.setVisibility(Visibility.HIDDEN);
 
         newButton = new ToolStripButton(OperationsWeb.getConstants().actionNew(), GlobalResources.RESOURCE.newListGrid().getURL());
@@ -31,7 +32,6 @@ public class ListGridToolStrip extends ToolStrip {
 
             @Override
             public void onClick(ClickEvent event) {
-                deleteConfirmationWindow.setMessage(messageDeleteWindow);
                 deleteConfirmationWindow.show();
             }
         });
