@@ -8,7 +8,7 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface FamilyListUiHandlers extends UiHandlers {
 
-    void retrieveFamilyList(int firstResult, int maxResults);
+    void retrieveFamilyList(int firstResult, int maxResults, String family);
 
     void saveFamily(FamilyDto familyDto);
     void goToFamily(String familyCode);

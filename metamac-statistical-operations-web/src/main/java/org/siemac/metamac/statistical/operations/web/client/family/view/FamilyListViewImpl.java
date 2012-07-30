@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
+import org.siemac.metamac.statistical.operations.web.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
@@ -25,6 +26,8 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
+import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
@@ -45,6 +48,8 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     private ModalWindow            window;
     private NewFamilyForm          newFamilyForm;
 
+    private SearchSectionStack     searchSectionStack;
+
     @Inject
     public FamilyListViewImpl() {
         super();
@@ -56,6 +61,8 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         window.setTitle(OperationsWeb.getConstants().actionNewFamily());
         window.setAutoSize(true);
         window.addItem(newFamilyForm);
+
+        // ToolStrip
 
         listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().familyDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
@@ -70,11 +77,24 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
         listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
+        // Search
+
+        searchSectionStack = new SearchSectionStack();
+        searchSectionStack.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
+
+            @Override
+            public void onFormItemClick(FormItemIconClickEvent event) {
+                getUiHandlers().retrieveFamilyList(FamilyListPresenter.FAMILY_LIST_FIRST_RESULT, FamilyListPresenter.FAMILY_LIST_MAX_RESULTS, searchSectionStack.getSearchCriteria());
+            }
+        });
+
+        // Family ListGrid
+
         familyListGrid = new PaginatedCheckListGrid(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS, new PaginatedAction() {
 
             @Override
             public void retrieveResultSet(int firstResult, int maxResults) {
-                getUiHandlers().retrieveFamilyList(firstResult, maxResults);
+                getUiHandlers().retrieveFamilyList(firstResult, maxResults, null);
             }
         });
         familyListGrid.getListGrid().setAutoFitMaxRecords(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS);
@@ -103,6 +123,7 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
 
         panel.addMember(listGridToolStrip);
+        panel.addMember(searchSectionStack);
         panel.addMember(familyListGrid);
     }
 
@@ -224,6 +245,11 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         if (ClientSecurityUtils.canDeleteFamily()) {
             listGridToolStrip.getDeleteButton().show();
         }
+    }
+
+    @Override
+    public void clearSearchSection() {
+        searchSectionStack.reset();
     }
 
 }

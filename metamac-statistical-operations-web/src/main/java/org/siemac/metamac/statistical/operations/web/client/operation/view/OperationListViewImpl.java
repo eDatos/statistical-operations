@@ -17,6 +17,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperationForm;
+import org.siemac.metamac.statistical.operations.web.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
@@ -29,6 +30,8 @@ import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
+import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
@@ -48,6 +51,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     // Modal window
     private ModalWindow            window;
     private NewOperationForm       newOperationForm;
+
+    private SearchSectionStack     searchSectionStack;
 
     @Inject
     public OperationListViewImpl() {
@@ -70,6 +75,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         window.setAutoSize(true);
         window.addItem(newOperationForm);
 
+        // ToolStrip
+
         listGridToolStrip = new ListGridToolStrip(OperationsWeb.getConstants().operationDeleteConfirmation());
         listGridToolStrip.getNewButton().addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
 
@@ -86,11 +93,24 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
         listGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateOperation() ? Visibility.VISIBLE : Visibility.HIDDEN);
 
+        // Search
+
+        searchSectionStack = new SearchSectionStack();
+        searchSectionStack.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
+
+            @Override
+            public void onFormItemClick(FormItemIconClickEvent event) {
+                getUiHandlers().retrieveOperationList(OperationListPresenter.OPERATION_LIST_FIRST_RESULT, OperationListPresenter.OPERATION_LIST_MAX_RESULTS, searchSectionStack.getSearchCriteria());
+            }
+        });
+
+        // Operation ListGrid
+
         operationListGrid = new PaginatedCheckListGrid(OperationListPresenter.OPERATION_LIST_MAX_RESULTS, new PaginatedAction() {
 
             @Override
             public void retrieveResultSet(int firstResult, int maxResults) {
-                getUiHandlers().retrieveOperationList(firstResult, maxResults);
+                getUiHandlers().retrieveOperationList(firstResult, maxResults, null);
             }
         });
         operationListGrid.getListGrid().setAutoFitMaxRecords(OperationListPresenter.OPERATION_LIST_MAX_RESULTS);
@@ -124,6 +144,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
 
         panel.addMember(listGridToolStrip);
+        panel.addMember(searchSectionStack);
         panel.addMember(operationListGrid);
     }
 
@@ -275,6 +296,11 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         if (actionAllowed) {
             listGridToolStrip.getDeleteButton().show();
         }
+    }
+
+    @Override
+    public void clearSearchSection() {
+        searchSectionStack.reset();
     }
 
 }

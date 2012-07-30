@@ -86,6 +86,8 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
         FamilyDto getFamily();
         void onFamilySaved(FamilyDto familyDto);
 
+        void clearSearchSection();
+
         boolean validate();
         void closeFamilyWindow();
     }
@@ -142,7 +144,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
+        retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
     }
 
     @Override
@@ -182,20 +184,20 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
                 ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getMessageList(getMessages().familyDeleted()), MessageTypeEnum.SUCCESS);
             }
         });
     }
 
     @Override
-    public void retrieveFamilyList(int firstResult, int maxResults) {
-        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, null), new AsyncCallback<GetFamilyPaginatedListResult>() {
+    public void retrieveFamilyList(int firstResult, int maxResults, final String family) {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new AsyncCallback<GetFamilyPaginatedListResult>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -205,6 +207,9 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onSuccess(GetFamilyPaginatedListResult result) {
                 getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
+                if (StringUtils.isBlank(family)) {
+                    getView().clearSearchSection();
+                }
             }
         });
     }

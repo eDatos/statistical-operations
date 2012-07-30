@@ -1,18 +1,25 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
+import org.siemac.metamac.web.common.client.MetamacWebCommon;
+import org.siemac.metamac.web.common.client.resources.GlobalResources;
+import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
+
 import com.smartgwt.client.types.AnimationEffect;
-import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.grid.ListGrid;
-import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.form.fields.FormItemIcon;
+import com.smartgwt.client.widgets.form.fields.events.HasFormItemClickHandlers;
 import com.smartgwt.client.widgets.layout.SectionStack;
 import com.smartgwt.client.widgets.layout.SectionStackSection;
 
 public class SearchSectionStack extends SectionStack {
 
-    private ListGrid listGrid;
+    private static String     SEARCH_ITEM_NAME = "search-item";
+
+    private CustomDynamicForm form;
+    private FormItemIcon      searchIcon;
 
     public SearchSectionStack() {
         setWidth100();
@@ -22,7 +29,7 @@ public class SearchSectionStack extends SectionStack {
         setHeight(26);
         setStyleName("versionSectionStackStyle");
 
-        SectionStackSection section = new SectionStackSection("Buscar");
+        SectionStackSection section = new SectionStackSection(MetamacWebCommon.getConstants().search());
         section.setExpanded(false);
 
         Canvas rollUnderCanvasProperties = new Canvas();
@@ -31,26 +38,32 @@ public class SearchSectionStack extends SectionStack {
         rollUnderCanvasProperties.setBackgroundColor("#ffe973");
         rollUnderCanvasProperties.setOpacity(50);
 
-        listGrid = new ListGrid();
-        listGrid.setAlternateRecordStyles(false);
-        listGrid.setAutoFitMaxRecords(5);
-        listGrid.setAutoFitData(Autofit.VERTICAL);
-        listGrid.setRollUnderCanvasProperties(rollUnderCanvasProperties);
-        listGrid.setShowRollOverCanvas(true);
-        listGrid.setAnimateRollUnder(true);
-        listGrid.setShowSelectionCanvas(true);
-        listGrid.setAnimateSelectionUnder(true);
+        form = new CustomDynamicForm();
+        form.setMargin(5);
+        form.setAutoWidth();
+        CustomTextItem searchItem = new CustomTextItem(SEARCH_ITEM_NAME, "");
+        searchItem.setShowTitle(false);
+        searchIcon = new FormItemIcon();
+        searchIcon.setSrc(GlobalResources.RESOURCE.search().getURL());
+        searchItem.setIcons(searchIcon);
+        form.setFields(searchItem);
 
-        ListGridField codeField = new ListGridField("ConceptSchemeDS.CODE", "conceptSchemeCode");
-        codeField.setWidth("30%");
-        ListGridField nameField = new ListGridField("ConceptSchemeDS.NAME", "conceptSchemeName");
-        ListGridField versionField = new ListGridField("ConceptSchemeDS.VERSION_LOGIC", "conceptSchemeVersion");
-        versionField.setWidth("15%");
-        listGrid.setFields(codeField, nameField, versionField);
-
-        section.setItems(listGrid);
+        section.setItems(form);
 
         setSections(section);
+    }
+
+    public HasFormItemClickHandlers getSearchIcon() {
+        return searchIcon;
+    }
+
+    public String getSearchCriteria() {
+        return form.getValueAsString(SEARCH_ITEM_NAME);
+    }
+
+    public void reset() {
+        form.clearValues();
+        collapseSection(0);
     }
 
 }

@@ -7,19 +7,18 @@ import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 
-import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.FormErrorOrientation;
 import com.smartgwt.client.types.VerticalAlignment;
-import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewInstanceForm extends CustomDynamicForm {
 
     private RequiredTextItem identifier;
     private RequiredTextItem title;
-    private ButtonItem       saveButton;
+    private CustomButtonItem saveButton;
 
     public NewInstanceForm() {
         super();
@@ -33,9 +32,7 @@ public class NewInstanceForm extends CustomDynamicForm {
         title = new RequiredTextItem("in-title", OperationsWeb.getConstants().instanceTitle());
         title.setWidth(200);
 
-        saveButton = new ButtonItem("op-save", OperationsWeb.getConstants().actionCreateInstance());
-        saveButton.setColSpan(2);
-        saveButton.setAlign(Alignment.CENTER);
+        saveButton = new CustomButtonItem("op-save", OperationsWeb.getConstants().actionCreateInstance());
         saveButton.setWidth(110);
 
         setHeight100();

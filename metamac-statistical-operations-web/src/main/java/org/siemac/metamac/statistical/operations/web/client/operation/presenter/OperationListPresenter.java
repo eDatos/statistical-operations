@@ -89,6 +89,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
         List<Long> getSelectedOperations();
         void onOperationSaved(OperationDto operationDto);
 
+        void clearSearchSection();
+
         void setCategorySchemes(List<ExternalItemDto> schemes);
         void setSubjects(List<ExternalItemDto> subjects);
     }
@@ -145,7 +147,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     @Override
     protected void onReset() {
         super.onReset();
-        retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
+        retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
     }
 
     @Override
@@ -180,8 +182,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     }
 
     @Override
-    public void retrieveOperationList(int firstResult, int maxResults) {
-        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, null), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
+    public void retrieveOperationList(int firstResult, int maxResults, final String operation) {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, operation), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -190,6 +192,9 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onWaitSuccess(GetOperationPaginatedListResult result) {
                 getView().setOperations(result.getOperationBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
+                if (StringUtils.isBlank(operation)) {
+                    getView().clearSearchSection();
+                }
             }
         });
     }
@@ -200,12 +205,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
             }
         });

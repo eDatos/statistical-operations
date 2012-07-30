@@ -8,7 +8,7 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface OperationListUiHandlers extends UiHandlers {
 
-    void retrieveOperationList(int firstResult, int maxResults);
+    void retrieveOperationList(int firstResult, int maxResults, String operation);
 
     void saveOperation(OperationDto operationDto);
     void goToOperation(String operationCode);
