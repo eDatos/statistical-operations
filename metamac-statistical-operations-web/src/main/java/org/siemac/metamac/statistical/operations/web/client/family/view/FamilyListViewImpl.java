@@ -16,8 +16,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
-import org.siemac.metamac.statistical.operations.web.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
+import org.siemac.metamac.web.common.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
 import com.google.gwt.user.client.ui.Widget;
