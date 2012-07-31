@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
+import org.siemac.metamac.common.metadata.rest.internal.v1_0.domain.Configuration;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.exception.MetamacException;
@@ -43,6 +44,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
@@ -57,7 +59,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     // private MessageContext context; // Always null in this bean (not in Service)...
 
     @Autowired
-    private ConfigurationService configurationService;
+    private ConfigurationService             configurationService;
+
+    @Autowired
+    private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
 
     @Override
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) {
@@ -97,7 +102,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
         target.setRevPractice(toInternationalString(source.getRevPractice()));
-        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        commonMetadataToOperation(source.getCommonMetadata(), target);
         target.setComment(toInternationalString(source.getComment()));
         target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toOperationParent(apiUrl));
@@ -391,7 +396,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return targets;
     }
 
-    // TODO pasar a librería común toError? Si se crea metamac-api-domain sólo con clases de Interfaz
     @Override
     public Error toError(Exception exception) {
         Error error = new Error();
@@ -429,6 +433,21 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             errorItems.add(errorItem);
         }
         return errorItems;
+    }
+
+    private void commonMetadataToOperation(ExternalItem commonMetadata, Operation target) {
+        if (commonMetadata == null) {
+            return;
+        }
+        // Calls to CommonMetadata API
+        Configuration configuration = commonMetadataRestInternalFacade.retrieveConfigurationById(commonMetadata.getCode());
+
+        // Transform
+        target.setContact(configuration.getContact());
+        target.setLegalActs(configuration.getLegalActs());
+        target.setDataSharing(configuration.getDataSharing());
+        target.setConfidentialityPolicy(configuration.getConfPolicy());
+        target.setConfidentialityDataTreatment(configuration.getConfDataTreatment());
     }
 
     private Resource toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) {

@@ -31,12 +31,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>family2 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>family2 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>family2 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </families>
@@ -79,28 +79,12 @@
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>secundarySubjectArea1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>secundarySubjectArea1 in English</ns2:label>
             </ns2:text>
-        </ns2:title>
-    </secondarySubjectAreas>
-    <secondarySubjectAreas>
-        <ns2:id>secundarySubjectArea333</ns2:id>
-        <ns2:urn>urn:secundarySubjectArea333</ns2:urn>
-        <ns2:kind>CATEGORY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>secundarySubjectArea333 in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>secundarySubjectArea333 en Español</ns2:label>
+                <ns2:label>secundarySubjectArea1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </secondarySubjectAreas>
@@ -120,14 +104,30 @@
             </ns2:text>
         </ns2:title>
     </secondarySubjectAreas>
+    <secondarySubjectAreas>
+        <ns2:id>secundarySubjectArea333</ns2:id>
+        <ns2:urn>urn:secundarySubjectArea333</ns2:urn>
+        <ns2:kind>CATEGORY</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>secundarySubjectArea333 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>secundarySubjectArea333 in English</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </secondarySubjectAreas>
     <objective>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>objetive1 in English</ns2:label>
-        </ns2:text>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
             <ns2:label>objetive1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>objetive1 in English</ns2:label>
         </ns2:text>
     </objective>
     <description>
@@ -147,12 +147,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance4444 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>instance4444 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>instance4444 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </instances>
@@ -195,12 +195,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance333 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>instance333 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>instance333 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </instances>
@@ -208,12 +208,12 @@
         <ns2:id>surveyIdentifier</ns2:id>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>surveyIdentifier en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>surveyIdentifier in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>surveyIdentifier en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </surveyType>
@@ -221,12 +221,12 @@
         <ns2:id>officialityType</ns2:id>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>officialityType en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>officialityType in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>officialityType en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </officialityType>
@@ -238,12 +238,12 @@
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/producers/producer1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>producer1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>es</ns2:locale>
                 <ns2:label>producer1 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>producer1 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </producers>
@@ -254,28 +254,28 @@
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/producers/producer22</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>producer22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>producer22 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>producer22 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </producers>
     <regionalResponsibles>
-        <ns2:id>regionalResponsible22</ns2:id>
-        <ns2:urn>urn:regionalResponsible22</ns2:urn>
+        <ns2:id>regionalResponsible1</ns2:id>
+        <ns2:urn>urn:regionalResponsible1</ns2:urn>
         <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalResponsible22 in English</ns2:label>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>regionalResponsible1 en Español</ns2:label>
             </ns2:text>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalResponsible22 en Español</ns2:label>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>regionalResponsible1 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </regionalResponsibles>
@@ -296,21 +296,37 @@
         </ns2:title>
     </regionalResponsibles>
     <regionalResponsibles>
-        <ns2:id>regionalResponsible1</ns2:id>
-        <ns2:urn>urn:regionalResponsible1</ns2:urn>
+        <ns2:id>regionalResponsible22</ns2:id>
+        <ns2:urn>urn:regionalResponsible22</ns2:urn>
         <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</ns2:selfLink>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</ns2:selfLink>
         <ns2:title>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalResponsible1 en Español</ns2:label>
+                <ns2:label>regionalResponsible22 en Español</ns2:label>
             </ns2:text>
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalResponsible1 in English</ns2:label>
+                <ns2:label>regionalResponsible22 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </regionalResponsibles>
+    <regionalContributors>
+        <ns2:id>regionalContributor22</ns2:id>
+        <ns2:urn>urn:regionalContributor22</ns2:urn>
+        <ns2:kind>AGENCY</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>regionalContributor22 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>regionalContributor22 in English</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </regionalContributors>
     <regionalContributors>
         <ns2:id>regionalContributor1</ns2:id>
         <ns2:urn>urn:regionalContributor1</ns2:urn>
@@ -327,42 +343,10 @@
             </ns2:text>
         </ns2:title>
     </regionalContributors>
-    <regionalContributors>
-        <ns2:id>regionalContributor22</ns2:id>
-        <ns2:urn>urn:regionalContributor22</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalContributor22 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalContributor22 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalContributors>
     <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
     <currentlyActive>false</currentlyActive>
     <status>DESIGN</status>
     <procStatus>PUBLISH_INTERNALLY</procStatus>
-    <publishers>
-        <ns2:id>publisher333</ns2:id>
-        <ns2:urn>urn:publisher333</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>publisher333 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>publisher333 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </publishers>
     <publishers>
         <ns2:id>publisher22</ns2:id>
         <ns2:urn>urn:publisher22</ns2:urn>
@@ -380,18 +364,34 @@
         </ns2:title>
     </publishers>
     <publishers>
+        <ns2:id>publisher333</ns2:id>
+        <ns2:urn>urn:publisher333</ns2:urn>
+        <ns2:kind>AGENCY</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher333</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>publisher333 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>publisher333 en Español</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </publishers>
+    <publishers>
         <ns2:id>publisher1</ns2:id>
         <ns2:urn>urn:publisher1</ns2:urn>
         <ns2:kind>AGENCY</ns2:kind>
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>publisher1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>publisher1 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>publisher1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </publishers>
@@ -414,28 +414,12 @@
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency4444 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>updateFrequency4444 in English</ns2:label>
             </ns2:text>
-        </ns2:title>
-    </updateFrequencies>
-    <updateFrequencies>
-        <ns2:id>updateFrequency22</ns2:id>
-        <ns2:urn>urn:updateFrequency22</ns2:urn>
-        <ns2:kind>CODE</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>updateFrequency22 in English</ns2:label>
-            </ns2:text>
             <ns2:text>
                 <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency22 en Español</ns2:label>
+                <ns2:label>updateFrequency4444 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </updateFrequencies>
@@ -446,12 +430,12 @@
         <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>updateFrequency1 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>updateFrequency1 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </updateFrequencies>
@@ -468,6 +452,22 @@
             <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>updateFrequency333 in English</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </updateFrequencies>
+    <updateFrequencies>
+        <ns2:id>updateFrequency22</ns2:id>
+        <ns2:urn>urn:updateFrequency22</ns2:urn>
+        <ns2:kind>CODE</ns2:kind>
+        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>updateFrequency22 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>updateFrequency22 in English</ns2:label>
             </ns2:text>
         </ns2:title>
     </updateFrequencies>
@@ -494,12 +494,12 @@
         <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
         <ns2:title>
             <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance333 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
                 <ns2:locale>en</ns2:locale>
                 <ns2:label>instance333 in English</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>instance333 en Español</ns2:label>
             </ns2:text>
         </ns2:title>
     </currentInstance>
@@ -516,22 +516,78 @@
     </revPolicy>
     <revPractice>
         <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>revPractice1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
             <ns2:locale>en</ns2:locale>
             <ns2:label>revPractice1 in English</ns2:label>
         </ns2:text>
-    </revPractice>
-    <comment>
         <ns2:text>
             <ns2:locale>es</ns2:locale>
-            <ns2:label>comment1 en Español</ns2:label>
+            <ns2:label>revPractice1 en Español</ns2:label>
+        </ns2:text>
+    </revPractice>
+    <contact>
+        <ns2:id>contact1</ns2:id>
+        <ns2:urn>urn:contact1</ns2:urn>
+        <ns2:kind>AGENCY</ns2:kind>
+        <ns2:selfLink>http://srm-api/contacts/contact1</ns2:selfLink>
+        <ns2:title>
+            <ns2:text>
+                <ns2:locale>es</ns2:locale>
+                <ns2:label>contact1 en Español</ns2:label>
+            </ns2:text>
+            <ns2:text>
+                <ns2:locale>en</ns2:locale>
+                <ns2:label>contact1 in English</ns2:label>
+            </ns2:text>
+        </ns2:title>
+    </contact>
+    <legalActs>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>legalActs1 en Español</ns2:label>
         </ns2:text>
         <ns2:text>
             <ns2:locale>en</ns2:locale>
+            <ns2:label>legalActs1 in English</ns2:label>
+        </ns2:text>
+    </legalActs>
+    <dataSharing>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>dataSharing1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>dataSharing1 in English</ns2:label>
+        </ns2:text>
+    </dataSharing>
+    <confidentialityPolicy>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>confidentialityPolicy1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>confidentialityPolicy1 in English</ns2:label>
+        </ns2:text>
+    </confidentialityPolicy>
+    <confidentialityDataTreatment>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>confidentialityDataTreatment1 en Español</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
+            <ns2:label>confidentialityDataTreatment1 in English</ns2:label>
+        </ns2:text>
+    </confidentialityDataTreatment>
+    <comment>
+        <ns2:text>
+            <ns2:locale>en</ns2:locale>
             <ns2:label>comment1 in English</ns2:label>
+        </ns2:text>
+        <ns2:text>
+            <ns2:locale>es</ns2:locale>
+            <ns2:label>comment1 en Español</ns2:label>
         </ns2:text>
     </comment>
     <notes>

@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.common.metadata.rest.internal.v1_0.domain.Configuration;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -563,6 +564,16 @@ public class StatisticalOperationsRestMocks {
         return simpleItemsNoPagedResult;
     }
 
+    public static Configuration mockExternalApiCommonMetadataRetrieveConfiguration1ById() {
+        Configuration configuration = new Configuration();
+        configuration.setContact(MetamacRestMocks.mockResource("contact1", "urn:contact1", "AGENCY", "http://srm-api/contacts/contact1"));
+        configuration.setLegalActs(mockInternationalString("legalActs", "1"));
+        configuration.setDataSharing(mockInternationalString("dataSharing", "1"));
+        configuration.setConfPolicy(mockInternationalString("confidentialityPolicy", "1"));
+        configuration.setConfDataTreatment(mockInternationalString("confidentialityDataTreatment", "1"));
+        return configuration;
+    }
+
     private static Resource mockOperationResource(String subId, String baseApi) {
         String operationId = "operation" + subId;
         return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestInternalConstants.KIND_OPERATION, baseApi
@@ -631,7 +642,11 @@ public class StatisticalOperationsRestMocks {
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(mockInternationalString("revPolicy", subId));
         operation.setRevPractice(mockInternationalString("revPractice", subId));
-        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        operation.setContact(mockResourceFromExternalItem("contact1", "http://srm-api", "contacts", TypeExternalArtefactsEnum.AGENCY));
+        operation.setLegalActs(mockInternationalString("legalActs", "1"));
+        operation.setDataSharing(mockInternationalString("dataSharing", "1"));
+        operation.setConfidentialityPolicy(mockInternationalString("confidentialityPolicy", "1"));
+        operation.setConfidentialityDataTreatment(mockInternationalString("confidentialityDataTreatment", "1"));
         operation.setComment(mockInternationalString("comment", subId));
         operation.setNotes(mockInternationalString("notes", subId));
         operation.setParent(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, baseApi + "/operations"));
@@ -811,7 +826,7 @@ public class StatisticalOperationsRestMocks {
         String subTitle = subsubTitle != null ? metadata + subsubTitle : metadata;
         return MetamacRestMocks.mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
     }
-    
+
     private static Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, TypeExternalArtefactsEnum kind) {
         String endpointApi = "http://localhost:8080/metamac-srm-web"; // not read property from properties file to check explicity
         return mockResourceFromExternalItem(id, endpointApi, apiSubpath, kind);

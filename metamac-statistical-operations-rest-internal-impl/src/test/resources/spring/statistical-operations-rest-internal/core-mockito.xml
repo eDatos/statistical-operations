@@ -12,4 +12,8 @@
         <constructor-arg value="org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService" />
     </bean>
     
+    <bean id="commonMetadataRestInternalFacade" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade" />
+    </bean>    
+    
 </beans>

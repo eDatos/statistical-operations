@@ -622,7 +622,7 @@ public class StatisticalOperationsCoreMocks {
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
         operation.setRevPolicy(mockInternationalString("revPolicy", subCode));
         operation.setRevPractice(mockInternationalString("revPractice", subCode));
-        // TODO CONTACTS, LEGAL_ACTS, DATA_SHARING, CONFIDENTIALITY_POLICY, CONFIDENTIALITY_DATA_TREATMENT. No están en OperationBase
+        operation.setCommonMetadata(mockExternalItem("commonMetadata1", "nothing", TypeExternalArtefactsEnum.AGENCY));
         operation.setComment(mockInternationalString("comment", subCode));
         operation.setNotes(mockInternationalString("notes", subCode));
 

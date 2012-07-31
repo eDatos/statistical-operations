@@ -42,7 +42,7 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPractice(), actual.getRevPractice());
-        MetamacRestAsserts.assertEqualsResources(expected.getContacts(), actual.getContacts());
+        MetamacRestAsserts.assertEqualsResource(expected.getContact(), actual.getContact());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getLegalActs(), actual.getLegalActs());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataSharing(), actual.getDataSharing());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityPolicy(), actual.getConfidentialityPolicy());

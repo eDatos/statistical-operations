@@ -39,7 +39,7 @@
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="revPolicy" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="revPractice" type="common:InternationalString" minOccurs="0"/>
-            <xs:element name="contacts" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="contact" type="common:Resource" minOccurs="1" />
             <xs:element name="legalActs" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0"/>
             <xs:element name="confidentialityPolicy" type="common:InternationalString" minOccurs="0"/>

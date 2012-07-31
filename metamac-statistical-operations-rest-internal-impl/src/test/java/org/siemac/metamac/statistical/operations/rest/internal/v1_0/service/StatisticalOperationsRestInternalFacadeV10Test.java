@@ -41,6 +41,7 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
@@ -60,27 +61,29 @@ import org.springframework.web.util.UriUtils;
 
 public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestBaseTest {
 
-    private static final String                       PORT                                            = ServerResource.PORT;
-    private static String                             baseApi                                         = "http://localhost:" + PORT + "/internal/v1.0";
+    private static final String                               PORT                                            = ServerResource.PORT;
+    private static String                                     baseApi                                         = "http://localhost:" + PORT + "/internal/v1.0";
 
     private static StatisticalOperationsRestInternalFacadeV10 statisticalOperationsRestInternalFacadeClientXml;
     private static StatisticalOperationsRestInternalFacadeV10 statisticalOperationsRestInternalFacadeClientJson;
 
-    private static ApplicationContext                 applicationContext                              = null;
+    private static ApplicationContext                         applicationContext                              = null;
 
-    private static String                             NOT_EXISTS                                      = "NOT_EXISTS";
+    private static String                                     NOT_EXISTS                                      = "NOT_EXISTS";
 
     // Operations
-    public static String                              OPERATION_1                                     = "operation1";
-    public static String                              FAMILY_1                                        = "family1";
-    public static String                              FAMILY_2                                        = "family2";
-    public static String                              INSTANCE_1                                      = "instance1";
-    public static String                              QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
-    public static String                              QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
-                                                                                                              + LogicalOperator.AND + " " + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM
-                                                                                                              + " " + ComparisonOperator.EQ + " \"true\"";
-    public static String                              QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
-    public static String                              QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                                      OPERATION_1                                     = "operation1";
+    public static String                                      FAMILY_1                                        = "family1";
+    public static String                                      FAMILY_2                                        = "family2";
+    public static String                                      INSTANCE_1                                      = "instance1";
+    public static String                                      COMMON_METADATA_1                               = "commonMetadata1";
+    public static String                                      QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                                      QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
+                                                                                                                      + LogicalOperator.AND + " "
+                                                                                                                      + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM + " "
+                                                                                                                      + ComparisonOperator.EQ + " \"true\"";
+    public static String                                      QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                                      QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @BeforeClass
@@ -1174,7 +1177,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             fail("Incorrect exception");
         }
     }
-    
+
     @Test
     public void testRetrieveSurveyTypesXml() throws Exception {
 
@@ -1194,9 +1197,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     // TODO json? testRetrieveSurveyTypesJsonWithoutJaxbTransformation
-    
+
     @Test
     public void testRetrieveOfficialityTypesXml() throws Exception {
 
@@ -1216,9 +1219,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     // TODO json? testRetrieveOfficialityTypesJsonWithoutJaxbTransformation
-    
+
     @Test
     public void testRetrieveInstanceTypesXml() throws Exception {
 
@@ -1238,9 +1241,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     // TODO json? testRetrieveInstanceTypesJsonWithoutJaxbTransformation
-    
+
     @Test
     public void testRetrieveSurveySourcesXml() throws Exception {
 
@@ -1260,9 +1263,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     // TODO json? testRetrieveSurveySourcesJsonWithoutJaxbTransformation
-    
+
     @Test
     public void testRetrieveCollMethodsXml() throws Exception {
 
@@ -1282,9 +1285,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     // TODO json? testRetrieveCollMethodsJsonWithoutJaxbTransformation
-    
+
     @Test
     public void testRetrieveCostsXml() throws Exception {
 
@@ -1304,9 +1307,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
-    // TODO json? testRetrieveCostsJsonWithoutJaxbTransformation
 
+    // TODO json? testRetrieveCostsJsonWithoutJaxbTransformation
 
     private String getRequestUriRetrieveOperationById(String operationId) {
         return baseApi + "/operations/" + operationId;
@@ -1366,7 +1368,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     private String getRequestUriRetrieveSurveyTypes() {
         return baseApi + "/surveyTypes";
     }
-    
+
     private String getRequestUriRetrieveOfficialityTypes() {
         return baseApi + "/officialityTypes";
     }
@@ -1391,6 +1393,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
+        CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
@@ -1449,8 +1452,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         when(statisticalOperationsListsService.findAllSurveySources(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllSurveySources());
         when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCollMethods());
         when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCosts());
-    }
 
+        // External APIS
+        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+    }
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> pagedResultOperations = null;
         if (FAMILY_1.equals(family)) {
