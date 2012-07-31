@@ -177,7 +177,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Family.class);
+        condition = initCriteriaConditions(condition, Family.class);
 
         // Repository operation
         return familyRepository.findByCondition(condition);
@@ -188,7 +188,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Family.class);
+        condition = initCriteriaConditions(condition, Family.class);
 
         // Repository operation
         return familyRepository.findByCondition(condition, pagingParameter);
@@ -389,7 +389,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Operation.class);
+        condition = initCriteriaConditions(condition, Operation.class);
 
         // Repository operation
         return operationRepository.findByCondition(condition);
@@ -400,7 +400,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Operation.class);
+        condition = initCriteriaConditions(condition, Operation.class);
 
         // Repository operation
         return operationRepository.findByCondition(condition, pagingParameter);
@@ -635,7 +635,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Instance.class);
+        condition = initCriteriaConditions(condition, Instance.class);
 
         // Repository operation
         return instanceRepository.findByCondition(condition);
@@ -646,7 +646,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        initCriteriaConditions(condition, Instance.class);
+        condition = initCriteriaConditions(condition, Instance.class);
 
         // Repository operation
         return instanceRepository.findByCondition(condition, pagingParameter);
