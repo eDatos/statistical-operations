@@ -150,11 +150,52 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
+    
+    @Test
+    public void testRetrieveOperationByIdXmlWithoutJaxbTransformationWithXmlSufix() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + ".xml";
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+    
+    @Test
+    public void testRetrieveOperationByIdXmlWithoutJaxbTransformationWithTypeParameter() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + "?_type=xml";
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.xml");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
+    }
+
 
     @Test
     public void testRetrieveOperationByIdJsonWithoutJaxbTransformation() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+    
+    @Test
+    public void testRetrieveOperationByIdJsonWithoutJaxbTransformationWithJsonSufix() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + ".json";
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+    
+    @Test
+    public void testRetrieveOperationByIdJsonWithoutJaxbTransformationWithTypeParameter() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + "?_type=json";
         InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
 
         // Request and validate
