@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:tns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain"
+    targetNamespace="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" jaxb:version="2.1">
+
+    <xs:import namespace="http://www.siemac.org/metamac/rest/common/v1.0/domain" schemaLocation="metamac-rest-api:metamac-rest-common-domain-v1.0.xsd" />
+                          
+    <xs:complexType name="Operation">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="selfLink" type="xs:string" />
+            <xs:element name="title" type="common:InternationalString" />
+            <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="families" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="subjectArea" type="common:Resource" />
+            <xs:element name="secondarySubjectAreas" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="objective" type="common:InternationalString" />
+            <xs:element name="description" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="instances" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="surveyType" type="common:SimpleItem" />
+            <xs:element name="officialityType" type="common:SimpleItem" />
+            <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
+            <xs:element name="producers" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="regionalResponsibles" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="regionalContributors" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
+            <xs:element name="status" type="tns:Status" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
+            <xs:element name="publishers" type="common:Resource" maxOccurs="unbounded" />
+            <xs:element name="relPolUsAc" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
+            <xs:element name="releaseCalendarAccess" type="xs:string" minOccurs="0"/>
+            <xs:element name="updateFrequencies" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="currentInternalInstance" type="common:Resource" minOccurs="0"/>
+            <xs:element name="currentInstance" type="common:Resource" minOccurs="0"/>
+            <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="revPolicy" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="revPractice" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="contact" type="common:Resource" minOccurs="1" />
+            <xs:element name="legalActs" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="confidentialityPolicy" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="children" type="common:ResourceLink" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType> 
+       
+    <xs:complexType name="Family">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="selfLink" type="xs:string" />
+            <xs:element name="title" type="common:InternationalString" />
+            <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="description" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
+            <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="children" type="common:ResourceLink" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Instance">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="urn" type="xs:string" />
+            <xs:element name="kind" type="xs:string" />
+            <xs:element name="selfLink" type="xs:string" />
+            <xs:element name="title" type="common:InternationalString" />
+            <xs:element name="acronym" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="survey" type="common:Resource" />
+            <xs:element name="successor" type="common:Resource" minOccurs="0"/>
+            <xs:element name="predecessor" type="common:Resource" minOccurs="0"/>
+            <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="statisticalPopulation" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="statisticalUnits" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="geographicGranularity" type="common:Resource" minOccurs="0"/>
+            <xs:element name="geographicComparability" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="temporalGranularity" type="common:Resource" minOccurs="0"/>
+            <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="basePeriod" type="xs:string" minOccurs="0"/>
+            <xs:element name="unitMeasures" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="statConcDef" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="statConcDefList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="classSystem" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="classSystemList" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="instanceType" type="common:SimpleItem" />
+            <xs:element name="internalInventoryDate" type="xs:dateTime" />
+            <xs:element name="procStatus" type="tns:ProcStatus" />
+            <xs:element name="docMethod" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="surveySource" type="common:SimpleItem" minOccurs="0"/>
+            <xs:element name="collMethod" type="common:SimpleItem" minOccurs="0"/>
+            <xs:element name="informationSuppliers" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="freqColls" type="common:Resource" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="dataValidation" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="dataCompilation" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="adjustment" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="costBurden" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="costs" type="common:SimpleItem" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="qualityDoc" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="qualityAssure" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="qualityAssmnt" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="userNeeds" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="userSat" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="completeness" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="timeliness" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="punctuality" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="accuracyOverall" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="samplingErr" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="nonsamplingErr" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="coherXDom" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="coherInternal" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="comment" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="notes" type="common:InternationalString" minOccurs="0"/>
+            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="children" type="common:ResourceLink" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="ProcStatus">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="PUBLISH_INTERNALLY" />
+            <xs:enumeration value="PUBLISH_EXTERNALLY" />
+        </xs:restriction>
+    </xs:simpleType> 
+    
+    <xs:simpleType name="Status">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="PLANNING" />
+            <xs:enumeration value="DESIGN" />
+            <xs:enumeration value="PRODUCTION" />
+            <xs:enumeration value="OUT_OF_PRINT" />
+        </xs:restriction>
+    </xs:simpleType> 
+
+    <xs:simpleType name="OperationCriteriaPropertyRestriction">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />
+            <xs:enumeration value="TITLE" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="SUBJECT_AREA_URN" />
+            <xs:enumeration value="SECONDARY_SUBJECT_AREA_URN" />
+            <xs:enumeration value="DESCRIPTION" />
+            <xs:enumeration value="SURVEY_TYPE_ID" />                  
+            <xs:enumeration value="OFFICIALITY_TYPE_ID" />
+            <xs:enumeration value="IS_INDICATORS_SYSTEM" />
+            <xs:enumeration value="PRODUCER_URN" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
+            <xs:enumeration value="CURRENTLY_ACTIVE" />
+            <xs:enumeration value="STATUS" />
+            <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="PUBLISHER_URN" />
+            <xs:enumeration value="INVENTORY_DATE" />
+        </xs:restriction>
+    </xs:simpleType>    
+    
+	<xs:simpleType name="OperationCriteriaPropertyOrder">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+        </xs:restriction>
+    </xs:simpleType>  
+    
+    <xs:simpleType name="InstanceCriteriaPropertyRestriction">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />            
+            <xs:enumeration value="TITLE" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="DATA_DESCRIPTION" />
+            <xs:enumeration value="GEOGRAPHIC_GRANULARITY_URN" />
+            <xs:enumeration value="TEMPORAL_GRANULARITY_URN" />
+            <xs:enumeration value="INSTANCE_TYPE_ID" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
+            <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="INVENTORY_DATE" />
+        </xs:restriction>
+    </xs:simpleType>    
+    
+    <xs:simpleType name="InstanceCriteriaPropertyOrder">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+        </xs:restriction>
+    </xs:simpleType>          
+    
+    <xs:simpleType name="FamilyCriteriaPropertyRestriction">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+            <xs:enumeration value="URN" />            
+            <xs:enumeration value="TITLE" />
+            <xs:enumeration value="ACRONYM" />
+            <xs:enumeration value="DESCRIPTION" />
+            <xs:enumeration value="INTERNAL_INVENTORY_DATE" />
+            <xs:enumeration value="PROC_STATUS" />
+            <xs:enumeration value="INVENTORY_DATE" />
+        </xs:restriction>
+    </xs:simpleType>    
+    
+    <xs:simpleType name="FamilyCriteriaPropertyOrder">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ID" />
+        </xs:restriction>
+    </xs:simpleType>      
+    
+    <!-- Elements -->
+    <xs:element name="operation" type="tns:Operation" />
+    <xs:element name="family" type="tns:Family" />
+    <xs:element name="instance" type="tns:Instance" />
+</xs:schema>
