@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
@@ -34,6 +35,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
 import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.constants.RestConstants;
+import org.siemac.metamac.rest.jackson.MetamacJacksonJaxbJsonProvider;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
@@ -99,13 +101,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // xml
         {
             List providers = new ArrayList();
-            providers.add(new org.apache.cxf.jaxrs.provider.JAXBElementProvider());
+            providers.add(applicationContext.getBean(JAXBElementProvider.class));
             statisticalOperationsRestInternalFacadeClientXml = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestInternalFacadeV10.class, providers, Boolean.TRUE);
         }
         // json
         {
             List providers = new ArrayList();
-            providers.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
+            providers.add(applicationContext.getBean(MetamacJacksonJaxbJsonProvider.class));
             statisticalOperationsRestInternalFacadeClientJson = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestInternalFacadeV10.class, providers, Boolean.TRUE);
         }
         // Mockito

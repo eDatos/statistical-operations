@@ -12,7 +12,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance1 in English"

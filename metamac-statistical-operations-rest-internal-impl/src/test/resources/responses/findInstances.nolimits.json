@@ -10,7 +10,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance1 in English"
@@ -28,7 +28,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance2",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance2 in English"
@@ -46,7 +46,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance3 in English"
@@ -64,7 +64,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance4 in English"
@@ -82,7 +82,7 @@
       "kind": "statisticalOperations#instance",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "instance15 in English"

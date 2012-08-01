@@ -14,7 +14,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation3",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation3 en Español"
@@ -32,7 +32,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation4",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation4 en Español"

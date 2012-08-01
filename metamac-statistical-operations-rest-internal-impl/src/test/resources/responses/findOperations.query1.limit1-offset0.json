@@ -12,7 +12,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation1 en Español"

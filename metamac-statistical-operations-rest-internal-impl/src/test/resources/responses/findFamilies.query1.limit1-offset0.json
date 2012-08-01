@@ -12,7 +12,7 @@
       "kind": "statisticalOperations#family",
       "selfLink": "http://localhost:9001/internal/v1.0/families/family1",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "family1 in English"

@@ -10,7 +10,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation1",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation1 en Español"
@@ -28,7 +28,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation2",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation2 en Español"
@@ -46,7 +46,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation3",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation3 in English"
@@ -64,7 +64,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation4",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "es",
             "label": "operation4 en Español"
@@ -82,7 +82,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation5",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation5 in English"
@@ -100,7 +100,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation6",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation6 in English"
@@ -118,7 +118,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation7",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation7 in English"
@@ -136,7 +136,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation8",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation8 in English"
@@ -154,7 +154,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation9",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation9 in English"
@@ -172,7 +172,7 @@
       "kind": "statisticalOperations#operation",
       "selfLink": "http://localhost:9001/internal/v1.0/operations/operation10",
       "title": {
-        "texts": [
+        "text": [
           {
             "locale": "en",
             "label": "operation10 in English"

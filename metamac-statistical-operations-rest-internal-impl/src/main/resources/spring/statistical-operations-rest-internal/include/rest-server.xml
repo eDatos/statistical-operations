@@ -39,11 +39,7 @@
         <property name="marshallerProperties" ref="propertiesMap" />
     </bean>
 
-    <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
-        <property name="mapper" ref="jacksonJsonMapper" />
-    </bean>
-    
-    <bean id="jacksonJsonMapper" class="org.siemac.metamac.rest.jackson.JacksonJsonMapper" />
+    <bean id="jsonProvider" class="org.siemac.metamac.rest.jackson.MetamacJacksonJaxbJsonProvider" />
     
     <util:map id="propertiesMap">
         <entry key="jaxb.formatted.output">
