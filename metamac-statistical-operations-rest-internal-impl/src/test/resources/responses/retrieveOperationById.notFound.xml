@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<error xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <errorItems code="exception.operations.operation.not_found">
-        <message>Operation not found with id {0}</message>
-        <parameters>NOT_EXISTS</parameters>
-    </errorItems>
-</error>
+<common:error xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
+    <common:errorItems>
+        <common:errorItem code="exception.operations.operation.not_found">
+            <common:message>Operation not found with id {0}</common:message>
+            <common:parameters>
+                <common:parameter>NOT_EXISTS</common:parameter>
+            </common:parameters>
+        </common:errorItem>
+    </common:errorItems>
+</common:error>

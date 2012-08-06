@@ -34,12 +34,15 @@
     </jaxrs:server>
 
     <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
-        <property name="marshallerProperties" ref="propertiesMap" />
+        <property name="marshallerProperties" ref="marshallerProperties" />
     </bean>
 
-    <util:map id="propertiesMap">
+    <util:map id="marshallerProperties">
         <entry key="jaxb.formatted.output">
             <value type="java.lang.Boolean">true</value>
         </entry>
+        <entry key="com.sun.xml.bind.namespacePrefixMapper" value-ref="statisticalOperationsNamespacePrefixMapper" />
     </util:map>
+    
+     <bean id="statisticalOperationsNamespacePrefixMapper" class="org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsNamespacePrefixMapper" />
 </beans>

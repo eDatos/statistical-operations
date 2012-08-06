@@ -1,48 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<family xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <id>family1</id>
-    <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</urn>
-    <kind>statisticalOperations#family</kind>
-    <selfLink>http://localhost:9001/internal/v1.0/families/family1</selfLink>
-    <title>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>family1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>family1 in English</ns2:label>
-        </ns2:text>
-    </title>
-    <acronym>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>acronym1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>acronym1 en Español</ns2:label>
-        </ns2:text>
-    </acronym>
-    <description>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>description1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>description1 en Español</ns2:label>
-        </ns2:text>
-    </description>
-    <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
-    <procStatus>PUBLISH_INTERNALLY</procStatus>
-    <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
-    <parent>
-        <ns2:kind>statisticalOperations#families</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/families</ns2:selfLink>
-    </parent>
-    <children>
-        <ns2:kind>statisticalOperations#operations</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1/operations</ns2:selfLink>
-    </children>
-</family>
+<operations:family xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#family">
+    <operations:id>family1</operations:id>
+    <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</operations:urn>
+    <operations:selfLink>http://localhost:9001/internal/v1.0/families/family1</operations:selfLink>
+    <operations:parent kind="statisticalOperations#families">
+        <common:selfLink>http://localhost:9001/internal/v1.0/families</common:selfLink>
+    </operations:parent>
+    <operations:title>
+        <common:text xml:lang="es">family1 en Español</common:text>
+        <common:text xml:lang="en">family1 in English</common:text>
+    </operations:title>
+    <operations:acronym>
+        <common:text xml:lang="es">acronym1 en Español</common:text>
+        <common:text xml:lang="en">acronym1 in English</common:text>
+    </operations:acronym>
+    <operations:description>
+        <common:text xml:lang="es">description1 en Español</common:text>
+        <common:text xml:lang="en">description1 in English</common:text>
+    </operations:description>
+    <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
+    <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
+    <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
+    <operations:children>
+        <operations:child kind="statisticalOperations#operations">
+            <common:selfLink>http://localhost:9001/internal/v1.0/families/family1/operations</common:selfLink>
+        </operations:child>
+    </operations:children>
+</operations:family>

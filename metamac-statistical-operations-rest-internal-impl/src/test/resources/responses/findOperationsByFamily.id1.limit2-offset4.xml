@@ -1,41 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#operations</kind>
-    <limit>2</limit>
-    <offset>4</offset>
-    <total>6</total>
-    <firstLink>http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&amp;offset=0</firstLink>
-    <previousLink>http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&amp;offset=2</previousLink>
-    <items>
-        <id>operation5</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</urn>
-        <kind>statisticalOperations#operation</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation5</selfLink>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>operation5 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>operation5 in English</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>operation6</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</urn>
-        <kind>statisticalOperations#operation</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation6</selfLink>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>operation6 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>operation6 en Español</label>
-            </text>
-        </title>
-    </items>
-</resourcesPagedResult>
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="2" offset="4" total="6" firstLink="http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&amp;offset=0" previousLink="http://localhost:9001/internal/v1.0/families/family1/operations?limit=2&amp;offset=2">
+    <operations:operation kind="statisticalOperations#operation">
+        <common:id>operation5</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation5</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">operation5 in English</common:text>
+            <common:text xml:lang="es">operation5 en Español</common:text>
+        </common:title>
+    </operations:operation>
+    <operations:operation kind="statisticalOperations#operation">
+        <common:id>operation6</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation6</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">operation6 in English</common:text>
+            <common:text xml:lang="es">operation6 en Español</common:text>
+        </common:title>
+    </operations:operation>
+</operations:operations>

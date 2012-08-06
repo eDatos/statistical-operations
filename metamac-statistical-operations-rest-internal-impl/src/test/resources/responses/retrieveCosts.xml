@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<simpleItemsNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#costs</kind>
-    <total>2</total>
-    <items>
-        <id>cost1</id>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>cost1 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>cost1 en Español</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>cost2</id>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>cost2 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>cost2 in English</label>
-            </text>
-        </title>
-    </items>
-</simpleItemsNoPagedResult>
+<operations:costs xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#costs" total="2">
+    <operations:cost>
+        <common:id>cost1</common:id>
+        <common:title>
+            <common:text xml:lang="es">cost1 en Español</common:text>
+            <common:text xml:lang="en">cost1 in English</common:text>
+        </common:title>
+    </operations:cost>
+    <operations:cost>
+        <common:id>cost2</common:id>
+        <common:title>
+            <common:text xml:lang="en">cost2 in English</common:text>
+            <common:text xml:lang="es">cost2 en Español</common:text>
+        </common:title>
+    </operations:cost>
+</operations:costs>

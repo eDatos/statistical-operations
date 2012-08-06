@@ -1,615 +1,287 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operation xmlns="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:ns2="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <id>operation1</id>
-    <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</urn>
-    <kind>statisticalOperations#operation</kind>
-    <selfLink>http://localhost:9001/internal/v1.0/operations/operation1</selfLink>
-    <title>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>operation1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>operation1 en Español</ns2:label>
-        </ns2:text>
-    </title>
-    <acronym>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>acronym1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>acronym1 en Español</ns2:label>
-        </ns2:text>
-    </acronym>
-    <families>
-        <ns2:id>family2</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</ns2:urn>
-        <ns2:kind>statisticalOperations#family</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family2</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>family2 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>family2 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </families>
-    <families>
-        <ns2:id>family1</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</ns2:urn>
-        <ns2:kind>statisticalOperations#family</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/families/family1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>family1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>family1 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </families>
-    <subjectArea>
-        <ns2:id>subjectArea1</ns2:id>
-        <ns2:urn>urn:subjectArea1</ns2:urn>
-        <ns2:kind>CATEGORY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/subjectAreas/subjectArea1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>subjectArea1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>subjectArea1 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </subjectArea>
-    <secondarySubjectAreas>
-        <ns2:id>secundarySubjectArea1</ns2:id>
-        <ns2:urn>urn:secundarySubjectArea1</ns2:urn>
-        <ns2:kind>CATEGORY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>secundarySubjectArea1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>secundarySubjectArea1 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </secondarySubjectAreas>
-    <secondarySubjectAreas>
-        <ns2:id>secundarySubjectArea22</ns2:id>
-        <ns2:urn>urn:secundarySubjectArea22</ns2:urn>
-        <ns2:kind>CATEGORY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>secundarySubjectArea22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>secundarySubjectArea22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </secondarySubjectAreas>
-    <secondarySubjectAreas>
-        <ns2:id>secundarySubjectArea333</ns2:id>
-        <ns2:urn>urn:secundarySubjectArea333</ns2:urn>
-        <ns2:kind>CATEGORY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>secundarySubjectArea333 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>secundarySubjectArea333 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </secondarySubjectAreas>
-    <objective>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>objetive1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>objetive1 in English</ns2:label>
-        </ns2:text>
-    </objective>
-    <description>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>description1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>description1 in English</ns2:label>
-        </ns2:text>
-    </description>
-    <instances>
-        <ns2:id>instance4444</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4444</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4444</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance4444 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance4444 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </instances>
-    <instances>
-        <ns2:id>instance22</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </instances>
-    <instances>
-        <ns2:id>instance1</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance1 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </instances>
-    <instances>
-        <ns2:id>instance333</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance333 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance333 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </instances>
-    <surveyType>
-        <ns2:id>surveyIdentifier</ns2:id>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>surveyIdentifier in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>surveyIdentifier en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </surveyType>
-    <officialityType>
-        <ns2:id>officialityType</ns2:id>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>officialityType in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>officialityType en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </officialityType>
-    <indicatorSystem>true</indicatorSystem>
-    <producers>
-        <ns2:id>producer1</ns2:id>
-        <ns2:urn>urn:producer1</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/producers/producer1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>producer1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>producer1 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </producers>
-    <producers>
-        <ns2:id>producer22</ns2:id>
-        <ns2:urn>urn:producer22</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/producers/producer22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>producer22 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>producer22 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </producers>
-    <regionalResponsibles>
-        <ns2:id>regionalResponsible1</ns2:id>
-        <ns2:urn>urn:regionalResponsible1</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalResponsible1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalResponsible1 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalResponsibles>
-    <regionalResponsibles>
-        <ns2:id>regionalResponsible333</ns2:id>
-        <ns2:urn>urn:regionalResponsible333</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalResponsible333 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalResponsible333 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalResponsibles>
-    <regionalResponsibles>
-        <ns2:id>regionalResponsible22</ns2:id>
-        <ns2:urn>urn:regionalResponsible22</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalResponsible22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalResponsible22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalResponsibles>
-    <regionalContributors>
-        <ns2:id>regionalContributor22</ns2:id>
-        <ns2:urn>urn:regionalContributor22</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalContributor22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalContributor22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalContributors>
-    <regionalContributors>
-        <ns2:id>regionalContributor1</ns2:id>
-        <ns2:urn>urn:regionalContributor1</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>regionalContributor1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>regionalContributor1 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </regionalContributors>
-    <internalInventoryDate>2012-12-01T13:15:14Z</internalInventoryDate>
-    <currentlyActive>false</currentlyActive>
-    <status>DESIGN</status>
-    <procStatus>PUBLISH_INTERNALLY</procStatus>
-    <publishers>
-        <ns2:id>publisher22</ns2:id>
-        <ns2:urn>urn:publisher22</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>publisher22 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>publisher22 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </publishers>
-    <publishers>
-        <ns2:id>publisher333</ns2:id>
-        <ns2:urn>urn:publisher333</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>publisher333 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>publisher333 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </publishers>
-    <publishers>
-        <ns2:id>publisher1</ns2:id>
-        <ns2:urn>urn:publisher1</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>publisher1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>publisher1 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </publishers>
-    <relPolUsAc>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>relPolUsAc1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>relPolUsAc1 en Español</ns2:label>
-        </ns2:text>
-    </relPolUsAc>
-    <releaseCalendar>true</releaseCalendar>
-    <releaseCalendarAccess>http://releaseCalendarAccess1</releaseCalendarAccess>
-    <updateFrequencies>
-        <ns2:id>updateFrequency4444</ns2:id>
-        <ns2:urn>urn:updateFrequency4444</ns2:urn>
-        <ns2:kind>CODE</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>updateFrequency4444 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency4444 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </updateFrequencies>
-    <updateFrequencies>
-        <ns2:id>updateFrequency1</ns2:id>
-        <ns2:urn>urn:updateFrequency1</ns2:urn>
-        <ns2:kind>CODE</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>updateFrequency1 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency1 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </updateFrequencies>
-    <updateFrequencies>
-        <ns2:id>updateFrequency333</ns2:id>
-        <ns2:urn>urn:updateFrequency333</ns2:urn>
-        <ns2:kind>CODE</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency333 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>updateFrequency333 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </updateFrequencies>
-    <updateFrequencies>
-        <ns2:id>updateFrequency22</ns2:id>
-        <ns2:urn>urn:updateFrequency22</ns2:urn>
-        <ns2:kind>CODE</ns2:kind>
-        <ns2:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>updateFrequency22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>updateFrequency22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </updateFrequencies>
-    <currentInternalInstance>
-        <ns2:id>instance22</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance22 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance22 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </currentInternalInstance>
-    <currentInstance>
-        <ns2:id>instance333</ns2:id>
-        <ns2:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</ns2:urn>
-        <ns2:kind>statisticalOperations#instance</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>instance333 in English</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>instance333 en Español</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </currentInstance>
-    <inventoryDate>2013-02-04T13:15:14Z</inventoryDate>
-    <revPolicy>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>revPolicy1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>revPolicy1 in English</ns2:label>
-        </ns2:text>
-    </revPolicy>
-    <revPractice>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>revPractice1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>revPractice1 en Español</ns2:label>
-        </ns2:text>
-    </revPractice>
-    <contact>
-        <ns2:id>contact1</ns2:id>
-        <ns2:urn>urn:contact1</ns2:urn>
-        <ns2:kind>AGENCY</ns2:kind>
-        <ns2:selfLink>http://srm-api/contacts/contact1</ns2:selfLink>
-        <ns2:title>
-            <ns2:text>
-                <ns2:locale>es</ns2:locale>
-                <ns2:label>contact1 en Español</ns2:label>
-            </ns2:text>
-            <ns2:text>
-                <ns2:locale>en</ns2:locale>
-                <ns2:label>contact1 in English</ns2:label>
-            </ns2:text>
-        </ns2:title>
-    </contact>
-    <legalActs>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>legalActs1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>legalActs1 in English</ns2:label>
-        </ns2:text>
-    </legalActs>
-    <dataSharing>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>dataSharing1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>dataSharing1 in English</ns2:label>
-        </ns2:text>
-    </dataSharing>
-    <confidentialityPolicy>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>confidentialityPolicy1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>confidentialityPolicy1 in English</ns2:label>
-        </ns2:text>
-    </confidentialityPolicy>
-    <confidentialityDataTreatment>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>confidentialityDataTreatment1 en Español</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>confidentialityDataTreatment1 in English</ns2:label>
-        </ns2:text>
-    </confidentialityDataTreatment>
-    <comment>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>comment1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>comment1 en Español</ns2:label>
-        </ns2:text>
-    </comment>
-    <notes>
-        <ns2:text>
-            <ns2:locale>en</ns2:locale>
-            <ns2:label>notes1 in English</ns2:label>
-        </ns2:text>
-        <ns2:text>
-            <ns2:locale>es</ns2:locale>
-            <ns2:label>notes1 en Español</ns2:label>
-        </ns2:text>
-    </notes>
-    <parent>
-        <ns2:kind>statisticalOperations#operations</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations</ns2:selfLink>
-    </parent>
-    <children>
-        <ns2:kind>statisticalOperations#instances</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances</ns2:selfLink>
-    </children>
-    <children>
-        <ns2:kind>statisticalOperations#families</ns2:kind>
-        <ns2:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/families</ns2:selfLink>
-    </children>
-</operation>
+<operations:operation xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operation">
+    <operations:id>operation1</operations:id>
+    <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</operations:urn>
+    <operations:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</operations:selfLink>
+    <operations:parent kind="statisticalOperations#operations">
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations</common:selfLink>
+    </operations:parent>
+    <operations:title>
+        <common:text xml:lang="es">operation1 en Español</common:text>
+        <common:text xml:lang="en">operation1 in English</common:text>
+    </operations:title>
+    <operations:acronym>
+        <common:text xml:lang="en">acronym1 in English</common:text>
+        <common:text xml:lang="es">acronym1 en Español</common:text>
+    </operations:acronym>
+    <operations:families>
+        <operations:family kind="statisticalOperations#family">
+            <common:id>family2</common:id>
+            <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</common:urn>
+            <common:selfLink>http://localhost:9001/internal/v1.0/families/family2</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">family2 in English</common:text>
+                <common:text xml:lang="es">family2 en Español</common:text>
+            </common:title>
+        </operations:family>
+        <operations:family kind="statisticalOperations#family">
+            <common:id>family1</common:id>
+            <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</common:urn>
+            <common:selfLink>http://localhost:9001/internal/v1.0/families/family1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">family1 en Español</common:text>
+                <common:text xml:lang="en">family1 in English</common:text>
+            </common:title>
+        </operations:family>
+    </operations:families>
+    <operations:subjectArea kind="CATEGORY">
+        <common:id>subjectArea1</common:id>
+        <common:urn>urn:subjectArea1</common:urn>
+        <common:selfLink>http://localhost:8080/metamac-srm-web/subjectAreas/subjectArea1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">subjectArea1 in English</common:text>
+            <common:text xml:lang="es">subjectArea1 en Español</common:text>
+        </common:title>
+    </operations:subjectArea>
+    <operations:secondarySubjectAreas>
+        <operations:secondarySubjectArea kind="CATEGORY">
+            <common:id>secundarySubjectArea22</common:id>
+            <common:urn>urn:secundarySubjectArea22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">secundarySubjectArea22 in English</common:text>
+                <common:text xml:lang="es">secundarySubjectArea22 en Español</common:text>
+            </common:title>
+        </operations:secondarySubjectArea>
+        <operations:secondarySubjectArea kind="CATEGORY">
+            <common:id>secundarySubjectArea333</common:id>
+            <common:urn>urn:secundarySubjectArea333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">secundarySubjectArea333 en Español</common:text>
+                <common:text xml:lang="en">secundarySubjectArea333 in English</common:text>
+            </common:title>
+        </operations:secondarySubjectArea>
+        <operations:secondarySubjectArea kind="CATEGORY">
+            <common:id>secundarySubjectArea1</common:id>
+            <common:urn>urn:secundarySubjectArea1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">secundarySubjectArea1 en Español</common:text>
+                <common:text xml:lang="en">secundarySubjectArea1 in English</common:text>
+            </common:title>
+        </operations:secondarySubjectArea>
+    </operations:secondarySubjectAreas>
+    <operations:objective>
+        <common:text xml:lang="es">objetive1 en Español</common:text>
+        <common:text xml:lang="en">objetive1 in English</common:text>
+    </operations:objective>
+    <operations:description>
+        <common:text xml:lang="es">description1 en Español</common:text>
+        <common:text xml:lang="en">description1 in English</common:text>
+    </operations:description>
+    <operations:surveyType>
+        <common:id>surveyIdentifier</common:id>
+        <common:title>
+            <common:text xml:lang="en">surveyIdentifier in English</common:text>
+            <common:text xml:lang="es">surveyIdentifier en Español</common:text>
+        </common:title>
+    </operations:surveyType>
+    <operations:officialityType>
+        <common:id>officialityType</common:id>
+        <common:title>
+            <common:text xml:lang="es">officialityType en Español</common:text>
+            <common:text xml:lang="en">officialityType in English</common:text>
+        </common:title>
+    </operations:officialityType>
+    <operations:indicatorSystem>true</operations:indicatorSystem>
+    <operations:producers>
+        <operations:producer kind="AGENCY">
+            <common:id>producer22</common:id>
+            <common:urn>urn:producer22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/producers/producer22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">producer22 in English</common:text>
+                <common:text xml:lang="es">producer22 en Español</common:text>
+            </common:title>
+        </operations:producer>
+        <operations:producer kind="AGENCY">
+            <common:id>producer1</common:id>
+            <common:urn>urn:producer1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/producers/producer1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">producer1 in English</common:text>
+                <common:text xml:lang="es">producer1 en Español</common:text>
+            </common:title>
+        </operations:producer>
+    </operations:producers>
+    <operations:regionalResponsibles>
+        <operations:regionalResponsible kind="AGENCY">
+            <common:id>regionalResponsible333</common:id>
+            <common:urn>urn:regionalResponsible333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">regionalResponsible333 in English</common:text>
+                <common:text xml:lang="es">regionalResponsible333 en Español</common:text>
+            </common:title>
+        </operations:regionalResponsible>
+        <operations:regionalResponsible kind="AGENCY">
+            <common:id>regionalResponsible22</common:id>
+            <common:urn>urn:regionalResponsible22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">regionalResponsible22 in English</common:text>
+                <common:text xml:lang="es">regionalResponsible22 en Español</common:text>
+            </common:title>
+        </operations:regionalResponsible>
+        <operations:regionalResponsible kind="AGENCY">
+            <common:id>regionalResponsible1</common:id>
+            <common:urn>urn:regionalResponsible1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">regionalResponsible1 in English</common:text>
+                <common:text xml:lang="es">regionalResponsible1 en Español</common:text>
+            </common:title>
+        </operations:regionalResponsible>
+    </operations:regionalResponsibles>
+    <operations:regionalContributors>
+        <operations:regionalContributor kind="AGENCY">
+            <common:id>regionalContributor22</common:id>
+            <common:urn>urn:regionalContributor22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">regionalContributor22 in English</common:text>
+                <common:text xml:lang="es">regionalContributor22 en Español</common:text>
+            </common:title>
+        </operations:regionalContributor>
+        <operations:regionalContributor kind="AGENCY">
+            <common:id>regionalContributor1</common:id>
+            <common:urn>urn:regionalContributor1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">regionalContributor1 en Español</common:text>
+                <common:text xml:lang="en">regionalContributor1 in English</common:text>
+            </common:title>
+        </operations:regionalContributor>
+    </operations:regionalContributors>
+    <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
+    <operations:currentlyActive>false</operations:currentlyActive>
+    <operations:status>DESIGN</operations:status>
+    <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
+    <operations:publishers>
+        <operations:publisher kind="AGENCY">
+            <common:id>publisher22</common:id>
+            <common:urn>urn:publisher22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">publisher22 en Español</common:text>
+                <common:text xml:lang="en">publisher22 in English</common:text>
+            </common:title>
+        </operations:publisher>
+        <operations:publisher kind="AGENCY">
+            <common:id>publisher333</common:id>
+            <common:urn>urn:publisher333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher333</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">publisher333 in English</common:text>
+                <common:text xml:lang="es">publisher333 en Español</common:text>
+            </common:title>
+        </operations:publisher>
+        <operations:publisher kind="AGENCY">
+            <common:id>publisher1</common:id>
+            <common:urn>urn:publisher1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">publisher1 in English</common:text>
+                <common:text xml:lang="es">publisher1 en Español</common:text>
+            </common:title>
+        </operations:publisher>
+    </operations:publishers>
+    <operations:relPolUsAc>
+        <common:text xml:lang="es">relPolUsAc1 en Español</common:text>
+        <common:text xml:lang="en">relPolUsAc1 in English</common:text>
+    </operations:relPolUsAc>
+    <operations:releaseCalendar>true</operations:releaseCalendar>
+    <operations:releaseCalendarAccess>http://releaseCalendarAccess1</operations:releaseCalendarAccess>
+    <operations:updateFrequencies>
+        <operations:updateFrequency kind="CODE">
+            <common:id>updateFrequency22</common:id>
+            <common:urn>urn:updateFrequency22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">updateFrequency22 in English</common:text>
+                <common:text xml:lang="es">updateFrequency22 en Español</common:text>
+            </common:title>
+        </operations:updateFrequency>
+        <operations:updateFrequency kind="CODE">
+            <common:id>updateFrequency333</common:id>
+            <common:urn>urn:updateFrequency333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency333</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">updateFrequency333 in English</common:text>
+                <common:text xml:lang="es">updateFrequency333 en Español</common:text>
+            </common:title>
+        </operations:updateFrequency>
+        <operations:updateFrequency kind="CODE">
+            <common:id>updateFrequency4444</common:id>
+            <common:urn>urn:updateFrequency4444</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">updateFrequency4444 in English</common:text>
+                <common:text xml:lang="es">updateFrequency4444 en Español</common:text>
+            </common:title>
+        </operations:updateFrequency>
+        <operations:updateFrequency kind="CODE">
+            <common:id>updateFrequency1</common:id>
+            <common:urn>urn:updateFrequency1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="en">updateFrequency1 in English</common:text>
+                <common:text xml:lang="es">updateFrequency1 en Español</common:text>
+            </common:title>
+        </operations:updateFrequency>
+    </operations:updateFrequencies>
+    <operations:currentInternalInstance kind="statisticalOperations#instance">
+        <common:id>instance22</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">instance22 in English</common:text>
+            <common:text xml:lang="es">instance22 en Español</common:text>
+        </common:title>
+    </operations:currentInternalInstance>
+    <operations:currentInstance kind="statisticalOperations#instance">
+        <common:id>instance333</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">instance333 in English</common:text>
+            <common:text xml:lang="es">instance333 en Español</common:text>
+        </common:title>
+    </operations:currentInstance>
+    <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
+    <operations:revPolicy>
+        <common:text xml:lang="es">revPolicy1 en Español</common:text>
+        <common:text xml:lang="en">revPolicy1 in English</common:text>
+    </operations:revPolicy>
+    <operations:revPractice>
+        <common:text xml:lang="en">revPractice1 in English</common:text>
+        <common:text xml:lang="es">revPractice1 en Español</common:text>
+    </operations:revPractice>
+    <operations:comment>
+        <common:text xml:lang="es">comment1 en Español</common:text>
+        <common:text xml:lang="en">comment1 in English</common:text>
+    </operations:comment>
+    <operations:notes>
+        <common:text xml:lang="en">notes1 in English</common:text>
+        <common:text xml:lang="es">notes1 en Español</common:text>
+    </operations:notes>
+    <operations:children>
+        <operations:child kind="statisticalOperations#instances">
+            <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances</common:selfLink>
+        </operations:child>
+        <operations:child kind="statisticalOperations#families">
+            <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/families</common:selfLink>
+        </operations:child>
+    </operations:children>
+</operations:operation>

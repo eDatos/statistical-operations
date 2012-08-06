@@ -5,19 +5,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
+
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Costs;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Families;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instances;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveySources;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveyTypes;
 
 public interface StatisticalOperationsRestInternalFacadeV10 {
 
     @GET
     @Produces("application/xml")
     @Path("operations")
-    ResourcesPagedResult findOperations(@QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, @QueryParam("offset") String offset);
+    Operations findOperations(@QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, @QueryParam("offset") String offset);
 
     @GET
     @Produces("application/xml")
@@ -27,12 +34,12 @@ public interface StatisticalOperationsRestInternalFacadeV10 {
     @GET
     @Produces("application/xml")
     @Path("operations/{id}/families")
-    ResourcesNoPagedResult retrieveFamiliesByOperation(@PathParam("id") String id);
+    Families retrieveFamiliesByOperation(@PathParam("id") String id);
 
     @GET
     @Produces("application/xml")
     @Path("operations/{operationId}/instances")
-    ResourcesPagedResult findInstances(@PathParam("operationId") String operationId, @QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, 
+    Instances findInstances(@PathParam("operationId") String operationId, @QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, 
                 @QueryParam("offset") String offset);
 
     @GET
@@ -43,7 +50,7 @@ public interface StatisticalOperationsRestInternalFacadeV10 {
     @GET
     @Produces("application/xml")
     @Path("families")
-    ResourcesPagedResult findFamilies(@QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, @QueryParam("offset") String offset);
+    Families findFamilies(@QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, @QueryParam("offset") String offset);
 
     @GET
     @Produces("application/xml")
@@ -53,37 +60,36 @@ public interface StatisticalOperationsRestInternalFacadeV10 {
     @GET
     @Produces("application/xml")
     @Path("families/{id}/operations")
-    ResourcesPagedResult findOperationsByFamily(@PathParam("id") String id, @QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, 
+    Operations findOperationsByFamily(@PathParam("id") String id, @QueryParam("query") String query, @QueryParam("orderBy") String orderBy, @QueryParam("limit") String limit, 
                 @QueryParam("offset") String offset);
 
     @GET
     @Produces("application/xml")
     @Path("surveyTypes")
-    SimpleItemsNoPagedResult retrieveSurveyTypes();
+    SurveyTypes retrieveSurveyTypes();
 
     @GET
     @Produces("application/xml")
     @Path("officialityTypes")
-    SimpleItemsNoPagedResult retrieveOfficialityTypes();
+    OfficialityTypes retrieveOfficialityTypes();
 
     @GET
     @Produces("application/xml")
     @Path("instanceTypes")
-    SimpleItemsNoPagedResult retrieveInstanceTypes();
+    InstanceTypes retrieveInstanceTypes();
 
     @GET
     @Produces("application/xml")
     @Path("surveySources")
-    SimpleItemsNoPagedResult retrieveSurveySources();
+    SurveySources retrieveSurveySources();
 
     @GET
     @Produces("application/xml")
     @Path("collMethods")
-    SimpleItemsNoPagedResult retrieveCollMethods();
+    CollMethods retrieveCollMethods();
 
     @GET
     @Produces("application/xml")
     @Path("costs")
-    SimpleItemsNoPagedResult retrieveCosts();
-
+    Costs retrieveCosts();
 }

@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resourcesNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#families</kind>
-    <total>2</total>
-    <items>
-        <id>family1</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</urn>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9101/internal/v1.0/families/family1</selfLink>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>family1 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>family1 en Español</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>family2</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</urn>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9101/internal/v1.0/families/family2</selfLink>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>family2 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>family2 en Español</label>
-            </text>
-        </title>
-    </items>
-</resourcesNoPagedResult>
+<operations:families xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#families" total="2">
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family1</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/families/family1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">family1 en Español</common:text>
+            <common:text xml:lang="en">family1 in English</common:text>
+        </common:title>
+    </operations:family>
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family2</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/families/family2</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">family2 in English</common:text>
+            <common:text xml:lang="es">family2 en Español</common:text>
+        </common:title>
+    </operations:family>
+</operations:families>

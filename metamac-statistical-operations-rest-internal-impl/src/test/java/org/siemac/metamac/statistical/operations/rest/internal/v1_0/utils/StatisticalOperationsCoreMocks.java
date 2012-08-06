@@ -654,8 +654,8 @@ public class StatisticalOperationsCoreMocks {
         instance.setOrder(Integer.valueOf(2));
         instance.setDataDescription(mockInternationalString("dataDescription", subCode));
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
-        instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.DATASTRUCTURE));
-        instance.addStatisticalUnit(mockExternalItem("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.DATASTRUCTURE));
+        instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addStatisticalUnit(mockExternalItem("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
         instance.setGeographicGranularity(mockExternalItem("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST));
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
         instance.setTemporalGranularity(mockExternalItem("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));

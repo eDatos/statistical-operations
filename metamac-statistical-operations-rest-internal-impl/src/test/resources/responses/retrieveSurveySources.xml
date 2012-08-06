@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<simpleItemsNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#surveySources</kind>
-    <total>2</total>
-    <items>
-        <id>surveySource1</id>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>surveySource1 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>surveySource1 en Español</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>surveySource2</id>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>surveySource2 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>surveySource2 in English</label>
-            </text>
-        </title>
-    </items>
-</simpleItemsNoPagedResult>
+<operations:surveySources xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#surveySources" total="2">
+    <operations:surveySource>
+        <common:id>surveySource1</common:id>
+        <common:title>
+            <common:text xml:lang="en">surveySource1 in English</common:text>
+            <common:text xml:lang="es">surveySource1 en Español</common:text>
+        </common:title>
+    </operations:surveySource>
+    <operations:surveySource>
+        <common:id>surveySource2</common:id>
+        <common:title>
+            <common:text xml:lang="es">surveySource2 en Español</common:text>
+            <common:text xml:lang="en">surveySource2 in English</common:text>
+        </common:title>
+    </operations:surveySource>
+</operations:surveySources>

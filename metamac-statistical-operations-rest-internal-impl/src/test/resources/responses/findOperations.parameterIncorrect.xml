@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<error xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <errorItems code="exception.common.parameter.incorrect">
-        <message>Parameter {0} has incorrect value</message>
-        <parameters>METADATA_INCORRECT</parameters>
-    </errorItems>
-</error>
+<common:error xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
+    <common:errorItems>
+        <common:errorItem code="exception.common.parameter.incorrect">
+            <common:message>Parameter {0} has incorrect value</common:message>
+            <common:parameters>
+                <common:parameter>METADATA_INCORRECT</common:parameter>
+            </common:parameters>
+        </common:errorItem>
+    </common:errorItems>
+</common:error>

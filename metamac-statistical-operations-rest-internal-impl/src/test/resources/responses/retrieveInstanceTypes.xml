@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<simpleItemsNoPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#instanceTypes</kind>
-    <total>2</total>
-    <items>
-        <id>instanceType1</id>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>instanceType1 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>instanceType1 en Español</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>instanceType2</id>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>instanceType2 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>instanceType2 in English</label>
-            </text>
-        </title>
-    </items>
-</simpleItemsNoPagedResult>
+<operations:instanceTypes xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instanceTypes" total="2">
+    <operations:instanceType>
+        <common:id>instanceType1</common:id>
+        <common:title>
+            <common:text xml:lang="en">instanceType1 in English</common:text>
+            <common:text xml:lang="es">instanceType1 en Español</common:text>
+        </common:title>
+    </operations:instanceType>
+    <operations:instanceType>
+        <common:id>instanceType2</common:id>
+        <common:title>
+            <common:text xml:lang="es">instanceType2 en Español</common:text>
+            <common:text xml:lang="en">instanceType2 in English</common:text>
+        </common:title>
+    </operations:instanceType>
+</operations:instanceTypes>

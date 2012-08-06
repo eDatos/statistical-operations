@@ -108,7 +108,7 @@
                             <includeArtifacIds>metamac-rest-api</includeArtifacIds>
                             <includeClassifiers>resources</includeClassifiers>
                             <excludeTransitive>true</excludeTransitive>
-                            <includes>**/*.xsd</includes>
+                            <includes>**/*.xsd,**/*.dtd</includes>
                             <includeTypes>zip</includeTypes>
                         </configuration>
                     </execution>

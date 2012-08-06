@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#families</kind>
-    <limit>2</limit>
-    <offset>2</offset>
-    <total>5</total>
-    <firstLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0</firstLink>
-    <previousLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0</previousLink>
-    <nextLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4</nextLink>
-    <lastLink>http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4</lastLink>
-    <items>
-        <id>family3</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</urn>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/families/family3</selfLink>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>family3 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>family3 in English</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>family4</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</urn>
-        <kind>statisticalOperations#family</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/families/family4</selfLink>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>family4 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>family4 en Español</label>
-            </text>
-        </title>
-    </items>
-</resourcesPagedResult>
+<operations:families xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#families" limit="2" offset="2" total="5" firstLink="http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0" previousLink="http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=0" nextLink="http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4" lastLink="http://localhost:9001/internal/v1.0/families?limit=2&amp;offset=4">
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family3</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/families/family3</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">family3 in English</common:text>
+            <common:text xml:lang="es">family3 en Español</common:text>
+        </common:title>
+    </operations:family>
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family4</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/families/family4</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">family4 in English</common:text>
+            <common:text xml:lang="es">family4 en Español</common:text>
+        </common:title>
+    </operations:family>
+</operations:families>

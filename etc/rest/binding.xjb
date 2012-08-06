@@ -26,5 +26,11 @@
 	</jaxb:bindings>	 	
  	<jaxb:bindings node="//xs:complexType[@name='Instance']//xs:element[@name='children']">
             <jaxb:property name="children"/>
-	</jaxb:bindings>	 		 
+	</jaxb:bindings>
+ 	<jaxb:bindings node="//xs:complexType[@name='StatConcDefs']//xs:element[@name='statConcDef']">
+            <jaxb:property name="statConcDefs"/>
+	</jaxb:bindings>
+ 	<jaxb:bindings node="//xs:complexType[@name='Children']//xs:element[@name='child']">
+            <jaxb:property name="children"/>
+	</jaxb:bindings>
 </jaxb:bindings>

@@ -1,39 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#instances</kind>
-    <limit>25</limit>
-    <offset>0</offset>
-    <total>2</total>
-    <items>
-        <id>instance1</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</urn>
-        <kind>statisticalOperations#instance</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</selfLink>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>instance1 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>instance1 in English</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>instance15</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</urn>
-        <kind>statisticalOperations#instance</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15</selfLink>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>instance15 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>instance15 in English</label>
-            </text>
-        </title>
-    </items>
-</resourcesPagedResult>
+<operations:instances xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="25" offset="0" total="2">
+    <operations:instance kind="statisticalOperations#instance">
+        <common:id>instance1</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">instance1 en Español</common:text>
+            <common:text xml:lang="en">instance1 in English</common:text>
+        </common:title>
+    </operations:instance>
+    <operations:instance kind="statisticalOperations#instance">
+        <common:id>instance15</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">instance15 en Español</common:text>
+            <common:text xml:lang="en">instance15 in English</common:text>
+        </common:title>
+    </operations:instance>
+</operations:instances>

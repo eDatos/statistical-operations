@@ -29,12 +29,8 @@ import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
 import org.siemac.metamac.rest.common.test.ServerResource;
 import org.siemac.metamac.rest.common.test.mockito.PagingParameterMatcher;
-import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.LogicalOperator;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.constants.RestConstants;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
@@ -43,13 +39,21 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Costs;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Families;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instances;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveySources;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesByOperationMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindFamiliesMatcher;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito.FindInstancesByOperationMatcher;
@@ -135,7 +139,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     @Test
     public void testRetrieveOperationByIdXmlWithoutJaxbTransformationWithXmlSufix() throws Exception {
 
@@ -145,7 +149,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
     }
-    
+
     @Test
     public void testRetrieveOperationByIdXmlWithoutJaxbTransformationWithTypeParameter() throws Exception {
 
@@ -163,11 +167,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -181,7 +185,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, responseExpected);
     }
-    
+
     @Test
     public void testRetrieveOperationByIdJsonNonAcceptable() throws Exception {
 
@@ -203,8 +207,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -212,8 +216,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -221,8 +225,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // first page with pagination
@@ -230,8 +234,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // second page with pagination
@@ -239,8 +243,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "2";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // last page with pagination
@@ -248,8 +252,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "8";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
         {
             // no results
@@ -257,8 +261,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "9";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset), operations);
         }
 
         // Queries
@@ -268,8 +272,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset, query), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset, query), operations);
         }
         {
             // query by id and indicators system, without limits
@@ -277,8 +281,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM; // operation1
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset, query), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset, query), operations);
         }
         {
             // query by id, first page
@@ -286,8 +290,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResult(baseApi, limit, offset, query), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(baseApi, limit, offset, query), operations);
         }
     }
 
@@ -375,8 +379,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -384,8 +388,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -393,8 +397,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // first page with pagination
@@ -402,8 +406,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // second page with pagination
@@ -411,8 +415,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "2";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // second page with pagination, family 2
@@ -420,8 +424,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "2";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_2, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily2(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_2, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily2(baseApi, limit, offset), operations);
         }
         {
             // last page, with pagination
@@ -429,9 +433,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "4";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
         {
             // no results
@@ -439,8 +442,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "7";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockOperationsPagedResultByFamily1(baseApi, limit, offset), pagedResult);
+            Operations operations = getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(baseApi, limit, offset), operations);
         }
     }
 
@@ -475,11 +478,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Family not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -512,11 +515,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Family not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Family not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -558,11 +561,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Instance not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Instance not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -586,8 +589,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // without limits, first page
@@ -595,8 +598,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // without limits, first page
@@ -604,8 +607,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // first page with pagination
@@ -613,8 +616,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // second page with pagination
@@ -622,8 +625,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "2";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // last page with pagination
@@ -631,8 +634,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "4";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
         {
             // no results
@@ -640,8 +643,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "9";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset), instances);
         }
 
         // Queries
@@ -651,8 +654,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset, query), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset, query), instances);
         }
         {
             // query by id, first page
@@ -660,8 +663,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockInstancesPagedResultByOperation1(baseApi, limit, offset, query), pagedResult);
+            Instances instances = getStatisticalOperationsRestInternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(baseApi, limit, offset, query), instances);
         }
     }
 
@@ -720,11 +723,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -739,8 +742,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // without limits, first page
@@ -748,8 +751,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // without limits, first page
@@ -757,8 +760,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // first page with pagination
@@ -766,8 +769,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // second page with pagination
@@ -775,8 +778,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "2";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // last page with pagination
@@ -784,8 +787,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "4";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         {
             // no results
@@ -793,8 +796,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "9";
             String query = null;
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset), families);
         }
         // Queries
         {
@@ -803,8 +806,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = null;
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset, query), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset, query), families);
         }
         {
             // query by id, first page
@@ -812,8 +815,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
             String offset = "0";
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String orderBy = null;
-            ResourcesPagedResult pagedResult = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            MetamacRestAsserts.assertEqualsResourcesPagedResult(StatisticalOperationsRestMocks.mockFamiliesPagedResult(baseApi, limit, offset, query), pagedResult);
+            Families families = getStatisticalOperationsRestInternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(baseApi, limit, offset, query), families);
         }
     }
 
@@ -869,10 +872,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveFamiliesByOperationXml() throws Exception {
 
         // Retrieve
-        ResourcesNoPagedResult familiesNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveFamiliesByOperation(OPERATION_1);
+        Families families = getStatisticalOperationsRestInternalFacadeClientXml().retrieveFamiliesByOperation(OPERATION_1);
 
         // Validation
-        MetamacRestAsserts.assertEqualsResourcesNoPagedResult(StatisticalOperationsRestMocks.mockFamiliesNoPagedResultByOperation1(baseApi), familiesNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamiliesByOperation1(baseApi), families);
     }
 
     @Test
@@ -892,11 +895,11 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().get(0).getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().get(0).getParameters().get(0));
+            assertEquals(1, error.getErrorItems().getErrorItems().size());
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
+            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
+            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -906,10 +909,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveSurveyTypesXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveyTypes();
+        SurveyTypes surveyTypes = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveyTypes();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveyTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsSurveyTypes(StatisticalOperationsRestMocks.mockSurveyTypes(), surveyTypes);
     }
 
     @Test
@@ -926,10 +929,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveOfficialityTypesXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveOfficialityTypes();
+        OfficialityTypes officialityTypes = getStatisticalOperationsRestInternalFacadeClientXml().retrieveOfficialityTypes();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockOfficialityTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsOfficialityTypes(StatisticalOperationsRestMocks.mockOfficialityTypes(), officialityTypes);
     }
 
     @Test
@@ -946,10 +949,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveInstanceTypesXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveInstanceTypes();
+        InstanceTypes instanceTypes = getStatisticalOperationsRestInternalFacadeClientXml().retrieveInstanceTypes();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockInstanceTypesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsInstanceTypes(StatisticalOperationsRestMocks.mockInstanceTypes(), instanceTypes);
     }
 
     @Test
@@ -966,10 +969,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveSurveySourcesXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveySources();
+        SurveySources surveySources = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveySources();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockSurveySourcesSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsSurveySources(StatisticalOperationsRestMocks.mockSurveySources(), surveySources);
     }
 
     @Test
@@ -986,10 +989,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveCollMethodsXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCollMethods();
+        CollMethods collMethods = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCollMethods();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockCollMethodsSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsCollMethods(StatisticalOperationsRestMocks.mockCollMethods(), collMethods);
     }
 
     @Test
@@ -1006,10 +1009,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public void testRetrieveCostsXml() throws Exception {
 
         // Retrieve
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCosts();
+        Costs costs = getStatisticalOperationsRestInternalFacadeClientXml().retrieveCosts();
 
         // Validation
-        MetamacRestAsserts.assertEqualsSimpleItemsNoPagedResult(StatisticalOperationsRestMocks.mockCostsSimpleItemsNoPagedResult(), simpleItemsNoPagedResult);
+        StatisticalOperationsRestAsserts.assertEqualsCosts(StatisticalOperationsRestMocks.mockCosts(), costs);
     }
 
     @Test
@@ -1105,7 +1108,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
-        CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class);
+        // CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class); // TODO
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
@@ -1165,22 +1168,22 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCollMethods());
         when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCosts());
 
-        // External APIS
-        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        // External APIS TODO
+        // when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
     }
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
-        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> pagedResultOperations = null;
+        PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;
         if (FAMILY_1.equals(family)) {
-            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
+            operations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
         } else if (FAMILY_2.equals(family)) {
-            pagedResultOperations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily2(String.valueOf(limit), String.valueOf(offset));
+            operations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily2(String.valueOf(limit), String.valueOf(offset));
         } else {
             fail("family non supported. Family = " + family);
         }
         // Mock
         when(
                 statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsByFamilyMatcher(family, null, null)),
-                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResultOperations);
+                        argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(operations);
 
     }
 

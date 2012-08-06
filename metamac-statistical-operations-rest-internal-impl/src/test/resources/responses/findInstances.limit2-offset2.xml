@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resourcesPagedResult xmlns="http://www.siemac.org/metamac/rest/common/v1.0/domain">
-    <kind>statisticalOperations#instances</kind>
-    <limit>2</limit>
-    <offset>2</offset>
-    <total>5</total>
-    <firstLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0</firstLink>
-    <previousLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0</previousLink>
-    <nextLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4</nextLink>
-    <lastLink>http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4</lastLink>
-    <items>
-        <id>instance3</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</urn>        
-        <kind>statisticalOperations#instance</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</selfLink>
-        <title>
-            <text>
-                <locale>en</locale>
-                <label>instance3 in English</label>
-            </text>
-            <text>
-                <locale>es</locale>
-                <label>instance3 en Español</label>
-            </text>
-        </title>
-    </items>
-    <items>
-        <id>instance4</id>
-        <urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</urn>
-        <kind>statisticalOperations#instance</kind>
-        <selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</selfLink>
-        <title>
-            <text>
-                <locale>es</locale>
-                <label>instance4 en Español</label>
-            </text>
-            <text>
-                <locale>en</locale>
-                <label>instance4 in English</label>
-            </text>
-        </title>
-    </items>
-</resourcesPagedResult>
+<operations:instances xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="2" offset="2" total="5" firstLink="http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0" previousLink="http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=0" nextLink="http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4" lastLink="http://localhost:9001/internal/v1.0/operations/operation1/instances?limit=2&amp;offset=4">
+    <operations:instance kind="statisticalOperations#instance">
+        <common:id>instance3</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance3</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">instance3 en Español</common:text>
+            <common:text xml:lang="en">instance3 in English</common:text>
+        </common:title>
+    </operations:instance>
+    <operations:instance kind="statisticalOperations#instance">
+        <common:id>instance4</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</common:urn>
+        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance4</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">instance4 in English</common:text>
+            <common:text xml:lang="es">instance4 en Español</common:text>
+        </common:title>
+    </operations:instance>
+</operations:instances>

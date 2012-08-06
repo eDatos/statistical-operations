@@ -15,9 +15,6 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesNoPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.ResourcesPagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.SimpleItemsNoPagedResult;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
@@ -35,9 +32,18 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Costs;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Families;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instances;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveySources;
+import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper.RestCriteria2SculptorCriteriaMapper;
 import org.slf4j.Logger;
@@ -87,7 +93,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public ResourcesPagedResult findOperations(String query, String orderBy, String limit, String offset) {
+    public Operations findOperations(String query, String orderBy, String limit, String offset) {
         try {
             // Retrieve operations by criteria
             SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getOperationCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
@@ -104,8 +110,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsPagedResult(operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
-            return operationsPagedResult;
+            Operations operations = do2RestInternalMapper.toOperations(operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            return operations;
 
         } catch (MetamacException e) {
             throw manageException(e);
@@ -113,7 +119,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public ResourcesPagedResult findInstances(String operationId, String query, String orderBy, String limit, String offset) {
+    public Instances findInstances(String operationId, String query, String orderBy, String limit, String offset) {
         try {
             // Retrieve operation to check exists and it is published
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(operationId);
@@ -134,9 +140,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult instancesPagedResult = do2RestInternalMapper
-                    .toInstancesPagedResult(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
-            return instancesPagedResult;
+            Instances instances = do2RestInternalMapper.toInstances(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            return instances;
 
         } catch (MetamacException e) {
             throw manageException(e);
@@ -144,7 +149,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public ResourcesNoPagedResult retrieveFamiliesByOperation(String id) {
+    public Families retrieveFamiliesByOperation(String id) {
         try {
             // Retrieve operation to check exists and it is published
             retrieveOperationEntityPublishedInternalOrExternally(id);
@@ -158,8 +163,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, pagingParameter);
 
             // Transform
-            ResourcesNoPagedResult familiesNoPagedResult = do2RestInternalMapper.toFamiliesByOperationNoPagedResult(familiesEntitiesResult.getValues(), getApiUrl());
-            return familiesNoPagedResult;
+            Families families = do2RestInternalMapper.toFamiliesByOperation(familiesEntitiesResult.getValues(), getApiUrl());
+            return families;
 
         } catch (MetamacException e) {
             throw manageException(e);
@@ -182,7 +187,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public ResourcesPagedResult findFamilies(String query, String orderBy, String limit, String offset) {
+    public Families findFamilies(String query, String orderBy, String limit, String offset) {
         try {
             // Retrieve families by criteria
             SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getFamilyCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
@@ -199,8 +204,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult familiesPagedResult = do2RestInternalMapper.toFamiliesPagedResult(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
-            return familiesPagedResult;
+            Families families = do2RestInternalMapper.toFamilies(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            return families;
 
         } catch (MetamacException e) {
             throw manageException(e);
@@ -208,7 +213,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public ResourcesPagedResult findOperationsByFamily(String id, String query, String orderBy, String limit, String offset) {
+    public Operations findOperationsByFamily(String id, String query, String orderBy, String limit, String offset) {
         try {
             // Validate family exists and it is published
             org.siemac.metamac.statistical.operations.core.domain.Family family = retrieveFamilyEntityPublishedInternalOrExternally(id);
@@ -226,9 +231,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            ResourcesPagedResult operationsPagedResult = do2RestInternalMapper.toOperationsByFamilyPagedResult(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(),
-                    getApiUrl());
-            return operationsPagedResult;
+            Operations operations = do2RestInternalMapper.toOperationsByFamily(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            return operations;
 
         } catch (MetamacException e) {
             throw manageException(e);
@@ -255,66 +259,66 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveSurveyTypes() {
+    public SurveyTypes retrieveSurveyTypes() {
 
         // Retrieve all
         List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toSurveyTypesNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        SurveyTypes surveyTypes = do2RestInternalMapper.toSurveyTypes(entitiesResult);
+        return surveyTypes;
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveOfficialityTypes() {
+    public OfficialityTypes retrieveOfficialityTypes() {
 
         // Retrieve all
         List<OfficialityType> entitiesResult = statisticalOperationsListsService.findAllOfficialityTypes(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toOfficialityTypesNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        OfficialityTypes officialityTypes = do2RestInternalMapper.toOfficialityTypes(entitiesResult);
+        return officialityTypes;
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveInstanceTypes() {
-        
+    public InstanceTypes retrieveInstanceTypes() {
+
         // Retrieve all
         List<InstanceType> entitiesResult = statisticalOperationsListsService.findAllInstanceTypes(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toInstanceTypesNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        InstanceTypes instanceTypes = do2RestInternalMapper.toInstanceTypes(entitiesResult);
+        return instanceTypes;
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveSurveySources() {
+    public SurveySources retrieveSurveySources() {
         // Retrieve all
         List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toSurveySourcesNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        SurveySources surveySources = do2RestInternalMapper.toSurveySources(entitiesResult);
+        return surveySources;
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveCollMethods() {
+    public CollMethods retrieveCollMethods() {
         // Retrieve all
         List<CollMethod> entitiesResult = statisticalOperationsListsService.findAllCollMethods(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toCollMethodsNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        CollMethods collMethods = do2RestInternalMapper.toCollMethods(entitiesResult);
+        return collMethods;
     }
 
     @Override
-    public SimpleItemsNoPagedResult retrieveCosts() {
+    public Costs retrieveCosts() {
         // Retrieve all
         List<Cost> entitiesResult = statisticalOperationsListsService.findAllCosts(serviceContextRestInternal);
 
         // Transform
-        SimpleItemsNoPagedResult simpleItemsNoPagedResult = do2RestInternalMapper.toCostsNoPagedResult(entitiesResult, getApiUrl());
-        return simpleItemsNoPagedResult;
+        Costs costs = do2RestInternalMapper.toCosts(entitiesResult);
+        return costs;
     }
 
     /**
