@@ -12,12 +12,10 @@
             <xs:element name="parent" type="common:ResourceLink" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="families" type="tns:Families" minOccurs="1" />
             <xs:element name="subjectArea" type="common:Resource" />
             <xs:element name="secondarySubjectAreas" type="tns:SecondarySubjectAreas" minOccurs="0" />
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="instances" type="tns:Instances" minOccurs="0" />
             <xs:element name="surveyType" type="common:Item" />
             <xs:element name="officialityType" type="common:Item" />
             <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
@@ -128,7 +126,7 @@
     <!-- Lists -->
     <xs:complexType name="Operations">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="operation" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -138,7 +136,7 @@
 
     <xs:complexType name="Families">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="family" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -148,7 +146,7 @@
 
     <xs:complexType name="Instances">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="instance" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -160,83 +158,139 @@
         <xs:sequence>
             <xs:element name="child" type="common:ResourceLink" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
+        <xs:attribute name="total" type="xs:integer" use="required"/>
     </xs:complexType>        
     
     <xs:complexType name="StatisticalUnits">
-        <xs:sequence>
-            <xs:element name="statisticalUnit" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="statisticalUnit" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="UnitMeasures">
-        <xs:sequence>
-            <xs:element name="unitMeasure" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="unitMeasure" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>    
     
     <xs:complexType name="StatConcDefs">
-        <xs:sequence>
-            <xs:element name="statConcDef" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="statConcDef" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>    
     
     <xs:complexType name="ClassSystems">
-        <xs:sequence>
-            <xs:element name="classSystem" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="classSystem" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>     
             
     <xs:complexType name="InformationSuppliers">
-        <xs:sequence>
-            <xs:element name="informationSupplier" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="informationSupplier" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>     
     
     <xs:complexType name="FreqColls">
-        <xs:sequence>
-            <xs:element name="freqColl" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="freqColl" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>                 
     
     <xs:complexType name="SecondarySubjectAreas">
-        <xs:sequence>
-            <xs:element name="secondarySubjectArea" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="secondarySubjectArea" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>
     
     <xs:complexType name="Producers">
-        <xs:sequence>
-            <xs:element name="producer" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="producer" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>
     
     <xs:complexType name="RegionalResponsibles">
-        <xs:sequence>
-            <xs:element name="regionalResponsible" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="regionalResponsible" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>
     
     <xs:complexType name="RegionalContributors">
-        <xs:sequence>
-            <xs:element name="regionalContributor" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="regionalContributor" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>         
 
     <xs:complexType name="Publishers">
-        <xs:sequence>
-            <xs:element name="publisher" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="publisher" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>
     
     <xs:complexType name="UpdateFrequencies">
-        <xs:sequence>
-            <xs:element name="updateFrequency" type="common:Resource" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="updateFrequency" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>         
 
     <xs:complexType name="SurveyTypes">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="surveyType" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -246,7 +300,7 @@
     
     <xs:complexType name="OfficialityTypes">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="officialityType" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -256,7 +310,7 @@
 
     <xs:complexType name="InstanceTypes">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="instanceType" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -266,7 +320,7 @@
 
     <xs:complexType name="SurveySources">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="surveySource" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -276,7 +330,7 @@
 
     <xs:complexType name="CollMethods">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="collMethod" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
@@ -286,7 +340,7 @@
 
     <xs:complexType name="Costs">
         <xs:complexContent>
-            <xs:extension base="common:Results">
+            <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="cost" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>

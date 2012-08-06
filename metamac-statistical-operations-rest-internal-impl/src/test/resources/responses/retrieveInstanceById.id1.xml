@@ -34,8 +34,8 @@
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</common:urn>
         <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
         <common:title>
-            <common:text xml:lang="es">instance22 en Español</common:text>
             <common:text xml:lang="en">instance22 in English</common:text>
+            <common:text xml:lang="es">instance22 en Español</common:text>
         </common:title>
     </operations:successor>
     <operations:predecessor kind="statisticalOperations#instance">
@@ -52,17 +52,17 @@
         <common:text xml:lang="es">dataDescription1 en Español</common:text>
     </operations:dataDescription>
     <operations:statisticalPopulation>
-        <common:text xml:lang="es">statisticalPopulation1 en Español</common:text>
         <common:text xml:lang="en">statisticalPopulation1 in English</common:text>
+        <common:text xml:lang="es">statisticalPopulation1 en Español</common:text>
     </operations:statisticalPopulation>
-    <operations:statisticalUnits>
+    <operations:statisticalUnits kind="PENDIENTE_API_SRM" total="2">
         <operations:statisticalUnit kind="CONCEPT">
             <common:id>statisticalUnit1</common:id>
             <common:urn>urn:statisticalUnit1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit1</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">statisticalUnit1 in English</common:text>
                 <common:text xml:lang="es">statisticalUnit1 en Español</common:text>
+                <common:text xml:lang="en">statisticalUnit1 in English</common:text>
             </common:title>
         </operations:statisticalUnit>
         <operations:statisticalUnit kind="CONCEPT">
@@ -80,8 +80,8 @@
         <common:urn>urn:geographicGranularity</common:urn>
         <common:selfLink>http://localhost:8080/metamac-srm-web/geographicGranularities/geographicGranularity</common:selfLink>
         <common:title>
-            <common:text xml:lang="en">geographicGranularity in English</common:text>
             <common:text xml:lang="es">geographicGranularity en Español</common:text>
+            <common:text xml:lang="en">geographicGranularity in English</common:text>
         </common:title>
     </operations:geographicGranularity>
     <operations:geographicComparability>
@@ -102,22 +102,31 @@
         <common:text xml:lang="es">temporalComparability1 en Español</common:text>
     </operations:temporalComparability>
     <operations:basePeriod>2012</operations:basePeriod>
-    <operations:unitMeasures>
+    <operations:unitMeasures kind="PENDIENTE_API_SRM" total="1">
         <operations:unitMeasure kind="CONCEPT">
             <common:id>unitMeasure1</common:id>
             <common:urn>urn:unitMeasure1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/unitMeasures/unitMeasure1</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">unitMeasure1 en Español</common:text>
                 <common:text xml:lang="en">unitMeasure1 in English</common:text>
+                <common:text xml:lang="es">unitMeasure1 en Español</common:text>
             </common:title>
         </operations:unitMeasure>
     </operations:unitMeasures>
     <operations:statConcDefsDescription>
-        <common:text xml:lang="es">statConcDef1 en Español</common:text>
         <common:text xml:lang="en">statConcDef1 in English</common:text>
+        <common:text xml:lang="es">statConcDef1 en Español</common:text>
     </operations:statConcDefsDescription>
-    <operations:statConcDefs>
+    <operations:statConcDefs kind="PENDIENTE_API_SRM" total="3">
+        <operations:statConcDef kind="CODELIST">
+            <common:id>statConcDefList1</common:id>
+            <common:urn>urn:statConcDefList1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">statConcDefList1 en Español</common:text>
+                <common:text xml:lang="en">statConcDefList1 in English</common:text>
+            </common:title>
+        </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
             <common:id>statConcDefList333</common:id>
             <common:urn>urn:statConcDefList333</common:urn>
@@ -128,21 +137,12 @@
             </common:title>
         </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
-            <common:id>statConcDefList1</common:id>
-            <common:urn>urn:statConcDefList1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">statConcDefList1 in English</common:text>
-                <common:text xml:lang="es">statConcDefList1 en Español</common:text>
-            </common:title>
-        </operations:statConcDef>
-        <operations:statConcDef kind="CODELIST">
             <common:id>statConcDefList22</common:id>
             <common:urn>urn:statConcDefList22</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList22</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">statConcDefList22 in English</common:text>
                 <common:text xml:lang="es">statConcDefList22 en Español</common:text>
+                <common:text xml:lang="en">statConcDefList22 in English</common:text>
             </common:title>
         </operations:statConcDef>
     </operations:statConcDefs>
@@ -150,16 +150,7 @@
         <common:text xml:lang="es">classSystem1 en Español</common:text>
         <common:text xml:lang="en">classSystem1 in English</common:text>
     </operations:classSystemsDescription>
-    <operations:classSystems>
-        <operations:classSystem kind="CODELIST">
-            <common:id>classSystemList22</common:id>
-            <common:urn>urn:classSystemList22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">classSystemList22 en Español</common:text>
-                <common:text xml:lang="en">classSystemList22 in English</common:text>
-            </common:title>
-        </operations:classSystem>
+    <operations:classSystems kind="PENDIENTE_API_SRM" total="2">
         <operations:classSystem kind="CODELIST">
             <common:id>classSystemList1</common:id>
             <common:urn>urn:classSystemList1</common:urn>
@@ -169,12 +160,21 @@
                 <common:text xml:lang="en">classSystemList1 in English</common:text>
             </common:title>
         </operations:classSystem>
+        <operations:classSystem kind="CODELIST">
+            <common:id>classSystemList22</common:id>
+            <common:urn>urn:classSystemList22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">classSystemList22 en Español</common:text>
+                <common:text xml:lang="en">classSystemList22 in English</common:text>
+            </common:title>
+        </operations:classSystem>
     </operations:classSystems>
     <operations:instanceType>
         <common:id>instanceType1</common:id>
         <common:title>
-            <common:text xml:lang="es">instanceType1 en Español</common:text>
             <common:text xml:lang="en">instanceType1 in English</common:text>
+            <common:text xml:lang="es">instanceType1 en Español</common:text>
         </common:title>
     </operations:instanceType>
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
@@ -186,29 +186,29 @@
     <operations:surveySource>
         <common:id>surveySource1</common:id>
         <common:title>
-            <common:text xml:lang="en">surveySource1 in English</common:text>
             <common:text xml:lang="es">surveySource1 en Español</common:text>
+            <common:text xml:lang="en">surveySource1 in English</common:text>
         </common:title>
     </operations:surveySource>
     <operations:collMethod>
         <common:id>collMethod1</common:id>
         <common:title>
-            <common:text xml:lang="es">collMethod1 en Español</common:text>
             <common:text xml:lang="en">collMethod1 in English</common:text>
+            <common:text xml:lang="es">collMethod1 en Español</common:text>
         </common:title>
     </operations:collMethod>
-    <operations:informationSuppliers>
+    <operations:informationSuppliers kind="PENDIENTE_API_SRM" total="1">
         <operations:informationSupplier kind="COMMON_METADATA">
             <common:id>informationSupplier1</common:id>
             <common:urn>urn:informationSupplier1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/informationSuppliers/informationSupplier1</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">informationSupplier1 en Español</common:text>
                 <common:text xml:lang="en">informationSupplier1 in English</common:text>
+                <common:text xml:lang="es">informationSupplier1 en Español</common:text>
             </common:title>
         </operations:informationSupplier>
     </operations:informationSuppliers>
-    <operations:freqColls>
+    <operations:freqColls kind="PENDIENTE_API_SRM" total="2">
         <operations:freqColl kind="CATEGORY_SCHEME">
             <common:id>freqColl22</common:id>
             <common:urn>urn:freqColl22</common:urn>
@@ -223,8 +223,8 @@
             <common:urn>urn:freqColl1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl1</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">freqColl1 in English</common:text>
                 <common:text xml:lang="es">freqColl1 en Español</common:text>
+                <common:text xml:lang="en">freqColl1 in English</common:text>
             </common:title>
         </operations:freqColl>
     </operations:freqColls>
@@ -241,15 +241,22 @@
         <common:text xml:lang="es">adjustment1 en Español</common:text>
     </operations:adjustment>
     <operations:costBurden>
-        <common:text xml:lang="en">costBurden1 in English</common:text>
         <common:text xml:lang="es">costBurden1 en Español</common:text>
+        <common:text xml:lang="en">costBurden1 in English</common:text>
     </operations:costBurden>
     <operations:costs kind="statisticalOperations#costs" total="4">
         <operations:cost>
-            <common:id>cost333</common:id>
+            <common:id>cost4444</common:id>
             <common:title>
-                <common:text xml:lang="en">cost333 in English</common:text>
-                <common:text xml:lang="es">cost333 en Español</common:text>
+                <common:text xml:lang="en">cost4444 in English</common:text>
+                <common:text xml:lang="es">cost4444 en Español</common:text>
+            </common:title>
+        </operations:cost>
+        <operations:cost>
+            <common:id>cost22</common:id>
+            <common:title>
+                <common:text xml:lang="es">cost22 en Español</common:text>
+                <common:text xml:lang="en">cost22 in English</common:text>
             </common:title>
         </operations:cost>
         <operations:cost>
@@ -260,17 +267,10 @@
             </common:title>
         </operations:cost>
         <operations:cost>
-            <common:id>cost4444</common:id>
+            <common:id>cost333</common:id>
             <common:title>
-                <common:text xml:lang="es">cost4444 en Español</common:text>
-                <common:text xml:lang="en">cost4444 in English</common:text>
-            </common:title>
-        </operations:cost>
-        <operations:cost>
-            <common:id>cost22</common:id>
-            <common:title>
-                <common:text xml:lang="en">cost22 in English</common:text>
-                <common:text xml:lang="es">cost22 en Español</common:text>
+                <common:text xml:lang="en">cost333 in English</common:text>
+                <common:text xml:lang="es">cost333 en Español</common:text>
             </common:title>
         </operations:cost>
     </operations:costs>
@@ -292,47 +292,47 @@
         <common:text xml:lang="es">userNeeds1 en Español</common:text>
     </operations:userNeeds>
     <operations:userSat>
-        <common:text xml:lang="en">userSat1 in English</common:text>
         <common:text xml:lang="es">userSat1 en Español</common:text>
+        <common:text xml:lang="en">userSat1 in English</common:text>
     </operations:userSat>
     <operations:completeness>
-        <common:text xml:lang="es">completeness1 en Español</common:text>
         <common:text xml:lang="en">completeness1 in English</common:text>
+        <common:text xml:lang="es">completeness1 en Español</common:text>
     </operations:completeness>
     <operations:timeliness>
-        <common:text xml:lang="es">timeliness1 en Español</common:text>
         <common:text xml:lang="en">timeliness1 in English</common:text>
+        <common:text xml:lang="es">timeliness1 en Español</common:text>
     </operations:timeliness>
     <operations:punctuality>
         <common:text xml:lang="es">punctuality1 en Español</common:text>
         <common:text xml:lang="en">punctuality1 in English</common:text>
     </operations:punctuality>
     <operations:accuracyOverall>
-        <common:text xml:lang="es">accuracyOverall1 en Español</common:text>
         <common:text xml:lang="en">accuracyOverall1 in English</common:text>
+        <common:text xml:lang="es">accuracyOverall1 en Español</common:text>
     </operations:accuracyOverall>
     <operations:samplingErr>
-        <common:text xml:lang="es">samplingErr1 en Español</common:text>
         <common:text xml:lang="en">samplingErr1 in English</common:text>
+        <common:text xml:lang="es">samplingErr1 en Español</common:text>
     </operations:samplingErr>
     <operations:nonsamplingErr>
-        <common:text xml:lang="es">nonsamplingErr1 en Español</common:text>
         <common:text xml:lang="en">nonsamplingErr1 in English</common:text>
+        <common:text xml:lang="es">nonsamplingErr1 en Español</common:text>
     </operations:nonsamplingErr>
     <operations:coherXDom>
-        <common:text xml:lang="es">coherXDom1 en Español</common:text>
         <common:text xml:lang="en">coherXDom1 in English</common:text>
+        <common:text xml:lang="es">coherXDom1 en Español</common:text>
     </operations:coherXDom>
     <operations:coherInternal>
-        <common:text xml:lang="en">coherInternal1 in English</common:text>
         <common:text xml:lang="es">coherInternal1 en Español</common:text>
+        <common:text xml:lang="en">coherInternal1 in English</common:text>
     </operations:coherInternal>
     <operations:comment>
-        <common:text xml:lang="es">comment1 en Español</common:text>
         <common:text xml:lang="en">comment1 in English</common:text>
+        <common:text xml:lang="es">comment1 en Español</common:text>
     </operations:comment>
     <operations:notes>
-        <common:text xml:lang="en">notes1 in English</common:text>
         <common:text xml:lang="es">notes1 en Español</common:text>
+        <common:text xml:lang="en">notes1 in English</common:text>
     </operations:notes>
 </operations:instance>

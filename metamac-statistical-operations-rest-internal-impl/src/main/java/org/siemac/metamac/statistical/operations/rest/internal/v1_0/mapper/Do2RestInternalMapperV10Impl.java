@@ -43,7 +43,6 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Children;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
@@ -81,12 +80,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     // private MessageContext context; // Always null in this bean (not in Service)...
 
     @Autowired
-    private ConfigurationService             configurationService;
+    private ConfigurationService configurationService;
 
-    @Autowired
-    private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
+    // @Autowired
+    // private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade; // TODO
 
-    private String                           srmApiEndpoint;
+    private String               srmApiEndpoint;
+
+    public static String         KIND_SRM_EXTERNAL_ITEM = "PENDIENTE_API_SRM"; // TODO METAMAC-916
 
     @PostConstruct
     public void init() throws Exception {
@@ -110,12 +111,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setSelfLink(toOperationLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
-        target.setFamilies(toResourcesFamilies(source.getFamilies(), apiUrl));
         target.setSubjectArea(toResourceExternalItemSrm(source.getSubjectArea()));
         target.setSecondarySubjectAreas(toSecondarySubjectAreas(source.getSecondarySubjectAreas()));
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
-//        target.getInstances().addAll(toResourcesInstances(source.getInstances(), apiUrl)); // TODO instances? O sólo como children?
         target.setSurveyType(toItem(source.getSurveyType()));
         target.setOfficialityType(toItem(source.getOfficialityType()));
         target.setIndicatorSystem(source.getIndicatorSystem());
@@ -499,18 +498,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private Families toResourcesFamilies(Set<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl) {
-        if (sources == null || sources.size() == 0) {
-            return null;
-        }
-        Families targets = new Families();
-        for (org.siemac.metamac.statistical.operations.core.domain.Family source : sources) {
-            Resource target = toResource(source, apiUrl);
-            targets.getFamilies().add(target);
-        }
-        return targets;
-    }
-
     private Resource toResource(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl) {
         if (source == null) {
             return null;
@@ -522,18 +509,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setSelfLink(toFamilyLink(apiUrl, source));
         target.setTitle(toInternationalString(source.getTitle()));
         return target;
-    }
-
-    private List<Resource> toResourcesInstances(List<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, String apiUrl) {
-        List<Resource> targets = new ArrayList<Resource>();
-        if (sources == null) {
-            return targets;
-        }
-        for (org.siemac.metamac.statistical.operations.core.domain.Instance source : sources) {
-            Resource target = toResource(source, apiUrl);
-            targets.add(target);
-        }
-        return targets;
     }
 
     private Resource toResource(org.siemac.metamac.statistical.operations.core.domain.Instance source, String apiUrl) {
@@ -677,6 +652,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         familiesTarget.setSelfLink(toFamiliesByOperationLink(operation, apiUrl));
         targets.getChildren().add(familiesTarget);
 
+        targets.setTotal(BigInteger.valueOf(targets.getChildren().size()));
         return targets;
     }
 
@@ -696,6 +672,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         operationsTarget.setSelfLink(toOperationsByFamilyLink(family, apiUrl));
         targets.getChildren().add(operationsTarget);
 
+        targets.setTotal(BigInteger.valueOf(targets.getChildren().size()));
         return targets;
     }
 
@@ -837,67 +814,81 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
                 throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     private SecondarySubjectAreas toSecondarySubjectAreas(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         SecondarySubjectAreas targets = new SecondarySubjectAreas();
         toResourcesExternalItemsSrm(sources, targets.getSecondarySubjectAreas());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getSecondarySubjectAreas().size()));
         return targets;
     }
-    
+
     private Producers toProducers(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         Producers targets = new Producers();
         toResourcesExternalItemsSrm(sources, targets.getProducers());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getProducers().size()));
         return targets;
     }
-    
+
     private RegionalResponsibles toRegionalResponsibles(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         RegionalResponsibles targets = new RegionalResponsibles();
         toResourcesExternalItemsSrm(sources, targets.getRegionalResponsibles());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getRegionalResponsibles().size()));
         return targets;
     }
-    
+
     private RegionalContributors toRegionalContributors(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         RegionalContributors targets = new RegionalContributors();
         toResourcesExternalItemsSrm(sources, targets.getRegionalContributors());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getRegionalContributors().size()));
         return targets;
     }
-    
+
     private Publishers toPublishers(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         Publishers targets = new Publishers();
         toResourcesExternalItemsSrm(sources, targets.getPublishers());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getPublishers().size()));
         return targets;
     }
-    
+
     private UpdateFrequencies toUpdateFrequencies(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         UpdateFrequencies targets = new UpdateFrequencies();
         toResourcesExternalItemsSrm(sources, targets.getUpdateFrequencies());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getUpdateFrequencies().size()));
         return targets;
     }
-    
+
     private StatisticalUnits toStatisticalUnits(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
         StatisticalUnits targets = new StatisticalUnits();
         toResourcesExternalItemsSrm(sources, targets.getStatisticalUnits());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getStatisticalUnits().size()));
         return targets;
     }
 
@@ -907,6 +898,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         UnitMeasures targets = new UnitMeasures();
         toResourcesExternalItemsSrm(sources, targets.getUnitMeasures());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getUnitMeasures().size()));
         return targets;
     }
 
@@ -916,6 +909,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         StatConcDefs targets = new StatConcDefs();
         toResourcesExternalItemsSrm(sources, targets.getStatConcDefs());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
     }
 
@@ -925,6 +920,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         ClassSystems targets = new ClassSystems();
         toResourcesExternalItemsSrm(sources, targets.getClassSystems());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getClassSystems().size()));
         return targets;
     }
 
@@ -934,6 +931,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         InformationSuppliers targets = new InformationSuppliers();
         toResourcesExternalItemsSrm(sources, targets.getInformationSuppliers());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getInformationSuppliers().size()));
         return targets;
     }
 
@@ -943,6 +942,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         FreqColls targets = new FreqColls();
         toResourcesExternalItemsSrm(sources, targets.getFreqColls());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getFreqColls().size()));
         return targets;
     }
 }

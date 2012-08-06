@@ -11,17 +11,17 @@
         <common:text xml:lang="en">family1 in English</common:text>
     </operations:title>
     <operations:acronym>
-        <common:text xml:lang="es">acronym1 en Español</common:text>
         <common:text xml:lang="en">acronym1 in English</common:text>
+        <common:text xml:lang="es">acronym1 en Español</common:text>
     </operations:acronym>
     <operations:description>
-        <common:text xml:lang="es">description1 en Español</common:text>
         <common:text xml:lang="en">description1 in English</common:text>
+        <common:text xml:lang="es">description1 en Español</common:text>
     </operations:description>
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
-    <operations:children>
+    <operations:children total="1">
         <operations:child kind="statisticalOperations#operations">
             <common:selfLink>http://localhost:9001/internal/v1.0/families/family1/operations</common:selfLink>
         </operations:child>

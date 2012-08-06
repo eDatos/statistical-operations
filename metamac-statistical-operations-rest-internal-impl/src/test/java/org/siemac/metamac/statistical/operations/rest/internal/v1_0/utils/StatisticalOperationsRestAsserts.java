@@ -38,12 +38,10 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
-        assertEqualsFamilies(expected.getFamilies(), actual.getFamilies());
         MetamacRestAsserts.assertEqualsResource(expected.getSubjectArea(), actual.getSubjectArea());
         assertEqualsSecondarySubjectAreas(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
-//        MetamacRestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances()); // TODO instances
         MetamacRestAsserts.assertEqualsItem(expected.getSurveyType(), actual.getSurveyType());
         MetamacRestAsserts.assertEqualsItem(expected.getOfficialityType(), actual.getOfficialityType());
         assertEquals(expected.getIndicatorSystem(), actual.getIndicatorSystem());
@@ -150,86 +148,97 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getOperations(), actual.getOperations());
-    }    
-    
+    }
+
     public static void assertEqualsFamilies(Families expected, Families actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getFamilies(), actual.getFamilies());
     }
-    
+
     public static void assertEqualsInstances(Instances expected, Instances actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances());
-    }     
-    
+    }
+
     public static void assertEqualsSurveyTypes(SurveyTypes expected, SurveyTypes actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getSurveyTypes(), actual.getSurveyTypes());
-    }     
-    
+        assertEquals(expected.getTotal(), actual.getTotal());
+    }
+
     public static void assertEqualsOfficialityTypes(OfficialityTypes expected, OfficialityTypes actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getOfficialityTypes(), actual.getOfficialityTypes());
-    }     
-    
+        assertEquals(expected.getTotal(), actual.getTotal());
+    }
+
     public static void assertEqualsSurveySources(SurveySources expected, SurveySources actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getSurveySources(), actual.getSurveySources());
-    }   
-    
+        assertEquals(expected.getTotal(), actual.getTotal());
+    }
+
     public static void assertEqualsInstanceTypes(InstanceTypes expected, InstanceTypes actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getInstanceTypes(), actual.getInstanceTypes());
-    }           
-    
+        assertEquals(expected.getTotal(), actual.getTotal());
+    }
+
     public static void assertEqualsCollMethods(CollMethods expected, CollMethods actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getCollMethods(), actual.getCollMethods());
-    }       
-    
+        assertEquals(expected.getTotal(), actual.getTotal());
+    }
+
     public static void assertEqualsCosts(Costs expected, Costs actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsItems(expected.getCosts(), actual.getCosts());
+        assertEquals(expected.getTotal(), actual.getTotal());
     }
-    
+
     private static void assertEqualsInformationSuppliers(InformationSuppliers expected, InformationSuppliers actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getInformationSuppliers(), actual.getInformationSuppliers());
-    }    
+    }
 
     private static void assertEqualsChildren(Children expected, Children actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        assertEquals(expected.getTotal(), actual.getTotal());
         MetamacRestAsserts.assertEqualsResourcesLinks(expected.getChildren(), actual.getChildren());
     }
 
@@ -238,6 +247,7 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getFreqColls(), actual.getFreqColls());
     }
 
@@ -246,6 +256,7 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getClassSystems(), actual.getClassSystems());
     }
 
@@ -254,6 +265,7 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getStatConcDefs(), actual.getStatConcDefs());
     }
 
@@ -262,6 +274,7 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getUnitMeasures(), actual.getUnitMeasures());
     }
 
@@ -270,54 +283,61 @@ public class StatisticalOperationsRestAsserts {
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getStatisticalUnits(), actual.getStatisticalUnits());
     }
-    
+
     private static void assertEqualsSecondarySubjectAreas(SecondarySubjectAreas expected, SecondarySubjectAreas actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
     }
-    
+
     private static void assertEqualsProducers(Producers expected, Producers actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getProducers(), actual.getProducers());
     }
-    
+
     private static void assertEqualsRegionalResponsibles(RegionalResponsibles expected, RegionalResponsibles actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
     }
-    
+
     private static void assertEqualsRegionalContributors(RegionalContributors expected, RegionalContributors actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getRegionalContributors(), actual.getRegionalContributors());
     }
-    
+
     private static void assertEqualsPublishers(Publishers expected, Publishers actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getPublishers(), actual.getPublishers());
     }
-    
+
     private static void assertEqualsUpdateFrequencies(UpdateFrequencies expected, UpdateFrequencies actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
-    }    
+    }
 }
