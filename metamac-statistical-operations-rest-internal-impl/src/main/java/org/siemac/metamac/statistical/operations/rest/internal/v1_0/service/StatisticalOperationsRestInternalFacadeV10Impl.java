@@ -14,7 +14,6 @@ import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
@@ -245,8 +244,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             org.siemac.metamac.statistical.operations.core.domain.Instance instanceEntity = statisticalOperationsBaseService.findInstanceByCode(serviceContextRestInternal, id);
             if (instanceEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(instanceEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(instanceEntity.getProcStatus()))) {
                 // Instance not found
-                Error error = RestExceptionUtils.getError(RestServiceExceptionType.INSTANCE_NOT_FOUND, id);
-                throw new RestException(error, Status.NOT_FOUND);
+                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.INSTANCE_NOT_FOUND, id);
+                throw new RestException(exception, Status.NOT_FOUND);
             }
 
             // Transform and return
@@ -324,12 +323,13 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     /**
      * Retrieve operation by code (id in Api) and check it is published externally or internally
      */
-    private org.siemac.metamac.statistical.operations.core.domain.Operation retrieveOperationEntityPublishedInternalOrExternally(String code) throws MetamacException {
-        org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, code);
+    private org.siemac.metamac.statistical.operations.core.domain.Operation retrieveOperationEntityPublishedInternalOrExternally(String id) throws MetamacException {
+        org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = statisticalOperationsBaseService.findOperationByCode(serviceContextRestInternal, id);
         if (operationEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationEntity.getProcStatus()))) {
             // Operation not found
-            Error error = RestExceptionUtils.getError(RestServiceExceptionType.OPERATION_NOT_FOUND, code);
-            throw new RestException(error, Status.NOT_FOUND);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.OPERATION_NOT_FOUND, id);
+            throw new RestException(exception, Status.NOT_FOUND);
+
         }
         return operationEntity;
     }
@@ -337,13 +337,14 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     /**
      * Retrieve family by code (id in Api) and check it is published externally or internally
      */
-    private org.siemac.metamac.statistical.operations.core.domain.Family retrieveFamilyEntityPublishedInternalOrExternally(String code) throws MetamacException {
-        org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = statisticalOperationsBaseService.findFamilyByCode(serviceContextRestInternal, code);
+    private org.siemac.metamac.statistical.operations.core.domain.Family retrieveFamilyEntityPublishedInternalOrExternally(String id) throws MetamacException {
+        org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = statisticalOperationsBaseService.findFamilyByCode(serviceContextRestInternal, id);
 
         if (familyEntity == null || (!ProcStatusEnum.PUBLISH_EXTERNALLY.equals(familyEntity.getProcStatus()) && !ProcStatusEnum.PUBLISH_INTERNALLY.equals(familyEntity.getProcStatus()))) {
             // Family not found or not published
-            Error error = RestExceptionUtils.getError(RestServiceExceptionType.FAMILY_NOT_FOUND, code);
-            throw new RestException(error, Status.NOT_FOUND);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.FAMILY_NOT_FOUND, id);
+            throw new RestException(exception, Status.NOT_FOUND);
+
         }
         return familyEntity;
     }
@@ -360,7 +361,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
      */
     private RestException manageException(MetamacException e) {
         logger.error("Error", e);
-        Error error = do2RestInternalMapper.toError(e);
-        return new RestException(error, Status.INTERNAL_SERVER_ERROR);
+        org.siemac.metamac.rest.common.v1_0.domain.Exception exception = do2RestInternalMapper.toException(e);
+        return new RestException(exception, Status.INTERNAL_SERVER_ERROR);
     }
 }

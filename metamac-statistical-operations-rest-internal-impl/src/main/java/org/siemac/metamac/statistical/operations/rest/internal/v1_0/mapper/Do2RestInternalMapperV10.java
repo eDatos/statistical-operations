@@ -3,7 +3,6 @@ package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
 import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
-import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -50,5 +49,5 @@ public interface Do2RestInternalMapperV10 {
     public Costs toCosts(List<Cost> entitiesResult);
 
     // Other
-    public Error toError(Exception exception);
+    public org.siemac.metamac.rest.common.v1_0.domain.Exception toException(Exception exception);
 }

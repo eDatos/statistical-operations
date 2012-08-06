@@ -165,13 +165,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().retrieveOperationById(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Operation not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -476,13 +476,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().findOperationsByFamily(NOT_EXISTS, null, null, null, null);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Family not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Family not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -513,13 +513,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().retrieveFamilyById(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Family not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.FAMILY_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Family not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -559,13 +559,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().retrieveInstanceById(OPERATION_1, NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Instance not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Instance not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -721,13 +721,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().findInstances(NOT_EXISTS, null, null, null, null);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Operation not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }
@@ -893,13 +893,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().retrieveFamiliesByOperation(NOT_EXISTS);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Error error = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = extractErrorFromException(statisticalOperationsRestInternalFacadeClientXml, e);
 
-            assertEquals(1, error.getErrorItems().getErrorItems().size());
-            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), error.getErrorItems().getErrorItems().get(0).getCode());
-            assertEquals("Operation not found with id {0}", error.getErrorItems().getErrorItems().get(0).getMessage());
-            assertEquals(1, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().size());
-            assertEquals(NOT_EXISTS, error.getErrorItems().getErrorItems().get(0).getParameters().getParameters().get(0));
+            assertEquals(RestServiceExceptionType.OPERATION_NOT_FOUND.getCode(), exception.getCode());
+            assertEquals("Operation not found with id " + NOT_EXISTS, exception.getMessage());
+            assertEquals(1, exception.getParameters().getParameters().size());
+            assertEquals(NOT_EXISTS, exception.getParameters().getParameters().get(0));
+            assertNull(exception.getErrors());
         } catch (Exception e) {
             fail("Incorrect exception");
         }

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<common:error xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
-    <common:errorItems>
-        <common:errorItem code="exception.operations.instance.not_found">
-            <common:message>Instance not found with id {0}</common:message>
-            <common:parameters>
-                <common:parameter>NOT_EXISTS</common:parameter>
-            </common:parameters>
-        </common:errorItem>
-    </common:errorItems>
-</common:error>
+<common:exception xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/statistical/operations/rest/internal/v1.0/domain">
+    <common:code>exception.operations.instance.not_found</common:code>
+    <common:message>Instance not found with id NOT_EXISTS</common:message>
+    <common:parameters total="1">
+        <common:parameter>NOT_EXISTS</common:parameter>
+    </common:parameters>
+</common:exception>

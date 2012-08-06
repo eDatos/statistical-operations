@@ -19,9 +19,8 @@ import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
-import org.siemac.metamac.rest.common.v1_0.domain.ErrorItem;
-import org.siemac.metamac.rest.common.v1_0.domain.ErrorItems;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorParameters;
+import org.siemac.metamac.rest.common.v1_0.domain.Errors;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Item;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
@@ -415,9 +414,51 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     @Override
-    public Error toError(Exception exception) {
+    public org.siemac.metamac.rest.common.v1_0.domain.Exception toException(Exception source) {
+        org.siemac.metamac.rest.common.v1_0.domain.Exception target = null;
+        if (source instanceof MetamacException) {
+            MetamacException metamacException = (MetamacException) source;
+            if (metamacException.getPrincipalException() != null) {
+                target = new org.siemac.metamac.rest.common.v1_0.domain.Exception();
+                Error principalError = toError(metamacException.getPrincipalException());
+                target.setCode(principalError.getCode());
+                target.setMessage(principalError.getMessage());
+                target.setParameters(principalError.getParameters());
+            } else {
+                target = RestExceptionUtils.getException(RestCommonServiceExceptionType.UNKNOWN);
+            }
+            if (metamacException.getExceptionItems() != null && metamacException.getExceptionItems().size() != 0) {
+                target.setErrors(new Errors());
+                for (MetamacExceptionItem metamacExceptionItem : metamacException.getExceptionItems()) {
+                    Error error = toError(metamacExceptionItem);
+                    target.getErrors().getErrors().add(error);
+                }
+            }
+        } else {
+            target = RestExceptionUtils.getException(RestCommonServiceExceptionType.UNKNOWN);
+        }
+        return target;
+    }
+
+    private Error toError(MetamacExceptionItem metamacExceptionItem) {
         Error error = new Error();
-        error.setErrorItems(toErrorItems(exception));
+        error.setCode(metamacExceptionItem.getCode());
+        error.setMessage(metamacExceptionItem.getMessage());
+        error.setParameters(new ErrorParameters());
+        if (metamacExceptionItem.getMessageParameters() != null) {
+            for (int i = 0; i < metamacExceptionItem.getMessageParameters().length; i++) {
+                Serializable messageParameter = metamacExceptionItem.getMessageParameters()[i];
+                String parameter = null;
+                if (messageParameter instanceof String) {
+                    parameter = messageParameter.toString();
+                } else if (messageParameter instanceof String[]) {
+                    parameter = Arrays.deepToString((String[]) messageParameter);
+                } else {
+                    parameter = messageParameter.toString();
+                }
+                error.getParameters().getParameters().add(parameter);
+            }
+        }
         return error;
     }
 
@@ -436,38 +477,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
 
         return targets;
-    }
-
-    private ErrorItems toErrorItems(Exception exception) {
-        ErrorItems errorItemList = new ErrorItems();
-        if (exception instanceof MetamacException) {
-            MetamacException metamacException = (MetamacException) exception;
-            for (MetamacExceptionItem metamacExceptionItem : metamacException.getExceptionItems()) {
-                ErrorItem errorItem = new ErrorItem();
-                errorItem.setCode(metamacExceptionItem.getCode());
-                errorItem.setMessage(metamacExceptionItem.getMessage());
-                errorItem.setParameters(new ErrorParameters());
-                if (metamacExceptionItem.getMessageParameters() != null) {
-                    for (int i = 0; i < metamacExceptionItem.getMessageParameters().length; i++) {
-                        Serializable messageParameter = metamacExceptionItem.getMessageParameters()[i];
-                        String parameter = null;
-                        if (messageParameter instanceof String) {
-                            parameter = messageParameter.toString();
-                        } else if (messageParameter instanceof String[]) {
-                            parameter = Arrays.deepToString((String[]) messageParameter);
-                        } else {
-                            parameter = messageParameter.toString();
-                        }
-                        errorItem.getParameters().getParameters().add(parameter);
-                    }
-                }
-                errorItemList.getErrorItems().add(errorItem);
-            }
-        } else {
-            ErrorItem errorItem = RestExceptionUtils.getErrorItem(RestCommonServiceExceptionType.UNKNOWN);
-            errorItemList.getErrorItems().add(errorItem);
-        }
-        return errorItemList;
     }
 
     private void commonMetadataToOperation(ExternalItem commonMetadata, Operation target) {
@@ -791,8 +800,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             case PUBLISH_EXTERNALLY:
                 return ProcStatus.PUBLISH_EXTERNALLY;
             default:
-                Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
-                throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
+                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -810,8 +819,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             case OUT_OF_PRINT:
                 return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.OUT_OF_PRINT;
             default:
-                Error error = RestExceptionUtils.getError(RestServiceExceptionType.UNKNOWN);
-                throw new RestException(error, Status.INTERNAL_SERVER_ERROR);
+                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
         }
     }
 

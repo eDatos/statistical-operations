@@ -11,8 +11,6 @@ import org.siemac.metamac.core.common.util.CoreCommonUtil;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestOrder;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestQueryPropertyRestriction;
 import org.siemac.metamac.rest.common.query.domain.SculptorPropertyCriteria;
-import org.siemac.metamac.rest.common.v1_0.domain.Error;
-import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
@@ -25,6 +23,7 @@ import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyOrder;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyOrder;
@@ -230,8 +229,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
     }
 
     private RestException toRestExceptionParameterIncorrect(String parameter) {
-        Error error = RestExceptionUtils.getError(RestCommonServiceExceptionType.PARAMETER_INCORRECT, parameter);
-        return new RestException(error, Status.INTERNAL_SERVER_ERROR);
+        org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.PARAMETER_INCORRECT, parameter);
+        throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
     }
 
     private ProcStatusEnum propertyRestrictionValueToProcStatusEnum(String value) {
