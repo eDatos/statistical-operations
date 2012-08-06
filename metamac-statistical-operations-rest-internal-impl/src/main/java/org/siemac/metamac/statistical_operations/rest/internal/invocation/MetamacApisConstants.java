@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.invocation;
+package org.siemac.metamac.statistical_operations.rest.internal.invocation;
 
 public class MetamacApisConstants {
 

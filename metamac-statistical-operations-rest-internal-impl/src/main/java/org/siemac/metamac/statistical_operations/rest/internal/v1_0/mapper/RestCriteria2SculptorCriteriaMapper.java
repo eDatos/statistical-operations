@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.statistical.operations.core.domain.Family;

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
 import java.util.Date;
 
@@ -23,13 +23,13 @@ import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyOrder;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyOrder;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationCriteriaPropertyOrder;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OperationCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyOrder;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyOrder;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OperationCriteriaPropertyOrder;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OperationCriteriaPropertyRestriction;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.service;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.service;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -6,18 +6,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Costs;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Families;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instances;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveySources;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.CollMethods;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Costs;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Families;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Family;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Instance;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Instances;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OfficialityTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Operations;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.SurveySources;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.SurveyTypes;
 
 public interface StatisticalOperationsRestInternalFacadeV10 {
 

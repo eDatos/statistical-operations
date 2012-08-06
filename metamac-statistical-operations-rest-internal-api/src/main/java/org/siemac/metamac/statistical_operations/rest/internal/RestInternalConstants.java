@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal;
+package org.siemac.metamac.statistical_operations.rest.internal;
 
 import org.siemac.metamac.rest.constants.RestConstants;
 

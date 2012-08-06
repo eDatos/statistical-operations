@@ -1,6 +1,6 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mapper;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,34 +40,34 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.rest.internal.RestInternalConstants;
-import org.siemac.metamac.statistical.operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Children;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ClassSystems;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.CollMethods;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Costs;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Families;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Family;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.FreqColls;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InformationSuppliers;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instance;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Instances;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operation;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Operations;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.ProcStatus;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Producers;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Publishers;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.RegionalContributors;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.RegionalResponsibles;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SecondarySubjectAreas;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.StatConcDefs;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.StatisticalUnits;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveySources;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.UnitMeasures;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.UpdateFrequencies;
+import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Children;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.ClassSystems;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.CollMethods;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Costs;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Families;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Family;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.FreqColls;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InformationSuppliers;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Instance;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Instances;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OfficialityTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Operation;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Operations;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.ProcStatus;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Producers;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Publishers;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.RegionalContributors;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.RegionalResponsibles;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.SecondarySubjectAreas;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.StatConcDefs;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.StatisticalUnits;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.SurveySources;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.UnitMeasures;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.UpdateFrequencies;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -805,19 +805,19 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
     }
 
-    private org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status toStatus(StatusEnum source) {
+    private org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Status toStatus(StatusEnum source) {
         if (source == null) {
             return null;
         }
         switch (source) {
             case PLANNING:
-                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.PLANNING;
+                return org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Status.PLANNING;
             case DESIGN:
-                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.DESIGN;
+                return org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Status.DESIGN;
             case PRODUCTION:
-                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.PRODUCTION;
+                return org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Status.PRODUCTION;
             case OUT_OF_PRINT:
-                return org.siemac.metamac.statistical.operations.rest.internal.v1_0.domain.Status.OUT_OF_PRINT;
+                return org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Status.OUT_OF_PRINT;
             default:
                 org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
                 throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);

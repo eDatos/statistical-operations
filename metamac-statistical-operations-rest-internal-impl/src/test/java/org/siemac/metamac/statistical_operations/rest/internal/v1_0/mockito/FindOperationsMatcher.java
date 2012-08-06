@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.mockito;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mockito;
 
 import java.util.ArrayList; 
 import java.util.List;

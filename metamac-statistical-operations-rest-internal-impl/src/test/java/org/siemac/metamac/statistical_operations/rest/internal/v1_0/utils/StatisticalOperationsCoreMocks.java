@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
+package org.siemac.metamac.statistical_operations.rest.internal.v1_0.utils;
 
 import static org.junit.Assert.fail;
 
@@ -23,7 +23,7 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical.operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10Test;
+import org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10Test;
 
 public class StatisticalOperationsCoreMocks {
 

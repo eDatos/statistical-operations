@@ -44,5 +44,5 @@
         <entry key="com.sun.xml.bind.namespacePrefixMapper" value-ref="statisticalOperationsNamespacePrefixMapper" />
     </util:map>
     
-     <bean id="statisticalOperationsNamespacePrefixMapper" class="org.siemac.metamac.statistical.operations.rest.internal.StatisticalOperationsNamespacePrefixMapper" />
+     <bean id="statisticalOperationsNamespacePrefixMapper" class="org.siemac.metamac.statistical_operations.rest.internal.StatisticalOperationsNamespacePrefixMapper" />
 </beans>

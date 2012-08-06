@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.rest.internal.invocation;
+package org.siemac.metamac.statistical_operations.rest.internal.invocation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

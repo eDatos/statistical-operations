@@ -13,7 +13,7 @@
     </bean>
     
     <bean id="commonMetadataRestInternalFacade" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="org.siemac.metamac.statistical.operations.rest.internal.invocation.CommonMetadataRestInternalFacade" />
+        <constructor-arg value="org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestInternalFacade" />
     </bean>    
     
 </beans>
