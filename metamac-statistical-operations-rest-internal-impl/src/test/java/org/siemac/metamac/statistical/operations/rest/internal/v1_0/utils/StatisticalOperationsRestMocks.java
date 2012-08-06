@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.rest.internal.v1_0.utils;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.fail; 
 
 import java.math.BigInteger;
 
