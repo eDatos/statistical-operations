@@ -86,7 +86,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
             return operation;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -112,7 +112,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Operations operations = do2RestInternalMapper.toOperations(operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return operations;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -142,7 +142,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Instances instances = do2RestInternalMapper.toInstances(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return instances;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -165,7 +165,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Families families = do2RestInternalMapper.toFamiliesByOperation(familiesEntitiesResult.getValues(), getApiUrl());
             return families;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -180,7 +180,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
             return family;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -206,7 +206,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Families families = do2RestInternalMapper.toFamilies(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return families;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -233,7 +233,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Operations operations = do2RestInternalMapper.toOperationsByFamily(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
             return operations;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
@@ -252,72 +252,93 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             Instance instance = do2RestInternalMapper.toInstance(instanceEntity, getApiUrl());
             return instance;
 
-        } catch (MetamacException e) {
+        } catch (Exception e) {
             throw manageException(e);
         }
     }
 
     @Override
     public SurveyTypes retrieveSurveyTypes() {
+        try {
+            // Retrieve all
+            List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
 
-        // Retrieve all
-        List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
-
-        // Transform
-        SurveyTypes surveyTypes = do2RestInternalMapper.toSurveyTypes(entitiesResult);
-        return surveyTypes;
+            // Transform
+            SurveyTypes surveyTypes = do2RestInternalMapper.toSurveyTypes(entitiesResult);
+            return surveyTypes;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     @Override
     public OfficialityTypes retrieveOfficialityTypes() {
+        try {
+            // Retrieve all
+            List<OfficialityType> entitiesResult = statisticalOperationsListsService.findAllOfficialityTypes(serviceContextRestInternal);
 
-        // Retrieve all
-        List<OfficialityType> entitiesResult = statisticalOperationsListsService.findAllOfficialityTypes(serviceContextRestInternal);
-
-        // Transform
-        OfficialityTypes officialityTypes = do2RestInternalMapper.toOfficialityTypes(entitiesResult);
-        return officialityTypes;
+            // Transform
+            OfficialityTypes officialityTypes = do2RestInternalMapper.toOfficialityTypes(entitiesResult);
+            return officialityTypes;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     @Override
     public InstanceTypes retrieveInstanceTypes() {
+        try {
+            // Retrieve all
+            List<InstanceType> entitiesResult = statisticalOperationsListsService.findAllInstanceTypes(serviceContextRestInternal);
 
-        // Retrieve all
-        List<InstanceType> entitiesResult = statisticalOperationsListsService.findAllInstanceTypes(serviceContextRestInternal);
-
-        // Transform
-        InstanceTypes instanceTypes = do2RestInternalMapper.toInstanceTypes(entitiesResult);
-        return instanceTypes;
+            // Transform
+            InstanceTypes instanceTypes = do2RestInternalMapper.toInstanceTypes(entitiesResult);
+            return instanceTypes;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     @Override
     public SurveySources retrieveSurveySources() {
-        // Retrieve all
-        List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestInternal);
+        try {
+            // Retrieve all
+            List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestInternal);
 
-        // Transform
-        SurveySources surveySources = do2RestInternalMapper.toSurveySources(entitiesResult);
-        return surveySources;
+            // Transform
+            SurveySources surveySources = do2RestInternalMapper.toSurveySources(entitiesResult);
+            return surveySources;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     @Override
     public CollMethods retrieveCollMethods() {
-        // Retrieve all
-        List<CollMethod> entitiesResult = statisticalOperationsListsService.findAllCollMethods(serviceContextRestInternal);
+        try {
+            // Retrieve all
+            List<CollMethod> entitiesResult = statisticalOperationsListsService.findAllCollMethods(serviceContextRestInternal);
 
-        // Transform
-        CollMethods collMethods = do2RestInternalMapper.toCollMethods(entitiesResult);
-        return collMethods;
+            // Transform
+            CollMethods collMethods = do2RestInternalMapper.toCollMethods(entitiesResult);
+            return collMethods;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     @Override
     public Costs retrieveCosts() {
-        // Retrieve all
-        List<Cost> entitiesResult = statisticalOperationsListsService.findAllCosts(serviceContextRestInternal);
+        try {
+            // Retrieve all
+            List<Cost> entitiesResult = statisticalOperationsListsService.findAllCosts(serviceContextRestInternal);
 
-        // Transform
-        Costs costs = do2RestInternalMapper.toCosts(entitiesResult);
-        return costs;
+            // Transform
+            Costs costs = do2RestInternalMapper.toCosts(entitiesResult);
+            return costs;
+        } catch (Exception e) {
+            throw manageException(e);
+        }
     }
 
     /**
@@ -359,9 +380,13 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     /**
      * Throws response error, logging exception
      */
-    private RestException manageException(MetamacException e) {
+    private RestException manageException(Exception e) {
         logger.error("Error", e);
-        org.siemac.metamac.rest.common.v1_0.domain.Exception exception = do2RestInternalMapper.toException(e);
-        return new RestException(exception, Status.INTERNAL_SERVER_ERROR);
+        if (e instanceof RestException) {
+            return (RestException) e;
+        } else {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = do2RestInternalMapper.toException(e);
+            return new RestException(exception, Status.INTERNAL_SERVER_ERROR);
+        }
     }
 }

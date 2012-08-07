@@ -2,7 +2,6 @@ package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -593,18 +592,6 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setId(source.getIdentifier());
         target.setTitle(toInternationalString(source.getDescription()));
         return target;
-    }
-
-    private List<Item> toItemsCosts(Set<org.siemac.metamac.statistical.operations.core.domain.Cost> sources) {
-        List<Item> targets = new ArrayList<Item>();
-        if (sources == null) {
-            return targets;
-        }
-        for (Cost source : sources) {
-            Item target = toItem(source);
-            targets.add(target);
-        }
-        return targets;
     }
 
     private void toResourcesExternalItems(Set<ExternalItem> sources, List<Resource> targets, String apiExternalItem) {
