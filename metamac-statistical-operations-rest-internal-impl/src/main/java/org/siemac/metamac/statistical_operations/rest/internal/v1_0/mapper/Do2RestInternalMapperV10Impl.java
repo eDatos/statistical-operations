@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +14,12 @@ import javax.ws.rs.core.Response.Status;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
+import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configuration;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
+import org.siemac.metamac.rest.common.v1_0.domain.Children;
 import org.siemac.metamac.rest.common.v1_0.domain.Error;
 import org.siemac.metamac.rest.common.v1_0.domain.ErrorParameters;
 import org.siemac.metamac.rest.common.v1_0.domain.Errors;
@@ -42,7 +44,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Children;
+import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Costs;
@@ -79,14 +81,14 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     // private MessageContext context; // Always null in this bean (not in Service)...
 
     @Autowired
-    private ConfigurationService configurationService;
+    private ConfigurationService             configurationService;
 
-    // @Autowired
-    // private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade; // TODO
+    @Autowired
+    private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
 
-    private String               srmApiEndpoint;
+    private String                           srmApiEndpoint;
 
-    public static String         KIND_SRM_EXTERNAL_ITEM = "PENDIENTE_API_SRM"; // TODO METAMAC-916
+    public static String                     KIND_SRM_EXTERNAL_ITEM = "PENDIENTE_API_SRM"; // TODO METAMAC-916
 
     @PostConstruct
     public void init() throws Exception {
@@ -483,15 +485,15 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         if (commonMetadata == null) {
             return;
         }
-        // // Calls to CommonMetadata API TODO
-        // Configuration configuration = commonMetadataRestInternalFacade.retrieveConfigurationById(commonMetadata.getCode());
-        //
-        // // Transform
-        // target.setContact(configuration.getContact());
-        // target.setLegalActs(configuration.getLegalActs());
-        // target.setDataSharing(configuration.getDataSharing());
-        // target.setConfidentialityPolicy(configuration.getConfPolicy());
-        // target.setConfidentialityDataTreatment(configuration.getConfDataTreatment());
+         // Calls to CommonMetadata API
+         Configuration configuration = commonMetadataRestInternalFacade.retrieveConfigurationById(commonMetadata.getCode());
+        
+         // Transform
+         target.setContact(configuration.getContact());
+         target.setLegalActs(configuration.getLegalActs());
+         target.setDataSharing(configuration.getDataSharing());
+         target.setConfidentialityPolicy(configuration.getConfPolicy());
+         target.setConfidentialityDataTreatment(configuration.getConfDataTreatment());
     }
 
     private Resource toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl) {

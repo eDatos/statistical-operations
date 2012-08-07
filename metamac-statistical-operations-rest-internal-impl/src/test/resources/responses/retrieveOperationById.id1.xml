@@ -19,18 +19,18 @@
         <common:urn>urn:subjectArea1</common:urn>
         <common:selfLink>http://localhost:8080/metamac-srm-web/subjectAreas/subjectArea1</common:selfLink>
         <common:title>
-            <common:text xml:lang="es">subjectArea1 en Español</common:text>
             <common:text xml:lang="en">subjectArea1 in English</common:text>
+            <common:text xml:lang="es">subjectArea1 en Español</common:text>
         </common:title>
     </operations:subjectArea>
     <operations:secondarySubjectAreas kind="PENDIENTE_API_SRM" total="3">
         <operations:secondarySubjectArea kind="CATEGORY">
-            <common:id>secundarySubjectArea333</common:id>
-            <common:urn>urn:secundarySubjectArea333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</common:selfLink>
+            <common:id>secundarySubjectArea22</common:id>
+            <common:urn>urn:secundarySubjectArea22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">secundarySubjectArea333 en Español</common:text>
-                <common:text xml:lang="en">secundarySubjectArea333 in English</common:text>
+                <common:text xml:lang="en">secundarySubjectArea22 in English</common:text>
+                <common:text xml:lang="es">secundarySubjectArea22 en Español</common:text>
             </common:title>
         </operations:secondarySubjectArea>
         <operations:secondarySubjectArea kind="CATEGORY">
@@ -38,17 +38,17 @@
             <common:urn>urn:secundarySubjectArea1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea1</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">secundarySubjectArea1 in English</common:text>
                 <common:text xml:lang="es">secundarySubjectArea1 en Español</common:text>
+                <common:text xml:lang="en">secundarySubjectArea1 in English</common:text>
             </common:title>
         </operations:secondarySubjectArea>
         <operations:secondarySubjectArea kind="CATEGORY">
-            <common:id>secundarySubjectArea22</common:id>
-            <common:urn>urn:secundarySubjectArea22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22</common:selfLink>
+            <common:id>secundarySubjectArea333</common:id>
+            <common:urn>urn:secundarySubjectArea333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">secundarySubjectArea22 en Español</common:text>
-                <common:text xml:lang="en">secundarySubjectArea22 in English</common:text>
+                <common:text xml:lang="es">secundarySubjectArea333 en Español</common:text>
+                <common:text xml:lang="en">secundarySubjectArea333 in English</common:text>
             </common:title>
         </operations:secondarySubjectArea>
     </operations:secondarySubjectAreas>
@@ -63,19 +63,28 @@
     <operations:surveyType>
         <common:id>surveyIdentifier</common:id>
         <common:title>
-            <common:text xml:lang="es">surveyIdentifier en Español</common:text>
             <common:text xml:lang="en">surveyIdentifier in English</common:text>
+            <common:text xml:lang="es">surveyIdentifier en Español</common:text>
         </common:title>
     </operations:surveyType>
     <operations:officialityType>
         <common:id>officialityType</common:id>
         <common:title>
-            <common:text xml:lang="es">officialityType en Español</common:text>
             <common:text xml:lang="en">officialityType in English</common:text>
+            <common:text xml:lang="es">officialityType en Español</common:text>
         </common:title>
     </operations:officialityType>
     <operations:indicatorSystem>true</operations:indicatorSystem>
     <operations:producers kind="PENDIENTE_API_SRM" total="2">
+        <operations:producer kind="AGENCY">
+            <common:id>producer22</common:id>
+            <common:urn>urn:producer22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/producers/producer22</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">producer22 en Español</common:text>
+                <common:text xml:lang="en">producer22 in English</common:text>
+            </common:title>
+        </operations:producer>
         <operations:producer kind="AGENCY">
             <common:id>producer1</common:id>
             <common:urn>urn:producer1</common:urn>
@@ -85,24 +94,15 @@
                 <common:text xml:lang="es">producer1 en Español</common:text>
             </common:title>
         </operations:producer>
-        <operations:producer kind="AGENCY">
-            <common:id>producer22</common:id>
-            <common:urn>urn:producer22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/producers/producer22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">producer22 in English</common:text>
-                <common:text xml:lang="es">producer22 en Español</common:text>
-            </common:title>
-        </operations:producer>
     </operations:producers>
     <operations:regionalResponsibles kind="PENDIENTE_API_SRM" total="3">
         <operations:regionalResponsible kind="AGENCY">
-            <common:id>regionalResponsible22</common:id>
-            <common:urn>urn:regionalResponsible22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</common:selfLink>
+            <common:id>regionalResponsible333</common:id>
+            <common:urn>urn:regionalResponsible333</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">regionalResponsible22 in English</common:text>
-                <common:text xml:lang="es">regionalResponsible22 en Español</common:text>
+                <common:text xml:lang="en">regionalResponsible333 in English</common:text>
+                <common:text xml:lang="es">regionalResponsible333 en Español</common:text>
             </common:title>
         </operations:regionalResponsible>
         <operations:regionalResponsible kind="AGENCY">
@@ -110,21 +110,30 @@
             <common:urn>urn:regionalResponsible1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">regionalResponsible1 in English</common:text>
                 <common:text xml:lang="es">regionalResponsible1 en Español</common:text>
+                <common:text xml:lang="en">regionalResponsible1 in English</common:text>
             </common:title>
         </operations:regionalResponsible>
         <operations:regionalResponsible kind="AGENCY">
-            <common:id>regionalResponsible333</common:id>
-            <common:urn>urn:regionalResponsible333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</common:selfLink>
+            <common:id>regionalResponsible22</common:id>
+            <common:urn>urn:regionalResponsible22</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible22</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">regionalResponsible333 en Español</common:text>
-                <common:text xml:lang="en">regionalResponsible333 in English</common:text>
+                <common:text xml:lang="es">regionalResponsible22 en Español</common:text>
+                <common:text xml:lang="en">regionalResponsible22 in English</common:text>
             </common:title>
         </operations:regionalResponsible>
     </operations:regionalResponsibles>
     <operations:regionalContributors kind="PENDIENTE_API_SRM" total="2">
+        <operations:regionalContributor kind="AGENCY">
+            <common:id>regionalContributor1</common:id>
+            <common:urn>urn:regionalContributor1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">regionalContributor1 en Español</common:text>
+                <common:text xml:lang="en">regionalContributor1 in English</common:text>
+            </common:title>
+        </operations:regionalContributor>
         <operations:regionalContributor kind="AGENCY">
             <common:id>regionalContributor22</common:id>
             <common:urn>urn:regionalContributor22</common:urn>
@@ -134,30 +143,12 @@
                 <common:text xml:lang="en">regionalContributor22 in English</common:text>
             </common:title>
         </operations:regionalContributor>
-        <operations:regionalContributor kind="AGENCY">
-            <common:id>regionalContributor1</common:id>
-            <common:urn>urn:regionalContributor1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">regionalContributor1 in English</common:text>
-                <common:text xml:lang="es">regionalContributor1 en Español</common:text>
-            </common:title>
-        </operations:regionalContributor>
     </operations:regionalContributors>
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:currentlyActive>false</operations:currentlyActive>
     <operations:status>DESIGN</operations:status>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
     <operations:publishers kind="PENDIENTE_API_SRM" total="3">
-        <operations:publisher kind="AGENCY">
-            <common:id>publisher1</common:id>
-            <common:urn>urn:publisher1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">publisher1 en Español</common:text>
-                <common:text xml:lang="en">publisher1 in English</common:text>
-            </common:title>
-        </operations:publisher>
         <operations:publisher kind="AGENCY">
             <common:id>publisher22</common:id>
             <common:urn>urn:publisher22</common:urn>
@@ -172,8 +163,17 @@
             <common:urn>urn:publisher333</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher333</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">publisher333 en Español</common:text>
                 <common:text xml:lang="en">publisher333 in English</common:text>
+                <common:text xml:lang="es">publisher333 en Español</common:text>
+            </common:title>
+        </operations:publisher>
+        <operations:publisher kind="AGENCY">
+            <common:id>publisher1</common:id>
+            <common:urn>urn:publisher1</common:urn>
+            <common:selfLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</common:selfLink>
+            <common:title>
+                <common:text xml:lang="es">publisher1 en Español</common:text>
+                <common:text xml:lang="en">publisher1 in English</common:text>
             </common:title>
         </operations:publisher>
     </operations:publishers>
@@ -189,8 +189,8 @@
             <common:urn>urn:updateFrequency1</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">updateFrequency1 in English</common:text>
                 <common:text xml:lang="es">updateFrequency1 en Español</common:text>
+                <common:text xml:lang="en">updateFrequency1 in English</common:text>
             </common:title>
         </operations:updateFrequency>
         <operations:updateFrequency kind="CODE">
@@ -198,8 +198,8 @@
             <common:urn>urn:updateFrequency22</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency22</common:selfLink>
             <common:title>
-                <common:text xml:lang="en">updateFrequency22 in English</common:text>
                 <common:text xml:lang="es">updateFrequency22 en Español</common:text>
+                <common:text xml:lang="en">updateFrequency22 in English</common:text>
             </common:title>
         </operations:updateFrequency>
         <operations:updateFrequency kind="CODE">
@@ -216,8 +216,8 @@
             <common:urn>urn:updateFrequency4444</common:urn>
             <common:selfLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</common:selfLink>
             <common:title>
-                <common:text xml:lang="es">updateFrequency4444 en Español</common:text>
                 <common:text xml:lang="en">updateFrequency4444 in English</common:text>
+                <common:text xml:lang="es">updateFrequency4444 en Español</common:text>
             </common:title>
         </operations:updateFrequency>
     </operations:updateFrequencies>
@@ -226,8 +226,8 @@
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</common:urn>
         <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
         <common:title>
-            <common:text xml:lang="es">instance22 en Español</common:text>
             <common:text xml:lang="en">instance22 in English</common:text>
+            <common:text xml:lang="es">instance22 en Español</common:text>
         </common:title>
     </operations:currentInternalInstance>
     <operations:currentInstance kind="statisticalOperations#instance">
@@ -235,33 +235,58 @@
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</common:urn>
         <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</common:selfLink>
         <common:title>
-            <common:text xml:lang="es">instance333 en Español</common:text>
             <common:text xml:lang="en">instance333 in English</common:text>
+            <common:text xml:lang="es">instance333 en Español</common:text>
         </common:title>
     </operations:currentInstance>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
     <operations:revPolicy>
-        <common:text xml:lang="en">revPolicy1 in English</common:text>
         <common:text xml:lang="es">revPolicy1 en Español</common:text>
+        <common:text xml:lang="en">revPolicy1 in English</common:text>
     </operations:revPolicy>
     <operations:revPractice>
         <common:text xml:lang="en">revPractice1 in English</common:text>
         <common:text xml:lang="es">revPractice1 en Español</common:text>
     </operations:revPractice>
+    <operations:contact kind="AGENCY">
+        <common:id>contact1</common:id>
+        <common:urn>urn:contact1</common:urn>
+        <common:selfLink>http://srm-api/contacts/contact1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">contact1 en Español</common:text>
+            <common:text xml:lang="en">contact1 in English</common:text>
+        </common:title>
+    </operations:contact>
+    <operations:legalActs>
+        <common:text xml:lang="es">legalActs1 en Español</common:text>
+        <common:text xml:lang="en">legalActs1 in English</common:text>
+    </operations:legalActs>
+    <operations:dataSharing>
+        <common:text xml:lang="es">dataSharing1 en Español</common:text>
+        <common:text xml:lang="en">dataSharing1 in English</common:text>
+    </operations:dataSharing>
+    <operations:confidentialityPolicy>
+        <common:text xml:lang="es">confidentialityPolicy1 en Español</common:text>
+        <common:text xml:lang="en">confidentialityPolicy1 in English</common:text>
+    </operations:confidentialityPolicy>
+    <operations:confidentialityDataTreatment>
+        <common:text xml:lang="es">confidentialityDataTreatment1 en Español</common:text>
+        <common:text xml:lang="en">confidentialityDataTreatment1 in English</common:text>
+    </operations:confidentialityDataTreatment>
     <operations:comment>
-        <common:text xml:lang="es">comment1 en Español</common:text>
         <common:text xml:lang="en">comment1 in English</common:text>
+        <common:text xml:lang="es">comment1 en Español</common:text>
     </operations:comment>
     <operations:notes>
         <common:text xml:lang="en">notes1 in English</common:text>
         <common:text xml:lang="es">notes1 en Español</common:text>
     </operations:notes>
     <operations:children total="2">
-        <operations:child kind="statisticalOperations#instances">
+        <common:child kind="statisticalOperations#instances">
             <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances</common:selfLink>
-        </operations:child>
-        <operations:child kind="statisticalOperations#families">
+        </common:child>
+        <common:child kind="statisticalOperations#families">
             <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/families</common:selfLink>
-        </operations:child>
+        </common:child>
     </operations:children>
 </operations:operation>

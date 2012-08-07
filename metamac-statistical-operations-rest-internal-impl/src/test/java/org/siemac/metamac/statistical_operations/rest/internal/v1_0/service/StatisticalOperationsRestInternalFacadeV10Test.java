@@ -39,6 +39,7 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
+import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Costs;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Families;
@@ -104,7 +105,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // xml
         {
             List providers = new ArrayList();
-            providers.add(applicationContext.getBean(JAXBElementProvider.class));
+            providers.add(applicationContext.getBean("jaxbProvider", JAXBElementProvider.class));
             statisticalOperationsRestInternalFacadeClientXml = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestInternalFacadeV10.class, providers, Boolean.TRUE);
         }
         // Mockito
@@ -192,7 +193,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
 
         // Request and validate
-        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_JSON);
+        WebClient webClient = WebClient.create(requestUri).accept("application/json");
         Response response = webClient.get();
 
         assertEquals(Status.NOT_ACCEPTABLE.getStatusCode(), response.getStatus());
@@ -1108,7 +1109,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
-        // CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class); // TODO
+        CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
@@ -1168,8 +1169,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCollMethods());
         when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCosts());
 
-        // External APIS TODO
-        // when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        // External APIS
+        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
     }
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;

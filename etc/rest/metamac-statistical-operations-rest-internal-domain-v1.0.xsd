@@ -43,7 +43,7 @@
             <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="comment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="notes" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="children" type="tns:Children" minOccurs="1" />
+            <xs:element name="children" type="common:Children" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>
@@ -60,7 +60,7 @@
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0" />
-            <xs:element name="children" type="tns:Children" minOccurs="1" />
+            <xs:element name="children" type="common:Children" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>
@@ -118,7 +118,7 @@
             <xs:element name="coherInternal" type="common:InternationalString" minOccurs="0" />
             <xs:element name="comment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="notes" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="children" type="tns:Children" minOccurs="0" />
+            <xs:element name="children" type="common:Children" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>
@@ -153,13 +153,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <xs:complexType name="Children">
-        <xs:sequence>
-            <xs:element name="child" type="common:ResourceLink" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
-        <xs:attribute name="total" type="xs:integer" use="required"/>
-    </xs:complexType>        
     
     <xs:complexType name="StatisticalUnits">
         <xs:complexContent>

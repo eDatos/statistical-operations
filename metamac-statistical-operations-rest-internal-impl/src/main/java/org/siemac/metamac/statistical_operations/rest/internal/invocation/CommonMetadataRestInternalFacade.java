@@ -1,8 +1,8 @@
 package org.siemac.metamac.statistical_operations.rest.internal.invocation;
 
+import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configuration;
 
 public interface CommonMetadataRestInternalFacade {
 
-    // TODO
-//    Configuration retrieveConfigurationById(String id);
+    Configuration retrieveConfigurationById(String id);
 }

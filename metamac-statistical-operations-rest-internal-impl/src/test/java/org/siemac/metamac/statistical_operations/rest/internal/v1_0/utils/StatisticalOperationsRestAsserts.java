@@ -3,7 +3,6 @@ package org.siemac.metamac.statistical_operations.rest.internal.v1_0.utils;
 import static org.junit.Assert.assertEquals;
 
 import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Children;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.Costs;
@@ -69,7 +68,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityDataTreatment(), actual.getConfidentialityDataTreatment());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
-        assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
     }
 
     public static void assertEqualsFamily(Family expected, Family actual) {
@@ -84,7 +83,7 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
-        assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
     }
 
     public static void assertEqualsInstance(Instance expected, Instance actual) {
@@ -140,7 +139,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
-        assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
     }
 
     public static void assertEqualsOperations(Operations expected, Operations actual) {
@@ -231,15 +230,6 @@ public class StatisticalOperationsRestAsserts {
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getInformationSuppliers(), actual.getInformationSuppliers());
-    }
-
-    private static void assertEqualsChildren(Children expected, Children actual) {
-        MetamacRestAsserts.assertEqualsNullability(expected, actual);
-        if (expected == null) {
-            return;
-        }
-        assertEquals(expected.getTotal(), actual.getTotal());
-        MetamacRestAsserts.assertEqualsResourcesLinks(expected.getChildren(), actual.getChildren());
     }
 
     private static void assertEqualsFreqColls(FreqColls expected, FreqColls actual) {

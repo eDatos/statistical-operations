@@ -188,6 +188,7 @@
                             </schemaIncludes>
                             <args>
                                 <arg>-Xbg</arg>
+                                <arg>-npa</arg> <!-- no generate package-info -->
                             </args>
                             <episodes>
 	                           <episode>
