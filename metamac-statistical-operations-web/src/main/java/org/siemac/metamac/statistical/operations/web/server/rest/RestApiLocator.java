@@ -4,7 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.siemac.metamac.common.metadata.rest.internal.v1_0.service.CommonMetadataRestInternalFacadeV10;
+import org.siemac.metamac.common_metadata.rest.internal.v1_0.service.CommonMetadataRestInternalFacadeV10;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
