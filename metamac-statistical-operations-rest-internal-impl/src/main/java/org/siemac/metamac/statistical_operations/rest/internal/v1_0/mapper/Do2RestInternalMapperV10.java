@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
-import java.util.List; 
+import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -47,7 +47,4 @@ public interface Do2RestInternalMapperV10 {
     public SurveySources toSurveySources(List<SurveySource> entitiesResult);
     public CollMethods toCollMethods(List<CollMethod> entitiesResult);
     public Costs toCosts(List<Cost> entitiesResult);
-
-    // Other
-    public org.siemac.metamac.rest.common.v1_0.domain.Exception toException(Exception exception);
 }

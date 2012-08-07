@@ -14,6 +14,7 @@ import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
@@ -385,7 +386,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
         if (e instanceof RestException) {
             return (RestException) e;
         } else {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = do2RestInternalMapper.toException(e);
+            // do not show information details about exception to user
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestCommonServiceExceptionType.UNKNOWN);
             return new RestException(exception, Status.INTERNAL_SERVER_ERROR);
         }
     }
