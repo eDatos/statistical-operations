@@ -94,7 +94,6 @@
                         <configuration>
                             <target>
                                 <delete dir="${basedir}/target/enunciate-scratch" includeemptydirs="true"/>
-                                <delete dir="${basedir}/target/enunciate" includeemptydirs="true"/>
                             </target>
                         </configuration>
                     </execution>                    
