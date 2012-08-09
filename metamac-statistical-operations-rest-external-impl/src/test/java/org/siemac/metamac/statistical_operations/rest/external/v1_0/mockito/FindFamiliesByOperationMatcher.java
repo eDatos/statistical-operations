@@ -19,7 +19,7 @@ public class FindFamiliesByOperationMatcher extends ConditionalCriteriasMatcher 
     public boolean matches(Object actual) {
         List<ConditionalCriteria> expected = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
                 .withProperty(FamilyProperties.operations().code()).eq(operationCode).withProperty(FamilyProperties.procStatus())
-                .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
+                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
         return super.matches(expected, actual);
     }
 }

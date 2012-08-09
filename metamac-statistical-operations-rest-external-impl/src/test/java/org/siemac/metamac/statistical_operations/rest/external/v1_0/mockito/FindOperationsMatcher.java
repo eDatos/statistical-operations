@@ -28,7 +28,7 @@ public class FindOperationsMatcher extends ConditionalCriteriasMatcher {
         
         // By procStatus
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Operation.class).withProperty(OperationProperties.procStatus())
-                .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
+                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
         
         // orderBy
         if (conditionalCriteriaOrderBy != null) {

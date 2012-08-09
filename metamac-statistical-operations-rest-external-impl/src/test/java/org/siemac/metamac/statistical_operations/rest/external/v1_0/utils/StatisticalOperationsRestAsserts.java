@@ -47,16 +47,13 @@ public class StatisticalOperationsRestAsserts {
         assertEqualsProducers(expected.getProducers(), actual.getProducers());
         assertEqualsRegionalResponsibles(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
         assertEqualsRegionalContributors(expected.getRegionalContributors(), actual.getRegionalContributors());
-        assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getCurrentlyActive(), actual.getCurrentlyActive());
         assertEquals(expected.getStatus(), actual.getStatus());
-        assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEqualsPublishers(expected.getPublishers(), actual.getPublishers());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRelPolUsAc(), actual.getRelPolUsAc());
         assertEquals(expected.getReleaseCalendar(), actual.getReleaseCalendar());
         assertEquals(expected.getReleaseCalendarAccess(), actual.getReleaseCalendarAccess());
         assertEqualsUpdateFrequencies(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
-        MetamacRestAsserts.assertEqualsResource(expected.getCurrentInternalInstance(), actual.getCurrentInternalInstance());
         MetamacRestAsserts.assertEqualsResource(expected.getCurrentInstance(), actual.getCurrentInstance());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
@@ -66,7 +63,6 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataSharing(), actual.getDataSharing());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityPolicy(), actual.getConfidentialityPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityDataTreatment(), actual.getConfidentialityDataTreatment());
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
     }
@@ -79,8 +75,6 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
-        assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
-        assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
@@ -109,9 +103,6 @@ public class StatisticalOperationsRestAsserts {
         assertEqualsStatConcDefs(expected.getStatConcDefs(), actual.getStatConcDefs());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getClassSystemsDescription(), actual.getClassSystemsDescription());
         assertEqualsClassSystems(expected.getClassSystems(), actual.getClassSystems());
-        MetamacRestAsserts.assertEqualsItem(expected.getInstanceType(), actual.getInstanceType());
-        assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
-        assertEquals(expected.getProcStatus(), actual.getProcStatus());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDocMethod(), actual.getDocMethod());
         MetamacRestAsserts.assertEqualsItem(expected.getSurveySource(), actual.getSurveySource());
         MetamacRestAsserts.assertEqualsItem(expected.getCollMethod(), actual.getCollMethod());
@@ -120,8 +111,6 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataValidation(), actual.getDataValidation());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataCompilation(), actual.getDataCompilation());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAdjustment(), actual.getAdjustment());
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getCostBurden(), actual.getCostBurden());
-        assertEqualsCosts(expected.getCosts(), actual.getCosts());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getQualityDoc(), actual.getQualityDoc());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getQualityAssure(), actual.getQualityAssure());
@@ -137,7 +126,6 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getCoherXDom(), actual.getCoherXDom());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getCoherInternal(), actual.getCoherInternal());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
         MetamacRestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
         MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
     }

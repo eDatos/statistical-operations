@@ -28,11 +28,11 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.service.Stat
 public class StatisticalOperationsCoreMocks {
 
     public static Operation mockOperation1() {
-        return mockOperation("1", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity(), mockFamily2RelatedEntity());
+        return mockOperation("1", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity(), mockFamily2RelatedEntity());
     }
 
     public static Operation mockOperation2() {
-        return mockOperation("2", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
+        return mockOperation("2", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation3() {
@@ -40,11 +40,11 @@ public class StatisticalOperationsCoreMocks {
     }
 
     public static Operation mockOperation4() {
-        return mockOperation("4", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
+        return mockOperation("4", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation5() {
-        return mockOperation("5", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
+        return mockOperation("5", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
     public static Operation mockOperation6() {
@@ -68,7 +68,7 @@ public class StatisticalOperationsCoreMocks {
     }
 
     public static Family mockFamily1() {
-        return mockFamily("1", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockFamily("1", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
     public static Family mockFamily2() {
@@ -88,19 +88,19 @@ public class StatisticalOperationsCoreMocks {
     }
 
     public static Instance mockInstance1() {
-        return mockInstance("1", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance("1", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
     public static Instance mockInstance2() {
-        return mockInstance("2", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance("2", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
     public static Instance mockInstance3() {
-        return mockInstance("3", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance("3", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
     public static Instance mockInstance4() {
-        return mockInstance("4", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance("4", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
     public static Instance mockInstance15() {
-        return mockInstance("15", ProcStatusEnum.PUBLISH_INTERNALLY);
+        return mockInstance("15", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
     public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {

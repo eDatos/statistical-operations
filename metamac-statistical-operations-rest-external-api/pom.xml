@@ -98,7 +98,7 @@
                             <goal>unpack-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/classes/META-INF/rest</outputDirectory>
+                            <outputDirectory>${project.build.directory}/classes/META-INF/rest/external</outputDirectory>
                             <includeGroupIds>org.siemac.metamac</includeGroupIds>
                             <includeArtifacIds>metamac-rest-api</includeArtifacIds>
                             <includeClassifiers>resources</includeClassifiers>
@@ -125,8 +125,8 @@
                             <outputDirectory>${project.build.directory}/classes</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../etc/rest</directory>
-                                    <targetPath>META-INF/rest</targetPath>
+                                    <directory>${basedir}/../etc/rest/external</directory>
+                                    <targetPath>META-INF/rest/external</targetPath>
                                     <includes>
                                         <include>**/*</include>
                                     </includes>
@@ -150,7 +150,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>target/classes/META-INF/rest/**/*.xsd</include>
+                        <include>target/classes/META-INF/rest/external/*.xsd</include>
                     </includes>
                     <replacements>
                         <replacement>
@@ -172,7 +172,7 @@
                         </goals>
                         <configuration>
                             <extension>true</extension>
-                            <schemaDirectory>${project.build.directory}/classes/META-INF/rest</schemaDirectory>
+                            <schemaDirectory>${project.build.directory}/classes/META-INF/rest/external</schemaDirectory>
                             <schemaIncludes>
                                 <schemaInclude>*.xsd</schemaInclude>
                             </schemaIncludes>
@@ -187,7 +187,7 @@
                                 </episode>
                             </episodes>
                             <bindingFiles>
-                                <bindingFile>${basedir}/../etc/rest/binding.xjb</bindingFile>
+                                <bindingFile>${basedir}/../etc/rest/external/binding.xjb</bindingFile>
                             </bindingFiles>
                             <generateDirectory>${basedir}/src/generated/java</generateDirectory>
                             <forceRegenerate>true</forceRegenerate>

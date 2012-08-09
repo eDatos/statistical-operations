@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
-import org.siemac.metamac.common_metadata.rest.external.v1_0.domain.Configuration;
+import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configuration;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.rest.common.v1_0.domain.Children;
@@ -49,7 +49,6 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Insta
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operation;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operations;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.ProcStatus;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Producers;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Publishers;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.RegionalContributors;
@@ -113,23 +112,19 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setProducers(toProducers(source.getProducer()));
         target.setRegionalResponsibles(toRegionalResponsibles(source.getRegionalResponsible()));
         target.setRegionalContributors(toRegionalContributors(source.getRegionalContributor()));
-        target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
         target.setStatus(toStatus(source.getStatus()));
-        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setPublishers(toPublishers(source.getPublisher()));
         target.setRelPolUsAc(toInternationalString(source.getRelPolUsAc()));
         target.setReleaseCalendar(source.getReleaseCalendar());
         target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
         target.setUpdateFrequencies(toUpdateFrequencies(source.getUpdateFrequency()));
         target.setCurrentInstance(toResource(getInstanceInProcStatus(source.getInstances(), ProcStatusEnum.PUBLISH_EXTERNALLY), apiUrl));
-        target.setCurrentInternalInstance(toResource(getInstanceInProcStatus(source.getInstances(), ProcStatusEnum.PUBLISH_INTERNALLY), apiUrl));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
         target.setRevPractice(toInternationalString(source.getRevPractice()));
         commonMetadataToOperation(source.getCommonMetadata(), target);
         target.setComment(toInternationalString(source.getComment()));
-        target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toOperationParent(apiUrl));
         target.setChildren(toOperationChildren(source, apiUrl));
         return target;
@@ -185,8 +180,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setDescription(toInternationalString(source.getDescription()));
-        target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
-        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setParent(toFamilyParent(apiUrl));
         target.setChildren(toFamilyChildren(source, apiUrl));
@@ -258,9 +251,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setStatConcDefs(toStatConcDefs(source.getStatConcDefList()));
         target.setClassSystemsDescription(toInternationalString(source.getClassSystem()));
         target.setClassSystems(toClassSystems(source.getClassSystemList()));
-        target.setInstanceType(toItem(source.getInstanceType()));
-        target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
-        target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
         target.setSurveySource(toItem(source.getSurveySource()));
         target.setCollMethod(toItem(source.getCollMethod()));
@@ -269,8 +259,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setDataValidation(toInternationalString(source.getDataValidation()));
         target.setDataCompilation(toInternationalString(source.getDataCompilation()));
         target.setAdjustment(toInternationalString(source.getAdjustment()));
-        target.setCostBurden(toInternationalString(source.getCostBurden()));
-        target.setCosts(toCosts(source.getCost()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
         target.setQualityDoc(toInternationalString(source.getQualityDoc()));
         target.setQualityAssure(toInternationalString(source.getQualityAssure()));
@@ -286,7 +274,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setCoherXDom(toInternationalString(source.getCoherXDomain()));
         target.setCoherInternal(toInternationalString(source.getCoherInternal()));
         target.setComment(toInternationalString(source.getComment()));
-        target.setNotes(toInternationalString(source.getNotes()));
         target.setParent(toInstanceParent(source, apiUrl));
         target.setChildren(toInstanceChildren(source, apiUrl));
         return target;
@@ -720,21 +707,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             }
         }
         return null;
-    }
-
-    private ProcStatus toProcStatus(ProcStatusEnum source) {
-        if (source == null) {
-            return null;
-        }
-        switch (source) {
-            case PUBLISH_INTERNALLY:
-                return ProcStatus.PUBLISH_INTERNALLY;
-            case PUBLISH_EXTERNALLY:
-                return ProcStatus.PUBLISH_EXTERNALLY;
-            default:
-                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
-                throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
-        }
     }
 
     private org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status toStatus(StatusEnum source) {

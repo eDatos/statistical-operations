@@ -30,7 +30,7 @@ public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.operation().code()).eq(operationCode)
                 .buildSingle());
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.procStatus())
-                .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
+                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
 
         // orderBy
         if (conditionalCriteriaOrderBy != null) {

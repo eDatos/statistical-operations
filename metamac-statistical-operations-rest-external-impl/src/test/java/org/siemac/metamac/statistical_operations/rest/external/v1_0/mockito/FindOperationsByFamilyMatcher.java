@@ -30,7 +30,7 @@ public class FindOperationsByFamilyMatcher extends ConditionalCriteriasMatcher {
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Operation.class).withProperty(OperationProperties.families().code()).eq(family)
                 .buildSingle());
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Operation.class).withProperty(OperationProperties.procStatus())
-                .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
+                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
 
         // orderBy
         if (conditionalCriteriaOrderBy != null) {

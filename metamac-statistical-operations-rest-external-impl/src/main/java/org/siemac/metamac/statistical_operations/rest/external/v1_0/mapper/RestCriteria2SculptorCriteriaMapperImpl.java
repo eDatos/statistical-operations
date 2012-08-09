@@ -21,7 +21,6 @@ import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
-import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.FamilyCriteriaPropertyOrder;
@@ -88,15 +87,10 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()));
                 case PRODUCER_URN:
                     return new SculptorPropertyCriteria(OperationProperties.producer().urn(), propertyRestriction.getValue());
-                case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.externalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
                 case CURRENTLY_ACTIVE:
                     return new SculptorPropertyCriteria(OperationProperties.currentlyActive(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()));
                 case STATUS:
                     return new SculptorPropertyCriteria(OperationProperties.status(), propertyRestrictionValueToStatusEnum(propertyRestriction.getValue()));
-                case PROC_STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
                 case PUBLISHER_URN:
                     return new SculptorPropertyCriteria(OperationProperties.publisher().urn(), propertyRestriction.getValue());
                 case INVENTORY_DATE:
@@ -142,11 +136,6 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getValue());
                 case DESCRIPTION:
                     return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getValue());
-                case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Family>(FamilyProperties.externalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Family.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
-                case PROC_STATUS:
-                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
                 case INVENTORY_DATE:
                     return new SculptorPropertyCriteria(
                             new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class),
@@ -194,13 +183,6 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     return new SculptorPropertyCriteria(InstanceProperties.geographicGranularity().urn(), propertyRestriction.getValue());
                 case TEMPORAL_GRANULARITY_URN:
                     return new SculptorPropertyCriteria(InstanceProperties.temporalGranularity().urn(), propertyRestriction.getValue());
-                case INSTANCE_TYPE_ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.instanceType().identifier(), propertyRestriction.getValue());
-                case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
-                case PROC_STATUS:
-                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
                 case INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
                             Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
@@ -231,10 +213,6 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
     private RestException toRestExceptionParameterIncorrect(String parameter) {
         org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.PARAMETER_INCORRECT, parameter);
         throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
-    }
-
-    private ProcStatusEnum propertyRestrictionValueToProcStatusEnum(String value) {
-        return value != null ? ProcStatusEnum.valueOf(value) : null;
     }
 
     private Boolean propertyRestrictionValueToBoolean(String value) {

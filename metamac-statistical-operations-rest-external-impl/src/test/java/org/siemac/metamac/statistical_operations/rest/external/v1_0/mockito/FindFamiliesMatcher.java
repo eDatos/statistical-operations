@@ -28,7 +28,7 @@ public class FindFamiliesMatcher extends ConditionalCriteriasMatcher {
         
         // By procStatus
         expected.add(ConditionalCriteriaBuilder.criteriaFor(Family.class).withProperty(FamilyProperties.procStatus())
-                .in(ProcStatusEnum.PUBLISH_INTERNALLY, ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
+                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
         
         // orderBy
         if (conditionalCriteriaOrderBy != null) {
