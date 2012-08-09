@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-    <artifactId>metamac-statistical-operations-rest-internal-api</artifactId>
+    <artifactId>metamac-statistical-operations-rest-external-api</artifactId>
     <packaging>jar</packaging>
-    <name>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL API</name>
-    <description>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL API</description>
+    <name>METAMAC :: STATISTICAL OPERATIONS :: REST :: EXTERNAL API</name>
+    <description>METAMAC :: STATISTICAL OPERATIONS :: REST :: EXTERNAL API</description>
 
     <dependencies>
         <dependency>
@@ -187,7 +187,7 @@
                                 </episode>
                             </episodes>
                             <bindingFiles>
-                                <bindingFile>${basedir}/../etc/rest/binding-internal.xjb</bindingFile>
+                                <bindingFile>${basedir}/../etc/rest/binding.xjb</bindingFile>
                             </bindingFiles>
                             <generateDirectory>${basedir}/src/generated/java</generateDirectory>
                             <forceRegenerate>true</forceRegenerate>

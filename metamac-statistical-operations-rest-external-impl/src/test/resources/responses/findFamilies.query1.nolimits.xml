@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations:families xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#families" limit="25" offset="0" total="2">
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family1</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</common:urn>
+        <common:selfLink>http://localhost:9001/external/v1.0/families/family1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">family1 in English</common:text>
+            <common:text xml:lang="es">family1 en Español</common:text>
+        </common:title>
+    </operations:family>
+    <operations:family kind="statisticalOperations#family">
+        <common:id>family15</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family15</common:urn>
+        <common:selfLink>http://localhost:9001/external/v1.0/families/family15</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">family15 in English</common:text>
+            <common:text xml:lang="es">family15 en Español</common:text>
+        </common:title>
+    </operations:family>
+</operations:families>

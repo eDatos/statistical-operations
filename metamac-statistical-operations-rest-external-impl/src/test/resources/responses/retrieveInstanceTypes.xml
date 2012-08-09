@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations:instanceTypes xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instanceTypes" total="2">
+    <operations:instanceType>
+        <common:id>instanceType1</common:id>
+        <common:title>
+            <common:text xml:lang="en">instanceType1 in English</common:text>
+            <common:text xml:lang="es">instanceType1 en Español</common:text>
+        </common:title>
+    </operations:instanceType>
+    <operations:instanceType>
+        <common:id>instanceType2</common:id>
+        <common:title>
+            <common:text xml:lang="es">instanceType2 en Español</common:text>
+            <common:text xml:lang="en">instanceType2 in English</common:text>
+        </common:title>
+    </operations:instanceType>
+</operations:instanceTypes>

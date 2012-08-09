@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations:collMethods xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#collMethods" total="2">
+    <operations:collMethod>
+        <common:id>collMethod1</common:id>
+        <common:title>
+            <common:text xml:lang="es">collMethod1 en Español</common:text>
+            <common:text xml:lang="en">collMethod1 in English</common:text>
+        </common:title>
+    </operations:collMethod>
+    <operations:collMethod>
+        <common:id>collMethod2</common:id>
+        <common:title>
+            <common:text xml:lang="en">collMethod2 in English</common:text>
+            <common:text xml:lang="es">collMethod2 en Español</common:text>
+        </common:title>
+    </operations:collMethod>
+</operations:collMethods>

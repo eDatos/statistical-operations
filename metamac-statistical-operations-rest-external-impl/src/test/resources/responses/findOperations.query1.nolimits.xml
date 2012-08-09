@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="25" offset="0" total="2">
+    <operations:operation kind="statisticalOperations#operation">
+        <common:id>operation1</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
+        <common:selfLink>http://localhost:9001/external/v1.0/operations/operation1</common:selfLink>
+        <common:title>
+            <common:text xml:lang="en">operation1 in English</common:text>
+            <common:text xml:lang="es">operation1 en Español</common:text>
+        </common:title>
+    </operations:operation>
+    <operations:operation kind="statisticalOperations#operation">
+        <common:id>operation10</common:id>
+        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</common:urn>
+        <common:selfLink>http://localhost:9001/external/v1.0/operations/operation10</common:selfLink>
+        <common:title>
+            <common:text xml:lang="es">operation10 en Español</common:text>
+            <common:text xml:lang="en">operation10 in English</common:text>
+        </common:title>
+    </operations:operation>
+</operations:operations>
