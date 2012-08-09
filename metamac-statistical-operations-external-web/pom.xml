@@ -29,11 +29,11 @@
             <classifier>client</classifier>
         </dependency>
         <!-- TODO Publicar API externa, no interna! -->
-<!--         <dependency> -->
-<!--             <groupId>org.siemac.metamac.metamac-statistical-operations</groupId> -->
-<!--             <artifactId>metamac-statistical-operations-rest-internal-impl</artifactId> -->
-<!--             <version>${project.version}</version> -->
-<!--         </dependency> -->
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-rest-internal-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -44,5 +44,78 @@
             <artifactId>icu4j</artifactId>
             <version>${icu4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.enunciate</groupId>
+            <artifactId>enunciate-rt</artifactId>
+            <version>1.25</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>jackson-jaxrs</artifactId>
+            		<groupId>org.codehaus.jackson</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jackson-xc</artifactId>
+            		<groupId>org.codehaus.jackson</groupId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.enunciate</groupId>
+            <artifactId>enunciate-core</artifactId>
+            <version>1.25</version>
+        </dependency>        
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>delete-previous-docs</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete dir="${basedir}/src/main/webapp/docs/api" includeemptydirs="true"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>delete-enunciate-temporal</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete dir="${basedir}/target/enunciate-scratch" includeemptydirs="true"/>
+                                <delete dir="${basedir}/target/enunciate" includeemptydirs="true"/>
+                            </target>
+                        </configuration>
+                    </execution>                    
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.enunciate</groupId>
+                <artifactId>maven-enunciate-plugin</artifactId>
+                <version>1.25</version>
+                <configuration>
+                    <configFile>etc/enunciate/enunciate.xml</configFile>  
+                    <docsDir>${basedir}/src/main/webapp/docs/api</docsDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>docs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>    
 </project>

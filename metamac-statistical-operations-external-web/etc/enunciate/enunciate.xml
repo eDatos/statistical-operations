@@ -1,0 +1,34 @@
+<enunciate xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.25.xsd">
+
+    <namespaces>
+        <namespace uri="http://www.siemac.org/metamac/statistical-operations/rest/internal/v1.0/domain" id="operations"/>
+        <namespace uri="http://www.siemac.org/metamac/rest/common/v1.0/domain" id="common"/>
+    </namespaces>
+    
+    <api-classes>
+        <include pattern="org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.**" />
+    </api-classes>
+
+    <api-import class="org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.**" />
+
+    <services>
+        <rest defaultRestSubcontext="api/internal/" />
+    </services>
+
+    <modules>
+        <docs title="Metamac Statistical Operations API"
+              includeExampleJson="false" includeExampleXml="true"
+              docsDir="../../" 
+              groupRestResources="byDocumentationGroup"
+              freemarkerXMLProcessingTemplate="etc/enunciate/docs.fmt"
+              />
+        <spring-app disabled="true" />
+        <jersey disabled="true" />
+        <csharp disabled="true" />
+        <c disabled="true"/>
+        <xml disabled="false" />
+        <obj-c disabled="true" />
+        <java-client generateJsonJar="false" />
+        <jaxws-client generateJsonJar="false" />
+    </modules>
+</enunciate>

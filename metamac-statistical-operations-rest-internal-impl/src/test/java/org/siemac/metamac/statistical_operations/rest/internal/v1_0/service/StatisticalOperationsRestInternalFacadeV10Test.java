@@ -69,7 +69,8 @@ import org.springframework.web.util.UriUtils;
 public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestBaseTest {
 
     private static final String                               PORT                                            = ServerResource.PORT;
-    private static String                                     baseApi                                         = "http://localhost:" + PORT + "/internal/v1.0";
+    private static String                                     jaxrsServerAddress                              = "http://localhost:" + PORT + "/internal";
+    private static String                                     baseApi                                         = jaxrsServerAddress + "/v1.0";
 
     private static StatisticalOperationsRestInternalFacadeV10 statisticalOperationsRestInternalFacadeClientXml;
 
@@ -106,7 +107,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         {
             List providers = new ArrayList();
             providers.add(applicationContext.getBean("jaxbProvider", JAXBElementProvider.class));
-            statisticalOperationsRestInternalFacadeClientXml = JAXRSClientFactory.create(baseApi, StatisticalOperationsRestInternalFacadeV10.class, providers, Boolean.TRUE);
+            statisticalOperationsRestInternalFacadeClientXml = JAXRSClientFactory.create(jaxrsServerAddress, StatisticalOperationsRestInternalFacadeV10.class, providers, Boolean.TRUE);
         }
         // Mockito
         setUpMockito();

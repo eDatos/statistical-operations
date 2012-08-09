@@ -72,6 +72,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     private ServiceContext                      serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
     private Logger                              logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
 
+    private final String                        API_VERSION                = "v1.0";
+
     @Context
     public void setMessageContext(MessageContext context) {
         this.context = context;
@@ -375,7 +377,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
      * Get Base API url
      */
     private String getApiUrl() {
-        return RestUtils.getApiUrl(context);
+        return RestUtils.getApiUrl(context) + "/" + API_VERSION;
     }
 
     /**

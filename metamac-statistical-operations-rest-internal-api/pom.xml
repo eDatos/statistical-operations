@@ -18,20 +18,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
+            <groupId>org.apache.cxf.xjc-utils</groupId>
+            <artifactId>cxf-xjc-runtime</artifactId>
             <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-tools-common</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
@@ -57,7 +47,7 @@
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-rest-common</artifactId>
             <version>${metamac-rest-common.version}</version>
-        </dependency>        
+        </dependency>
     </dependencies>
 
     <build>
