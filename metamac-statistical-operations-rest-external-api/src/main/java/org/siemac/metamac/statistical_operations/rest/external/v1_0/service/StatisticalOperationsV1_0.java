@@ -20,7 +20,7 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Surve
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SurveyTypes;
 
 @Path("v1.0")
-public interface StatisticalOperationsRestExternalFacadeV10 {
+public interface StatisticalOperationsV1_0 {
 
     /**
      * Find operations
