@@ -69,7 +69,7 @@ import org.springframework.web.util.UriUtils;
 public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestBaseTest {
 
     private static final String                               PORT                                            = ServerResource.PORT;
-    private static String                                     jaxrsServerAddress                              = "http://localhost:" + PORT + "/internal";
+    private static String                                     jaxrsServerAddress                              = "http://localhost:" + PORT + "/apis/operations-internal";
     private static String                                     baseApi                                         = jaxrsServerAddress + "/v1.0";
 
     // not read property from properties file to check explicity
