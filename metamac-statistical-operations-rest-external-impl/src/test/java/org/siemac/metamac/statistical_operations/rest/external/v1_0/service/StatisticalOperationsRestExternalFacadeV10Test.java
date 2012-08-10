@@ -75,7 +75,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
     // not read property from properties file to check explicity
     private static String                                     statisticalOperationsApiExternalEndpointV10     = "http://data.istac.es/apis/operations/v1.0";
 
-    private static StatisticalOperationsRestExternalFacadeV10 statisticalOperationsRestExternalFacadeClientXml;
+    private static StatisticalOperationsV1_0 statisticalOperationsRestExternalFacadeClientXml;
 
     private static ApplicationContext                         applicationContext                              = null;
 
@@ -110,7 +110,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         {
             List providers = new ArrayList();
             providers.add(applicationContext.getBean("jaxbProvider", JAXBElementProvider.class));
-            statisticalOperationsRestExternalFacadeClientXml = JAXRSClientFactory.create(jaxrsServerAddress, StatisticalOperationsRestExternalFacadeV10.class, providers, Boolean.TRUE);
+            statisticalOperationsRestExternalFacadeClientXml = JAXRSClientFactory.create(jaxrsServerAddress, StatisticalOperationsV1_0.class, providers, Boolean.TRUE);
         }
         // Mockito
         setUpMockito();
@@ -1278,7 +1278,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(pagedResult);
     }
 
-    private StatisticalOperationsRestExternalFacadeV10 getStatisticalOperationsRestExternalFacadeClientXml() {
+    private StatisticalOperationsV1_0 getStatisticalOperationsRestExternalFacadeClientXml() {
         WebClient.client(statisticalOperationsRestExternalFacadeClientXml).reset();
         WebClient.client(statisticalOperationsRestExternalFacadeClientXml).accept(APPLICATION_XML);
         return statisticalOperationsRestExternalFacadeClientXml;

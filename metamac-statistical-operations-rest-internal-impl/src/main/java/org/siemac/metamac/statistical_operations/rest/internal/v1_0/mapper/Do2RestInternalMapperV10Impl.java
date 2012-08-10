@@ -68,9 +68,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
-    // @Context
-    // private MessageContext context; // Always null in this bean (not in Service)...
-
     @Autowired
     private ConfigurationService             configurationService;
 
