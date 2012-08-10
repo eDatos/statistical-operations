@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operations xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="25" offset="0" total="6">
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="25" offset="0" total="6">
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>

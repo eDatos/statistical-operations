@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper;
 
-import java.math.BigInteger;
+import java.math.BigInteger; 
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
-import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configuration;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.rest.common.v1_0.domain.Children;
@@ -20,10 +19,35 @@ import org.siemac.metamac.rest.common.v1_0.domain.Item;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
+import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.ClassSystems;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FreqColls;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSuppliers;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Producers;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Publishers;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalContributors;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalResponsibles;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SecondarySubjectAreas;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UnitMeasures;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
@@ -36,30 +60,6 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestInternalFacade;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.ClassSystems;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.CollMethods;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Costs;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Families;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Family;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.FreqColls;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.InformationSuppliers;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Instance;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Instances;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operation;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operations;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Producers;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Publishers;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.RegionalContributors;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.RegionalResponsibles;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SecondarySubjectAreas;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.StatConcDefs;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.StatisticalUnits;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SurveySources;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.UnitMeasures;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.UpdateFrequencies;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -713,19 +713,19 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         return null;
     }
 
-    private org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status toStatus(StatusEnum source) {
+    private org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status toStatus(StatusEnum source) {
         if (source == null) {
             return null;
         }
         switch (source) {
             case PLANNING:
-                return org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status.PLANNING;
+                return org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status.PLANNING;
             case DESIGN:
-                return org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status.DESIGN;
+                return org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status.DESIGN;
             case PRODUCTION:
-                return org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status.PRODUCTION;
+                return org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status.PRODUCTION;
             case OUT_OF_PRINT:
-                return org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Status.OUT_OF_PRINT;
+                return org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status.OUT_OF_PRINT;
             default:
                 org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
                 throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);

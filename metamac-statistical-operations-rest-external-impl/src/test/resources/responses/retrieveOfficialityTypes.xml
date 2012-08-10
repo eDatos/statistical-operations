@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:officialityTypes xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#officialityTypes" total="3">
+<operations:officialityTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#officialityTypes" total="3">
     <operations:officialityType>
         <common:id>officialityType1</common:id>
         <common:title>

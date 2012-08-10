@@ -3,24 +3,24 @@ package org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper;
 import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.CollMethods;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Costs;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Families;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Family;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Instance;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Instances;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operation;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Operations;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SurveySources;
-import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.SurveyTypes;
 
 public interface Do2RestExternalMapperV10 {
 
