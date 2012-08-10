@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:instances xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="1" offset="0" total="2" nextLink="http://localhost:9001/external/v1.0/operations/operation1/instances?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1" lastLink="http://localhost:9001/external/v1.0/operations/operation1/instances?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1">
+<operations:instances xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="1" offset="0" total="2" nextLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1" lastLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1">
     <operations:instance kind="statisticalOperations#instance">
         <common:id>instance1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</common:urn>
-        <common:selfLink>http://localhost:9001/external/v1.0/operations/operation1/instances/instance1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance1</common:selfLink>
         <common:title>
             <common:text xml:lang="en">instance1 in English</common:text>
             <common:text xml:lang="es">instance1 en Español</common:text>

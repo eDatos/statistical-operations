@@ -2,9 +2,9 @@
 <operations:operation xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/external/v1.0/domain" kind="statisticalOperations#operation">
     <operations:id>operation1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</operations:urn>
-    <operations:selfLink>http://localhost:9001/external/v1.0/operations/operation1</operations:selfLink>
+    <operations:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1</operations:selfLink>
     <operations:parent kind="statisticalOperations#operations">
-        <common:selfLink>http://localhost:9001/external/v1.0/operations</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations</common:selfLink>
     </operations:parent>
     <operations:title>
         <common:text xml:lang="en">operation1 in English</common:text>
@@ -17,7 +17,7 @@
     <operations:subjectArea kind="CATEGORY">
         <common:id>subjectArea1</common:id>
         <common:urn>urn:subjectArea1</common:urn>
-        <common:selfLink>http://localhost:8080/metamac-srm-external-web/subjectAreas/subjectArea1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/srm/v1.0/subjectAreas/subjectArea1</common:selfLink>
         <common:title>
             <common:text xml:lang="en">subjectArea1 in English</common:text>
             <common:text xml:lang="es">subjectArea1 en Español</common:text>
@@ -27,7 +27,7 @@
         <operations:secondarySubjectArea kind="CATEGORY">
             <common:id>secundarySubjectArea333</common:id>
             <common:urn>urn:secundarySubjectArea333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/secundarySubjectAreas/secundarySubjectArea333</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea333</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">secundarySubjectArea333 in English</common:text>
                 <common:text xml:lang="es">secundarySubjectArea333 en Español</common:text>
@@ -36,7 +36,7 @@
         <operations:secondarySubjectArea kind="CATEGORY">
             <common:id>secundarySubjectArea22</common:id>
             <common:urn>urn:secundarySubjectArea22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/secundarySubjectAreas/secundarySubjectArea22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea22</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">secundarySubjectArea22 in English</common:text>
                 <common:text xml:lang="es">secundarySubjectArea22 en Español</common:text>
@@ -45,7 +45,7 @@
         <operations:secondarySubjectArea kind="CATEGORY">
             <common:id>secundarySubjectArea1</common:id>
             <common:urn>urn:secundarySubjectArea1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/secundarySubjectAreas/secundarySubjectArea1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">secundarySubjectArea1 in English</common:text>
                 <common:text xml:lang="es">secundarySubjectArea1 en Español</common:text>
@@ -79,7 +79,7 @@
         <operations:producer kind="AGENCY">
             <common:id>producer1</common:id>
             <common:urn>urn:producer1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/producers/producer1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/producers/producer1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">producer1 in English</common:text>
                 <common:text xml:lang="es">producer1 en Español</common:text>
@@ -88,7 +88,7 @@
         <operations:producer kind="AGENCY">
             <common:id>producer22</common:id>
             <common:urn>urn:producer22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/producers/producer22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/producers/producer22</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">producer22 in English</common:text>
                 <common:text xml:lang="es">producer22 en Español</common:text>
@@ -99,7 +99,7 @@
         <operations:regionalResponsible kind="AGENCY">
             <common:id>regionalResponsible333</common:id>
             <common:urn>urn:regionalResponsible333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/regionalResponsibles/regionalResponsible333</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible333</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">regionalResponsible333 en Español</common:text>
                 <common:text xml:lang="en">regionalResponsible333 in English</common:text>
@@ -108,7 +108,7 @@
         <operations:regionalResponsible kind="AGENCY">
             <common:id>regionalResponsible22</common:id>
             <common:urn>urn:regionalResponsible22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/regionalResponsibles/regionalResponsible22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">regionalResponsible22 en Español</common:text>
                 <common:text xml:lang="en">regionalResponsible22 in English</common:text>
@@ -117,7 +117,7 @@
         <operations:regionalResponsible kind="AGENCY">
             <common:id>regionalResponsible1</common:id>
             <common:urn>urn:regionalResponsible1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/regionalResponsibles/regionalResponsible1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">regionalResponsible1 in English</common:text>
                 <common:text xml:lang="es">regionalResponsible1 en Español</common:text>
@@ -128,7 +128,7 @@
         <operations:regionalContributor kind="AGENCY">
             <common:id>regionalContributor22</common:id>
             <common:urn>urn:regionalContributor22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/regionalContributors/regionalContributor22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/regionalContributors/regionalContributor22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">regionalContributor22 en Español</common:text>
                 <common:text xml:lang="en">regionalContributor22 in English</common:text>
@@ -137,7 +137,7 @@
         <operations:regionalContributor kind="AGENCY">
             <common:id>regionalContributor1</common:id>
             <common:urn>urn:regionalContributor1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/regionalContributors/regionalContributor1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/regionalContributors/regionalContributor1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">regionalContributor1 en Español</common:text>
                 <common:text xml:lang="en">regionalContributor1 in English</common:text>
@@ -150,7 +150,7 @@
         <operations:publisher kind="AGENCY">
             <common:id>publisher22</common:id>
             <common:urn>urn:publisher22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/publishers/publisher22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/publishers/publisher22</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">publisher22 in English</common:text>
                 <common:text xml:lang="es">publisher22 en Español</common:text>
@@ -159,7 +159,7 @@
         <operations:publisher kind="AGENCY">
             <common:id>publisher333</common:id>
             <common:urn>urn:publisher333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/publishers/publisher333</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/publishers/publisher333</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">publisher333 en Español</common:text>
                 <common:text xml:lang="en">publisher333 in English</common:text>
@@ -168,7 +168,7 @@
         <operations:publisher kind="AGENCY">
             <common:id>publisher1</common:id>
             <common:urn>urn:publisher1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/publishers/publisher1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/publishers/publisher1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">publisher1 in English</common:text>
                 <common:text xml:lang="es">publisher1 en Español</common:text>
@@ -185,7 +185,7 @@
         <operations:updateFrequency kind="CODE">
             <common:id>updateFrequency333</common:id>
             <common:urn>urn:updateFrequency333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/updateFrequencies/updateFrequency333</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency333</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">updateFrequency333 en Español</common:text>
                 <common:text xml:lang="en">updateFrequency333 in English</common:text>
@@ -194,7 +194,7 @@
         <operations:updateFrequency kind="CODE">
             <common:id>updateFrequency22</common:id>
             <common:urn>urn:updateFrequency22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/updateFrequencies/updateFrequency22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">updateFrequency22 en Español</common:text>
                 <common:text xml:lang="en">updateFrequency22 in English</common:text>
@@ -203,7 +203,7 @@
         <operations:updateFrequency kind="CODE">
             <common:id>updateFrequency1</common:id>
             <common:urn>urn:updateFrequency1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/updateFrequencies/updateFrequency1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">updateFrequency1 en Español</common:text>
                 <common:text xml:lang="en">updateFrequency1 in English</common:text>
@@ -212,7 +212,7 @@
         <operations:updateFrequency kind="CODE">
             <common:id>updateFrequency4444</common:id>
             <common:urn>urn:updateFrequency4444</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-external-web/updateFrequencies/updateFrequency4444</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency4444</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">updateFrequency4444 in English</common:text>
                 <common:text xml:lang="es">updateFrequency4444 en Español</common:text>
@@ -222,7 +222,7 @@
     <operations:currentInstance kind="statisticalOperations#instance">
         <common:id>instance333</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</common:urn>
-        <common:selfLink>http://localhost:9001/external/v1.0/operations/operation1/instances/instance333</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance333</common:selfLink>
         <common:title>
             <common:text xml:lang="en">instance333 in English</common:text>
             <common:text xml:lang="es">instance333 en Español</common:text>
@@ -268,10 +268,10 @@
     </operations:comment>
     <operations:children total="2">
         <common:child kind="statisticalOperations#instances">
-            <common:selfLink>http://localhost:9001/external/v1.0/operations/operation1/instances</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances</common:selfLink>
         </common:child>
         <common:child kind="statisticalOperations#families">
-            <common:selfLink>http://localhost:9001/external/v1.0/operations/operation1/families</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/families</common:selfLink>
         </common:child>
     </operations:children>
 </operations:operation>

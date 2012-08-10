@@ -25,20 +25,20 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.domain.Surve
 public interface Do2RestExternalMapperV10 {
 
     // Operations
-    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source, String apiUrl);
-    public Operations toOperations(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit, String apiUrl);
+    public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source);
+    public Operations toOperations(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit);
     public Operations toOperationsByFamily(org.siemac.metamac.statistical.operations.core.domain.Family family,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit, String apiUrl);
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit);
 
     // Families
-    public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source, String apiUrl);
-    public Families toFamilies(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String query, String orderBy, Integer limit, String apiUrl);
-    public Families toFamiliesByOperation(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String apiUrl);
+    public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source);
+    public Families toFamilies(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sources, String query, String orderBy, Integer limit);
+    public Families toFamiliesByOperation(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources);
 
     // Instances
-    public Instance toInstance(org.siemac.metamac.statistical.operations.core.domain.Instance source, String apiUrl);
+    public Instance toInstance(org.siemac.metamac.statistical.operations.core.domain.Instance source);
     public Instances toInstances(org.siemac.metamac.statistical.operations.core.domain.Operation operation,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, String query, String orderBy, Integer limit, String apiUrl);
+            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, String query, String orderBy, Integer limit);
 
     // List of values
     public SurveyTypes toSurveyTypes(List<SurveyType> sources);

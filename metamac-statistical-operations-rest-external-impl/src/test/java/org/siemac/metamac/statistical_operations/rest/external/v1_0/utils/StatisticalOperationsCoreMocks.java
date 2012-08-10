@@ -485,8 +485,8 @@ public class StatisticalOperationsCoreMocks {
         operation.setTitle(mockInternationalString("operation", subCode));
         operation.setProcStatus(procStatus);
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0), operation.getCode()));
-        operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3), operation.getCode()));
-        operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2), operation.getCode()));
+        operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(3), operation.getCode()));
+        operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(2), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1), operation.getCode()));
         return operation;
     }
@@ -566,8 +566,14 @@ public class StatisticalOperationsCoreMocks {
         return cost;
     }
 
-    private static ExternalItem mockExternalItem(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
-        String uri = subpathUrl + "/" + code;
+    private static ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
+        String uri = "v1.0/" + subpathUrl + "/" + code;
+        String urn = "urn:" + code;
+        return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
+    }
+    
+    private static ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
+        String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
         return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
     }
@@ -585,10 +591,10 @@ public class StatisticalOperationsCoreMocks {
                 operation.addFamily(family);
             }
         }
-        operation.setSubjectArea(mockExternalItem("subjectArea1", "subjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea1", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea22", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.getSecondarySubjectAreas().add(mockExternalItem("secundarySubjectArea333", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.setSubjectArea(mockExternalItemSrm("subjectArea1", "subjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea1", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea22", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea333", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
         operation.setObjective(mockInternationalString("objetive", subCode));
         operation.setDescription(mockInternationalString("description", subCode));
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0), operation.getCode()));
@@ -598,31 +604,31 @@ public class StatisticalOperationsCoreMocks {
         operation.setSurveyType(mockSurveyType("surveyIdentifier"));
         operation.setOfficialityType(mockOfficialityType("officialityType"));
         operation.setIndicatorSystem(isIndicatorsSystem);
-        operation.getProducer().add(mockExternalItem("producer1", "producers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getProducer().add(mockExternalItem("producer22", "producers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible1", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible22", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalResponsible().add(mockExternalItem("regionalResponsible333", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalContributor().add(mockExternalItem("regionalContributor1", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalContributor().add(mockExternalItem("regionalContributor22", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
+        operation.getProducer().add(mockExternalItemSrm("producer1", "producers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getProducer().add(mockExternalItemSrm("producer22", "producers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalResponsible().add(mockExternalItemSrm("regionalResponsible1", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalResponsible().add(mockExternalItemSrm("regionalResponsible22", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalResponsible().add(mockExternalItemSrm("regionalResponsible333", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalContributor().add(mockExternalItemSrm("regionalContributor1", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalContributor().add(mockExternalItemSrm("regionalContributor22", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(StatusEnum.DESIGN);
         operation.setProcStatus(procStatus);
-        operation.getPublisher().add(mockExternalItem("publisher1", "publishers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getPublisher().add(mockExternalItem("publisher22", "publishers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getPublisher().add(mockExternalItem("publisher333", "publishers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getPublisher().add(mockExternalItemSrm("publisher1", "publishers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getPublisher().add(mockExternalItemSrm("publisher22", "publishers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getPublisher().add(mockExternalItemSrm("publisher333", "publishers", TypeExternalArtefactsEnum.AGENCY));
         operation.setRelPolUsAc(mockInternationalString("relPolUsAc", subCode));
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
-        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency1", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency22", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency333", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequency().add(mockExternalItem("updateFrequency4444", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
+        operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency1", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
+        operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency22", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
+        operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency333", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
+        operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency4444", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
         operation.setRevPolicy(mockInternationalString("revPolicy", subCode));
         operation.setRevPractice(mockInternationalString("revPractice", subCode));
-        operation.setCommonMetadata(mockExternalItem("commonMetadata1", "nothing", TypeExternalArtefactsEnum.AGENCY));
+        operation.setCommonMetadata(mockExternalItemCommonMetadata("commonMetadata1", "nothing", TypeExternalArtefactsEnum.AGENCY));
         operation.setComment(mockInternationalString("comment", subCode));
         operation.setNotes(mockInternationalString("notes", subCode));
 
@@ -654,30 +660,30 @@ public class StatisticalOperationsCoreMocks {
         instance.setOrder(Integer.valueOf(2));
         instance.setDataDescription(mockInternationalString("dataDescription", subCode));
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
-        instance.addStatisticalUnit(mockExternalItem("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        instance.addStatisticalUnit(mockExternalItem("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        instance.setGeographicGranularity(mockExternalItem("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
+        instance.setGeographicGranularity(mockExternalItemSrm("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST));
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
-        instance.setTemporalGranularity(mockExternalItem("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));
+        instance.setTemporalGranularity(mockExternalItemSrm("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subCode));
         instance.setBasePeriod("2012");
-        instance.addUnitMeasure(mockExternalItem("unitMeasure1", "unitMeasures", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addUnitMeasure(mockExternalItemSrm("unitMeasure1", "unitMeasures", TypeExternalArtefactsEnum.CONCEPT));
         instance.setStatConcDef(mockInternationalString("statConcDef", subCode));
-        instance.addStatConcDefList(mockExternalItem("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItem("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItem("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
         instance.setClassSystem(mockInternationalString("classSystem", subCode));
-        instance.addClassSystemList(mockExternalItem("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addClassSystemList(mockExternalItem("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addClassSystemList(mockExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addClassSystemList(mockExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.setInstanceType(mockInstanceType("instanceType1"));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalString("docMethod", subCode));
         instance.setSurveySource(mockSurveySource("surveySource1"));
         instance.setCollMethod(mockCollMethod("collMethod1"));
-        instance.addInformationSupplier(mockExternalItem("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.COMMON_METADATA));
-        instance.addFreqColl(mockExternalItem("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
-        instance.addFreqColl(mockExternalItem("freqColl22", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
+        instance.addInformationSupplier(mockExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.COMMON_METADATA));
+        instance.addFreqColl(mockExternalItemSrm("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
+        instance.addFreqColl(mockExternalItemSrm("freqColl22", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
         instance.setDataValidation(mockInternationalString("dataValidation", subCode));
         instance.setDataCompilation(mockInternationalString("dataCompilation", subCode));
         instance.setAdjustment(mockInternationalString("adjustment", subCode));
