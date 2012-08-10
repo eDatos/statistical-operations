@@ -3,7 +3,7 @@
     <operations:instance kind="statisticalOperations#instance">
         <common:id>instance1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1</common:selfLink>
         <common:title>
             <common:text xml:lang="es">instance1 en Español</common:text>
             <common:text xml:lang="en">instance1 in English</common:text>
@@ -12,7 +12,7 @@
     <operations:instance kind="statisticalOperations#instance">
         <common:id>instance15</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance15</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance15</common:selfLink>
         <common:title>
             <common:text xml:lang="es">instance15 en Español</common:text>
             <common:text xml:lang="en">instance15 in English</common:text>

@@ -3,7 +3,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation1 in English</common:text>
             <common:text xml:lang="es">operation1 en Español</common:text>
@@ -12,7 +12,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation2</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation2</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation2</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation2</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation2 in English</common:text>
             <common:text xml:lang="es">operation2 en Español</common:text>
@@ -21,7 +21,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation3</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation3</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation3</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation3</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation3 in English</common:text>
             <common:text xml:lang="es">operation3 en Español</common:text>
@@ -30,7 +30,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation4</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation4</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation4</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation4</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation4 in English</common:text>
             <common:text xml:lang="es">operation4 en Español</common:text>
@@ -39,7 +39,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation5</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation5</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation5</common:selfLink>
         <common:title>
             <common:text xml:lang="es">operation5 en Español</common:text>
             <common:text xml:lang="en">operation5 in English</common:text>
@@ -48,7 +48,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation6</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation6</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation6</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation6 in English</common:text>
             <common:text xml:lang="es">operation6 en Español</common:text>
@@ -57,7 +57,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation7</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation7</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation7</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation7</common:selfLink>
         <common:title>
             <common:text xml:lang="es">operation7 en Español</common:text>
             <common:text xml:lang="en">operation7 in English</common:text>
@@ -66,7 +66,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation8</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation8</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation8</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation8</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation8 in English</common:text>
             <common:text xml:lang="es">operation8 en Español</common:text>
@@ -75,7 +75,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation9</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation9</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation9</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation9</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation9 in English</common:text>
             <common:text xml:lang="es">operation9 en Español</common:text>
@@ -84,7 +84,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <common:id>operation10</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation10</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation10</common:selfLink>
         <common:title>
             <common:text xml:lang="en">operation10 in English</common:text>
             <common:text xml:lang="es">operation10 en Español</common:text>

@@ -3,10 +3,8 @@ package org.siemac.metamac.statistical_operations.rest.internal.v1_0.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
@@ -18,7 +16,6 @@ import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.SculptorCriteria;
-import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
@@ -66,18 +63,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     @Autowired
     private RestCriteria2SculptorCriteriaMapper restCriteria2SculptorCriteriaMapper;
 
-    // @Context // must inject with setter, because with @Context is not injected in web server
-    private MessageContext                      context;
-
     private ServiceContext                      serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
     private Logger                              logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
-
-    private final String                        API_VERSION                = "v1.0";
-
-    @Context
-    public void setMessageContext(MessageContext context) {
-        this.context = context;
-    }
 
     @Override
     public Operation retrieveOperationById(String id) {
@@ -86,7 +73,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedInternalOrExternally(id);
 
             // Transform
-            Operation operation = do2RestInternalMapper.toOperation(operationEntity, getApiUrl());
+            Operation operation = do2RestInternalMapper.toOperation(operationEntity);
             return operation;
 
         } catch (Exception e) {
@@ -112,7 +99,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            Operations operations = do2RestInternalMapper.toOperations(operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            Operations operations = do2RestInternalMapper.toOperations(operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit());
             return operations;
 
         } catch (Exception e) {
@@ -142,7 +129,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            Instances instances = do2RestInternalMapper.toInstances(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            Instances instances = do2RestInternalMapper.toInstances(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit());
             return instances;
 
         } catch (Exception e) {
@@ -165,7 +152,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, pagingParameter);
 
             // Transform
-            Families families = do2RestInternalMapper.toFamiliesByOperation(familiesEntitiesResult.getValues(), getApiUrl());
+            Families families = do2RestInternalMapper.toFamiliesByOperation(familiesEntitiesResult.getValues());
             return families;
 
         } catch (Exception e) {
@@ -180,7 +167,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             org.siemac.metamac.statistical.operations.core.domain.Family familyEntity = retrieveFamilyEntityPublishedInternalOrExternally(id);
 
             // Transform
-            Family family = do2RestInternalMapper.toFamily(familyEntity, getApiUrl());
+            Family family = do2RestInternalMapper.toFamily(familyEntity);
             return family;
 
         } catch (Exception e) {
@@ -206,7 +193,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            Families families = do2RestInternalMapper.toFamilies(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            Families families = do2RestInternalMapper.toFamilies(familiesEntitiesResult, query, orderBy, sculptorCriteria.getLimit());
             return families;
 
         } catch (Exception e) {
@@ -233,7 +220,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
                     serviceContextRestInternal, conditionalCriteria, sculptorCriteria.getPagingParameter());
 
             // Transform
-            Operations operations = do2RestInternalMapper.toOperationsByFamily(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit(), getApiUrl());
+            Operations operations = do2RestInternalMapper.toOperationsByFamily(family, operationsEntitiesResult, query, orderBy, sculptorCriteria.getLimit());
             return operations;
 
         } catch (Exception e) {
@@ -252,7 +239,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
             }
 
             // Transform and return
-            Instance instance = do2RestInternalMapper.toInstance(instanceEntity, getApiUrl());
+            Instance instance = do2RestInternalMapper.toInstance(instanceEntity);
             return instance;
 
         } catch (Exception e) {
@@ -371,13 +358,6 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
 
         }
         return familyEntity;
-    }
-
-    /**
-     * Get Base API url
-     */
-    private String getApiUrl() {
-        return RestUtils.getApiUrl(context) + "/" + API_VERSION;
     }
 
     /**

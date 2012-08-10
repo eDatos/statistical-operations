@@ -887,7 +887,7 @@ public class StatisticalOperationsRestMocks {
     }
 
     private static Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, TypeExternalArtefactsEnum kind) {
-        String endpointApi = "http://localhost:8080/metamac-srm-web"; // not read property from properties file to check explicity
+        String endpointApi = "http://data.istac.es/apis/srm/v1.0";
         return mockResourceFromExternalItem(id, endpointApi, apiSubpath, kind);
     }
 

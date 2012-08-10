@@ -2,11 +2,11 @@
 <operations:instance xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instance">
     <operations:id>instance1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</operations:urn>
-    <operations:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance1</operations:selfLink>
+    <operations:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1</operations:selfLink>
     <operations:parent kind="statisticalOperations#operation">
         <common:id>operation1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</common:selfLink>
         <common:title>
             <common:text xml:lang="es">operation1 en Español</common:text>
             <common:text xml:lang="en">operation1 in English</common:text>
@@ -23,7 +23,7 @@
     <operations:survey kind="statisticalOperations#operation">
         <common:id>operation1</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</common:selfLink>
         <common:title>
             <common:text xml:lang="es">operation1 en Español</common:text>
             <common:text xml:lang="en">operation1 in English</common:text>
@@ -32,7 +32,7 @@
     <operations:successor kind="statisticalOperations#instance">
         <common:id>instance22</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
         <common:title>
             <common:text xml:lang="en">instance22 in English</common:text>
             <common:text xml:lang="es">instance22 en Español</common:text>
@@ -41,7 +41,7 @@
     <operations:predecessor kind="statisticalOperations#instance">
         <common:id>instance333</common:id>
         <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</common:urn>
-        <common:selfLink>http://localhost:9001/internal/v1.0/operations/operation1/instances/instance333</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance333</common:selfLink>
         <common:title>
             <common:text xml:lang="es">instance333 en Español</common:text>
             <common:text xml:lang="en">instance333 in English</common:text>
@@ -59,7 +59,7 @@
         <operations:statisticalUnit kind="CONCEPT">
             <common:id>statisticalUnit1</common:id>
             <common:urn>urn:statisticalUnit1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">statisticalUnit1 en Español</common:text>
                 <common:text xml:lang="en">statisticalUnit1 in English</common:text>
@@ -68,7 +68,7 @@
         <operations:statisticalUnit kind="CONCEPT">
             <common:id>statisticalUnit22</common:id>
             <common:urn>urn:statisticalUnit22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">statisticalUnit22 en Español</common:text>
                 <common:text xml:lang="en">statisticalUnit22 in English</common:text>
@@ -78,7 +78,7 @@
     <operations:geographicGranularity kind="CODELIST">
         <common:id>geographicGranularity</common:id>
         <common:urn>urn:geographicGranularity</common:urn>
-        <common:selfLink>http://localhost:8080/metamac-srm-web/geographicGranularities/geographicGranularity</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/srm/v1.0/geographicGranularities/geographicGranularity</common:selfLink>
         <common:title>
             <common:text xml:lang="es">geographicGranularity en Español</common:text>
             <common:text xml:lang="en">geographicGranularity in English</common:text>
@@ -91,7 +91,7 @@
     <operations:temporalGranularity kind="CODELIST">
         <common:id>temporalGranularity</common:id>
         <common:urn>urn:temporalGranularity</common:urn>
-        <common:selfLink>http://localhost:8080/metamac-srm-web/temporalGranularities/temporalGranularity</common:selfLink>
+        <common:selfLink>http://data.istac.es/apis/srm/v1.0/temporalGranularities/temporalGranularity</common:selfLink>
         <common:title>
             <common:text xml:lang="en">temporalGranularity in English</common:text>
             <common:text xml:lang="es">temporalGranularity en Español</common:text>
@@ -106,7 +106,7 @@
         <operations:unitMeasure kind="CONCEPT">
             <common:id>unitMeasure1</common:id>
             <common:urn>urn:unitMeasure1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/unitMeasures/unitMeasure1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/unitMeasures/unitMeasure1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">unitMeasure1 in English</common:text>
                 <common:text xml:lang="es">unitMeasure1 en Español</common:text>
@@ -121,7 +121,7 @@
         <operations:statConcDef kind="CODELIST">
             <common:id>statConcDefList1</common:id>
             <common:urn>urn:statConcDefList1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">statConcDefList1 en Español</common:text>
                 <common:text xml:lang="en">statConcDefList1 in English</common:text>
@@ -130,7 +130,7 @@
         <operations:statConcDef kind="CODELIST">
             <common:id>statConcDefList333</common:id>
             <common:urn>urn:statConcDefList333</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList333</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">statConcDefList333 en Español</common:text>
                 <common:text xml:lang="en">statConcDefList333 in English</common:text>
@@ -139,7 +139,7 @@
         <operations:statConcDef kind="CODELIST">
             <common:id>statConcDefList22</common:id>
             <common:urn>urn:statConcDefList22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">statConcDefList22 en Español</common:text>
                 <common:text xml:lang="en">statConcDefList22 in English</common:text>
@@ -154,7 +154,7 @@
         <operations:classSystem kind="CODELIST">
             <common:id>classSystemList1</common:id>
             <common:urn>urn:classSystemList1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">classSystemList1 en Español</common:text>
                 <common:text xml:lang="en">classSystemList1 in English</common:text>
@@ -163,7 +163,7 @@
         <operations:classSystem kind="CODELIST">
             <common:id>classSystemList22</common:id>
             <common:urn>urn:classSystemList22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/classSystemLists/classSystemList22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList22</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">classSystemList22 en Español</common:text>
                 <common:text xml:lang="en">classSystemList22 in English</common:text>
@@ -201,7 +201,7 @@
         <operations:informationSupplier kind="COMMON_METADATA">
             <common:id>informationSupplier1</common:id>
             <common:urn>urn:informationSupplier1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/informationSuppliers/informationSupplier1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">informationSupplier1 in English</common:text>
                 <common:text xml:lang="es">informationSupplier1 en Español</common:text>
@@ -212,7 +212,7 @@
         <operations:freqColl kind="CATEGORY_SCHEME">
             <common:id>freqColl22</common:id>
             <common:urn>urn:freqColl22</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl22</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl22</common:selfLink>
             <common:title>
                 <common:text xml:lang="en">freqColl22 in English</common:text>
                 <common:text xml:lang="es">freqColl22 en Español</common:text>
@@ -221,7 +221,7 @@
         <operations:freqColl kind="CATEGORY_SCHEME">
             <common:id>freqColl1</common:id>
             <common:urn>urn:freqColl1</common:urn>
-            <common:selfLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl1</common:selfLink>
+            <common:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl1</common:selfLink>
             <common:title>
                 <common:text xml:lang="es">freqColl1 en Español</common:text>
                 <common:text xml:lang="en">freqColl1 in English</common:text>
