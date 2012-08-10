@@ -12,7 +12,7 @@
     <api-import class="org.siemac.metamac.statistical_operations.rest.external.v1_0.service.**" />
 
     <services>
-        <rest defaultRestSubcontext="api/internal/" />
+        <rest defaultRestSubcontext="apis/operations/" />
     </services>
 
     <modules>
