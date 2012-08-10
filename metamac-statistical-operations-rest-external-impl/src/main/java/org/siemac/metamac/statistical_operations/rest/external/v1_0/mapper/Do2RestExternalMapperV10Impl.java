@@ -73,23 +73,23 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     @Autowired
     private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
 
-    private String                           statisticalOperationsApiInternalEndpointV10;
-    private String                           srmApiInternalEndpoint;
+    private String                           statisticalOperationsApiExternalEndpointV10;
+    private String                           srmApiExternalEndpoint;
 
     public static String                     KIND_SRM_EXTERNAL_ITEM = "PENDIENTE_API_SRM"; // TODO METAMAC-916
 
     @PostConstruct
     public void init() throws Exception {
-        // Statistical operations Internal Api
-        String statisticalOperationsApiInternalEndpoint = configurationService.getProperty(RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);
-        if (statisticalOperationsApiInternalEndpoint == null) {
+        // Statistical operations External Api
+        String statisticalOperationsApiExternalEndpoint = configurationService.getProperty(RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);
+        if (statisticalOperationsApiExternalEndpoint == null) {
             throw new BeanCreationException("Property not found: " + RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);
         }
-        statisticalOperationsApiInternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiInternalEndpoint, RestExternalConstants.API_VERSION_1_0);
+        statisticalOperationsApiExternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiExternalEndpoint, RestExternalConstants.API_VERSION_1_0);
 
-        // Srm Internal Api
-        srmApiInternalEndpoint = configurationService.getProperty(RestEndpointsConstants.SRM_EXTERNAL_API);
-        if (srmApiInternalEndpoint == null) {
+        // Srm External Api
+        srmApiExternalEndpoint = configurationService.getProperty(RestEndpointsConstants.SRM_EXTERNAL_API);
+        if (srmApiExternalEndpoint == null) {
             throw new BeanCreationException("Property not found: " + RestEndpointsConstants.SRM_EXTERNAL_API);
         }
     }
@@ -539,14 +539,14 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     }
 
     private void toResourcesExternalItemsSrm(Set<ExternalItem> sources, List<Resource> targets) {
-        toResourcesExternalItems(sources, targets, srmApiInternalEndpoint);
+        toResourcesExternalItems(sources, targets, srmApiExternalEndpoint);
     }
 
     private Resource toResourceExternalItemSrm(ExternalItem source) {
         if (source == null) {
             return null;
         }
-        return toResourceExternalItem(source, srmApiInternalEndpoint);
+        return toResourceExternalItem(source, srmApiExternalEndpoint);
     }
 
     private Resource toResourceExternalItem(ExternalItem source, String apiExternalItem) {
@@ -644,7 +644,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
 
     // API/operations
     private String toOperationsLink() {
-        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, RestExternalConstants.LINK_SUBPATH_OPERATIONS);
+        return RestUtils.createLink(statisticalOperationsApiExternalEndpointV10, RestExternalConstants.LINK_SUBPATH_OPERATIONS);
     }
 
     // API/operations/OPERATION_ID
@@ -667,7 +667,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
 
     // API/families
     private String toFamiliesLink() {
-        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, RestExternalConstants.LINK_SUBPATH_FAMILIES);
+        return RestUtils.createLink(statisticalOperationsApiExternalEndpointV10, RestExternalConstants.LINK_SUBPATH_FAMILIES);
     }
 
     // API/families/family
