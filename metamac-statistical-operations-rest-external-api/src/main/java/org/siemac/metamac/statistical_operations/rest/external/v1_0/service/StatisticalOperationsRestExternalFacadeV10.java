@@ -25,8 +25,8 @@ public interface StatisticalOperationsRestExternalFacadeV10 {
     /**
      * Find operations
      * 
-     * @param query Clause to filter results by metadatas. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadatas
+     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
+     * @param orderBy Clause to order the results by metadata
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of operations
@@ -61,8 +61,8 @@ public interface StatisticalOperationsRestExternalFacadeV10 {
     /**
      * Find instances by operation
      * 
-     * @param query Clause to filter results by metadatas. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadatas
+     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
+     * @param orderBy Clause to order the results by metadata
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of instances
@@ -88,8 +88,8 @@ public interface StatisticalOperationsRestExternalFacadeV10 {
     /**
      * Find families
      * 
-     * @param query Clause to filter results by metadatas. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadatas
+     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
+     * @param orderBy Clause to order the results by metadata
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of families
@@ -113,8 +113,8 @@ public interface StatisticalOperationsRestExternalFacadeV10 {
     /**
      * Find operations by family
      * 
-     * @param query Clause to filter results by metadatas. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadatas
+     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
+     * @param orderBy Clause to order the results by metadata
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of operations
