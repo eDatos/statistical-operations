@@ -15,6 +15,12 @@ import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria.CriteriaCallback;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.FamilyCriteriaPropertyOrder;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceCriteriaPropertyOrder;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OperationCriteriaPropertyOrder;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OperationCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
@@ -24,12 +30,6 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyOrder;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.FamilyCriteriaPropertyRestriction;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyOrder;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OperationCriteriaPropertyOrder;
-import org.siemac.metamac.statistical_operations.rest.internal.v1_0.domain.OperationCriteriaPropertyRestriction;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operation xmlns:operations="http://www.siemac.org/metamac/statistical-operations/rest/internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operation">
+<operations:operation xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operation">
     <operations:id>operation1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</operations:urn>
     <operations:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</operations:selfLink>
