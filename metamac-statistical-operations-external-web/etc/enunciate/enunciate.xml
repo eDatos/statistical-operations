@@ -20,8 +20,8 @@
               includeExampleJson="false" includeExampleXml="true"
               docsDir="../../" 
               groupRestResources="byDocumentationGroup"
-              freemarkerXMLProcessingTemplate="etc/enunciate/docs.fmt"
               />
+<!--               freemarkerXMLProcessingTemplate="etc/enunciate/docs.fmt" -->
         <spring-app disabled="true" />
         <jersey disabled="true" />
         <csharp disabled="true" />
