@@ -34,7 +34,6 @@
 
     <import resource="classpath:/spring/statistical-operations/applicationContext.xml" />
      
-    <!-- TODO Publicar API externa, no interna! -->
-    <import resource="classpath:/spring/statistical-operations-rest-internal/applicationContext.xml" />
+    <import resource="classpath:/spring/statistical-operations-rest-external/applicationContext.xml" />
 </beans>
 

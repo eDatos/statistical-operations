@@ -28,10 +28,9 @@
             <version>${project.version}</version>
             <classifier>client</classifier>
         </dependency>
-        <!-- TODO Publicar API externa, no interna! -->
         <dependency>
             <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
-            <artifactId>metamac-statistical-operations-rest-internal-impl</artifactId>
+            <artifactId>metamac-statistical-operations-rest-external-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
