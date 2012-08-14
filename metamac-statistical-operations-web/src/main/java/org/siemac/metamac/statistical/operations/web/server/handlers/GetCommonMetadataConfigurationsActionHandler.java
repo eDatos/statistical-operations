@@ -3,10 +3,10 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configurations;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
+import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configurations;
 import org.siemac.metamac.statistical.operations.web.server.rest.CommonMetadataRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;

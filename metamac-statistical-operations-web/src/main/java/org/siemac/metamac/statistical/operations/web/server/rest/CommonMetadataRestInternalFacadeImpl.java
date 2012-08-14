@@ -2,8 +2,8 @@ package org.siemac.metamac.statistical.operations.web.server.rest;
 
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configuration;
-import org.siemac.metamac.common_metadata.rest.internal.v1_0.domain.Configurations;
+import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configuration;
+import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configurations;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
