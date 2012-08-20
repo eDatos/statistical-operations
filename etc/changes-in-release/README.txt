@@ -16,5 +16,9 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 	    <entry key="metamac.endpoints.srm.rest.external">http://localhost:8080/metamac-srm-external-web/apis/srm</entry>
 
 4. Indicar que se han sustituido los webservices por APIs Rest. Explicar en qué direcciones se despliega la api interna y la externa.
+	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/apis/operations/v1.0
+
+5. Indicar que la ubicación de la documentación de las APIs:
+	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/docs/api/
     	
 99. Reiniciar Tomcat

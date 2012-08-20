@@ -19,14 +19,12 @@
         <docs title="Metamac Statistical Operations API"
               includeExampleJson="false" includeExampleXml="true"
               docsDir="../../" 
-              groupRestResources="byDocumentationGroup"
-              freemarkerXMLProcessingTemplate="etc/enunciate/docs.fmt"
-              />
+              groupRestResources="byDocumentationGroup"  />
         <spring-app disabled="true" />
         <jersey disabled="true" />
         <csharp disabled="true" />
         <c disabled="true"/>
-        <xml disabled="false" />
+        <xml disabled="false" disableWadl="true"/>
         <obj-c disabled="true" />
         <java-client generateJsonJar="false" />
         <jaxws-client generateJsonJar="false" />
