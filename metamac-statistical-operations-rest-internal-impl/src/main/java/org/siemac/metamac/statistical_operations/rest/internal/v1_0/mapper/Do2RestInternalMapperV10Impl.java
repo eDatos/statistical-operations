@@ -19,7 +19,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.Item;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
-import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configuration;
+import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -60,7 +60,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestInternalFacade;
+import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestExternalFacade;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -72,7 +72,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     private ConfigurationService             configurationService;
 
     @Autowired
-    private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
+    private CommonMetadataRestExternalFacade commonMetadataRestInternalFacade;
 
     private String                           statisticalOperationsApiInternalEndpointV10;
     private String                           srmApiInternalEndpoint;

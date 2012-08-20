@@ -10,7 +10,7 @@ import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.Children;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
-import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configuration;
+import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Costs;
