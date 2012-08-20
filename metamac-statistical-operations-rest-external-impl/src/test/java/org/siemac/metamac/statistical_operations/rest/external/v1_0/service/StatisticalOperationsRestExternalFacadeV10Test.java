@@ -54,7 +54,7 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestInternalFacade;
+import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestExternalFacade;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mockito.FindFamiliesByOperationMatcher;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mockito.FindFamiliesMatcher;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mockito.FindInstancesByOperationMatcher;
@@ -1132,7 +1132,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
-        CommonMetadataRestInternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestInternalFacade.class);
+        CommonMetadataRestExternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());

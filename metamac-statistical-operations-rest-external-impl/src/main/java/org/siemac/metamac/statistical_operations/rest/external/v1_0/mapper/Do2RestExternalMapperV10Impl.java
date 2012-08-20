@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper;
 
-import java.math.BigInteger; 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.Item;
 import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
-import org.siemac.metamac.rest.common_metadata_internal.v1_0.domain.Configuration;
+import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -59,7 +59,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
-import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestInternalFacade;
+import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestExternalFacade;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -71,7 +71,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     private ConfigurationService             configurationService;
 
     @Autowired
-    private CommonMetadataRestInternalFacade commonMetadataRestInternalFacade;
+    private CommonMetadataRestExternalFacade commonMetadataRestInternalFacade;
 
     private String                           statisticalOperationsApiExternalEndpointV10;
     private String                           srmApiExternalEndpoint;

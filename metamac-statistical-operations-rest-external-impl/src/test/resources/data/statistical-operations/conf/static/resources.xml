@@ -2,5 +2,5 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>Configurations</comment>
-    <entry key="metamac.statistical.operations.clients.common.metadata.rest.internal">MOCKED</entry>
+    <entry key="metamac.statistical.operations.clients.common.metadata.rest.external">MOCKED</entry>
 </properties>
