@@ -13,8 +13,8 @@
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
     <artifactId>metamac-statistical-operations-external-web</artifactId>
     <packaging>war</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS :: EXTERNAL WEB</name>
-    <description>METAMAC :: STATISTICAL :: OPERATIONS :: EXTERNAL WEB</description>
+    <name>METAMAC :: STATISTICAL OPERATIONS :: EXTERNAL WEB</name>
+    <description>METAMAC :: STATISTICAL OPERATIONS :: EXTERNAL WEB</description>
 
     <properties>
         <!-- Convenience property to set the GWT version -->
@@ -42,27 +42,7 @@
             <groupId>com.ibm.icu</groupId>
             <artifactId>icu4j</artifactId>
             <version>${icu4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.enunciate</groupId>
-            <artifactId>enunciate-rt</artifactId>
-            <version>${enunciate.version}</version>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>jackson-jaxrs</artifactId>
-            		<groupId>org.codehaus.jackson</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>jackson-xc</artifactId>
-            		<groupId>org.codehaus.jackson</groupId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.enunciate</groupId>
-            <artifactId>enunciate-core</artifactId>
-            <version>${enunciate.version}</version>
-        </dependency>        
+        </dependency>    
     </dependencies>
 
     <build>
