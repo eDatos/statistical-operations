@@ -19,6 +19,7 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/apis/operations/v1.0
 
 5. Indicar que la ubicación de la documentación de las APIs:
-	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/docs/api/
-    	
+	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/docs/api/index.html
+	- Interna: http://localhost:8080/metamac-statistical-operations-web/docs/api/index.html
+	
 99. Reiniciar Tomcat
