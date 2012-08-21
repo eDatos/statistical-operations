@@ -1,15 +1,11 @@
-<enunciate xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.25.xsd">
+<enunciate xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.26.xsd">
 
     <namespaces>
         <namespace uri="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" id="operations"/>
         <namespace uri="http://www.siemac.org/metamac/rest/common/v1.0/domain" id="common"/>
     </namespaces>
     
-    <api-classes>
-        <include pattern="org.siemac.metamac.statistical_operations.rest.external.v1_0.service.**" />
-    </api-classes>
-
-    <api-import class="org.siemac.metamac.statistical_operations.rest.external.v1_0.service.**" />
+    <api-import class="org.siemac.metamac.statistical_operations.rest.external.v1_0.service.StatisticalOperationsV1_0" />
 
     <services>
         <rest defaultRestSubcontext="apis/operations/" />
