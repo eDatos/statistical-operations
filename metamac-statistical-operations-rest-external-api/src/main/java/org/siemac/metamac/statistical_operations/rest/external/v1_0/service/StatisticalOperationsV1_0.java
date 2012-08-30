@@ -25,8 +25,16 @@ public interface StatisticalOperationsV1_0 {
     /**
      * Find operations
      * 
-     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadata
+     * @param query Clause to filter results by metadata <br/>
+     *            - Logical operators: AND, OR <br/>
+     *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, SURVEY_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN,
+     *            CURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>
+     *            - Example: (ID LIKE "Operation1" AND OFFICIALITY_TYPE_ID EQ "OfficialityType1") OR (ACRONYM EQ "Op1") OR (INVENTORY_DATE IS_NULL)
+     * @param orderBy Clause to order the results by metadata <br/>
+     *            - Order operators: ASC, DESC<br/>
+     *            - Metadata to order: ID<br/>
+     *            - Example: ID ASC<br/>
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of operations
@@ -61,8 +69,16 @@ public interface StatisticalOperationsV1_0 {
     /**
      * Find instances by operation
      * 
-     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadata
+     * @param operationId Operation id
+     * @param query Clause to filter results by metadata <br/>
+     *            - Logical operators: AND, OR <br/>
+     *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN, INVENTORY_DATE <br/>
+     *            - Example: (ID LIKE "Instance1" AND DATA_DESCRIPTION EQ "DataDescription1") OR (ACRONYM EQ "Instance1")
+     * @param orderBy Clause to order the results by metadata <br/>
+     *            - Order operators: ASC, DESC<br/>
+     *            - Metadata to order: ID<br/>
+     *            - Example: ID ASC<br/>
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of instances
@@ -88,8 +104,15 @@ public interface StatisticalOperationsV1_0 {
     /**
      * Find families
      * 
-     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadata
+     * @param query Clause to filter results by metadata <br/>
+     *            - Logical operators: AND, OR <br/>
+     *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, DESCRIPTION, INVENTORY_DATE <br/>
+     *            - Example: (ID LIKE "Family1" AND ACRONYM EQ "Family1") OR (DESCRIPTION IS_NOT_NULL)
+     * @param orderBy Clause to order the results by metadata <br/>
+     *            - Order operators: ASC, DESC<br/>
+     *            - Metadata to order: ID<br/>
+     *            - Example: ID ASC<br/>
      * @param limit Maximum number of results per page
      * @param offset Position of first result
      * @return List of families
@@ -113,11 +136,20 @@ public interface StatisticalOperationsV1_0 {
     /**
      * Find operations by family
      * 
-     * @param query Clause to filter results by metadata. Accepts AND/OR clauses (see @LogicalOperator) and operators as eq, like... (see @ComparisonOperator)
-     * @param orderBy Clause to order the results by metadata
+     * @param id Family id
+     * @param query Clause to filter results by metadata <br/>
+     *            - Logical operators: AND, OR <br/>
+     *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, SURVEY_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN,
+     *            CURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>
+     *            - Example: (ID LIKE "Operation1" AND OFFICIALITY_TYPE_ID EQ "OfficialityType1") OR (ACRONYM EQ "Op1") OR (INVENTORY_DATE IS_NULL)
+     * @param orderBy Clause to order the results by metadata <br/>
+     *            - Order operators: ASC, DESC<br/>
+     *            - Metadata to order: ID<br/>
+     *            - Example: ID ASC<br/>
      * @param limit Maximum number of results per page
      * @param offset Position of first result
-     * @return List of operations
+     * @return List of operations of family
      */
     @GET
     @Produces("application/xml")
@@ -167,6 +199,7 @@ public interface StatisticalOperationsV1_0 {
 
     /**
      * Retrieve all coll methods
+     * 
      * @return List of coll methods
      */
     @GET
@@ -176,6 +209,7 @@ public interface StatisticalOperationsV1_0 {
 
     /**
      * Retrieve all costs
+     * 
      * @return List of costs
      */
     @GET
