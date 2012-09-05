@@ -11,9 +11,11 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 	- Añadir al fichero [DATA_METAMAC]/common/static/endpoints.xml (crearlo si no existe), las siguientes entradas:
 	    <entry key="metamac.endpoints.statistical.operations.rest.internal">http://localhost:8080/metamac-statistical-operations-web/apis/operations-internal</entry>
 	    <entry key="metamac.endpoints.statistical.operations.rest.external">http://localhost:8080/metamac-statistical-operations-external-web/apis/operations</entry>
-	    <entry key="metamac.endpoints.common.metadata.rest.external">http://localhost:8080/metamac-common-metadata-web/apis/cmetadata</entry>
-	    <entry key="metamac.endpoints.srm.rest.internal">http://localhost:8080/metamac-srm-web/apis/srm-internal</entry>
-	    <entry key="metamac.endpoints.srm.rest.external">http://localhost:8080/metamac-srm-external-web/apis/srm</entry>
+	    
+	    Se requiere que las siguientes propiedades estén ya definidas en dicho fichero:
+	     - API Externa de Common Metadata: metamac.endpoints.common.metadata.rest.external
+	     - API Interna de SRM: metamac.endpoints.srm.rest.internal
+	     - API Externa de SRM: metamac.endpoints.srm.rest.external
 
 4. Indicar que se han sustituido los webservices por APIs Rest. Explicar en qué direcciones se despliega la api interna y la externa.
 	- Externa: http://localhost:8080/metamac-statistical-operations-external-web/apis/operations/v1.0
