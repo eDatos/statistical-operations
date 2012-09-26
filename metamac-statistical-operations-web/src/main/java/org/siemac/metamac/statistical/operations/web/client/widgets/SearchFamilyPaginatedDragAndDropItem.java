@@ -11,6 +11,7 @@ import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.BaseSearchPaginatedDragAndDropItem;
 
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.HoverCustomizer;
 import com.smartgwt.client.widgets.grid.ListGridField;
@@ -21,16 +22,16 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 public class SearchFamilyPaginatedDragAndDropItem extends BaseSearchPaginatedDragAndDropItem {
 
     public SearchFamilyPaginatedDragAndDropItem(String name, String title, String dragDropType, int maxResults, PaginatedAction action) {
-        super(name, title, dragDropType, maxResults, action);
-        create(name, title, dragDropType, maxResults, FormItemUtils.FORM_ITEM_WIDTH, action);
+        super(name, title, maxResults, action);
+        create(name, title, maxResults, FormItemUtils.FORM_ITEM_WIDTH, action);
     }
 
-    public SearchFamilyPaginatedDragAndDropItem(String name, String title, String dragDropType, int maxResults, int formItemWidth, PaginatedAction action) {
-        super(name, title, dragDropType, maxResults, formItemWidth, action);
-        create(name, title, dragDropType, maxResults, formItemWidth, action);
+    public SearchFamilyPaginatedDragAndDropItem(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
+        super(name, title, maxResults, formItemWidth, action);
+        create(name, title, maxResults, formItemWidth, action);
     }
 
-    private void create(String name, String title, String dragDropType, int maxResults, int formItemWidth, PaginatedAction action) {
+    private void create(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
         ListGridField codeField = new ListGridField(FamilyDS.CODE);
         codeField.setShowHover(true);
         codeField.setHoverCustomizer(new HoverCustomizer() {
@@ -68,6 +69,14 @@ public class SearchFamilyPaginatedDragAndDropItem extends BaseSearchPaginatedDra
 
         sourceList.getListGrid().setFields(codeField, titleField);
         targetList.setFields(codeField, deleteField);
+    }
+    
+    @Override
+    protected void addNonDuplicatedRecordToTarget(Record record) {
+        String code = record.getAttribute(FamilyDS.CODE);
+        if (targetList.getRecordList().find(FamilyDS.CODE, code) == null) {
+            targetList.addData(record);
+        }
     }
 
     public void setSourceFamilies(List<FamilyBaseDto> familyBaseDtos) {

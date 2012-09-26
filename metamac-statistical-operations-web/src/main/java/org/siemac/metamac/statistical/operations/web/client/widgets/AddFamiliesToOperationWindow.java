@@ -43,7 +43,7 @@ public class AddFamiliesToOperationWindow extends CustomWindow {
 
         form = new CustomDynamicForm();
 
-        familiesItem = new SearchFamilyPaginatedDragAndDropItem("familiesItem", OperationsWeb.getConstants().families(), "familiesItem", OperationViewImpl.FAMILY_LIST_MAX_RESULTS,
+        familiesItem = new SearchFamilyPaginatedDragAndDropItem("familiesItem", OperationsWeb.getConstants().families(), OperationViewImpl.FAMILY_LIST_MAX_RESULTS,
                 FORM_ITEM_CUSTOM_WIDTH, new PaginatedAction() {
 
                     @Override

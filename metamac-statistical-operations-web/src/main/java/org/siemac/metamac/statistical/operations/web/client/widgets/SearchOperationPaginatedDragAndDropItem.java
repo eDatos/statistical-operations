@@ -11,6 +11,7 @@ import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.BaseSearchPaginatedDragAndDropItem;
 
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.HoverCustomizer;
 import com.smartgwt.client.widgets.grid.ListGridField;
@@ -20,17 +21,17 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginatedDragAndDropItem {
 
-    public SearchOperationPaginatedDragAndDropItem(String name, String title, String dragDropType, int maxResults, PaginatedAction action) {
-        super(name, title, dragDropType, maxResults, action);
-        create(name, title, dragDropType, maxResults, FormItemUtils.FORM_ITEM_WIDTH, action);
+    public SearchOperationPaginatedDragAndDropItem(String name, String title, int maxResults, PaginatedAction action) {
+        super(name, title, maxResults, action);
+        create(name, title, maxResults, FormItemUtils.FORM_ITEM_WIDTH, action);
     }
 
-    public SearchOperationPaginatedDragAndDropItem(String name, String title, String dragDropType, int maxResults, int formItemWidth, PaginatedAction action) {
-        super(name, title, dragDropType, maxResults, formItemWidth, action);
-        create(name, title, dragDropType, maxResults, formItemWidth, action);
+    public SearchOperationPaginatedDragAndDropItem(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
+        super(name, title, maxResults, formItemWidth, action);
+        create(name, title, maxResults, formItemWidth, action);
     }
 
-    private void create(String name, String title, String dragDropType, int maxResults, int formItemWidth, PaginatedAction action) {
+    private void create(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
         ListGridField codeField = new ListGridField(OperationDS.OP_CODE);
         codeField.setShowHover(true);
         codeField.setHoverCustomizer(new HoverCustomizer() {
@@ -107,6 +108,14 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
             }
         }
         return false;
+    }
+    
+    @Override
+    protected void addNonDuplicatedRecordToTarget(Record record) {
+        String code = record.getAttribute(OperationDS.OP_CODE);
+        if (targetList.getRecordList().find(OperationDS.OP_CODE, code) == null) {
+            targetList.addData(record);
+        }
     }
 
 }
