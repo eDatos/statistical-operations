@@ -15,12 +15,12 @@
     <name>METAMAC :: STATISTICAL :: OPERATIONS :: CORE</name>
 
     <dependencies>
-		<!-- METAMAC -->
-    	<dependency>
-			<groupId>org.siemac.metamac.metamac-sso</groupId>
-			<artifactId>metamac-sso-client</artifactId>
-			<version>${metamac-sso.version}</version>
-		</dependency>
+        <!-- METAMAC -->
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-sso</groupId>
+            <artifactId>metamac-sso-client</artifactId>
+            <version>${metamac-sso.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-core-common</artifactId>
@@ -33,10 +33,15 @@
             <version>${metamac-common-test.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
 
-        <!-- Add dependency to JMS when consumers are used, deployment.type=ear <dependency> <groupId>javax.jms</groupId> <artifactId>jms</artifactId> 
+        <!-- Add dependency to JMS when consumers are used, deployment.type=ear <dependency> <groupId>javax.jms</groupId> <artifactId>jms</artifactId>
             <version>1.1</version> <scope>provided</scope> </dependency> -->
-        <!-- Add dependency to EJB when deployment.type=ear <dependency> <groupId>javax.ejb</groupId> <artifactId>ejb-api</artifactId> <version>3.0</version> 
+        <!-- Add dependency to EJB when deployment.type=ear <dependency> <groupId>javax.ejb</groupId> <artifactId>ejb-api</artifactId> <version>3.0</version>
             <scope>provided</scope> </dependency> -->
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -62,7 +67,7 @@
                     <groupId>javax.transaction</groupId>
                     <artifactId>jta</artifactId>
                 </exclusion>
-                 <exclusion>
+                <exclusion>
                     <groupId>xml-apis</groupId>
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
@@ -281,7 +286,7 @@
             <version>${sculptor.version}</version>
             <scope>provided</scope>
             <exclusions>
-                <!-- La inclusion de esta libreria provoca un BUG en el plugin de eclipse de GWT cuando usamos GIN en un proyecto GWT, es demasiado antigua 
+                <!-- La inclusion de esta libreria provoca un BUG en el plugin de eclipse de GWT cuando usamos GIN en un proyecto GWT, es demasiado antigua
                     esta version. No importa que el scope sea PROVIDED, el plugin de GWT no es capaz de tragarselo. -->
                 <!-- POR TANTO CUANDO SE EJECUTE EL PLUGIN DE GWT DE ECLIPSE ES NECESARIO DESCOMENTAR ESTAS LINEAS -->
                 <!-- <exclusion> -->
@@ -336,7 +341,7 @@
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.jodatime</artifactId>
             <version>${usertype.jodatime.version}</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
@@ -414,9 +419,9 @@
                         <configuration>
                             <classifier>client</classifier>
                             <excludes>
-								<exclude>**/*.dot</exclude>
-								<exclude>**/generator/</exclude>
-							</excludes>
+                                <exclude>**/*.dot</exclude>
+                                <exclude>**/generator/</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
@@ -471,8 +476,8 @@
                                 <delete file="${basedir}/src/generated/resources/pub-sub.xml" />
                                 <delete file="${basedir}/src/generated/resources/EntityManagerFactory.xml" />
                                 <delete file="${basedir}/src/generated/resources/Interceptor.xml" />
-								<delete file="${basedir}/src/generated/resources/beanRefContext.xml" />
-								<delete file="${basedir}/src/generated/resources/generated-spring.properties" />
+                                <delete file="${basedir}/src/generated/resources/beanRefContext.xml" />
+                                <delete file="${basedir}/src/generated/resources/generated-spring.properties" />
 
                                 <delete file="${basedir}/src/test/resources/more-test.xml" />
                                 <delete file="${basedir}/src/test/resources/spring-test.properties" />

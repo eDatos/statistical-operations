@@ -45,6 +45,11 @@
             <version>${metamac-web-common.version}</version>
         </dependency>
         <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
             <version>${gwt.version}</version>
@@ -285,7 +290,7 @@
                     </filesets>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -299,7 +304,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <delete dir="${basedir}/src/main/webapp/docs/api" includeemptydirs="true"/>
+                                <delete dir="${basedir}/src/main/webapp/docs/api" includeemptydirs="true" />
                             </target>
                         </configuration>
                     </execution>
@@ -311,11 +316,11 @@
                         </goals>
                         <configuration>
                             <target>
-                                <delete dir="${basedir}/target/enunciate-scratch" includeemptydirs="true"/>
-                                <delete dir="${basedir}/target/enunciate" includeemptydirs="true"/>
+                                <delete dir="${basedir}/target/enunciate-scratch" includeemptydirs="true" />
+                                <delete dir="${basedir}/target/enunciate" includeemptydirs="true" />
                             </target>
                         </configuration>
-                    </execution>                    
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -323,7 +328,7 @@
                 <artifactId>maven-enunciate-plugin</artifactId>
                 <version>${enunciate.version}</version>
                 <configuration>
-                    <configFile>etc/enunciate/enunciate.xml</configFile>  
+                    <configFile>etc/enunciate/enunciate.xml</configFile>
                     <docsDir>${basedir}/src/main/webapp/docs/api</docsDir>
                 </configuration>
                 <executions>
