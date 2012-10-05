@@ -99,7 +99,7 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     }
 
     @Override
-    protected List<String> getTableNamesOrderedByFKDepedency() {
+    protected List<String> getTableNamesOrderedByFKDependency() {
         List<String> tables = new ArrayList<String>();
         tables.add("TB_INTERNATIONAL_STRINGS");
         tables.add("TB_FAMILIES");
