@@ -33,19 +33,19 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION);
         return serviceContext;
     }
-    
+
     protected ServiceContext getServiceContextTecnicoProduccionOperation01() {
         ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, OPERATION_01);
         return serviceContext;
     }
-    
+
     protected ServiceContext getServiceContextTecnicoProduccionOperation02() {
         ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, OPERATION_02);
         return serviceContext;
     }
-    
+
     protected ServiceContext getServiceContextTecnicoApoyoProduccion() {
         ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
@@ -99,33 +99,32 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     }
 
     @Override
-    protected List<String> getTablesToRemoveContent() {
+    protected List<String> getTableNamesOrderedByFKDepedency() {
         List<String> tables = new ArrayList<String>();
-        tables.add("TB_LOCALISED_STRINGS");
-        
-        tables.add("TB_EI_UPDATE_FREQUENCY");
-        tables.add("TB_EI_UNITS_MEASURE");
-        tables.add("TB_EI_STATISTICAL_UNITS");
-        tables.add("TB_EI_SECONDARY_AREAS");
-        tables.add("TB_EI_REG_RESPONSIBLES");
-        tables.add("TB_EI_REG_CONTRIBUTORS");
-        tables.add("TB_EI_PUBLISHERS");
-        tables.add("TB_EI_PRODUCERS");
-        tables.add("TB_EI_INF_SUPPLIERS");
-        tables.add("TB_EI_FREQ_COLL");
-        tables.add("TB_EI_CONC_DEF_LISTS");
-        tables.add("TB_EI_CLASS_SYSTEM_LISTS");
-        
-        tables.add("TB_INSTANCES_COSTS");
-        tables.add("TB_INSTANCES");
-        tables.add("TB_FAMILIES_OPERATIONS");
-        tables.add("TB_OPERATIONS");
-        
-        tables.add("TB_EXTERNAL_ITEMS");
-        
-        tables.add("TB_FAMILIES");
         tables.add("TB_INTERNATIONAL_STRINGS");
-        
+        tables.add("TB_FAMILIES");
+
+        tables.add("TB_EXTERNAL_ITEMS");
+
+        tables.add("TB_OPERATIONS");
+        tables.add("TB_FAMILIES_OPERATIONS");
+        tables.add("TB_INSTANCES");
+        tables.add("TB_INSTANCES_COSTS");
+
+        tables.add("TB_EI_CLASS_SYSTEM_LISTS");
+        tables.add("TB_EI_CONC_DEF_LISTS");
+        tables.add("TB_EI_FREQ_COLL");
+        tables.add("TB_EI_INF_SUPPLIERS");
+        tables.add("TB_EI_PRODUCERS");
+        tables.add("TB_EI_PUBLISHERS");
+        tables.add("TB_EI_REG_CONTRIBUTORS");
+        tables.add("TB_EI_REG_RESPONSIBLES");
+        tables.add("TB_EI_SECONDARY_AREAS");
+        tables.add("TB_EI_STATISTICAL_UNITS");
+        tables.add("TB_EI_UNITS_MEASURE");
+        tables.add("TB_EI_UPDATE_FREQUENCY");
+
+        tables.add("TB_LOCALISED_STRINGS");
         return tables;
     }
 
@@ -148,9 +147,10 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
         sequences.add("SEQ_COSTS");
         return sequences;
     }
-    
+
     @Override
     protected Map<String, String> getTablePrimaryKeys() {
         return null;
-    }    
+    }
+
 }
