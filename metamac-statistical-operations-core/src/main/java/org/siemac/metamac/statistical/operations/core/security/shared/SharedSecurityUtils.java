@@ -54,7 +54,6 @@ public class SharedSecurityUtils {
                 || isTecnicoApoyoDifusion(metamacPrincipal) || isTecnicoProduccion(metamacPrincipal) || isTecnicoApoyoProduccion(metamacPrincipal);
     }
 
-
     public static Boolean isTecnicoPlanificacion(MetamacPrincipal metamacPrincipal) {
         return isRoleInAccesses(metamacPrincipal, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
     }

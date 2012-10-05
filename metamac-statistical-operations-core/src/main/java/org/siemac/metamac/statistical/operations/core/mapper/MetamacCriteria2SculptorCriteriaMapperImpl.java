@@ -26,22 +26,20 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
     private MetamacCriteria2SculptorCriteria<Operation> operationCriteriaMapper = null;
     private MetamacCriteria2SculptorCriteria<Instance>  instanceCriteriaMapper  = null;
 
-    
     /**************************************************************************
      * Constructor
      **************************************************************************/
-    
+
     public MetamacCriteria2SculptorCriteriaMapperImpl() throws MetamacException {
         familyCriteriaMapper = new MetamacCriteria2SculptorCriteria<Family>(Family.class, null, FamilyCriteriaPropertyEnum.class, new FamilyCriteriaCallback());
         operationCriteriaMapper = new MetamacCriteria2SculptorCriteria<Operation>(Operation.class, null, OperationCriteriaPropertyEnum.class, new OperationCriteriaCallback());
         instanceCriteriaMapper = new MetamacCriteria2SculptorCriteria<Instance>(Instance.class, null, InstanceCriteriaPropertyEnum.class, new InstanceCriteriaCallback());
     }
 
-    
     /**************************************************************************
      * Mappings
      **************************************************************************/
-    
+
     @Override
     public MetamacCriteria2SculptorCriteria<Family> getFamilyCriteriaMapper() {
         return familyCriteriaMapper;
@@ -56,13 +54,11 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
     public MetamacCriteria2SculptorCriteria<Instance> getInstanceCriteriaMapper() {
         return instanceCriteriaMapper;
     }
-    
-    
-    
+
     /**************************************************************************
      * CALLBACK CLASSES
      **************************************************************************/
-    
+
     private class FamilyCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -90,7 +86,7 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
 
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null;    // put default order
+            return null; // put default order
         }
 
         @Override
@@ -99,7 +95,7 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
         }
 
     }
-    
+
     private class OperationCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -127,7 +123,7 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
 
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null;    // put default order
+            return null; // put default order
         }
 
         @Override
@@ -136,7 +132,7 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
         }
 
     }
-    
+
     private class InstanceCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -161,10 +157,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }
         }
-        
+
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null;    // put default order
+            return null; // put default order
         }
 
         @Override

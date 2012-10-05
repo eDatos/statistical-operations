@@ -614,7 +614,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         Long operation = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation);
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operation);
-        
+
         // Create families
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto());
         Long family02 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
@@ -622,14 +622,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         Long family04 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
         Long family05 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
         Long family06 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
-        
+
         // Relate families with operations
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), family02, operation);
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), family03, operation);
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), family04, operation);
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), family05, operation);
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), family06, operation);
-        
+
         // Publish Families
         statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextAdministrador(), family02);
         statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextAdministrador(), family03);
@@ -1867,7 +1867,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(1, result.getResults().size());
     }
 
-    
     @Test
     @Transactional
     public void testFindOperationByConditionProcStatus() throws MetamacException {
@@ -1878,7 +1877,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         Long operation04 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         Long operation05 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         Long operation06 = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
-        
+
         // Publish operations
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation02);
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation03);
@@ -1913,7 +1912,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
     }
-    
+
     @Test
     @Transactional
     public void testFindOperationByConditionFamilyCode() throws MetamacException {
@@ -3014,7 +3013,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         Long operation = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operation);
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operation);
-        
+
         // Create instances
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation, createInstanceDto());
         Long instance02 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation, createInstanceDto()).getId();
@@ -3022,7 +3021,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         Long instance04 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation, createInstanceDto()).getId();
         Long instance05 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation, createInstanceDto()).getId();
         Long instance06 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation, createInstanceDto()).getId();
-        
+
         // Publish instances
         statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextAdministrador(), instance02);
         statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextAdministrador(), instance03);
@@ -3057,7 +3056,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         result = statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
     }
-    
+
     @Test
     @Transactional
     public void testFindInstanceByConditionOperationId() throws MetamacException {

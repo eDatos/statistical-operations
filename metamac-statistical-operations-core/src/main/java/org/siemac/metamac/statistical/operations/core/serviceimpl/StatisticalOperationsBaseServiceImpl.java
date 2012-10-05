@@ -490,8 +490,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
-        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.urn()).eq(urn).distinctRoot()
-                .build();
+        List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.urn()).eq(urn).distinctRoot().build();
 
         // Find
         List<Instance> result = findInstanceByCondition(ctx, conditions);

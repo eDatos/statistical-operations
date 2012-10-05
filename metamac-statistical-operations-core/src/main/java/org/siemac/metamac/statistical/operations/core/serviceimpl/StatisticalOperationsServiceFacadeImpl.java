@@ -245,7 +245,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return familyDto;
     }
-    
+
     @Override
     public FamilyDto findFamilyByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Security
@@ -523,7 +523,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return operationDto;
     }
-    
+
     @Override
     public OperationDto findOperationByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Security
@@ -773,7 +773,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Return
         return instanceDto;
     }
-    
+
     @Override
     public InstanceDto findInstanceByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Security
@@ -937,8 +937,5 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         checkAccessOperationByCode(ctx, operation.getCode(), roles);
 
     }
-
-
-
 
 }

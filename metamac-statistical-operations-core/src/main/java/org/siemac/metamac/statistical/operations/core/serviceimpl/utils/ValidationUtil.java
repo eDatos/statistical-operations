@@ -183,19 +183,19 @@ public class ValidationUtil {
         }
 
     }
-    
-    
+
     /**
      * Check if the expectedSize and the realSize of an instancesList is correct
+     * 
      * @param expectedSize
-     * @param realSize 
-     * @throws MetamacException 
+     * @param realSize
+     * @throws MetamacException
      */
     public static void checkUpdateInstancesOrder(int expectedSize, int realSize) throws MetamacException {
         if (expectedSize != realSize) {
             throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE);
         }
-        
+
     }
 
 }

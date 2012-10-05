@@ -39,7 +39,7 @@ public class CheckMandatoryMetadataUtil {
         ValidationUtils.checkMetadataRequired(family.getUrn(), ServiceExceptionParameters.FAMILY_URN, exceptions);
         ValidationUtils.checkMetadataRequired(family.getTitle(), ServiceExceptionParameters.FAMILY_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(family.getProcStatus(), ServiceExceptionParameters.FAMILY_PROC_STATUS, exceptions);
-        
+
         if (family.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(family.getCode())) {
             exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.FAMILY_CODE));
         }
@@ -114,7 +114,7 @@ public class CheckMandatoryMetadataUtil {
         if (!ValidationUtils.isEmpty(operation.getReleaseCalendarAccess())) {
             ValidationUtils.validateUrl(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
         }
-        
+
         if (operation.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(operation.getCode())) {
             exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.OPERATION_CODE));
         }
@@ -188,7 +188,7 @@ public class CheckMandatoryMetadataUtil {
         ValidationUtils.checkMetadataRequired(instance.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
         ValidationUtils.checkMetadataRequired(instance.getTitle(), ServiceExceptionParameters.INSTANCE_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(instance.getProcStatus(), ServiceExceptionParameters.INSTANCE_PROC_STATUS, exceptions);
-        
+
         if (instance.getBasePeriod() != null && !TimeUtils.isTimeValue(instance.getBasePeriod())) {
             exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.INSTANCE_BASE_PERIOD));
         }

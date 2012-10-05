@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
-@TransactionConfiguration(transactionManager="txManager", defaultRollback=true)
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
@@ -78,7 +78,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoPlanificacion(), Long.valueOf(1));
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoProduccion(), Long.valueOf(1));
     }
-    
 
     @Test
     public void testFindAllSurveySources() throws Exception {
@@ -301,7 +300,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyById(getServiceContextTecnicoProduccion(), familyId);
 
     }
-    
+
     @Test
     public void testFindFamilyByCode() throws Exception {
         String familyCode = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getCode();
@@ -313,7 +312,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoPlanificacion(), familyCode);
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoProduccion(), familyCode);
     }
-    
+
     @Test
     public void testFindFamilyByUrn() throws Exception {
         String familyUrn = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getUrn();
@@ -324,9 +323,8 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoDifusion(), familyUrn);
         statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoPlanificacion(), familyUrn);
         statisticalOperationsServiceFacade.findFamilyByUrn(getServiceContextTecnicoProduccion(), familyUrn);
-        
-    }
 
+    }
 
     @Test
     public void testPublishInternallyFamily() throws Exception {
@@ -620,7 +618,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoPlanificacion(), operationId);
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoProduccion(), operationId);
     }
-    
+
     @Test
     public void testFindOperationByCode() throws Exception {
         String operationCode = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getCode();
@@ -632,7 +630,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoPlanificacion(), operationCode);
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoProduccion(), operationCode);
     }
-    
+
     @Test
     public void testFindOperationByUrn() throws Exception {
         String operationUrn = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getUrn();
@@ -644,7 +642,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoPlanificacion(), operationUrn);
         statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoProduccion(), operationUrn);
     }
-
 
     @Test
     public void testPublishInternallyOperation() throws Exception {
@@ -1158,7 +1155,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceById(getServiceContextTecnicoProduccion(), instanceId);
 
     }
-    
+
     @Test
     public void testFindInstanceByCode() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1172,7 +1169,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoPlanificacion(), instanceCode);
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoProduccion(), instanceCode);
     }
-    
+
     @Test
     public void testFindInstanceByUrn() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1185,7 +1182,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoDifusion(), instanceUrn);
         statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoPlanificacion(), instanceUrn);
         statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextTecnicoProduccion(), instanceUrn);
-        
+
     }
 
     @Test
@@ -1270,7 +1267,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationId);
-        
 
         // getServiceContextTecnicoPlanificacion
         {
@@ -1476,7 +1472,6 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         return operationDto;
     }
 
-
     private InstanceDto createInstanceDto() throws MetamacException {
         InstanceDto instanceDto = new InstanceDto();
 
@@ -1504,6 +1499,5 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         return instanceDto;
     }
-
 
 }
