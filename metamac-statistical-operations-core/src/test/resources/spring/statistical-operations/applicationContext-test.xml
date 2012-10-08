@@ -32,5 +32,6 @@
 
 	<!-- metamac-statistical-operations-core > src/test/resources -->
 	<import resource="classpath:/spring/statistical-operations/include/datasource-test.xml" />
+    <import resource="classpath:/spring/statistical-operations/include/interceptor-test.xml" />
 	<import resource="classpath:/spring/statistical-operations/include/more-test.xml" />
 </beans>
