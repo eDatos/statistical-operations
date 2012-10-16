@@ -11,10 +11,6 @@ public interface GlobalResources extends ClientBundle {
     public static final GlobalResources RESOURCE = GWT.create(GlobalResources.class);
 
     @ImageOptions(repeatStyle = RepeatStyle.Both)
-    @Source("images/istacLogo.gif")
-    ImageResource istacLogo();
-
-    @ImageOptions(repeatStyle = RepeatStyle.Both)
     @Source("images/new_listgrid.png")
     ImageResource newListGrid();
 
