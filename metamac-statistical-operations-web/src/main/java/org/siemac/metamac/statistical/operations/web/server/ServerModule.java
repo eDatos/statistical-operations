@@ -72,7 +72,7 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperatio
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler;
-import org.siemac.metamac.web.common.server.handlers.LoadConfigurationPropertiesActionActionHandler;
+import org.siemac.metamac.web.common.server.handlers.LoadConfigurationPropertiesActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetNavigationBarUrlActionHandler;
 import org.siemac.metamac.web.common.server.handlers.MockCASUserActionHandler;
@@ -144,7 +144,7 @@ public class ServerModule extends HandlerModule {
         bindHandler(CloseSessionAction.class, CloseSessionActionHandler.class);
         bindHandler(GetNavigationBarUrlAction.class, GetNavigationBarUrlActionHandler.class);
 
-        bindHandler(LoadConfigurationPropertiesAction.class, LoadConfigurationPropertiesActionActionHandler.class);
+        bindHandler(LoadConfigurationPropertiesAction.class, LoadConfigurationPropertiesActionHandler.class);
 
         // This action should be removed to use CAS authentication
         bindHandler(MockCASUserAction.class, MockCASUserActionHandler.class);
