@@ -34,6 +34,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
@@ -288,7 +289,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     public void goToFamily(String familyCode) {
         if (!StringUtils.isBlank(familyCode)) {
             PlaceRequest familyListRequest = new PlaceRequest(NameTokens.familyListPage);
-            PlaceRequest familyRequest = new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, familyCode);
+            PlaceRequest familyRequest = PlaceRequestUtils.buildFamilyPlaceRequest(familyCode);
             List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
             placeRequestHierarchy.add(familyListRequest);
             placeRequestHierarchy.add(familyRequest);
@@ -317,7 +318,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void goToInstance(String instanceCode) {
         if (!StringUtils.isBlank(instanceCode)) {
-            placeManager.revealRelativePlace(new PlaceRequest(NameTokens.instancePage).with(PlaceRequestParams.instanceParam, instanceCode));
+            placeManager.revealRelativePlace(PlaceRequestUtils.buildInstancePlaceRequest(instanceCode));
         }
     }
 

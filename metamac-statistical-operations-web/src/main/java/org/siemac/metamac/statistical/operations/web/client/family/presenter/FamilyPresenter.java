@@ -18,6 +18,7 @@ import org.siemac.metamac.statistical.operations.web.client.family.view.handlers
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsResult;
@@ -213,7 +214,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     public void goToOperation(String operationCode) {
         if (!StringUtils.isBlank(operationCode)) {
             PlaceRequest operationListRequest = new PlaceRequest(NameTokens.operationListPage);
-            PlaceRequest operationRequest = new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode);
+            PlaceRequest operationRequest = PlaceRequestUtils.buildOperationPlaceRequest(operationCode);
             List<PlaceRequest> placeRequests = new ArrayList<PlaceRequest>();
             placeRequests.add(operationListRequest);
             placeRequests.add(operationRequest);

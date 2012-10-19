@@ -19,6 +19,15 @@ public class PlaceRequestUtils {
         return request != null ? request.getNameToken() : null;
     }
 
+    // FAMILIES
+
+    public static PlaceRequest buildFamilyPlaceRequest(String familyCode) {
+        PlaceRequest placeRequest = new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, familyCode);
+        return placeRequest;
+    }
+
+    // OPERATIONS
+
     public static String getOperationIdentifierParam(PlaceManager placeManager) {
         for (PlaceRequest request : placeManager.getCurrentPlaceHierarchy()) {
             if (NameTokens.operationPage.equals(request.getNameToken())) {
@@ -26,6 +35,18 @@ public class PlaceRequestUtils {
             }
         }
         return null;
+    }
+
+    public static PlaceRequest buildOperationPlaceRequest(String operationCode) {
+        PlaceRequest placeRequest = new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode);
+        return placeRequest;
+    }
+
+    // INSTANCES
+
+    public static PlaceRequest buildInstancePlaceRequest(String instanceCode) {
+        PlaceRequest placeRequest = new PlaceRequest(NameTokens.instancePage).with(PlaceRequestParams.instanceParam, instanceCode);
+        return placeRequest;
     }
 
 }
