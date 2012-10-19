@@ -3,7 +3,6 @@
 	<name>metamac-statistical-operations-web</name>
 	<comment>metamac-statistical-operations-web project</comment>
 	<projects>
-		<project>sdmx-domain</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
