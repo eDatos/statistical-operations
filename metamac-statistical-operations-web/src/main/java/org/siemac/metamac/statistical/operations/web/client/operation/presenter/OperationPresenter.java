@@ -281,6 +281,10 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationSaved()), MessageTypeEnum.SUCCESS);
                 operationDto = result.getOperationSaved();
                 getView().onOperationSaved(operationDto);
+
+                // Update URL
+                PlaceRequest placeRequest = PlaceRequestUtils.buildOperationPlaceRequest(operationDto.getCode());
+                placeManager.updateHistory(placeRequest, true);
             }
         });
     }

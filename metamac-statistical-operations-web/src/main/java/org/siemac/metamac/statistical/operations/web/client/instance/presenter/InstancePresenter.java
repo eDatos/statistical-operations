@@ -204,6 +204,10 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
                 ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceSaved()), MessageTypeEnum.SUCCESS);
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
+
+                // Update URL
+                PlaceRequest placeRequest = PlaceRequestUtils.buildInstancePlaceRequest(instanceDto.getCode());
+                placeManager.updateHistory(placeRequest, true);
             }
         });
     }

@@ -369,7 +369,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public OperationDto getOperation(OperationDto operationDto) {
         // Identifiers
-        operationDto.setCode(operationDto.getCode());
+        operationDto.setCode(code.getValueAsString());
         operationDto.setTitle(title.getValue());
         operationDto.setAcronym(acronym.getValue());
         // Content classifiers

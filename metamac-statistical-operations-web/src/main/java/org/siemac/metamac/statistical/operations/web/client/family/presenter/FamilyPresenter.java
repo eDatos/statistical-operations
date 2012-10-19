@@ -206,6 +206,10 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
                 ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familySaved()), MessageTypeEnum.SUCCESS);
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
+
+                // Update URL
+                PlaceRequest placeRequest = PlaceRequestUtils.buildFamilyPlaceRequest(familyDto.getCode());
+                placeManager.updateHistory(placeRequest, true);
             }
         });
     }

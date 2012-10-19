@@ -253,7 +253,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     @Override
     public InstanceDto getInstance(InstanceDto instanceDto) {
         // Identifiers
-        instanceDto.setCode(instanceDto.getCode());
+        instanceDto.setCode(code.getValueAsString());
         instanceDto.setTitle(title.getValue());
         instanceDto.setAcronym(acronym.getValue());
 
