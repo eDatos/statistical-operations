@@ -11,9 +11,13 @@ import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
 import org.siemac.metamac.sso.client.SsoClientConstants;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
+import org.springframework.beans.factory.annotation.Value;
 
 public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
 
+    @Value("${metamac.statistical_operations.db.provider}")
+    private String databaseProvider;
+    
     public final String OPERATION_01 = "C0025A";
     public final String OPERATION_02 = "C0025B";
 
@@ -149,8 +153,13 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     }
 
     @Override
-    protected Map<String, String> getTablePrimaryKeys() {
+    protected Map<String, List<String>> getTablePrimaryKeys() {
         return null;
+    }
+    
+    @Override
+    protected DataBaseProvider getDatabaseProvider() {
+        return DataBaseProvider.valueOf(databaseProvider);
     }
 
 }

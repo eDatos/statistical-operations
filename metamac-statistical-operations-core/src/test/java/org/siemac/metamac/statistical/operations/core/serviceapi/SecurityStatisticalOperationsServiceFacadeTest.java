@@ -1499,5 +1499,4 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         return instanceDto;
     }
-
 }
