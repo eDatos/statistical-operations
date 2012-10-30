@@ -672,15 +672,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         FamilyDto familyDto01 = createFamilyDto();
         familyDto01.setCode("familyDto01");
-        familyDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        familyDto01.setTitle(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         FamilyDto familyDto02 = createFamilyDto();
         familyDto02.setCode("familyDto02");
-        familyDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        familyDto02.setTitle(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         FamilyDto familyDto03 = createFamilyDto();
         familyDto03.setCode("familyDto03");
-        familyDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        familyDto03.setTitle(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto01);
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto02);
@@ -731,15 +731,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         FamilyDto familyDto01 = createFamilyDto();
         familyDto01.setCode("familyDto01");
-        familyDto01.setAcronym(MetamacMocks.mockInternationalString("es", "IPC", "en", "CPI"));
+        familyDto01.setAcronym(MetamacMocks.mockInternationalStringDto("es", "IPC", "en", "CPI"));
 
         FamilyDto familyDto02 = createFamilyDto();
         familyDto02.setCode("familyDto02");
-        familyDto02.setAcronym(MetamacMocks.mockInternationalString("es", "CALIDAD_VIDA", "en", "QL"));
+        familyDto02.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CALIDAD_VIDA", "en", "QL"));
 
         FamilyDto familyDto03 = createFamilyDto();
         familyDto03.setCode("familyDto03");
-        familyDto03.setAcronym(MetamacMocks.mockInternationalString("es", "CONDICIONES_VIDA", "en", "Living"));
+        familyDto03.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CONDICIONES_VIDA", "en", "Living"));
 
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto01);
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto02);
@@ -790,15 +790,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         FamilyDto familyDto01 = createFamilyDto();
         familyDto01.setCode("familyDto01");
-        familyDto01.setDescription(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        familyDto01.setDescription(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         FamilyDto familyDto02 = createFamilyDto();
         familyDto02.setCode("familyDto02");
-        familyDto02.setDescription(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        familyDto02.setDescription(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         FamilyDto familyDto03 = createFamilyDto();
         familyDto03.setCode("familyDto03");
-        familyDto03.setDescription(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        familyDto03.setDescription(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto01);
         statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto02);
@@ -1667,15 +1667,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         OperationDto operationDto01 = createOperationDto();
         operationDto01.setCode("operationDto01");
-        operationDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        operationDto01.setTitle(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         OperationDto operationDto02 = createOperationDto();
         operationDto02.setCode("operationDto02");
-        operationDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        operationDto02.setTitle(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         OperationDto operationDto03 = createOperationDto();
         operationDto03.setCode("operationDto03");
-        operationDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        operationDto03.setTitle(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto02);
@@ -1736,15 +1736,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         OperationDto operationDto01 = createOperationDto();
         operationDto01.setCode("operationDto01");
-        operationDto01.setAcronym(MetamacMocks.mockInternationalString("es", "IPC", "en", "CPI"));
+        operationDto01.setAcronym(MetamacMocks.mockInternationalStringDto("es", "IPC", "en", "CPI"));
 
         OperationDto operationDto02 = createOperationDto();
         operationDto02.setCode("operationDto02");
-        operationDto02.setAcronym(MetamacMocks.mockInternationalString("es", "CALIDAD_VIDA", "en", "QL"));
+        operationDto02.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CALIDAD_VIDA", "en", "QL"));
 
         OperationDto operationDto03 = createOperationDto();
         operationDto03.setCode("operationDto03");
-        operationDto03.setAcronym(MetamacMocks.mockInternationalString("es", "CONDICIONES_VIDA", "en", "Living"));
+        operationDto03.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CONDICIONES_VIDA", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto02);
@@ -1805,15 +1805,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Insert data
         OperationDto operationDto01 = createOperationDto();
         operationDto01.setCode("operationDto01");
-        operationDto01.setDescription(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        operationDto01.setDescription(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         OperationDto operationDto02 = createOperationDto();
         operationDto02.setCode("operationDto02");
-        operationDto02.setDescription(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        operationDto02.setDescription(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         OperationDto operationDto03 = createOperationDto();
         operationDto03.setCode("operationDto03");
-        operationDto03.setDescription(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        operationDto03.setDescription(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto02);
@@ -2800,15 +2800,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         InstanceDto instanceDto01 = createInstanceDto();
         instanceDto01.setCode("instanceDto01");
-        instanceDto01.setTitle(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        instanceDto01.setTitle(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         InstanceDto instanceDto02 = createInstanceDto();
         instanceDto02.setCode("instanceDto02");
-        instanceDto02.setTitle(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        instanceDto02.setTitle(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         InstanceDto instanceDto03 = createInstanceDto();
         instanceDto03.setCode("instanceDto03");
-        instanceDto03.setTitle(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        instanceDto03.setTitle(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto01);
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto02);
@@ -2872,15 +2872,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         InstanceDto instanceDto01 = createInstanceDto();
         instanceDto01.setCode("instanceDto01");
-        instanceDto01.setAcronym(MetamacMocks.mockInternationalString("es", "IPC", "en", "CPI"));
+        instanceDto01.setAcronym(MetamacMocks.mockInternationalStringDto("es", "IPC", "en", "CPI"));
 
         InstanceDto instanceDto02 = createInstanceDto();
         instanceDto02.setCode("instanceDto02");
-        instanceDto02.setAcronym(MetamacMocks.mockInternationalString("es", "CALIDAD_VIDA", "en", "QL"));
+        instanceDto02.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CALIDAD_VIDA", "en", "QL"));
 
         InstanceDto instanceDto03 = createInstanceDto();
         instanceDto03.setCode("instanceDto03");
-        instanceDto03.setAcronym(MetamacMocks.mockInternationalString("es", "CONDICIONES_VIDA", "en", "Living"));
+        instanceDto03.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CONDICIONES_VIDA", "en", "Living"));
 
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto01);
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto02);
@@ -2944,15 +2944,15 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         InstanceDto instanceDto01 = createInstanceDto();
         instanceDto01.setCode("instanceDto01");
-        instanceDto01.setDataDescription(MetamacMocks.mockInternationalString("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
+        instanceDto01.setDataDescription(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         InstanceDto instanceDto02 = createInstanceDto();
         instanceDto02.setCode("instanceDto02");
-        instanceDto02.setDataDescription(MetamacMocks.mockInternationalString("es", "Calidad de Vida", "en", "Quality of Life"));
+        instanceDto02.setDataDescription(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         InstanceDto instanceDto03 = createInstanceDto();
         instanceDto03.setCode("instanceDto03");
-        instanceDto03.setDataDescription(MetamacMocks.mockInternationalString("es", "Condiciones de vida", "en", "Living"));
+        instanceDto03.setDataDescription(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto01);
         statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operation01.getId(), instanceDto02);
