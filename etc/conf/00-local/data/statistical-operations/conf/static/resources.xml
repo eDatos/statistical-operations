@@ -3,4 +3,5 @@
 <properties>
     <comment>Configurations</comment>
     <entry key="metamac.statistical.operations.clients.common.metadata.rest.external">${metamac.endpoints.common.metadata.rest.external}</entry>
+    <entry key="metamac.statistical.operations.user.guide.file.name">Gestor_operaciones_estadisticas-Manual_usuario.pdf</entry>
 </properties>
