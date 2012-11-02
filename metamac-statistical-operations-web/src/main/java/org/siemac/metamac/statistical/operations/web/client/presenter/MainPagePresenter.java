@@ -27,16 +27,21 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAct
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlResult;
+import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
 import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.CloseSessionAction;
 import org.siemac.metamac.web.common.shared.CloseSessionResult;
+import org.siemac.metamac.web.common.shared.utils.SharedTokens;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -283,6 +288,21 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
             @Override
             public void onSuccess(CloseSessionResult result) {
                 Window.Location.assign(result.getLogoutPageUrl());
+            }
+        });
+    }
+
+    @Override
+    public void downloadUserGuide() {
+        dispatcher.execute(new GetUserGuideUrlAction(), new WaitingAsyncCallback<GetUserGuideUrlResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, MetamacWebCommon.getMessages().errorDownloadingUserGuide()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetUserGuideUrlResult result) {
+                CommonWebUtils.showDownloadFileWindow(SharedTokens.FILE_DOWNLOAD_DIR_PATH, SharedTokens.PARAM_FILE_NAME, result.getUserGuideUrl());
             }
         });
     }
