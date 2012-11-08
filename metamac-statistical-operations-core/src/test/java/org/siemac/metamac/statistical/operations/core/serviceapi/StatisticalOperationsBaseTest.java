@@ -1,6 +1,8 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
 
-    @Value("${metamac.statistical_operations.db.provider}")
-    private String databaseProvider;
-    
+    @Value("${metamac.statistical.operations.db.provider}")
+    private String      databaseProvider;
+
     public final String OPERATION_01 = "C0025A";
     public final String OPERATION_02 = "C0025B";
 
@@ -105,6 +107,8 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     @Override
     protected List<String> getTableNamesOrderedByFKDependency() {
         List<String> tables = new ArrayList<String>();
+        tables.add("TB_SEQUENCES");
+
         tables.add("TB_INTERNATIONAL_STRINGS");
         tables.add("TB_FAMILIES");
 
@@ -133,30 +137,12 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     }
 
     @Override
-    protected List<String> getSequencesToRestart() {
-        List<String> sequences = new ArrayList<String>();
-        sequences.add("SEQ_I18NSTRS");
-        sequences.add("SEQ_L10NSTRS");
-        sequences.add("SEQ_EXTERNAL_ITEMS");
-        sequences.add("SEQ_COMMON_METADATA");
-        sequences.add("SEQ_FAMILIES");
-        sequences.add("SEQ_OPERATIONS");
-        sequences.add("SEQ_INSTANCES");
-        sequences.add("SEQ_SURVEY_TYPES");
-        sequences.add("SEQ_INSTANCE_TYPES");
-        sequences.add("SEQ_ACTIVITY_CLASSES");
-        sequences.add("SEQ_SURVEY_SOURCES");
-        sequences.add("SEQ_OFFICIALITY_TYPES");
-        sequences.add("SEQ_COLL_METHODS");
-        sequences.add("SEQ_COSTS");
-        return sequences;
+    protected Map<String, List<String>> getTablePrimaryKeys() {
+        Map<String, List<String>> primaryKeys = new HashMap<String, List<String>>();
+        primaryKeys.put("TB_SEQUENCES", Arrays.asList("SEQUENCE_NAME"));
+        return primaryKeys;
     }
 
-    @Override
-    protected Map<String, List<String>> getTablePrimaryKeys() {
-        return null;
-    }
-    
     @Override
     protected DataBaseProvider getDatabaseProvider() {
         return DataBaseProvider.valueOf(databaseProvider);
