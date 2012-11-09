@@ -11,8 +11,8 @@
 
     <artifactId>metamac-statistical-operations</artifactId>
     <packaging>pom</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS</name>
-    <description>METAMAC :: STATISTICAL :: OPERATIONS</description>
+    <name>METAMAC :: STATISTICAL OPERATIONS</name>
+    <description>METAMAC :: STATISTICAL OPERATIONS</description>
 
     <scm>
         <connection>scm:svn:http://svn.arte-consultores.com/svn/arte/istac/metamac/metamac-statistical-operations/trunk/</connection>

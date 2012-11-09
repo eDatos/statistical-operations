@@ -14,8 +14,8 @@
     <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
     <artifactId>metamac-statistical-operations-web</artifactId>
     <packaging>war</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS :: WEB</name>
-    <description>METAMAC :: STATISTICAL :: OPERATIONS :: WEB</description>
+    <name>METAMAC :: STATISTICAL OPERATIONS :: WEB</name>
+    <description>METAMAC :: STATISTICAL OPERATIONS :: WEB</description>
 
     <properties>
         <!-- Convenience property to set the GWT version -->

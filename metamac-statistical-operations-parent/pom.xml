@@ -12,8 +12,8 @@
     <artifactId>metamac-statistical-operations-parent</artifactId>
     <version>1.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</name>
-    <description>METAMAC :: STATISTICAL :: OPERATIONS :: PARENT</description>
+    <name>METAMAC :: STATISTICAL OPERATIONS :: PARENT</name>
+    <description>METAMAC :: STATISTICAL OPERATIONS :: PARENT</description>
 
     <issueManagement>
         <system>Jira</system>
