@@ -30,6 +30,11 @@
             <classifier>client</classifier>
         </dependency>
         <dependency>
+            <groupId>org.siemac.metamac</groupId>
+            <artifactId>metamac-rest-api</artifactId>
+            <version>${metamac-rest-api.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
             <artifactId>metamac-statistical-operations-rest-internal-impl</artifactId>
             <version>${project.version}</version>
