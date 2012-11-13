@@ -30,6 +30,7 @@
             <classifier>client</classifier>
         </dependency>
         <dependency>
+            <!-- Added explicity due to METAMAC-751 -->
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-rest-api</artifactId>
             <version>${metamac-rest-api.version}</version>
