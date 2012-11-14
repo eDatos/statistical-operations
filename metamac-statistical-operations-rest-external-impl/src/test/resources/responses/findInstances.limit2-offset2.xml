@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:instances xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="2" offset="2" total="5" firstLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=0" previousLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=0" nextLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=4" lastLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=4">
+<operations:instances xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instances" limit="2" offset="2" total="5" firstLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=0" previousLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=0" nextLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=4" lastLink="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances?limit=2&amp;offset=4">
     <operations:instance kind="statisticalOperations#instance">
-        <common:id>instance3</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance3</common:selfLink>
-        <common:title>
-            <common:text xml:lang="es">instance3 en Español</common:text>
-            <common:text xml:lang="en">instance3 in English</common:text>
-        </common:title>
+        <cdomain:id>instance3</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance3</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance3</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">instance3 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">instance3 in English</cdomain:text>
+        </cdomain:title>
     </operations:instance>
     <operations:instance kind="statisticalOperations#instance">
-        <common:id>instance4</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance4</common:selfLink>
-        <common:title>
-            <common:text xml:lang="en">instance4 in English</common:text>
-            <common:text xml:lang="es">instance4 en Español</common:text>
-        </common:title>
+        <cdomain:id>instance4</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance4</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">instance4 in English</cdomain:text>
+            <cdomain:text xml:lang="es">instance4 en Español</cdomain:text>
+        </cdomain:title>
     </operations:instance>
 </operations:instances>

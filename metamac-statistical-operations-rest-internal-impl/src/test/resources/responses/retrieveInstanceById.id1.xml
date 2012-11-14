@@ -1,338 +1,338 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:instance xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instance">
+<operations:instance xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instance">
     <operations:id>instance1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</operations:urn>
     <operations:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1</operations:selfLink>
     <operations:parent kind="statisticalOperations#operation">
-        <common:id>operation1</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</common:selfLink>
-        <common:title>
-            <common:text xml:lang="es">operation1 en Español</common:text>
-            <common:text xml:lang="en">operation1 in English</common:text>
-        </common:title>
+        <cdomain:id>operation1</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
+        </cdomain:title>
     </operations:parent>
     <operations:title>
-        <common:text xml:lang="es">instance1 en Español</common:text>
-        <common:text xml:lang="en">instance1 in English</common:text>
+        <cdomain:text xml:lang="es">instance1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">instance1 in English</cdomain:text>
     </operations:title>
     <operations:acronym>
-        <common:text xml:lang="en">acronym1 in English</common:text>
-        <common:text xml:lang="es">acronym1 en Español</common:text>
+        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
     </operations:acronym>
     <operations:survey kind="statisticalOperations#operation">
-        <common:id>operation1</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</common:selfLink>
-        <common:title>
-            <common:text xml:lang="es">operation1 en Español</common:text>
-            <common:text xml:lang="en">operation1 in English</common:text>
-        </common:title>
+        <cdomain:id>operation1</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
+        </cdomain:title>
     </operations:survey>
     <operations:successor kind="statisticalOperations#instance">
-        <common:id>instance22</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance22</common:selfLink>
-        <common:title>
-            <common:text xml:lang="en">instance22 in English</common:text>
-            <common:text xml:lang="es">instance22 en Español</common:text>
-        </common:title>
+        <cdomain:id>instance22</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance22</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">instance22 in English</cdomain:text>
+            <cdomain:text xml:lang="es">instance22 en Español</cdomain:text>
+        </cdomain:title>
     </operations:successor>
     <operations:predecessor kind="statisticalOperations#instance">
-        <common:id>instance333</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance333</common:selfLink>
-        <common:title>
-            <common:text xml:lang="es">instance333 en Español</common:text>
-            <common:text xml:lang="en">instance333 in English</common:text>
-        </common:title>
+        <cdomain:id>instance333</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance333</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">instance333 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">instance333 in English</cdomain:text>
+        </cdomain:title>
     </operations:predecessor>
     <operations:dataDescription>
-        <common:text xml:lang="en">dataDescription1 in English</common:text>
-        <common:text xml:lang="es">dataDescription1 en Español</common:text>
+        <cdomain:text xml:lang="en">dataDescription1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">dataDescription1 en Español</cdomain:text>
     </operations:dataDescription>
     <operations:statisticalPopulation>
-        <common:text xml:lang="en">statisticalPopulation1 in English</common:text>
-        <common:text xml:lang="es">statisticalPopulation1 en Español</common:text>
+        <cdomain:text xml:lang="en">statisticalPopulation1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">statisticalPopulation1 en Español</cdomain:text>
     </operations:statisticalPopulation>
     <operations:statisticalUnits kind="PENDIENTE_API_SRM" total="2">
         <operations:statisticalUnit kind="CONCEPT">
-            <common:id>statisticalUnit1</common:id>
-            <common:urn>urn:statisticalUnit1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">statisticalUnit1 en Español</common:text>
-                <common:text xml:lang="en">statisticalUnit1 in English</common:text>
-            </common:title>
+            <cdomain:id>statisticalUnit1</cdomain:id>
+            <cdomain:urn>urn:statisticalUnit1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statisticalUnit1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">statisticalUnit1 in English</cdomain:text>
+            </cdomain:title>
         </operations:statisticalUnit>
         <operations:statisticalUnit kind="CONCEPT">
-            <common:id>statisticalUnit22</common:id>
-            <common:urn>urn:statisticalUnit22</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">statisticalUnit22 en Español</common:text>
-                <common:text xml:lang="en">statisticalUnit22 in English</common:text>
-            </common:title>
+            <cdomain:id>statisticalUnit22</cdomain:id>
+            <cdomain:urn>urn:statisticalUnit22</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit22</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statisticalUnit22 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">statisticalUnit22 in English</cdomain:text>
+            </cdomain:title>
         </operations:statisticalUnit>
     </operations:statisticalUnits>
     <operations:geographicGranularity kind="CODELIST">
-        <common:id>geographicGranularity</common:id>
-        <common:urn>urn:geographicGranularity</common:urn>
-        <common:selfLink>http://data.istac.es/apis/srm/v1.0/geographicGranularities/geographicGranularity</common:selfLink>
-        <common:title>
-            <common:text xml:lang="es">geographicGranularity en Español</common:text>
-            <common:text xml:lang="en">geographicGranularity in English</common:text>
-        </common:title>
+        <cdomain:id>geographicGranularity</cdomain:id>
+        <cdomain:urn>urn:geographicGranularity</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/geographicGranularities/geographicGranularity</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">geographicGranularity en Español</cdomain:text>
+            <cdomain:text xml:lang="en">geographicGranularity in English</cdomain:text>
+        </cdomain:title>
     </operations:geographicGranularity>
     <operations:geographicComparability>
-        <common:text xml:lang="es">geographicComparability1 en Español</common:text>
-        <common:text xml:lang="en">geographicComparability1 in English</common:text>
+        <cdomain:text xml:lang="es">geographicComparability1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">geographicComparability1 in English</cdomain:text>
     </operations:geographicComparability>
     <operations:temporalGranularity kind="CODELIST">
-        <common:id>temporalGranularity</common:id>
-        <common:urn>urn:temporalGranularity</common:urn>
-        <common:selfLink>http://data.istac.es/apis/srm/v1.0/temporalGranularities/temporalGranularity</common:selfLink>
-        <common:title>
-            <common:text xml:lang="en">temporalGranularity in English</common:text>
-            <common:text xml:lang="es">temporalGranularity en Español</common:text>
-        </common:title>
+        <cdomain:id>temporalGranularity</cdomain:id>
+        <cdomain:urn>urn:temporalGranularity</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/temporalGranularities/temporalGranularity</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">temporalGranularity in English</cdomain:text>
+            <cdomain:text xml:lang="es">temporalGranularity en Español</cdomain:text>
+        </cdomain:title>
     </operations:temporalGranularity>
     <operations:temporalComparability>
-        <common:text xml:lang="en">temporalComparability1 in English</common:text>
-        <common:text xml:lang="es">temporalComparability1 en Español</common:text>
+        <cdomain:text xml:lang="en">temporalComparability1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">temporalComparability1 en Español</cdomain:text>
     </operations:temporalComparability>
     <operations:basePeriod>2012</operations:basePeriod>
     <operations:unitMeasures kind="PENDIENTE_API_SRM" total="1">
         <operations:unitMeasure kind="CONCEPT">
-            <common:id>unitMeasure1</common:id>
-            <common:urn>urn:unitMeasure1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/unitMeasures/unitMeasure1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">unitMeasure1 in English</common:text>
-                <common:text xml:lang="es">unitMeasure1 en Español</common:text>
-            </common:title>
+            <cdomain:id>unitMeasure1</cdomain:id>
+            <cdomain:urn>urn:unitMeasure1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/unitMeasures/unitMeasure1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">unitMeasure1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">unitMeasure1 en Español</cdomain:text>
+            </cdomain:title>
         </operations:unitMeasure>
     </operations:unitMeasures>
     <operations:statConcDefsDescription>
-        <common:text xml:lang="en">statConcDef1 in English</common:text>
-        <common:text xml:lang="es">statConcDef1 en Español</common:text>
+        <cdomain:text xml:lang="en">statConcDef1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">statConcDef1 en Español</cdomain:text>
     </operations:statConcDefsDescription>
     <operations:statConcDefs kind="PENDIENTE_API_SRM" total="3">
         <operations:statConcDef kind="CODELIST">
-            <common:id>statConcDefList1</common:id>
-            <common:urn>urn:statConcDefList1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">statConcDefList1 en Español</common:text>
-                <common:text xml:lang="en">statConcDefList1 in English</common:text>
-            </common:title>
+            <cdomain:id>statConcDefList1</cdomain:id>
+            <cdomain:urn>urn:statConcDefList1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statConcDefList1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">statConcDefList1 in English</cdomain:text>
+            </cdomain:title>
         </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
-            <common:id>statConcDefList333</common:id>
-            <common:urn>urn:statConcDefList333</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">statConcDefList333 en Español</common:text>
-                <common:text xml:lang="en">statConcDefList333 in English</common:text>
-            </common:title>
+            <cdomain:id>statConcDefList333</cdomain:id>
+            <cdomain:urn>urn:statConcDefList333</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statConcDefList333 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">statConcDefList333 in English</cdomain:text>
+            </cdomain:title>
         </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
-            <common:id>statConcDefList22</common:id>
-            <common:urn>urn:statConcDefList22</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">statConcDefList22 en Español</common:text>
-                <common:text xml:lang="en">statConcDefList22 in English</common:text>
-            </common:title>
+            <cdomain:id>statConcDefList22</cdomain:id>
+            <cdomain:urn>urn:statConcDefList22</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statConcDefList22 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">statConcDefList22 in English</cdomain:text>
+            </cdomain:title>
         </operations:statConcDef>
     </operations:statConcDefs>
     <operations:classSystemsDescription>
-        <common:text xml:lang="es">classSystem1 en Español</common:text>
-        <common:text xml:lang="en">classSystem1 in English</common:text>
+        <cdomain:text xml:lang="es">classSystem1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">classSystem1 in English</cdomain:text>
     </operations:classSystemsDescription>
     <operations:classSystems kind="PENDIENTE_API_SRM" total="2">
         <operations:classSystem kind="CODELIST">
-            <common:id>classSystemList1</common:id>
-            <common:urn>urn:classSystemList1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">classSystemList1 en Español</common:text>
-                <common:text xml:lang="en">classSystemList1 in English</common:text>
-            </common:title>
+            <cdomain:id>classSystemList1</cdomain:id>
+            <cdomain:urn>urn:classSystemList1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">classSystemList1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">classSystemList1 in English</cdomain:text>
+            </cdomain:title>
         </operations:classSystem>
         <operations:classSystem kind="CODELIST">
-            <common:id>classSystemList22</common:id>
-            <common:urn>urn:classSystemList22</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">classSystemList22 en Español</common:text>
-                <common:text xml:lang="en">classSystemList22 in English</common:text>
-            </common:title>
+            <cdomain:id>classSystemList22</cdomain:id>
+            <cdomain:urn>urn:classSystemList22</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList22</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">classSystemList22 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">classSystemList22 in English</cdomain:text>
+            </cdomain:title>
         </operations:classSystem>
     </operations:classSystems>
     <operations:instanceType>
-        <common:id>instanceType1</common:id>
-        <common:title>
-            <common:text xml:lang="en">instanceType1 in English</common:text>
-            <common:text xml:lang="es">instanceType1 en Español</common:text>
-        </common:title>
+        <cdomain:id>instanceType1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">instanceType1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">instanceType1 en Español</cdomain:text>
+        </cdomain:title>
     </operations:instanceType>
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
     <operations:docMethod>
-        <common:text xml:lang="es">docMethod1 en Español</common:text>
-        <common:text xml:lang="en">docMethod1 in English</common:text>
+        <cdomain:text xml:lang="es">docMethod1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">docMethod1 in English</cdomain:text>
     </operations:docMethod>
     <operations:surveySource>
-        <common:id>surveySource1</common:id>
-        <common:title>
-            <common:text xml:lang="es">surveySource1 en Español</common:text>
-            <common:text xml:lang="en">surveySource1 in English</common:text>
-        </common:title>
+        <cdomain:id>surveySource1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">surveySource1 in English</cdomain:text>
+        </cdomain:title>
     </operations:surveySource>
     <operations:collMethod>
-        <common:id>collMethod1</common:id>
-        <common:title>
-            <common:text xml:lang="en">collMethod1 in English</common:text>
-            <common:text xml:lang="es">collMethod1 en Español</common:text>
-        </common:title>
+        <cdomain:id>collMethod1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">collMethod1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">collMethod1 en Español</cdomain:text>
+        </cdomain:title>
     </operations:collMethod>
     <operations:informationSuppliers kind="PENDIENTE_API_SRM" total="1">
         <operations:informationSupplier kind="COMMON_METADATA">
-            <common:id>informationSupplier1</common:id>
-            <common:urn>urn:informationSupplier1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">informationSupplier1 in English</common:text>
-                <common:text xml:lang="es">informationSupplier1 en Español</common:text>
-            </common:title>
+            <cdomain:id>informationSupplier1</cdomain:id>
+            <cdomain:urn>urn:informationSupplier1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">informationSupplier1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">informationSupplier1 en Español</cdomain:text>
+            </cdomain:title>
         </operations:informationSupplier>
     </operations:informationSuppliers>
     <operations:freqColls kind="PENDIENTE_API_SRM" total="2">
         <operations:freqColl kind="CATEGORY_SCHEME">
-            <common:id>freqColl22</common:id>
-            <common:urn>urn:freqColl22</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl22</common:selfLink>
-            <common:title>
-                <common:text xml:lang="en">freqColl22 in English</common:text>
-                <common:text xml:lang="es">freqColl22 en Español</common:text>
-            </common:title>
+            <cdomain:id>freqColl22</cdomain:id>
+            <cdomain:urn>urn:freqColl22</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl22</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">freqColl22 in English</cdomain:text>
+                <cdomain:text xml:lang="es">freqColl22 en Español</cdomain:text>
+            </cdomain:title>
         </operations:freqColl>
         <operations:freqColl kind="CATEGORY_SCHEME">
-            <common:id>freqColl1</common:id>
-            <common:urn>urn:freqColl1</common:urn>
-            <common:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl1</common:selfLink>
-            <common:title>
-                <common:text xml:lang="es">freqColl1 en Español</common:text>
-                <common:text xml:lang="en">freqColl1 in English</common:text>
-            </common:title>
+            <cdomain:id>freqColl1</cdomain:id>
+            <cdomain:urn>urn:freqColl1</cdomain:urn>
+            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl1</cdomain:selfLink>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">freqColl1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">freqColl1 in English</cdomain:text>
+            </cdomain:title>
         </operations:freqColl>
     </operations:freqColls>
     <operations:dataValidation>
-        <common:text xml:lang="es">dataValidation1 en Español</common:text>
-        <common:text xml:lang="en">dataValidation1 in English</common:text>
+        <cdomain:text xml:lang="es">dataValidation1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">dataValidation1 in English</cdomain:text>
     </operations:dataValidation>
     <operations:dataCompilation>
-        <common:text xml:lang="en">dataCompilation1 in English</common:text>
-        <common:text xml:lang="es">dataCompilation1 en Español</common:text>
+        <cdomain:text xml:lang="en">dataCompilation1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">dataCompilation1 en Español</cdomain:text>
     </operations:dataCompilation>
     <operations:adjustment>
-        <common:text xml:lang="en">adjustment1 in English</common:text>
-        <common:text xml:lang="es">adjustment1 en Español</common:text>
+        <cdomain:text xml:lang="en">adjustment1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">adjustment1 en Español</cdomain:text>
     </operations:adjustment>
     <operations:costBurden>
-        <common:text xml:lang="es">costBurden1 en Español</common:text>
-        <common:text xml:lang="en">costBurden1 in English</common:text>
+        <cdomain:text xml:lang="es">costBurden1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">costBurden1 in English</cdomain:text>
     </operations:costBurden>
     <operations:costs kind="statisticalOperations#costs" total="4">
         <operations:cost>
-            <common:id>cost4444</common:id>
-            <common:title>
-                <common:text xml:lang="en">cost4444 in English</common:text>
-                <common:text xml:lang="es">cost4444 en Español</common:text>
-            </common:title>
+            <cdomain:id>cost4444</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">cost4444 in English</cdomain:text>
+                <cdomain:text xml:lang="es">cost4444 en Español</cdomain:text>
+            </cdomain:title>
         </operations:cost>
         <operations:cost>
-            <common:id>cost22</common:id>
-            <common:title>
-                <common:text xml:lang="es">cost22 en Español</common:text>
-                <common:text xml:lang="en">cost22 in English</common:text>
-            </common:title>
+            <cdomain:id>cost22</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">cost22 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">cost22 in English</cdomain:text>
+            </cdomain:title>
         </operations:cost>
         <operations:cost>
-            <common:id>cost1</common:id>
-            <common:title>
-                <common:text xml:lang="es">cost1 en Español</common:text>
-                <common:text xml:lang="en">cost1 in English</common:text>
-            </common:title>
+            <cdomain:id>cost1</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">cost1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">cost1 in English</cdomain:text>
+            </cdomain:title>
         </operations:cost>
         <operations:cost>
-            <common:id>cost333</common:id>
-            <common:title>
-                <common:text xml:lang="en">cost333 in English</common:text>
-                <common:text xml:lang="es">cost333 en Español</common:text>
-            </common:title>
+            <cdomain:id>cost333</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">cost333 in English</cdomain:text>
+                <cdomain:text xml:lang="es">cost333 en Español</cdomain:text>
+            </cdomain:title>
         </operations:cost>
     </operations:costs>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
     <operations:qualityDoc>
-        <common:text xml:lang="es">qualityDoc1 en Español</common:text>
-        <common:text xml:lang="en">qualityDoc1 in English</common:text>
+        <cdomain:text xml:lang="es">qualityDoc1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">qualityDoc1 in English</cdomain:text>
     </operations:qualityDoc>
     <operations:qualityAssure>
-        <common:text xml:lang="en">qualityAssure1 in English</common:text>
-        <common:text xml:lang="es">qualityAssure1 en Español</common:text>
+        <cdomain:text xml:lang="en">qualityAssure1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">qualityAssure1 en Español</cdomain:text>
     </operations:qualityAssure>
     <operations:qualityAssmnt>
-        <common:text xml:lang="en">qualityAssmnt1 in English</common:text>
-        <common:text xml:lang="es">qualityAssmnt1 en Español</common:text>
+        <cdomain:text xml:lang="en">qualityAssmnt1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">qualityAssmnt1 en Español</cdomain:text>
     </operations:qualityAssmnt>
     <operations:userNeeds>
-        <common:text xml:lang="en">userNeeds1 in English</common:text>
-        <common:text xml:lang="es">userNeeds1 en Español</common:text>
+        <cdomain:text xml:lang="en">userNeeds1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">userNeeds1 en Español</cdomain:text>
     </operations:userNeeds>
     <operations:userSat>
-        <common:text xml:lang="es">userSat1 en Español</common:text>
-        <common:text xml:lang="en">userSat1 in English</common:text>
+        <cdomain:text xml:lang="es">userSat1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">userSat1 in English</cdomain:text>
     </operations:userSat>
     <operations:completeness>
-        <common:text xml:lang="en">completeness1 in English</common:text>
-        <common:text xml:lang="es">completeness1 en Español</common:text>
+        <cdomain:text xml:lang="en">completeness1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">completeness1 en Español</cdomain:text>
     </operations:completeness>
     <operations:timeliness>
-        <common:text xml:lang="en">timeliness1 in English</common:text>
-        <common:text xml:lang="es">timeliness1 en Español</common:text>
+        <cdomain:text xml:lang="en">timeliness1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">timeliness1 en Español</cdomain:text>
     </operations:timeliness>
     <operations:punctuality>
-        <common:text xml:lang="es">punctuality1 en Español</common:text>
-        <common:text xml:lang="en">punctuality1 in English</common:text>
+        <cdomain:text xml:lang="es">punctuality1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">punctuality1 in English</cdomain:text>
     </operations:punctuality>
     <operations:accuracyOverall>
-        <common:text xml:lang="en">accuracyOverall1 in English</common:text>
-        <common:text xml:lang="es">accuracyOverall1 en Español</common:text>
+        <cdomain:text xml:lang="en">accuracyOverall1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">accuracyOverall1 en Español</cdomain:text>
     </operations:accuracyOverall>
     <operations:samplingErr>
-        <common:text xml:lang="en">samplingErr1 in English</common:text>
-        <common:text xml:lang="es">samplingErr1 en Español</common:text>
+        <cdomain:text xml:lang="en">samplingErr1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">samplingErr1 en Español</cdomain:text>
     </operations:samplingErr>
     <operations:nonsamplingErr>
-        <common:text xml:lang="en">nonsamplingErr1 in English</common:text>
-        <common:text xml:lang="es">nonsamplingErr1 en Español</common:text>
+        <cdomain:text xml:lang="en">nonsamplingErr1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">nonsamplingErr1 en Español</cdomain:text>
     </operations:nonsamplingErr>
     <operations:coherXDom>
-        <common:text xml:lang="en">coherXDom1 in English</common:text>
-        <common:text xml:lang="es">coherXDom1 en Español</common:text>
+        <cdomain:text xml:lang="en">coherXDom1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">coherXDom1 en Español</cdomain:text>
     </operations:coherXDom>
     <operations:coherInternal>
-        <common:text xml:lang="es">coherInternal1 en Español</common:text>
-        <common:text xml:lang="en">coherInternal1 in English</common:text>
+        <cdomain:text xml:lang="es">coherInternal1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">coherInternal1 in English</cdomain:text>
     </operations:coherInternal>
     <operations:comment>
-        <common:text xml:lang="en">comment1 in English</common:text>
-        <common:text xml:lang="es">comment1 en Español</common:text>
+        <cdomain:text xml:lang="en">comment1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">comment1 en Español</cdomain:text>
     </operations:comment>
     <operations:notes>
-        <common:text xml:lang="es">notes1 en Español</common:text>
-        <common:text xml:lang="en">notes1 in English</common:text>
+        <cdomain:text xml:lang="es">notes1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">notes1 in English</cdomain:text>
     </operations:notes>
 </operations:instance>

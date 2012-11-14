@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:officialityTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#officialityTypes" total="3">
+<operations:officialityTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#officialityTypes" total="3">
     <operations:officialityType>
-        <common:id>officialityType1</common:id>
-        <common:title>
-            <common:text xml:lang="es">officialityType1 en Español</common:text>
-            <common:text xml:lang="en">officialityType1 in English</common:text>
-        </common:title>
+        <cdomain:id>officialityType1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">officialityType1 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">officialityType1 in English</cdomain:text>
+        </cdomain:title>
     </operations:officialityType>
     <operations:officialityType>
-        <common:id>officialityType2</common:id>
-        <common:title>
-            <common:text xml:lang="es">officialityType2 en Español</common:text>
-            <common:text xml:lang="en">officialityType2 in English</common:text>
-        </common:title>
+        <cdomain:id>officialityType2</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">officialityType2 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">officialityType2 in English</cdomain:text>
+        </cdomain:title>
     </operations:officialityType>
     <operations:officialityType>
-        <common:id>officialityType3</common:id>
-        <common:title>
-            <common:text xml:lang="en">officialityType3 in English</common:text>
-            <common:text xml:lang="es">officialityType3 en Español</common:text>
-        </common:title>
+        <cdomain:id>officialityType3</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">officialityType3 in English</cdomain:text>
+            <cdomain:text xml:lang="es">officialityType3 en Español</cdomain:text>
+        </cdomain:title>
     </operations:officialityType>
 </operations:officialityTypes>

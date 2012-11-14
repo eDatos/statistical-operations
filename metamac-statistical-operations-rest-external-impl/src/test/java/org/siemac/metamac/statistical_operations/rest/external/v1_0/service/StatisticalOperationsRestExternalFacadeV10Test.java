@@ -64,7 +64,6 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.utils.Statis
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.utils.StatisticalOperationsRestAsserts;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.utils.StatisticalOperationsRestMocks;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.util.UriUtils;
 
 public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestBaseTest {
 
@@ -1053,17 +1052,9 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         return baseApi + "/operations/" + operationId;
     }
 
-    private String encodeParameter(String parameter) throws Exception {
-        if (parameter == null) {
-            return null;
-        }
-        parameter = UriUtils.encodePath(parameter, "UTF-8");
-        return parameter;
-    }
-
     private String getRequestUriFindOperations(String query, String limit, String offset) throws Exception {
         String url = baseApi + "/operations";
-        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, encodeParameter(query));
+        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, RestUtils.encodeParameter(query));
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_LIMIT, limit);
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_OFFSET, offset);
         return url;
@@ -1075,7 +1066,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
 
     private String getRequestUriFindFamilies(String query, String limit, String offset) throws Exception {
         String url = baseApi + "/families";
-        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, encodeParameter(query));
+        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, RestUtils.encodeParameter(query));
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_LIMIT, limit);
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_OFFSET, offset);
         return url;
@@ -1087,7 +1078,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
 
     private String getRequestUriFindInstances(String operationId, String query, String limit, String offset) throws Exception {
         String url = baseApi + "/operations/" + operationId + "/instances";
-        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, encodeParameter(query));
+        url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_QUERY, RestUtils.encodeParameter(query));
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_LIMIT, limit);
         url = RestUtils.createLinkWithQueryParam(url, RestConstants.PARAMETER_OFFSET, offset);
         return url;

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="2" offset="4" total="6" firstLink="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations?limit=2&amp;offset=0" previousLink="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations?limit=2&amp;offset=2">
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="2" offset="4" total="6" firstLink="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations?limit=2&amp;offset=0" previousLink="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations?limit=2&amp;offset=2">
     <operations:operation kind="statisticalOperations#operation">
-        <common:id>operation5</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation5</common:selfLink>
-        <common:title>
-            <common:text xml:lang="en">operation5 in English</common:text>
-            <common:text xml:lang="es">operation5 en Español</common:text>
-        </common:title>
+        <cdomain:id>operation5</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation5</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">operation5 in English</cdomain:text>
+            <cdomain:text xml:lang="es">operation5 en Español</cdomain:text>
+        </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
-        <common:id>operation6</common:id>
-        <common:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</common:urn>
-        <common:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation6</common:selfLink>
-        <common:title>
-            <common:text xml:lang="en">operation6 in English</common:text>
-            <common:text xml:lang="es">operation6 en Español</common:text>
-        </common:title>
+        <cdomain:id>operation6</cdomain:id>
+        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</cdomain:urn>
+        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation6</cdomain:selfLink>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">operation6 in English</cdomain:text>
+            <cdomain:text xml:lang="es">operation6 en Español</cdomain:text>
+        </cdomain:title>
     </operations:operation>
 </operations:operations>

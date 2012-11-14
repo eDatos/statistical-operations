@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:instanceTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instanceTypes" total="2">
+<operations:instanceTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instanceTypes" total="2">
     <operations:instanceType>
-        <common:id>instanceType1</common:id>
-        <common:title>
-            <common:text xml:lang="en">instanceType1 in English</common:text>
-            <common:text xml:lang="es">instanceType1 en Español</common:text>
-        </common:title>
+        <cdomain:id>instanceType1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">instanceType1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">instanceType1 en Español</cdomain:text>
+        </cdomain:title>
     </operations:instanceType>
     <operations:instanceType>
-        <common:id>instanceType2</common:id>
-        <common:title>
-            <common:text xml:lang="es">instanceType2 en Español</common:text>
-            <common:text xml:lang="en">instanceType2 in English</common:text>
-        </common:title>
+        <cdomain:id>instanceType2</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">instanceType2 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">instanceType2 in English</cdomain:text>
+        </cdomain:title>
     </operations:instanceType>
 </operations:instanceTypes>

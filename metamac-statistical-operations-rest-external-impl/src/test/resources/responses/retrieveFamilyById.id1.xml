@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:family xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" kind="statisticalOperations#family">
+<operations:family xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" kind="statisticalOperations#family">
     <operations:id>family1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</operations:urn>
     <operations:selfLink>http://data.istac.es/apis/operations/v1.0/families/family1</operations:selfLink>
     <operations:parent kind="statisticalOperations#families">
-        <common:selfLink>http://data.istac.es/apis/operations/v1.0/families</common:selfLink>
+        <cdomain:selfLink>http://data.istac.es/apis/operations/v1.0/families</cdomain:selfLink>
     </operations:parent>
     <operations:title>
-        <common:text xml:lang="en">family1 in English</common:text>
-        <common:text xml:lang="es">family1 en Español</common:text>
+        <cdomain:text xml:lang="en">family1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
     </operations:title>
     <operations:acronym>
-        <common:text xml:lang="en">acronym1 in English</common:text>
-        <common:text xml:lang="es">acronym1 en Español</common:text>
+        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
     </operations:acronym>
     <operations:description>
-        <common:text xml:lang="es">description1 en Español</common:text>
-        <common:text xml:lang="en">description1 in English</common:text>
+        <cdomain:text xml:lang="es">description1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">description1 in English</cdomain:text>
     </operations:description>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
     <operations:children total="1">
-        <common:child kind="statisticalOperations#operations">
-            <common:selfLink>http://data.istac.es/apis/operations/v1.0/families/family1/operations</common:selfLink>
-        </common:child>
+        <cdomain:child kind="statisticalOperations#operations">
+            <cdomain:selfLink>http://data.istac.es/apis/operations/v1.0/families/family1/operations</cdomain:selfLink>
+        </cdomain:child>
     </operations:children>
 </operations:family>

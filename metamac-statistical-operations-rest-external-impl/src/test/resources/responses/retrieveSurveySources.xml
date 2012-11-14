@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:surveySources xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:common="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#surveySources" total="2">
+<operations:surveySources xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#surveySources" total="2">
     <operations:surveySource>
-        <common:id>surveySource1</common:id>
-        <common:title>
-            <common:text xml:lang="en">surveySource1 in English</common:text>
-            <common:text xml:lang="es">surveySource1 en Español</common:text>
-        </common:title>
+        <cdomain:id>surveySource1</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="en">surveySource1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
+        </cdomain:title>
     </operations:surveySource>
     <operations:surveySource>
-        <common:id>surveySource2</common:id>
-        <common:title>
-            <common:text xml:lang="es">surveySource2 en Español</common:text>
-            <common:text xml:lang="en">surveySource2 in English</common:text>
-        </common:title>
+        <cdomain:id>surveySource2</cdomain:id>
+        <cdomain:title>
+            <cdomain:text xml:lang="es">surveySource2 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">surveySource2 in English</cdomain:text>
+        </cdomain:title>
     </operations:surveySource>
 </operations:surveySources>
