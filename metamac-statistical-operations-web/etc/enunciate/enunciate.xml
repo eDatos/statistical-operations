@@ -2,7 +2,7 @@
 
     <namespaces>
         <namespace uri="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" id="operations"/>
-        <namespace uri="http://www.siemac.org/metamac/rest/common/v1.0/domain" id="common"/>
+        <namespace uri="http://www.siemac.org/metamac/rest/common/v1.0/domain" id="cdomain"/>
     </namespaces>
     
     <api-import class="org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10" />
