@@ -2,17 +2,15 @@
 <operations:family xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#family">
     <operations:id>family1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</operations:urn>
-    <operations:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family1</operations:selfLink>
-    <operations:parent kind="statisticalOperations#families">
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families</cdomain:selfLink>
-    </operations:parent>
+    <operations:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1"/>
+    <operations:parentLink kind="statisticalOperations#families" href="http://data.istac.es/apis/operations-internal/v1.0/families"/>
     <operations:title>
-        <cdomain:text xml:lang="en">family1 in English</cdomain:text>
         <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">family1 in English</cdomain:text>
     </operations:title>
     <operations:acronym>
-        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
         <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
     </operations:acronym>
     <operations:description>
         <cdomain:text xml:lang="en">description1 in English</cdomain:text>
@@ -21,9 +19,7 @@
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
-    <operations:children total="1">
-        <cdomain:child kind="statisticalOperations#operations">
-            <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations</cdomain:selfLink>
-        </cdomain:child>
-    </operations:children>
+    <operations:childLinks total="1">
+        <cdomain:childLink kind="statisticalOperations#operations" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations"/>
+    </operations:childLinks>
 </operations:family>

@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
-import org.siemac.metamac.rest.common.v1_0.domain.Children;
+import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
@@ -618,7 +618,7 @@ public class StatisticalOperationsRestMocks {
         operation.setId("operation" + subId);
         operation.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getId());
         operation.setKind(RestInternalConstants.KIND_OPERATION);
-        operation.setSelfLink(baseApi + "/operations/operation" + subId);
+        operation.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATION, baseApi + "/operations/operation" + subId));
         operation.setTitle(mockInternationalString("operation", subId));
         operation.setAcronym(mockInternationalString("acronym", subId));
         operation.setSubjectArea(mockResourceFromExternalItemSrm("subjectArea1", "subjectAreas", TypeExternalArtefactsEnum.CATEGORY));
@@ -683,11 +683,11 @@ public class StatisticalOperationsRestMocks {
         operation.setConfidentialityDataTreatment(mockInternationalString("confidentialityDataTreatment", "1"));
         operation.setComment(mockInternationalString("comment", subId));
         operation.setNotes(mockInternationalString("notes", subId));
-        operation.setParent(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, baseApi + "/operations"));
-        operation.setChildren(new Children());
-        operation.getChildren().setTotal(BigInteger.valueOf(2));
-        operation.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, baseApi + "/operations/operation" + subId + "/families"));
-        operation.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCES, baseApi + "/operations/operation" + subId + "/instances"));
+        operation.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, baseApi + "/operations"));
+        operation.setChildLinks(new ChildLinks());
+        operation.getChildLinks().setTotal(BigInteger.valueOf(2));
+        operation.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, baseApi + "/operations/operation" + subId + "/families"));
+        operation.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCES, baseApi + "/operations/operation" + subId + "/instances"));
         return operation;
     }
 
@@ -697,17 +697,17 @@ public class StatisticalOperationsRestMocks {
         family.setId("family" + subId);
         family.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getId());
         family.setKind(RestInternalConstants.KIND_FAMILY);
-        family.setSelfLink(baseApi + "/families/family" + subId);
+        family.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILY, baseApi + "/families/family" + subId));
         family.setTitle(mockInternationalString("family", subId));
         family.setAcronym(mockInternationalString("acronym", subId));
         family.setDescription(mockInternationalString("description", subId));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
-        family.setParent(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, baseApi + "/families"));
-        family.setChildren(new Children());
-        family.getChildren().setTotal(BigInteger.valueOf(1));
-        family.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subId + "/operations"));
+        family.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, baseApi + "/families"));
+        family.setChildLinks(new ChildLinks());
+        family.getChildLinks().setTotal(BigInteger.valueOf(1));
+        family.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subId + "/operations"));
         return family;
     }
 
@@ -717,7 +717,7 @@ public class StatisticalOperationsRestMocks {
         instance.setId("instance" + subId);
         instance.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation + "." + instance.getId());
         instance.setKind(RestInternalConstants.KIND_INSTANCE);
-        instance.setSelfLink(baseApi + "/operations/" + operation + "/instances/instance" + subId);
+        instance.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCE, baseApi + "/operations/" + operation + "/instances/instance" + subId));
         instance.setTitle(mockInternationalString("instance", subId));
         instance.setAcronym(mockInternationalString("acronym", subId));
         instance.setSurvey(MetamacRestMocks.mockResource(operation, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation, RestInternalConstants.KIND_OPERATION,
@@ -795,8 +795,7 @@ public class StatisticalOperationsRestMocks {
         instance.setCoherInternal(mockInternationalString("coherInternal", subId));
         instance.setComment(mockInternationalString("comment", subId));
         instance.setNotes(mockInternationalString("notes", subId));
-        instance.setParent(MetamacRestMocks.mockResource(operation, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation, RestInternalConstants.KIND_OPERATION,
-                baseApi + "/operations/" + operation));
+        instance.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATION, baseApi + "/operations/" + operation));
         // no children
         return instance;
     }

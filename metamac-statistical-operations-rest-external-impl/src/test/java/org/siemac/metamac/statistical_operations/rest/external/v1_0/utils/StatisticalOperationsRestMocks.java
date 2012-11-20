@@ -1,13 +1,13 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.utils;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.fail; 
 
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
-import org.siemac.metamac.rest.common.v1_0.domain.Children;
+import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
@@ -680,9 +680,9 @@ public class StatisticalOperationsRestMocks {
         operation.setComment(mockInternationalString("comment", subId));
         operation.setParent(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_OPERATIONS, baseApi + "/operations"));
         operation.setChildren(new Children());
-        operation.getChildren().setTotal(BigInteger.valueOf(2));
-        operation.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_FAMILIES, baseApi + "/operations/operation" + subId + "/families"));
-        operation.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_INSTANCES, baseApi + "/operations/operation" + subId + "/instances"));
+        operation.getChildLinks().setTotal(BigInteger.valueOf(2));
+        operation.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_FAMILIES, baseApi + "/operations/operation" + subId + "/families"));
+        operation.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_INSTANCES, baseApi + "/operations/operation" + subId + "/instances"));
         return operation;
     }
 
@@ -698,9 +698,9 @@ public class StatisticalOperationsRestMocks {
         family.setDescription(mockInternationalString("description", subId));
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         family.setParent(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_FAMILIES, baseApi + "/families"));
-        family.setChildren(new Children());
-        family.getChildren().setTotal(BigInteger.valueOf(1));
-        family.getChildren().getChildren().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subId + "/operations"));
+        family.setChildren(new ChildLinks());
+        family.getChildLinks().setTotal(BigInteger.valueOf(1));
+        family.getChildLinks().getChildLinks().add(MetamacRestMocks.mockResourceLink(RestExternalConstants.KIND_OPERATIONS, baseApi + "/families/family" + subId + "/operations"));
         return family;
     }
 

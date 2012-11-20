@@ -10,8 +10,8 @@
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
             <xs:element name="urn" type="xs:string" />
-            <xs:element name="selfLink" type="xs:string" />
-            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="selfLink" type="common:ResourceLink" />
+            <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="subjectArea" type="common:Resource" />
@@ -45,7 +45,7 @@
             <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="comment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="notes" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="children" type="common:Children" minOccurs="1" />
+            <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>
@@ -54,15 +54,15 @@
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
             <xs:element name="urn" type="xs:string" />
-            <xs:element name="selfLink" type="xs:string" />
-            <xs:element name="parent" type="common:ResourceLink" />
+            <xs:element name="selfLink" type="common:ResourceLink" />
+            <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0" />
-            <xs:element name="children" type="common:Children" minOccurs="1" />
+            <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>
@@ -71,8 +71,8 @@
         <xs:sequence>
             <xs:element name="id" type="xs:string" />
             <xs:element name="urn" type="xs:string" />
-            <xs:element name="selfLink" type="xs:string" />
-            <xs:element name="parent" type="common:Resource" />
+            <xs:element name="selfLink" type="common:ResourceLink" />
+            <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="survey" type="common:Resource" />
@@ -120,7 +120,7 @@
             <xs:element name="coherInternal" type="common:InternationalString" minOccurs="0" />
             <xs:element name="comment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="notes" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="children" type="common:Children" minOccurs="1" />
+            <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
         </xs:sequence>
         <xs:attribute name="kind" type="xs:string" use="required" />
     </xs:complexType>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:families xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#families" limit="25" offset="0" total="5">
+<operations:families xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#families" total="5" limit="25" offset="0">
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family1</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">family1 in English</cdomain:text>
             <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
@@ -12,16 +12,16 @@
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family2</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family2</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family2</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family2"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">family2 in English</cdomain:text>
             <cdomain:text xml:lang="es">family2 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">family2 in English</cdomain:text>
         </cdomain:title>
     </operations:family>
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family3</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family3</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family3"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">family3 en Español</cdomain:text>
             <cdomain:text xml:lang="en">family3 in English</cdomain:text>
@@ -30,7 +30,7 @@
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family4</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family4</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family4"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">family4 in English</cdomain:text>
             <cdomain:text xml:lang="es">family4 en Español</cdomain:text>
@@ -39,7 +39,7 @@
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family15</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family15</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/families/family15</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family15"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">family15 in English</cdomain:text>
             <cdomain:text xml:lang="es">family15 en Español</cdomain:text>

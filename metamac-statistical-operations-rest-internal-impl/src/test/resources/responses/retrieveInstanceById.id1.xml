@@ -2,19 +2,11 @@
 <operations:instance xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#instance">
     <operations:id>instance1</operations:id>
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</operations:urn>
-    <operations:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1</operations:selfLink>
-    <operations:parent kind="statisticalOperations#operation">
-        <cdomain:id>operation1</cdomain:id>
-        <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</cdomain:selfLink>
-        <cdomain:title>
-            <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
-        </cdomain:title>
-    </operations:parent>
+    <operations:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1"/>
+    <operations:parentLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1"/>
     <operations:title>
-        <cdomain:text xml:lang="es">instance1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">instance1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">instance1 en Español</cdomain:text>
     </operations:title>
     <operations:acronym>
         <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
@@ -23,7 +15,7 @@
     <operations:survey kind="statisticalOperations#operation">
         <cdomain:id>operation1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
             <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
@@ -32,43 +24,43 @@
     <operations:successor kind="statisticalOperations#instance">
         <cdomain:id>instance22</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance22</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance22</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance22"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instance22 in English</cdomain:text>
             <cdomain:text xml:lang="es">instance22 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">instance22 in English</cdomain:text>
         </cdomain:title>
     </operations:successor>
     <operations:predecessor kind="statisticalOperations#instance">
         <cdomain:id>instance333</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance333</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance333</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance333"/>
         <cdomain:title>
-            <cdomain:text xml:lang="es">instance333 en Español</cdomain:text>
             <cdomain:text xml:lang="en">instance333 in English</cdomain:text>
+            <cdomain:text xml:lang="es">instance333 en Español</cdomain:text>
         </cdomain:title>
     </operations:predecessor>
     <operations:dataDescription>
-        <cdomain:text xml:lang="en">dataDescription1 in English</cdomain:text>
         <cdomain:text xml:lang="es">dataDescription1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">dataDescription1 in English</cdomain:text>
     </operations:dataDescription>
     <operations:statisticalPopulation>
-        <cdomain:text xml:lang="en">statisticalPopulation1 in English</cdomain:text>
         <cdomain:text xml:lang="es">statisticalPopulation1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">statisticalPopulation1 in English</cdomain:text>
     </operations:statisticalPopulation>
     <operations:statisticalUnits kind="PENDIENTE_API_SRM" total="2">
         <operations:statisticalUnit kind="CONCEPT">
             <cdomain:id>statisticalUnit1</cdomain:id>
             <cdomain:urn>urn:statisticalUnit1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit1</cdomain:selfLink>
+            <cdomain:selfLink kind="CONCEPT" href="http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statisticalUnit1 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">statisticalUnit1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">statisticalUnit1 en Español</cdomain:text>
             </cdomain:title>
         </operations:statisticalUnit>
         <operations:statisticalUnit kind="CONCEPT">
             <cdomain:id>statisticalUnit22</cdomain:id>
             <cdomain:urn>urn:statisticalUnit22</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit22</cdomain:selfLink>
+            <cdomain:selfLink kind="CONCEPT" href="http://data.istac.es/apis/srm/v1.0/statisticalUnits/statisticalUnit22"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">statisticalUnit22 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">statisticalUnit22 in English</cdomain:text>
@@ -78,10 +70,10 @@
     <operations:geographicGranularity kind="CODELIST">
         <cdomain:id>geographicGranularity</cdomain:id>
         <cdomain:urn>urn:geographicGranularity</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/geographicGranularities/geographicGranularity</cdomain:selfLink>
+        <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/geographicGranularities/geographicGranularity"/>
         <cdomain:title>
-            <cdomain:text xml:lang="es">geographicGranularity en Español</cdomain:text>
             <cdomain:text xml:lang="en">geographicGranularity in English</cdomain:text>
+            <cdomain:text xml:lang="es">geographicGranularity en Español</cdomain:text>
         </cdomain:title>
     </operations:geographicGranularity>
     <operations:geographicComparability>
@@ -91,10 +83,10 @@
     <operations:temporalGranularity kind="CODELIST">
         <cdomain:id>temporalGranularity</cdomain:id>
         <cdomain:urn>urn:temporalGranularity</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/temporalGranularities/temporalGranularity</cdomain:selfLink>
+        <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/temporalGranularities/temporalGranularity"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">temporalGranularity in English</cdomain:text>
             <cdomain:text xml:lang="es">temporalGranularity en Español</cdomain:text>
+            <cdomain:text xml:lang="en">temporalGranularity in English</cdomain:text>
         </cdomain:title>
     </operations:temporalGranularity>
     <operations:temporalComparability>
@@ -106,7 +98,7 @@
         <operations:unitMeasure kind="CONCEPT">
             <cdomain:id>unitMeasure1</cdomain:id>
             <cdomain:urn>urn:unitMeasure1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/unitMeasures/unitMeasure1</cdomain:selfLink>
+            <cdomain:selfLink kind="CONCEPT" href="http://data.istac.es/apis/srm/v1.0/unitMeasures/unitMeasure1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="en">unitMeasure1 in English</cdomain:text>
                 <cdomain:text xml:lang="es">unitMeasure1 en Español</cdomain:text>
@@ -119,30 +111,30 @@
     </operations:statConcDefsDescription>
     <operations:statConcDefs kind="PENDIENTE_API_SRM" total="3">
         <operations:statConcDef kind="CODELIST">
-            <cdomain:id>statConcDefList1</cdomain:id>
-            <cdomain:urn>urn:statConcDefList1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1</cdomain:selfLink>
+            <cdomain:id>statConcDefList333</cdomain:id>
+            <cdomain:urn>urn:statConcDefList333</cdomain:urn>
+            <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statConcDefList1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">statConcDefList1 in English</cdomain:text>
+                <cdomain:text xml:lang="en">statConcDefList333 in English</cdomain:text>
+                <cdomain:text xml:lang="es">statConcDefList333 en Español</cdomain:text>
             </cdomain:title>
         </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
-            <cdomain:id>statConcDefList333</cdomain:id>
-            <cdomain:urn>urn:statConcDefList333</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333</cdomain:selfLink>
+            <cdomain:id>statConcDefList1</cdomain:id>
+            <cdomain:urn>urn:statConcDefList1</cdomain:urn>
+            <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statConcDefList333 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">statConcDefList333 in English</cdomain:text>
+                <cdomain:text xml:lang="en">statConcDefList1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">statConcDefList1 en Español</cdomain:text>
             </cdomain:title>
         </operations:statConcDef>
         <operations:statConcDef kind="CODELIST">
             <cdomain:id>statConcDefList22</cdomain:id>
             <cdomain:urn>urn:statConcDefList22</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22</cdomain:selfLink>
+            <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statConcDefList22 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">statConcDefList22 in English</cdomain:text>
+                <cdomain:text xml:lang="es">statConcDefList22 en Español</cdomain:text>
             </cdomain:title>
         </operations:statConcDef>
     </operations:statConcDefs>
@@ -154,16 +146,16 @@
         <operations:classSystem kind="CODELIST">
             <cdomain:id>classSystemList1</cdomain:id>
             <cdomain:urn>urn:classSystemList1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList1</cdomain:selfLink>
+            <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">classSystemList1 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">classSystemList1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">classSystemList1 en Español</cdomain:text>
             </cdomain:title>
         </operations:classSystem>
         <operations:classSystem kind="CODELIST">
             <cdomain:id>classSystemList22</cdomain:id>
             <cdomain:urn>urn:classSystemList22</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList22</cdomain:selfLink>
+            <cdomain:selfLink kind="CODELIST" href="http://data.istac.es/apis/srm/v1.0/classSystemLists/classSystemList22"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">classSystemList22 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">classSystemList22 in English</cdomain:text>
@@ -186,8 +178,8 @@
     <operations:surveySource>
         <cdomain:id>surveySource1</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
             <cdomain:text xml:lang="en">surveySource1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
         </cdomain:title>
     </operations:surveySource>
     <operations:collMethod>
@@ -201,7 +193,7 @@
         <operations:informationSupplier kind="COMMON_METADATA">
             <cdomain:id>informationSupplier1</cdomain:id>
             <cdomain:urn>urn:informationSupplier1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1</cdomain:selfLink>
+            <cdomain:selfLink kind="COMMON_METADATA" href="http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="en">informationSupplier1 in English</cdomain:text>
                 <cdomain:text xml:lang="es">informationSupplier1 en Español</cdomain:text>
@@ -212,7 +204,7 @@
         <operations:freqColl kind="CATEGORY_SCHEME">
             <cdomain:id>freqColl22</cdomain:id>
             <cdomain:urn>urn:freqColl22</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl22</cdomain:selfLink>
+            <cdomain:selfLink kind="CATEGORY_SCHEME" href="http://data.istac.es/apis/srm/v1.0/freqColls/freqColl22"/>
             <cdomain:title>
                 <cdomain:text xml:lang="en">freqColl22 in English</cdomain:text>
                 <cdomain:text xml:lang="es">freqColl22 en Español</cdomain:text>
@@ -221,28 +213,28 @@
         <operations:freqColl kind="CATEGORY_SCHEME">
             <cdomain:id>freqColl1</cdomain:id>
             <cdomain:urn>urn:freqColl1</cdomain:urn>
-            <cdomain:selfLink>http://data.istac.es/apis/srm/v1.0/freqColls/freqColl1</cdomain:selfLink>
+            <cdomain:selfLink kind="CATEGORY_SCHEME" href="http://data.istac.es/apis/srm/v1.0/freqColls/freqColl1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">freqColl1 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">freqColl1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">freqColl1 en Español</cdomain:text>
             </cdomain:title>
         </operations:freqColl>
     </operations:freqColls>
     <operations:dataValidation>
-        <cdomain:text xml:lang="es">dataValidation1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">dataValidation1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">dataValidation1 en Español</cdomain:text>
     </operations:dataValidation>
     <operations:dataCompilation>
         <cdomain:text xml:lang="en">dataCompilation1 in English</cdomain:text>
         <cdomain:text xml:lang="es">dataCompilation1 en Español</cdomain:text>
     </operations:dataCompilation>
     <operations:adjustment>
-        <cdomain:text xml:lang="en">adjustment1 in English</cdomain:text>
         <cdomain:text xml:lang="es">adjustment1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">adjustment1 in English</cdomain:text>
     </operations:adjustment>
     <operations:costBurden>
-        <cdomain:text xml:lang="es">costBurden1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">costBurden1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">costBurden1 en Español</cdomain:text>
     </operations:costBurden>
     <operations:costs kind="statisticalOperations#costs" total="4">
         <operations:cost>
@@ -253,39 +245,39 @@
             </cdomain:title>
         </operations:cost>
         <operations:cost>
-            <cdomain:id>cost22</cdomain:id>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">cost22 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">cost22 in English</cdomain:text>
-            </cdomain:title>
-        </operations:cost>
-        <operations:cost>
-            <cdomain:id>cost1</cdomain:id>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">cost1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">cost1 in English</cdomain:text>
-            </cdomain:title>
-        </operations:cost>
-        <operations:cost>
             <cdomain:id>cost333</cdomain:id>
             <cdomain:title>
                 <cdomain:text xml:lang="en">cost333 in English</cdomain:text>
                 <cdomain:text xml:lang="es">cost333 en Español</cdomain:text>
             </cdomain:title>
         </operations:cost>
+        <operations:cost>
+            <cdomain:id>cost1</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="en">cost1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">cost1 en Español</cdomain:text>
+            </cdomain:title>
+        </operations:cost>
+        <operations:cost>
+            <cdomain:id>cost22</cdomain:id>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">cost22 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">cost22 in English</cdomain:text>
+            </cdomain:title>
+        </operations:cost>
     </operations:costs>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
     <operations:qualityDoc>
-        <cdomain:text xml:lang="es">qualityDoc1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">qualityDoc1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">qualityDoc1 en Español</cdomain:text>
     </operations:qualityDoc>
     <operations:qualityAssure>
         <cdomain:text xml:lang="en">qualityAssure1 in English</cdomain:text>
         <cdomain:text xml:lang="es">qualityAssure1 en Español</cdomain:text>
     </operations:qualityAssure>
     <operations:qualityAssmnt>
-        <cdomain:text xml:lang="en">qualityAssmnt1 in English</cdomain:text>
         <cdomain:text xml:lang="es">qualityAssmnt1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">qualityAssmnt1 in English</cdomain:text>
     </operations:qualityAssmnt>
     <operations:userNeeds>
         <cdomain:text xml:lang="en">userNeeds1 in English</cdomain:text>
@@ -320,8 +312,8 @@
         <cdomain:text xml:lang="es">nonsamplingErr1 en Español</cdomain:text>
     </operations:nonsamplingErr>
     <operations:coherXDom>
-        <cdomain:text xml:lang="en">coherXDom1 in English</cdomain:text>
         <cdomain:text xml:lang="es">coherXDom1 en Español</cdomain:text>
+        <cdomain:text xml:lang="en">coherXDom1 in English</cdomain:text>
     </operations:coherXDom>
     <operations:coherInternal>
         <cdomain:text xml:lang="es">coherInternal1 en Español</cdomain:text>
@@ -332,7 +324,7 @@
         <cdomain:text xml:lang="es">comment1 en Español</cdomain:text>
     </operations:comment>
     <operations:notes>
-        <cdomain:text xml:lang="es">notes1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">notes1 in English</cdomain:text>
+        <cdomain:text xml:lang="es">notes1 en Español</cdomain:text>
     </operations:notes>
 </operations:instance>

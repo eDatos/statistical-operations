@@ -34,7 +34,7 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
-        assertEquals(expected.getSelfLink(), actual.getSelfLink());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsResource(expected.getSubjectArea(), actual.getSubjectArea());
@@ -67,30 +67,30 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityPolicy(), actual.getConfidentialityPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityDataTreatment(), actual.getConfidentialityDataTreatment());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
-        MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
-        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getParentLink(), actual.getParentLink());
+        MetamacRestAsserts.assertEqualsChildLinks(expected.getChildLinks(), actual.getChildLinks());
     }
 
     public static void assertEqualsFamily(Family expected, Family actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
-        assertEquals(expected.getSelfLink(), actual.getSelfLink());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
-        MetamacRestAsserts.assertEqualsResourceLink(expected.getParent(), actual.getParent());
-        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getParentLink(), actual.getParentLink());
+        MetamacRestAsserts.assertEqualsChildLinks(expected.getChildLinks(), actual.getChildLinks());
     }
 
     public static void assertEqualsInstance(Instance expected, Instance actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getUrn(), actual.getUrn());
         assertEquals(expected.getKind(), actual.getKind());
-        assertEquals(expected.getSelfLink(), actual.getSelfLink());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsResource(expected.getSurvey(), actual.getSurvey());
@@ -138,8 +138,8 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getCoherInternal(), actual.getCoherInternal());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getComment(), actual.getComment());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getNotes(), actual.getNotes());
-        MetamacRestAsserts.assertEqualsResource(expected.getParent(), actual.getParent());
-        MetamacRestAsserts.assertEqualsChildren(expected.getChildren(), actual.getChildren());
+        MetamacRestAsserts.assertEqualsResourceLink(expected.getParentLink(), actual.getParentLink());
+        MetamacRestAsserts.assertEqualsChildLinks(expected.getChildLinks(), actual.getChildLinks());
     }
 
     public static void assertEqualsOperations(Operations expected, Operations actual) {

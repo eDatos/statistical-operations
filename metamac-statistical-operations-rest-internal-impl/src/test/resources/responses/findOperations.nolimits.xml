@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="25" offset="0" total="10">
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" total="10" limit="25" offset="0">
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation1</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
@@ -12,16 +12,16 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation2</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation2</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation2</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation2"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">operation2 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation2 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">operation2 in English</cdomain:text>
         </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation3</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation3</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation3</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation3"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation3 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation3 en Español</cdomain:text>
@@ -30,7 +30,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation4</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation4</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation4</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation4"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation4 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation4 en Español</cdomain:text>
@@ -39,7 +39,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation5</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation5</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation5</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation5"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">operation5 en Español</cdomain:text>
             <cdomain:text xml:lang="en">operation5 in English</cdomain:text>
@@ -48,7 +48,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation6</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation6</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation6"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation6 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation6 en Español</cdomain:text>
@@ -57,25 +57,25 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation7</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation7</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation7</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation7"/>
         <cdomain:title>
-            <cdomain:text xml:lang="es">operation7 en Español</cdomain:text>
             <cdomain:text xml:lang="en">operation7 in English</cdomain:text>
+            <cdomain:text xml:lang="es">operation7 en Español</cdomain:text>
         </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation8</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation8</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation8</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation8"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">operation8 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation8 en Español</cdomain:text>
+            <cdomain:text xml:lang="en">operation8 in English</cdomain:text>
         </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation9</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation9</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation9</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation9"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation9 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation9 en Español</cdomain:text>
@@ -84,7 +84,7 @@
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation10</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations-internal/v1.0/operations/operation10</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation10"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation10 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation10 en Español</cdomain:text>
