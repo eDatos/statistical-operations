@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" limit="1" offset="0" total="2" nextLink="http://data.istac.es/apis/operations/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1" lastLink="http://data.istac.es/apis/operations/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1">
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" total="2" limit="1" offset="0" nextLink="http://data.istac.es/apis/operations/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1" lastLink="http://data.istac.es/apis/operations/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=1&amp;offset=1">
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
-        <cdomain:selfLink>http://data.istac.es/apis/operations/v1.0/operations/operation1</cdomain:selfLink>
+        <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation1"/>
         <cdomain:title>
             <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
