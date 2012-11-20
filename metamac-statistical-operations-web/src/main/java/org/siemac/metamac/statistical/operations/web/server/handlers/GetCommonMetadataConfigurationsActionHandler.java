@@ -33,7 +33,7 @@ public class GetCommonMetadataConfigurationsActionHandler extends SecurityAction
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>();
         if (result != null && result.getConfigurations() != null) {
             for (Resource resource : result.getConfigurations()) {
-                ExternalItemDto externalItemDto = new ExternalItemDto(resource.getId(), resource.getSelfLink(), resource.getUrn(), TypeExternalArtefactsEnum.STATISTICAL_OPERATION,
+                ExternalItemDto externalItemDto = new ExternalItemDto(resource.getId(), resource.getSelfLink().getHref(), resource.getUrn(), TypeExternalArtefactsEnum.STATISTICAL_OPERATION,
                         DtoUtils.getInternationalStringDtoFromInternationalString(resource.getTitle()));
                 externalItemDtos.add(externalItemDto);
             }
