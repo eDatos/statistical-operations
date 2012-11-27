@@ -33,6 +33,8 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -49,6 +51,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 @ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
+@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsBaseServiceTestBase {
 
     @Autowired

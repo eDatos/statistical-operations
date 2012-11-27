@@ -14,6 +14,8 @@ import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -27,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = {"classpath:spring/statistical-operations/applicationContext-test.xml"})
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
+@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class StatisticalOperationsListsServiceTest extends StatisticalOperationsBaseTest implements StatisticalOperationsListsServiceTestBase {
 
     @Autowired
