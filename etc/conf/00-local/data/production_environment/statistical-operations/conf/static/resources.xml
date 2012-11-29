@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment>Configurations</comment>
-    <entry key="metamac.statistical.operations.clients.common.metadata.rest.external">${metamac.endpoints.common.metadata.rest.external}</entry>
-    <entry key="metamac.statistical.operations.user.guide.file.name">Gestor_operaciones_estadisticas-Manual_usuario.pdf</entry>
-</properties>
