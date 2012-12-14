@@ -214,16 +214,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        instancesOrderFormLayout = new InstancesOrderFormLayout();
-        instancesOrderFormLayout.setTitleLabelContents(getConstants().instances());
-        instancesOrderFormLayout.getSave().addClickHandler(new ClickHandler() {
+        TitleLabel instancesTitleLabel = new TitleLabel(getConstants().instances());
+        instancesTitleLabel.setStyleName("sectionTitleLeftMargin");
 
-            @Override
-            public void onClick(ClickEvent event) {
-                uiHandlers.updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
-            }
-        });
-
+        // Instances list
         instanceListGrid = new CustomListGrid();
         instanceListGrid.setHeight(150);
         ListGridField identifierField = new ListGridField(InstanceRecord.CODE, getConstants().instanceIdentifier());
@@ -254,6 +248,16 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         instancesListGridLayout.setMargin(15);
         instancesListGridLayout.addMember(instanceListGridToolStrip);
         instancesListGridLayout.addMember(instanceListGrid);
+
+        // Instances order
+        instancesOrderFormLayout = new InstancesOrderFormLayout();
+        instancesOrderFormLayout.getSave().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                uiHandlers.updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
+            }
+        });
 
         // FAMILIES
 
@@ -294,8 +298,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         subPanel.setOverflow(Overflow.SCROLL);
         subPanel.addMember(mainFormLayout);
 
-        subPanel.addMember(instancesOrderFormLayout);
+        subPanel.addMember(instancesTitleLabel);
         subPanel.addMember(instancesListGridLayout);
+        subPanel.addMember(instancesOrderFormLayout);
 
         subPanel.addMember(familiesTitleLabel);
         subPanel.addMember(familiesListGridLayout);
@@ -478,8 +483,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     @Override
     public void setInstances(List<InstanceBaseDto> instanceBaseDtos) {
-        instancesOrderFormLayout.setInstances(instanceBaseDtos);
-
+        // Instances list
         instanceListGrid.removeAllData();
         if (instanceBaseDtos != null) {
             for (InstanceBaseDto instanceBaseDto : instanceBaseDtos) {
@@ -487,6 +491,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         }
         deselectInstance();
+
+        // Instances order
+        instancesOrderFormLayout.setInstances(instanceBaseDtos);
+        if (instanceBaseDtos == null || instanceBaseDtos.isEmpty()) {
+            instancesOrderFormLayout.hide();
+        } else {
+            instancesOrderFormLayout.show();
+        }
     }
 
     public void setOperationFamilies(List<FamilyBaseDto> familyBaseDtos) {
