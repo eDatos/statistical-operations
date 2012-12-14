@@ -99,10 +99,10 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
         familyListGrid.getListGrid().setAutoFitMaxRecords(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS);
         familyListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
-        ListGridField codeField = new ListGridField(FamilyDS.CODE, OperationsWeb.getConstants().familyIdentifier());
-        ListGridField titleField = new ListGridField(FamilyDS.TITLE, OperationsWeb.getConstants().familyTitle());
-        ListGridField descriptionField = new ListGridField(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
-        ListGridField statusField = new ListGridField(FamilyDS.PROC_STATUS, OperationsWeb.getConstants().familyProcStatus());
+        ListGridField codeField = new ListGridField(FamilyDS.CODE, OperationsWeb.getCoreMessages().family_code());
+        ListGridField titleField = new ListGridField(FamilyDS.TITLE, OperationsWeb.getCoreMessages().family_title());
+        ListGridField descriptionField = new ListGridField(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
+        ListGridField statusField = new ListGridField(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().family_proc_status());
         familyListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField);
         familyListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 

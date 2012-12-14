@@ -282,10 +282,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         familyListGrid = new ListGrid();
         familyListGrid.setHeight(150);
-        ListGridField identifierFamilyField = new ListGridField(FamilyDS.CODE, getConstants().familyIdentifier());
-        ListGridField titleFamilyField = new ListGridField(FamilyDS.TITLE, getConstants().familyTitle());
-        ListGridField descriptionFamilyField = new ListGridField(FamilyDS.DESCRIPTION, getConstants().familyDescription());
-        ListGridField statusFamilyField = new ListGridField(FamilyDS.PROC_STATUS, getConstants().familyProcStatus());
+        ListGridField identifierFamilyField = new ListGridField(FamilyDS.CODE, getCoreMessages().family_code());
+        ListGridField titleFamilyField = new ListGridField(FamilyDS.TITLE, getCoreMessages().family_title());
+        ListGridField descriptionFamilyField = new ListGridField(FamilyDS.DESCRIPTION, getCoreMessages().family_description());
+        ListGridField statusFamilyField = new ListGridField(FamilyDS.PROC_STATUS, getCoreMessages().family_proc_status());
         familyListGrid.setFields(identifierFamilyField, titleFamilyField, descriptionFamilyField, statusFamilyField);
 
         VLayout familiesListGridLayout = new VLayout();

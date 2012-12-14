@@ -25,11 +25,11 @@ public class NewFamilyForm extends CustomDynamicForm {
 
         setValidateOnChange(true);
 
-        identifier = new RequiredTextItem("fam-id", OperationsWeb.getConstants().familyIdentifier());
+        identifier = new RequiredTextItem("fam-id", OperationsWeb.getCoreMessages().family_code());
         identifier.setWidth(200);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
-        title = new RequiredTextItem("fam-title", OperationsWeb.getConstants().familyTitle());
+        title = new RequiredTextItem("fam-title", OperationsWeb.getCoreMessages().family_title());
         title.setWidth(200);
 
         saveButton = new CustomButtonItem("fam-save", OperationsWeb.getConstants().actionCreateFamily());
