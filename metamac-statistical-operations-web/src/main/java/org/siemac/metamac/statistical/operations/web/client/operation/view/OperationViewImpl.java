@@ -527,61 +527,61 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private void createViewForm() {
         // Identifiers
         identifiersViewForm = new GroupDynamicForm(getConstants().operationIdentifiers());
-        ViewTextItem identifier = new ViewTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
-        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.OP_TITLE, getConstants().operationTitle());
-        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.OP_ACRONYM, getConstants().operationAcronym());
+        ViewTextItem identifier = new ViewTextItem(OperationDS.OP_CODE, getCoreMessages().operation_code());
+        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.OP_TITLE, getCoreMessages().operation_title());
+        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.OP_ACRONYM, getCoreMessages().operation_acronym());
         identifiersViewForm.setFields(identifier, title, acronym);
 
         // Content Classifiers
         classificationViewForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
-        ViewTextItem subject = new ViewTextItem(OperationDS.OP_SUBJECT_AREA, getConstants().operationSubjectArea());
-        ViewTextItem secondarySubject = new ViewTextItem(OperationDS.OP_SUBJECT_SECONDARY, getConstants().operationSubjectAreasSecundary());
+        ViewTextItem subject = new ViewTextItem(OperationDS.OP_SUBJECT_AREA, getCoreMessages().operation_subject_area());
+        ViewTextItem secondarySubject = new ViewTextItem(OperationDS.OP_SUBJECT_SECONDARY, getCoreMessages().operation_secondary_subject_areas());
         classificationViewForm.setFields(subject, secondarySubject);
 
         // Content Descriptors
         contentViewForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(OperationDS.OP_DESCRIPTION, getConstants().operationDescription());
-        ViewMultiLanguageTextItem objective = new ViewMultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getConstants().operationObjective());
+        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
+        ViewMultiLanguageTextItem objective = new ViewMultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
         contentViewForm.setFields(objective, description);
 
         // Class Descriptors
         classViewForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
-        ViewTextItem survey = new ViewTextItem(OperationDS.OP_SURVEY_TYPE, getConstants().operationSurveyType());
-        ViewTextItem officiality = new ViewTextItem(OperationDS.OP_OFFICIALITY_TYPE, getConstants().operationOfficialityType());
-        ViewTextItem indSystem = new ViewTextItem(OperationDS.OP_INDICATOR_SYSTEM, getConstants().operationIndicatorSystem());
+        ViewTextItem survey = new ViewTextItem(OperationDS.OP_SURVEY_TYPE, getCoreMessages().operation_survey_type());
+        ViewTextItem officiality = new ViewTextItem(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
+        ViewTextItem indSystem = new ViewTextItem(OperationDS.OP_INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         classViewForm.setFields(survey, officiality, indSystem);
 
         // Production descriptors
         productionViewForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
-        ViewTextItem producer = new ViewTextItem(OperationDS.OP_PRODUCER, getConstants().operationProducers());
-        ViewTextItem regionalResposible = new ViewTextItem(OperationDS.OP_REG_RESPONSIBLE, getConstants().operationRegionalResponsibles());
-        ViewTextItem regionalCont = new ViewTextItem(OperationDS.OP_REG_CONTRIBUTOR, getConstants().operationRegionalContributors());
-        ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
-        ViewTextItem currentlyActive = new ViewTextItem(OperationDS.OP_CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
-        ViewTextItem status = new ViewTextItem(OperationDS.OP_STATUS, getConstants().operationStatus());
-        ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
+        ViewTextItem producer = new ViewTextItem(OperationDS.OP_PRODUCER, getCoreMessages().operation_producer());
+        ViewTextItem regionalResposible = new ViewTextItem(OperationDS.OP_REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
+        ViewTextItem regionalCont = new ViewTextItem(OperationDS.OP_REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
+        ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
+        ViewTextItem currentlyActive = new ViewTextItem(OperationDS.OP_CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
+        ViewTextItem status = new ViewTextItem(OperationDS.OP_STATUS, getCoreMessages().operation_status());
+        ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getCoreMessages().operation_proc_status());
         productionViewForm.setFields(producer, regionalResposible, regionalCont, inventoryDate, currentlyActive, status, procStatus);
 
         // Diffusion Descriptors
         diffusionViewForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
-        ViewTextItem publisher = new ViewTextItem(OperationDS.OP_PUBLISHER, getConstants().operationPublisher());
-        staticRelPolUsAc = new ViewMultiLanguageTextItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
+        ViewTextItem publisher = new ViewTextItem(OperationDS.OP_PUBLISHER, getCoreMessages().operation_publisher());
+        staticRelPolUsAc = new ViewMultiLanguageTextItem(OperationDS.OP_RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         ViewTextItem releaseCalendar = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
-        ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
-        ViewTextItem updateFreq = new ViewTextItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
+        ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
+        ViewTextItem updateFreq = new ViewTextItem(OperationDS.OP_UPDATE_FREQ, getCoreMessages().operation_update_frequency());
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
         ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
-        ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getConstants().operationInventoryDate());
-        staticRevPolicyItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
-        staticRevPracticeItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
-        ViewTextItem commonMetadata = new ViewTextItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
+        ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getCoreMessages().operation_inventory_date());
+        staticRevPolicyItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
+        staticRevPracticeItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_PRACTICE, getCoreMessages().operation_rev_practice());
+        ViewTextItem commonMetadata = new ViewTextItem(OperationDS.OP_COMMON_METADATA, getCoreMessages().operation_common_metadata());
         diffusionViewForm.setFields(publisher, staticRelPolUsAc, releaseCalendar, releaseCalendarAccess, updateFreq, currentInst, currentInternalInst, invDate, staticRevPolicyItem,
                 staticRevPracticeItem, commonMetadata);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        staticCommentItem = new ViewMultiLanguageTextItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
-        staticNotesItem = new ViewMultiLanguageTextItem(OperationDS.OP_NOTES, getConstants().operationNotes());
+        staticCommentItem = new ViewMultiLanguageTextItem(OperationDS.OP_COMMENTS, getCoreMessages().operation_comment());
+        staticNotesItem = new ViewMultiLanguageTextItem(OperationDS.OP_NOTES, getCoreMessages().operation_notes());
         annotationsViewForm.setFields(staticCommentItem, staticNotesItem);
 
         // Add to main layout
@@ -598,7 +598,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().operationIdentifiers());
 
-        code = new RequiredTextItem(OperationDS.OP_CODE, getConstants().operationIdentifier());
+        code = new RequiredTextItem(OperationDS.OP_CODE, getCoreMessages().operation_code());
         code.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -607,7 +607,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
         code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
-        ViewTextItem staticCode = new ViewTextItem(OperationDS.OP_CODE_VIEW, getConstants().operationIdentifier());
+        ViewTextItem staticCode = new ViewTextItem(OperationDS.OP_CODE_VIEW, getCoreMessages().operation_code());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -616,14 +616,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        title = new MultiLanguageTextItem(OperationDS.OP_TITLE, getConstants().operationTitle());
+        title = new MultiLanguageTextItem(OperationDS.OP_TITLE, getCoreMessages().operation_title());
         title.setRequired(true);
-        acronym = new MultiLanguageTextItem(OperationDS.OP_ACRONYM, getConstants().operationAcronym());
+        acronym = new MultiLanguageTextItem(OperationDS.OP_ACRONYM, getCoreMessages().operation_acronym());
         identifiersEditionForm.setFields(staticCode, code, title, acronym);
 
         // Content classifiers
         classificationEditionForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
-        subjectItem = new ExternalSelectItem(OperationDS.OP_SUBJECT_AREA, getConstants().operationSubjectArea());
+        subjectItem = new ExternalSelectItem(OperationDS.OP_SUBJECT_AREA, getCoreMessages().operation_subject_area());
         subjectItem.setRequired(true);
         subjectItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -634,7 +634,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        secondarySubjectItem = new ExternalMultipleSelectItem(OperationDS.OP_SUBJECT_SECONDARY, getConstants().operationSubjectAreasSecundary());
+        secondarySubjectItem = new ExternalMultipleSelectItem(OperationDS.OP_SUBJECT_SECONDARY, getCoreMessages().operation_secondary_subject_areas());
         secondarySubjectItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -648,24 +648,24 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        description = new MultiLanguageTextAreaItem(OperationDS.OP_DESCRIPTION, getConstants().operationDescription());
-        objective = new MultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getConstants().operationObjective());
+        description = new MultiLanguageTextAreaItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
+        objective = new MultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
         // objective.setValidators(getRequiredIfInternallyPublished());
         contentEditionForm.setFields(objective, description);
 
         // Class Descriptors
         classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
-        surveyType = new CustomSelectItem(OperationDS.OP_SURVEY_TYPE, getConstants().operationSurveyType());
+        surveyType = new CustomSelectItem(OperationDS.OP_SURVEY_TYPE, getCoreMessages().operation_survey_type());
         // surveyType.setValidators(getRequiredIfInternallyPublished());
-        officialityType = new CustomSelectItem(OperationDS.OP_OFFICIALITY_TYPE, getConstants().operationOfficialityType());
+        officialityType = new CustomSelectItem(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
         // officialityType.setValidators(getRequiredIfInternallyPublished());
-        indSystem = new CustomCheckboxItem(OperationDS.OP_INDICATOR_SYSTEM, getConstants().operationIndicatorSystem());
+        indSystem = new CustomCheckboxItem(OperationDS.OP_INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         indSystem.setTitleStyle("requiredFormLabel");
         classEditionForm.setFields(surveyType, officialityType, indSystem);
 
         // Production descriptors
         productionEditionForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
-        producerItem = new ExternalMultipleSelectItem(OperationDS.OP_PRODUCER, getConstants().operationProducers());
+        producerItem = new ExternalMultipleSelectItem(OperationDS.OP_PRODUCER, getCoreMessages().operation_producer());
         // producerItem.setValidators(getRequiredIfInternallyPublished());
         producerItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -676,7 +676,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        regionalResponsibleItem = new ExternalMultipleSelectItem(OperationDS.OP_REG_RESPONSIBLE, getConstants().operationRegionalResponsibles());
+        regionalResponsibleItem = new ExternalMultipleSelectItem(OperationDS.OP_REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
         // regionalResponsibleItem.setValidators(getRequiredIfInternallyPublished());
         regionalResponsibleItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -687,7 +687,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        regionalContributorItem = new ExternalMultipleSelectItem(OperationDS.OP_REG_CONTRIBUTOR, getConstants().operationRegionalContributors());
+        regionalContributorItem = new ExternalMultipleSelectItem(OperationDS.OP_REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
         regionalContributorItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -697,19 +697,19 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
-        currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
+        ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
+        currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
         // currentlyActiveItem.setValidators(getRequiredIfInternallyPublished());
-        statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getConstants().operationStatus());
+        statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getCoreMessages().operation_status());
         statusItem.setValueMap(CommonUtils.getStatusEnumHashMap());
-        ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getConstants().operationProcStatus());
-        ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getConstants().operationProcStatus());
+        ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getCoreMessages().operation_proc_status());
+        ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getCoreMessages().operation_proc_status());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
         productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, inventoryDate, currentlyActiveItem, statusItem, staticProcStatus, procStatus);
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
-        publisherItem = new ExternalMultipleSelectItem(OperationDS.OP_PUBLISHER, getConstants().operationPublisher());
+        publisherItem = new ExternalMultipleSelectItem(OperationDS.OP_PUBLISHER, getCoreMessages().operation_publisher());
         // publisherItem.setValidators(getRequiredIfInternallyPublished());
         publisherItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -720,26 +720,26 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.OP_RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
+        relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.OP_RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
-        releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
+        releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
         releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
-        updateFrequencyItem = new CustomSelectItem(OperationDS.OP_UPDATE_FREQ, getConstants().operationUpdateFrequency());
+        updateFrequencyItem = new CustomSelectItem(OperationDS.OP_UPDATE_FREQ, getCoreMessages().operation_update_frequency());
         updateFrequencyItem.setMultiple(true);
         ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
         ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
-        ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getConstants().operationInventoryDate());
-        revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getConstants().operationRevPolicy());
+        ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getCoreMessages().operation_inventory_date());
+        revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
         revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
-        commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getConstants().operationCommonMetadata());
+        commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getCoreMessages().operation_common_metadata());
         // commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
         diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
                 revPracticeItem, commonMetadataItem);
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        commentItem = new MultilanguageRichTextEditorItem(OperationDS.OP_COMMENTS, getConstants().operationComments());
-        notesItem = new MultilanguageRichTextEditorItem(OperationDS.OP_NOTES, getConstants().operationNotes());
+        commentItem = new MultilanguageRichTextEditorItem(OperationDS.OP_COMMENTS, getCoreMessages().operation_comment());
+        notesItem = new MultilanguageRichTextEditorItem(OperationDS.OP_NOTES, getCoreMessages().operation_notes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         // Add to main layout
@@ -751,6 +751,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         mainFormLayout.addEditionCanvas(diffusionEditionForm);
         mainFormLayout.addEditionCanvas(annotationsEditionForm);
     }
+
     private void setViewForm(OperationDto operationDto) {
         // Identifiers
         identifiersViewForm.setValue(OperationDS.OP_CODE, operationDto.getCode());
