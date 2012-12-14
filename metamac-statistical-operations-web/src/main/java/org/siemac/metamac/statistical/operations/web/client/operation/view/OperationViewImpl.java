@@ -220,11 +220,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Instances list
         instanceListGrid = new CustomListGrid();
         instanceListGrid.setHeight(150);
-        ListGridField identifierField = new ListGridField(InstanceRecord.CODE, getConstants().instanceIdentifier());
-        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getConstants().instanceTitle());
-        ListGridField descriptionField = new ListGridField(InstanceRecord.DESCRIPTION, getConstants().instanceDescription());
+        ListGridField identifierField = new ListGridField(InstanceRecord.CODE, getCoreMessages().instance_code());
+        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getCoreMessages().instance_title());
+        ListGridField descriptionField = new ListGridField(InstanceRecord.DESCRIPTION, getCoreMessages().instance_description());
         ListGridField statusField = new ListGridField(InstanceRecord.STATUS, getConstants().instanceStatus());
-        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getConstants().instanceOrder());
+        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getCoreMessages().instance_order());
         instanceListGrid.setFields(identifierField, titleField, descriptionField, statusField, orderField);
         instanceListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 

@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,9 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         list.setBodyStyleName("normal");
         list.setShowHeader(false);
         list.setLeaveScrollbarGap(false);
-        ListGridField codeField = new ListGridField(InstanceRecord.CODE, getConstants().instanceIdentifier(), 150);
-        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getConstants().instanceTitle());
-        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getConstants().instanceOrder());
+        ListGridField codeField = new ListGridField(InstanceRecord.CODE, getCoreMessages().instance_code(), 150);
+        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getCoreMessages().instance_title());
+        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getCoreMessages().instance_order());
         orderField.setShowIfCondition(new ListGridFieldIfFunction() {
 
             @Override
@@ -72,7 +73,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         list.setSortField(InstanceRecord.ORDER);
         list.setSortDirection(SortDirection.DESCENDING);
 
-        CanvasItem canvasItem = new CanvasItem("order", getConstants().instanceOrder());
+        CanvasItem canvasItem = new CanvasItem("order", getCoreMessages().instance_order());
         canvasItem.setTitleVAlign(VerticalAlignment.TOP);
         canvasItem.setTitleStyle("staticFormItemTitle");
         canvasItem.setCanvas(list);
