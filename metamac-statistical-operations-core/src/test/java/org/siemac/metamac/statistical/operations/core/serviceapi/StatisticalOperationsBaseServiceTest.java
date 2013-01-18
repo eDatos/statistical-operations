@@ -99,7 +99,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             statisticalOperationsBaseService.findFamilyByCode(getServiceContextAdministrador(), family_code);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.FAMILY_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.FAMILY_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
 
@@ -374,7 +374,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             statisticalOperationsBaseService.findOperationByCode(getServiceContextAdministrador(), operation_code);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.OPERATION_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.OPERATION_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
 
@@ -623,7 +623,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         try {
             statisticalOperationsBaseService.findInstanceByCode(getServiceContextAdministrador(), instance_code);
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.INSTANCE_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
 

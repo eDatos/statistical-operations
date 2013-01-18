@@ -80,7 +80,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         List<Family> result = findFamilyByCondition(ctx, conditions);
 
         if (result.size() == 0) {
-            throw new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND, code);
+            throw new MetamacException(ServiceExceptionType.FAMILY_CODE_NOT_FOUND, code);
         } else if (result.size() > 1) {
             throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one family with code " + code);
         }
@@ -293,7 +293,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         List<Operation> result = findOperationByCondition(ctx, conditions);
 
         if (result.size() == 0) {
-            throw new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, code);
+            throw new MetamacException(ServiceExceptionType.OPERATION_CODE_NOT_FOUND, code);
         } else if (result.size() > 1) {
             throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one operation with code " + code);
         }
@@ -458,7 +458,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         try {
             return instanceRepository.findById(id);
         } catch (InstanceNotFoundException e) {
-            throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND);
+            throw new MetamacException(ServiceExceptionType.INSTANCE_ID_NOT_FOUND);
         }
     }
 
@@ -475,7 +475,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         List<Instance> result = findInstanceByCondition(ctx, conditions);
 
         if (result.size() == 0) {
-            throw new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, code);
+            throw new MetamacException(ServiceExceptionType.INSTANCE_CODE_NOT_FOUND, code);
         } else if (result.size() > 1) {
             throw new MetamacException(ServiceExceptionType.UNKNOWN, "More than one instance with code " + code);
         }

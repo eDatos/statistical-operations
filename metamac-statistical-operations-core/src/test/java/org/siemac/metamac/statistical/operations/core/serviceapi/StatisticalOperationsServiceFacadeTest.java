@@ -2470,7 +2470,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         try {
             statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), instanceDto.getId());
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.INSTANCE_ID_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
         }
 
     }
@@ -2659,7 +2659,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     // try {
     // statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), instanceDto.getId());
     // } catch (MetamacException e) {
-    // assertEquals(ServiceExceptionType.SERVICE_INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
+    // assertEquals(ServiceExceptionType.SERVICE_INSTANCE_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
     // }
     //
     // }
