@@ -6,7 +6,6 @@ import java.util.List;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
-import org.siemac.metamac.core.common.util.CoreCommonUtil;
 import org.siemac.metamac.core.common.util.TimeUtils;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
@@ -39,10 +38,7 @@ public class CheckMandatoryMetadataUtil {
         ValidationUtils.checkMetadataRequired(family.getUrn(), ServiceExceptionParameters.FAMILY_URN, exceptions);
         ValidationUtils.checkMetadataRequired(family.getTitle(), ServiceExceptionParameters.FAMILY_TITLE, exceptions);
         ValidationUtils.checkMetadataRequired(family.getProcStatus(), ServiceExceptionParameters.FAMILY_PROC_STATUS, exceptions);
-
-        if (family.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(family.getCode())) {
-            exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.FAMILY_CODE));
-        }
+        ValidationUtils.checkSemanticIdentifierAsMetamacID(family.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
 
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);
@@ -115,10 +111,8 @@ public class CheckMandatoryMetadataUtil {
             ValidationUtils.validateUrl(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
         }
 
-        if (operation.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(operation.getCode())) {
-            exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.OPERATION_CODE));
-        }
-
+        ValidationUtils.checkSemanticIdentifierAsMetamacID(operation.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
+        
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);
         }
@@ -192,9 +186,8 @@ public class CheckMandatoryMetadataUtil {
         if (instance.getBasePeriod() != null && !TimeUtils.isTimeValue(instance.getBasePeriod())) {
             exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.INSTANCE_BASE_PERIOD));
         }
-        if (instance.getCode() != null && !CoreCommonUtil.isSemanticIdentifier(instance.getCode())) {
-            exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.INSTANCE_CODE));
-        }
+        
+        ValidationUtils.checkSemanticIdentifierAsMetamacID(instance.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
 
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);

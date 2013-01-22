@@ -405,6 +405,18 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
     }
+    
+    @Test
+    public void testCreateOperationWithInvalidSemanticIdentifier() throws MetamacException {
+        Operation operation = createOperation();
+        operation.setCode("OPERATION@IPC");
+        
+        try {
+            operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.METADATA_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+    }
 
     @Test
     public void testCreateOperationWithoutDescription() throws MetamacException {
