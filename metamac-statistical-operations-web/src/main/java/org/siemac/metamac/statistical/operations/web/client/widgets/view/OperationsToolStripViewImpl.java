@@ -3,7 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.widgets.view;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
-import org.siemac.metamac.web.common.client.widgets.CustomToolStripButton;
+import org.siemac.metamac.web.common.client.widgets.RadioToolStripButton;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -13,10 +13,10 @@ import com.smartgwt.client.widgets.toolbar.ToolStrip;
 
 public class OperationsToolStripViewImpl implements OperationsToolStripPresenterWidget.OperationsToolStripView {
 
-    private ToolStrip             toolStrip;
+    private ToolStrip            toolStrip;
 
-    private CustomToolStripButton familiesButton;
-    private CustomToolStripButton operationsButton;
+    private RadioToolStripButton familiesButton;
+    private RadioToolStripButton operationsButton;
 
     @Inject
     public OperationsToolStripViewImpl() {
@@ -25,10 +25,10 @@ public class OperationsToolStripViewImpl implements OperationsToolStripPresenter
         toolStrip.setWidth100();
         toolStrip.setAlign(Alignment.LEFT);
 
-        familiesButton = new CustomToolStripButton(OperationsWeb.getConstants().statisticalFamilies());
+        familiesButton = new RadioToolStripButton(OperationsWeb.getConstants().statisticalFamilies());
         familiesButton.setID(ToolStripButtonEnum.FAMILIES.getValue());
 
-        operationsButton = new CustomToolStripButton(OperationsWeb.getConstants().statisticalOperations());
+        operationsButton = new RadioToolStripButton(OperationsWeb.getConstants().statisticalOperations());
         operationsButton.setID(ToolStripButtonEnum.OPERATIONS.getValue());
 
         toolStrip.addButton(familiesButton);
@@ -64,5 +64,4 @@ public class OperationsToolStripViewImpl implements OperationsToolStripPresenter
     public HasClickHandlers getGoOperationList() {
         return operationsButton;
     }
-
 }
