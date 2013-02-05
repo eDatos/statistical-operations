@@ -20,6 +20,8 @@ import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent.UpdateCodeListsHandler;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
+import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
@@ -45,8 +47,6 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent;
-import org.siemac.metamac.web.common.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
 import org.siemac.metamac.web.common.client.utils.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
