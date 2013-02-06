@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" total="2" limit="25" offset="0">
+<operations:operations xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#operations" total="2" limit="25" offset="0" selfLink="http://data.istac.es/apis/operations/v1.0/operations?query=ID LIKE &quot;1&quot;&amp;limit=25&amp;offset=0">
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation1"/>
         <cdomain:title>
-            <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
             <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
+            <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
         </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
@@ -14,8 +14,8 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation10"/>
         <cdomain:title>
-            <cdomain:text xml:lang="es">operation10 en Español</cdomain:text>
             <cdomain:text xml:lang="en">operation10 in English</cdomain:text>
+            <cdomain:text xml:lang="es">operation10 en Español</cdomain:text>
         </cdomain:title>
     </operations:operation>
 </operations:operations>

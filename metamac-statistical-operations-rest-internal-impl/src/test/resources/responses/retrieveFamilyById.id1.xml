@@ -4,6 +4,9 @@
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</operations:urn>
     <operations:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1"/>
     <operations:parentLink kind="statisticalOperations#families" href="http://data.istac.es/apis/operations-internal/v1.0/families"/>
+    <operations:childLinks total="1">
+        <cdomain:childLink kind="statisticalOperations#operations" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations"/>
+    </operations:childLinks>
     <operations:title>
         <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">family1 in English</cdomain:text>
@@ -19,7 +22,4 @@
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
-    <operations:childLinks total="1">
-        <cdomain:childLink kind="statisticalOperations#operations" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations"/>
-    </operations:childLinks>
 </operations:family>

@@ -4,6 +4,10 @@
     <operations:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</operations:urn>
     <operations:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation1"/>
     <operations:parentLink kind="statisticalOperations#operations" href="http://data.istac.es/apis/operations/v1.0/operations"/>
+    <operations:childLinks total="2">
+        <cdomain:childLink kind="statisticalOperations#instances" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances"/>
+        <cdomain:childLink kind="statisticalOperations#families" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/families"/>
+    </operations:childLinks>
     <operations:title>
         <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
         <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
@@ -264,8 +268,4 @@
         <cdomain:text xml:lang="es">comment1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">comment1 in English</cdomain:text>
     </operations:comment>
-    <operations:childLinks total="2">
-        <cdomain:childLink kind="statisticalOperations#instances" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances"/>
-        <cdomain:childLink kind="statisticalOperations#families" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/families"/>
-    </operations:childLinks>
 </operations:operation>
