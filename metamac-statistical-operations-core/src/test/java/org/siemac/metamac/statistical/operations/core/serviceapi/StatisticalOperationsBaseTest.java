@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
-import org.siemac.metamac.common.test.MetamacBaseTests;
+import org.siemac.metamac.common.test.dbunit.MetamacDBUnitBaseTests;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
 import org.siemac.metamac.sso.client.SsoClientConstants;
@@ -15,7 +15,7 @@ import org.siemac.metamac.statistical.operations.core.constants.StatisticalOpera
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.springframework.beans.factory.annotation.Value;
 
-public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
+public abstract class StatisticalOperationsBaseTest extends MetamacDBUnitBaseTests {
 
     @Value("${metamac.statistical.operations.db.provider}")
     private String      databaseProvider;
@@ -27,56 +27,55 @@ public abstract class StatisticalOperationsBaseTest extends MetamacBaseTests {
     // SERVICE CONTEXT
     // --------------------------------------------------------------------------------------------------------------
 
-    @Override
     protected ServiceContext getServiceContextAdministrador() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.ADMINISTRADOR);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoProduccion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoProduccionOperation01() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, OPERATION_01);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoProduccionOperation02() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PRODUCCION, OPERATION_02);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoApoyoProduccion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
         return serviceContext;
     }
     protected ServiceContext getServiceContextTecnicoPlanificacion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoApoyoPlanificacion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoDifusion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_DIFUSION);
         return serviceContext;
     }
 
     protected ServiceContext getServiceContextTecnicoApoyoDifusion() {
-        ServiceContext serviceContext = super.getServiceContextWithoutPrincipal();
+        ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_APOYO_DIFUSION);
         return serviceContext;
     }
