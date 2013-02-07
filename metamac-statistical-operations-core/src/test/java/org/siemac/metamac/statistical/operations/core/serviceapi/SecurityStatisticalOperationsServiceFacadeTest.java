@@ -994,7 +994,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         try {
             statisticalOperationsServiceFacade.createInstance(getServiceContextTecnicoProduccionOperation02(), operationId, createInstanceDto());
         } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+            assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
     }
 
