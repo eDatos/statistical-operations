@@ -70,7 +70,7 @@ public class SearchFamilyPaginatedDragAndDropItem extends BaseSearchPaginatedDra
         sourceList.getListGrid().setFields(codeField, titleField);
         targetList.setFields(codeField, deleteField);
     }
-    
+
     @Override
     protected void addNonDuplicatedRecordToTarget(Record record) {
         String code = record.getAttribute(FamilyDS.CODE);

@@ -109,7 +109,7 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
         }
         return false;
     }
-    
+
     @Override
     protected void addNonDuplicatedRecordToTarget(Record record) {
         String code = record.getAttribute(OperationDS.OP_CODE);

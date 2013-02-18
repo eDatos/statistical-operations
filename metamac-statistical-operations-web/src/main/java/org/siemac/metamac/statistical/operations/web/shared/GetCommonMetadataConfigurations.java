@@ -12,9 +12,9 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class GetCommonMetadataConfigurations {
 
     @In(1)
-    String query;
+    String                query;
 
     @Out(1)
     List<ExternalItemDto> configurations;
-    
+
 }
