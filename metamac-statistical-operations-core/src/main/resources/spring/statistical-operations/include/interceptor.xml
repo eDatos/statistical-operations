@@ -12,7 +12,7 @@
 
     <!-- Flush interceptor -->
     <bean id="flushingHandlingAdvice" class="org.siemac.metamac.statistical.operations.core.aop.FlushingInterceptor" />
-    
+
     <!-- Disable flush interceptor -->
     <bean id="disableFlushHandlingAdvice" class="org.siemac.metamac.statistical.operations.core.aop.DisableFlushInterceptor" />
 
@@ -27,7 +27,10 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="updateServicePointCut" expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*Service.*update*(..))" />
+        <aop:pointcut id="updateServicePointCut"
+            expression="(execution(public * org.siemac.metamac.statistical.operations..serviceapi.*Service.*(..)) and not 
+                                                                (execution(public * org.siemac.metamac.statistical.operations..serviceapi.*Service.retrieve*(..)) or 
+                                                                 execution(public * org.siemac.metamac.statistical.operations..serviceapi.*Service.find*(..))))" />
         <aop:pointcut id="serviceFacadePointCut" expression="execution(public * org.siemac.metamac.statistical.operations..serviceapi.*ServiceFacade.*(..))" />
         <aop:pointcut id="doMapperPointCut" expression="execution(public * org.siemac.metamac.statistical.operations.core.mapper.*2DoMapper.*(..))" />
 
@@ -41,14 +44,14 @@
         <aop:advisor pointcut-ref="serviceFacadePointCut" advice-ref="hibernateErrorHandlingAdvice" order="4" />
         <aop:advisor pointcut-ref="updatingServiceFacade" advice-ref="jpaInterceptorFlushEager" order="5" />
 
-		<!-- Flushing interceptor -->
+        <!-- Flushing interceptor -->
         <aop:aspect id="flushing" ref="flushingHandlingAdvice">
             <aop:after-returning pointcut-ref="updateServicePointCut" method="forceFlushToOptimisticLocking" />
         </aop:aspect>
-        
+
         <!-- Flush mode interceptor -->
-       <aop:aspect id="flushingMode" ref="disableFlushHandlingAdvice">
-           <aop:around method="manageFlushMode" pointcut-ref="doMapperPointCut" />
-       </aop:aspect>
+        <aop:aspect id="flushingMode" ref="disableFlushHandlingAdvice">
+            <aop:around method="manageFlushMode" pointcut-ref="doMapperPointCut" />
+        </aop:aspect>
     </aop:config>
 </beans>
