@@ -6,6 +6,7 @@ import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.common_metadata.rest.external.v1_0.service.CommonMetadataV1_0;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
+import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class MetamacApisLocator {
 
     @PostConstruct
     public void initService() throws Exception {
-        String baseApi = configurationService.getProperties().getProperty(MetamacApisConstants.COMMON_METADATA_REST_EXTERNAL);
+        String baseApi = configurationService.getProperties().getProperty(RestEndpointsConstants.COMMON_METADATA_EXTERNAL_API);
         commonMetadataRestExternalFacadeV10 = JAXRSClientFactory.create(baseApi, CommonMetadataV1_0.class, null, true); // true to do thread safe
     }
 
