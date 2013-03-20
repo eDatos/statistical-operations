@@ -13,6 +13,7 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.handl
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomWindow;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
@@ -24,7 +25,8 @@ import com.smartgwt.client.widgets.form.fields.ButtonItem;
 
 public class AddFamiliesToOperationWindow extends CustomWindow {
 
-    private static final int                     FORM_ITEM_CUSTOM_WIDTH = 300;
+    // private static final int FORM_ITEM_CUSTOM_WIDTH = 300;
+    private static final String                  FORM_ITEM_CUSTOM_WIDTH = FormItemUtils.FORM_ITEM_WIDTH;
 
     private OperationUiHandlers                  uiHandlers;
 

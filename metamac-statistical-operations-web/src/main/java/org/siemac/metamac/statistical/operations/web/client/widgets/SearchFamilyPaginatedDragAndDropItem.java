@@ -26,12 +26,12 @@ public class SearchFamilyPaginatedDragAndDropItem extends BaseSearchPaginatedDra
         create(name, title, maxResults, FormItemUtils.FORM_ITEM_WIDTH, action);
     }
 
-    public SearchFamilyPaginatedDragAndDropItem(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
+    public SearchFamilyPaginatedDragAndDropItem(String name, String title, int maxResults, String formItemWidth, PaginatedAction action) {
         super(name, title, maxResults, formItemWidth, action);
         create(name, title, maxResults, formItemWidth, action);
     }
 
-    private void create(String name, String title, int maxResults, int formItemWidth, PaginatedAction action) {
+    private void create(String name, String title, int maxResults, String formItemWidth, PaginatedAction action) {
         ListGridField codeField = new ListGridField(FamilyDS.CODE);
         codeField.setShowHover(true);
         codeField.setHoverCustomizer(new HoverCustomizer() {
