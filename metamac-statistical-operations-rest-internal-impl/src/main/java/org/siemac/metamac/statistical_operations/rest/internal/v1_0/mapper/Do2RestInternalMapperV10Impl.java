@@ -569,7 +569,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Resource target = new Resource();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(source.getType().name());
+        target.setKind(source.getType().getValue());
         target.setSelfLink(toResourceLink(target.getKind(), RestUtils.createLink(apiExternalItem, source.getUri())));
         target.setTitle(toInternationalString(source.getTitle()));
         return target;

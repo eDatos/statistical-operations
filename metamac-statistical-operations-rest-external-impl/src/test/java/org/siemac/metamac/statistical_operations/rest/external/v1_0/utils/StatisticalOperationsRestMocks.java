@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
-import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -585,7 +584,7 @@ public class StatisticalOperationsRestMocks {
 
     public static Configuration mockExternalApiCommonMetadataRetrieveConfiguration1ById() {
         Configuration configuration = new Configuration();
-        configuration.setContact(MetamacRestMocks.mockResource("contact1", "urn:contact1", "AGENCY", "http://srm-api/contacts/contact1"));
+        configuration.setContact(MetamacRestMocks.mockResource("contact1", "urn:contact1", "structuralResources#agency", "http://srm-api/contacts/contact1"));
         configuration.setLegalActs(mockInternationalString("legalActs", "1"));
         configuration.setDataSharing(mockInternationalString("dataSharing", "1"));
         configuration.setConfPolicy(mockInternationalString("confidentialityPolicy", "1"));
@@ -620,13 +619,13 @@ public class StatisticalOperationsRestMocks {
         operation.setSelfLink(MetamacRestMocks.mockResourceLink(operation.getKind(), baseApi + "/operations/operation" + subId));
         operation.setTitle(mockInternationalString("operation", subId));
         operation.setAcronym(mockInternationalString("acronym", subId));
-        operation.setSubjectArea(mockResourceFromExternalItemSrm("subjectArea1", "subjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.setSubjectArea(mockResourceFromExternalItemSrm("subjectArea1", "subjectAreas", "structuralResources#category"));
         operation.setSecondarySubjectAreas(new SecondarySubjectAreas());
         operation.getSecondarySubjectAreas().setTotal(BigInteger.valueOf(3));
         operation.getSecondarySubjectAreas().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea1", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea22", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea333", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
+        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea1", "secundarySubjectAreas", "structuralResources#category"));
+        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea22", "secundarySubjectAreas", "structuralResources#category"));
+        operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea333", "secundarySubjectAreas", "structuralResources#category"));
         operation.setObjective(mockInternationalString("objetive", subId));
         operation.setDescription(mockInternationalString("description", subId));
         operation.setSurveyType(MetamacRestMocks.mockItem("surveyIdentifier"));
@@ -635,44 +634,44 @@ public class StatisticalOperationsRestMocks {
         operation.setProducers(new Producers());
         operation.getProducers().setTotal(BigInteger.valueOf(2));
         operation.getProducers().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getProducers().getProducers().add(mockResourceFromExternalItemSrm("producer1", "producers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getProducers().getProducers().add(mockResourceFromExternalItemSrm("producer22", "producers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getProducers().getProducers().add(mockResourceFromExternalItemSrm("producer1", "producers", "structuralResources#agency"));
+        operation.getProducers().getProducers().add(mockResourceFromExternalItemSrm("producer22", "producers", "structuralResources#agency"));
         operation.setRegionalResponsibles(new RegionalResponsibles());
         operation.getRegionalResponsibles().setTotal(BigInteger.valueOf(3));
         operation.getRegionalResponsibles().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible1", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible22", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible333", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible1", "regionalResponsibles", "structuralResources#agency"));
+        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible22", "regionalResponsibles", "structuralResources#agency"));
+        operation.getRegionalResponsibles().getRegionalResponsibles().add(mockResourceFromExternalItemSrm("regionalResponsible333", "regionalResponsibles", "structuralResources#agency"));
         operation.setRegionalContributors(new RegionalContributors());
         operation.getRegionalContributors().setTotal(BigInteger.valueOf(2));
         operation.getRegionalContributors().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
         operation.getRegionalContributors().setTotal(BigInteger.valueOf(2));
         operation.getRegionalContributors().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor1", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
-        operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor22", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
+        operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor1", "regionalContributors", "structuralResources#agency"));
+        operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor22", "regionalContributors", "structuralResources#agency"));
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(Status.DESIGN);
         operation.setPublishers(new Publishers());
         operation.getPublishers().setTotal(BigInteger.valueOf(3));
         operation.getPublishers().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher1", "publishers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher22", "publishers", TypeExternalArtefactsEnum.AGENCY));
-        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher333", "publishers", TypeExternalArtefactsEnum.AGENCY));
+        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher1", "publishers", "structuralResources#agency"));
+        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher22", "publishers", "structuralResources#agency"));
+        operation.getPublishers().getPublishers().add(mockResourceFromExternalItemSrm("publisher333", "publishers", "structuralResources#agency"));
         operation.setRelPolUsAc(mockInternationalString("relPolUsAc", subId));
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
         operation.setUpdateFrequencies(new UpdateFrequencies());
         operation.getUpdateFrequencies().setTotal(BigInteger.valueOf(4));
         operation.getUpdateFrequencies().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency1", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency22", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency333", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
-        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency4444", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
+        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency1", "updateFrequencies", "structuralResources#code"));
+        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency22", "updateFrequencies", "structuralResources#code"));
+        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency333", "updateFrequencies", "structuralResources#code"));
+        operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency4444", "updateFrequencies", "structuralResources#code"));
         operation.setCurrentInstance(mockInstanceResource(operation.getId(), "333", baseApi));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(mockInternationalString("revPolicy", subId));
         operation.setRevPractice(mockInternationalString("revPractice", subId));
-        operation.setContact(mockResourceFromExternalItem("contact1", "http://srm-api", "contacts", TypeExternalArtefactsEnum.AGENCY));
+        operation.setContact(mockResourceFromExternalItem("contact1", "http://srm-api", "contacts", "structuralResources#agency"));
         operation.setLegalActs(mockInternationalString("legalActs", "1"));
         operation.setDataSharing(mockInternationalString("dataSharing", "1"));
         operation.setConfidentialityPolicy(mockInternationalString("confidentialityPolicy", "1"));
@@ -722,42 +721,42 @@ public class StatisticalOperationsRestMocks {
         instance.setStatisticalUnits(new StatisticalUnits());
         instance.getStatisticalUnits().setTotal(BigInteger.valueOf(2));
         instance.getStatisticalUnits().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        instance.setGeographicGranularity(mockResourceFromExternalItemSrm("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST));
+        instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit1", "statisticalUnits", "structuralResources#concept"));
+        instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit22", "statisticalUnits", "structuralResources#concept"));
+        instance.setGeographicGranularity(mockResourceFromExternalItemSrm("geographicGranularity", "geographicGranularities", "structuralResources#codelist"));
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subId));
-        instance.setTemporalGranularity(mockResourceFromExternalItemSrm("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));
+        instance.setTemporalGranularity(mockResourceFromExternalItemSrm("temporalGranularity", "temporalGranularities", "structuralResources#codelist"));
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subId));
         instance.setBasePeriod("2012");
         instance.setUnitMeasures(new UnitMeasures());
         instance.getUnitMeasures().setTotal(BigInteger.valueOf(1));
         instance.getUnitMeasures().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getUnitMeasures().getUnitMeasures().add(mockResourceFromExternalItemSrm("unitMeasure1", "unitMeasures", TypeExternalArtefactsEnum.CONCEPT));
+        instance.getUnitMeasures().getUnitMeasures().add(mockResourceFromExternalItemSrm("unitMeasure1", "unitMeasures", "structuralResources#concept"));
         instance.setStatConcDefsDescription(mockInternationalString("statConcDef", subId));
         instance.setStatConcDefs(new StatConcDefs());
         instance.getStatConcDefs().setTotal(BigInteger.valueOf(3));
         instance.getStatConcDefs().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList1", "statConcDefLists", "structuralResources#codelist"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList22", "statConcDefLists", "structuralResources#codelist"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList333", "statConcDefLists", "structuralResources#codelist"));
         instance.setClassSystemsDescription(mockInternationalString("classSystem", subId));
         instance.setClassSystems(new ClassSystems());
         instance.getClassSystems().setTotal(BigInteger.valueOf(2));
         instance.getClassSystems().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList1", "classSystemLists", "structuralResources#codelist"));
+        instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList22", "classSystemLists", "structuralResources#codelist"));
         instance.setDocMethod(mockInternationalString("docMethod", subId));
         instance.setSurveySource(MetamacRestMocks.mockItem("surveySource1"));
         instance.setCollMethod(MetamacRestMocks.mockItem("collMethod1"));
         instance.setInformationSuppliers(new InformationSuppliers());
         instance.getInformationSuppliers().setTotal(BigInteger.valueOf(1));
         instance.getInformationSuppliers().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getInformationSuppliers().getInformationSuppliers().add(mockResourceFromExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.CONCEPT));
+        instance.getInformationSuppliers().getInformationSuppliers().add(mockResourceFromExternalItemSrm("informationSupplier1", "informationSuppliers", "structuralResources#concept"));
         instance.setFreqColls(new FreqColls());
         instance.getFreqColls().setTotal(BigInteger.valueOf(2));
         instance.getFreqColls().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getFreqColls().getFreqColls().add(mockResourceFromExternalItemSrm("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
-        instance.getFreqColls().getFreqColls().add(mockResourceFromExternalItemSrm("freqColl22", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
+        instance.getFreqColls().getFreqColls().add(mockResourceFromExternalItemSrm("freqColl1", "freqColls", "structuralResources#categoryScheme"));
+        instance.getFreqColls().getFreqColls().add(mockResourceFromExternalItemSrm("freqColl22", "freqColls", "structuralResources#categoryScheme"));
         instance.setDataValidation(mockInternationalString("dataValidation", subId));
         instance.setDataCompilation(mockInternationalString("dataCompilation", subId));
         instance.setAdjustment(mockInternationalString("adjustment", subId));
@@ -866,14 +865,14 @@ public class StatisticalOperationsRestMocks {
         return MetamacRestMocks.mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
     }
 
-    private static Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, TypeExternalArtefactsEnum kind) {
+    private static Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, String kind) {
         String endpointApi = "http://data.istac.es/apis/srm/v1.0";
         return mockResourceFromExternalItem(id, endpointApi, apiSubpath, kind);
     }
 
-    private static Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, TypeExternalArtefactsEnum kind) {
+    private static Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, String kind) {
         String urn = "urn:" + id;
         String selfLink = endpointApi + "/" + apiSubpath + "/" + id;
-        return MetamacRestMocks.mockResource(id, urn, kind.name(), selfLink);
+        return MetamacRestMocks.mockResource(id, urn, kind, selfLink);
     }
 }
