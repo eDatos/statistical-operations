@@ -571,7 +571,7 @@ public class StatisticalOperationsCoreMocks {
         String urn = "urn:" + code;
         return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
     }
-    
+
     private static ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
@@ -628,7 +628,7 @@ public class StatisticalOperationsCoreMocks {
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
         operation.setRevPolicy(mockInternationalString("revPolicy", subCode));
         operation.setRevPractice(mockInternationalString("revPractice", subCode));
-        operation.setCommonMetadata(mockExternalItemCommonMetadata("commonMetadata1", "nothing", TypeExternalArtefactsEnum.AGENCY));
+        operation.setCommonMetadata(mockExternalItemCommonMetadata("commonMetadata1", "nothing", TypeExternalArtefactsEnum.CONFIGURATION));
         operation.setComment(mockInternationalString("comment", subCode));
         operation.setNotes(mockInternationalString("notes", subCode));
 
@@ -681,7 +681,7 @@ public class StatisticalOperationsCoreMocks {
         instance.setDocMethod(mockInternationalString("docMethod", subCode));
         instance.setSurveySource(mockSurveySource("surveySource1"));
         instance.setCollMethod(mockCollMethod("collMethod1"));
-        instance.addInformationSupplier(mockExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.COMMON_METADATA));
+        instance.addInformationSupplier(mockExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.CONCEPT));
         instance.addFreqColl(mockExternalItemSrm("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
         instance.addFreqColl(mockExternalItemSrm("freqColl22", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
         instance.setDataValidation(mockInternationalString("dataValidation", subCode));

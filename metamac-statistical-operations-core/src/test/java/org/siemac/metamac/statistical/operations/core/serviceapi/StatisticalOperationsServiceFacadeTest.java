@@ -74,6 +74,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Survey Type
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllSurveyTypes() throws MetamacException {
@@ -81,6 +82,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!surveyTypesList.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindSurveyTypeById() throws MetamacException {
@@ -92,6 +94,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Instance Type
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllInstanceTypes() throws MetamacException {
@@ -99,6 +102,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!instanceTypesList.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceTypeById() throws MetamacException {
@@ -110,6 +114,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Survey Source
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllSurveySources() throws MetamacException {
@@ -117,6 +122,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!surveySourcesList.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindSurveySourceById() throws MetamacException {
@@ -128,6 +134,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Officiality Type
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllOfficialityTypes() throws MetamacException {
@@ -135,6 +142,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!officialityTypesList.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOfficialityTypeById() throws MetamacException {
@@ -146,6 +154,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Coll Methods
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllCollMethods() throws Exception {
@@ -154,6 +163,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindCollMethodById() throws Exception {
@@ -166,6 +176,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Costs
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testFindAllCosts() throws Exception {
@@ -174,6 +185,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindCostById() throws Exception {
@@ -186,6 +198,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Family
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testCreateFamily() throws MetamacException {
@@ -215,6 +228,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testUpdateFamily() throws MetamacException {
@@ -433,6 +447,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(Long.valueOf(2), familyDtoSession1AfterUpdate2.getOptimisticLockingVersion());
     }
 
+    @Override
     @Test
     @Transactional
     public void testDeleteFamily() throws MetamacException {
@@ -547,6 +562,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(familiesBefore, familiesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindAllFamilies() throws MetamacException {
@@ -557,6 +573,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindFamilyByCondition() throws MetamacException {
@@ -965,6 +982,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindFamilyById() throws MetamacException {
@@ -976,6 +994,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(familyDto.getId().equals(familyRetrieved.getId()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindFamilyByCode() throws Exception {
@@ -988,6 +1007,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindFamilyByUrn() throws Exception {
@@ -1021,6 +1041,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(familiesBefore == familiesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishInternallyFamily() throws MetamacException {
@@ -1053,6 +1074,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(familiesBefore == familiesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishExternallyFamily() throws MetamacException {
@@ -1098,6 +1120,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationsForFamily() throws MetamacException {
@@ -1115,6 +1138,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertNotNull(operationsForFamily);
     }
 
+    @Override
     @Test
     @Transactional
     public void testAddOperationForFamily() throws MetamacException {
@@ -1139,6 +1163,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(familiesBefore, familiesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testRemoveOperationForFamily() throws MetamacException {
@@ -1170,6 +1195,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Operation
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testCreateOperation() throws MetamacException {
@@ -1197,6 +1223,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testUpdateOperation() throws Exception {
@@ -1499,6 +1526,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testDeleteOperation() throws MetamacException {
@@ -1602,6 +1630,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(operationsBefore, operationsAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindAllOperations() throws MetamacException {
@@ -1610,6 +1639,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!operations.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationsByCondition() throws MetamacException {
@@ -2036,6 +2066,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationById() throws MetamacException {
@@ -2047,6 +2078,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(operationDto.getId().equals(operationRetrieved.getId()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationByCode() throws Exception {
@@ -2058,6 +2090,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(operationDto.getCode().equals(operationRetrieved.getCode()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationByUrn() throws Exception {
@@ -2069,6 +2102,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(operationDto.getUrn().equals(operationRetrieved.getUrn()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishInternallyOperation() throws MetamacException {
@@ -2087,6 +2121,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(operationsBefore, operationsAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishExternallyOperation() throws MetamacException {
@@ -2115,6 +2150,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindFamiliesForOperation() throws MetamacException {
@@ -2133,6 +2169,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstancesForOperation() throws MetamacException {
@@ -2156,6 +2193,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     // assertNotNull(instances);
     // }
 
+    @Override
     @Test
     @Transactional
     public void testAddFamilyForOperation() throws MetamacException {
@@ -2180,6 +2218,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testRemoveFamilyForOperation() throws MetamacException {
@@ -2210,6 +2249,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
      * Instance
      **************************************************************************/
 
+    @Override
     @Test
     @Transactional
     public void testCreateInstance() throws MetamacException, InterruptedException {
@@ -2276,6 +2316,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testUpdateInstance() throws Exception {
@@ -2365,6 +2406,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @DirtyDatabase
     public void testUpdateInstancesOrder() throws Exception {
@@ -2451,6 +2493,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(Long.valueOf(2), instanceDtoSession1AfterUpdate2.getOptimisticLockingVersion());
     }
 
+    @Override
     @Test
     @Transactional
     public void testDeleteInstance() throws MetamacException {
@@ -2725,6 +2768,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(instancesBefore, instancesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindAllInstances() throws MetamacException {
@@ -2737,6 +2781,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(!instances.isEmpty());
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceByCondition() throws MetamacException {
@@ -3138,6 +3183,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceById() throws MetamacException {
@@ -3152,6 +3198,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(instanceDto.getId().equals(instanceRetrieved.getId()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceByCode() throws Exception {
@@ -3166,6 +3213,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertTrue(instanceDto.getCode().equals(instanceRetrieved.getCode()));
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceByUrn() throws Exception {
@@ -3181,6 +3229,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishInternallyInstance() throws MetamacException {
@@ -3211,6 +3260,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(operationsBeforePublish, operationsAfterPublish);
     }
 
+    @Override
     @Test
     @Transactional
     public void testPublishExternallyInstance() throws MetamacException {
@@ -3246,6 +3296,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindOperationForInstance() throws MetamacException {
@@ -3267,6 +3318,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         assertEquals(instancesBefore, instancesAfter);
     }
 
+    @Override
     @Test
     @Transactional
     public void testFindInstanceBaseById() throws MetamacException {
@@ -3454,7 +3506,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
+        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.CONFIGURATION));
 
         return operationDto;
     }

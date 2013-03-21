@@ -181,10 +181,10 @@
         </cdomain:title>
     </operations:collMethod>
     <operations:informationSuppliers kind="PENDIENTE_API_SRM" total="1">
-        <operations:informationSupplier kind="COMMON_METADATA">
+        <operations:informationSupplier kind="CONCEPT">
             <cdomain:id>informationSupplier1</cdomain:id>
             <cdomain:urn>urn:informationSupplier1</cdomain:urn>
-            <cdomain:selfLink kind="COMMON_METADATA" href="http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1"/>
+            <cdomain:selfLink kind="CONCEPT" href="http://data.istac.es/apis/srm/v1.0/informationSuppliers/informationSupplier1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">informationSupplier1 en Español</cdomain:text>
                 <cdomain:text xml:lang="en">informationSupplier1 in English</cdomain:text>

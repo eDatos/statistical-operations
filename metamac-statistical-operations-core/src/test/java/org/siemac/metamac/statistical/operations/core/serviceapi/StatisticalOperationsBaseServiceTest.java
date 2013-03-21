@@ -61,12 +61,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     protected StatisticalOperationsListsService statisticalOperationsListsService;
 
     @Autowired
-    private PlatformTransactionManager          transactionManager = null;
+    private final PlatformTransactionManager    transactionManager = null;
 
     /**************************************************************************
      * Family Tests
      **************************************************************************/
 
+    @Override
     @Test
     public void testFindFamilyById() throws MetamacException {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -78,6 +79,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(family.equals(familyRetrieved));
     }
 
+    @Override
     @Test
     public void testFindFamilyByCode() throws Exception {
         String family_code = "family_01";
@@ -103,6 +105,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testFindFamilyByUrn() throws Exception {
         String family_urn = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily()).getUrn();
@@ -130,6 +133,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(family);
     }
 
+    @Override
     @Test
     public void testDeleteFamily() throws MetamacException {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -141,6 +145,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(statisticalOperationsBaseService.findAllFamilies(getServiceContextAdministrador()).size() < families.size());
     }
 
+    @Override
     @Test
     public void testFindAllFamilies() throws MetamacException {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -150,6 +155,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(!families.isEmpty());
     }
 
+    @Override
     @Test
     public void testFindFamilyByCondition() throws MetamacException {
         statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -298,6 +304,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals(2, familiesList2.getPageSize());
     }
 
+    @Override
     @Test
     public void testCreateFamily() throws Exception {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -305,6 +312,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getCode(), family.getUrn());
     }
 
+    @Override
     @Test
     public void testUpdateFamily() throws Exception {
         Family family = statisticalOperationsBaseService.createFamily(getServiceContextAdministrador(), createFamily());
@@ -326,12 +334,14 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(family);
     }
 
+    @Override
     @Test
     public void testPublishInternallyFamily() throws Exception {
         // This test is in *ServiceFacade
 
     }
 
+    @Override
     @Test
     public void testPublishExternallyFamily() throws Exception {
         // This test is in *ServiceFacade
@@ -342,6 +352,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
      * Operation Tests
      **************************************************************************/
 
+    @Override
     @Test
     public void testFindOperationById() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
@@ -353,6 +364,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(operation.equals(operationRetrieved));
     }
 
+    @Override
     @Test
     public void testFindOperationByCode() throws Exception {
         String operation_code = "operation_01";
@@ -378,6 +390,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testFindOperationByUrn() throws Exception {
         String operation_urn = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation()).getUrn();
@@ -399,18 +412,19 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testCreateOperation() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
     }
-    
+
     @Test
     public void testCreateOperationWithInvalidSemanticIdentifier() throws MetamacException {
         Operation operation = createOperation();
         operation.setCode("OPERATION@IPC");
-        
+
         try {
             operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         } catch (MetamacException e) {
@@ -448,6 +462,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operation);
     }
 
+    @Override
     @Test
     public void testDeleteOperation() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
@@ -470,6 +485,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(statisticalOperationsListsService.findAllSurveyTypes(getServiceContextAdministrador()).size() == operationsTypeBefore);
     }
 
+    @Override
     @Test
     public void testFindAllOperations() throws MetamacException {
         statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
@@ -479,6 +495,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     }
 
+    @Override
     @Test
     public void testFindOperationByCondition() throws MetamacException {
         statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
@@ -515,16 +532,19 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals(2, operationsList2.getPageSize());
     }
 
+    @Override
     @Test
     public void testAddOperationFamilyAssociation() throws Exception {
         // This test is in *ServiceFacade
     }
 
+    @Override
     @Test
     public void testRemoveOperationFamilyAssociation() throws Exception {
         // This test is in *ServiceFacade
     }
 
+    @Override
     @Test
     public void testUpdateOperation() throws Exception {
         Operation operation = createOperationWithDescription();
@@ -586,11 +606,13 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals(null, operation.getDescription());
     }
 
+    @Override
     @Test
     public void testPublishInternallyOperation() throws Exception {
         // This test is in *ServiceFacade
     }
 
+    @Override
     @Test
     public void testPublishExternallyOperation() throws Exception {
         // This test is in *ServiceFacade
@@ -600,6 +622,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
      * Instance Tests
      **************************************************************************/
 
+    @Override
     @Test
     public void testFindInstanceById() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -613,6 +636,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(instance.equals(instanceRetrieved));
     }
 
+    @Override
     @Test
     public void testFindInstanceByCode() throws Exception {
         String instance_code = "instance_01";
@@ -639,6 +663,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testFindInstanceByUrn() throws Exception {
 
@@ -662,6 +687,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testCreateInstance() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -681,6 +707,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testDeleteInstance() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -713,6 +740,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador()).size() < instances.size());
     }
 
+    @Override
     @Test
     public void testFindAllInstances() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -724,6 +752,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertTrue(!instances.isEmpty());
     }
 
+    @Override
     @Test
     public void testFindInstanceByCondition() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -765,6 +794,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals(2, instances2.getPageSize());
     }
 
+    @Override
     @Test
     public void testUpdateInstance() throws Exception {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -789,6 +819,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testUpdateInstancesOrder() throws Exception {
         // Create operation
@@ -838,12 +869,14 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         }
     }
 
+    @Override
     @Test
     public void testPublishInternallyInstance() throws Exception {
         // This test is in *ServiceFacade
 
     }
 
+    @Override
     @Test
     public void testPublishExternallyInstance() throws Exception {
         // This test is in *ServiceFacade
@@ -1006,7 +1039,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.addPublisher(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operation.setCommonMetadata(new ExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.COMMON_METADATA));
+        operation.setCommonMetadata(new ExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.CONFIGURATION));
 
         // OFFICIALITY_TYPE
         operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));

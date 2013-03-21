@@ -752,7 +752,7 @@ public class StatisticalOperationsRestMocks {
         instance.setInformationSuppliers(new InformationSuppliers());
         instance.getInformationSuppliers().setTotal(BigInteger.valueOf(1));
         instance.getInformationSuppliers().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getInformationSuppliers().getInformationSuppliers().add(mockResourceFromExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.COMMON_METADATA));
+        instance.getInformationSuppliers().getInformationSuppliers().add(mockResourceFromExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.CONCEPT));
         instance.setFreqColls(new FreqColls());
         instance.getFreqColls().setTotal(BigInteger.valueOf(2));
         instance.getFreqColls().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);

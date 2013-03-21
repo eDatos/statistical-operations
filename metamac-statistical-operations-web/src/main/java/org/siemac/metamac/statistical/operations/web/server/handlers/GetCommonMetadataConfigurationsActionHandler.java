@@ -44,7 +44,7 @@ public class GetCommonMetadataConfigurationsActionHandler extends SecurityAction
             for (Resource resource : result.getConfigurations()) {
                 // Do not store rest api endpoint
                 String uri = StringUtils.removeStart(resource.getSelfLink().getHref(), commonMetadataRestApiEndpoint);
-                ExternalItemDto externalItemDto = new ExternalItemDto(resource.getId(), uri, resource.getUrn(), TypeExternalArtefactsEnum.STATISTICAL_OPERATION,
+                ExternalItemDto externalItemDto = new ExternalItemDto(resource.getId(), uri, resource.getUrn(), TypeExternalArtefactsEnum.CONFIGURATION,
                         DtoUtils.getInternationalStringDtoFromInternationalString(resource.getTitle()));
                 externalItemDtos.add(externalItemDto);
             }
