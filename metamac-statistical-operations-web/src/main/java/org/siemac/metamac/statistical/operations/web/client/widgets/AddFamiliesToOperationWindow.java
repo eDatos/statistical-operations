@@ -13,7 +13,6 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.handl
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomWindow;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
@@ -25,8 +24,7 @@ import com.smartgwt.client.widgets.form.fields.ButtonItem;
 
 public class AddFamiliesToOperationWindow extends CustomWindow {
 
-    // private static final int FORM_ITEM_CUSTOM_WIDTH = 300;
-    private static final String                  FORM_ITEM_CUSTOM_WIDTH = FormItemUtils.FORM_ITEM_WIDTH;
+    private static final int                     FORM_ITEM_CUSTOM_WIDTH = 300;
 
     private OperationUiHandlers                  uiHandlers;
 
@@ -45,8 +43,8 @@ public class AddFamiliesToOperationWindow extends CustomWindow {
 
         form = new CustomDynamicForm();
 
-        familiesItem = new SearchFamilyPaginatedDragAndDropItem("familiesItem", OperationsWeb.getConstants().families(), OperationViewImpl.FAMILY_LIST_MAX_RESULTS, FORM_ITEM_CUSTOM_WIDTH,
-                new PaginatedAction() {
+        familiesItem = new SearchFamilyPaginatedDragAndDropItem("familiesItem", OperationsWeb.getConstants().families(), OperationViewImpl.FAMILY_LIST_MAX_RESULTS,
+                String.valueOf(FORM_ITEM_CUSTOM_WIDTH), new PaginatedAction() {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults) {
@@ -132,5 +130,4 @@ public class AddFamiliesToOperationWindow extends CustomWindow {
         }
         return familyIds;
     }
-
 }

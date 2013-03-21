@@ -11,7 +11,6 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
-import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
@@ -25,8 +24,7 @@ import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
 
-    // private static final int FORM_ITEM_CUSTOM_WIDTH = 300;
-    private static final String   FORM_ITEM_CUSTOM_WIDTH = FormItemUtils.FORM_ITEM_WIDTH;
+    private static final int      FORM_ITEM_CUSTOM_WIDTH = 300;
 
     private RequiredTextItem      identifier;
     private RequiredTextItem      title;
@@ -52,7 +50,7 @@ public class NewOperationForm extends CustomDynamicForm {
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
         releaseCalendar.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
-        subjectAreasItem = new ExternalSelectItem("op-subject", getCoreMessages().operation_subject_area(), FORM_ITEM_CUSTOM_WIDTH);
+        subjectAreasItem = new ExternalSelectItem("op-subject", getCoreMessages().operation_subject_area(), String.valueOf(FORM_ITEM_CUSTOM_WIDTH));
         subjectAreasItem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         subjectAreasItem.setRequired(true);
 
@@ -104,5 +102,4 @@ public class NewOperationForm extends CustomDynamicForm {
         this.subjectAreas = subjects;
         subjectAreasItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(subjects));
     }
-
 }
