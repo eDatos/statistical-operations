@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment>CodeLists for frequency metadata</comment>
-	<entry key="metamac.statistical.operations.codelist.operation.updatefrequency">urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MY_AGENCY:CL_FREQ(1.0)", "CL_PRUEBA_FREQ</entry>
-	<entry key="metamac.statistical.operations.codelist.instance.temporalgranularity">urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MY_AGENCY:CL_FREQ(1.0)", "CL_PRUEBA_FREQ</entry>
-	<entry key="metamac.statistical.operations.codelist.instance.freqcoll">urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MY_AGENCY:CL_FREQ(1.0)", "CL_PRUEBA_FREQ</entry>
+	<entry key="metamac.statistical.operations.codelist.operation.updatefrequency">FILL_ME_WITH_CODELIST_URN</entry>
+	<entry key="metamac.statistical.operations.codelist.instance.temporalgranularity">FILL_ME_WITH_CODELIST_URN</entry>
+	<entry key="metamac.statistical.operations.codelist.instance.freqcoll">FILL_ME_WITH_CODELIST_URN</entry>
 </properties>

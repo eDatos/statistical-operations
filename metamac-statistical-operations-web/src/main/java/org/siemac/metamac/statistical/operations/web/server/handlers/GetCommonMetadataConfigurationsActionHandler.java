@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
+import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configurations;
 import org.siemac.metamac.statistical.operations.web.server.rest.CommonMetadataRestExternalFacade;
-import org.siemac.metamac.statistical.operations.web.server.rest.RestApiConstants;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
@@ -36,7 +36,7 @@ public class GetCommonMetadataConfigurationsActionHandler extends SecurityAction
     @Override
     public GetCommonMetadataConfigurationsResult executeSecurityAction(GetCommonMetadataConfigurationsAction action) throws ActionException {
 
-        String commonMetadataRestApiEndpoint = configurationService.getProperty(RestApiConstants.COMMON_METADATA_REST_EXTERNAL);
+        String commonMetadataRestApiEndpoint = configurationService.getProperty(ConfigurationConstants.ENDPOINT_COMMON_METADATA_EXTERNAL_API);
 
         Configurations result = commonMetadataRestExternalFacade.findConfigurations(action.getQuery());
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>();
@@ -51,5 +51,4 @@ public class GetCommonMetadataConfigurationsActionHandler extends SecurityAction
         }
         return new GetCommonMetadataConfigurationsResult(externalItemDtos);
     }
-
 }

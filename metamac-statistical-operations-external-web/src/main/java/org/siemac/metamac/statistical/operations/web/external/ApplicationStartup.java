@@ -10,7 +10,7 @@ import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.rest.constants.RestEndpointsConstants;
-import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
+import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
 
 public class ApplicationStartup implements ServletContextListener {
 
@@ -35,11 +35,11 @@ public class ApplicationStartup implements ServletContextListener {
         LOG.info("**********************************************************");
 
         // Datasource
-        checkProperty(StatisticalOperationsConstants.DB_DRIVER_NAME);
-        checkProperty(StatisticalOperationsConstants.DB_URL);
-        checkProperty(StatisticalOperationsConstants.DB_USERNAME);
-        checkProperty(StatisticalOperationsConstants.DB_PASSWORD);
-        checkProperty(StatisticalOperationsConstants.DB_DIALECT);
+        checkProperty(StatisticalOperationsConfigurationConstants.DB_DRIVER_NAME);
+        checkProperty(StatisticalOperationsConfigurationConstants.DB_URL);
+        checkProperty(StatisticalOperationsConfigurationConstants.DB_USERNAME);
+        checkProperty(StatisticalOperationsConfigurationConstants.DB_PASSWORD);
+        checkProperty(StatisticalOperationsConfigurationConstants.DB_DIALECT);
 
         // Api
         checkProperty(RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);

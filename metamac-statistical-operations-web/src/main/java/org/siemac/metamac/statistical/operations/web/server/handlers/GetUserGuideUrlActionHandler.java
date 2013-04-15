@@ -1,6 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.conf.ConfigurationService;
+import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
+import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlResult;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
@@ -12,11 +14,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 @Component
 public class GetUserGuideUrlActionHandler extends SecurityActionHandler<GetUserGuideUrlAction, GetUserGuideUrlResult> {
 
-    private static String        PROP_DATA_URL             = "environment.metamac.data";
-    private static String        PROP_USER_GUIDE_FILE_NAME = "metamac.statistical.operations.user.guide.file.name";
-
     @Autowired
-    private ConfigurationService configurationService      = null;
+    private ConfigurationService configurationService = null;
 
     public GetUserGuideUrlActionHandler() {
         super(GetUserGuideUrlAction.class);
@@ -24,9 +23,8 @@ public class GetUserGuideUrlActionHandler extends SecurityActionHandler<GetUserG
 
     @Override
     public GetUserGuideUrlResult executeSecurityAction(GetUserGuideUrlAction action) throws ActionException {
-        String dataUrl = configurationService.getConfig().getString(PROP_DATA_URL);
-        String userGuideFileName = configurationService.getConfig().getString(PROP_USER_GUIDE_FILE_NAME);
+        String dataUrl = configurationService.getConfig().getString(StatisticalOperationsWebConstants.ENVIRONMENT_DATA_URL);
+        String userGuideFileName = configurationService.getConfig().getString(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME);
         return new GetUserGuideUrlResult(dataUrl + "/statistical-operations/statistical-operations-web/docs/" + userGuideFileName);
     }
-
 }
