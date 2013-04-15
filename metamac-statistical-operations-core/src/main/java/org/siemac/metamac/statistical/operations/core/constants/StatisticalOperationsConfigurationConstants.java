@@ -1,6 +1,8 @@
 package org.siemac.metamac.statistical.operations.core.constants;
 
-public class StatisticalOperationsConfigurationConstants {
+import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
+
+public class StatisticalOperationsConfigurationConstants extends ConfigurationConstants {
 
     // PROPERTIES SPECIFIED IN THE DATA DIRECTORY
 
