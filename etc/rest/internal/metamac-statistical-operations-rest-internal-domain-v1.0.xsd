@@ -73,7 +73,7 @@
             <xs:element name="urn" type="xs:string" />
             <xs:element name="selfLink" type="common:ResourceLink" />
             <xs:element name="parentLink" type="common:ResourceLink" />
-            <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
+            <xs:element name="childLinks" type="common:ChildLinks" minOccurs="0" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="survey" type="common:Resource" />
