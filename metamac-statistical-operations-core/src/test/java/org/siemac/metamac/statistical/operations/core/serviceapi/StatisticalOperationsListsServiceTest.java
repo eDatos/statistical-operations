@@ -13,6 +13,7 @@ import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
 import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
 import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
+import org.siemac.metamac.statistical.operations.core.utils.StatisticalOperationsBaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.core.serviceapi;
+package org.siemac.metamac.statistical.operations.core.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
