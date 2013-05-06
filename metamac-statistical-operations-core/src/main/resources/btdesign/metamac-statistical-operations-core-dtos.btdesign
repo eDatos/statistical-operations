@@ -63,7 +63,11 @@ Application StatisticalOperationsDto {
             String urn nullable;
             - @InternationalStringDto title;
             - @InternationalStringDto description nullable;
-            - @ProcStatusEnum procStatus required;
+            - @InternationalStringDto acronym nullable;
+            
+            - @ProcStatusEnum procStatus nullable;
+            
+            JAVADATE internalInventoryDate nullable;
         }
 
         "Dto for OperationDto"
@@ -121,11 +125,19 @@ Application StatisticalOperationsDto {
             String urn nullable;
             - @InternationalStringDto title;
             - @InternationalStringDto acronym nullable;
+            
+            - @InternationalStringDto description nullable;
+            
             - @ProcStatusEnum procStatus required;
+            
             Boolean indicatorSystem;
             - @ExternalItemDto subjectArea nullable;
             - @SurveyTypeDto surveyType nullable;
             - @OfficialityTypeDto officialityType nullable;
+            Boolean currentlyActive;
+            - @StatusEnum status nullable;
+            
+            JAVADATE internalInventoryDate nullable;
         }
 
         "Dto for InstanceDto"
@@ -192,9 +204,17 @@ Application StatisticalOperationsDto {
             String code;
             String urn nullable;
             - @InternationalStringDto title;
-            - @ProcStatusEnum procStatus required;
-            - @InternationalStringDto description nullable;
+            - @InternationalStringDto acronym nullable;
+            
+            - @InternationalStringDto dataDescription nullable;
+            
+            - @InstanceTypeDto instanceType nullable;
+            
+            - @ProcStatusEnum procStatus nullable;
+            
             Integer order;
+            
+            JAVADATE internalInventoryDate nullable;
         }
 
     }

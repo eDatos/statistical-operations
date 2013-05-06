@@ -191,11 +191,17 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // TITLE
         target.setTitle(internationalStringToDto(source.getTitle()));
 
+        // ACRONYM
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
+
         // DESCRIPTION
         target.setDescription(internationalStringToDto(source.getDescription()));
 
         // PROC STATUS
         // Not necessary
+
+        // INTERNAL INVENTORY DATE
+        // not necessary
 
         return target;
     }
@@ -336,6 +342,9 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // TITLE
         target.setTitle(internationalStringToDto(source.getTitle()));
 
+        // DESCRIPTION
+        target.setDescription(internationalStringToDto(source.getDescription()));
+
         // TITLE_ALTERNATIVE
         target.setAcronym(internationalStringToDto(source.getAcronym()));
 
@@ -350,6 +359,15 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
 
         // OFFICIALITY_TYPE
         target.setOfficialityType(officialityTypeToDto(source.getOfficialityType()));
+
+        // CURRENTLY ACTIVE
+        // Not necessary
+
+        // STATUS
+        // Not necessary
+
+        // INTERNAL INVENTORY DATE
+        // Not necessary
 
         return target;
     }
@@ -572,7 +590,19 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // TITLE
         target.setTitle(internationalStringToDto(source.getTitle()));
 
+        // DESCRIPTION
+        target.setDataDescription(internationalStringToDto(source.getDataDescription()));
+
+        // ACRONYM
+        target.setAcronym(internationalStringToDto(source.getAcronym()));
+
         // PROC_STATUS
+        // Not necessary
+
+        // INSTANCE TYPE
+        // Not necessary
+
+        // INTERNAL INVENTORY DATE
         // Not necessary
 
         // ORDER
