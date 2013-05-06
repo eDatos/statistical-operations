@@ -431,14 +431,16 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         target.getStatisticalUnit().addAll(externalItemListToEntity(source.getStatisticalUnit(), target.getStatisticalUnit(), ServiceExceptionParameters.INSTANCE_STATISTICAL_UNIT));
 
         // GEOGRAPHIC_GRANULARITY
-        target.setGeographicGranularity(externalItemDtoToEntity(source.getGeographicGranularity(), target.getGeographicGranularity(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY));
+        target.getGeographicGranularity().clear();
+        target.getGeographicGranularity().addAll(externalItemListToEntity(source.getGeographicGranularity(), target.getGeographicGranularity(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY));
 
         // GEOGRAPHIC_COMPARABILITY
         target.setGeographicComparability(internationalStringToEntity(source.getGeographicComparability(), target.getGeographicComparability(),
                 ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_COMPARABILITY));
 
         // TEMPORAL_GRANULARITY
-        target.setTemporalGranularity(externalItemDtoToEntity(source.getTemporalGranularity(), target.getTemporalGranularity(), ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY));
+        target.getTemporalGranularity().clear();
+        target.getTemporalGranularity().addAll(externalItemListToEntity(source.getTemporalGranularity(), target.getTemporalGranularity(), ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY));
 
         // TEMPORAL_COMPARABILITY
         target.setTemporalComparability(internationalStringToEntity(source.getTemporalComparability(), target.getTemporalComparability(), ServiceExceptionParameters.INSTANCE_TEMPORAL_COMPARABILITY));

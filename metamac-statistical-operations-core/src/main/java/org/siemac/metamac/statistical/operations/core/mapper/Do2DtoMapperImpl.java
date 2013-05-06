@@ -408,13 +408,13 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         target.getStatisticalUnit().addAll(externalItemListToDto(source.getStatisticalUnit()));
 
         // GEOGRAPHIC_GRANULARITY
-        target.setGeographicGranularity(externalItemToDto(source.getGeographicGranularity()));
+        target.getGeographicGranularity().addAll(externalItemListToDto(source.getGeographicGranularity()));
 
         // GEOGRAPHIC_COMPARABILITY
         target.setGeographicComparability(internationalStringToDto(source.getGeographicComparability()));
 
         // TEMPORAL_GRANULARITY
-        target.setTemporalGranularity(externalItemToDto(source.getTemporalGranularity()));
+        target.getTemporalGranularity().addAll(externalItemListToDto(source.getTemporalGranularity()));
 
         // TEMPORAL_COMPARABILITY
         target.setTemporalComparability(internationalStringToDto(source.getTemporalComparability()));

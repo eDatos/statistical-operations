@@ -151,9 +151,9 @@ Application StatisticalOperationsDto {
             - @InternationalStringDto dataDescription nullable;
             - @InternationalStringDto statisticalPopulation nullable;
             - Set<@ExternalItemDto> statisticalUnit;
-            - @ExternalItemDto geographicGranularity nullable;
+            - Set<@ExternalItemDto> geographicGranularity;
             - @InternationalStringDto geographicComparability nullable;
-            - @ExternalItemDto temporalGranularity nullable;
+            - Set<@ExternalItemDto> temporalGranularity nullable;
             - @InternationalStringDto temporalComparability nullable;
             String basePeriod nullable;
             - Set<@ExternalItemDto> unitMeasure;

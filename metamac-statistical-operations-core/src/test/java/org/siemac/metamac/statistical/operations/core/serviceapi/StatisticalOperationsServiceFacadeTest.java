@@ -2391,7 +2391,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int instancesBefore = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
 
         // GEOGRAPHIC_GRANULARITY
-        instanceDto.setGeographicGranularity(null);
+        instanceDto.getGeographicGranularity().clear();
 
         // Save
         instanceDto = statisticalOperationsServiceFacade.updateInstance(getServiceContextAdministrador(), instanceDto);
@@ -2399,7 +2399,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Validations
         assertNotNull(operationDto);
         assertNotNull(instanceDto);
-        assertTrue(instanceDto.getGeographicGranularity() == null);
+        assertTrue(instanceDto.getGeographicGranularity().isEmpty());
 
         // Check number of instances
         int instancesAfter = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
@@ -3563,7 +3563,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instanceDto = createInstanceDto();
 
         // GEOGRAPHIC_GRANULARITY
-        instanceDto.setGeographicGranularity(new ExternalItemDto("GEOGRAPHIC_GRANULARITY", "/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", TypeExternalArtefactsEnum.CONCEPT));
+        instanceDto.addGeographicGranularity(new ExternalItemDto("GEOGRAPHIC_GRANULARITY", "/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", TypeExternalArtefactsEnum.CONCEPT));
 
         return instanceDto;
 

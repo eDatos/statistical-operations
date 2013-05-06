@@ -441,11 +441,11 @@ Application StatisticalOperations {
        		"Metadata STATISTICAL_UNIT. Its type is CONCEPT"
        		- Set<@ExternalItem> statisticalUnit databaseColumn="STATISTICAL_UNIT_FK" databaseJoinTable="TB_EI_STATISTICAL_UNITS"  cascade="all-delete-orphan";
        		"Metadata GEOGRAPHIC_GRANULARITY. Its type is CODE"
-       		- @ExternalItem geographicGranularity nullable cascade="all" databaseColumn="GEOGRAPHIC_GRANULARITY_FK";
+       		- Set<@ExternalItem> geographicGranularity databaseColumn="GEOGRAPHIC_GRANULARITY_FK" databaseJoinTable="TB_EI_GEO_GRANULARITIES"  cascade="all-delete-orphan";
        		"Metadata GEOGRAPHIC_COMPARABILITY"
        		- @InternationalString geographicComparability cascade="all" nullable databaseColumn="GEOGRAPHIC_COMPARABILITY_FK";
        		"Metadata TEMPORAL_GRANULARITY. Its type is CODE"
-       		- @ExternalItem temporalGranularity nullable cascade="all" databaseColumn="TEMPORAL_GRANULARITY_FK";
+       		- Set<@ExternalItem> temporalGranularity databaseColumn="TEMPORAL_GRANULARITY_FK" databaseJoinTable="TB_EI_TIME_GRANULARITIES"  cascade="all-delete-orphan";
        		"Metadata TEMPORAL_COMPARABILITY"
        		- @InternationalString temporalComparability cascade="all" nullable databaseColumn="TEMPORAL_COMPARABILITY_FK";
        		"Metadata BASE_PERIOD. Its type is CODE"
