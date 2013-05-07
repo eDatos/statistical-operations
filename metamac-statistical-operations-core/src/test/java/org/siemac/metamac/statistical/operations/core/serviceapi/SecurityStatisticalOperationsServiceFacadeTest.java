@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -175,26 +176,35 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoPlanificacion(), familyDto);
         try {
             statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoApoyoDifusion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoApoyoPlanificacion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoApoyoProduccion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoDifusion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.createFamily(getServiceContextTecnicoProduccion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -210,26 +220,35 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoPlanificacion(), familyDto);
         try {
             statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoApoyoDifusion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoApoyoPlanificacion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoApoyoProduccion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoDifusion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+
         try {
             statisticalOperationsServiceFacade.updateFamily(getServiceContextTecnicoProduccion(), familyDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -244,30 +263,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoPlanificacion(), familyId);
         try {
             statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoApoyoDifusion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoDifusion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoProduccion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
 
+        try {
+            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+
+        try {
+            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+
+        try {
+            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoDifusion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+
+        try {
+            statisticalOperationsServiceFacade.deleteFamily(getServiceContextTecnicoProduccion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -341,30 +368,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoPlanificacion(), familyId);
         try {
             statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoDifusion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoDifusion(), familyId);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
-        }
-        try {
-            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoProduccion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
 
+        try {
+            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+        
+        try {
+            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+        
+        try {
+            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoDifusion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
+        
+        try {
+            statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoProduccion(), familyId);
+            fail("operation not allowed");
+        } catch (MetamacException e) {
+            assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
+        }
     }
 
     @Test
@@ -380,30 +415,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoPlanificacion(), familyId);
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoApoyoDifusion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoDifusion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoProduccion(), familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-
     }
 
     @Test
@@ -427,26 +470,35 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoPlanificacion(), familyId, operationId);
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoApoyoDifusion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoApoyoProduccion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoDifusion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoProduccion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -462,30 +514,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoPlanificacion(), familyId, operationId);
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoApoyoDifusion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoApoyoProduccion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoDifusion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoProduccion(), familyId, operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-
     }
 
     @Test
@@ -495,30 +555,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoPlanificacion(), operationDto);
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoApoyoDifusion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoApoyoPlanificacion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoApoyoProduccion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoDifusion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoProduccion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-
     }
 
     @Test
@@ -534,25 +602,31 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoDifusion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoProduccion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoDifusion(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccionOperation02(), operationDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-
     }
 
     @Test
@@ -563,30 +637,38 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoPlanificacion(), operationId);
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoApoyoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoApoyoPlanificacion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoApoyoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
+        
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-
     }
 
     @Test
@@ -674,6 +756,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoProduccionOperation01(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -687,6 +770,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -700,6 +784,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -713,6 +798,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -725,6 +811,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -737,6 +824,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoProduccionOperation02(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -749,6 +837,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoPlanificacion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -785,6 +874,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoProduccionOperation01(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -799,6 +889,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -814,6 +905,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoApoyoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -829,6 +921,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoApoyoProduccion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -843,6 +936,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoDifusion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -857,6 +951,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoProduccionOperation02(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -871,6 +966,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextTecnicoApoyoPlanificacion(), operationId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -914,21 +1010,25 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextTecnicoApoyoDifusion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextTecnicoApoyoProduccion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextTecnicoDifusion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.addFamilyForOperation(getServiceContextTecnicoProduccionOperation02(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -948,21 +1048,25 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.removeFamilyForOperation(getServiceContextTecnicoApoyoDifusion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.removeFamilyForOperation(getServiceContextTecnicoApoyoProduccion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.removeFamilyForOperation(getServiceContextTecnicoDifusion(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.removeFamilyForOperation(getServiceContextTecnicoProduccionOperation02(), operationId, familyId);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -984,16 +1088,19 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.createInstance(getServiceContextTecnicoApoyoDifusion(), operationId, createInstanceDto());
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.createInstance(getServiceContextTecnicoDifusion(), operationId, createInstanceDto());
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.createInstance(getServiceContextTecnicoProduccionOperation02(), operationId, createInstanceDto());
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -1015,16 +1122,19 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.updateInstance(getServiceContextTecnicoApoyoDifusion(), instanceDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.updateInstance(getServiceContextTecnicoDifusion(), instanceDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.updateInstance(getServiceContextTecnicoProduccionOperation02(), instanceDto);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -1048,16 +1158,19 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         try {
             statisticalOperationsServiceFacade.updateInstancesOrder(getServiceContextTecnicoApoyoDifusion(), operationId, order);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.updateInstancesOrder(getServiceContextTecnicoDifusion(), operationId, order);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
         try {
             statisticalOperationsServiceFacade.updateInstancesOrder(getServiceContextTecnicoProduccionOperation02(), operationId, order);
+            fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
@@ -1095,28 +1208,33 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
             try {
                 statisticalOperationsServiceFacade.deleteInstance(getServiceContextTecnicoApoyoPlanificacion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.deleteInstance(getServiceContextTecnicoApoyoProduccion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.deleteInstance(getServiceContextTecnicoApoyoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
             try {
                 statisticalOperationsServiceFacade.deleteInstance(getServiceContextTecnicoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
             try {
                 statisticalOperationsServiceFacade.deleteInstance(getServiceContextTecnicoProduccionOperation02(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
@@ -1235,28 +1353,33 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
             try {
                 statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoApoyoPlanificacion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoApoyoProduccion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoApoyoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
             try {
                 statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
             try {
                 statisticalOperationsServiceFacade.publishInternallyInstance(getServiceContextTecnicoProduccionOperation02(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
@@ -1300,28 +1423,35 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoApoyoPlanificacion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoApoyoProduccion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
 
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoApoyoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
+            
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoDifusion(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
+            
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoProduccionOperation02(), instanceId);
+                fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_ACCESS_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
