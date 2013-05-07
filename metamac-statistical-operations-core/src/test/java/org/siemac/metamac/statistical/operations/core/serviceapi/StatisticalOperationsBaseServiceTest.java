@@ -33,6 +33,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.utils.StatisticalOperationsBaseTest;
+import org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -697,6 +698,19 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation.getCode() + "." + instance.getCode(), instance.getUrn());
         assertNotNull(instance);
     }
+    
+    @Test
+    public void testCreateInstanceWithGranularities() throws MetamacException {
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
+        statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
+        Instance expected = createInstanceWithGranularities();
+        Instance actual = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), expected);
+
+        assertNotNull(actual);
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation.getCode() + "." + actual.getCode(), actual.getUrn());
+        assertEquals(expected.getGeographicGranularity().size(), actual.getGeographicGranularity().size());
+        assertEquals(expected.getTemporalGranularity().size(), actual.getTemporalGranularity().size());
+    }
 
     @Test
     public void testCreateInstanceOperationNotPublished() throws MetamacException {
@@ -1088,6 +1102,19 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         // ORDER
         instance.setOrder(0);
 
+        return instance;
+    }
+    
+    private Instance createInstanceWithGranularities() throws MetamacException {
+        Instance instance = createInstance();
+        
+        instance.addGeographicGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
+        instance.addGeographicGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
+        
+        instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
+        instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
+        instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
+        
         return instance;
     }
 }
