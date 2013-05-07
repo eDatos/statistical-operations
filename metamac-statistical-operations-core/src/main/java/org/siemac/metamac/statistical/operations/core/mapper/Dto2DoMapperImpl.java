@@ -559,42 +559,50 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
-        return target;
+        return target; 
     }
 
-    private Set<ExternalItem> externalItemListToEntity(Set<ExternalItemDto> source, Set<ExternalItem> target, String metadataName) throws MetamacException {
+    // ------------------------------------------------------------
+    // EXTERNAL ITEMS
+    // ------------------------------------------------------------
+    
+    private Set<ExternalItem> externalItemListToEntity(Set<ExternalItemDto> sources, Set<ExternalItem> targets, String metadataName) throws MetamacException {
 
-        if (source.isEmpty()) {
-            if (!target.isEmpty()) {
-                // Delete old entity
-                deleteExternalItemList(target);
-            }
-            return new HashSet<ExternalItem>();
-        }
+        Set<ExternalItem> targetsBefore = targets;
+        Set<ExternalItem> newTargets = new HashSet<ExternalItem>();
 
-        if (target.isEmpty()) {
-            target = new HashSet<ExternalItem>();
-        }
-
-        Set<ExternalItem> targetsBefore = target;
-        target.clear();
-
-        for (ExternalItemDto itemDto : source) {
+        for (ExternalItemDto source : sources) {
             boolean existsBefore = false;
-            for (ExternalItem item : targetsBefore) {
-                if (itemDto.getUrn().equals(item.getUrn())) {
+            for (ExternalItem target : targetsBefore) {
+                if (source.getUrn().equals(target.getUrn())) {
+                    newTargets.add(externalItemDtoToEntity(source, target, metadataName));
                     existsBefore = true;
-                    target.add(item);
                     break;
                 }
             }
-
             if (!existsBefore) {
-                target.add(externalItemDtoToEntity(itemDto, null, metadataName));
+                newTargets.add(externalItemDtoToEntity(source, null, metadataName));
             }
         }
 
-        return target;
+        // Delete missing
+        for (ExternalItem oldTarget : targetsBefore) {
+            boolean found = false;
+            for (ExternalItem newTarget : newTargets) {
+                found = found || (oldTarget.getUrn().equals(newTarget.getUrn()));
+            }
+            if (!found) {
+                // Delete
+                externalItemDtoToEntity(null, oldTarget, metadataName);
+            }
+        }
+
+        targets.clear();
+        for (ExternalItem target : newTargets) {
+            targets.add(target);
+        }
+
+        return targets;
     }
 
     private ExternalItem externalItemDtoToEntity(ExternalItemDto source, ExternalItem target, String metadataName) throws MetamacException {
@@ -621,18 +629,11 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         return target;
     }
 
-    /**
-     * Delete the externalItem of an externalItemList
-     * 
-     * @param target
-     */
-    private void deleteExternalItemList(Set<ExternalItem> target) {
-        for (ExternalItem externalItem : target) {
-            externalItemRepository.delete(externalItem);
-        }
 
-    }
-
+    // ------------------------------------------------------------
+    // INTERNATIONAL STRINGS & LOCALISED STRINGS
+    // ------------------------------------------------------------
+    
     private InternationalString internationalStringToEntity(InternationalStringDto source, InternationalString target, String metadataName) throws MetamacException {
 
         if (source == null) {
@@ -694,6 +695,11 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         return target;
     }
 
+    
+    // ------------------------------------------------------------
+    // COSTS
+    // ------------------------------------------------------------
+    
     private Set<Cost> costDtoListToCostList(Set<CostDto> source, Set<Cost> target, ServiceContext ctx) throws MetamacException {
 
         Set<Cost> result = new HashSet<Cost>();

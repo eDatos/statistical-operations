@@ -14,7 +14,19 @@ public class InternationalString extends InternationalStringBase {
 
     public InternationalString() {
     }
-
+    
+    public LocalisedString getLocalisedLabelEntity(String locale) {
+        if (locale == null) {
+            return null;
+        }
+        for (LocalisedString localstr : getTexts()) {
+            if (locale.equalsIgnoreCase(localstr.getLocale())) {
+                return localstr;
+            }
+        }
+        return null;
+    }
+    
     public String getLocalisedLabel(String locale) {
         if (locale == null) {
             return null;

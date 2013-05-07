@@ -16,4 +16,5 @@ public class LocalisedString extends LocalisedStringBase {
 
     public LocalisedString() {
     }
+    
 }

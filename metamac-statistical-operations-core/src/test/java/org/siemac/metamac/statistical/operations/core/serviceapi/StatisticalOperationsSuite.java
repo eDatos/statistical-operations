@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDtoFieldsTest;
+import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2DoMapperTest;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -17,6 +18,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDtoFields
                         StatisticalOperationsServiceFacadeTest.class,
                         FamilyBaseDtoFieldsTest.class,
                         OperationBaseDtoFieldsTest.class,
-                        InstanceBaseDtoFieldsTest.class})
+                        InstanceBaseDtoFieldsTest.class,
+                        ExternalItemsDto2DoMapperTest.class})
 public class StatisticalOperationsSuite {
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import org.siemac.metamac.common.test.dbunit.MetamacDBUnitBaseTests;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.sso.client.MetamacPrincipalAccess;
@@ -18,10 +20,10 @@ import org.springframework.beans.factory.annotation.Value;
 public abstract class StatisticalOperationsBaseTest extends MetamacDBUnitBaseTests {
 
     @Value("${metamac.statistical.operations.db.provider}")
-    private String      databaseProvider;
+    private String           databaseProvider;
 
-    public final String OPERATION_01 = "C0025A";
-    public final String OPERATION_02 = "C0025B";
+    public final String      OPERATION_01 = "C0025A";
+    public final String      OPERATION_02 = "C0025B";
 
     // --------------------------------------------------------------------------------------------------------------
     // SERVICE CONTEXT
@@ -56,6 +58,7 @@ public abstract class StatisticalOperationsBaseTest extends MetamacDBUnitBaseTes
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
         return serviceContext;
     }
+
     protected ServiceContext getServiceContextTecnicoPlanificacion() {
         ServiceContext serviceContext = mockServiceContextWithoutPrincipal();
         putMetamacPrincipalInServiceContext(serviceContext, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
