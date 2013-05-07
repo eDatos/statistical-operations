@@ -99,12 +99,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindFamilyByCodeNotExists() throws Exception {
         String family_code = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.FAMILY_CODE_NOT_FOUND, family_code));
 
-        try {
-            statisticalOperationsBaseService.findFamilyByCode(getServiceContextAdministrador(), family_code);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.FAMILY_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findFamilyByCode(getServiceContextAdministrador(), family_code);
     }
 
     @Override
@@ -121,12 +118,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindFamilyByUrnNotExists() throws Exception {
         String urn = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.FAMILY_NOT_FOUND, urn));
 
-        try {
-            statisticalOperationsBaseService.findFamilyByUrn(getServiceContextAdministrador(), urn);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.FAMILY_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findFamilyByUrn(getServiceContextAdministrador(), urn);
     }
 
     @Test
@@ -384,12 +378,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindOperationByCodeNotExists() throws Exception {
         String operation_code = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.OPERATION_CODE_NOT_FOUND, operation_code));
 
-        try {
-            statisticalOperationsBaseService.findOperationByCode(getServiceContextAdministrador(), operation_code);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.OPERATION_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findOperationByCode(getServiceContextAdministrador(), operation_code);
     }
 
     @Override
@@ -406,12 +397,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindOperationByUrnNotExists() throws Exception {
         String urn = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.OPERATION_NOT_FOUND, urn));
 
-        try {
-            statisticalOperationsBaseService.findOperationByUrn(getServiceContextAdministrador(), urn);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.OPERATION_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findOperationByUrn(getServiceContextAdministrador(), urn);
     }
 
     @Override
@@ -424,14 +412,11 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateOperationWithInvalidSemanticIdentifier() throws MetamacException {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.OPERATION_CODE));
+
         Operation operation = createOperation();
         operation.setCode("OPERATION@IPC");
-
-        try {
-            operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.METADATA_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
     }
 
     @Test
@@ -447,15 +432,12 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateOperationWithInvalidAccess() throws MetamacException {
-        Operation operation = createOperation();
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INVALID_URL, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
 
+        Operation operation = createOperation();
         operation.setReleaseCalendarAccess("invalidUrl");
 
-        try {
-            operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
     }
 
     @Test
@@ -561,6 +543,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateOperationWithIncorrectReleaseCalendarAccess() throws Exception {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INVALID_URL, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
+
         DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
         defaultTransactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         TransactionStatus status = transactionManager.getTransaction(defaultTransactionDefinition);
@@ -572,28 +556,22 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         transactionManager.commit(status);
 
         operation.setReleaseCalendarAccess("incorrectUrl");
-        try {
-            statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
-            assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
-        }
+        statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
     }
 
     @Test
-    public void testUpdateOperationWitReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
+    public void testUpdateOperationWithReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
+        // expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INVALID_URL, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
+
         Operation operation = createOperation();
         operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
         assertNull(operation.getReleaseCalendarAccess());
 
         operation.setReleaseCalendar(Boolean.FALSE);
         operation.setReleaseCalendarAccess("http://tutu.com");
-        try {
-            statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.METADATA_INVALID_URL.getCode(), e.getExceptionItems().get(0).getCode());
-            assertEquals(ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, e.getExceptionItems().get(0).getMessageParameters()[0]);
-        }
+
+        // TODO: Debe lanzar error y no lo esta lanzando
+        statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
     }
 
     @Test
@@ -657,12 +635,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindInstanceByCodeNotExists() throws Exception {
         String instance_code = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.INSTANCE_CODE_NOT_FOUND, instance_code));
 
-        try {
-            statisticalOperationsBaseService.findInstanceByCode(getServiceContextAdministrador(), instance_code);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INSTANCE_CODE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findInstanceByCode(getServiceContextAdministrador(), instance_code);
     }
 
     @Override
@@ -681,12 +656,9 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Test
     public void testFindInstanceByUrnNotExists() throws Exception {
         String urn = "not_exists";
+        expectedMetamacException(new MetamacException(ServiceExceptionType.INSTANCE_NOT_FOUND, urn));
 
-        try {
-            statisticalOperationsBaseService.findInstanceByUrn(getServiceContextAdministrador(), urn);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INSTANCE_NOT_FOUND.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.findInstanceByUrn(getServiceContextAdministrador(), urn);
     }
 
     @Override
@@ -698,7 +670,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation.getCode() + "." + instance.getCode(), instance.getUrn());
         assertNotNull(instance);
     }
-    
+
     @Test
     public void testCreateInstanceWithGranularities() throws MetamacException {
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
@@ -714,12 +686,10 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testCreateInstanceOperationNotPublished() throws MetamacException {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.INSTANCE_INCORRECT_OPERATION_PROC_STATUS));
+
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
-        try {
-            statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.INSTANCE_INCORRECT_OPERATION_PROC_STATUS.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
     }
 
     @Override
@@ -822,16 +792,14 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateInstanceWithIncorrectBasePeriod() throws Exception {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.INSTANCE_BASE_PERIOD));
+
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
         instance.setBasePeriod("2005Q1error");
-        try {
-            statisticalOperationsBaseService.updateInstance(getServiceContextAdministrador(), instance);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.METADATA_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
-        }
+        statisticalOperationsBaseService.updateInstance(getServiceContextAdministrador(), instance);
     }
 
     @Override
@@ -862,6 +830,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateInstancesOrderIncorrectParameter() throws Exception {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE));
+
         // Create operation
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperationForInternalPublishing());
         operation = statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
@@ -876,12 +846,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         instancesIds.add(instance03.getId());
         instancesIds.add(instance02.getId());
 
-        try {
-            statisticalOperationsBaseService.updateInstancesOrder(getServiceContextAdministrador(), operation.getId(), instancesIds);
-        } catch (MetamacException e) {
-            assertEquals(ServiceExceptionType.PARAMETER_INCORRECT.getCode(), e.getExceptionItems().get(0).getCode());
-            assertEquals(ServiceExceptionParameters.INSTANCES_ID_LIST_SIZE, e.getExceptionItems().get(0).getMessageParameters()[0]);
-        }
+        statisticalOperationsBaseService.updateInstancesOrder(getServiceContextAdministrador(), operation.getId(), instancesIds);
     }
 
     @Override
@@ -1104,17 +1069,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         return instance;
     }
-    
+
     private Instance createInstanceWithGranularities() throws MetamacException {
         Instance instance = createInstance();
-        
+
         instance.addGeographicGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
         instance.addGeographicGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
-        
+
         instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
         instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
         instance.addTemporalGranularity(StatisticalOperationsMocks.mockCodeExternalItem());
-        
+
         return instance;
     }
 }
