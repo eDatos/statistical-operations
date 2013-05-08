@@ -8,7 +8,7 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
 import org.siemac.metamac.core.common.util.shared.VersionUtil;
 
-public abstract class StatisticalOperationsMocks extends MetamacMocks {
+public class StatisticalOperationsMocks extends MetamacMocks {
 
     private static final String[] MAINTAINER_MOCK          = new String[]{"MaintainerMock"};
     private static final String   ORGANIZATION_UNIT_MOCK   = "OrganizationUnitMock";

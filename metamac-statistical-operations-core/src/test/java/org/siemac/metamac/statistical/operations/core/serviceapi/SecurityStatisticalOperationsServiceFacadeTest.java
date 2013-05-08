@@ -1549,7 +1549,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setAcronym(acronym);
 
         // RELEASE_CALENDAR
-        operationDto.setReleaseCalendar(false);
+        operationDto.setReleaseCalendar(true);
 
         // RELEASE_CALENDAR_ACCESS
         operationDto.setReleaseCalendarAccess("http://www.draft.com");
@@ -1602,7 +1602,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         // COMMON_METADATA
         operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-
+        
         return operationDto;
     }
 

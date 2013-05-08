@@ -460,6 +460,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INVALID_URL, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
 
         Operation operation = createOperation();
+        operation.setReleaseCalendar(true);
         operation.setReleaseCalendarAccess("invalidUrl");
 
         operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
@@ -580,6 +581,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         transactionManager.commit(status);
 
+        operation.setReleaseCalendar(true);
         operation.setReleaseCalendarAccess("incorrectUrl");
         statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
     }

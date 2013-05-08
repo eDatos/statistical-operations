@@ -1283,8 +1283,6 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         description.addText(description_en);
         operationDto.setDescription(description);
 
-        operationDto.setReleaseCalendarAccess(null);
-
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         assertNotNull(operationDto);
@@ -1430,6 +1428,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
         OperationDto operationDto = createOperationDto();
+        operationDto.setReleaseCalendar(true);
         operationDto.setReleaseCalendarAccess("INCORRECT URL");
 
         try {
@@ -3481,7 +3480,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setAcronym(acronym);
 
         // RELEASE_CALENDAR
-        operationDto.setReleaseCalendar(false);
+        operationDto.setReleaseCalendar(true);
 
         // RELEASE_CALENDAR_ACCESS
         operationDto.setReleaseCalendarAccess("http://www.test.com");
