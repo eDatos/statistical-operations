@@ -107,12 +107,15 @@ public class CheckMandatoryMetadataUtil {
         ValidationUtils.checkMetadataRequired(operation.getSubjectArea(), ServiceExceptionParameters.OPERATION_SUBJECT_AREA, exceptions);
         ValidationUtils.checkMetadataRequired(operation.getIndicatorSystem(), ServiceExceptionParameters.OPERATION_INDICATOR_SYSTEM, exceptions);
 
-        if (!ValidationUtils.isEmpty(operation.getReleaseCalendarAccess())) {
+        if (operation.getReleaseCalendar().equals(false)) {
+            ValidationUtils.checkMetadataEmpty(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
+        } else {
+            ValidationUtils.checkMetadataRequired(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
             ValidationUtils.validateUrl(operation.getReleaseCalendarAccess(), ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS, exceptions);
         }
 
         ValidationUtils.checkSemanticIdentifierAsMetamacID(operation.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
-        
+
         if (!exceptions.isEmpty()) {
             throw new MetamacException(exceptions);
         }
@@ -186,7 +189,7 @@ public class CheckMandatoryMetadataUtil {
         if (instance.getBasePeriod() != null && !TimeUtils.isTimeValue(instance.getBasePeriod())) {
             exceptions.add(new MetamacExceptionItem(ServiceExceptionType.METADATA_INCORRECT, ServiceExceptionParameters.INSTANCE_BASE_PERIOD));
         }
-        
+
         ValidationUtils.checkSemanticIdentifierAsMetamacID(instance.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
 
         if (!exceptions.isEmpty()) {
@@ -219,7 +222,6 @@ public class CheckMandatoryMetadataUtil {
         List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
 
         ValidationUtils.checkMetadataRequired(instance.getInventoryDate(), ServiceExceptionParameters.INSTANCE_INVENTORY_DATE, exceptions);
-
         checkInstanceForPublishInternally(instance);
     }
 

@@ -586,7 +586,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
     @Test
     public void testUpdateOperationWithReleaseCalendarAccessAndWithoutReleaseCalendar() throws Exception {
-        // expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_INVALID_URL, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_UNEXPECTED, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
 
         Operation operation = createOperation();
         operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
@@ -595,7 +595,20 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setReleaseCalendar(Boolean.FALSE);
         operation.setReleaseCalendarAccess("http://tutu.com");
 
-        // TODO: Debe lanzar error y no lo esta lanzando
+        statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
+    }
+    
+    @Test
+    public void testUpdateOperationWithReleaseCalendarAndWithoutReleaseCalendarAccess() throws Exception {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_REQUIRED, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
+
+        Operation operation = createOperation();
+        operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), operation);
+        assertNull(operation.getReleaseCalendarAccess());
+
+        operation.setReleaseCalendar(Boolean.TRUE);
+        operation.setReleaseCalendarAccess(null);
+
         statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
     }
 
