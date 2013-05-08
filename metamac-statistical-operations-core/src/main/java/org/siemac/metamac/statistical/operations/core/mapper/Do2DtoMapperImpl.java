@@ -306,8 +306,11 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // CONTACT: Extracted from AppCommonMetadata
-        // LEGAL_ACTS: Extracted from AppCommonMetadata
-        // DATA_SHARING: Extracted from AppCommonMetadata
+        
+        // COMMON_LEGAL_ACTS: Extracted from AppCommonMetadata
+        target.setSpecificLegalActs(internationalStringToDto(source.getSpecificLegalActs()));
+        // COMMON_DATA_SHARING: Extracted from AppCommonMetadata
+        target.setSpecificDataSharing(internationalStringToDto(source.getSpecificDataSharing()));
         // CONFIDENCIALITY_POLICY: Extracted from AppCommonMetadata
         // CONFIDENCIALITY_DATA_TREATMENT: Extracted from AppCommonMetadata
 

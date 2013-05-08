@@ -47,6 +47,8 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.utils.StatisticalOperationsBaseTest;
+import org.siemac.metamac.statistical.operations.core.utils.asserts.StatisticalOperationsAsserts;
+import org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -1207,6 +1209,30 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Check number of operations
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
         assertEquals(1, operationsAfter);
+    }
+
+    @Test
+    @Transactional
+    public void testCreateOperationWithSpecificLegalActs() throws MetamacException {
+        OperationDto expected = createOperationDto();
+        expected.setSpecificLegalActs(StatisticalOperationsMocks.mockInternationalStringDto());
+
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), expected);
+        assertNotNull(operationDto);
+
+        StatisticalOperationsAsserts.assertEqualsInternationalStringDto(expected.getSpecificLegalActs(), operationDto.getSpecificLegalActs());
+    }
+    
+    @Test
+    @Transactional
+    public void testCreateOperationWithSpecificDataSharing() throws MetamacException {
+        OperationDto expected = createOperationDto();
+        expected.setSpecificDataSharing(StatisticalOperationsMocks.mockInternationalStringDto());
+
+        OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), expected);
+        assertNotNull(operationDto);
+
+        StatisticalOperationsAsserts.assertEqualsInternationalStringDto(expected.getSpecificDataSharing(), operationDto.getSpecificDataSharing());
     }
 
     @Test

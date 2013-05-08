@@ -109,10 +109,13 @@ Application StatisticalOperationsDto {
             - @InternationalStringDto revPractice nullable;
             // CONTAT: It comes from AppCommonMetadata
 
-            // LEGAL_ACTS: It comes from AppCommonMetadata
-            // DATA_SHARING: It comes from AppCommonMetadata
+            // COMMON_LEGAL_ACTS: It comes from AppCommonMetadata
+            - @InternationalStringDto specificLegalActs nullable;
+            // COMMON_DATA_SHARING: It comes from AppCommonMetadata
+            - @InternationalStringDto specificDataSharing nullable;
             // CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
             // CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
+            
             - @InternationalStringDto comment nullable;
             - @InternationalStringDto notes nullable;
 

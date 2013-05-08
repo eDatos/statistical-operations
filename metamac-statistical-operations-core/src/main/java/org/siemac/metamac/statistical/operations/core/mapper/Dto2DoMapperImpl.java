@@ -372,7 +372,9 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // CONTACT: Extracted from AppCommonMetadata
 
         // LEGAL_ACTS: Extracted from AppCommonMetadata
+        target.setSpecificLegalActs(internationalStringToEntity(source.getSpecificLegalActs(), target.getSpecificLegalActs(), ServiceExceptionParameters.OPERATION_SPECIFIC_LEGAL_ACTS));
         // DATA_SHARING: Extracted from AppCommonMetadata
+        target.setSpecificDataSharing(internationalStringToEntity(source.getSpecificDataSharing(), target.getSpecificDataSharing(), ServiceExceptionParameters.OPERATION_SPECIFIC_DATA_SHARING));
         // CONFIDENCIALITY_POLICY: Extracted from AppCommonMetadata
         // CONFIDENCIALITY_DATA_TREATMENT: Extracted from AppCommonMetadata
 

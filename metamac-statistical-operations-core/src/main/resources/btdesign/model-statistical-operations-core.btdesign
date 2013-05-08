@@ -389,8 +389,12 @@ Application StatisticalOperations {
        		// CONTAT: It comes from AppCommonMetadata
        		
        		
-       		// LEGAL_ACTS: It comes from AppCommonMetadata
-       		// DATA_SHARING: It comes from AppCommonMetadata
+       		// COMMON_LEGAL_ACTS: It comes from AppCommonMetadata
+       		"SPECIFIC_LEGAL_ACTS"
+       		- @InternationalString specificLegalActs cascade="all" nullable databaseColumn="SPECIFIC_LEGAL_ACTS_FK";
+       		// COMMON_DATA_SHARING: It comes from AppCommonMetadata
+       		"SPECIFIC_DATA_SHARING"
+       		- @InternationalString specificDataSharing cascade="all" nullable databaseColumn="SPECIFIC_DATA_SHARING_FK";
        		// CONFIDENCIALITY_POLICY: It comes from AppCommonMetadata
        		// CONFIDENCIALITY_DATA_TREATMENT: It comes from AppCommonMetadata
        		

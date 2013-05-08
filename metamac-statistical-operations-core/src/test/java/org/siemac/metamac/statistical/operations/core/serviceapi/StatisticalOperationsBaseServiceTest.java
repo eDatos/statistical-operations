@@ -33,6 +33,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.utils.StatisticalOperationsBaseTest;
+import org.siemac.metamac.statistical.operations.core.utils.asserts.StatisticalOperationsAsserts;
 import org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -408,6 +409,30 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
+    }
+    
+    @Test
+    public void testCreateOperationWithSpecificLegalActs() throws MetamacException {
+        Operation expected = createOperation();
+        expected.setSpecificLegalActs(StatisticalOperationsMocks.mockInternationalString());
+        
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), expected);
+        
+        assertNotNull(operation);
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
+        StatisticalOperationsAsserts.assertEqualsInternationalString(expected.getSpecificLegalActs(), operation.getSpecificLegalActs());
+    }
+    
+    @Test
+    public void testCreateOperationWithSpecificDataSharing() throws MetamacException {
+        Operation expected = createOperation();
+        expected.setSpecificDataSharing(StatisticalOperationsMocks.mockInternationalString());
+        
+        Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), expected);
+        
+        assertNotNull(operation);
+        assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
+        StatisticalOperationsAsserts.assertEqualsInternationalString(expected.getSpecificDataSharing(), operation.getSpecificDataSharing());
     }
 
     @Test

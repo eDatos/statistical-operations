@@ -44,6 +44,8 @@ public class ServiceExceptionParameters {
     public static final String OPERATION_INTERNAL_INVENTORY_DATE = "operation.internal_inventory_date";
     public static final String OPERATION_INVENTORY_DATE          = "operation.inventory_date";
     public static final String OPERATION_COMMON_METADATA         = "operation.common_metadata";
+    public static final String OPERATION_SPECIFIC_LEGAL_ACTS     = "operation.specific_legal_acts";
+    public static final String OPERATION_SPECIFIC_DATA_SHARING     = "operation.specific_data_sharing";
 
     public static final String INSTANCE_CODE                     = "instance.code";
     public static final String INSTANCE_URN                      = "instance.urn";
