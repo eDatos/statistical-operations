@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client;
 
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.gin.DefaultPlace;
 
 import com.google.gwt.event.shared.EventBus;

@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.utils;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
@@ -10,6 +11,7 @@ import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
+import org.siemac.metamac.rest.common_metadata.v1_0.domain.ResourceInternal;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.ClassSystems;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
@@ -41,57 +43,68 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.service.Stat
 
 public class StatisticalOperationsRestMocks {
 
-    public static Operation mockOperation1(String baseApi) {
-        return mockOperation(baseApi, "1");
+    private final String statisticalOperationsInternalApiBase;
+    private final String srmInternalApiBase;
+
+    public StatisticalOperationsRestMocks(String statisticalOperationsInternalApiBase, String srmInternalApiBase) {
+        assertNotNull(statisticalOperationsInternalApiBase);
+        assertNotNull(srmInternalApiBase);
+
+        this.statisticalOperationsInternalApiBase = statisticalOperationsInternalApiBase;
+        this.srmInternalApiBase = srmInternalApiBase;
     }
 
-    public static Operation mockOperation2(String baseApi) {
-        return mockOperation(baseApi, "2");
+    public Operation mockOperation1() {
+        return mockOperation(statisticalOperationsInternalApiBase, "1");
     }
 
-    public static Operation mockOperation3(String baseApi) {
-        return mockOperation(baseApi, "3");
+    public Operation mockOperation2() {
+        return mockOperation(statisticalOperationsInternalApiBase, "2");
     }
 
-    public static Operation mockOperation4(String baseApi) {
-        return mockOperation(baseApi, "4");
+    public Operation mockOperation3() {
+        return mockOperation(statisticalOperationsInternalApiBase, "3");
     }
 
-    public static Operation mockOperation5(String baseApi) {
-        return mockOperation(baseApi, "5");
+    public Operation mockOperation4() {
+        return mockOperation(statisticalOperationsInternalApiBase, "4");
     }
 
-    public static Operation mockOperation6(String baseApi) {
-        return mockOperation(baseApi, "6");
+    public Operation mockOperation5() {
+        return mockOperation(statisticalOperationsInternalApiBase, "5");
     }
 
-    public static Family mockFamily1(String baseApi) {
-        return mockFamily(baseApi, "1");
+    public Operation mockOperation6() {
+        return mockOperation(statisticalOperationsInternalApiBase, "6");
     }
 
-    public static Family mockFamily2(String baseApi) {
-        return mockFamily(baseApi, "2");
+    public Family mockFamily1() {
+        return mockFamily(statisticalOperationsInternalApiBase, "1");
     }
 
-    public static Instance mockInstance1(String baseApi) {
-        return mockInstance(baseApi, "1", "operation1");
+    public Family mockFamily2() {
+        return mockFamily(statisticalOperationsInternalApiBase, "2");
     }
 
-    public static Operations mockOperations(String baseApi, String limit, String offset) {
+    public Instance mockInstance1() {
+        return mockInstance(statisticalOperationsInternalApiBase, "1", "operation1");
+    }
+
+    public Operations mockOperations(String baseApi, String limit, String offset) {
         Operations operations = new Operations();
         operations.setKind(RestExternalConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(10));
         if (limit == null && (offset == null || "0".equals(offset))) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
-            operations.getOperations().add(mockOperation5Resource(baseApi));
-            operations.getOperations().add(mockOperation6Resource(baseApi));
-            operations.getOperations().add(mockOperation7Resource(baseApi));
-            operations.getOperations().add(mockOperation8Resource(baseApi));
-            operations.getOperations().add(mockOperation9Resource(baseApi));
-            operations.getOperations().add(mockOperation10Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
+            operations.getOperations().add(mockOperation5Resource());
+            operations.getOperations().add(mockOperation6Resource());
+            operations.getOperations().add(mockOperation7Resource());
+            operations.getOperations().add(mockOperation8Resource());
+            operations.getOperations().add(mockOperation9Resource());
+            operations.getOperations().add(mockOperation10Resource());
             operations.setOffset(BigInteger.valueOf(0));
             operations.setLimit(BigInteger.valueOf(25));
             operations.setFirstLink(null);
@@ -99,16 +112,16 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(null);
             operations.setLastLink(null);
         } else if ("10000".equals(limit) && offset == null) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
-            operations.getOperations().add(mockOperation5Resource(baseApi));
-            operations.getOperations().add(mockOperation6Resource(baseApi));
-            operations.getOperations().add(mockOperation7Resource(baseApi));
-            operations.getOperations().add(mockOperation8Resource(baseApi));
-            operations.getOperations().add(mockOperation9Resource(baseApi));
-            operations.getOperations().add(mockOperation10Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
+            operations.getOperations().add(mockOperation5Resource());
+            operations.getOperations().add(mockOperation6Resource());
+            operations.getOperations().add(mockOperation7Resource());
+            operations.getOperations().add(mockOperation8Resource());
+            operations.getOperations().add(mockOperation9Resource());
+            operations.getOperations().add(mockOperation10Resource());
             operations.setOffset(BigInteger.valueOf(0));
             operations.setLimit(BigInteger.valueOf(1000));
             operations.setFirstLink(null);
@@ -116,8 +129,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(null);
             operations.setLastLink(null);
         } else if ("2".equals(limit) && "0".equals(offset)) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(null);
@@ -125,8 +138,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(baseApi + "/operations?limit=2&offset=2");
             operations.setLastLink(baseApi + "/operations?limit=2&offset=8");
         } else if ("2".equals(limit) && "2".equals(offset)) {
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(baseApi + "/operations?limit=2&offset=0");
@@ -134,8 +147,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(baseApi + "/operations?limit=2&offset=4");
             operations.setLastLink(baseApi + "/operations?limit=2&offset=8");
         } else if ("2".equals(limit) && "8".equals(offset)) {
-            operations.getOperations().add(mockOperation9Resource(baseApi));
-            operations.getOperations().add(mockOperation10Resource(baseApi));
+            operations.getOperations().add(mockOperation9Resource());
+            operations.getOperations().add(mockOperation10Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(baseApi + "/operations?limit=2&offset=0");
@@ -156,7 +169,7 @@ public class StatisticalOperationsRestMocks {
         return operations;
     }
 
-    public static Operations mockOperations(String baseApi, String limit, String offset, String query) {
+    public Operations mockOperations(String baseApi, String limit, String offset, String query) {
         Operations operations = new Operations();
         operations.setKind(RestExternalConstants.KIND_OPERATIONS);
         String querySupported1 = StatisticalOperationsRestExternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
@@ -164,8 +177,8 @@ public class StatisticalOperationsRestMocks {
         if (querySupported1.equals(query)) {
             operations.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
-                operations.getOperations().add(mockOperation1Resource(baseApi));
-                operations.getOperations().add(mockOperation10Resource(baseApi));
+                operations.getOperations().add(mockOperation1Resource());
+                operations.getOperations().add(mockOperation10Resource());
                 operations.setOffset(BigInteger.valueOf(0));
                 operations.setLimit(BigInteger.valueOf(25));
                 operations.setFirstLink(null);
@@ -173,7 +186,7 @@ public class StatisticalOperationsRestMocks {
                 operations.setNextLink(null);
                 operations.setLastLink(null);
             } else if ("1".equals(limit) && "0".equals(offset)) {
-                operations.getOperations().add(mockOperation1Resource(baseApi));
+                operations.getOperations().add(mockOperation1Resource());
                 operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 operations.setFirstLink(null);
@@ -181,8 +194,8 @@ public class StatisticalOperationsRestMocks {
                 operations.setNextLink(baseApi + "/operations?query=" + query + "&limit=1&offset=1");
                 operations.setLastLink(baseApi + "/operations?query=" + query + "&limit=1&offset=1");
             } else if ("1".equals(limit) && "1".equals(offset)) {
-                operations.getOperations().add(mockOperation3Resource(baseApi));
-                operations.getOperations().add(mockOperation4Resource(baseApi));
+                operations.getOperations().add(mockOperation3Resource());
+                operations.getOperations().add(mockOperation4Resource());
                 operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 operations.setFirstLink(baseApi + "/operations?query=" + query + "&limit=1&offset=0");
@@ -193,7 +206,7 @@ public class StatisticalOperationsRestMocks {
         } else if (querySupported2.equals(query)) {
             operations.setTotal(BigInteger.valueOf(1));
             if (limit == null && (offset == null || "0".equals(offset))) {
-                operations.getOperations().add(mockOperation1Resource(baseApi));
+                operations.getOperations().add(mockOperation1Resource());
                 operations.setOffset(BigInteger.valueOf(0));
                 operations.setLimit(BigInteger.valueOf(25));
                 operations.setFirstLink(null);
@@ -209,17 +222,17 @@ public class StatisticalOperationsRestMocks {
         return operations;
     }
 
-    public static Operations mockOperationsByFamily1(String baseApi, String limit, String offset) {
+    public Operations mockOperationsByFamily1(String baseApi, String limit, String offset) {
         Operations operations = new Operations();
         operations.setKind(RestExternalConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(6));
         if (limit == null && (offset == null || "0".equals(offset))) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
-            operations.getOperations().add(mockOperation5Resource(baseApi));
-            operations.getOperations().add(mockOperation6Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
+            operations.getOperations().add(mockOperation5Resource());
+            operations.getOperations().add(mockOperation6Resource());
             operations.setOffset(BigInteger.valueOf(0));
             operations.setLimit(BigInteger.valueOf(25));
             operations.setFirstLink(null);
@@ -227,12 +240,12 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(null);
             operations.setLastLink(null);
         } else if ("10000".equals(limit) && offset == null) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
-            operations.getOperations().add(mockOperation5Resource(baseApi));
-            operations.getOperations().add(mockOperation6Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
+            operations.getOperations().add(mockOperation5Resource());
+            operations.getOperations().add(mockOperation6Resource());
             operations.setOffset(BigInteger.valueOf(0));
             operations.setLimit(BigInteger.valueOf(1000));
             operations.setFirstLink(null);
@@ -240,8 +253,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(null);
             operations.setLastLink(null);
         } else if ("2".equals(limit) && "0".equals(offset)) {
-            operations.getOperations().add(mockOperation1Resource(baseApi));
-            operations.getOperations().add(mockOperation2Resource(baseApi));
+            operations.getOperations().add(mockOperation1Resource());
+            operations.getOperations().add(mockOperation2Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(null);
@@ -249,8 +262,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(baseApi + "/families/family1/operations?limit=2&offset=2");
             operations.setLastLink(baseApi + "/families/family1/operations?limit=2&offset=4");
         } else if ("2".equals(limit) && "2".equals(offset)) {
-            operations.getOperations().add(mockOperation3Resource(baseApi));
-            operations.getOperations().add(mockOperation4Resource(baseApi));
+            operations.getOperations().add(mockOperation3Resource());
+            operations.getOperations().add(mockOperation4Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(baseApi + "/families/family1/operations?limit=2&offset=0");
@@ -258,8 +271,8 @@ public class StatisticalOperationsRestMocks {
             operations.setNextLink(baseApi + "/families/family1/operations?limit=2&offset=4");
             operations.setLastLink(baseApi + "/families/family1/operations?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
-            operations.getOperations().add(mockOperation5Resource(baseApi));
-            operations.getOperations().add(mockOperation6Resource(baseApi));
+            operations.getOperations().add(mockOperation5Resource());
+            operations.getOperations().add(mockOperation6Resource());
             operations.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             operations.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             operations.setFirstLink(baseApi + "/families/family1/operations?limit=2&offset=0");
@@ -280,12 +293,12 @@ public class StatisticalOperationsRestMocks {
         return operations;
     }
 
-    public static Operations mockOperationsByFamily2(String baseApi, String limit, String offset) {
+    public Operations mockOperationsByFamily2(String baseApi, String limit, String offset) {
         Operations operations = new Operations();
         operations.setKind(RestExternalConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(4));
         if ("1".equals(limit) && "2".equals(offset)) {
-            operations.getOperations().add(mockOperation8Resource(baseApi));
+            operations.getOperations().add(mockOperation8Resource());
             operations.setOffset(BigInteger.valueOf(2));
             operations.setLimit(BigInteger.valueOf(1));
             operations.setFirstLink(baseApi + "/families/family2/operations?limit=1&offset=0");
@@ -298,16 +311,16 @@ public class StatisticalOperationsRestMocks {
         return operations;
     }
 
-    public static Families mockFamilies(String baseApi, String limit, String offset) {
+    public Families mockFamilies(String baseApi, String limit, String offset) {
         Families families = new Families();
         families.setKind(RestExternalConstants.KIND_FAMILIES);
         families.setTotal(BigInteger.valueOf(5));
         if (limit == null && (offset == null || "0".equals(offset))) {
-            families.getFamilies().add(mockFamily1Resource(baseApi));
-            families.getFamilies().add(mockFamily2Resource(baseApi));
-            families.getFamilies().add(mockFamily3Resource(baseApi));
-            families.getFamilies().add(mockFamily4Resource(baseApi));
-            families.getFamilies().add(mockFamily15Resource(baseApi));
+            families.getFamilies().add(mockFamily1Resource());
+            families.getFamilies().add(mockFamily2Resource());
+            families.getFamilies().add(mockFamily3Resource());
+            families.getFamilies().add(mockFamily4Resource());
+            families.getFamilies().add(mockFamily15Resource());
             families.setOffset(BigInteger.valueOf(0));
             families.setLimit(BigInteger.valueOf(25));
             families.setFirstLink(null);
@@ -315,11 +328,11 @@ public class StatisticalOperationsRestMocks {
             families.setNextLink(null);
             families.setLastLink(null);
         } else if ("10000".equals(limit) && offset == null) {
-            families.getFamilies().add(mockFamily1Resource(baseApi));
-            families.getFamilies().add(mockFamily2Resource(baseApi));
-            families.getFamilies().add(mockFamily3Resource(baseApi));
-            families.getFamilies().add(mockFamily4Resource(baseApi));
-            families.getFamilies().add(mockFamily15Resource(baseApi));
+            families.getFamilies().add(mockFamily1Resource());
+            families.getFamilies().add(mockFamily2Resource());
+            families.getFamilies().add(mockFamily3Resource());
+            families.getFamilies().add(mockFamily4Resource());
+            families.getFamilies().add(mockFamily15Resource());
             families.setOffset(BigInteger.valueOf(0));
             families.setLimit(BigInteger.valueOf(1000));
             families.setFirstLink(null);
@@ -327,8 +340,8 @@ public class StatisticalOperationsRestMocks {
             families.setNextLink(null);
             families.setLastLink(null);
         } else if ("2".equals(limit) && "0".equals(offset)) {
-            families.getFamilies().add(mockFamily1Resource(baseApi));
-            families.getFamilies().add(mockFamily2Resource(baseApi));
+            families.getFamilies().add(mockFamily1Resource());
+            families.getFamilies().add(mockFamily2Resource());
             families.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             families.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             families.setFirstLink(null);
@@ -336,8 +349,8 @@ public class StatisticalOperationsRestMocks {
             families.setNextLink(baseApi + "/families?limit=2&offset=2");
             families.setLastLink(baseApi + "/families?limit=2&offset=4");
         } else if ("2".equals(limit) && "2".equals(offset)) {
-            families.getFamilies().add(mockFamily3Resource(baseApi));
-            families.getFamilies().add(mockFamily4Resource(baseApi));
+            families.getFamilies().add(mockFamily3Resource());
+            families.getFamilies().add(mockFamily4Resource());
             families.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             families.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             families.setFirstLink(baseApi + "/families?limit=2&offset=0");
@@ -345,7 +358,7 @@ public class StatisticalOperationsRestMocks {
             families.setNextLink(baseApi + "/families?limit=2&offset=4");
             families.setLastLink(baseApi + "/families?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
-            families.getFamilies().add(mockFamily15Resource(baseApi));
+            families.getFamilies().add(mockFamily15Resource());
             families.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             families.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             families.setFirstLink(baseApi + "/families?limit=2&offset=0");
@@ -366,7 +379,7 @@ public class StatisticalOperationsRestMocks {
         return families;
     }
 
-    public static Families mockFamilies(String baseApi, String limit, String offset, String query) {
+    public Families mockFamilies(String baseApi, String limit, String offset, String query) {
         Families families = new Families();
         families.setKind(RestExternalConstants.KIND_FAMILIES);
 
@@ -374,8 +387,8 @@ public class StatisticalOperationsRestMocks {
         if (querySupported1.equals(query)) {
             families.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
-                families.getFamilies().add(mockFamily1Resource(baseApi));
-                families.getFamilies().add(mockFamily15Resource(baseApi));
+                families.getFamilies().add(mockFamily1Resource());
+                families.getFamilies().add(mockFamily15Resource());
                 families.setOffset(BigInteger.valueOf(0));
                 families.setLimit(BigInteger.valueOf(25));
                 families.setFirstLink(null);
@@ -383,7 +396,7 @@ public class StatisticalOperationsRestMocks {
                 families.setNextLink(null);
                 families.setLastLink(null);
             } else if ("1".equals(limit) && "0".equals(offset)) {
-                families.getFamilies().add(mockFamily1Resource(baseApi));
+                families.getFamilies().add(mockFamily1Resource());
                 families.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 families.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 families.setFirstLink(null);
@@ -391,7 +404,7 @@ public class StatisticalOperationsRestMocks {
                 families.setNextLink(baseApi + "/families?query=" + query + "&limit=1&offset=1");
                 families.setLastLink(baseApi + "/families?query=" + query + "&limit=1&offset=1");
             } else if ("1".equals(limit) && "1".equals(offset)) {
-                families.getFamilies().add(mockFamily15Resource(baseApi));
+                families.getFamilies().add(mockFamily15Resource());
                 families.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 families.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 families.setFirstLink(baseApi + "/families?query=" + query + "&limit=1&offset=0");
@@ -407,26 +420,26 @@ public class StatisticalOperationsRestMocks {
         return families;
     }
 
-    public static Families mockFamiliesByOperation1(String baseApi) {
+    public Families mockFamiliesByOperation1() {
         Families families = new Families();
         families.setKind(RestExternalConstants.KIND_FAMILIES);
         families.setTotal(BigInteger.valueOf(2));
-        families.getFamilies().add(mockFamily1Resource(baseApi));
-        families.getFamilies().add(mockFamily2Resource(baseApi));
+        families.getFamilies().add(mockFamily1Resource());
+        families.getFamilies().add(mockFamily2Resource());
         return families;
     }
 
-    public static Instances mockInstancesByOperation1(String baseApi, String limit, String offset) {
+    public Instances mockInstancesByOperation1(String baseApi, String limit, String offset) {
         Instances instances = new Instances();
         instances.setKind(RestExternalConstants.KIND_INSTANCES);
         instances.setTotal(BigInteger.valueOf(5));
         String operation = StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1;
         if (limit == null && (offset == null || "0".equals(offset))) {
-            instances.getInstances().add(mockInstance1Resource(baseApi));
-            instances.getInstances().add(mockInstance2Resource(baseApi));
-            instances.getInstances().add(mockInstance3Resource(baseApi));
-            instances.getInstances().add(mockInstance4Resource(baseApi));
-            instances.getInstances().add(mockInstance15Resource(baseApi));
+            instances.getInstances().add(mockInstance1Resource());
+            instances.getInstances().add(mockInstance2Resource());
+            instances.getInstances().add(mockInstance3Resource());
+            instances.getInstances().add(mockInstance4Resource());
+            instances.getInstances().add(mockInstance15Resource());
             instances.setOffset(BigInteger.valueOf(0));
             instances.setLimit(BigInteger.valueOf(25));
             instances.setFirstLink(null);
@@ -434,11 +447,11 @@ public class StatisticalOperationsRestMocks {
             instances.setNextLink(null);
             instances.setLastLink(null);
         } else if ("10000".equals(limit) && offset == null) {
-            instances.getInstances().add(mockInstance1Resource(baseApi));
-            instances.getInstances().add(mockInstance2Resource(baseApi));
-            instances.getInstances().add(mockInstance3Resource(baseApi));
-            instances.getInstances().add(mockInstance4Resource(baseApi));
-            instances.getInstances().add(mockInstance15Resource(baseApi));
+            instances.getInstances().add(mockInstance1Resource());
+            instances.getInstances().add(mockInstance2Resource());
+            instances.getInstances().add(mockInstance3Resource());
+            instances.getInstances().add(mockInstance4Resource());
+            instances.getInstances().add(mockInstance15Resource());
             instances.setOffset(BigInteger.valueOf(0));
             instances.setLimit(BigInteger.valueOf(1000));
             instances.setFirstLink(null);
@@ -446,8 +459,8 @@ public class StatisticalOperationsRestMocks {
             instances.setNextLink(null);
             instances.setLastLink(null);
         } else if ("2".equals(limit) && "0".equals(offset)) {
-            instances.getInstances().add(mockInstance1Resource(baseApi));
-            instances.getInstances().add(mockInstance2Resource(baseApi));
+            instances.getInstances().add(mockInstance1Resource());
+            instances.getInstances().add(mockInstance2Resource());
             instances.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             instances.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             instances.setFirstLink(null);
@@ -455,8 +468,8 @@ public class StatisticalOperationsRestMocks {
             instances.setNextLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=2");
             instances.setLastLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=4");
         } else if ("2".equals(limit) && "2".equals(offset)) {
-            instances.getInstances().add(mockInstance3Resource(baseApi));
-            instances.getInstances().add(mockInstance4Resource(baseApi));
+            instances.getInstances().add(mockInstance3Resource());
+            instances.getInstances().add(mockInstance4Resource());
             instances.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             instances.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             instances.setFirstLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=0");
@@ -464,7 +477,7 @@ public class StatisticalOperationsRestMocks {
             instances.setNextLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=4");
             instances.setLastLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=4");
         } else if ("2".equals(limit) && "4".equals(offset)) {
-            instances.getInstances().add(mockInstance15Resource(baseApi));
+            instances.getInstances().add(mockInstance15Resource());
             instances.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
             instances.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
             instances.setFirstLink(baseApi + "/operations/" + operation + "/instances?limit=2&offset=0");
@@ -485,7 +498,7 @@ public class StatisticalOperationsRestMocks {
         return instances;
     }
 
-    public static Instances mockInstancesByOperation1(String baseApi, String limit, String offset, String query) {
+    public Instances mockInstancesByOperation1(String baseApi, String limit, String offset, String query) {
         Instances instances = new Instances();
         instances.setKind(RestExternalConstants.KIND_INSTANCES);
         String operation = StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1;
@@ -494,8 +507,8 @@ public class StatisticalOperationsRestMocks {
         if (querySupported1.equals(query)) {
             instances.setTotal(BigInteger.valueOf(2));
             if (limit == null && (offset == null || "0".equals(offset))) {
-                instances.getInstances().add(mockInstance1Resource(baseApi));
-                instances.getInstances().add(mockInstance15Resource(baseApi));
+                instances.getInstances().add(mockInstance1Resource());
+                instances.getInstances().add(mockInstance15Resource());
                 instances.setOffset(BigInteger.valueOf(0));
                 instances.setLimit(BigInteger.valueOf(25));
                 instances.setFirstLink(null);
@@ -503,7 +516,7 @@ public class StatisticalOperationsRestMocks {
                 instances.setNextLink(null);
                 instances.setLastLink(null);
             } else if ("1".equals(limit) && "0".equals(offset)) {
-                instances.getInstances().add(mockInstance1Resource(baseApi));
+                instances.getInstances().add(mockInstance1Resource());
                 instances.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 instances.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 instances.setFirstLink(null);
@@ -511,7 +524,7 @@ public class StatisticalOperationsRestMocks {
                 instances.setNextLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=1");
                 instances.setLastLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=1");
             } else if ("1".equals(limit) && "1".equals(offset)) {
-                instances.getInstances().add(mockInstance15Resource(baseApi));
+                instances.getInstances().add(mockInstance15Resource());
                 instances.setOffset(BigInteger.valueOf(Integer.valueOf(offset).intValue()));
                 instances.setLimit(BigInteger.valueOf(Integer.valueOf(limit).intValue()));
                 instances.setFirstLink(baseApi + "/operations/" + operation + "/instances?query=" + query + "&limit=1&offset=0");
@@ -527,7 +540,7 @@ public class StatisticalOperationsRestMocks {
         return instances;
     }
 
-    public static SurveyTypes mockSurveyTypes() {
+    public SurveyTypes mockSurveyTypes() {
         SurveyTypes surveyTypes = new SurveyTypes();
         surveyTypes.setKind(RestExternalConstants.KIND_SURVEY_TYPES);
         surveyTypes.setTotal(BigInteger.valueOf(2));
@@ -536,7 +549,7 @@ public class StatisticalOperationsRestMocks {
         return surveyTypes;
     }
 
-    public static OfficialityTypes mockOfficialityTypes() {
+    public OfficialityTypes mockOfficialityTypes() {
         OfficialityTypes officialityTypes = new OfficialityTypes();
         officialityTypes.setKind(RestExternalConstants.KIND_OFFICIALITY_TYPES);
         officialityTypes.setTotal(BigInteger.valueOf(3));
@@ -546,7 +559,7 @@ public class StatisticalOperationsRestMocks {
         return officialityTypes;
     }
 
-    public static InstanceTypes mockInstanceTypes() {
+    public InstanceTypes mockInstanceTypes() {
         InstanceTypes instanceTypes = new InstanceTypes();
         instanceTypes.setKind(RestExternalConstants.KIND_INSTANCE_TYPES);
         instanceTypes.setTotal(BigInteger.valueOf(2));
@@ -555,7 +568,7 @@ public class StatisticalOperationsRestMocks {
         return instanceTypes;
     }
 
-    public static SurveySources mockSurveySources() {
+    public SurveySources mockSurveySources() {
         SurveySources surveySources = new SurveySources();
         surveySources.setKind(RestExternalConstants.KIND_SURVEY_SOURCES);
         surveySources.setTotal(BigInteger.valueOf(2));
@@ -564,7 +577,7 @@ public class StatisticalOperationsRestMocks {
         return surveySources;
     }
 
-    public static CollMethods mockCollMethods() {
+    public CollMethods mockCollMethods() {
         CollMethods collMethods = new CollMethods();
         collMethods.setKind(RestExternalConstants.KIND_COLL_METHODS);
         collMethods.setTotal(BigInteger.valueOf(2));
@@ -573,7 +586,7 @@ public class StatisticalOperationsRestMocks {
         return collMethods;
     }
 
-    public static Costs mockCosts() {
+    public Costs mockCosts() {
         Costs costs = new Costs();
         costs.setKind(RestExternalConstants.KIND_COSTS);
         costs.setTotal(BigInteger.valueOf(2));
@@ -582,9 +595,9 @@ public class StatisticalOperationsRestMocks {
         return costs;
     }
 
-    public static Configuration mockExternalApiCommonMetadataRetrieveConfiguration1ById() {
+    public Configuration mockExternalApiCommonMetadataRetrieveConfiguration1ById() {
         Configuration configuration = new Configuration();
-        configuration.setContact(MetamacRestMocks.mockResource("contact1", "urn:contact1", "structuralResources#agency", "http://srm-api/contacts/contact1"));
+        configuration.setContact(mockOrganisationResourceFromExternalItemSrm("contact1"));
         configuration.setLegalActs(mockInternationalString("legalActs", "1"));
         configuration.setDataSharing(mockInternationalString("dataSharing", "1"));
         configuration.setConfPolicy(mockInternationalString("confidentialityPolicy", "1"));
@@ -592,25 +605,25 @@ public class StatisticalOperationsRestMocks {
         return configuration;
     }
 
-    private static Resource mockOperationResource(String subId, String baseApi) {
+    private Resource mockOperationResource(String subId) {
         String operationId = "operation" + subId;
-        return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestExternalConstants.KIND_OPERATION, baseApi
-                + "/operations/" + operationId);
+        return MetamacRestMocks.mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestExternalConstants.KIND_OPERATION,
+                statisticalOperationsInternalApiBase + "/operations/" + operationId);
     }
 
-    private static Resource mockFamilyResource(String subId, String baseApi) {
+    private Resource mockFamilyResource(String subId) {
         String familyId = "family" + subId;
-        return MetamacRestMocks.mockResource(familyId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + familyId, RestExternalConstants.KIND_FAMILY, baseApi + "/families/"
-                + familyId);
+        return MetamacRestMocks.mockResource(familyId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + familyId, RestExternalConstants.KIND_FAMILY,
+                statisticalOperationsInternalApiBase + "/families/" + familyId);
     }
 
-    private static Resource mockInstanceResource(String operationId, String subId, String baseApi) {
+    private Resource mockInstanceResource(String operationId, String subId) {
         String instanceId = "instance" + subId;
         return MetamacRestMocks.mockResource(instanceId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operationId + "." + instanceId,
-                RestExternalConstants.KIND_INSTANCE, baseApi + "/operations/" + operationId + "/instances/" + instanceId);
+                RestExternalConstants.KIND_INSTANCE, statisticalOperationsInternalApiBase + "/operations/" + operationId + "/instances/" + instanceId);
     }
 
-    private static Operation mockOperation(String baseApi, String subId) {
+    private Operation mockOperation(String baseApi, String subId) {
 
         Operation operation = new Operation();
         operation.setId("operation" + subId);
@@ -667,11 +680,11 @@ public class StatisticalOperationsRestMocks {
         operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency22", "updateFrequencies", "structuralResources#code"));
         operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency333", "updateFrequencies", "structuralResources#code"));
         operation.getUpdateFrequencies().getUpdateFrequencies().add(mockResourceFromExternalItemSrm("updateFrequency4444", "updateFrequencies", "structuralResources#code"));
-        operation.setCurrentInstance(mockInstanceResource(operation.getId(), "333", baseApi));
+        operation.setCurrentInstance(mockInstanceResource(operation.getId(), "333"));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
         operation.setRevPolicy(mockInternationalString("revPolicy", subId));
         operation.setRevPractice(mockInternationalString("revPractice", subId));
-        operation.setContact(mockResourceFromExternalItem("contact1", "http://srm-api", "contacts", "structuralResources#agency"));
+        operation.setContact(mockOrganisationResourceFromExternalItemSrm("contact1"));
         operation.setLegalActs(mockInternationalString("legalActs", "1"));
         operation.setDataSharing(mockInternationalString("dataSharing", "1"));
         operation.setConfidentialityPolicy(mockInternationalString("confidentialityPolicy", "1"));
@@ -685,7 +698,7 @@ public class StatisticalOperationsRestMocks {
         return operation;
     }
 
-    private static Family mockFamily(String baseApi, String subId) {
+    private Family mockFamily(String baseApi, String subId) {
 
         Family family = new Family();
         family.setId("family" + subId);
@@ -703,7 +716,7 @@ public class StatisticalOperationsRestMocks {
         return family;
     }
 
-    private static Instance mockInstance(String baseApi, String subId, String operation) {
+    private Instance mockInstance(String baseApi, String subId, String operation) {
 
         Instance instance = new Instance();
         instance.setId("instance" + subId);
@@ -714,8 +727,8 @@ public class StatisticalOperationsRestMocks {
         instance.setAcronym(mockInternationalString("acronym", subId));
         instance.setSurvey(MetamacRestMocks.mockResource(operation, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation, RestExternalConstants.KIND_OPERATION,
                 baseApi + "/operations/" + operation));
-        instance.setPredecessor(mockInstanceResource(operation, "333", baseApi));
-        instance.setSuccessor(mockInstanceResource(operation, "22", baseApi));
+        instance.setPredecessor(mockInstanceResource(operation, "333"));
+        instance.setSuccessor(mockInstanceResource(operation, "22"));
         instance.setDataDescription(mockInternationalString("dataDescription", subId));
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subId));
         instance.setStatisticalUnits(new StatisticalUnits());
@@ -723,9 +736,9 @@ public class StatisticalOperationsRestMocks {
         instance.getStatisticalUnits().setKind(Do2RestExternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
         instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit1", "statisticalUnits", "structuralResources#concept"));
         instance.getStatisticalUnits().getStatisticalUnits().add(mockResourceFromExternalItemSrm("statisticalUnit22", "statisticalUnits", "structuralResources#concept"));
-        instance.setGeographicGranularity(mockResourceFromExternalItemSrm("geographicGranularity", "geographicGranularities", "structuralResources#codelist"));
+        // instance.setGeographicGranularity(mockResourceFromExternalItemSrm("geographicGranularity", "geographicGranularities", "structuralResources#codelist")); // TODO metamac-1629
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subId));
-        instance.setTemporalGranularity(mockResourceFromExternalItemSrm("temporalGranularity", "temporalGranularities", "structuralResources#codelist"));
+        // instance.setTemporalGranularity(mockResourceFromExternalItemSrm("temporalGranularity", "temporalGranularities", "structuralResources#codelist")); // TODO metamac-1629
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subId));
         instance.setBasePeriod("2012");
         instance.setUnitMeasures(new UnitMeasures());
@@ -780,99 +793,108 @@ public class StatisticalOperationsRestMocks {
         return instance;
     }
 
-    private static Resource mockOperation1Resource(String baseApi) {
-        return mockOperationResource("1", baseApi);
+    private Resource mockOperation1Resource() {
+        return mockOperationResource("1");
     }
 
-    private static Resource mockOperation2Resource(String baseApi) {
-        return mockOperationResource("2", baseApi);
+    private Resource mockOperation2Resource() {
+        return mockOperationResource("2");
     }
 
-    private static Resource mockOperation3Resource(String baseApi) {
-        return mockOperationResource("3", baseApi);
+    private Resource mockOperation3Resource() {
+        return mockOperationResource("3");
     }
 
-    private static Resource mockOperation4Resource(String baseApi) {
-        return mockOperationResource("4", baseApi);
+    private Resource mockOperation4Resource() {
+        return mockOperationResource("4");
     }
 
-    private static Resource mockOperation5Resource(String baseApi) {
-        return mockOperationResource("5", baseApi);
+    private Resource mockOperation5Resource() {
+        return mockOperationResource("5");
     }
 
-    private static Resource mockOperation6Resource(String baseApi) {
-        return mockOperationResource("6", baseApi);
+    private Resource mockOperation6Resource() {
+        return mockOperationResource("6");
     }
 
-    private static Resource mockOperation7Resource(String baseApi) {
-        return mockOperationResource("7", baseApi);
+    private Resource mockOperation7Resource() {
+        return mockOperationResource("7");
     }
 
-    private static Resource mockOperation8Resource(String baseApi) {
-        return mockOperationResource("8", baseApi);
+    private Resource mockOperation8Resource() {
+        return mockOperationResource("8");
     }
 
-    private static Resource mockOperation9Resource(String baseApi) {
-        return mockOperationResource("9", baseApi);
+    private Resource mockOperation9Resource() {
+        return mockOperationResource("9");
     }
 
-    private static Resource mockOperation10Resource(String baseApi) {
-        return mockOperationResource("10", baseApi);
+    private Resource mockOperation10Resource() {
+        return mockOperationResource("10");
     }
 
-    private static Resource mockFamily1Resource(String baseApi) {
-        return mockFamilyResource("1", baseApi);
+    private Resource mockFamily1Resource() {
+        return mockFamilyResource("1");
     }
 
-    private static Resource mockFamily2Resource(String baseApi) {
-        return mockFamilyResource("2", baseApi);
+    private Resource mockFamily2Resource() {
+        return mockFamilyResource("2");
     }
 
-    private static Resource mockFamily3Resource(String baseApi) {
-        return mockFamilyResource("3", baseApi);
+    private Resource mockFamily3Resource() {
+        return mockFamilyResource("3");
     }
 
-    private static Resource mockFamily4Resource(String baseApi) {
-        return mockFamilyResource("4", baseApi);
+    private Resource mockFamily4Resource() {
+        return mockFamilyResource("4");
     }
 
-    private static Resource mockFamily15Resource(String baseApi) {
-        return mockFamilyResource("15", baseApi);
+    private Resource mockFamily15Resource() {
+        return mockFamilyResource("15");
     }
 
-    private static Resource mockInstance1Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "1", baseApi);
+    private Resource mockInstance1Resource() {
+        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "1");
     }
 
-    private static Resource mockInstance2Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "2", baseApi);
+    private Resource mockInstance2Resource() {
+        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "2");
     }
 
-    private static Resource mockInstance3Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "3", baseApi);
+    private Resource mockInstance3Resource() {
+        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "3");
     }
 
-    private static Resource mockInstance4Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "4", baseApi);
+    private Resource mockInstance4Resource() {
+        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "4");
     }
 
-    private static Resource mockInstance15Resource(String baseApi) {
-        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "15", baseApi);
+    private Resource mockInstance15Resource() {
+        return mockInstanceResource(StatisticalOperationsRestExternalFacadeV10Test.OPERATION_1, "15");
     }
 
-    private static InternationalString mockInternationalString(String metadata, String subsubTitle) {
+    private InternationalString mockInternationalString(String metadata, String subsubTitle) {
         String subTitle = subsubTitle != null ? metadata + subsubTitle : metadata;
         return MetamacRestMocks.mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
     }
 
-    private static Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, String kind) {
-        String endpointApi = "http://data.istac.es/apis/srm/v1.0";
-        return mockResourceFromExternalItem(id, endpointApi, apiSubpath, kind);
+    private Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, String kind) {
+        return mockResourceFromExternalItem(id, srmInternalApiBase + "/v1.0", apiSubpath, kind);
     }
 
-    private static Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, String kind) {
+    private Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, String kind) {
         String urn = "urn:" + id;
         String selfLink = endpointApi + "/" + apiSubpath + "/" + id;
         return MetamacRestMocks.mockResource(id, urn, kind, selfLink);
+    }
+
+    private ResourceInternal mockOrganisationResourceFromExternalItemSrm(String id) {
+        ResourceInternal resource = new ResourceInternal();
+        resource.setId(id);
+        resource.setUrn("urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0)." + id);
+        resource.setKind("structuralResources#agency");
+        resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmInternalApiBase + "/v1.0/agencyschemes/SDMX/AGENCIES/1.0/agencies/" + id));
+        resource.setTitle(MetamacRestMocks.mockInternationalString("es", id + " en Español", "en", id + " in English"));
+        return resource;
     }
 }

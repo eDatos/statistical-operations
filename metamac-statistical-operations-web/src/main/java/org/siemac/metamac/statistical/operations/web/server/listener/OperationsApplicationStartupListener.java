@@ -21,6 +21,10 @@ public class OperationsApplicationStartupListener extends ApplicationStartupList
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_PASSWORD);
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_DIALECT);
 
+        // WEB APPLICATIONS
+        checkRequiredProperty(ConfigurationConstants.WEB_APPLICATION_STATISTICAL_OPERATIONS_INTERNAL_WEB);
+        checkRequiredProperty(ConfigurationConstants.WEB_APPLICATION_SRM_INTERNAL_WEB);
+
         // API
 
         checkRequiredProperty(ConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_INTERNAL_API);

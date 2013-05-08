@@ -13,9 +13,10 @@
             <xs:element name="selfLink" type="common:ResourceLink" />
             <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
+            <xs:element name="managementAppLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="subjectArea" type="common:Resource" />
+            <xs:element name="subjectArea" type="tns:ResourceInternal" />
             <xs:element name="secondarySubjectAreas" type="tns:SecondarySubjectAreas" minOccurs="0" />
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
@@ -34,12 +35,12 @@
             <xs:element name="releaseCalendar" type="xs:boolean" minOccurs="0" />
             <xs:element name="releaseCalendarAccess" type="xs:string" minOccurs="0" />
             <xs:element name="updateFrequencies" type="tns:UpdateFrequencies" minOccurs="0" />
-            <xs:element name="currentInternalInstance" type="common:Resource" minOccurs="0" />
-            <xs:element name="currentInstance" type="common:Resource" minOccurs="0" />
+            <xs:element name="currentInternalInstance" type="tns:ResourceInternal" minOccurs="0" />
+            <xs:element name="currentInstance" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0" />
             <xs:element name="revPolicy" type="common:InternationalString" minOccurs="0" />
             <xs:element name="revPractice" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="contact" type="common:Resource" minOccurs="1" />
+            <xs:element name="contact" type="tns:ResourceInternal" minOccurs="1" />
             <xs:element name="legalActs" type="common:InternationalString" minOccurs="0" />
             <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0" />
             <xs:element name="confidentialityPolicy" type="common:InternationalString" minOccurs="0" />
@@ -57,6 +58,7 @@
             <xs:element name="selfLink" type="common:ResourceLink" />
             <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="childLinks" type="common:ChildLinks" minOccurs="1" />
+            <xs:element name="managementAppLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
@@ -74,17 +76,18 @@
             <xs:element name="selfLink" type="common:ResourceLink" />
             <xs:element name="parentLink" type="common:ResourceLink" />
             <xs:element name="childLinks" type="common:ChildLinks" minOccurs="0" />
+            <xs:element name="managementAppLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="survey" type="common:Resource" />
-            <xs:element name="successor" type="common:Resource" minOccurs="0" />
-            <xs:element name="predecessor" type="common:Resource" minOccurs="0" />
+            <xs:element name="survey" type="tns:ResourceInternal" />
+            <xs:element name="successor" type="tns:ResourceInternal" minOccurs="0" />
+            <xs:element name="predecessor" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalPopulation" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalUnits" type="tns:StatisticalUnits" minOccurs="0" />
-            <xs:element name="geographicGranularity" type="common:Resource" minOccurs="0" />
+            <xs:element name="geographicGranularity" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="geographicComparability" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="temporalGranularity" type="common:Resource" minOccurs="0" />
+            <xs:element name="temporalGranularity" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0" />
             <xs:element name="basePeriod" type="xs:string" minOccurs="0" />
             <xs:element name="unitMeasures" type="tns:UnitMeasures" minOccurs="0" />
@@ -130,7 +133,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="operation" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="operation" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -140,7 +143,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="family" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="family" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -150,7 +153,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="instance" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="instance" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -429,6 +432,16 @@
             <xs:enumeration value="ID" />
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:complexType name="ResourceInternal">
+        <xs:complexContent>
+            <xs:extension base="common:Resource">
+                <xs:sequence>
+                    <xs:element name="managementAppLink" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
 
     <!-- Elements -->
     <xs:element name="operation" type="tns:Operation" />

@@ -24,6 +24,8 @@ import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.siemac.metamac.core.common.conf.ConfigurationService;
+import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
@@ -67,32 +69,35 @@ import org.springframework.context.ApplicationContext;
 
 public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestBaseTest {
 
-    private static final String                               PORT                                            = ServerResource.PORT;
-    private static String                                     jaxrsServerAddress                              = "http://localhost:" + PORT + "/apis/operations";
-    private static String                                     baseApi                                         = jaxrsServerAddress + "/v1.0";
+    private static final String                   PORT                                            = ServerResource.PORT;
+    private static String                         jaxrsServerAddress                              = "http://localhost:" + PORT + "/apis/operations";
+    private static String                         baseApi                                         = jaxrsServerAddress + "/v1.0";
 
+    private static String                         srmApiExternalEndpoint;
     // not read property from properties file to check explicity
-    private static String                                     statisticalOperationsApiExternalEndpointV10     = "http://data.istac.es/apis/operations/v1.0";
+    private static String                         statisticalOperationsApiExternalEndpointV10     = "http://data.istac.es/apis/operations/v1.0";
 
-    private static StatisticalOperationsV1_0 statisticalOperationsRestExternalFacadeClientXml;
+    private static StatisticalOperationsV1_0      statisticalOperationsRestExternalFacadeClientXml;
 
-    private static ApplicationContext                         applicationContext                              = null;
+    private static ApplicationContext             applicationContext                              = null;
 
-    private static String                                     NOT_EXISTS                                      = "NOT_EXISTS";
+    private static String                         NOT_EXISTS                                      = "NOT_EXISTS";
 
     // Operations
-    public static String                                      OPERATION_1                                     = "operation1";
-    public static String                                      FAMILY_1                                        = "family1";
-    public static String                                      FAMILY_2                                        = "family2";
-    public static String                                      INSTANCE_1                                      = "instance1";
-    public static String                                      COMMON_METADATA_1                               = "commonMetadata1";
-    public static String                                      QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
-    public static String                                      QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
-                                                                                                                      + LogicalOperator.AND + " "
-                                                                                                                      + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM + " "
-                                                                                                                      + ComparisonOperator.EQ + " \"true\"";
-    public static String                                      QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
-    public static String                                      QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                          OPERATION_1                                     = "operation1";
+    public static String                          FAMILY_1                                        = "family1";
+    public static String                          FAMILY_2                                        = "family2";
+    public static String                          INSTANCE_1                                      = "instance1";
+    public static String                          COMMON_METADATA_1                               = "commonMetadata1";
+    public static String                          QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                          QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
+                                                                                                          + LogicalOperator.AND + " " + OperationCriteriaPropertyRestriction.IS_INDICATORS_SYSTEM + " "
+                                                                                                          + ComparisonOperator.EQ + " \"true\"";
+    public static String                          QUERY_FAMILY_ID_LIKE_1                          = FamilyCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+    public static String                          QUERY_INSTANCE_ID_LIKE_1                        = InstanceCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
+
+    private static StatisticalOperationsRestMocks statisticalOperationsRestMocks;
+    private static StatisticalOperationsCoreMocks statisticalOperationsCoreMocks;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @BeforeClass
@@ -111,7 +116,14 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             providers.add(applicationContext.getBean("jaxbProvider", JAXBElementProvider.class));
             statisticalOperationsRestExternalFacadeClientXml = JAXRSClientFactory.create(jaxrsServerAddress, StatisticalOperationsV1_0.class, providers, Boolean.TRUE);
         }
+
+        // Configuration
+        ConfigurationService configurationService = applicationContext.getBean(ConfigurationService.class);
+        srmApiExternalEndpoint = configurationService.getProperty(ConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
+
         // Mockito
+        statisticalOperationsRestMocks = new StatisticalOperationsRestMocks(statisticalOperationsApiExternalEndpointV10, srmApiExternalEndpoint);
+        statisticalOperationsCoreMocks = new StatisticalOperationsCoreMocks();
         setUpMockito();
     }
 
@@ -131,7 +143,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         Operation operation = getStatisticalOperationsRestExternalFacadeClientXml().retrieveOperationById(OPERATION_1);
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsOperation(StatisticalOperationsRestMocks.mockOperation1(statisticalOperationsApiExternalEndpointV10), operation);
+        StatisticalOperationsRestAsserts.assertEqualsOperation(statisticalOperationsRestMocks.mockOperation1(), operation);
     }
 
     @Test
@@ -229,7 +241,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -238,7 +250,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -247,7 +259,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // first page with pagination
@@ -256,7 +268,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // second page with pagination
@@ -265,7 +277,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // last page with pagination
@@ -274,7 +286,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // no results
@@ -283,7 +295,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
 
         // Queries
@@ -294,7 +306,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
         }
         {
             // query by id and indicators system, without limits
@@ -303,7 +315,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM; // operation1
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
         }
         {
             // query by id, first page
@@ -312,7 +324,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_OPERATION_ID_LIKE_1; // operation1 and operation10
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperations(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperations(statisticalOperationsApiExternalEndpointV10, limit, offset, query), operations);
         }
     }
 
@@ -401,7 +413,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -410,7 +422,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // without limits, first page
@@ -419,7 +431,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // first page with pagination
@@ -428,7 +440,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // second page with pagination
@@ -437,7 +449,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // second page with pagination, family 2
@@ -446,7 +458,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_2, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily2(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily2(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // last page, with pagination
@@ -455,7 +467,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
         {
             // no results
@@ -464,7 +476,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Operations operations = getStatisticalOperationsRestExternalFacadeClientXml().findOperationsByFamily(FAMILY_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsOperations(StatisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
+            StatisticalOperationsRestAsserts.assertEqualsOperations(statisticalOperationsRestMocks.mockOperationsByFamily1(statisticalOperationsApiExternalEndpointV10, limit, offset), operations);
         }
     }
 
@@ -516,7 +528,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         Family family = getStatisticalOperationsRestExternalFacadeClientXml().retrieveFamilyById(FAMILY_1);
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsFamily(StatisticalOperationsRestMocks.mockFamily1(statisticalOperationsApiExternalEndpointV10), family);
+        StatisticalOperationsRestAsserts.assertEqualsFamily(statisticalOperationsRestMocks.mockFamily1(), family);
     }
 
     @Test
@@ -562,7 +574,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         Instance instance = getStatisticalOperationsRestExternalFacadeClientXml().retrieveInstanceById(OPERATION_1, INSTANCE_1);
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsInstance(StatisticalOperationsRestMocks.mockInstance1(statisticalOperationsApiExternalEndpointV10), instance);
+        StatisticalOperationsRestAsserts.assertEqualsInstance(statisticalOperationsRestMocks.mockInstance1(), instance);
     }
 
     @Test
@@ -611,7 +623,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // without limits, first page
@@ -620,7 +632,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // without limits, first page
@@ -629,7 +641,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // first page with pagination
@@ -638,7 +650,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // second page with pagination
@@ -647,7 +659,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // last page with pagination
@@ -656,7 +668,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
         {
             // no results
@@ -665,7 +677,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset), instances);
         }
 
         // Queries
@@ -676,7 +688,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset, query),
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset, query),
                     instances);
         }
         {
@@ -686,7 +698,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_INSTANCE_ID_LIKE_1; // instance1 and instance15
             String orderBy = null;
             Instances instances = getStatisticalOperationsRestExternalFacadeClientXml().findInstances(OPERATION_1, query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsInstances(StatisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset, query),
+            StatisticalOperationsRestAsserts.assertEqualsInstances(statisticalOperationsRestMocks.mockInstancesByOperation1(statisticalOperationsApiExternalEndpointV10, limit, offset, query),
                     instances);
         }
     }
@@ -766,7 +778,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // without limits, first page
@@ -775,7 +787,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // without limits, first page
@@ -784,7 +796,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // first page with pagination
@@ -793,7 +805,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // second page with pagination
@@ -802,7 +814,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // last page with pagination
@@ -811,7 +823,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         {
             // no results
@@ -820,7 +832,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = null;
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset), families);
         }
         // Queries
         {
@@ -830,7 +842,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset, query), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset, query), families);
         }
         {
             // query by id, first page
@@ -839,7 +851,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
             String query = QUERY_FAMILY_ID_LIKE_1; // family1 and family15
             String orderBy = null;
             Families families = getStatisticalOperationsRestExternalFacadeClientXml().findFamilies(query, orderBy, limit, offset);
-            StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset, query), families);
+            StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamilies(statisticalOperationsApiExternalEndpointV10, limit, offset, query), families);
         }
     }
 
@@ -898,7 +910,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         Families families = getStatisticalOperationsRestExternalFacadeClientXml().retrieveFamiliesByOperation(OPERATION_1);
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsFamilies(StatisticalOperationsRestMocks.mockFamiliesByOperation1(statisticalOperationsApiExternalEndpointV10), families);
+        StatisticalOperationsRestAsserts.assertEqualsFamilies(statisticalOperationsRestMocks.mockFamiliesByOperation1(), families);
     }
 
     @Test
@@ -935,7 +947,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         SurveyTypes surveyTypes = getStatisticalOperationsRestExternalFacadeClientXml().retrieveSurveyTypes();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsSurveyTypes(StatisticalOperationsRestMocks.mockSurveyTypes(), surveyTypes);
+        StatisticalOperationsRestAsserts.assertEqualsSurveyTypes(statisticalOperationsRestMocks.mockSurveyTypes(), surveyTypes);
     }
 
     @Test
@@ -955,7 +967,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         OfficialityTypes officialityTypes = getStatisticalOperationsRestExternalFacadeClientXml().retrieveOfficialityTypes();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsOfficialityTypes(StatisticalOperationsRestMocks.mockOfficialityTypes(), officialityTypes);
+        StatisticalOperationsRestAsserts.assertEqualsOfficialityTypes(statisticalOperationsRestMocks.mockOfficialityTypes(), officialityTypes);
     }
 
     @Test
@@ -975,7 +987,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         InstanceTypes instanceTypes = getStatisticalOperationsRestExternalFacadeClientXml().retrieveInstanceTypes();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsInstanceTypes(StatisticalOperationsRestMocks.mockInstanceTypes(), instanceTypes);
+        StatisticalOperationsRestAsserts.assertEqualsInstanceTypes(statisticalOperationsRestMocks.mockInstanceTypes(), instanceTypes);
     }
 
     @Test
@@ -995,7 +1007,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         SurveySources surveySources = getStatisticalOperationsRestExternalFacadeClientXml().retrieveSurveySources();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsSurveySources(StatisticalOperationsRestMocks.mockSurveySources(), surveySources);
+        StatisticalOperationsRestAsserts.assertEqualsSurveySources(statisticalOperationsRestMocks.mockSurveySources(), surveySources);
     }
 
     @Test
@@ -1015,7 +1027,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         CollMethods collMethods = getStatisticalOperationsRestExternalFacadeClientXml().retrieveCollMethods();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsCollMethods(StatisticalOperationsRestMocks.mockCollMethods(), collMethods);
+        StatisticalOperationsRestAsserts.assertEqualsCollMethods(statisticalOperationsRestMocks.mockCollMethods(), collMethods);
     }
 
     @Test
@@ -1035,7 +1047,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         Costs costs = getStatisticalOperationsRestExternalFacadeClientXml().retrieveCosts();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsCosts(StatisticalOperationsRestMocks.mockCosts(), costs);
+        StatisticalOperationsRestAsserts.assertEqualsCosts(statisticalOperationsRestMocks.mockCosts(), costs);
     }
 
     @Test
@@ -1126,7 +1138,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         CommonMetadataRestExternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
 
         // Retrieve operations
-        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(StatisticalOperationsCoreMocks.mockOperation1());
+        when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(statisticalOperationsCoreMocks.mockOperation1());
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
         // Retrieve operations by family
         mockitoFindOperationByConditionByFamily(statisticalOperationsBaseService, FAMILY_1, 25, 0);
@@ -1148,8 +1160,8 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         mockitoFindOperationByCondition(statisticalOperationsBaseService, 1, 0, QUERY_OPERATION_ID_LIKE_1);
         mockitoFindOperationByCondition(statisticalOperationsBaseService, 25, 0, QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM);
         // Retrieve family
-        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_1))).thenReturn(StatisticalOperationsCoreMocks.mockFamily1());
-        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_2))).thenReturn(StatisticalOperationsCoreMocks.mockFamily2());
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_1))).thenReturn(statisticalOperationsCoreMocks.mockFamily1());
+        when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(FAMILY_2))).thenReturn(statisticalOperationsCoreMocks.mockFamily2());
         when(statisticalOperationsBaseService.findFamilyByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
         mockitoFindFamilyByConditionByOperation(statisticalOperationsBaseService, OPERATION_1);
         // Find families
@@ -1163,7 +1175,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         mockitoFindFamilyByCondition(statisticalOperationsBaseService, 1, 0, QUERY_FAMILY_ID_LIKE_1);
         mockitoFindFamilyByCondition(statisticalOperationsBaseService, 1, 1, QUERY_FAMILY_ID_LIKE_1);
         // Retrieve instance
-        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_1))).thenReturn(StatisticalOperationsCoreMocks.mockInstance1());
+        when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(INSTANCE_1))).thenReturn(statisticalOperationsCoreMocks.mockInstance1());
         when(statisticalOperationsBaseService.findInstanceByCode(any(ServiceContext.class), eq(NOT_EXISTS))).thenReturn(null);
         // Find instances
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 25, 0, null);
@@ -1176,22 +1188,22 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 0, QUERY_FAMILY_ID_LIKE_1);
         mockitoFindInstanceByConditionByOperation(statisticalOperationsBaseService, OPERATION_1, 1, 1, QUERY_FAMILY_ID_LIKE_1);
         // Lists
-        when(statisticalOperationsListsService.findAllSurveyTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllSurveyTypes());
-        when(statisticalOperationsListsService.findAllOfficialityTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllOfficialityTypes());
-        when(statisticalOperationsListsService.findAllInstanceTypes(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllInstanceTypes());
-        when(statisticalOperationsListsService.findAllSurveySources(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllSurveySources());
-        when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCollMethods());
-        when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(StatisticalOperationsCoreMocks.mockFindAllCosts());
+        when(statisticalOperationsListsService.findAllSurveyTypes(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllSurveyTypes());
+        when(statisticalOperationsListsService.findAllOfficialityTypes(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllOfficialityTypes());
+        when(statisticalOperationsListsService.findAllInstanceTypes(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllInstanceTypes());
+        when(statisticalOperationsListsService.findAllSurveySources(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllSurveySources());
+        when(statisticalOperationsListsService.findAllCollMethods(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllCollMethods());
+        when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllCosts());
 
         // External APIS
-        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(StatisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
     }
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;
         if (FAMILY_1.equals(family)) {
-            operations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
+            operations = statisticalOperationsCoreMocks.mockOperationsPagedResultByFamily1(String.valueOf(limit), String.valueOf(offset));
         } else if (FAMILY_2.equals(family)) {
-            operations = StatisticalOperationsCoreMocks.mockOperationsPagedResultByFamily2(String.valueOf(limit), String.valueOf(offset));
+            operations = statisticalOperationsCoreMocks.mockOperationsPagedResultByFamily2(String.valueOf(limit), String.valueOf(offset));
         } else {
             fail("family non supported. Family = " + family);
         }
@@ -1218,13 +1230,13 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         when(
                 statisticalOperationsBaseService.findOperationByCondition(any(ServiceContext.class), argThat(new FindOperationsMatcher(conditionalCriterias, null)),
                         argThat(new PagingParameterMatcher(PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
-                StatisticalOperationsCoreMocks.mockOperationsPagedResult(String.valueOf(limit), String.valueOf(offset), query));
+                statisticalOperationsCoreMocks.mockOperationsPagedResult(String.valueOf(limit), String.valueOf(offset), query));
     }
 
     private static void mockitoFindFamilyByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> pagedResult = null;
         if (OPERATION_1.equals(operation)) {
-            pagedResult = StatisticalOperationsCoreMocks.mockFamiliesNoPagedResultByOperation1();
+            pagedResult = statisticalOperationsCoreMocks.mockFamiliesNoPagedResultByOperation1();
         } else {
             fail("Operation non supported. Operation = " + operation);
         }
@@ -1244,7 +1256,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         when(
                 statisticalOperationsBaseService.findFamilyByCondition(any(ServiceContext.class), argThat(new FindFamiliesMatcher(conditionalCriterias, null)), argThat(new PagingParameterMatcher(
                         PagingParameter.rowAccess(offset, offset + limit, Boolean.TRUE))))).thenReturn(
-                StatisticalOperationsCoreMocks.mockFamiliesPagedResult(String.valueOf(limit), String.valueOf(offset), query));
+                statisticalOperationsCoreMocks.mockFamiliesPagedResult(String.valueOf(limit), String.valueOf(offset), query));
     }
 
     private static void mockitoFindInstanceByConditionByOperation(StatisticalOperationsBaseService statisticalOperationsBaseService, String operation, int limit, int offset, String query)
@@ -1259,7 +1271,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
 
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> pagedResult = null;
         if (OPERATION_1.equals(operation)) {
-            pagedResult = StatisticalOperationsCoreMocks.mockInstancesPagedResultByOperation1(String.valueOf(limit), String.valueOf(offset), query);
+            pagedResult = statisticalOperationsCoreMocks.mockInstancesPagedResultByOperation1(String.valueOf(limit), String.valueOf(offset), query);
         } else {
             fail("Operation non supported. Operation = " + operation);
         }

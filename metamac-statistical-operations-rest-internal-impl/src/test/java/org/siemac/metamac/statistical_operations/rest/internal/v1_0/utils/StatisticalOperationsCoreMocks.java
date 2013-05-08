@@ -27,83 +27,83 @@ import org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.Stat
 
 public class StatisticalOperationsCoreMocks {
 
-    public static Operation mockOperation1() {
+    public Operation mockOperation1() {
         return mockOperation("1", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity(), mockFamily2RelatedEntity());
     }
 
-    public static Operation mockOperation2() {
+    public Operation mockOperation2() {
         return mockOperation("2", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
-    public static Operation mockOperation3() {
+    public Operation mockOperation3() {
         return mockOperation("3", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
-    public static Operation mockOperation4() {
+    public Operation mockOperation4() {
         return mockOperation("4", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
-    public static Operation mockOperation5() {
+    public Operation mockOperation5() {
         return mockOperation("5", ProcStatusEnum.PUBLISH_INTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
-    public static Operation mockOperation6() {
+    public Operation mockOperation6() {
         return mockOperation("6", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily1RelatedEntity());
     }
 
-    public static Operation mockOperation7() {
+    public Operation mockOperation7() {
         return mockOperation("7", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
     }
 
-    public static Operation mockOperation8() {
+    public Operation mockOperation8() {
         return mockOperation("8", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
     }
 
-    public static Operation mockOperation9() {
+    public Operation mockOperation9() {
         return mockOperation("9", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.TRUE, mockFamily2RelatedEntity());
     }
 
-    public static Operation mockOperation10() {
+    public Operation mockOperation10() {
         return mockOperation("10", ProcStatusEnum.PUBLISH_EXTERNALLY, Boolean.FALSE, mockFamily2RelatedEntity());
     }
 
-    public static Family mockFamily1() {
+    public Family mockFamily1() {
         return mockFamily("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    public static Family mockFamily2() {
+    public Family mockFamily2() {
         return mockFamily("2", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
-    public static Family mockFamily3() {
+    public Family mockFamily3() {
         return mockFamily("3", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
-    public static Family mockFamily4() {
+    public Family mockFamily4() {
         return mockFamily("4", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
-    public static Family mockFamily15() {
+    public Family mockFamily15() {
         return mockFamily("15", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
-    public static Instance mockInstance1() {
+    public Instance mockInstance1() {
         return mockInstance("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
-    public static Instance mockInstance2() {
+    public Instance mockInstance2() {
         return mockInstance("2", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
-    public static Instance mockInstance3() {
+    public Instance mockInstance3() {
         return mockInstance("3", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
-    public static Instance mockInstance4() {
+    public Instance mockInstance4() {
         return mockInstance("4", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
-    public static Instance mockInstance15() {
+    public Instance mockInstance15() {
         return mockInstance("15", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
+    public PagedResult<Operation> mockOperationsPagedResult(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 10;
@@ -154,7 +154,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Operation> mockOperationsPagedResult(String limit, String offset, String query) {
+    public PagedResult<Operation> mockOperationsPagedResult(String limit, String offset, String query) {
 
         // Without query
         if (query == null) {
@@ -213,7 +213,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Operation> mockOperationsPagedResultByFamily1(String limit, String offset) {
+    public PagedResult<Operation> mockOperationsPagedResultByFamily1(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 6;
@@ -260,7 +260,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Operation> mockOperationsPagedResultByFamily2(String limit, String offset) {
+    public PagedResult<Operation> mockOperationsPagedResultByFamily2(String limit, String offset) {
 
         List<Operation> operations = new ArrayList<Operation>();
         int total = 4;
@@ -279,7 +279,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Operation>(operations, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Family> mockFamiliesPagedResult(String limit, String offset) {
+    public PagedResult<Family> mockFamiliesPagedResult(String limit, String offset) {
 
         List<Family> families = new ArrayList<Family>();
         int total = 5;
@@ -324,7 +324,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Family> mockFamiliesPagedResult(String limit, String offset, String query) {
+    public PagedResult<Family> mockFamiliesPagedResult(String limit, String offset, String query) {
 
         // No queries
         if (query == null) {
@@ -370,7 +370,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Family> mockFamiliesNoPagedResultByOperation1() {
+    public PagedResult<Family> mockFamiliesNoPagedResultByOperation1() {
 
         List<Family> families = new ArrayList<Family>();
         families.add(mockFamily1());
@@ -384,7 +384,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Family>(families, startRow, rowCount, pageSize, totalRows, -1);
     }
 
-    public static PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset) {
+    public PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset) {
 
         List<Instance> instances = new ArrayList<Instance>();
         int total = 5;
@@ -429,7 +429,7 @@ public class StatisticalOperationsCoreMocks {
         return new PagedResult<Instance>(instances, startRow, rowCount, pageSize, total, -1);
     }
 
-    public static PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset, String query) {
+    public PagedResult<Instance> mockInstancesPagedResultByOperation1(String limit, String offset, String query) {
 
         // No queries
         if (query == null) {
@@ -478,7 +478,7 @@ public class StatisticalOperationsCoreMocks {
     /**
      * Operation with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */
-    private static Operation mockOperationRelatedEntity(String subCode, ProcStatusEnum procStatus) {
+    private Operation mockOperationRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
         operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
@@ -491,18 +491,18 @@ public class StatisticalOperationsCoreMocks {
         return operation;
     }
 
-    private static Family mockFamily1RelatedEntity() {
+    private Family mockFamily1RelatedEntity() {
         return mockFamilyRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY);
     }
 
-    private static Family mockFamily2RelatedEntity() {
+    private Family mockFamily2RelatedEntity() {
         return mockFamilyRelatedEntity("2", ProcStatusEnum.PUBLISH_EXTERNALLY);
     }
 
     /**
      * Family with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */
-    private static Family mockFamilyRelatedEntity(String subCode, ProcStatusEnum procStatus) {
+    private Family mockFamilyRelatedEntity(String subCode, ProcStatusEnum procStatus) {
         Family family = new Family();
         family.setCode("family" + subCode);
         family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
@@ -514,7 +514,7 @@ public class StatisticalOperationsCoreMocks {
     /**
      * Instance with basic attributes. Do not use mockInstance to avoid cyclic method calls
      */
-    private static Instance mockInstanceRelatedEntity(String subCode, ProcStatusEnum procStatus, Integer order, String operationCode) {
+    private Instance mockInstanceRelatedEntity(String subCode, ProcStatusEnum procStatus, Integer order, String operationCode) {
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
         instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(operationCode, instance.getCode()));
@@ -524,61 +524,61 @@ public class StatisticalOperationsCoreMocks {
         return instance;
     }
 
-    private static SurveyType mockSurveyType(String code) {
+    private SurveyType mockSurveyType(String code) {
         SurveyType surveyType = new SurveyType();
         surveyType.setDescription(mockInternationalString(code, null));
         surveyType.setIdentifier(code);
         return surveyType;
     }
 
-    private static OfficialityType mockOfficialityType(String code) {
+    private OfficialityType mockOfficialityType(String code) {
         OfficialityType officialityType = new OfficialityType();
         officialityType.setDescription(mockInternationalString(code, null));
         officialityType.setIdentifier(code);
         return officialityType;
     }
 
-    private static InstanceType mockInstanceType(String code) {
+    private InstanceType mockInstanceType(String code) {
         InstanceType instanceType = new InstanceType();
         instanceType.setDescription(mockInternationalString(code, null));
         instanceType.setIdentifier(code);
         return instanceType;
     }
 
-    private static SurveySource mockSurveySource(String code) {
+    private SurveySource mockSurveySource(String code) {
         SurveySource surveySource = new SurveySource();
         surveySource.setDescription(mockInternationalString(code, null));
         surveySource.setIdentifier(code);
         return surveySource;
     }
 
-    private static CollMethod mockCollMethod(String code) {
+    private CollMethod mockCollMethod(String code) {
         CollMethod collMethod = new CollMethod();
         collMethod.setDescription(mockInternationalString(code, null));
         collMethod.setIdentifier(code);
         return collMethod;
     }
 
-    private static Cost mockCost(String code) {
+    private Cost mockCost(String code) {
         Cost cost = new Cost();
         cost.setDescription(mockInternationalString(code, null));
         cost.setIdentifier(code);
         return cost;
     }
 
-    private static ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
+    private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
         return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
     }
 
-    private static ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
+    private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
         return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
     }
 
-    private static Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
+    private Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
 
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
@@ -634,7 +634,7 @@ public class StatisticalOperationsCoreMocks {
 
         return operation;
     }
-    private static Family mockFamily(String subCode, ProcStatusEnum procStatus) {
+    private Family mockFamily(String subCode, ProcStatusEnum procStatus) {
 
         Family family = new Family();
         family.setCode("family" + subCode);
@@ -649,7 +649,7 @@ public class StatisticalOperationsCoreMocks {
         return family;
     }
 
-    private static Instance mockInstance(String subCode, ProcStatusEnum procStatus) {
+    private Instance mockInstance(String subCode, ProcStatusEnum procStatus) {
 
         Instance instance = new Instance();
         instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
@@ -662,9 +662,9 @@ public class StatisticalOperationsCoreMocks {
         instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
         instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
         instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        instance.setGeographicGranularity(mockExternalItemSrm("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST));
+        // instance.setGeographicGranularity(mockExternalItemSrm("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST)); // TODO METAMAC-1629
         instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
-        instance.setTemporalGranularity(mockExternalItemSrm("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));
+        // instance.setTemporalGranularity(mockExternalItemSrm("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST)); // TODO METAMAC-1629
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subCode));
         instance.setBasePeriod("2012");
         instance.addUnitMeasure(mockExternalItemSrm("unitMeasure1", "unitMeasures", TypeExternalArtefactsEnum.CONCEPT));
@@ -711,14 +711,14 @@ public class StatisticalOperationsCoreMocks {
 
         return instance;
     }
-    public static List<SurveyType> mockFindAllSurveyTypes() {
+    public List<SurveyType> mockFindAllSurveyTypes() {
         List<SurveyType> surveyTypes = new ArrayList<SurveyType>();
         surveyTypes.add(mockSurveyType("surveyType1"));
         surveyTypes.add(mockSurveyType("surveyType2"));
         return surveyTypes;
     }
 
-    public static List<OfficialityType> mockFindAllOfficialityTypes() {
+    public List<OfficialityType> mockFindAllOfficialityTypes() {
         List<OfficialityType> officialityTypes = new ArrayList<OfficialityType>();
         officialityTypes.add(mockOfficialityType("officialityType1"));
         officialityTypes.add(mockOfficialityType("officialityType2"));
@@ -726,40 +726,40 @@ public class StatisticalOperationsCoreMocks {
         return officialityTypes;
     }
 
-    public static List<InstanceType> mockFindAllInstanceTypes() {
+    public List<InstanceType> mockFindAllInstanceTypes() {
         List<InstanceType> instanceTypes = new ArrayList<InstanceType>();
         instanceTypes.add(mockInstanceType("instanceType1"));
         instanceTypes.add(mockInstanceType("instanceType2"));
         return instanceTypes;
     }
 
-    public static List<SurveySource> mockFindAllSurveySources() {
+    public List<SurveySource> mockFindAllSurveySources() {
         List<SurveySource> surveySources = new ArrayList<SurveySource>();
         surveySources.add(mockSurveySource("surveySource1"));
         surveySources.add(mockSurveySource("surveySource2"));
         return surveySources;
     }
 
-    public static List<CollMethod> mockFindAllCollMethods() {
+    public List<CollMethod> mockFindAllCollMethods() {
         List<CollMethod> collMethods = new ArrayList<CollMethod>();
         collMethods.add(mockCollMethod("collMethod1"));
         collMethods.add(mockCollMethod("collMethod2"));
         return collMethods;
     }
 
-    public static List<Cost> mockFindAllCosts() {
+    public List<Cost> mockFindAllCosts() {
         List<Cost> costs = new ArrayList<Cost>();
         costs.add(mockCost("cost1"));
         costs.add(mockCost("cost2"));
         return costs;
     }
 
-    private static InternationalString mockInternationalString(String metadata, String subCode) {
+    private InternationalString mockInternationalString(String metadata, String subCode) {
         String subTitle = subCode != null ? metadata + subCode : metadata;
         return mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
     }
 
-    private static InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
+    private InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
 
         InternationalString internationalString = new InternationalString();
 

@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.utils;
 
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
-import org.siemac.metamac.statistical.operations.web.client.PlaceRequestParams;
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
+import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;

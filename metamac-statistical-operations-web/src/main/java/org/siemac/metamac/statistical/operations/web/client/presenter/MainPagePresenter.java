@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.web.client;
+package org.siemac.metamac.statistical.operations.navigation.shared;
 
 public class PlaceRequestParams {
 

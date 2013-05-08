@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.presenter;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.ErrorPageUiHandlers;
 
 import com.google.gwt.event.shared.EventBus;

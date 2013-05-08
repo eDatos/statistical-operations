@@ -8,5 +8,6 @@
     <source path='core/constants' />
     <source path='core/enume/domain' />
     <source path='core/dto' />
+    <source path='navigation/shared' />
 
 </module>

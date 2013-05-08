@@ -69,39 +69,42 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             OperationCriteriaPropertyRestriction propertyNameCriteria = OperationCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case URN:
-                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case SUBJECT_AREA_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.subjectArea().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.subjectArea().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case SECONDARY_SUBJECT_AREA_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.secondarySubjectAreas().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.secondarySubjectAreas().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case SURVEY_TYPE_ID:
-                    return new SculptorPropertyCriteria(OperationProperties.surveyType().identifier(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.surveyType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case OFFICIALITY_TYPE_ID:
-                    return new SculptorPropertyCriteria(OperationProperties.officialityType().identifier(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.officialityType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case IS_INDICATORS_SYSTEM:
-                    return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()),
+                            propertyRestriction.getOperationType());
                 case PRODUCER_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.producer().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.producer().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case INTERNAL_INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 case CURRENTLY_ACTIVE:
-                    return new SculptorPropertyCriteria(OperationProperties.currentlyActive(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(OperationProperties.currentlyActive(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()),
+                            propertyRestriction.getOperationType());
                 case STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.status(), propertyRestrictionValueToStatusEnum(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(OperationProperties.status(), propertyRestrictionValueToStatusEnum(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()),
+                            propertyRestriction.getOperationType());
                 case PUBLISHER_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.publisher().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(OperationProperties.publisher().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -133,24 +136,24 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             FamilyCriteriaPropertyRestriction propertyNameCriteria = FamilyCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case URN:
-                    return new SculptorPropertyCriteria(FamilyProperties.urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case INTERNAL_INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Family>(FamilyProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Family.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            Family.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 case INVENTORY_DATE:
                     return new SculptorPropertyCriteria(
                             new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class),
-                            propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -181,29 +184,30 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             InstanceCriteriaPropertyRestriction propertyNameCriteria = InstanceCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case DATA_DESCRIPTION:
-                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case GEOGRAPHIC_GRANULARITY_URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.geographicGranularity().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.geographicGranularity().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case TEMPORAL_GRANULARITY_URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.temporalGranularity().urn(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.temporalGranularity().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case INSTANCE_TYPE_ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.instanceType().identifier(), propertyRestriction.getValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.instanceType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case INTERNAL_INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()));
+                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()),
+                            propertyRestriction.getOperationType());
                 case INVENTORY_DATE:
                     return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()));
+                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }

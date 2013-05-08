@@ -8,6 +8,7 @@
             <cdomain:text xml:lang="en">operation5 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation5 en Español</cdomain:text>
         </cdomain:title>
+        <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#operations/operation;id=operation5</operations:managementAppLink>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation6</cdomain:id>
@@ -17,5 +18,6 @@
             <cdomain:text xml:lang="en">operation6 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation6 en Español</cdomain:text>
         </cdomain:title>
+        <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#operations/operation;id=operation6</operations:managementAppLink>
     </operations:operation>
 </operations:operations>

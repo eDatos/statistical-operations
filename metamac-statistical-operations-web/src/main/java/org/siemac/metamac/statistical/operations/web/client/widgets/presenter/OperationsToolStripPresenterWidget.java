@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.presenter;
 
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

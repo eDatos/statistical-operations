@@ -8,5 +8,6 @@
             <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
         </cdomain:title>
+        <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#operations/operation;id=operation1</operations:managementAppLink>
     </operations:operation>
 </operations:operations>

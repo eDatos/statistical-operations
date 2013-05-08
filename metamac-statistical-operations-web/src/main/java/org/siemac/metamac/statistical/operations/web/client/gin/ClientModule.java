@@ -1,7 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.gin;
 
+import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
-import org.siemac.metamac.statistical.operations.web.client.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.OperationsPlaceManager;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWebMessages;

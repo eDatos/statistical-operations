@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response.Status;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
+import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -20,7 +21,6 @@ import org.siemac.metamac.rest.common.v1_0.domain.LocalisedString;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
-import org.siemac.metamac.rest.constants.RestEndpointsConstants;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
@@ -80,18 +80,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
 
     @PostConstruct
     public void init() throws Exception {
-        // Statistical operations External Api
-        String statisticalOperationsApiExternalEndpoint = configurationService.getProperty(RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);
-        if (statisticalOperationsApiExternalEndpoint == null) {
-            throw new BeanCreationException("Property not found: " + RestEndpointsConstants.STATISTICAL_OPERATIONS_EXTERNAL_API);
-        }
-        statisticalOperationsApiExternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiExternalEndpoint, RestExternalConstants.API_VERSION_1_0);
-
-        // Srm External Api
-        srmApiExternalEndpoint = configurationService.getProperty(RestEndpointsConstants.SRM_EXTERNAL_API);
-        if (srmApiExternalEndpoint == null) {
-            throw new BeanCreationException("Property not found: " + RestEndpointsConstants.SRM_EXTERNAL_API);
-        }
+        initEndpoints();
     }
 
     @Override
@@ -245,9 +234,9 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setDataDescription(toInternationalString(source.getDataDescription()));
         target.setStatisticalPopulation(toInternationalString(source.getStatisticalPopulation()));
         target.setStatisticalUnits(toStatisticalUnits(source.getStatisticalUnit()));
-        target.setGeographicGranularity(toResourceExternalItemSrm(source.getGeographicGranularity()));
+        // target.setGeographicGranularity(toResourceExternalItemSrm(source.getGeographicGranularity())); // TODO METAMAC-1629
         target.setGeographicComparability(toInternationalString(source.getGeographicComparability()));
-        target.setTemporalGranularity(toResourceExternalItemSrm(source.getTemporalGranularity()));
+        // target.setTemporalGranularity(toResourceExternalItemSrm(source.getTemporalGranularity())); // TODO METAMAC-1629
         target.setTemporalComparability(toInternationalString(source.getTemporalComparability()));
         target.setBasePeriod(source.getBasePeriod());
         target.setUnitMeasures(toUnitMeasures(source.getUnitMeasure()));
@@ -859,5 +848,22 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setKind(kind);
         target.setHref(href);
         return target;
+    }
+
+    private String readProperty(String property) {
+        String propertyValue = configurationService.getProperty(property);
+        if (propertyValue == null) {
+            throw new BeanCreationException("Property not found: " + property);
+        }
+        return propertyValue;
+    }
+
+    private void initEndpoints() {
+        // Statistical operations External Api v1.0
+        String statisticalOperationsApiExternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_EXTERNAL_API);
+        statisticalOperationsApiExternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiExternalEndpoint, RestExternalConstants.API_VERSION_1_0);
+
+        // Srm External Api (do not add api version! it is already stored in database)
+        srmApiExternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
     }
 }
