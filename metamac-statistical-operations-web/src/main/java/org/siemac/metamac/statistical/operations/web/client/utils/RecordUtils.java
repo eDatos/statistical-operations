@@ -76,7 +76,7 @@ public class RecordUtils {
      */
     public static InstanceRecord getInstanceRecord(InstanceBaseDto instanceDto) {
         InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), InternationalStringUtils.getLocalisedString(instanceDto.getTitle()),
-                InternationalStringUtils.getLocalisedString(instanceDto.getDescription()), OperationsWeb.getCoreMessages().getString(
+                InternationalStringUtils.getLocalisedString(instanceDto.getDataDescription()), OperationsWeb.getCoreMessages().getString(
                         OperationsWeb.getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
         return record;
     }
