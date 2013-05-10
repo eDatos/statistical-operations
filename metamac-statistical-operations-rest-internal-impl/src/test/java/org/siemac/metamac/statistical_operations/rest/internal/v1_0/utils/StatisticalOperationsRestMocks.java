@@ -19,6 +19,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Infor
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operations;
@@ -34,7 +35,6 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Stati
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Status;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UnitMeasures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper.Do2RestInternalMapperV10Impl;
@@ -789,10 +789,10 @@ public class StatisticalOperationsRestMocks {
         // instance.setTemporalGranularity(mockResourceFromExternalItemSrm("temporalGranularity", "temporalGranularities", "structuralResources#codelist")); // TODO METAMAC-1629
         instance.setTemporalComparability(mockInternationalString("temporalComparability", subId));
         instance.setBasePeriod("2012");
-        instance.setUnitMeasures(new UnitMeasures());
-        instance.getUnitMeasures().setTotal(BigInteger.valueOf(1));
-        instance.getUnitMeasures().setKind(Do2RestInternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
-        instance.getUnitMeasures().getUnitMeasures().add(mockResourceFromExternalItemSrm("unitMeasure1", "unitMeasures", "structuralResources#concept"));
+        instance.setMeasures(new Measures());
+        instance.getMeasures().setTotal(BigInteger.valueOf(1));
+        instance.getMeasures().setKind(Do2RestInternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
+        instance.getMeasures().getMeasures().add(mockResourceFromExternalItemSrm("measure1", "measures", "structuralResources#concept"));
         instance.setStatConcDefsDescription(mockInternationalString("statConcDef", subId));
         instance.setStatConcDefs(new StatConcDefs());
         instance.getStatConcDefs().setTotal(BigInteger.valueOf(3));

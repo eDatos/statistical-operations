@@ -80,17 +80,17 @@
         <cdomain:text xml:lang="en">temporalComparability1 in English</cdomain:text>
     </operations:temporalComparability>
     <operations:basePeriod>2012</operations:basePeriod>
-    <operations:unitMeasures kind="PENDIENTE_API_SRM" total="1">
-        <operations:unitMeasure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="operations:ResourceInternal" kind="structuralResources#concept">
-            <cdomain:id>unitMeasure1</cdomain:id>
-            <cdomain:urn>urn:unitMeasure1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/unitMeasures/unitMeasure1"/>
+    <operations:measures kind="PENDIENTE_API_SRM" total="1">
+        <operations:measure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="operations:ResourceInternal" kind="structuralResources#concept">
+            <cdomain:id>measure1</cdomain:id>
+            <cdomain:urn>urn:measure1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/measures/measure1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">unitMeasure1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">unitMeasure1 in English</cdomain:text>
+                <cdomain:text xml:lang="es">measure1 en Español</cdomain:text>
+                <cdomain:text xml:lang="en">measure1 in English</cdomain:text>
             </cdomain:title>
-        </operations:unitMeasure>
-    </operations:unitMeasures>
+        </operations:measure>
+    </operations:measures>
     <operations:statConcDefsDescription>
         <cdomain:text xml:lang="es">statConcDef1 en Español</cdomain:text>
         <cdomain:text xml:lang="en">statConcDef1 in English</cdomain:text>

@@ -34,6 +34,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSup
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
@@ -46,7 +47,6 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UnitMeasures;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -239,7 +239,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         // target.setTemporalGranularity(toResourceExternalItemSrm(source.getTemporalGranularity())); // TODO METAMAC-1629
         target.setTemporalComparability(toInternationalString(source.getTemporalComparability()));
         target.setBasePeriod(source.getBasePeriod());
-        target.setUnitMeasures(toUnitMeasures(source.getUnitMeasure()));
+        target.setMeasures(toMeasures(source.getUnitMeasure()));
         target.setStatConcDefsDescription(toInternationalString(source.getStatConcDef()));
         target.setStatConcDefs(toStatConcDefs(source.getStatConcDefList()));
         target.setClassSystemsDescription(toInternationalString(source.getClassSystem()));
@@ -788,14 +788,14 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         return targets;
     }
 
-    private UnitMeasures toUnitMeasures(Set<ExternalItem> sources) {
+    private Measures toMeasures(Set<ExternalItem> sources) {
         if (sources == null || sources.size() == 0) {
             return null;
         }
-        UnitMeasures targets = new UnitMeasures();
-        toResourcesExternalItemsSrm(sources, targets.getUnitMeasures());
+        Measures targets = new Measures();
+        toResourcesExternalItemsSrm(sources, targets.getMeasures());
         targets.setKind(KIND_SRM_EXTERNAL_ITEM);
-        targets.setTotal(BigInteger.valueOf(targets.getUnitMeasures().size()));
+        targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
     }
 

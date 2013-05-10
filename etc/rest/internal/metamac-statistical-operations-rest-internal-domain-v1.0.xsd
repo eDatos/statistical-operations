@@ -90,7 +90,7 @@
             <xs:element name="temporalGranularity" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0" />
             <xs:element name="basePeriod" type="xs:string" minOccurs="0" />
-            <xs:element name="unitMeasures" type="tns:UnitMeasures" minOccurs="0" />
+            <xs:element name="measures" type="tns:Measures" minOccurs="0" />
             <xs:element name="statConcDefsDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statConcDefs" type="tns:StatConcDefs" minOccurs="0" />
             <xs:element name="classSystemsDescription" type="common:InternationalString" minOccurs="0" />
@@ -169,11 +169,11 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="UnitMeasures">
+    <xs:complexType name="Measures">
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="unitMeasure" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="measure" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

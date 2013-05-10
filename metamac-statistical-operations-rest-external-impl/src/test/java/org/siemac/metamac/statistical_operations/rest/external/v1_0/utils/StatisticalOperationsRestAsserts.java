@@ -25,7 +25,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UnitMeasures;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 
 public class StatisticalOperationsRestAsserts {
@@ -98,7 +98,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsResource(expected.getTemporalGranularity(), actual.getTemporalGranularity());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTemporalComparability(), actual.getTemporalComparability());
         assertEquals(expected.getBasePeriod(), actual.getBasePeriod());
-        assertEqualsUnitMeasures(expected.getUnitMeasures(), actual.getUnitMeasures());
+        assertEqualsMeasures(expected.getMeasures(), actual.getMeasures());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getStatConcDefsDescription(), actual.getStatConcDefsDescription());
         assertEqualsStatConcDefs(expected.getStatConcDefs(), actual.getStatConcDefs());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getClassSystemsDescription(), actual.getClassSystemsDescription());
@@ -247,13 +247,13 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsResources(expected.getStatConcDefs(), actual.getStatConcDefs());
     }
 
-    private static void assertEqualsUnitMeasures(UnitMeasures expected, UnitMeasures actual) {
+    private static void assertEqualsMeasures(Measures expected, Measures actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getUnitMeasures(), actual.getUnitMeasures());
+        MetamacRestAsserts.assertEqualsResources(expected.getMeasures(), actual.getMeasures());
     }
 
     private static void assertEqualsStatisticalUnits(StatisticalUnits expected, StatisticalUnits actual) {
