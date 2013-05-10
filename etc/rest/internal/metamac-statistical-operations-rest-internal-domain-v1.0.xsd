@@ -26,6 +26,7 @@
             <xs:element name="producers" type="tns:Producers" minOccurs="1"/>
             <xs:element name="regionalResponsibles" type="tns:RegionalResponsibles" minOccurs="1" />
             <xs:element name="regionalContributors" type="tns:RegionalContributors" minOccurs="0" />
+            <xs:element name="createdDate" type="xs:dateTime" minOccurs="1" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="currentlyActive" type="xs:boolean" minOccurs="0" />
             <xs:element name="status" type="tns:Status" />
@@ -62,6 +63,7 @@
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
+            <xs:element name="createdDate" type="xs:dateTime" minOccurs="1" />            
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0" />
@@ -96,6 +98,7 @@
             <xs:element name="classSystemsDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="classSystems" type="tns:ClassSystems" minOccurs="0" />
             <xs:element name="instanceType" type="common:Item" />
+            <xs:element name="createdDate" type="xs:dateTime" minOccurs="1" />            
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="docMethod" type="common:InternationalString" minOccurs="0" />

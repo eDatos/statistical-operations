@@ -16,6 +16,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Infor
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operations;
@@ -29,7 +30,6 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatC
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 
 public class StatisticalOperationsRestAsserts {
@@ -51,6 +51,7 @@ public class StatisticalOperationsRestAsserts {
         assertEqualsProducers(expected.getProducers(), actual.getProducers());
         assertEqualsRegionalResponsibles(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
         assertEqualsRegionalContributors(expected.getRegionalContributors(), actual.getRegionalContributors());
+        assertEquals(expected.getCreatedDate(), actual.getCreatedDate());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getCurrentlyActive(), actual.getCurrentlyActive());
         assertEquals(expected.getStatus(), actual.getStatus());
@@ -84,6 +85,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
+        assertEquals(expected.getCreatedDate(), actual.getCreatedDate());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         assertEquals(expected.getInventoryDate(), actual.getInventoryDate());
@@ -116,6 +118,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getClassSystemsDescription(), actual.getClassSystemsDescription());
         assertEqualsClassSystems(expected.getClassSystems(), actual.getClassSystems());
         MetamacRestAsserts.assertEqualsItem(expected.getInstanceType(), actual.getInstanceType());
+        assertEquals(expected.getCreatedDate(), actual.getCreatedDate());
         assertEquals(expected.getInternalInventoryDate(), actual.getInternalInventoryDate());
         assertEquals(expected.getProcStatus(), actual.getProcStatus());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDocMethod(), actual.getDocMethod());

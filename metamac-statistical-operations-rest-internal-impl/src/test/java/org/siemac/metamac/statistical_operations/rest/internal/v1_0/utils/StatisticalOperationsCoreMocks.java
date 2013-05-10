@@ -611,6 +611,7 @@ public class StatisticalOperationsCoreMocks {
         operation.getRegionalResponsible().add(mockExternalItemSrm("regionalResponsible333", "regionalResponsibles", TypeExternalArtefactsEnum.AGENCY));
         operation.getRegionalContributor().add(mockExternalItemSrm("regionalContributor1", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
         operation.getRegionalContributor().add(mockExternalItemSrm("regionalContributor22", "regionalContributors", TypeExternalArtefactsEnum.AGENCY));
+        operation.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0));
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(StatusEnum.DESIGN);
@@ -642,6 +643,7 @@ public class StatisticalOperationsCoreMocks {
         family.setTitle(mockInternationalString("family", subCode));
         family.setAcronym(mockInternationalString("acronym", subCode));
         family.setDescription(mockInternationalString("description", subCode));
+        family.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
@@ -676,6 +678,7 @@ public class StatisticalOperationsCoreMocks {
         instance.addClassSystemList(mockExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.setInstanceType(mockInstanceType("instanceType1"));
+        instance.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalString("docMethod", subCode));

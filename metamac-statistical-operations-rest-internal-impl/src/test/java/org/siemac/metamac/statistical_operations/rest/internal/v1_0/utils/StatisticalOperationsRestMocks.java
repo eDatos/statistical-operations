@@ -701,6 +701,7 @@ public class StatisticalOperationsRestMocks {
         operation.getRegionalContributors().setKind(Do2RestInternalMapperV10Impl.KIND_SRM_EXTERNAL_ITEM);
         operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor1", "regionalContributors", "structuralResources#agency"));
         operation.getRegionalContributors().getRegionalContributors().add(mockResourceFromExternalItemSrm("regionalContributor22", "regionalContributors", "structuralResources#agency"));
+        operation.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0).toDate());
         operation.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         operation.setCurrentlyActive(Boolean.FALSE);
         operation.setStatus(Status.DESIGN);
@@ -753,6 +754,7 @@ public class StatisticalOperationsRestMocks {
         family.setTitle(mockInternationalString("family", subId));
         family.setAcronym(mockInternationalString("acronym", subId));
         family.setDescription(mockInternationalString("description", subId));
+        family.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0).toDate());
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
@@ -807,6 +809,7 @@ public class StatisticalOperationsRestMocks {
         instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList1", "classSystemLists", "structuralResources#codelist"));
         instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList22", "classSystemLists", "structuralResources#codelist"));
         instance.setInstanceType(MetamacRestMocks.mockItem("instanceType1"));
+        instance.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0).toDate());
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalString("docMethod", subId));

@@ -115,6 +115,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setProducers(toProducers(source.getProducer()));
         target.setRegionalResponsibles(toRegionalResponsibles(source.getRegionalResponsible()));
         target.setRegionalContributors(toRegionalContributors(source.getRegionalContributor()));
+        target.setCreatedDate(toDate(source.getCreatedDate()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setCurrentlyActive(source.getCurrentlyActive());
         target.setStatus(toStatus(source.getStatus()));
@@ -188,6 +189,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setDescription(toInternationalString(source.getDescription()));
+        target.setCreatedDate(toDate(source.getCreatedDate()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
@@ -263,6 +265,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setClassSystemsDescription(toInternationalString(source.getClassSystem()));
         target.setClassSystems(toClassSystems(source.getClassSystemList()));
         target.setInstanceType(toItem(source.getInstanceType()));
+        target.setCreatedDate(toDate(source.getCreatedDate()));
         target.setInternalInventoryDate(toDate(source.getInternalInventoryDate()));
         target.setProcStatus(toProcStatus(source.getProcStatus()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
