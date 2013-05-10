@@ -3,7 +3,6 @@
     <operations:instanceType>
         <cdomain:id>instanceType1</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instanceType1 in English</cdomain:text>
             <cdomain:text xml:lang="es">instanceType1 en Español</cdomain:text>
         </cdomain:title>
     </operations:instanceType>
@@ -11,7 +10,6 @@
         <cdomain:id>instanceType2</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">instanceType2 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">instanceType2 in English</cdomain:text>
         </cdomain:title>
     </operations:instanceType>
 </operations:instanceTypes>

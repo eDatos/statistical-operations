@@ -6,7 +6,6 @@
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation5"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">operation5 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">operation5 in English</cdomain:text>
         </cdomain:title>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
@@ -14,7 +13,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation6</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation6"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">operation6 in English</cdomain:text>
             <cdomain:text xml:lang="es">operation6 en Español</cdomain:text>
         </cdomain:title>
     </operations:operation>

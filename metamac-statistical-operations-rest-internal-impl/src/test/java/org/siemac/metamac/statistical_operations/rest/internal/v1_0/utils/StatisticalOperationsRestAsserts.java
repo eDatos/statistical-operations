@@ -12,6 +12,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Costs
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.FreqColls;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.GeographicGranularities;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InformationSuppliers;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceTypes;
@@ -30,6 +31,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatC
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 
 public class StatisticalOperationsRestAsserts {
@@ -107,9 +109,9 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataDescription(), actual.getDataDescription());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getStatisticalPopulation(), actual.getStatisticalPopulation());
         assertEqualsStatisticalUnits(expected.getStatisticalUnits(), actual.getStatisticalUnits());
-        MetamacRestAsserts.assertEqualsResource(expected.getGeographicGranularity(), actual.getGeographicGranularity());
+        assertEqualsGeographicGranularities(expected.getGeographicGranularity(), actual.getGeographicGranularity());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getGeographicComparability(), actual.getGeographicComparability());
-        MetamacRestAsserts.assertEqualsResource(expected.getTemporalGranularity(), actual.getTemporalGranularity());
+        assertEqualsTemporalGranularities(expected.getTemporalGranularity(), actual.getTemporalGranularity());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTemporalComparability(), actual.getTemporalComparability());
         assertEquals(expected.getBasePeriod(), actual.getBasePeriod());
         assertEqualsMeasures(expected.getMeasures(), actual.getMeasures());
@@ -239,7 +241,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getInformationSuppliers(), actual.getInformationSuppliers());
+        assertEqualsResourcesInternal(expected.getInformationSuppliers(), actual.getInformationSuppliers());
     }
 
     private static void assertEqualsFreqColls(FreqColls expected, FreqColls actual) {
@@ -248,7 +250,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getFreqColls(), actual.getFreqColls());
+        assertEqualsResourcesInternal(expected.getFreqColls(), actual.getFreqColls());
     }
 
     private static void assertEqualsClassSystems(ClassSystems expected, ClassSystems actual) {
@@ -257,7 +259,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getClassSystems(), actual.getClassSystems());
+        assertEqualsResourcesInternal(expected.getClassSystems(), actual.getClassSystems());
     }
 
     private static void assertEqualsStatConcDefs(StatConcDefs expected, StatConcDefs actual) {
@@ -266,7 +268,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getStatConcDefs(), actual.getStatConcDefs());
+        assertEqualsResourcesInternal(expected.getStatConcDefs(), actual.getStatConcDefs());
     }
 
     private static void assertEqualsMeasures(Measures expected, Measures actual) {
@@ -275,7 +277,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getMeasures(), actual.getMeasures());
+        assertEqualsResourcesInternal(expected.getMeasures(), actual.getMeasures());
     }
 
     private static void assertEqualsStatisticalUnits(StatisticalUnits expected, StatisticalUnits actual) {
@@ -284,7 +286,25 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getStatisticalUnits(), actual.getStatisticalUnits());
+        assertEqualsResourcesInternal(expected.getStatisticalUnits(), actual.getStatisticalUnits());
+    }
+
+    private static void assertEqualsGeographicGranularities(GeographicGranularities expected, GeographicGranularities actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        assertEqualsResourcesInternal(expected.getGeographicGranularities(), actual.getGeographicGranularities());
+    }
+
+    private static void assertEqualsTemporalGranularities(TemporalGranularities expected, TemporalGranularities actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        assertEqualsResourcesInternal(expected.getTemporalGranularities(), actual.getTemporalGranularities());
     }
 
     private static void assertEqualsSecondarySubjectAreas(SecondarySubjectAreas expected, SecondarySubjectAreas actual) {
@@ -293,7 +313,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
+        assertEqualsResourcesInternal(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
     }
 
     private static void assertEqualsProducers(Producers expected, Producers actual) {
@@ -302,7 +322,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getProducers(), actual.getProducers());
+        assertEqualsResourcesInternal(expected.getProducers(), actual.getProducers());
     }
 
     private static void assertEqualsRegionalResponsibles(RegionalResponsibles expected, RegionalResponsibles actual) {
@@ -311,7 +331,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
+        assertEqualsResourcesInternal(expected.getRegionalResponsibles(), actual.getRegionalResponsibles());
     }
 
     private static void assertEqualsRegionalContributors(RegionalContributors expected, RegionalContributors actual) {
@@ -320,7 +340,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getRegionalContributors(), actual.getRegionalContributors());
+        assertEqualsResourcesInternal(expected.getRegionalContributors(), actual.getRegionalContributors());
     }
 
     private static void assertEqualsPublishers(Publishers expected, Publishers actual) {
@@ -329,7 +349,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getPublishers(), actual.getPublishers());
+        assertEqualsResourcesInternal(expected.getPublishers(), actual.getPublishers());
     }
 
     private static void assertEqualsUpdateFrequencies(UpdateFrequencies expected, UpdateFrequencies actual) {
@@ -338,7 +358,7 @@ public class StatisticalOperationsRestAsserts {
             return;
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
-        MetamacRestAsserts.assertEqualsResources(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
+        assertEqualsResourcesInternal(expected.getUpdateFrequencies(), actual.getUpdateFrequencies());
     }
 
     public static void assertEqualsResourcesInternal(List<ResourceInternal> expecteds, List<ResourceInternal> actuals) {

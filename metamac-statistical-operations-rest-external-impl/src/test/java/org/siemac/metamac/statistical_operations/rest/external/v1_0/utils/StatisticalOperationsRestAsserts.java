@@ -9,10 +9,12 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FreqColls;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.GeographicGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSuppliers;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
@@ -25,7 +27,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 
 public class StatisticalOperationsRestAsserts {
@@ -93,9 +95,9 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataDescription(), actual.getDataDescription());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getStatisticalPopulation(), actual.getStatisticalPopulation());
         assertEqualsStatisticalUnits(expected.getStatisticalUnits(), actual.getStatisticalUnits());
-        MetamacRestAsserts.assertEqualsResource(expected.getGeographicGranularity(), actual.getGeographicGranularity());
+        assertEqualsGeographicGranularities(expected.getGeographicGranularity(), actual.getGeographicGranularity());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getGeographicComparability(), actual.getGeographicComparability());
-        MetamacRestAsserts.assertEqualsResource(expected.getTemporalGranularity(), actual.getTemporalGranularity());
+        assertEqualsTemporalGranularities(expected.getTemporalGranularity(), actual.getTemporalGranularity());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTemporalComparability(), actual.getTemporalComparability());
         assertEquals(expected.getBasePeriod(), actual.getBasePeriod());
         assertEqualsMeasures(expected.getMeasures(), actual.getMeasures());
@@ -263,6 +265,24 @@ public class StatisticalOperationsRestAsserts {
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getStatisticalUnits(), actual.getStatisticalUnits());
+    }
+
+    private static void assertEqualsGeographicGranularities(GeographicGranularities expected, GeographicGranularities actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        MetamacRestAsserts.assertEqualsResources(expected.getGeographicGranularities(), actual.getGeographicGranularities());
+    }
+
+    private static void assertEqualsTemporalGranularities(TemporalGranularities expected, TemporalGranularities actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        MetamacRestAsserts.assertEqualsResources(expected.getTemporalGranularities(), actual.getTemporalGranularities());
     }
 
     private static void assertEqualsSecondarySubjectAreas(SecondarySubjectAreas expected, SecondarySubjectAreas actual) {

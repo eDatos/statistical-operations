@@ -4,20 +4,17 @@
         <cdomain:id>officialityType1</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">officialityType1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">officialityType1 in English</cdomain:text>
         </cdomain:title>
     </operations:officialityType>
     <operations:officialityType>
         <cdomain:id>officialityType2</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">officialityType2 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">officialityType2 in English</cdomain:text>
         </cdomain:title>
     </operations:officialityType>
     <operations:officialityType>
         <cdomain:id>officialityType3</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">officialityType3 in English</cdomain:text>
             <cdomain:text xml:lang="es">officialityType3 en Español</cdomain:text>
         </cdomain:title>
     </operations:officialityType>

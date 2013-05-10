@@ -4,13 +4,11 @@
         <cdomain:id>surveyType1</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">surveyType1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">surveyType1 in English</cdomain:text>
         </cdomain:title>
     </operations:surveyType>
     <operations:surveyType>
         <cdomain:id>surveyType2</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">surveyType2 in English</cdomain:text>
             <cdomain:text xml:lang="es">surveyType2 en Español</cdomain:text>
         </cdomain:title>
     </operations:surveyType>

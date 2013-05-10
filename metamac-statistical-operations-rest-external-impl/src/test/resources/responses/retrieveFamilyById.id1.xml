@@ -9,15 +9,12 @@
     </operations:childLinks>
     <operations:title>
         <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">family1 in English</cdomain:text>
     </operations:title>
     <operations:acronym>
         <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
     </operations:acronym>
     <operations:description>
         <cdomain:text xml:lang="es">description1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">description1 in English</cdomain:text>
     </operations:description>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
 </operations:family>

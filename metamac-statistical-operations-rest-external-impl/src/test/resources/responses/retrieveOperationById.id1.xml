@@ -10,10 +10,8 @@
     </operations:childLinks>
     <operations:title>
         <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">operation1 in English</cdomain:text>
     </operations:title>
     <operations:acronym>
-        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
         <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
     </operations:acronym>
     <operations:subjectArea kind="structuralResources#category">
@@ -21,7 +19,6 @@
         <cdomain:urn>urn:subjectArea1</cdomain:urn>
         <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/srm/v1.0/subjectAreas/subjectArea1"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">subjectArea1 in English</cdomain:text>
             <cdomain:text xml:lang="es">subjectArea1 en Español</cdomain:text>
         </cdomain:title>
     </operations:subjectArea>
@@ -32,7 +29,6 @@
             <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea22"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">secundarySubjectArea22 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">secundarySubjectArea22 in English</cdomain:text>
             </cdomain:title>
         </operations:secondarySubjectArea>
         <operations:secondarySubjectArea kind="structuralResources#category">
@@ -41,7 +37,6 @@
             <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">secundarySubjectArea1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">secundarySubjectArea1 in English</cdomain:text>
             </cdomain:title>
         </operations:secondarySubjectArea>
         <operations:secondarySubjectArea kind="structuralResources#category">
@@ -49,30 +44,25 @@
             <cdomain:urn>urn:secundarySubjectArea333</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/srm/v1.0/secundarySubjectAreas/secundarySubjectArea333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">secundarySubjectArea333 in English</cdomain:text>
                 <cdomain:text xml:lang="es">secundarySubjectArea333 en Español</cdomain:text>
             </cdomain:title>
         </operations:secondarySubjectArea>
     </operations:secondarySubjectAreas>
     <operations:objective>
         <cdomain:text xml:lang="es">objetive1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">objetive1 in English</cdomain:text>
     </operations:objective>
     <operations:description>
         <cdomain:text xml:lang="es">description1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">description1 in English</cdomain:text>
     </operations:description>
     <operations:surveyType>
         <cdomain:id>surveyIdentifier</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">surveyIdentifier en Español</cdomain:text>
-            <cdomain:text xml:lang="en">surveyIdentifier in English</cdomain:text>
         </cdomain:title>
     </operations:surveyType>
     <operations:officialityType>
         <cdomain:id>officialityType</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">officialityType in English</cdomain:text>
             <cdomain:text xml:lang="es">officialityType en Español</cdomain:text>
         </cdomain:title>
     </operations:officialityType>
@@ -83,7 +73,6 @@
             <cdomain:urn>urn:producer1</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/producers/producer1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">producer1 in English</cdomain:text>
                 <cdomain:text xml:lang="es">producer1 en Español</cdomain:text>
             </cdomain:title>
         </operations:producer>
@@ -92,7 +81,6 @@
             <cdomain:urn>urn:producer22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/producers/producer22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">producer22 in English</cdomain:text>
                 <cdomain:text xml:lang="es">producer22 en Español</cdomain:text>
             </cdomain:title>
         </operations:producer>
@@ -104,7 +92,6 @@
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">regionalResponsible1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">regionalResponsible1 in English</cdomain:text>
             </cdomain:title>
         </operations:regionalResponsible>
         <operations:regionalResponsible kind="structuralResources#agency">
@@ -112,7 +99,6 @@
             <cdomain:urn>urn:regionalResponsible333</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">regionalResponsible333 in English</cdomain:text>
                 <cdomain:text xml:lang="es">regionalResponsible333 en Español</cdomain:text>
             </cdomain:title>
         </operations:regionalResponsible>
@@ -121,7 +107,6 @@
             <cdomain:urn>urn:regionalResponsible22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/regionalResponsibles/regionalResponsible22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">regionalResponsible22 in English</cdomain:text>
                 <cdomain:text xml:lang="es">regionalResponsible22 en Español</cdomain:text>
             </cdomain:title>
         </operations:regionalResponsible>
@@ -132,7 +117,6 @@
             <cdomain:urn>urn:regionalContributor22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/regionalContributors/regionalContributor22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">regionalContributor22 in English</cdomain:text>
                 <cdomain:text xml:lang="es">regionalContributor22 en Español</cdomain:text>
             </cdomain:title>
         </operations:regionalContributor>
@@ -142,7 +126,6 @@
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/regionalContributors/regionalContributor1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">regionalContributor1 en Español</cdomain:text>
-                <cdomain:text xml:lang="en">regionalContributor1 in English</cdomain:text>
             </cdomain:title>
         </operations:regionalContributor>
     </operations:regionalContributors>
@@ -154,7 +137,6 @@
             <cdomain:urn>urn:publisher22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/publishers/publisher22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">publisher22 in English</cdomain:text>
                 <cdomain:text xml:lang="es">publisher22 en Español</cdomain:text>
             </cdomain:title>
         </operations:publisher>
@@ -163,7 +145,6 @@
             <cdomain:urn>urn:publisher333</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/publishers/publisher333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">publisher333 in English</cdomain:text>
                 <cdomain:text xml:lang="es">publisher333 en Español</cdomain:text>
             </cdomain:title>
         </operations:publisher>
@@ -172,13 +153,13 @@
             <cdomain:urn>urn:publisher1</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/publishers/publisher1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">publisher1 in English</cdomain:text>
+                
                 <cdomain:text xml:lang="es">publisher1 en Español</cdomain:text>
             </cdomain:title>
         </operations:publisher>
     </operations:publishers>
     <operations:relPolUsAc>
-        <cdomain:text xml:lang="en">relPolUsAc1 in English</cdomain:text>
+        
         <cdomain:text xml:lang="es">relPolUsAc1 en Español</cdomain:text>
     </operations:relPolUsAc>
     <operations:releaseCalendar>true</operations:releaseCalendar>
@@ -189,7 +170,7 @@
             <cdomain:urn>urn:updateFrequency22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency22"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">updateFrequency22 in English</cdomain:text>
+                
                 <cdomain:text xml:lang="es">updateFrequency22 en Español</cdomain:text>
             </cdomain:title>
         </operations:updateFrequency>
@@ -198,7 +179,7 @@
             <cdomain:urn>urn:updateFrequency4444</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency4444"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">updateFrequency4444 in English</cdomain:text>
+                
                 <cdomain:text xml:lang="es">updateFrequency4444 en Español</cdomain:text>
             </cdomain:title>
         </operations:updateFrequency>
@@ -207,7 +188,7 @@
             <cdomain:urn>urn:updateFrequency1</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">updateFrequency1 in English</cdomain:text>
+                
                 <cdomain:text xml:lang="es">updateFrequency1 en Español</cdomain:text>
             </cdomain:title>
         </operations:updateFrequency>
@@ -216,7 +197,7 @@
             <cdomain:urn>urn:updateFrequency333</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/srm/v1.0/updateFrequencies/updateFrequency333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="en">updateFrequency333 in English</cdomain:text>
+                
                 <cdomain:text xml:lang="es">updateFrequency333 en Español</cdomain:text>
             </cdomain:title>
         </operations:updateFrequency>
@@ -227,17 +208,17 @@
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance333"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">instance333 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">instance333 in English</cdomain:text>
+            
         </cdomain:title>
     </operations:currentInstance>
     <operations:inventoryDate>2013-02-04T13:15:14Z</operations:inventoryDate>
     <operations:revPolicy>
-        <cdomain:text xml:lang="en">revPolicy1 in English</cdomain:text>
+        
         <cdomain:text xml:lang="es">revPolicy1 en Español</cdomain:text>
     </operations:revPolicy>
     <operations:revPractice>
         <cdomain:text xml:lang="es">revPractice1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">revPractice1 in English</cdomain:text>
+        
     </operations:revPractice>
     <operations:contact kind="structuralResources#agency">
         <cdomain:id>contact1</cdomain:id>
@@ -245,27 +226,27 @@
         <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/srm/v1.0/agencyschemes/SDMX/AGENCIES/1.0/agencies/contact1"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">contact1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">contact1 in English</cdomain:text>
+            
         </cdomain:title>
     </operations:contact>
     <operations:legalActs>
         <cdomain:text xml:lang="es">legalActs1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">legalActs1 in English</cdomain:text>
+        
     </operations:legalActs>
     <operations:dataSharing>
         <cdomain:text xml:lang="es">dataSharing1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">dataSharing1 in English</cdomain:text>
+        
     </operations:dataSharing>
     <operations:confidentialityPolicy>
         <cdomain:text xml:lang="es">confidentialityPolicy1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">confidentialityPolicy1 in English</cdomain:text>
+        
     </operations:confidentialityPolicy>
     <operations:confidentialityDataTreatment>
         <cdomain:text xml:lang="es">confidentialityDataTreatment1 en Español</cdomain:text>
-        <cdomain:text xml:lang="en">confidentialityDataTreatment1 in English</cdomain:text>
+        
     </operations:confidentialityDataTreatment>
     <operations:comment>
-        <cdomain:text xml:lang="en">comment1 in English</cdomain:text>
+        
         <cdomain:text xml:lang="es">comment1 en Español</cdomain:text>
     </operations:comment>
 </operations:operation>

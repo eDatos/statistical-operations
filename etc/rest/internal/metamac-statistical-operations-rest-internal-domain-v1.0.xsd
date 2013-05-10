@@ -63,7 +63,7 @@
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="createdDate" type="xs:dateTime" minOccurs="1" />            
+            <xs:element name="createdDate" type="xs:dateTime" minOccurs="1" />
             <xs:element name="internalInventoryDate" type="xs:dateTime" />
             <xs:element name="procStatus" type="tns:ProcStatus" />
             <xs:element name="inventoryDate" type="xs:dateTime" minOccurs="0" />
@@ -87,9 +87,9 @@
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalPopulation" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalUnits" type="tns:StatisticalUnits" minOccurs="0" />
-            <xs:element name="geographicGranularity" type="tns:ResourceInternal" minOccurs="0" />
+            <xs:element name="geographicGranularity" type="tns:GeographicGranularities" minOccurs="0" />
             <xs:element name="geographicComparability" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="temporalGranularity" type="tns:ResourceInternal" minOccurs="0" />
+            <xs:element name="temporalGranularity" type="tns:TemporalGranularities" minOccurs="0" />
             <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0" />
             <xs:element name="basePeriod" type="xs:string" minOccurs="0" />
             <xs:element name="measures" type="tns:Measures" minOccurs="0" />
@@ -166,7 +166,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="statisticalUnit" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="statisticalUnit" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -176,7 +176,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="measure" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="measure" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -186,7 +186,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="statConcDef" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="statConcDef" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -197,7 +197,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="classSystem" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="classSystem" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -207,7 +207,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="informationSupplier" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="informationSupplier" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -217,7 +217,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="freqColl" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="freqColl" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -228,7 +228,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="secondarySubjectArea" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="secondarySubjectArea" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -239,7 +239,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="producer" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="producer" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -250,7 +250,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="regionalResponsible" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="regionalResponsible" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -261,7 +261,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="regionalContributor" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="regionalContributor" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -272,7 +272,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="publisher" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="publisher" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -283,7 +283,7 @@
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="updateFrequency" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="updateFrequency" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -344,6 +344,26 @@
             <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="cost" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="GeographicGranularities">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="geographicGranularity" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TemporalGranularities">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="temporalGranularity" type="tns:ResourceInternal" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

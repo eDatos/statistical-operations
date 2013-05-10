@@ -9,15 +9,12 @@
     </operations:childLinks>
     <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#families/family;id=family1</operations:managementAppLink>
     <operations:title>
-        <cdomain:text xml:lang="en">family1 in English</cdomain:text>
         <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
     </operations:title>
     <operations:acronym>
-        <cdomain:text xml:lang="en">acronym1 in English</cdomain:text>
         <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
     </operations:acronym>
     <operations:description>
-        <cdomain:text xml:lang="en">description1 in English</cdomain:text>
         <cdomain:text xml:lang="es">description1 en Español</cdomain:text>
     </operations:description>
     <operations:createdDate>2011-01-02T15:14:13Z</operations:createdDate>

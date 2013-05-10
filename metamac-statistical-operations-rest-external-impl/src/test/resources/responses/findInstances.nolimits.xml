@@ -5,7 +5,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance1"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instance1 in English</cdomain:text>
             <cdomain:text xml:lang="es">instance1 en Español</cdomain:text>
         </cdomain:title>
     </operations:instance>
@@ -14,7 +13,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance2</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance2"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instance2 in English</cdomain:text>
             <cdomain:text xml:lang="es">instance2 en Español</cdomain:text>
         </cdomain:title>
     </operations:instance>
@@ -24,7 +22,6 @@
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance3"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">instance3 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">instance3 in English</cdomain:text>
         </cdomain:title>
     </operations:instance>
     <operations:instance kind="statisticalOperations#instance">
@@ -32,7 +29,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance4</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance4"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instance4 in English</cdomain:text>
             <cdomain:text xml:lang="es">instance4 en Español</cdomain:text>
         </cdomain:title>
     </operations:instance>
@@ -41,7 +37,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance15</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance15"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">instance15 in English</cdomain:text>
             <cdomain:text xml:lang="es">instance15 en Español</cdomain:text>
         </cdomain:title>
     </operations:instance>

@@ -76,9 +76,9 @@
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalPopulation" type="common:InternationalString" minOccurs="0" />
             <xs:element name="statisticalUnits" type="tns:StatisticalUnits" minOccurs="0" />
-            <xs:element name="geographicGranularity" type="common:Resource" minOccurs="0" />
+            <xs:element name="geographicGranularity" type="tns:GeographicGranularities" minOccurs="0" />
             <xs:element name="geographicComparability" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="temporalGranularity" type="common:Resource" minOccurs="0" />
+            <xs:element name="temporalGranularity" type="tns:TemporalGranularities" minOccurs="0" />
             <xs:element name="temporalComparability" type="common:InternationalString" minOccurs="0" />
             <xs:element name="basePeriod" type="xs:string" minOccurs="0" />
             <xs:element name="measures" type="tns:Measures" minOccurs="0" />
@@ -326,6 +326,26 @@
             <xs:extension base="common:ListBase">
                 <xs:sequence>
                     <xs:element name="cost" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="GeographicGranularities">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="geographicGranularity" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TemporalGranularities">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="temporalGranularity" type="common:Resource" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

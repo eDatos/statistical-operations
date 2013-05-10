@@ -5,7 +5,6 @@
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1"/>
         <cdomain:title>
-            <cdomain:text xml:lang="en">family1 in English</cdomain:text>
             <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
         </cdomain:title>
         <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#families/family;id=family1</operations:managementAppLink>

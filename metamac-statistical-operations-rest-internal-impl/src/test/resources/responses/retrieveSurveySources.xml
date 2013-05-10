@@ -3,7 +3,6 @@
     <operations:surveySource>
         <cdomain:id>surveySource1</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">surveySource1 in English</cdomain:text>
             <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
         </cdomain:title>
     </operations:surveySource>
@@ -11,7 +10,6 @@
         <cdomain:id>surveySource2</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">surveySource2 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">surveySource2 in English</cdomain:text>
         </cdomain:title>
     </operations:surveySource>
 </operations:surveySources>

@@ -4,13 +4,11 @@
         <cdomain:id>cost1</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">cost1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">cost1 in English</cdomain:text>
         </cdomain:title>
     </operations:cost>
     <operations:cost>
         <cdomain:id>cost2</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">cost2 in English</cdomain:text>
             <cdomain:text xml:lang="es">cost2 en Español</cdomain:text>
         </cdomain:title>
     </operations:cost>

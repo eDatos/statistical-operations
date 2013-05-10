@@ -6,7 +6,6 @@
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance3"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">instance3 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">instance3 in English</cdomain:text>
         </cdomain:title>
     </operations:instance>
     <operations:instance kind="statisticalOperations#instance">
@@ -15,7 +14,6 @@
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations/v1.0/operations/operation1/instances/instance4"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">instance4 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">instance4 in English</cdomain:text>
         </cdomain:title>
     </operations:instance>
 </operations:instances>

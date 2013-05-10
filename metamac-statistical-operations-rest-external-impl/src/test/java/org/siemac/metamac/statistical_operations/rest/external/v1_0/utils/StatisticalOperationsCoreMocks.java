@@ -482,7 +482,7 @@ public class StatisticalOperationsCoreMocks {
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
         operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
-        operation.setTitle(mockInternationalString("operation", subCode));
+        operation.setTitle(mockInternationalStringMetadata("operation", subCode));
         operation.setProcStatus(procStatus);
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(3), operation.getCode()));
@@ -506,7 +506,7 @@ public class StatisticalOperationsCoreMocks {
         Family family = new Family();
         family.setCode("family" + subCode);
         family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
-        family.setTitle(mockInternationalString("family", subCode));
+        family.setTitle(mockInternationalStringMetadata("family", subCode));
         family.setProcStatus(procStatus);
         return family;
     }
@@ -518,7 +518,7 @@ public class StatisticalOperationsCoreMocks {
         Instance instance = new Instance();
         instance.setCode("instance" + subCode);
         instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(operationCode, instance.getCode()));
-        instance.setTitle(mockInternationalString("instance", subCode));
+        instance.setTitle(mockInternationalStringMetadata("instance", subCode));
         instance.setProcStatus(procStatus);
         instance.setOrder(order);
         return instance;
@@ -526,42 +526,42 @@ public class StatisticalOperationsCoreMocks {
 
     private SurveyType mockSurveyType(String code) {
         SurveyType surveyType = new SurveyType();
-        surveyType.setDescription(mockInternationalString(code, null));
+        surveyType.setDescription(mockInternationalStringMetadata(code, null));
         surveyType.setIdentifier(code);
         return surveyType;
     }
 
     private OfficialityType mockOfficialityType(String code) {
         OfficialityType officialityType = new OfficialityType();
-        officialityType.setDescription(mockInternationalString(code, null));
+        officialityType.setDescription(mockInternationalStringMetadata(code, null));
         officialityType.setIdentifier(code);
         return officialityType;
     }
 
     private InstanceType mockInstanceType(String code) {
         InstanceType instanceType = new InstanceType();
-        instanceType.setDescription(mockInternationalString(code, null));
+        instanceType.setDescription(mockInternationalStringMetadata(code, null));
         instanceType.setIdentifier(code);
         return instanceType;
     }
 
     private SurveySource mockSurveySource(String code) {
         SurveySource surveySource = new SurveySource();
-        surveySource.setDescription(mockInternationalString(code, null));
+        surveySource.setDescription(mockInternationalStringMetadata(code, null));
         surveySource.setIdentifier(code);
         return surveySource;
     }
 
     private CollMethod mockCollMethod(String code) {
         CollMethod collMethod = new CollMethod();
-        collMethod.setDescription(mockInternationalString(code, null));
+        collMethod.setDescription(mockInternationalStringMetadata(code, null));
         collMethod.setIdentifier(code);
         return collMethod;
     }
 
     private Cost mockCost(String code) {
         Cost cost = new Cost();
-        cost.setDescription(mockInternationalString(code, null));
+        cost.setDescription(mockInternationalStringMetadata(code, null));
         cost.setIdentifier(code);
         return cost;
     }
@@ -569,13 +569,13 @@ public class StatisticalOperationsCoreMocks {
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
+        return new ExternalItem(code, uri, urn, type, mockInternationalStringMetadata(code, null), null);
     }
 
     private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, type, mockInternationalString(code, null), null);
+        return new ExternalItem(code, uri, urn, type, mockInternationalStringMetadata(code, null), null);
     }
 
     private Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
@@ -583,8 +583,8 @@ public class StatisticalOperationsCoreMocks {
         Operation operation = new Operation();
         operation.setCode("operation" + subCode);
         operation.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(operation.getCode()));
-        operation.setTitle(mockInternationalString("operation", subCode));
-        operation.setAcronym(mockInternationalString("acronym", subCode));
+        operation.setTitle(mockInternationalStringMetadata("operation", subCode));
+        operation.setAcronym(mockInternationalStringMetadata("acronym", subCode));
         if (families != null) {
             for (int i = 0; i < families.length; i++) {
                 Family family = families[i];
@@ -595,8 +595,8 @@ public class StatisticalOperationsCoreMocks {
         operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea1", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
         operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea22", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
         operation.getSecondarySubjectAreas().add(mockExternalItemSrm("secundarySubjectArea333", "secundarySubjectAreas", TypeExternalArtefactsEnum.CATEGORY));
-        operation.setObjective(mockInternationalString("objetive", subCode));
-        operation.setDescription(mockInternationalString("description", subCode));
+        operation.setObjective(mockInternationalStringMetadata("objetive", subCode));
+        operation.setDescription(mockInternationalStringMetadata("description", subCode));
         operation.addInstance(mockInstanceRelatedEntity("4444", ProcStatusEnum.DRAFT, Integer.valueOf(0), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2), operation.getCode()));
@@ -618,7 +618,7 @@ public class StatisticalOperationsCoreMocks {
         operation.getPublisher().add(mockExternalItemSrm("publisher1", "publishers", TypeExternalArtefactsEnum.AGENCY));
         operation.getPublisher().add(mockExternalItemSrm("publisher22", "publishers", TypeExternalArtefactsEnum.AGENCY));
         operation.getPublisher().add(mockExternalItemSrm("publisher333", "publishers", TypeExternalArtefactsEnum.AGENCY));
-        operation.setRelPolUsAc(mockInternationalString("relPolUsAc", subCode));
+        operation.setRelPolUsAc(mockInternationalStringMetadata("relPolUsAc", subCode));
         operation.setReleaseCalendar(Boolean.TRUE);
         operation.setReleaseCalendarAccess("http://releaseCalendarAccess1");
         operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency1", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
@@ -626,11 +626,11 @@ public class StatisticalOperationsCoreMocks {
         operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency333", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
         operation.getUpdateFrequency().add(mockExternalItemSrm("updateFrequency4444", "updateFrequencies", TypeExternalArtefactsEnum.CODE));
         operation.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
-        operation.setRevPolicy(mockInternationalString("revPolicy", subCode));
-        operation.setRevPractice(mockInternationalString("revPractice", subCode));
+        operation.setRevPolicy(mockInternationalStringMetadata("revPolicy", subCode));
+        operation.setRevPractice(mockInternationalStringMetadata("revPractice", subCode));
         operation.setCommonMetadata(mockExternalItemCommonMetadata("commonMetadata1", "nothing", TypeExternalArtefactsEnum.CONFIGURATION));
-        operation.setComment(mockInternationalString("comment", subCode));
-        operation.setNotes(mockInternationalString("notes", subCode));
+        operation.setComment(mockInternationalStringMetadata("comment", subCode));
+        operation.setNotes(mockInternationalStringMetadata("notes", subCode));
 
         return operation;
     }
@@ -639,9 +639,9 @@ public class StatisticalOperationsCoreMocks {
         Family family = new Family();
         family.setCode("family" + subCode);
         family.setUrn(GeneratorUrnUtils.generateSiemacStatisticalFamilyUrn(family.getCode()));
-        family.setTitle(mockInternationalString("family", subCode));
-        family.setAcronym(mockInternationalString("acronym", subCode));
-        family.setDescription(mockInternationalString("description", subCode));
+        family.setTitle(mockInternationalStringMetadata("family", subCode));
+        family.setAcronym(mockInternationalStringMetadata("acronym", subCode));
+        family.setDescription(mockInternationalStringMetadata("description", subCode));
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
@@ -655,59 +655,61 @@ public class StatisticalOperationsCoreMocks {
         instance.setOperation(mockOperationRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY));
         instance.setCode("instance" + subCode);
         instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(instance.getOperation().getCode(), instance.getCode()));
-        instance.setTitle(mockInternationalString("instance", subCode));
-        instance.setAcronym(mockInternationalString("acronym", subCode));
+        instance.setTitle(mockInternationalStringMetadata("instance", subCode));
+        instance.setAcronym(mockInternationalStringMetadata("acronym", subCode));
         instance.setOrder(Integer.valueOf(2));
-        instance.setDataDescription(mockInternationalString("dataDescription", subCode));
-        instance.setStatisticalPopulation(mockInternationalString("statisticalPopulation", subCode));
+        instance.setDataDescription(mockInternationalStringMetadata("dataDescription", subCode));
+        instance.setStatisticalPopulation(mockInternationalStringMetadata("statisticalPopulation", subCode));
         instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit1", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
         instance.addStatisticalUnit(mockExternalItemSrm("statisticalUnit22", "statisticalUnits", TypeExternalArtefactsEnum.CONCEPT));
-        // instance.setGeographicGranularity(mockExternalItemSrm("geographicGranularity", "geographicGranularities", TypeExternalArtefactsEnum.CODELIST)); // TODO metamac-1629
-        instance.setGeographicComparability(mockInternationalString("geographicComparability", subCode));
-        // instance.setTemporalGranularity(mockExternalItemSrm("temporalGranularity", "temporalGranularities", TypeExternalArtefactsEnum.CODELIST));// TODO metamac-1629
-        instance.setTemporalComparability(mockInternationalString("temporalComparability", subCode));
+        instance.addGeographicGranularity(mockExternalItemSrm("geographicGranularity01", "codelists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addGeographicGranularity(mockExternalItemSrm("geographicGranularity02", "codelists", TypeExternalArtefactsEnum.CODELIST));
+        instance.setGeographicComparability(mockInternationalStringMetadata("geographicComparability", subCode));
+        instance.addTemporalGranularity(mockExternalItemSrm("temporalGranularity01", "codelists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addTemporalGranularity(mockExternalItemSrm("temporalGranularity02", "codelists", TypeExternalArtefactsEnum.CODELIST));
+        instance.setTemporalComparability(mockInternationalStringMetadata("temporalComparability", subCode));
         instance.setBasePeriod("2012");
         instance.addUnitMeasure(mockExternalItemSrm("measure1", "measures", TypeExternalArtefactsEnum.CONCEPT));
-        instance.setStatConcDef(mockInternationalString("statConcDef", subCode));
+        instance.setStatConcDef(mockInternationalStringMetadata("statConcDef", subCode));
         instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.setClassSystem(mockInternationalString("classSystem", subCode));
+        instance.setClassSystem(mockInternationalStringMetadata("classSystem", subCode));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.setInstanceType(mockInstanceType("instanceType1"));
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         instance.setProcStatus(procStatus);
-        instance.setDocMethod(mockInternationalString("docMethod", subCode));
+        instance.setDocMethod(mockInternationalStringMetadata("docMethod", subCode));
         instance.setSurveySource(mockSurveySource("surveySource1"));
         instance.setCollMethod(mockCollMethod("collMethod1"));
         instance.addInformationSupplier(mockExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.CONCEPT));
         instance.addFreqColl(mockExternalItemSrm("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
         instance.addFreqColl(mockExternalItemSrm("freqColl22", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
-        instance.setDataValidation(mockInternationalString("dataValidation", subCode));
-        instance.setDataCompilation(mockInternationalString("dataCompilation", subCode));
-        instance.setAdjustment(mockInternationalString("adjustment", subCode));
-        instance.setCostBurden(mockInternationalString("costBurden", subCode));
+        instance.setDataValidation(mockInternationalStringMetadata("dataValidation", subCode));
+        instance.setDataCompilation(mockInternationalStringMetadata("dataCompilation", subCode));
+        instance.setAdjustment(mockInternationalStringMetadata("adjustment", subCode));
+        instance.setCostBurden(mockInternationalStringMetadata("costBurden", subCode));
         instance.addCost(mockCost("cost1"));
         instance.addCost(mockCost("cost22"));
         instance.addCost(mockCost("cost333"));
         instance.addCost(mockCost("cost4444"));
         instance.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0));
-        instance.setQualityDoc(mockInternationalString("qualityDoc", subCode));
-        instance.setQualityAssure(mockInternationalString("qualityAssure", subCode));
-        instance.setQualityAssmnt(mockInternationalString("qualityAssmnt", subCode));
-        instance.setUserNeeds(mockInternationalString("userNeeds", subCode));
-        instance.setUserSat(mockInternationalString("userSat", subCode));
-        instance.setCompleteness(mockInternationalString("completeness", subCode));
-        instance.setTimeliness(mockInternationalString("timeliness", subCode));
-        instance.setPunctuality(mockInternationalString("punctuality", subCode));
-        instance.setAccuracyOverall(mockInternationalString("accuracyOverall", subCode));
-        instance.setSamplingErr(mockInternationalString("samplingErr", subCode));
-        instance.setNonsamplingErr(mockInternationalString("nonsamplingErr", subCode));
-        instance.setCoherXDomain(mockInternationalString("coherXDom", subCode));
-        instance.setCoherInternal(mockInternationalString("coherInternal", subCode));
-        instance.setComment(mockInternationalString("comment", subCode));
-        instance.setNotes(mockInternationalString("notes", subCode));
+        instance.setQualityDoc(mockInternationalStringMetadata("qualityDoc", subCode));
+        instance.setQualityAssure(mockInternationalStringMetadata("qualityAssure", subCode));
+        instance.setQualityAssmnt(mockInternationalStringMetadata("qualityAssmnt", subCode));
+        instance.setUserNeeds(mockInternationalStringMetadata("userNeeds", subCode));
+        instance.setUserSat(mockInternationalStringMetadata("userSat", subCode));
+        instance.setCompleteness(mockInternationalStringMetadata("completeness", subCode));
+        instance.setTimeliness(mockInternationalStringMetadata("timeliness", subCode));
+        instance.setPunctuality(mockInternationalStringMetadata("punctuality", subCode));
+        instance.setAccuracyOverall(mockInternationalStringMetadata("accuracyOverall", subCode));
+        instance.setSamplingErr(mockInternationalStringMetadata("samplingErr", subCode));
+        instance.setNonsamplingErr(mockInternationalStringMetadata("nonsamplingErr", subCode));
+        instance.setCoherXDomain(mockInternationalStringMetadata("coherXDom", subCode));
+        instance.setCoherInternal(mockInternationalStringMetadata("coherInternal", subCode));
+        instance.setComment(mockInternationalStringMetadata("comment", subCode));
+        instance.setNotes(mockInternationalStringMetadata("notes", subCode));
 
         return instance;
     }
@@ -754,25 +756,20 @@ public class StatisticalOperationsCoreMocks {
         return costs;
     }
 
-    private InternationalString mockInternationalString(String metadata, String subCode) {
+    private InternationalString mockInternationalStringMetadata(String metadata, String subCode) {
         String subTitle = subCode != null ? metadata + subCode : metadata;
-        return mockInternationalString("es", subTitle + " en Español", "en", subTitle + " in English");
+        String locale = "es";
+        String label = subTitle + " en Español";
+        return mockInternationalString(locale, label);
     }
 
-    private InternationalString mockInternationalString(String locale1, String label1, String locale2, String label2) {
-
+    private InternationalString mockInternationalString(String locale, String label) {
+        // Note: only one locale, because it is a set and change orden in xml responses, so only there are svn differences
         InternationalString internationalString = new InternationalString();
-
         LocalisedString internationalStringLocale1 = new LocalisedString();
-        internationalStringLocale1.setLocale(locale1);
-        internationalStringLocale1.setLabel(label1);
+        internationalStringLocale1.setLocale(locale);
+        internationalStringLocale1.setLabel(label);
         internationalString.addText(internationalStringLocale1);
-
-        LocalisedString internationalStringLocale2 = new LocalisedString();
-        internationalStringLocale2.setLocale(locale2);
-        internationalStringLocale2.setLabel(label2);
-        internationalString.addText(internationalStringLocale2);
-
         return internationalString;
     }
 }

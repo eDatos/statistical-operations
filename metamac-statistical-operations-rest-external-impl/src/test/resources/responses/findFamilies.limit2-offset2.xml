@@ -6,7 +6,6 @@
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations/v1.0/families/family3"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">family3 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">family3 in English</cdomain:text>
         </cdomain:title>
     </operations:family>
     <operations:family kind="statisticalOperations#family">
@@ -15,7 +14,6 @@
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations/v1.0/families/family4"/>
         <cdomain:title>
             <cdomain:text xml:lang="es">family4 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">family4 in English</cdomain:text>
         </cdomain:title>
     </operations:family>
 </operations:families>

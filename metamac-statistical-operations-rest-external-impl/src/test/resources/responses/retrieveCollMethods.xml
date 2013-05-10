@@ -4,13 +4,11 @@
         <cdomain:id>collMethod1</cdomain:id>
         <cdomain:title>
             <cdomain:text xml:lang="es">collMethod1 en Español</cdomain:text>
-            <cdomain:text xml:lang="en">collMethod1 in English</cdomain:text>
         </cdomain:title>
     </operations:collMethod>
     <operations:collMethod>
         <cdomain:id>collMethod2</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="en">collMethod2 in English</cdomain:text>
             <cdomain:text xml:lang="es">collMethod2 en Español</cdomain:text>
         </cdomain:title>
     </operations:collMethod>

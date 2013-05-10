@@ -30,6 +30,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FreqColls;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.GeographicGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSuppliers;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
@@ -47,6 +48,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -234,9 +236,9 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setDataDescription(toInternationalString(source.getDataDescription()));
         target.setStatisticalPopulation(toInternationalString(source.getStatisticalPopulation()));
         target.setStatisticalUnits(toStatisticalUnits(source.getStatisticalUnit()));
-        // target.setGeographicGranularity(toResourceExternalItemSrm(source.getGeographicGranularity())); // TODO METAMAC-1629
+        target.setGeographicGranularity(toGeographicGranularities(source.getGeographicGranularity()));
         target.setGeographicComparability(toInternationalString(source.getGeographicComparability()));
-        // target.setTemporalGranularity(toResourceExternalItemSrm(source.getTemporalGranularity())); // TODO METAMAC-1629
+        target.setTemporalGranularity(toTemporalGranularities(source.getTemporalGranularity()));
         target.setTemporalComparability(toInternationalString(source.getTemporalComparability()));
         target.setBasePeriod(source.getBasePeriod());
         target.setMeasures(toMeasures(source.getUnitMeasure()));
@@ -785,6 +787,28 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         toResourcesExternalItemsSrm(sources, targets.getStatisticalUnits());
         targets.setKind(KIND_SRM_EXTERNAL_ITEM);
         targets.setTotal(BigInteger.valueOf(targets.getStatisticalUnits().size()));
+        return targets;
+    }
+
+    private GeographicGranularities toGeographicGranularities(Set<ExternalItem> sources) {
+        if (sources == null || sources.size() == 0) {
+            return null;
+        }
+        GeographicGranularities targets = new GeographicGranularities();
+        toResourcesExternalItemsSrm(sources, targets.getGeographicGranularities());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getGeographicGranularities().size()));
+        return targets;
+    }
+
+    private TemporalGranularities toTemporalGranularities(Set<ExternalItem> sources) {
+        if (sources == null || sources.size() == 0) {
+            return null;
+        }
+        TemporalGranularities targets = new TemporalGranularities();
+        toResourcesExternalItemsSrm(sources, targets.getTemporalGranularities());
+        targets.setKind(KIND_SRM_EXTERNAL_ITEM);
+        targets.setTotal(BigInteger.valueOf(targets.getTemporalGranularities().size()));
         return targets;
     }
 
