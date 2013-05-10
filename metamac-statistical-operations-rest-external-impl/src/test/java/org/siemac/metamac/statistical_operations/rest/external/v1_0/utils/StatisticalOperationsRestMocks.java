@@ -729,7 +729,7 @@ public class StatisticalOperationsRestMocks {
         instance.setSelfLink(MetamacRestMocks.mockResourceLink(instance.getKind(), baseApi + "/operations/" + operation + "/instances/instance" + subId));
         instance.setTitle(mockInternationalStringMetadata("instance", subId));
         instance.setAcronym(mockInternationalStringMetadata("acronym", subId));
-        instance.setSurvey(mockResource(operation, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation, RestExternalConstants.KIND_OPERATION, baseApi
+        instance.setStatisticalOperation(mockResource(operation, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation, RestExternalConstants.KIND_OPERATION, baseApi
                 + "/operations/" + operation));
         instance.setPredecessor(mockInstanceResource(operation, "333"));
         instance.setSuccessor(mockInstanceResource(operation, "22"));

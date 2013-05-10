@@ -89,7 +89,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsResourceLink(expected.getSelfLink(), actual.getSelfLink());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getAcronym(), actual.getAcronym());
-        MetamacRestAsserts.assertEqualsResource(expected.getSurvey(), actual.getSurvey());
+        MetamacRestAsserts.assertEqualsResource(expected.getStatisticalOperation(), actual.getStatisticalOperation());
         MetamacRestAsserts.assertEqualsResource(expected.getSuccessor(), actual.getSuccessor());
         MetamacRestAsserts.assertEqualsResource(expected.getPredecessor(), actual.getPredecessor());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDataDescription(), actual.getDataDescription());

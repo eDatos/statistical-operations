@@ -81,7 +81,7 @@
             <xs:element name="managementAppLink" type="xs:string" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="survey" type="tns:ResourceInternal" />
+            <xs:element name="statisticalOperation" type="tns:ResourceInternal" />
             <xs:element name="successor" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="predecessor" type="tns:ResourceInternal" minOccurs="0" />
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0" />

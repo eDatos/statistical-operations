@@ -70,7 +70,7 @@
             <xs:element name="childLinks" type="common:ChildLinks" minOccurs="0" />
             <xs:element name="title" type="common:InternationalString" />
             <xs:element name="acronym" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="survey" type="common:Resource" />
+            <xs:element name="statisticalOperation" type="common:Resource" />
             <xs:element name="successor" type="common:Resource" minOccurs="0" />
             <xs:element name="predecessor" type="common:Resource" minOccurs="0" />
             <xs:element name="dataDescription" type="common:InternationalString" minOccurs="0" />

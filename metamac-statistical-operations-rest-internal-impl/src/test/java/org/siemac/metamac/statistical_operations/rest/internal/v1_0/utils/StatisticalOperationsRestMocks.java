@@ -780,7 +780,7 @@ public class StatisticalOperationsRestMocks {
         instance.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCE, statisticalOperationsApiBaseV10 + "/operations/" + operation + "/instances/instance" + subId));
         instance.setTitle(mockInternationalStringMetadata("instance", subId));
         instance.setAcronym(mockInternationalStringMetadata("acronym", subId));
-        instance.setSurvey(mockOperationResource(operation));
+        instance.setStatisticalOperation(mockOperationResource(operation));
         instance.setPredecessor(mockInstanceResource(operation, "333"));
         instance.setSuccessor(mockInstanceResource(operation, "22"));
         instance.setDataDescription(mockInternationalStringMetadata("dataDescription", subId));

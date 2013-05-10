@@ -249,7 +249,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setSelfLink(toInstanceSelfLink(source));
         target.setTitle(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
-        target.setSurvey(toResource(source.getOperation()));
+        target.setStatisticalOperation(toResource(source.getOperation()));
         target.setPredecessor(toResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() - 1)));
         target.setSuccessor(toResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() + 1)));
         target.setDataDescription(toInternationalString(source.getDataDescription()));
