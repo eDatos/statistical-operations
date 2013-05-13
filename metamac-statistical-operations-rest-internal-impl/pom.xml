@@ -16,6 +16,10 @@
 	<name>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</name>
 	<description>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</description>
 
+    <properties>
+        <metamac-srm-rest-internal-api.version>1.0.0-SNAPSHOT</metamac-srm-rest-internal-api.version>
+    </properties>
+    
 	<dependencies>
         <!-- Metamac -->
 		<dependency>
@@ -29,6 +33,11 @@
             <classifier>client</classifier>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-srm</groupId>
+            <artifactId>metamac-srm-rest-internal-api</artifactId>
+            <version>${metamac-srm-rest-internal-api.version}</version>
+        </dependency>        
         <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-rest-common</artifactId>

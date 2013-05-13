@@ -24,16 +24,7 @@
         </cdomain:title>
         <operations:managementAppLink>http://localhost:8080/metamac-srm-web/subjectAreas/subjectArea1</operations:managementAppLink>
     </operations:subjectArea>
-    <operations:secondarySubjectAreas kind="PENDIENTE_API_SRM" total="3">
-        <operations:secondarySubjectArea kind="structuralResources#category">
-            <cdomain:id>secundarySubjectArea333</cdomain:id>
-            <cdomain:urn>urn:secundarySubjectArea333</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/structural-resources-internal/v1.0/secundarySubjectAreas/secundarySubjectArea333"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">secundarySubjectArea333 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</operations:managementAppLink>
-        </operations:secondarySubjectArea>
+    <operations:secondarySubjectAreas kind="structuralResources#categories" total="3">
         <operations:secondarySubjectArea kind="structuralResources#category">
             <cdomain:id>secundarySubjectArea22</cdomain:id>
             <cdomain:urn>urn:secundarySubjectArea22</cdomain:urn>
@@ -42,6 +33,15 @@
                 <cdomain:text xml:lang="es">secundarySubjectArea22 en Español</cdomain:text>
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea22</operations:managementAppLink>
+        </operations:secondarySubjectArea>
+        <operations:secondarySubjectArea kind="structuralResources#category">
+            <cdomain:id>secundarySubjectArea333</cdomain:id>
+            <cdomain:urn>urn:secundarySubjectArea333</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#category" href="http://data.istac.es/apis/structural-resources-internal/v1.0/secundarySubjectAreas/secundarySubjectArea333"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">secundarySubjectArea333 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/secundarySubjectAreas/secundarySubjectArea333</operations:managementAppLink>
         </operations:secondarySubjectArea>
         <operations:secondarySubjectArea kind="structuralResources#category">
             <cdomain:id>secundarySubjectArea1</cdomain:id>
@@ -72,16 +72,7 @@
         </cdomain:title>
     </operations:officialityType>
     <operations:indicatorSystem>true</operations:indicatorSystem>
-    <operations:producers kind="PENDIENTE_API_SRM" total="2">
-        <operations:producer kind="structuralResources#agency">
-            <cdomain:id>producer1</cdomain:id>
-            <cdomain:urn>urn:producer1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/producers/producer1"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">producer1 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/producers/producer1</operations:managementAppLink>
-        </operations:producer>
+    <operations:producers kind="structuralResources#organisationUnits" total="2">
         <operations:producer kind="structuralResources#agency">
             <cdomain:id>producer22</cdomain:id>
             <cdomain:urn>urn:producer22</cdomain:urn>
@@ -91,17 +82,17 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/producers/producer22</operations:managementAppLink>
         </operations:producer>
-    </operations:producers>
-    <operations:regionalResponsibles kind="PENDIENTE_API_SRM" total="3">
-        <operations:regionalResponsible kind="structuralResources#agency">
-            <cdomain:id>regionalResponsible333</cdomain:id>
-            <cdomain:urn>urn:regionalResponsible333</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/regionalResponsibles/regionalResponsible333"/>
+        <operations:producer kind="structuralResources#agency">
+            <cdomain:id>producer1</cdomain:id>
+            <cdomain:urn>urn:producer1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/producers/producer1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">regionalResponsible333 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">producer1 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</operations:managementAppLink>
-        </operations:regionalResponsible>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/producers/producer1</operations:managementAppLink>
+        </operations:producer>
+    </operations:producers>
+    <operations:regionalResponsibles kind="structuralResources#organisationUnits" total="3">
         <operations:regionalResponsible kind="structuralResources#agency">
             <cdomain:id>regionalResponsible22</cdomain:id>
             <cdomain:urn>urn:regionalResponsible22</cdomain:urn>
@@ -120,17 +111,17 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible1</operations:managementAppLink>
         </operations:regionalResponsible>
-    </operations:regionalResponsibles>
-    <operations:regionalContributors kind="PENDIENTE_API_SRM" total="2">
-        <operations:regionalContributor kind="structuralResources#agency">
-            <cdomain:id>regionalContributor22</cdomain:id>
-            <cdomain:urn>urn:regionalContributor22</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/regionalContributors/regionalContributor22"/>
+        <operations:regionalResponsible kind="structuralResources#agency">
+            <cdomain:id>regionalResponsible333</cdomain:id>
+            <cdomain:urn>urn:regionalResponsible333</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/regionalResponsibles/regionalResponsible333"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">regionalContributor22 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">regionalResponsible333 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</operations:managementAppLink>
-        </operations:regionalContributor>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalResponsibles/regionalResponsible333</operations:managementAppLink>
+        </operations:regionalResponsible>
+    </operations:regionalResponsibles>
+    <operations:regionalContributors kind="structuralResources#organisations" total="2">
         <operations:regionalContributor kind="structuralResources#agency">
             <cdomain:id>regionalContributor1</cdomain:id>
             <cdomain:urn>urn:regionalContributor1</cdomain:urn>
@@ -140,22 +131,22 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor1</operations:managementAppLink>
         </operations:regionalContributor>
+        <operations:regionalContributor kind="structuralResources#agency">
+            <cdomain:id>regionalContributor22</cdomain:id>
+            <cdomain:urn>urn:regionalContributor22</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/regionalContributors/regionalContributor22"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">regionalContributor22 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/regionalContributors/regionalContributor22</operations:managementAppLink>
+        </operations:regionalContributor>
     </operations:regionalContributors>
     <operations:createdDate>2011-01-02T15:14:13Z</operations:createdDate>
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:currentlyActive>false</operations:currentlyActive>
     <operations:status>DESIGN</operations:status>
     <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
-    <operations:publishers kind="PENDIENTE_API_SRM" total="3">
-        <operations:publisher kind="structuralResources#agency">
-            <cdomain:id>publisher1</cdomain:id>
-            <cdomain:urn>urn:publisher1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/publishers/publisher1"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">publisher1 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</operations:managementAppLink>
-        </operations:publisher>
+    <operations:publishers kind="structuralResources#organisationUnits" total="3">
         <operations:publisher kind="structuralResources#agency">
             <cdomain:id>publisher22</cdomain:id>
             <cdomain:urn>urn:publisher22</cdomain:urn>
@@ -164,6 +155,15 @@
                 <cdomain:text xml:lang="es">publisher22 en Español</cdomain:text>
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/publishers/publisher22</operations:managementAppLink>
+        </operations:publisher>
+        <operations:publisher kind="structuralResources#agency">
+            <cdomain:id>publisher1</cdomain:id>
+            <cdomain:urn>urn:publisher1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#agency" href="http://data.istac.es/apis/structural-resources-internal/v1.0/publishers/publisher1"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">publisher1 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/publishers/publisher1</operations:managementAppLink>
         </operations:publisher>
         <operations:publisher kind="structuralResources#agency">
             <cdomain:id>publisher333</cdomain:id>
@@ -180,7 +180,25 @@
     </operations:relPolUsAc>
     <operations:releaseCalendar>true</operations:releaseCalendar>
     <operations:releaseCalendarAccess>http://releaseCalendarAccess1</operations:releaseCalendarAccess>
-    <operations:updateFrequencies kind="PENDIENTE_API_SRM" total="4">
+    <operations:updateFrequencies kind="structuralResources#codes" total="4">
+        <operations:updateFrequency kind="structuralResources#code">
+            <cdomain:id>updateFrequency4444</cdomain:id>
+            <cdomain:urn>urn:updateFrequency4444</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/structural-resources-internal/v1.0/updateFrequencies/updateFrequency4444"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">updateFrequency4444 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</operations:managementAppLink>
+        </operations:updateFrequency>
+        <operations:updateFrequency kind="structuralResources#code">
+            <cdomain:id>updateFrequency333</cdomain:id>
+            <cdomain:urn>urn:updateFrequency333</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/structural-resources-internal/v1.0/updateFrequencies/updateFrequency333"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">updateFrequency333 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency333</operations:managementAppLink>
+        </operations:updateFrequency>
         <operations:updateFrequency kind="structuralResources#code">
             <cdomain:id>updateFrequency22</cdomain:id>
             <cdomain:urn>urn:updateFrequency22</cdomain:urn>
@@ -198,24 +216,6 @@
                 <cdomain:text xml:lang="es">updateFrequency1 en Español</cdomain:text>
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency1</operations:managementAppLink>
-        </operations:updateFrequency>
-        <operations:updateFrequency kind="structuralResources#code">
-            <cdomain:id>updateFrequency333</cdomain:id>
-            <cdomain:urn>urn:updateFrequency333</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/structural-resources-internal/v1.0/updateFrequencies/updateFrequency333"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">updateFrequency333 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency333</operations:managementAppLink>
-        </operations:updateFrequency>
-        <operations:updateFrequency kind="structuralResources#code">
-            <cdomain:id>updateFrequency4444</cdomain:id>
-            <cdomain:urn>urn:updateFrequency4444</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#code" href="http://data.istac.es/apis/structural-resources-internal/v1.0/updateFrequencies/updateFrequency4444"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">updateFrequency4444 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/updateFrequencies/updateFrequency4444</operations:managementAppLink>
         </operations:updateFrequency>
     </operations:updateFrequencies>
     <operations:currentInternalInstance kind="statisticalOperations#instance">
