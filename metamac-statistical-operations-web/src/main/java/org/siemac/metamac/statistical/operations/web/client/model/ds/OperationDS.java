@@ -8,6 +8,7 @@ public class OperationDS extends DataSource {
     // IDENTIFIERS
     public static final String OP_ID                        = "op-id";
     public static final String OP_CODE                      = "op-code";
+    public static final String OP_URN                       = "op-urn";
     public static final String OP_CODE_VIEW                 = "op-code-view";       // Not mapped in DTO
     public static final String OP_TITLE                     = "op-title";
     public static final String OP_ACRONYM                   = "op-acron";
@@ -30,6 +31,7 @@ public class OperationDS extends DataSource {
     public static final String OP_STATUS                    = "op-status";
     public static final String OP_PROC_STATUS               = "op-proc-status";
     public static final String OP_PROC_STATUS_VIEW          = "op-proc-status-view"; // Not mapped in DTO
+    public static final String OP_CREATED_DATE              = "op-created-date";
     // DIFUSSION DESCRIPTORS
     public static final String OP_PUBLISHER                 = "op-publisherItem";
     public static final String OP_RE_POL_US_AC              = "op-pol-us";

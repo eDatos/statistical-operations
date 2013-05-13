@@ -45,14 +45,6 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
 
         ListGridField titleField = new ListGridField(OperationDS.OP_TITLE);
         titleField.setShowHover(true);
-        titleField.setHoverCustomizer(new HoverCustomizer() {
-
-            @Override
-            public String hoverHTML(Object value, ListGridRecord record, int rowNum, int colNum) {
-                OperationRecord operationRecord = (OperationRecord) record;
-                return operationRecord != null ? operationRecord.getTitle() : new String();
-            }
-        });
 
         ListGridField deleteField = new ListGridField(DELETE_FIELD_NAME);
         deleteField.setType(ListGridFieldType.IMAGE);

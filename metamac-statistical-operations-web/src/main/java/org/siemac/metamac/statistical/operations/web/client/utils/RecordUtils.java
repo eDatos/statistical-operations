@@ -12,6 +12,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
+import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.DateUtils;
 
 public class RecordUtils {
@@ -55,11 +56,24 @@ public class RecordUtils {
      * @return
      */
     public static OperationRecord getOperationRecord(OperationBaseDto operationBaseDto) {
-        OperationRecord record = new OperationRecord(operationBaseDto.getId(), operationBaseDto.getCode(), getLocalisedString(operationBaseDto.getTitle()),
-                getLocalisedString(operationBaseDto.getAcronym()), getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationBaseDto.getProcStatus().getName()),
-                operationBaseDto.getIndicatorSystem(), operationBaseDto.getSubjectArea(), operationBaseDto.getSurveyType(), operationBaseDto.getOfficialityType());
+        OperationRecord record = new OperationRecord();
+        record.setId(operationBaseDto.getId());
+        record.setCode(operationBaseDto.getCode());
+        record.setUrn(operationBaseDto.getUrn());
+        record.setTitle(getLocalisedString(operationBaseDto.getTitle()));
+        record.setAcronym(getLocalisedString(operationBaseDto.getAcronym()));
+        record.setSubjectArea(operationBaseDto.getSubjectArea());
+        record.setSurveyType(operationBaseDto.getSurveyType());
+        record.setOfficialityType(operationBaseDto.getOfficialityType());
+        record.setIndicatorsSystem(operationBaseDto.getIndicatorSystem());
+        record.setCreatedDate(DateUtils.getFormattedDate(operationBaseDto.getCreatedDate()));
+        record.setInternalInventoryDate(DateUtils.getFormattedDate(operationBaseDto.getInternalInventoryDate()));
+        record.setCurrentlyActive(CommonWebUtils.getBooleanValueAsString(operationBaseDto.getCurrentlyActive()));
+        record.setProcStatus(CommonUtils.getProcStatusName(operationBaseDto.getProcStatus()));
+        record.setStatus(CommonUtils.getStatusName(operationBaseDto.getStatus()));
         return record;
     }
+
     /**
      * Returns {@link OperationRecord} from {@link OperationDto}
      * 
@@ -67,9 +81,8 @@ public class RecordUtils {
      * @return
      */
     public static OperationRecord getOperationRecord(OperationDto operationDto) {
-        OperationRecord record = new OperationRecord(operationDto.getId(), operationDto.getCode(), getLocalisedString(operationDto.getTitle()), getLocalisedString(operationDto.getAcronym()),
-                getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()), operationDto.getIndicatorSystem(), operationDto.getSubjectArea(),
-                operationDto.getSurveyType(), operationDto.getOfficialityType());
+        OperationRecord record = new OperationRecord();
+        // TODO
         return record;
     }
 

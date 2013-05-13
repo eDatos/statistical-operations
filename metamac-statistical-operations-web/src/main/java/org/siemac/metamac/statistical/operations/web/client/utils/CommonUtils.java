@@ -29,4 +29,11 @@ public class CommonUtils {
         }
         return StringUtils.EMPTY;
     }
+
+    public static String getStatusName(StatusEnum statusEnum) {
+        if (statusEnum != null) {
+            return getCoreMessages().getString(getCoreMessages().statusEnum() + statusEnum.getName());
+        }
+        return StringUtils.EMPTY;
+    }
 }

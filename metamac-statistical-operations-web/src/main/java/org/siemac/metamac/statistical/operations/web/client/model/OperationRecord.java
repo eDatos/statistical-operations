@@ -15,26 +15,12 @@ public class OperationRecord extends ListGridRecord {
         super();
     }
 
-    public OperationRecord(Long id, String code, String title, String acronym, String status, Boolean indicatorsSystem, ExternalItemDto subjectArea, SurveyTypeDto surveyTypeDto,
-            OfficialityTypeDto officialityTypeDto) {
-        super();
-        setId(id);
-        setCode(code);
-        setTitle(title);
-        setAcronym(acronym);
-        setStatus(status);
-        setIndicatorsSystem(indicatorsSystem);
-        setSubjectArea(subjectArea);
-        setSurveyType(surveyTypeDto);
-        setOfficialityType(officialityTypeDto);
+    public void setId(Long value) {
+        setAttribute(OperationDS.OP_ID, value);
     }
 
     public Long getId() {
         return getAttributeAsLong(OperationDS.OP_ID);
-    }
-
-    public void setId(Long value) {
-        setAttribute(OperationDS.OP_ID, value);
     }
 
     public String getCode() {
@@ -45,28 +31,24 @@ public class OperationRecord extends ListGridRecord {
         setAttribute(OperationDS.OP_CODE, value);
     }
 
-    public String getTitle() {
-        return getAttributeAsString(OperationDS.OP_TITLE);
+    public void setUrn(String value) {
+        setAttribute(OperationDS.OP_URN, value);
     }
 
     public void setTitle(String value) {
         setAttribute(OperationDS.OP_TITLE, value);
     }
 
-    public String getAcronym() {
-        return getAttributeAsString(OperationDS.OP_ACRONYM);
-    }
-
     public void setAcronym(String value) {
         setAttribute(OperationDS.OP_ACRONYM, value);
     }
 
-    public String getStatus() {
-        return getAttributeAsString(OperationDS.OP_PROC_STATUS);
+    public void setProcStatus(String value) {
+        setAttribute(OperationDS.OP_PROC_STATUS, value);
     }
 
     public void setStatus(String value) {
-        setAttribute(OperationDS.OP_PROC_STATUS, value);
+        setAttribute(OperationDS.OP_STATUS, value);
     }
 
     public void setIndicatorsSystem(Boolean value) {
@@ -93,4 +75,15 @@ public class OperationRecord extends ListGridRecord {
         }
     }
 
+    public void setCreatedDate(String value) {
+        setAttribute(OperationDS.OP_CREATED_DATE, value);
+    }
+
+    public void setInternalInventoryDate(String value) {
+        setAttribute(OperationDS.OP_INTERNAL_INVENTORY_DATE, value);
+    }
+
+    public void setCurrentlyActive(String value) {
+        setAttribute(OperationDS.OP_CURRENTLY_ACTIVE, value);
+    }
 }

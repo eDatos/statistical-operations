@@ -9,11 +9,11 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
-import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperationForm;
@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Autofit;
-import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -33,7 +32,6 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
-import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
@@ -115,16 +113,7 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         });
         operationListGrid.getListGrid().setAutoFitMaxRecords(OperationListPresenter.OPERATION_LIST_MAX_RESULTS);
         operationListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
-        ListGridField codeField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getCoreMessages().operation_code());
-        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getCoreMessages().operation_title());
-        ListGridField descriptionField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getCoreMessages().operation_acronym());
-        ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getCoreMessages().operation_status());
-        ListGridField indicatorsSystem = new ListGridField(OperationDS.OP_INDICATOR_SYSTEM, OperationsWeb.getCoreMessages().operation_indicator_system());
-        ListGridField subjectAreaField = new ListGridField(OperationDS.OP_SUBJECT_AREA, OperationsWeb.getCoreMessages().operation_subject_area());
-        ListGridField surveyType = new ListGridField(OperationDS.OP_SURVEY_TYPE, OperationsWeb.getCoreMessages().operation_survey_type());
-        ListGridField officialityType = new ListGridField(OperationDS.OP_OFFICIALITY_TYPE, OperationsWeb.getCoreMessages().operation_officiality_type());
-        indicatorsSystem.setType(ListGridFieldType.IMAGE);
-        operationListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField, indicatorsSystem, subjectAreaField, surveyType, officialityType);
+        operationListGrid.getListGrid().setFields(ResourceListFieldUtils.getOperationFields());
         operationListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
