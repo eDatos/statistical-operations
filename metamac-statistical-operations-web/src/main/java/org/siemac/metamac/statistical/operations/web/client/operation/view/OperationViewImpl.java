@@ -18,7 +18,6 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
-import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
@@ -28,6 +27,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
@@ -284,11 +284,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         familyListGrid = new ListGrid();
         familyListGrid.setHeight(150);
-        ListGridField identifierFamilyField = new ListGridField(FamilyDS.CODE, getCoreMessages().family_code());
-        ListGridField titleFamilyField = new ListGridField(FamilyDS.TITLE, getCoreMessages().family_title());
-        ListGridField descriptionFamilyField = new ListGridField(FamilyDS.DESCRIPTION, getCoreMessages().family_description());
-        ListGridField statusFamilyField = new ListGridField(FamilyDS.PROC_STATUS, getCoreMessages().family_proc_status());
-        familyListGrid.setFields(identifierFamilyField, titleFamilyField, descriptionFamilyField, statusFamilyField);
+        familyListGrid.setFields(ResourceListFieldUtils.getFamilyFields());
 
         VLayout familiesListGridLayout = new VLayout();
         familiesListGridLayout.setMargin(15);

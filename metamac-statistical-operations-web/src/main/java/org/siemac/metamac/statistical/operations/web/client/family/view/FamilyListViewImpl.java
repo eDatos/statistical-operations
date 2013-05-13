@@ -10,9 +10,9 @@ import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButto
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyListPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
-import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewFamilyForm;
@@ -29,7 +29,6 @@ import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
-import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
@@ -99,11 +98,8 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         });
         familyListGrid.getListGrid().setAutoFitMaxRecords(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS);
         familyListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
-        ListGridField codeField = new ListGridField(FamilyDS.CODE, OperationsWeb.getCoreMessages().family_code());
-        ListGridField titleField = new ListGridField(FamilyDS.TITLE, OperationsWeb.getCoreMessages().family_title());
-        ListGridField descriptionField = new ListGridField(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
-        ListGridField statusField = new ListGridField(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().family_proc_status());
-        familyListGrid.getListGrid().setFields(codeField, titleField, descriptionField, statusField);
+
+        familyListGrid.getListGrid().setFields(ResourceListFieldUtils.getFamilyFields());
         familyListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
@@ -251,5 +247,4 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
     public void clearSearchSection() {
         searchSectionStack.reset();
     }
-
 }
