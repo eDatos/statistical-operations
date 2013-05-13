@@ -208,7 +208,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
                 getView().onFamilySaved(familyDto);
 
                 // Update URL
-                PlaceRequest placeRequest = PlaceRequestUtils.buildFamilyPlaceRequest(familyDto.getCode());
+                PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeFamilyPlaceRequest(familyDto.getCode());
                 placeManager.updateHistory(placeRequest, true);
             }
         });
@@ -218,7 +218,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     public void goToOperation(String operationCode) {
         if (!StringUtils.isBlank(operationCode)) {
             PlaceRequest operationListRequest = new PlaceRequest(NameTokens.operationListPage);
-            PlaceRequest operationRequest = PlaceRequestUtils.buildOperationPlaceRequest(operationCode);
+            PlaceRequest operationRequest = PlaceRequestUtils.buildRelativeOperationPlaceRequest(operationCode);
             List<PlaceRequest> placeRequests = new ArrayList<PlaceRequest>();
             placeRequests.add(operationListRequest);
             placeRequests.add(operationRequest);

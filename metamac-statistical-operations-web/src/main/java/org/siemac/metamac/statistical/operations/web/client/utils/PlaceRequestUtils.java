@@ -1,5 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.client.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 
@@ -21,7 +24,7 @@ public class PlaceRequestUtils {
 
     // FAMILIES
 
-    public static PlaceRequest buildFamilyPlaceRequest(String familyCode) {
+    public static PlaceRequest buildRelativeFamilyPlaceRequest(String familyCode) {
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.familyPage).with(PlaceRequestParams.familyParam, familyCode);
         return placeRequest;
     }
@@ -37,16 +40,23 @@ public class PlaceRequestUtils {
         return null;
     }
 
-    public static PlaceRequest buildOperationPlaceRequest(String operationCode) {
+    public static PlaceRequest buildRelativeOperationPlaceRequest(String operationCode) {
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.operationPage).with(PlaceRequestParams.operationParam, operationCode);
         return placeRequest;
     }
 
     // INSTANCES
 
-    public static PlaceRequest buildInstancePlaceRequest(String instanceCode) {
+    public static PlaceRequest buildRelativeInstancePlaceRequest(String instanceCode) {
         PlaceRequest placeRequest = new PlaceRequest(NameTokens.instancePage).with(PlaceRequestParams.instanceParam, instanceCode);
         return placeRequest;
     }
 
+    public static List<PlaceRequest> buildAbsoluteInstancePlaceRequest(String operationCode, String instanceCode) {
+        List<PlaceRequest> placeRequests = new ArrayList<PlaceRequest>();
+        placeRequests.add(new PlaceRequest(NameTokens.operationListPage));
+        placeRequests.add(buildRelativeOperationPlaceRequest(operationCode));
+        placeRequests.add(buildRelativeInstancePlaceRequest(instanceCode));
+        return placeRequests;
+    }
 }

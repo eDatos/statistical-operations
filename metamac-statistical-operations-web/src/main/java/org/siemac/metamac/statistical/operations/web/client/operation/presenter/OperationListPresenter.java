@@ -159,7 +159,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     @Override
     public void goToOperation(String operationCode) {
         if (!StringUtils.isBlank(operationCode)) {
-            placeManager.revealRelativePlace(PlaceRequestUtils.buildOperationPlaceRequest(operationCode));
+            placeManager.revealRelativePlace(PlaceRequestUtils.buildRelativeOperationPlaceRequest(operationCode));
         }
     }
 

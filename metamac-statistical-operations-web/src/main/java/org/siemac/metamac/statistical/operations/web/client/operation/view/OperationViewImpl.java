@@ -26,6 +26,7 @@ import org.siemac.metamac.statistical.operations.web.client.resources.GlobalReso
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
@@ -38,10 +39,12 @@ import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
@@ -52,6 +55,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRic
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
+import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -80,8 +84,6 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
     public static final int                 FAMILY_LIST_MAX_RESULTS = 17;
-
-    private OperationUiHandlers             uiHandlers;
 
     private VLayout                         panel;
 
@@ -255,7 +257,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public void onClick(ClickEvent event) {
-                uiHandlers.updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
+                getUiHandlers().updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
             }
         });
 
@@ -269,9 +271,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onClick(ClickEvent event) {
                 // Load operation families
-                uiHandlers.retrievePaginatedFamilies(0, FAMILY_LIST_MAX_RESULTS, null);
+                getUiHandlers().retrievePaginatedFamilies(0, FAMILY_LIST_MAX_RESULTS, null);
 
-                addFamiliesToOperationWindow = new AddFamiliesToOperationWindow(uiHandlers);
+                addFamiliesToOperationWindow = new AddFamiliesToOperationWindow(getUiHandlers());
                 addFamiliesToOperationWindow.setSelectedFamilies(familyBaseDtos);
             }
         });
@@ -359,7 +361,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         editFamiliesToolStripButton.setVisibility(ClientSecurityUtils.canAddFamilyToOperation(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
 
         // Load common metadata configurations
-        uiHandlers.retrieveCommonMetadataConfigurations();
+        getUiHandlers().retrieveCommonMetadataConfigurations();
 
         // Operation
         setOperation(operationDto);
@@ -520,8 +522,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Set Family
         mainFormLayout.setTitleLabelContents(InternationalStringUtils.getLocalisedString(operationDto.getTitle()));
         // Form
-        setViewForm(operationDto);
-        setEditionForm(operationDto);
+        setOperationViewMode(operationDto);
+        setOperationEditionMode(operationDto);
     }
 
     private void createViewForm() {
@@ -569,8 +571,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem releaseCalendar = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
         ViewTextItem updateFreq = new ViewTextItem(OperationDS.OP_UPDATE_FREQ, getCoreMessages().operation_update_frequency());
-        ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
-        ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
+        CustomLinkItem currentInst = new CustomLinkItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance(), getCustomLinkItemNavigationClickHandler());
+        CustomLinkItem currentInternalInst = new CustomLinkItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance(), getCustomLinkItemNavigationClickHandler());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getCoreMessages().operation_inventory_date());
         staticRevPolicyItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
         staticRevPracticeItem = new ViewMultiLanguageTextItem(OperationDS.OP_REV_PRACTICE, getCoreMessages().operation_rev_practice());
@@ -630,7 +632,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populateSubjects(event.getValue().toString());
+                    getUiHandlers().populateSubjects(event.getValue().toString());
                 }
             }
         });
@@ -640,7 +642,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populateSecondarySubjects(event.getValue().toString());
+                    getUiHandlers().populateSecondarySubjects(event.getValue().toString());
                 }
             }
         });
@@ -672,7 +674,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populateProducers(event.getValue().toString());
+                    getUiHandlers().populateProducers(event.getValue().toString());
                 }
             }
         });
@@ -683,7 +685,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populateRegionalResposibles(event.getValue().toString());
+                    getUiHandlers().populateRegionalResposibles(event.getValue().toString());
                 }
             }
         });
@@ -693,7 +695,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populateRegionalContributors(event.getValue().toString());
+                    getUiHandlers().populateRegionalContributors(event.getValue().toString());
                 }
             }
         });
@@ -716,7 +718,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             @Override
             public void onChanged(ChangedEvent event) {
                 if (event.getValue() != null) {
-                    uiHandlers.populatePublishers(event.getValue().toString());
+                    getUiHandlers().populatePublishers(event.getValue().toString());
                 }
             }
         });
@@ -726,8 +728,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
         updateFrequencyItem = new CustomSelectItem(OperationDS.OP_UPDATE_FREQ, getCoreMessages().operation_update_frequency());
         updateFrequencyItem.setMultiple(true);
-        ViewTextItem currentInst = new ViewTextItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance());
-        ViewTextItem currentInternalInst = new ViewTextItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance());
+        CustomLinkItem currentInst = new CustomLinkItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance(), getCustomLinkItemNavigationClickHandler());
+        CustomLinkItem currentInternalInst = new CustomLinkItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance(), getCustomLinkItemNavigationClickHandler());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getCoreMessages().operation_inventory_date());
         revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
         revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
@@ -752,7 +754,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         mainFormLayout.addEditionCanvas(annotationsEditionForm);
     }
 
-    private void setViewForm(OperationDto operationDto) {
+    private void setOperationViewMode(OperationDto operationDto) {
         // Identifiers
         identifiersViewForm.setValue(OperationDS.OP_CODE, operationDto.getCode());
         identifiersViewForm.setValue(OperationDS.OP_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
@@ -794,8 +796,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 : MetamacWebCommon.getConstants().no());
         diffusionViewForm.setValue(OperationDS.OP_RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
         diffusionViewForm.setValue(OperationDS.OP_UPDATE_FREQ, ExternalItemUtils.getExternalItemListToString(operationDto.getUpdateFrequency()));
-        diffusionViewForm.setValue(OperationDS.OP_CURRENT_INSTANCE,
-                operationDto.getCurrentInstance() != null ? CommonWebUtils.getElementName(operationDto.getCurrentInstance().getCode(), operationDto.getCurrentInstance().getTitle()) : "");
+
+        if (operationDto.getCurrentInstance() != null) {
+            ((CustomLinkItem) diffusionViewForm.getItem(OperationDS.OP_CURRENT_INSTANCE)).setValue(
+                    CommonWebUtils.getElementName(operationDto.getCurrentInstance().getCode(), operationDto.getCurrentInstance().getTitle()),
+                    PlaceRequestUtils.buildAbsoluteInstancePlaceRequest(operationDto.getCode(), operationDto.getCurrentInstance().getCode()));
+        } else {
+            ((CustomLinkItem) diffusionViewForm.getItem(OperationDS.OP_CURRENT_INSTANCE)).clearValue();
+        }
+
+        if (operationDto.getCurrentInternalInstance() != null) {
+            ((CustomLinkItem) diffusionViewForm.getItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE)).setValue(
+                    CommonWebUtils.getElementName(operationDto.getCurrentInternalInstance().getCode(), operationDto.getCurrentInternalInstance().getTitle()),
+                    PlaceRequestUtils.buildAbsoluteInstancePlaceRequest(operationDto.getCode(), operationDto.getCurrentInternalInstance().getCode()));
+        } else {
+            ((CustomLinkItem) diffusionViewForm.getItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE)).clearValue();
+        }
+
         diffusionViewForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         diffusionViewForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionViewForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
@@ -806,7 +823,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         annotationsViewForm.setValue(OperationDS.OP_COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
         annotationsViewForm.setValue(OperationDS.OP_NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
     }
-    private void setEditionForm(OperationDto operationDto) {
+
+    private void setOperationEditionMode(OperationDto operationDto) {
         // Identifiers
         code.setValue(operationDto.getCode());
         identifiersEditionForm.setValue(OperationDS.OP_CODE_VIEW, operationDto.getCode());
@@ -845,7 +863,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         releaseCalendar.setValue(operationDto.getReleaseCalendar());
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
         updateFrequencyItem.setValues(ExternalItemUtils.getExternalItemsUrns(operationDto.getUpdateFrequency()));
-        diffusionEditionForm.setValue(OperationDS.OP_CURRENT_INSTANCE, operationDto.getCurrentInstance() != null ? operationDto.getCurrentInstance().getCode() : "");
+
+        if (operationDto.getCurrentInstance() != null) {
+            ((CustomLinkItem) diffusionEditionForm.getItem(OperationDS.OP_CURRENT_INSTANCE)).setValue(
+                    CommonWebUtils.getElementName(operationDto.getCurrentInstance().getCode(), operationDto.getCurrentInstance().getTitle()),
+                    PlaceRequestUtils.buildAbsoluteInstancePlaceRequest(operationDto.getCode(), operationDto.getCurrentInstance().getCode()));
+        } else {
+            ((CustomLinkItem) diffusionEditionForm.getItem(OperationDS.OP_CURRENT_INSTANCE)).clearValue();
+        }
+
+        if (operationDto.getCurrentInternalInstance() != null) {
+            ((CustomLinkItem) diffusionEditionForm.getItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE)).setValue(
+                    CommonWebUtils.getElementName(operationDto.getCurrentInternalInstance().getCode(), operationDto.getCurrentInternalInstance().getTitle()),
+                    PlaceRequestUtils.buildAbsoluteInstancePlaceRequest(operationDto.getCode(), operationDto.getCurrentInternalInstance().getCode()));
+        } else {
+            ((CustomLinkItem) diffusionEditionForm.getItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE)).clearValue();
+        }
+
         diffusionEditionForm.setValue(OperationDS.OP_INVENTORY_DATE, operationDto.getInventoryDate());
         diffusionEditionForm.setValue(OperationDS.OP_REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionEditionForm.setValue(OperationDS.OP_REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
@@ -994,13 +1028,21 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setUiHandlers(OperationUiHandlers uiHandlers) {
-        this.uiHandlers = uiHandlers;
-    }
-
-    @Override
     public void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults) {
         addFamiliesToOperationWindow.setFamilies(familyBaseDtos, firstResult, totalResults);
     }
 
+    // ------------------------------------------------------------------------------------------------------------
+    // CLICK HANDLERS
+    // ------------------------------------------------------------------------------------------------------------
+
+    private CustomLinkItemNavigationClickHandler getCustomLinkItemNavigationClickHandler() {
+        return new CustomLinkItemNavigationClickHandler() {
+
+            @Override
+            public BaseUiHandlers getBaseUiHandlers() {
+                return getUiHandlers();
+            }
+        };
+    }
 }

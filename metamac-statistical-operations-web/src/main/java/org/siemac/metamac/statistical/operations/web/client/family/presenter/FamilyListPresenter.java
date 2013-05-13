@@ -156,7 +156,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     @Override
     public void goToFamily(String familyCode) {
         if (!StringUtils.isBlank(familyCode)) {
-            placeManager.revealRelativePlace(PlaceRequestUtils.buildFamilyPlaceRequest(familyCode));
+            placeManager.revealRelativePlace(PlaceRequestUtils.buildRelativeFamilyPlaceRequest(familyCode));
         }
     }
 

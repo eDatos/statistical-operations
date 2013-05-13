@@ -206,7 +206,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
                 getView().onInstanceSaved(instanceDto);
 
                 // Update URL
-                PlaceRequest placeRequest = PlaceRequestUtils.buildInstancePlaceRequest(instanceDto.getCode());
+                PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeInstancePlaceRequest(instanceDto.getCode());
                 placeManager.updateHistory(placeRequest, true);
             }
         });

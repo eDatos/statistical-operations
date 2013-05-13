@@ -9,6 +9,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
+import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
@@ -64,7 +65,6 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamil
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
@@ -283,7 +283,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                 getView().onOperationSaved(operationDto);
 
                 // Update URL
-                PlaceRequest placeRequest = PlaceRequestUtils.buildOperationPlaceRequest(operationDto.getCode());
+                PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeOperationPlaceRequest(operationDto.getCode());
                 placeManager.updateHistory(placeRequest, true);
             }
         });
@@ -293,7 +293,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     public void goToFamily(String familyCode) {
         if (!StringUtils.isBlank(familyCode)) {
             PlaceRequest familyListRequest = new PlaceRequest(NameTokens.familyListPage);
-            PlaceRequest familyRequest = PlaceRequestUtils.buildFamilyPlaceRequest(familyCode);
+            PlaceRequest familyRequest = PlaceRequestUtils.buildRelativeFamilyPlaceRequest(familyCode);
             List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
             placeRequestHierarchy.add(familyListRequest);
             placeRequestHierarchy.add(familyRequest);
@@ -322,7 +322,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void goToInstance(String instanceCode) {
         if (!StringUtils.isBlank(instanceCode)) {
-            placeManager.revealRelativePlace(PlaceRequestUtils.buildInstancePlaceRequest(instanceCode));
+            placeManager.revealRelativePlace(PlaceRequestUtils.buildRelativeInstancePlaceRequest(instanceCode));
         }
     }
 
@@ -591,4 +591,10 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         });
     }
 
+    @Override
+    public void goTo(List<PlaceRequest> location) {
+        if (location != null && !location.isEmpty()) {
+            placeManager.revealPlaceHierarchy(location);
+        }
+    }
 }

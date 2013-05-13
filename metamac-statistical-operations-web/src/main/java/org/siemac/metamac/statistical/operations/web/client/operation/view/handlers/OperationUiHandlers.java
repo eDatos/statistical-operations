@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
+import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
 
-import com.gwtplatform.mvp.client.UiHandlers;
-
-public interface OperationUiHandlers extends UiHandlers {
+public interface OperationUiHandlers extends BaseUiHandlers {
 
     void saveOperation(OperationDto operationDto);
     void goToFamily(String familyCode);
@@ -28,5 +27,4 @@ public interface OperationUiHandlers extends UiHandlers {
     void updateInstancesOrder(List<Long> instancesIds);
 
     void retrieveCommonMetadataConfigurations();
-
 }
