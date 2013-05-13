@@ -40,6 +40,7 @@ import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
+import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
@@ -71,7 +72,6 @@ import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
@@ -160,7 +160,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private ToolStrip                       familiesToolStrip;
     private ToolStripButton                 editFamiliesToolStripButton;
-    private ListGrid                        familyListGrid;
+    private BaseCustomListGrid              familyListGrid;
     // Families modal window
     private AddFamiliesToOperationWindow    addFamiliesToOperationWindow;
 
@@ -282,7 +282,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         TitleLabel familiesTitleLabel = new TitleLabel(getConstants().families());
         familiesTitleLabel.setStyleName("sectionTitleLeftMargin");
 
-        familyListGrid = new ListGrid();
+        familyListGrid = new BaseCustomListGrid();
         familyListGrid.setHeight(150);
         familyListGrid.setFields(ResourceListFieldUtils.getFamilyFields());
 
