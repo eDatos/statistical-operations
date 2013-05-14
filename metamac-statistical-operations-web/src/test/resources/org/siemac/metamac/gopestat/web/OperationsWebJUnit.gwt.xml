@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module>
-  <!-- Inherit our applications main module.                      -->
-  <inherits name='org.siemac.metamac.statistical.operations.web.metamac-statistical-operations-web'/>
-
-  <!-- Specify the path to any remote services.                   -->
-  <servlet path="/MetamacStatisticalOperationsWeb/greet" class="org.siemac.metamac.statistical.operations.web.server.GeneralWebServiceImpl" />
-
-</module>
