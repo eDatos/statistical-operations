@@ -16,10 +16,6 @@
 	<name>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</name>
 	<description>METAMAC :: STATISTICAL OPERATIONS :: REST :: INTERNAL IMPL</description>
 
-    <properties>
-        <metamac-srm-rest-internal-api.version>1.0.0-SNAPSHOT</metamac-srm-rest-internal-api.version>
-    </properties>
-    
 	<dependencies>
         <!-- Metamac -->
 		<dependency>

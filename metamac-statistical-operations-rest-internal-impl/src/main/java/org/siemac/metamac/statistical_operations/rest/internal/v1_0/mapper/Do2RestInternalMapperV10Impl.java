@@ -863,7 +863,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Measures targets = new Measures();
         toResourcesExternalItemsSrm(sources, targets.getMeasures());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO kind
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
     }
@@ -874,7 +874,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         StatConcDefs targets = new StatConcDefs();
         toResourcesExternalItemsSrm(sources, targets.getStatConcDefs());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO kind
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
     }
