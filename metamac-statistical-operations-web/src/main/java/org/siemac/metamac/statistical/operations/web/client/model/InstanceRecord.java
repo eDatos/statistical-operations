@@ -1,76 +1,72 @@
 package org.siemac.metamac.statistical.operations.web.client.model;
 
+import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
+
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class InstanceRecord extends ListGridRecord {
-
-    public static final String ID          = "id";
-    public static final String CODE        = "code";
-    public static final String TITLE       = "title";
-    public static final String DESCRIPTION = "description";
-    public static final String STATUS      = "status";
-    public static final String ORDER       = "order";
 
     public InstanceRecord() {
         super();
     }
 
-    public InstanceRecord(Long id, String code, String title, String description, String status, Integer order) {
-        super();
-        setId(id);
-        setCode(code);
-        setTitle(title);
-        setDescription(description);
-        setStatus(status);
-        setOrder(order);
-    }
-
     public Long getId() {
-        return getAttributeAsLong(ID);
+        return getAttributeAsLong(InstanceDS.ID);
     }
 
     public void setId(Long value) {
-        setAttribute(ID, value);
+        setAttribute(InstanceDS.ID, value);
     }
 
     public String getCode() {
-        return getAttributeAsString(CODE);
+        return getAttributeAsString(InstanceDS.CODE);
     }
 
     public void setCode(String value) {
-        setAttribute(CODE, value);
+        setAttribute(InstanceDS.CODE, value);
     }
 
     public String getTitle() {
-        return getAttributeAsString(TITLE);
+        return getAttributeAsString(InstanceDS.TITLE);
     }
 
     public void setTitle(String value) {
-        setAttribute(TITLE, value);
+        setAttribute(InstanceDS.TITLE, value);
     }
 
-    public String getDescription() {
-        return getAttributeAsString(DESCRIPTION);
+    public String getProcStatus() {
+        return getAttributeAsString(InstanceDS.PROC_STATUS);
     }
 
-    public void setDescription(String value) {
-        setAttribute(DESCRIPTION, value);
-    }
-
-    public String getStatus() {
-        return getAttributeAsString(STATUS);
-    }
-
-    public void setStatus(String value) {
-        setAttribute(STATUS, value);
+    public void setProcStatus(String value) {
+        setAttribute(InstanceDS.PROC_STATUS, value);
     }
 
     public Integer getOrder() {
-        return getAttributeAsInt(ORDER);
+        return getAttributeAsInt(InstanceDS.ORDER);
     }
 
     public void setOrder(Integer value) {
-        setAttribute(ORDER, value);
+        setAttribute(InstanceDS.ORDER, value);
     }
 
+    public void setUrn(String value) {
+        setAttribute(InstanceDS.URN, value);
+    }
+
+    public void setAcronym(String value) {
+        setAttribute(InstanceDS.ACRONYM, value);
+    }
+
+    public void setInstaceType(String value) {
+        setAttribute(InstanceDS.INSTANCE_TYPE, value);
+    }
+
+    public void setCreatedDate(String value) {
+        setAttribute(InstanceDS.CREATED_DATE, value);
+    }
+
+    public void setInternalInventoryDate(String value) {
+        setAttribute(InstanceDS.INTERNAL_INVENTORY_DATE, value);
+    }
 }

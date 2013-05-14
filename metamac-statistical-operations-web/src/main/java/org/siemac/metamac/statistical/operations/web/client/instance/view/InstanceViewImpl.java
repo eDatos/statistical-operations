@@ -236,8 +236,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         mainFormLayout.updatePublishSection(instanceDto.getProcStatus());
         // Set Instance
         mainFormLayout.setTitleLabelContents(InternationalStringUtils.getLocalisedString(instanceDto.getTitle()));
-        setViewForm(instanceDto);
-        setEditionForm(instanceDto);
+        setInstanceViewMode(instanceDto);
+        setInstanceEditionMode(instanceDto);
     }
 
     @Override
@@ -561,7 +561,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         mainFormLayout.addEditionCanvas(annotationsEditionForm);
     }
 
-    private void setViewForm(InstanceDto instanceDto) {
+    private void setInstanceViewMode(InstanceDto instanceDto) {
         // Identifiers
         identifiersViewForm.setValue(InstanceDS.CODE, instanceDto.getCode());
         identifiersViewForm.setValue(InstanceDS.TITLE, RecordUtils.getInternationalStringRecord(instanceDto.getTitle()));
@@ -633,7 +633,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         annotationsViewForm.setValue(InstanceDS.COMMENTS, RecordUtils.getInternationalStringRecord(instanceDto.getComment()));
         annotationsViewForm.setValue(InstanceDS.NOTES, RecordUtils.getInternationalStringRecord(instanceDto.getNotes()));
     }
-    private void setEditionForm(InstanceDto instanceDto) {
+    private void setInstanceEditionMode(InstanceDto instanceDto) {
         // Identifiers
         code.setValue(instanceDto.getCode());
         identifiersEditionForm.setValue(InstanceDS.CODE_VIEW, instanceDto.getCode());

@@ -1,6 +1,5 @@
 package org.siemac.metamac.statistical.operations.web.client.utils;
 
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 import static org.siemac.metamac.web.common.client.utils.InternationalStringUtils.getLocalisedString;
 
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
@@ -93,8 +92,19 @@ public class RecordUtils {
      * @return
      */
     public static InstanceRecord getInstanceRecord(InstanceBaseDto instanceDto) {
-        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), getLocalisedString(instanceDto.getTitle()), getLocalisedString(instanceDto.getDataDescription()),
-                getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
+        InstanceRecord record = new InstanceRecord();
+        record.setId(instanceDto.getId());
+        record.setCode(instanceDto.getCode());
+        record.setUrn(instanceDto.getUrn());
+        record.setTitle(getLocalisedString(instanceDto.getTitle()));
+        record.setAcronym(getLocalisedString(instanceDto.getAcronym()));
+        record.setInstaceType(instanceDto.getInstanceType() != null
+                ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription())
+                : null);
+        record.setCreatedDate(DateUtils.getFormattedDate(instanceDto.getCreatedDate()));
+        record.setInternalInventoryDate(DateUtils.getFormattedDate(instanceDto.getInternalInventoryDate()));
+        record.setProcStatus(CommonUtils.getProcStatusName(instanceDto.getProcStatus()));
+        record.setOrder(instanceDto.getOrder());
         return record;
     }
 
@@ -105,9 +115,19 @@ public class RecordUtils {
      * @return
      */
     public static InstanceRecord getInstanceRecord(InstanceDto instanceDto) {
-        InstanceRecord record = new InstanceRecord(instanceDto.getId(), instanceDto.getCode(), getLocalisedString(instanceDto.getTitle()), null, getCoreMessages().getString(
-                getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()), instanceDto.getOrder());
+        InstanceRecord record = new InstanceRecord();
+        record.setId(instanceDto.getId());
+        record.setCode(instanceDto.getCode());
+        record.setUrn(instanceDto.getUrn());
+        record.setTitle(getLocalisedString(instanceDto.getTitle()));
+        record.setAcronym(getLocalisedString(instanceDto.getAcronym()));
+        record.setInstaceType(instanceDto.getInstanceType() != null
+                ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription())
+                : null);
+        record.setCreatedDate(DateUtils.getFormattedDate(instanceDto.getCreatedDate()));
+        record.setInternalInventoryDate(DateUtils.getFormattedDate(instanceDto.getInternalInventoryDate()));
+        record.setProcStatus(CommonUtils.getProcStatusName(instanceDto.getProcStatus()));
+        record.setOrder(instanceDto.getOrder());
         return record;
     }
-
 }

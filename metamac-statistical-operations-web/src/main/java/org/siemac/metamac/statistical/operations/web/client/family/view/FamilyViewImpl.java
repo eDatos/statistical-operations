@@ -10,10 +10,10 @@ import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButto
 import org.siemac.metamac.statistical.operations.web.client.family.presenter.FamilyPresenter;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
-import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
@@ -39,7 +39,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
@@ -112,11 +111,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         operationListGrid = new BaseCustomListGrid();
         operationListGrid.setAutoFitMaxRecords(20);
         operationListGrid.setAutoFitData(Autofit.VERTICAL);
-        ListGridField identifierField = new ListGridField(OperationDS.OP_CODE, OperationsWeb.getCoreMessages().family_code());
-        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE, OperationsWeb.getCoreMessages().family_title());
-        ListGridField titleAlternativeField = new ListGridField(OperationDS.OP_ACRONYM, OperationsWeb.getCoreMessages().family_acronym());
-        ListGridField statusField = new ListGridField(OperationDS.OP_PROC_STATUS, OperationsWeb.getCoreMessages().operation_proc_status());
-        operationListGrid.setFields(identifierField, titleField, titleAlternativeField, statusField);
+        operationListGrid.setFields(ResourceListFieldUtils.getOperationFields());
 
         VLayout operationsLayout = new VLayout();
         operationsLayout.setMargin(15);

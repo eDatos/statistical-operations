@@ -18,6 +18,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnu
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
@@ -72,7 +73,6 @@ import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
@@ -222,12 +222,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Instances list
         instanceListGrid = new CustomListGrid();
         instanceListGrid.setHeight(150);
-        ListGridField identifierField = new ListGridField(InstanceRecord.CODE, getCoreMessages().instance_code());
-        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getCoreMessages().instance_title());
-        ListGridField descriptionField = new ListGridField(InstanceRecord.DESCRIPTION, getCoreMessages().instance_description());
-        ListGridField statusField = new ListGridField(InstanceRecord.STATUS, getConstants().instanceStatus());
-        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getCoreMessages().instance_order());
-        instanceListGrid.setFields(identifierField, titleField, descriptionField, statusField, orderField);
+        instanceListGrid.setFields(ResourceListFieldUtils.getInstanceFields());
         instanceListGrid.addSelectionChangedHandler(new SelectionChangedHandler() {
 
             @Override
@@ -446,7 +441,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     public void onInstanceSaved(InstanceDto instanceDto) {
         InstanceRecord record = RecordUtils.getInstanceRecord(instanceDto);
         instanceListGrid.addData(record);
-        instanceListGrid.sort(InstanceRecord.ORDER, SortDirection.DESCENDING);
+        instanceListGrid.sort(InstanceDS.ORDER, SortDirection.DESCENDING);
 
         instancesOrderFormLayout.addInstance(instanceDto);
     }

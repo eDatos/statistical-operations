@@ -4,6 +4,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.web.common.client.utils.ListGridUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
@@ -74,5 +75,33 @@ public class ResourceListFieldUtils {
         CustomListGridField status = new CustomListGridField(OperationDS.OP_STATUS, getCoreMessages().operation_status());
 
         return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status};
+    }
+
+    public static CustomListGridField[] getInstanceFields() {
+
+        CustomListGridField code = new CustomListGridField(InstanceDS.CODE, getCoreMessages().instance_code());
+
+        CustomListGridField urn = new CustomListGridField(InstanceDS.URN, getCoreMessages().instance_urn());
+        urn.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
+
+        CustomListGridField title = new CustomListGridField(InstanceDS.TITLE, getCoreMessages().instance_title());
+
+        CustomListGridField acronym = new CustomListGridField(InstanceDS.TITLE, getCoreMessages().instance_title());
+        acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
+
+        CustomListGridField instanceType = new CustomListGridField(InstanceDS.INSTANCE_TYPE, getCoreMessages().instance_instance_type());
+        instanceType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
+
+        CustomListGridField createdDate = new CustomListGridField(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
+        createdDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
+
+        CustomListGridField internalInventoryDate = new CustomListGridField(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
+        internalInventoryDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
+
+        CustomListGridField procStatus = new CustomListGridField(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
+
+        CustomListGridField order = new CustomListGridField(InstanceDS.ORDER, getCoreMessages().instance_order());
+
+        return new CustomListGridField[]{code, urn, title, acronym, instanceType, createdDate, internalInventoryDate, procStatus, order};
     }
 }

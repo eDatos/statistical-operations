@@ -8,9 +8,10 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
-import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
+import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.MainFormLayout;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
@@ -58,9 +59,10 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         list.setBodyStyleName("normal");
         list.setShowHeader(false);
         list.setLeaveScrollbarGap(false);
-        ListGridField codeField = new ListGridField(InstanceRecord.CODE, getCoreMessages().instance_code(), 150);
-        ListGridField titleField = new ListGridField(InstanceRecord.TITLE, getCoreMessages().instance_title());
-        ListGridField orderField = new ListGridField(InstanceRecord.ORDER, getCoreMessages().instance_order());
+        CustomListGridField codeField = new CustomListGridField(InstanceDS.CODE, getCoreMessages().instance_code());
+        codeField.setWidth(150);
+        CustomListGridField titleField = new CustomListGridField(InstanceDS.TITLE, getCoreMessages().instance_title());
+        CustomListGridField orderField = new CustomListGridField(InstanceDS.ORDER, getCoreMessages().instance_order());
         orderField.setShowIfCondition(new ListGridFieldIfFunction() {
 
             @Override
@@ -70,7 +72,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         });
         list.setFields(codeField, titleField, orderField);
         list.setStyleName("orderListStyle");
-        list.setSortField(InstanceRecord.ORDER);
+        list.setSortField(InstanceDS.ORDER);
         list.setSortDirection(SortDirection.DESCENDING);
 
         CanvasItem canvasItem = new CanvasItem("order", getCoreMessages().instance_order());
@@ -95,7 +97,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         instancesTitleList = builder.toString();
         textItem.setValue(instancesTitleList);
         list.setData(records);
-        list.sort(InstanceRecord.ORDER, SortDirection.DESCENDING);
+        list.sort(InstanceDS.ORDER, SortDirection.DESCENDING);
         setViewMode();
     }
 
@@ -107,16 +109,15 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         instancesTitleList = builder.toString();
         textItem.setValue(instancesTitleList);
         list.addData(RecordUtils.getInstanceRecord(instanceDto));
-        list.sort(InstanceRecord.ORDER, SortDirection.DESCENDING);
+        list.sort(InstanceDS.ORDER, SortDirection.DESCENDING);
     }
 
     public List<Long> getInstancesOrder() {
         List<Long> order = new ArrayList<Long>();
         for (int i = list.getRecords().length - 1; i >= 0; i--) {
-            order.add(list.getRecord(i).getAttributeAsLong(InstanceRecord.ID));
+            order.add(list.getRecord(i).getAttributeAsLong(InstanceDS.ID));
         }
         list.getRecords();
         return order;
     }
-
 }

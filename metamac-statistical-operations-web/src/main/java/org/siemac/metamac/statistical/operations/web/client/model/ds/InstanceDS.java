@@ -6,8 +6,10 @@ import com.smartgwt.client.data.fields.DataSourceTextField;
 public class InstanceDS extends DataSource {
 
     // IDENTIFIERS
+    public static final String ID                       = "in-id";
     public static final String CODE                     = "in-code";
     public static final String CODE_VIEW                = "in-code-view";       // Not mapped in DTO
+    public static final String URN                      = "in-urn";
     public static final String TITLE                    = "in-title";
     public static final String ACRONYM                  = "in-acron";
     // CONTENT CLASSIFIERS
@@ -42,6 +44,7 @@ public class InstanceDS extends DataSource {
     public static final String ADJUSTMENT               = "in-adjust";
     public static final String COST_BURDEN              = "in-cost-burden";
     public static final String COST                     = "in-cost";
+    public static final String CREATED_DATE             = "in-created-date";
     // DIFFUSION DESCRIPTORS
     public static final String INVENTORY_DATE           = "in-indate";
     // QUALITY DESCRIPTORS
@@ -61,6 +64,8 @@ public class InstanceDS extends DataSource {
     // ANNOTATIONS
     public static final String COMMENTS                 = "op-com";
     public static final String NOTES                    = "op-not";
+
+    public static final String ORDER                    = "in-order";
 
     public InstanceDS() {
         DataSourceTextField id = new DataSourceTextField(CODE);
