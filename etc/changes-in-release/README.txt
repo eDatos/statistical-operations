@@ -17,5 +17,6 @@ Cuando se cree la RELEASE, añadir estos pasos al manual de instalación:
 	  
 4. Aplicación interna:
 	- Se ha eliminado la propiedad 'metamac.statistical.operations.clients.common.metadata.rest.external' del DATA (se especifica en el data común)
+	- [DATA]/common: Refactor fichero de configuración internal-endpoints.xml por api-endpoints.xml
 
 99. Reiniciar Tomcat
