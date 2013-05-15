@@ -51,7 +51,6 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
@@ -107,8 +106,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // CONTENT DESCRIPTORS
     private GroupDynamicForm                contentViewForm;
     private GroupDynamicForm                contentEditionForm;
-    private MultiLanguageTextItem           objective;
-    private MultiLanguageTextAreaItem       description;
+    private MultilanguageRichTextEditorItem objective;
+    private MultilanguageRichTextEditorItem description;
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm                classViewForm;
@@ -641,8 +640,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        description = new MultiLanguageTextAreaItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
-        objective = new MultiLanguageTextItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
+        description = new MultilanguageRichTextEditorItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
+        objective = new MultilanguageRichTextEditorItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
         // objective.setValidators(getRequiredIfInternallyPublished());
         contentEditionForm.setFields(objective, description);
 

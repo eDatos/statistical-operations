@@ -22,8 +22,8 @@ import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextAreaItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
@@ -46,28 +46,28 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> implements FamilyPresenter.FamilyView {
 
-    public static final int             OPERATION_LIST_MAX_RESULTS = 17;
+    public static final int                 OPERATION_LIST_MAX_RESULTS = 17;
 
-    private FamilyUiHandlers            uiHandlers;
+    private FamilyUiHandlers                uiHandlers;
 
-    private VLayout                     panel;
+    private VLayout                         panel;
 
-    private FamilyMainFormLayout        mainFormLayout;
-    private GroupDynamicForm            familyViewForm;
-    private GroupDynamicForm            familyEditionForm;
+    private FamilyMainFormLayout            mainFormLayout;
+    private GroupDynamicForm                familyViewForm;
+    private GroupDynamicForm                familyEditionForm;
 
-    private MultiLanguageTextItem       titleItem;
-    private MultiLanguageTextItem       acronymItem;
-    private MultiLanguageTextAreaItem   descriptionItem;
+    private MultiLanguageTextItem           titleItem;
+    private MultiLanguageTextItem           acronymItem;
+    private MultilanguageRichTextEditorItem descriptionItem;
 
-    private ToolStrip                   operationToolStrip;
-    private ToolStripButton             editToolStripButton;
-    private BaseCustomListGrid          operationListGrid;
+    private ToolStrip                       operationToolStrip;
+    private ToolStripButton                 editToolStripButton;
+    private BaseCustomListGrid              operationListGrid;
 
-    private List<OperationBaseDto>      operationBaseDtos;
+    private List<OperationBaseDto>          operationBaseDtos;
 
     // Add operations to family modal
-    private AddOperationsToFamilyWindow addOperationsToFamilyWindow;
+    private AddOperationsToFamilyWindow     addOperationsToFamilyWindow;
 
     public FamilyViewImpl() {
         super();
@@ -241,7 +241,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         titleItem = new MultiLanguageTextItem(FamilyDS.TITLE, OperationsWeb.getCoreMessages().family_title());
         titleItem.setRequired(true);
         acronymItem = new MultiLanguageTextItem(FamilyDS.ACRONYM, OperationsWeb.getCoreMessages().family_acronym());
-        descriptionItem = new MultiLanguageTextAreaItem(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
+        descriptionItem = new MultilanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
         ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
 
         // Status

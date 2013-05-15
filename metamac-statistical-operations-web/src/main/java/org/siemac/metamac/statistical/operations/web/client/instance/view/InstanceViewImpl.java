@@ -69,17 +69,17 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // CONTENT DESCRIPTORS
     private GroupDynamicForm                contentViewForm;
     private GroupDynamicForm                contentEditionForm;
-    private MultiLanguageTextItem           dataDescriptionItem;
-    private MultiLanguageTextItem           statisticalPopulationItem;
+    private MultilanguageRichTextEditorItem dataDescriptionItem;
+    private MultilanguageRichTextEditorItem statisticalPopulationItem;
     private ExternalMultipleSelectItem      statisticalUnitItem;
     private CustomSelectItem                geographicalGranularityItem;
-    private MultiLanguageTextItem           geographicalComparabilityItem;
+    private MultilanguageRichTextEditorItem geographicalComparabilityItem;
     private CustomSelectItem                temporalGranularityItem;
-    private MultiLanguageTextItem           temporalComparabilityItem;
+    private MultilanguageRichTextEditorItem temporalComparabilityItem;
     private CustomSelectItem                unitMeasureItem;
-    private MultiLanguageTextItem           statConcDefItem;
+    private MultilanguageRichTextEditorItem statConcDefItem;
     private CustomSelectItem                statConcDefListItem;
-    private MultiLanguageTextItem           classSystemItem;
+    private MultilanguageRichTextEditorItem classSystemItem;
     private CustomSelectItem                classSystemListItem;
 
     // CLASS DESCRIPTORS
@@ -447,8 +447,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Content descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().instanceContentDescriptors());
-        dataDescriptionItem = new MultiLanguageTextItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
-        statisticalPopulationItem = new MultiLanguageTextItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
+        dataDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
+        statisticalPopulationItem = new MultilanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
         statisticalUnitItem = new ExternalMultipleSelectItem(InstanceDS.STATISTIAL_UNIT, getCoreMessages().instance_statistical_unit());
         statisticalUnitItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
 
@@ -460,17 +460,17 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         });
         geographicalGranularityItem = new CustomSelectItem(InstanceDS.GEOGRAPHIC_GRANULARITY, getCoreMessages().instance_geographic_granularity());
-        geographicalComparabilityItem = new MultiLanguageTextItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
+        geographicalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
         temporalGranularityItem = new CustomSelectItem(InstanceDS.TEMPORAL_GRANULARITY, getCoreMessages().instance_temporal_granularity());
-        temporalComparabilityItem = new MultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
+        temporalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
         TextItem basePeriodItem = new TextItem(InstanceDS.BASE_PERIOD, getCoreMessages().instance_base_period());
         basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
         unitMeasureItem = new CustomSelectItem(InstanceDS.UNIT_MEASURE, getCoreMessages().instance_unit_measure());
         unitMeasureItem.setMultiple(true);
-        statConcDefItem = new MultiLanguageTextItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def());
+        statConcDefItem = new MultilanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def());
         statConcDefListItem = new CustomSelectItem(InstanceDS.STAT_CONC_DEF_LIST, getCoreMessages().instance_stat_conc_def_list());
         statConcDefListItem.setMultiple(true);
-        classSystemItem = new MultiLanguageTextItem(InstanceDS.CLASS_SYSTEM, getCoreMessages().instance_class_system());
+        classSystemItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM, getCoreMessages().instance_class_system());
         classSystemListItem = new CustomSelectItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list());
         classSystemListItem.setMultiple(true);
         contentEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicalGranularityItem, geographicalComparabilityItem, temporalGranularityItem,

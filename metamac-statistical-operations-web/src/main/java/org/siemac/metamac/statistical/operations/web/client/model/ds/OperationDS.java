@@ -44,6 +44,8 @@ public class OperationDS extends DataSource {
     public static final String OP_REV_POLICY                = "op-rev-pol";
     public static final String OP_REV_PRACTICE              = "op-rev-pract";
     public static final String OP_COMMON_METADATA           = "op-com-met";
+    // LEGAL ACTS
+    // TODO
     // ANNOTATIONS
     public static final String OP_COMMENTS                  = "op-com";
     public static final String OP_NOTES                     = "op-not";
@@ -58,5 +60,4 @@ public class OperationDS extends DataSource {
         addField(title);
 
     }
-
 }
