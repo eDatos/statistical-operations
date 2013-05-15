@@ -19,7 +19,7 @@
             <xs:element name="secondarySubjectAreas" type="tns:SecondarySubjectAreas" minOccurs="0" />
             <xs:element name="objective" type="common:InternationalString" />
             <xs:element name="description" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="surveyType" type="common:Item" />
+            <xs:element name="statisticalOperationType" type="common:Item" />
             <xs:element name="officialityType" type="common:Item" />
             <xs:element name="indicatorSystem" type="xs:boolean" minOccurs="0" />
             <xs:element name="producers" type="tns:Producers" minOccurs="1"/>
@@ -87,7 +87,7 @@
             <xs:element name="classSystemsDescription" type="common:InternationalString" minOccurs="0" />
             <xs:element name="classSystems" type="tns:ClassSystems" minOccurs="0" />
             <xs:element name="docMethod" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="surveySource" type="common:Item" minOccurs="0" />
+            <xs:element name="statisticalOperationSource" type="common:Item" minOccurs="0" />
             <xs:element name="collMethod" type="common:Item" minOccurs="0" />
             <xs:element name="informationSuppliers" type="tns:InformationSuppliers" minOccurs="0" />
             <xs:element name="freqColls" type="tns:FreqColls" minOccurs="0" />
@@ -271,11 +271,11 @@
         </xs:complexContent>
     </xs:complexType>         
 
-    <xs:complexType name="SurveyTypes">
+    <xs:complexType name="StatisticalOperationTypes">
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="surveyType" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="statisticalOperationType" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -301,11 +301,11 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SurveySources">
+    <xs:complexType name="StatisticalOperationSources">
         <xs:complexContent>
             <xs:extension base="common:ListBase">
                 <xs:sequence>
-                    <xs:element name="surveySource" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="statisticalOperationSource" type="common:Item" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -371,7 +371,7 @@
             <xs:enumeration value="SUBJECT_AREA_URN" />
             <xs:enumeration value="SECONDARY_SUBJECT_AREA_URN" />
             <xs:enumeration value="DESCRIPTION" />
-            <xs:enumeration value="SURVEY_TYPE_ID" />
+            <xs:enumeration value="STATISTICAL_OPERATION_TYPE_ID" />
             <xs:enumeration value="OFFICIALITY_TYPE_ID" />
             <xs:enumeration value="IS_INDICATORS_SYSTEM" />
             <xs:enumeration value="PRODUCER_URN" />
@@ -431,10 +431,10 @@
     <xs:element name="operations" type="tns:Operations" />
     <xs:element name="families" type="tns:Families" />
     <xs:element name="instances" type="tns:Instances" />
-    <xs:element name="surveyTypes" type="tns:SurveyTypes" />
+    <xs:element name="statisticalOperationTypes" type="tns:StatisticalOperationTypes" />
     <xs:element name="officialityTypes" type="tns:OfficialityTypes" />
     <xs:element name="instanceTypes" type="tns:InstanceTypes" />
-    <xs:element name="surveySources" type="tns:SurveySources" />
+    <xs:element name="statisticalOperationSources" type="tns:StatisticalOperationSources" />
     <xs:element name="collMethods" type="tns:CollMethods" />
     <xs:element name="costs" type="tns:Costs" />
 </xs:schema>

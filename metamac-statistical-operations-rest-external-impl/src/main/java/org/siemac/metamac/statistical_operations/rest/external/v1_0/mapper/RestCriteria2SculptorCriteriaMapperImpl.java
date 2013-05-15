@@ -79,7 +79,7 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     return new SculptorPropertyCriteria(OperationProperties.secondarySubjectAreas().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case DESCRIPTION:
                     return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
-                case SURVEY_TYPE_ID:
+                case STATISTICAL_OPERATION_TYPE_ID:
                     return new SculptorPropertyCriteria(OperationProperties.surveyType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
                 case OFFICIALITY_TYPE_ID:
                     return new SculptorPropertyCriteria(OperationProperties.officialityType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());

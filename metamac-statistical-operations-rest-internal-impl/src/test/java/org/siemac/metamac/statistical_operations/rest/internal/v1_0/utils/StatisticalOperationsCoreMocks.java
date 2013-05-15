@@ -603,7 +603,7 @@ public class StatisticalOperationsCoreMocks {
         operation.addInstance(mockInstanceRelatedEntity("22", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(3), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("1", ProcStatusEnum.PUBLISH_INTERNALLY, Integer.valueOf(2), operation.getCode()));
         operation.addInstance(mockInstanceRelatedEntity("333", ProcStatusEnum.PUBLISH_EXTERNALLY, Integer.valueOf(1), operation.getCode()));
-        operation.setSurveyType(mockSurveyType("surveyIdentifier"));
+        operation.setSurveyType(mockSurveyType("statisticalOperationIdentifier"));
         operation.setOfficialityType(mockOfficialityType("officialityType"));
         operation.setIndicatorSystem(isIndicatorsSystem);
         operation.getProducer().add(mockExternalItemSrm("producer1", "producers", TypeExternalArtefactsEnum.AGENCY));
@@ -686,7 +686,7 @@ public class StatisticalOperationsCoreMocks {
         instance.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0));
         instance.setProcStatus(procStatus);
         instance.setDocMethod(mockInternationalStringMetadata("docMethod", subCode));
-        instance.setSurveySource(mockSurveySource("surveySource1"));
+        instance.setSurveySource(mockSurveySource("statisticalOperationSource1"));
         instance.setCollMethod(mockCollMethod("collMethod1"));
         instance.addInformationSupplier(mockExternalItemSrm("informationSupplier1", "informationSuppliers", TypeExternalArtefactsEnum.CONCEPT));
         instance.addFreqColl(mockExternalItemSrm("freqColl1", "freqColls", TypeExternalArtefactsEnum.CATEGORY_SCHEME));
@@ -720,8 +720,8 @@ public class StatisticalOperationsCoreMocks {
     }
     public List<SurveyType> mockFindAllSurveyTypes() {
         List<SurveyType> surveyTypes = new ArrayList<SurveyType>();
-        surveyTypes.add(mockSurveyType("surveyType1"));
-        surveyTypes.add(mockSurveyType("surveyType2"));
+        surveyTypes.add(mockSurveyType("statisticalOperationType1"));
+        surveyTypes.add(mockSurveyType("statisticalOperationType2"));
         return surveyTypes;
     }
 
@@ -742,8 +742,8 @@ public class StatisticalOperationsCoreMocks {
 
     public List<SurveySource> mockFindAllSurveySources() {
         List<SurveySource> surveySources = new ArrayList<SurveySource>();
-        surveySources.add(mockSurveySource("surveySource1"));
-        surveySources.add(mockSurveySource("surveySource2"));
+        surveySources.add(mockSurveySource("statisticalOperationSource1"));
+        surveySources.add(mockSurveySource("statisticalOperationSource2"));
         return surveySources;
     }
 

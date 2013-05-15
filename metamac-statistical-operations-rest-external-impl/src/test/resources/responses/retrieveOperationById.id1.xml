@@ -54,12 +54,12 @@
     <operations:description>
         <cdomain:text xml:lang="es">description1 en Español</cdomain:text>
     </operations:description>
-    <operations:surveyType>
-        <cdomain:id>surveyIdentifier</cdomain:id>
+    <operations:statisticalOperationType>
+        <cdomain:id>statisticalOperationIdentifier</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="es">surveyIdentifier en Español</cdomain:text>
+            <cdomain:text xml:lang="es">statisticalOperationIdentifier en Español</cdomain:text>
         </cdomain:title>
-    </operations:surveyType>
+    </operations:statisticalOperationType>
     <operations:officialityType>
         <cdomain:id>officialityType</cdomain:id>
         <cdomain:title>

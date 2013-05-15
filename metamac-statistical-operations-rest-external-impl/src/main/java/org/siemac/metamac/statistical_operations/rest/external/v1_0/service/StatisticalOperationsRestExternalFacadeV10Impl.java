@@ -26,8 +26,8 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
@@ -63,8 +63,8 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
     @Autowired
     private RestCriteria2SculptorCriteriaMapper restCriteria2SculptorCriteriaMapper;
 
-    private ServiceContext                      serviceContextRestExternal = new ServiceContext("restExternal", "restExternal", "restExternal");
-    private Logger                              logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
+    private final ServiceContext                serviceContextRestExternal = new ServiceContext("restExternal", "restExternal", "restExternal");
+    private final Logger                        logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
 
     @Override
     public Operation retrieveOperationById(String id) {
@@ -117,8 +117,7 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
             SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getInstanceCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
             // Find for operation and only published
             List<ConditionalCriteria> conditionalCriteriaOperationAndProcStatus = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
-                    .withProperty(InstanceProperties.operation().code()).eq(operationId).withProperty(InstanceProperties.procStatus())
-                    .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).build();
+                    .withProperty(InstanceProperties.operation().code()).eq(operationId).withProperty(InstanceProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).build();
 
             List<ConditionalCriteria> conditionalCriteria = new ArrayList<ConditionalCriteria>();
             conditionalCriteria.addAll(conditionalCriteriaOperationAndProcStatus);
@@ -145,8 +144,7 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
 
             // Retrieve families by criteria
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Family.class)
-                    .withProperty(FamilyProperties.operations().code()).eq(id).withProperty(FamilyProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY)
-                    .distinctRoot().build();
+                    .withProperty(FamilyProperties.operations().code()).eq(id).withProperty(FamilyProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).distinctRoot().build();
             PagingParameter pagingParameter = PagingParameter.noLimits();
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> familiesEntitiesResult = statisticalOperationsBaseService.findFamilyByCondition(serviceContextRestExternal,
                     conditionalCriteria, pagingParameter);
@@ -211,8 +209,7 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
             SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getOperationCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
             // Find only this family and published
             List<ConditionalCriteria> conditionalCriteria = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Operation.class)
-                    .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY)
-                    .build();
+                    .withProperty(OperationProperties.families().code()).eq(id).withProperty(OperationProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).build();
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
@@ -248,14 +245,14 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public SurveyTypes retrieveSurveyTypes() {
+    public StatisticalOperationTypes retrieveStatisticalOperationTypes() {
         try {
             // Retrieve all
             List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestExternal);
 
             // Transform
-            SurveyTypes surveyTypes = do2RestExternalMapper.toSurveyTypes(entitiesResult);
-            return surveyTypes;
+            StatisticalOperationTypes statisticalOperationTypes = do2RestExternalMapper.toStatisticalOperationTypes(entitiesResult);
+            return statisticalOperationTypes;
         } catch (Exception e) {
             throw manageException(e);
         }
@@ -290,14 +287,14 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public SurveySources retrieveSurveySources() {
+    public StatisticalOperationSources retrieveStatisticalOperationSources() {
         try {
             // Retrieve all
             List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestExternal);
 
             // Transform
-            SurveySources surveySources = do2RestExternalMapper.toSurveySources(entitiesResult);
-            return surveySources;
+            StatisticalOperationSources statisticalOperationSources = do2RestExternalMapper.toStatisticalOperationSources(entitiesResult);
+            return statisticalOperationSources;
         } catch (Exception e) {
             throw manageException(e);
         }

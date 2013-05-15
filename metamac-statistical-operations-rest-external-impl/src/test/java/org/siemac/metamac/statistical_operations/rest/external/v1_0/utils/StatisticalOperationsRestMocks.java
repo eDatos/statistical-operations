@@ -35,10 +35,10 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalContri
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalResponsibles;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SecondarySubjectAreas;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Status;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
@@ -543,13 +543,13 @@ public class StatisticalOperationsRestMocks {
         return instances;
     }
 
-    public SurveyTypes mockSurveyTypes() {
-        SurveyTypes surveyTypes = new SurveyTypes();
-        surveyTypes.setKind(RestExternalConstants.KIND_SURVEY_TYPES);
-        surveyTypes.setTotal(BigInteger.valueOf(2));
-        surveyTypes.getSurveyTypes().add(mockItem("surveyType1"));
-        surveyTypes.getSurveyTypes().add(mockItem("surveyType2"));
-        return surveyTypes;
+    public StatisticalOperationTypes mockStatisticalOperationTypes() {
+        StatisticalOperationTypes statisticalOperationTypes = new StatisticalOperationTypes();
+        statisticalOperationTypes.setKind(RestExternalConstants.KIND_STATISTICAL_OPERATION_TYPES);
+        statisticalOperationTypes.setTotal(BigInteger.valueOf(2));
+        statisticalOperationTypes.getStatisticalOperationTypes().add(mockItem("statisticalOperationType1"));
+        statisticalOperationTypes.getStatisticalOperationTypes().add(mockItem("statisticalOperationType2"));
+        return statisticalOperationTypes;
     }
 
     public OfficialityTypes mockOfficialityTypes() {
@@ -571,13 +571,13 @@ public class StatisticalOperationsRestMocks {
         return instanceTypes;
     }
 
-    public SurveySources mockSurveySources() {
-        SurveySources surveySources = new SurveySources();
-        surveySources.setKind(RestExternalConstants.KIND_SURVEY_SOURCES);
-        surveySources.setTotal(BigInteger.valueOf(2));
-        surveySources.getSurveySources().add(mockItem("surveySource1"));
-        surveySources.getSurveySources().add(mockItem("surveySource2"));
-        return surveySources;
+    public StatisticalOperationSources mockStatisticalOperationSources() {
+        StatisticalOperationSources statisticalOperationSources = new StatisticalOperationSources();
+        statisticalOperationSources.setKind(RestExternalConstants.KIND_STATISTICAL_OPERATION_SOURCES);
+        statisticalOperationSources.setTotal(BigInteger.valueOf(2));
+        statisticalOperationSources.getStatisticalOperationSources().add(mockItem("statisticalOperationSource1"));
+        statisticalOperationSources.getStatisticalOperationSources().add(mockItem("statisticalOperationSource2"));
+        return statisticalOperationSources;
     }
 
     public CollMethods mockCollMethods() {
@@ -644,7 +644,7 @@ public class StatisticalOperationsRestMocks {
         operation.getSecondarySubjectAreas().getSecondarySubjectAreas().add(mockResourceFromExternalItemSrm("secundarySubjectArea333", "secundarySubjectAreas", "structuralResources#category"));
         operation.setObjective(mockInternationalStringMetadata("objetive", subId));
         operation.setDescription(mockInternationalStringMetadata("description", subId));
-        operation.setSurveyType(mockItem("surveyIdentifier"));
+        operation.setStatisticalOperationType(mockItem("statisticalOperationIdentifier"));
         operation.setOfficialityType(mockItem("officialityType"));
         operation.setIndicatorSystem(Boolean.TRUE);
         operation.setProducers(new Producers());
@@ -768,7 +768,7 @@ public class StatisticalOperationsRestMocks {
         instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList1", "classSystemLists", "structuralResources#codelist"));
         instance.getClassSystems().getClassSystems().add(mockResourceFromExternalItemSrm("classSystemList22", "classSystemLists", "structuralResources#codelist"));
         instance.setDocMethod(mockInternationalStringMetadata("docMethod", subId));
-        instance.setSurveySource(mockItem("surveySource1"));
+        instance.setStatisticalOperationSource(mockItem("statisticalOperationSource1"));
         instance.setCollMethod(mockItem("collMethod1"));
         instance.setInformationSuppliers(new InformationSuppliers());
         instance.getInformationSuppliers().setTotal(BigInteger.valueOf(1));

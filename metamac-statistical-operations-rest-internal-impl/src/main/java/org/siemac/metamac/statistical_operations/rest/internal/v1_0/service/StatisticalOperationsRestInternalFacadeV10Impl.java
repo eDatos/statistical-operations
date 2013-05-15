@@ -26,8 +26,8 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Insta
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
@@ -63,8 +63,8 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     @Autowired
     private RestCriteria2SculptorCriteriaMapper restCriteria2SculptorCriteriaMapper;
 
-    private ServiceContext                      serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
-    private Logger                              logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
+    private final ServiceContext                serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
+    private final Logger                        logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
 
     @Override
     public Operation retrieveOperationById(String id) {
@@ -248,14 +248,14 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public SurveyTypes retrieveSurveyTypes() {
+    public StatisticalOperationTypes retrieveStatisticalOperationTypes() {
         try {
             // Retrieve all
             List<SurveyType> entitiesResult = statisticalOperationsListsService.findAllSurveyTypes(serviceContextRestInternal);
 
             // Transform
-            SurveyTypes surveyTypes = do2RestInternalMapper.toSurveyTypes(entitiesResult);
-            return surveyTypes;
+            StatisticalOperationTypes statisticalOperationTypes = do2RestInternalMapper.toStatisticalOperationTypes(entitiesResult);
+            return statisticalOperationTypes;
         } catch (Exception e) {
             throw manageException(e);
         }
@@ -290,14 +290,14 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     }
 
     @Override
-    public SurveySources retrieveSurveySources() {
+    public StatisticalOperationSources retrieveStatisticalOperationSources() {
         try {
             // Retrieve all
             List<SurveySource> entitiesResult = statisticalOperationsListsService.findAllSurveySources(serviceContextRestInternal);
 
             // Transform
-            SurveySources surveySources = do2RestInternalMapper.toSurveySources(entitiesResult);
-            return surveySources;
+            StatisticalOperationSources statisticalOperationSources = do2RestInternalMapper.toStatisticalOperationSources(entitiesResult);
+            return statisticalOperationSources;
         } catch (Exception e) {
             throw manageException(e);
         }

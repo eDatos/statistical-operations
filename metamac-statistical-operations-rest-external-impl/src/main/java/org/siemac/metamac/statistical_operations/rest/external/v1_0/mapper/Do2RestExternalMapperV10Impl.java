@@ -45,9 +45,9 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalContri
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalResponsibles;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SecondarySubjectAreas;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
@@ -99,7 +99,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setSecondarySubjectAreas(toSecondarySubjectAreas(source.getSecondarySubjectAreas()));
         target.setObjective(toInternationalString(source.getObjective()));
         target.setDescription(toInternationalString(source.getDescription()));
-        target.setSurveyType(toItem(source.getSurveyType()));
+        target.setStatisticalOperationType(toItem(source.getSurveyType()));
         target.setOfficialityType(toItem(source.getOfficialityType()));
         target.setIndicatorSystem(source.getIndicatorSystem());
         target.setProducers(toProducers(source.getProducer()));
@@ -245,7 +245,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setClassSystemsDescription(toInternationalString(source.getClassSystem()));
         target.setClassSystems(toClassSystems(source.getClassSystemList()));
         target.setDocMethod(toInternationalString(source.getDocMethod()));
-        target.setSurveySource(toItem(source.getSurveySource()));
+        target.setStatisticalOperationSource(toItem(source.getSurveySource()));
         target.setCollMethod(toItem(source.getCollMethod()));
         target.setInformationSuppliers(toInformationSuppliers(source.getInformationSuppliers()));
         target.setFreqColls(toFreqColls(source.getFreqColl()));
@@ -292,16 +292,16 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     }
 
     @Override
-    public SurveyTypes toSurveyTypes(List<SurveyType> sources) {
-        SurveyTypes targets = new SurveyTypes();
-        targets.setKind(RestExternalConstants.KIND_SURVEY_TYPES);
+    public StatisticalOperationTypes toStatisticalOperationTypes(List<SurveyType> sources) {
+        StatisticalOperationTypes targets = new StatisticalOperationTypes();
+        targets.setKind(RestExternalConstants.KIND_STATISTICAL_OPERATION_TYPES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
         } else {
             for (org.siemac.metamac.statistical.operations.core.domain.SurveyType source : sources) {
                 Item target = toItem(source);
-                targets.getSurveyTypes().add(target);
+                targets.getStatisticalOperationTypes().add(target);
             }
             targets.setTotal(BigInteger.valueOf(sources.size()));
         }
@@ -346,16 +346,16 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     }
 
     @Override
-    public SurveySources toSurveySources(List<SurveySource> sources) {
-        SurveySources targets = new SurveySources();
-        targets.setKind(RestExternalConstants.KIND_SURVEY_SOURCES);
+    public StatisticalOperationSources toStatisticalOperationSources(List<SurveySource> sources) {
+        StatisticalOperationSources targets = new StatisticalOperationSources();
+        targets.setKind(RestExternalConstants.KIND_STATISTICAL_OPERATION_SOURCES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
         } else {
             for (org.siemac.metamac.statistical.operations.core.domain.SurveySource source : sources) {
                 Item target = toItem(source);
-                targets.getSurveySources().add(target);
+                targets.getStatisticalOperationSources().add(target);
             }
             targets.setTotal(BigInteger.valueOf(sources.size()));
         }

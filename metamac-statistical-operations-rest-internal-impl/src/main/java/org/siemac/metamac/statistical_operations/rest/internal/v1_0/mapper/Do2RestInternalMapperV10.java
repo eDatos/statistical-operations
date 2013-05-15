@@ -13,8 +13,8 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Insta
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -27,8 +27,8 @@ public interface Do2RestInternalMapperV10 {
     // Operations
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source);
     public Operations toOperations(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit);
-    public Operations toOperationsByFamily(org.siemac.metamac.statistical.operations.core.domain.Family family,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources, String query, String orderBy, Integer limit);
+    public Operations toOperationsByFamily(org.siemac.metamac.statistical.operations.core.domain.Family family, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sources,
+            String query, String orderBy, Integer limit);
 
     // Families
     public Family toFamily(org.siemac.metamac.statistical.operations.core.domain.Family source);
@@ -37,14 +37,14 @@ public interface Do2RestInternalMapperV10 {
 
     // Instances
     public Instance toInstance(org.siemac.metamac.statistical.operations.core.domain.Instance source);
-    public Instances toInstances(org.siemac.metamac.statistical.operations.core.domain.Operation operation,
-            PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources, String query, String orderBy, Integer limit);
+    public Instances toInstances(org.siemac.metamac.statistical.operations.core.domain.Operation operation, PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sources,
+            String query, String orderBy, Integer limit);
 
     // List of values
-    public SurveyTypes toSurveyTypes(List<SurveyType> sources);
+    public StatisticalOperationTypes toStatisticalOperationTypes(List<SurveyType> sources);
     public OfficialityTypes toOfficialityTypes(List<OfficialityType> entitiesResult);
     public InstanceTypes toInstanceTypes(List<InstanceType> entitiesResult);
-    public SurveySources toSurveySources(List<SurveySource> entitiesResult);
+    public StatisticalOperationSources toStatisticalOperationSources(List<SurveySource> entitiesResult);
     public CollMethods toCollMethods(List<CollMethod> entitiesResult);
     public Costs toCosts(List<Cost> entitiesResult);
 }

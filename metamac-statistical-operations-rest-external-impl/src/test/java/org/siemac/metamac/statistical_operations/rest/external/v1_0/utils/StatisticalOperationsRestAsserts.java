@@ -24,9 +24,9 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalContri
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalResponsibles;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SecondarySubjectAreas;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 
@@ -43,7 +43,7 @@ public class StatisticalOperationsRestAsserts {
         assertEqualsSecondarySubjectAreas(expected.getSecondarySubjectAreas(), actual.getSecondarySubjectAreas());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getObjective(), actual.getObjective());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDescription(), actual.getDescription());
-        MetamacRestAsserts.assertEqualsItem(expected.getSurveyType(), actual.getSurveyType());
+        MetamacRestAsserts.assertEqualsItem(expected.getStatisticalOperationType(), actual.getStatisticalOperationType());
         MetamacRestAsserts.assertEqualsItem(expected.getOfficialityType(), actual.getOfficialityType());
         assertEquals(expected.getIndicatorSystem(), actual.getIndicatorSystem());
         assertEqualsProducers(expected.getProducers(), actual.getProducers());
@@ -106,7 +106,7 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getClassSystemsDescription(), actual.getClassSystemsDescription());
         assertEqualsClassSystems(expected.getClassSystems(), actual.getClassSystems());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getDocMethod(), actual.getDocMethod());
-        MetamacRestAsserts.assertEqualsItem(expected.getSurveySource(), actual.getSurveySource());
+        MetamacRestAsserts.assertEqualsItem(expected.getStatisticalOperationSource(), actual.getStatisticalOperationSource());
         MetamacRestAsserts.assertEqualsItem(expected.getCollMethod(), actual.getCollMethod());
         assertEqualsInformationSuppliers(expected.getInformationSuppliers(), actual.getInformationSuppliers());
         assertEqualsFreqColls(expected.getFreqColls(), actual.getFreqColls());
@@ -159,12 +159,12 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsResources(expected.getInstances(), actual.getInstances());
     }
 
-    public static void assertEqualsSurveyTypes(SurveyTypes expected, SurveyTypes actual) {
+    public static void assertEqualsStatisticalOperationTypes(StatisticalOperationTypes expected, StatisticalOperationTypes actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
-        MetamacRestAsserts.assertEqualsItems(expected.getSurveyTypes(), actual.getSurveyTypes());
+        MetamacRestAsserts.assertEqualsItems(expected.getStatisticalOperationTypes(), actual.getStatisticalOperationTypes());
         assertEquals(expected.getTotal(), actual.getTotal());
     }
 
@@ -177,12 +177,12 @@ public class StatisticalOperationsRestAsserts {
         assertEquals(expected.getTotal(), actual.getTotal());
     }
 
-    public static void assertEqualsSurveySources(SurveySources expected, SurveySources actual) {
+    public static void assertEqualsStatisticalOperationSources(StatisticalOperationSources expected, StatisticalOperationSources actual) {
         MetamacRestAsserts.assertEqualsNullability(expected, actual);
         if (expected == null) {
             return;
         }
-        MetamacRestAsserts.assertEqualsItems(expected.getSurveySources(), actual.getSurveySources());
+        MetamacRestAsserts.assertEqualsItems(expected.getStatisticalOperationSources(), actual.getStatisticalOperationSources());
         assertEquals(expected.getTotal(), actual.getTotal());
     }
 

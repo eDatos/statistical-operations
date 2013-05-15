@@ -189,12 +189,12 @@
     <operations:docMethod>
         <cdomain:text xml:lang="es">docMethod1 en Español</cdomain:text>
     </operations:docMethod>
-    <operations:surveySource>
-        <cdomain:id>surveySource1</cdomain:id>
+    <operations:statisticalOperationSource>
+        <cdomain:id>statisticalOperationSource1</cdomain:id>
         <cdomain:title>
-            <cdomain:text xml:lang="es">surveySource1 en Español</cdomain:text>
+            <cdomain:text xml:lang="es">statisticalOperationSource1 en Español</cdomain:text>
         </cdomain:title>
-    </operations:surveySource>
+    </operations:statisticalOperationSource>
     <operations:collMethod>
         <cdomain:id>collMethod1</cdomain:id>
         <cdomain:title>

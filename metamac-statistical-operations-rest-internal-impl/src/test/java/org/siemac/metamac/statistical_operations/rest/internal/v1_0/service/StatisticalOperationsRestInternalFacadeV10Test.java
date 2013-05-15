@@ -47,8 +47,8 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Offic
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OperationCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
@@ -863,20 +863,20 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
 
     @Test
-    public void testRetrieveSurveyTypesXml() throws Exception {
+    public void testRetrieveStatisticalOperationTypesXml() throws Exception {
 
         // Retrieve
-        SurveyTypes surveyTypes = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveyTypes();
+        StatisticalOperationTypes statisticalOperationTypes = getStatisticalOperationsRestInternalFacadeClientXml().retrieveStatisticalOperationTypes();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsSurveyTypes(statisticalOperationsRestMocks.mockSurveyTypes(), surveyTypes);
+        StatisticalOperationsRestAsserts.assertEqualsStatisticalOperationTypes(statisticalOperationsRestMocks.mockStatisticalOperationTypes(), statisticalOperationTypes);
     }
 
     @Test
-    public void testRetrieveSurveyTypesXmlWithoutJaxbTransformation() throws Exception {
+    public void testRetrieveStatisticalOperationTypesXmlWithoutJaxbTransformation() throws Exception {
 
-        String requestUri = getRequestUriRetrieveSurveyTypes();
-        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveSurveyTypes.xml");
+        String requestUri = getRequestUriRetrieveStatisticalOperationTypes();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveStatisticalOperationTypes.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -923,20 +923,20 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
 
     @Test
-    public void testRetrieveSurveySourcesXml() throws Exception {
+    public void testRetrieveStatisticalOperationSourcesXml() throws Exception {
 
         // Retrieve
-        SurveySources surveySources = getStatisticalOperationsRestInternalFacadeClientXml().retrieveSurveySources();
+        StatisticalOperationSources statisticalOperationSources = getStatisticalOperationsRestInternalFacadeClientXml().retrieveStatisticalOperationSources();
 
         // Validation
-        StatisticalOperationsRestAsserts.assertEqualsSurveySources(statisticalOperationsRestMocks.mockSurveySources(), surveySources);
+        StatisticalOperationsRestAsserts.assertEqualsStatisticalOperationSources(statisticalOperationsRestMocks.mockStatisticalOperationSources(), statisticalOperationSources);
     }
 
     @Test
-    public void testRetrieveSurveySourcesXmlWithoutJaxbTransformation() throws Exception {
+    public void testRetrieveStatisticalOperationSourcesXmlWithoutJaxbTransformation() throws Exception {
 
-        String requestUri = getRequestUriRetrieveSurveySources();
-        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveSurveySources.xml");
+        String requestUri = getRequestUriRetrieveStatisticalOperationSources();
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveStatisticalOperationSources.xml");
 
         // Request and validate
         testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.OK, responseExpected);
@@ -1037,8 +1037,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         return url;
     }
 
-    private String getRequestUriRetrieveSurveyTypes() {
-        return baseApi + "/surveyTypes";
+    private String getRequestUriRetrieveStatisticalOperationTypes() {
+        return baseApi + "/statisticalOperationTypes";
     }
 
     private String getRequestUriRetrieveOfficialityTypes() {
@@ -1049,8 +1049,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         return baseApi + "/instanceTypes";
     }
 
-    private String getRequestUriRetrieveSurveySources() {
-        return baseApi + "/surveySources";
+    private String getRequestUriRetrieveStatisticalOperationSources() {
+        return baseApi + "/statisticalOperationSources";
     }
 
     private String getRequestUriRetrieveCollMethods() {

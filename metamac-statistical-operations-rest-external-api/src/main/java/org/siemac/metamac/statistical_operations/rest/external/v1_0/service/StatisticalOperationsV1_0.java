@@ -16,8 +16,8 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveySources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SurveyTypes;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 
 @Path("v1.0")
 public interface StatisticalOperationsV1_0 {
@@ -28,7 +28,8 @@ public interface StatisticalOperationsV1_0 {
      * @param query Clause to filter results by metadata <br/>
      *            - Logical operators: AND, OR <br/>
      *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
-     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, SURVEY_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN,
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, StatisticalOperation_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM,
+     *            PRODUCER_URN,
      *            CURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>
      *            - Example: (ID LIKE "Operation1" AND OFFICIALITY_TYPE_ID EQ "OfficialityType1") OR (ACRONYM EQ "Op1") OR (INVENTORY_DATE IS_NULL)
      * @param orderBy Clause to order the results by metadata <br/>
@@ -140,7 +141,8 @@ public interface StatisticalOperationsV1_0 {
      * @param query Clause to filter results by metadata <br/>
      *            - Logical operators: AND, OR <br/>
      *            - Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>
-     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, SURVEY_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN,
+     *            - Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, StatisticalOperation_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM,
+     *            PRODUCER_URN,
      *            CURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>
      *            - Example: (ID LIKE "Operation1" AND OFFICIALITY_TYPE_ID EQ "OfficialityType1") OR (ACRONYM EQ "Op1") OR (INVENTORY_DATE IS_NULL)
      * @param orderBy Clause to order the results by metadata <br/>
@@ -158,14 +160,14 @@ public interface StatisticalOperationsV1_0 {
             @QueryParam("offset") String offset);
 
     /**
-     * Retrieve all survey types
+     * Retrieve all statistical operations types
      * 
-     * @return List of survey types
+     * @return List of statistical operations types
      */
     @GET
     @Produces("application/xml")
-    @Path("surveyTypes")
-    SurveyTypes retrieveSurveyTypes();
+    @Path("statisticalOperationTypes")
+    StatisticalOperationTypes retrieveStatisticalOperationTypes();
 
     /**
      * Retrieve all officiality types
@@ -188,14 +190,14 @@ public interface StatisticalOperationsV1_0 {
     InstanceTypes retrieveInstanceTypes();
 
     /**
-     * Retrieve all survey sources
+     * Retrieve all statistical operations sources
      * 
-     * @return List of survey sources
+     * @return List of statistical operations sources
      */
     @GET
     @Produces("application/xml")
-    @Path("surveySources")
-    SurveySources retrieveSurveySources();
+    @Path("statisticalOperationSources")
+    StatisticalOperationSources retrieveStatisticalOperationSources();
 
     /**
      * Retrieve all coll methods
