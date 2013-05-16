@@ -568,7 +568,12 @@ public class StatisticalOperationsCoreMocks {
 
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
-        String urn = "urn:" + code;
+        String urn = null;
+        if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(type)) {
+            urn = "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:" + code + "(1.0)";
+        } else {
+            urn = "urn:" + code; // any
+        }
         String managementUrlPart = "/" + subpathUrl + "/" + code;
         return new ExternalItem(code, uri, urn, type, mockInternationalStringMetadata(code, null), managementUrlPart);
     }
@@ -675,11 +680,12 @@ public class StatisticalOperationsCoreMocks {
         instance.addTemporalGranularity(mockExternalItemSrm("temporalGranularity02", "codelists", TypeExternalArtefactsEnum.CODELIST));
         instance.setTemporalComparability(mockInternationalStringMetadata("temporalComparability", subCode));
         instance.setBasePeriod("2012");
-        instance.addUnitMeasure(mockExternalItemSrm("measure1", "measures", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addUnitMeasure(mockExternalItemSrm("measure1", "concepts", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addUnitMeasure(mockExternalItemSrm("measure2", "concepts", TypeExternalArtefactsEnum.CONCEPT_SCHEME));
         instance.setStatConcDef(mockInternationalStringMetadata("statConcDef", subCode));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "concepts", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "concepts", TypeExternalArtefactsEnum.CONCEPT_SCHEME));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "concepts", TypeExternalArtefactsEnum.CONCEPT_SCHEME));
         instance.setClassSystem(mockInternationalStringMetadata("classSystem", subCode));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));

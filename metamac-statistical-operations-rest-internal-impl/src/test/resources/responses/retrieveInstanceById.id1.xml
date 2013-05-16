@@ -46,15 +46,6 @@
     </operations:statisticalPopulation>
     <operations:statisticalUnits kind="structuralResources#concepts" total="2">
         <operations:statisticalUnit kind="structuralResources#concept">
-            <cdomain:id>statisticalUnit22</cdomain:id>
-            <cdomain:urn>urn:statisticalUnit22</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statisticalUnits/statisticalUnit22"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">statisticalUnit22 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit22</operations:managementAppLink>
-        </operations:statisticalUnit>
-        <operations:statisticalUnit kind="structuralResources#concept">
             <cdomain:id>statisticalUnit1</cdomain:id>
             <cdomain:urn>urn:statisticalUnit1</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statisticalUnits/statisticalUnit1"/>
@@ -63,17 +54,17 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit1</operations:managementAppLink>
         </operations:statisticalUnit>
+        <operations:statisticalUnit kind="structuralResources#concept">
+            <cdomain:id>statisticalUnit22</cdomain:id>
+            <cdomain:urn>urn:statisticalUnit22</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statisticalUnits/statisticalUnit22"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statisticalUnit22 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statisticalUnits/statisticalUnit22</operations:managementAppLink>
+        </operations:statisticalUnit>
     </operations:statisticalUnits>
     <operations:geographicGranularity kind="structuralResources#codes" total="2">
-        <operations:geographicGranularity kind="structuralResources#codelist">
-            <cdomain:id>geographicGranularity01</cdomain:id>
-            <cdomain:urn>urn:geographicGranularity01</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/codelists/geographicGranularity01"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">geographicGranularity01 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/geographicGranularity01</operations:managementAppLink>
-        </operations:geographicGranularity>
         <operations:geographicGranularity kind="structuralResources#codelist">
             <cdomain:id>geographicGranularity02</cdomain:id>
             <cdomain:urn>urn:geographicGranularity02</cdomain:urn>
@@ -83,20 +74,20 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/geographicGranularity02</operations:managementAppLink>
         </operations:geographicGranularity>
+        <operations:geographicGranularity kind="structuralResources#codelist">
+            <cdomain:id>geographicGranularity01</cdomain:id>
+            <cdomain:urn>urn:geographicGranularity01</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/codelists/geographicGranularity01"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">geographicGranularity01 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/geographicGranularity01</operations:managementAppLink>
+        </operations:geographicGranularity>
     </operations:geographicGranularity>
     <operations:geographicComparability>
         <cdomain:text xml:lang="es">geographicComparability1 en Español</cdomain:text>
     </operations:geographicComparability>
     <operations:temporalGranularity kind="structuralResources#codes" total="2">
-        <operations:temporalGranularity kind="structuralResources#codelist">
-            <cdomain:id>temporalGranularity02</cdomain:id>
-            <cdomain:urn>urn:temporalGranularity02</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/codelists/temporalGranularity02"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">temporalGranularity02 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/temporalGranularity02</operations:managementAppLink>
-        </operations:temporalGranularity>
         <operations:temporalGranularity kind="structuralResources#codelist">
             <cdomain:id>temporalGranularity01</cdomain:id>
             <cdomain:urn>urn:temporalGranularity01</cdomain:urn>
@@ -106,52 +97,97 @@
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/temporalGranularity01</operations:managementAppLink>
         </operations:temporalGranularity>
+        <operations:temporalGranularity kind="structuralResources#codelist">
+            <cdomain:id>temporalGranularity02</cdomain:id>
+            <cdomain:urn>urn:temporalGranularity02</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/codelists/temporalGranularity02"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">temporalGranularity02 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/codelists/temporalGranularity02</operations:managementAppLink>
+        </operations:temporalGranularity>
     </operations:temporalGranularity>
     <operations:temporalComparability>
         <cdomain:text xml:lang="es">temporalComparability1 en Español</cdomain:text>
     </operations:temporalComparability>
     <operations:basePeriod>2012</operations:basePeriod>
-    <operations:measures kind="structuralResources#conceptSchemes" total="1">
+    <operations:measures kind="structuralResources#concepts" total="3">
         <operations:measure kind="structuralResources#concept">
             <cdomain:id>measure1</cdomain:id>
             <cdomain:urn>urn:measure1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/measures/measure1"/>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/measure1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">measure1 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/measures/measure1</operations:managementAppLink>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/measure1</operations:managementAppLink>
+        </operations:measure>
+        <operations:measure kind="structuralResources#concept">
+            <cdomain:id>measure2concept1</cdomain:id>
+            <cdomain:urn>urn:measure2concept1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/measure2concept1"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">measure2concept1 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/measure2concept1</operations:managementAppLink>
+        </operations:measure>
+        <operations:measure kind="structuralResources#concept">
+            <cdomain:id>measure2concept2</cdomain:id>
+            <cdomain:urn>urn:measure2concept2</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/measure2concept2"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">measure2concept2 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/measure2concept2</operations:managementAppLink>
         </operations:measure>
     </operations:measures>
     <operations:statConcDefsDescription>
         <cdomain:text xml:lang="es">statConcDef1 en Español</cdomain:text>
     </operations:statConcDefsDescription>
-    <operations:statConcDefs kind="structuralResources#conceptSchemes" total="3">
-        <operations:statConcDef kind="structuralResources#codelist">
-            <cdomain:id>statConcDefList22</cdomain:id>
-            <cdomain:urn>urn:statConcDefList22</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statConcDefLists/statConcDefList22"/>
+    <operations:statConcDefs kind="structuralResources#concepts" total="5">
+        <operations:statConcDef kind="structuralResources#concept">
+            <cdomain:id>statConcDefList333concept1</cdomain:id>
+            <cdomain:urn>urn:statConcDefList333concept1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/statConcDefList333concept1"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statConcDefList22 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">statConcDefList333concept1 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList22</operations:managementAppLink>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/statConcDefList333concept1</operations:managementAppLink>
         </operations:statConcDef>
-        <operations:statConcDef kind="structuralResources#codelist">
-            <cdomain:id>statConcDefList333</cdomain:id>
-            <cdomain:urn>urn:statConcDefList333</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statConcDefLists/statConcDefList333"/>
+        <operations:statConcDef kind="structuralResources#concept">
+            <cdomain:id>statConcDefList333concept2</cdomain:id>
+            <cdomain:urn>urn:statConcDefList333concept2</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/statConcDefList333concept2"/>
             <cdomain:title>
-                <cdomain:text xml:lang="es">statConcDefList333 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">statConcDefList333concept2 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList333</operations:managementAppLink>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/statConcDefList333concept2</operations:managementAppLink>
         </operations:statConcDef>
-        <operations:statConcDef kind="structuralResources#codelist">
+        <operations:statConcDef kind="structuralResources#concept">
+            <cdomain:id>statConcDefList22concept1</cdomain:id>
+            <cdomain:urn>urn:statConcDefList22concept1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/statConcDefList22concept1"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statConcDefList22concept1 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/statConcDefList22concept1</operations:managementAppLink>
+        </operations:statConcDef>
+        <operations:statConcDef kind="structuralResources#concept">
+            <cdomain:id>statConcDefList22concept2</cdomain:id>
+            <cdomain:urn>urn:statConcDefList22concept2</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/statConcDefList22concept2"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">statConcDefList22concept2 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/statConcDefList22concept2</operations:managementAppLink>
+        </operations:statConcDef>
+        <operations:statConcDef kind="structuralResources#concept">
             <cdomain:id>statConcDefList1</cdomain:id>
             <cdomain:urn>urn:statConcDefList1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/structural-resources-internal/v1.0/statConcDefLists/statConcDefList1"/>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/structural-resources-internal/v1.0/concepts/statConcDefList1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">statConcDefList1 en Español</cdomain:text>
             </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/statConcDefLists/statConcDefList1</operations:managementAppLink>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/concepts/statConcDefList1</operations:managementAppLink>
         </operations:statConcDef>
     </operations:statConcDefs>
     <operations:classSystemsDescription>
@@ -214,15 +250,6 @@
     </operations:informationSuppliers>
     <operations:freqColls kind="structuralResources#codes" total="2">
         <operations:freqColl kind="structuralResources#categoryScheme">
-            <cdomain:id>freqColl1</cdomain:id>
-            <cdomain:urn>urn:freqColl1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#categoryScheme" href="http://data.istac.es/apis/structural-resources-internal/v1.0/freqColls/freqColl1"/>
-            <cdomain:title>
-                <cdomain:text xml:lang="es">freqColl1 en Español</cdomain:text>
-            </cdomain:title>
-            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl1</operations:managementAppLink>
-        </operations:freqColl>
-        <operations:freqColl kind="structuralResources#categoryScheme">
             <cdomain:id>freqColl22</cdomain:id>
             <cdomain:urn>urn:freqColl22</cdomain:urn>
             <cdomain:selfLink kind="structuralResources#categoryScheme" href="http://data.istac.es/apis/structural-resources-internal/v1.0/freqColls/freqColl22"/>
@@ -230,6 +257,15 @@
                 <cdomain:text xml:lang="es">freqColl22 en Español</cdomain:text>
             </cdomain:title>
             <operations:managementAppLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl22</operations:managementAppLink>
+        </operations:freqColl>
+        <operations:freqColl kind="structuralResources#categoryScheme">
+            <cdomain:id>freqColl1</cdomain:id>
+            <cdomain:urn>urn:freqColl1</cdomain:urn>
+            <cdomain:selfLink kind="structuralResources#categoryScheme" href="http://data.istac.es/apis/structural-resources-internal/v1.0/freqColls/freqColl1"/>
+            <cdomain:title>
+                <cdomain:text xml:lang="es">freqColl1 en Español</cdomain:text>
+            </cdomain:title>
+            <operations:managementAppLink>http://localhost:8080/metamac-srm-web/freqColls/freqColl1</operations:managementAppLink>
         </operations:freqColl>
     </operations:freqColls>
     <operations:dataValidation>
@@ -246,9 +282,9 @@
     </operations:costBurden>
     <operations:costs kind="statisticalOperations#costs" total="4">
         <operations:cost>
-            <cdomain:id>cost333</cdomain:id>
+            <cdomain:id>cost4444</cdomain:id>
             <cdomain:title>
-                <cdomain:text xml:lang="es">cost333 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">cost4444 en Español</cdomain:text>
             </cdomain:title>
         </operations:cost>
         <operations:cost>
@@ -258,9 +294,9 @@
             </cdomain:title>
         </operations:cost>
         <operations:cost>
-            <cdomain:id>cost4444</cdomain:id>
+            <cdomain:id>cost333</cdomain:id>
             <cdomain:title>
-                <cdomain:text xml:lang="es">cost4444 en Español</cdomain:text>
+                <cdomain:text xml:lang="es">cost333 en Español</cdomain:text>
             </cdomain:title>
         </operations:cost>
         <operations:cost>

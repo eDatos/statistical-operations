@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Item;
@@ -66,6 +68,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestExternalFacade;
+import org.siemac.metamac.statistical_operations.rest.internal.invocation.SrmRestInternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.utils.InternalWebApplicationNavigation;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +81,10 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     private ConfigurationService             configurationService;
 
     @Autowired
-    private CommonMetadataRestExternalFacade commonMetadataRestInternalFacade;
+    private CommonMetadataRestExternalFacade commonMetadataRestExternalFacade;
+
+    @Autowired
+    private SrmRestInternalFacade            srmRestInternalFacade;
 
     private String                           statisticalOperationsApiInternalEndpointV10;
     private String                           statisticalOperationsInternalWebApplication;
@@ -438,7 +444,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             return;
         }
         // Calls to CommonMetadata API
-        Configuration configuration = commonMetadataRestInternalFacade.retrieveConfigurationById(commonMetadata.getCode());
+        Configuration configuration = commonMetadataRestExternalFacade.retrieveConfigurationById(commonMetadata.getCode());
 
         // Transform
         target.setContact(commonMetadataResourceInternalToResourceInternal(configuration.getContact()));
@@ -839,7 +845,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         RegionalContributors targets = new RegionalContributors();
         toResourcesExternalItemsSrm(sources, targets.getRegionalContributors());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATIONS); // TODO pte
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATIONS);
         targets.setTotal(BigInteger.valueOf(targets.getRegionalContributors().size()));
         return targets;
     }
@@ -904,8 +910,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             return null;
         }
         Measures targets = new Measures();
-        toResourcesExternalItemsSrm(sources, targets.getMeasures());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO kind
+        toResourcesInternalFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getMeasures());
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
     }
@@ -915,10 +921,28 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             return null;
         }
         StatConcDefs targets = new StatConcDefs();
-        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO kind
+        toResourcesInternalFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getStatConcDefs());
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
+    }
+
+    private void toResourcesInternalFromExternalItemWithConceptSchemesAndConcepts(Set<ExternalItem> sources, List<ResourceInternal> targets) {
+        if (sources == null || sources.size() == 0) {
+            return;
+        }
+        for (ExternalItem source : sources) {
+            if (TypeExternalArtefactsEnum.CONCEPT.equals(source.getType())) {
+                ResourceInternal target = toResourceExternalItemSrm(source);
+                targets.add(target);
+            } else if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(source.getType())) {
+                List<ResourceInternal> targetConcepts = srmConceptSchemeToResourceInternalConcepts(source);
+                targets.addAll(targetConcepts);
+            } else {
+                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 
     private ClassSystems toClassSystems(Set<ExternalItem> sources) {
@@ -998,7 +1022,34 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return internalWebApplicationNavigation.buildInstanceUrl(source);
     }
 
+    private List<ResourceInternal> srmConceptSchemeToResourceInternalConcepts(ExternalItem conceptSchemeSource) {
+        // Return from API
+        List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal> conceptSources = srmRestInternalFacade.retrieveConceptsByConceptScheme(conceptSchemeSource.getUrn());
+
+        // Transform
+        List<ResourceInternal> targets = new ArrayList<ResourceInternal>(conceptSources.size());
+        for (org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal conceptSource : conceptSources) {
+            ResourceInternal conceptTarget = srmResourceInternalToResourceInternal(conceptSource);
+            targets.add(conceptTarget);
+        }
+        return targets;
+    }
+
     private ResourceInternal commonMetadataResourceInternalToResourceInternal(org.siemac.metamac.rest.common_metadata.v1_0.domain.ResourceInternal source) {
+        if (source == null) {
+            return null;
+        }
+        ResourceInternal target = new ResourceInternal();
+        target.setId(source.getId());
+        target.setUrn(source.getUrn());
+        target.setKind(source.getKind());
+        target.setSelfLink(source.getSelfLink());
+        target.setManagementAppLink(source.getManagementAppLink());
+        target.setTitle(source.getTitle());
+        return target;
+    }
+
+    private ResourceInternal srmResourceInternalToResourceInternal(org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal source) {
         if (source == null) {
             return null;
         }

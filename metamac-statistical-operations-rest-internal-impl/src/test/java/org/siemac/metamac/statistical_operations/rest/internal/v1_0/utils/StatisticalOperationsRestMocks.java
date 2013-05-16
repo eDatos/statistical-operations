@@ -3,6 +3,8 @@ package org.siemac.metamac.statistical_operations.rest.internal.v1_0.utils;
 import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
@@ -632,6 +634,13 @@ public class StatisticalOperationsRestMocks {
         return configuration;
     }
 
+    public List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal> mockSrmInternalApiRetrieveConceptsByConceptScheme(String conceptSchemeId) {
+        List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal> concepts = new ArrayList<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal>();
+        concepts.add(mockSrmConcept(conceptSchemeId, "concept1"));
+        concepts.add(mockSrmConcept(conceptSchemeId, "concept2"));
+        return concepts;
+    }
+
     private ResourceInternal mockOperationResource(String subId) {
         String operationId = !subId.contains("operation") ? "operation" + subId : subId;
         ResourceInternal resource = new ResourceInternal();
@@ -809,16 +818,20 @@ public class StatisticalOperationsRestMocks {
         instance.setTemporalComparability(mockInternationalStringMetadata("temporalComparability", subId));
         instance.setBasePeriod("2012");
         instance.setMeasures(new Measures());
-        instance.getMeasures().setTotal(BigInteger.valueOf(1));
-        instance.getMeasures().setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES);
-        instance.getMeasures().getMeasures().add(mockResourceFromExternalItemSrm("measure1", "measures", "structuralResources#concept"));
+        instance.getMeasures().setTotal(BigInteger.valueOf(3));
+        instance.getMeasures().setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
+        instance.getMeasures().getMeasures().add(mockResourceFromExternalItemSrm("measure1", "concepts", "structuralResources#concept"));
+        instance.getMeasures().getMeasures().add(mockResourceFromExternalItemSrm("measure2concept1", "concepts", "structuralResources#concept"));
+        instance.getMeasures().getMeasures().add(mockResourceFromExternalItemSrm("measure2concept2", "concepts", "structuralResources#concept"));
         instance.setStatConcDefsDescription(mockInternationalStringMetadata("statConcDef", subId));
         instance.setStatConcDefs(new StatConcDefs());
-        instance.getStatConcDefs().setTotal(BigInteger.valueOf(3));
-        instance.getStatConcDefs().setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES);
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList1", "statConcDefLists", "structuralResources#codelist"));
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList22", "statConcDefLists", "structuralResources#codelist"));
-        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList333", "statConcDefLists", "structuralResources#codelist"));
+        instance.getStatConcDefs().setTotal(BigInteger.valueOf(5));
+        instance.getStatConcDefs().setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList1", "concepts", "structuralResources#concept"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList22concept1", "concepts", "structuralResources#concept"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList22concept2", "concepts", "structuralResources#concept"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList333concept1", "concepts", "structuralResources#concept"));
+        instance.getStatConcDefs().getStatConcDefs().add(mockResourceFromExternalItemSrm("statConcDefList333concept2", "concepts", "structuralResources#concept"));
         instance.setClassSystemsDescription(mockInternationalStringMetadata("classSystem", subId));
         instance.setClassSystems(new ClassSystems());
         instance.getClassSystems().setTotal(BigInteger.valueOf(2));
@@ -978,10 +991,9 @@ public class StatisticalOperationsRestMocks {
     }
 
     private ResourceInternal mockResourceFromExternalItem(String id, String endpointApi, String managementApp, String sampleResourceSubpath, String kind) {
-        String urn = "urn:" + id;
         ResourceInternal resource = new ResourceInternal();
         resource.setId(id);
-        resource.setUrn(urn);
+        resource.setUrn("urn:" + id);
         resource.setKind(kind);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(kind, endpointApi + "/" + sampleResourceSubpath + "/" + id));
         resource.setManagementAppLink(managementApp + "/" + sampleResourceSubpath + "/" + id);
@@ -994,5 +1006,16 @@ public class StatisticalOperationsRestMocks {
         item.setId(id);
         item.setTitle(mockInternationalString("es", id + " en Español"));
         return item;
+    }
+
+    private org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal mockSrmConcept(String conceptSchemeId, String conceptId) {
+        org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal resource = new org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal();
+        resource.setId(conceptSchemeId + conceptId);
+        resource.setUrn("urn:" + resource.getId());
+        resource.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT);
+        resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmApiBaseV10 + "/concepts/" + resource.getId()));
+        resource.setManagementAppLink(srmWebApplicationBase + "/concepts/" + resource.getId());
+        resource.setTitle(mockInternationalString("es", resource.getId() + " en Español"));
+        return resource;
     }
 }

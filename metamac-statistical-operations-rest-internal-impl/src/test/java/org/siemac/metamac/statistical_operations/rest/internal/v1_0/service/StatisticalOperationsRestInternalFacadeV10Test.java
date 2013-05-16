@@ -57,6 +57,7 @@ import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOper
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestExternalFacade;
+import org.siemac.metamac.statistical_operations.rest.internal.invocation.SrmRestInternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.mockito.FindFamiliesByOperationMatcher;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.mockito.FindFamiliesMatcher;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.mockito.FindInstancesByOperationMatcher;
@@ -92,6 +93,9 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     public static String                                      FAMILY_2                                        = "family2";
     public static String                                      INSTANCE_1                                      = "instance1";
     public static String                                      COMMON_METADATA_1                               = "commonMetadata1";
+    public static String                                      CONCEPT_SCHEME_1                                = "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:measure2(1.0)";
+    public static String                                      CONCEPT_SCHEME_2                                = "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:statConcDefList22(1.0)";
+    public static String                                      CONCEPT_SCHEME_3                                = "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:statConcDefList333(1.0)";
     public static String                                      QUERY_OPERATION_ID_LIKE_1                       = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\"";
     public static String                                      QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM = OperationCriteriaPropertyRestriction.ID + " " + ComparisonOperator.LIKE + " \"1\" "
                                                                                                                       + LogicalOperator.AND + " "
@@ -1065,7 +1069,8 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
-        CommonMetadataRestExternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
+        CommonMetadataRestExternalFacade commonMetadataRestExternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
+        SrmRestInternalFacade srmRestInternalFacade = applicationContext.getBean(SrmRestInternalFacade.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(statisticalOperationsCoreMocks.mockOperation1());
@@ -1126,8 +1131,13 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllCosts());
 
         // External APIS
-        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        when(commonMetadataRestExternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        when(srmRestInternalFacade.retrieveConceptsByConceptScheme(CONCEPT_SCHEME_1)).thenReturn(statisticalOperationsRestMocks.mockSrmInternalApiRetrieveConceptsByConceptScheme("measure2"));
+        when(srmRestInternalFacade.retrieveConceptsByConceptScheme(CONCEPT_SCHEME_2)).thenReturn(statisticalOperationsRestMocks.mockSrmInternalApiRetrieveConceptsByConceptScheme("statConcDefList22"));
+        when(srmRestInternalFacade.retrieveConceptsByConceptScheme(CONCEPT_SCHEME_3))
+                .thenReturn(statisticalOperationsRestMocks.mockSrmInternalApiRetrieveConceptsByConceptScheme("statConcDefList333"));
     }
+
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;
         if (FAMILY_1.equals(family)) {
