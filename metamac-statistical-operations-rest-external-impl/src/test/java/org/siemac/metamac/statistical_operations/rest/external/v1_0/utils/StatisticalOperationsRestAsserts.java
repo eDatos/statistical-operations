@@ -6,6 +6,7 @@ import org.siemac.metamac.rest.common.test.utils.MetamacRestAsserts;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.ClassSystems;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.DataSharings;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FreqColls;
@@ -14,6 +15,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSup
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations.v1_0.domain.LegalActs;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
@@ -61,8 +63,8 @@ public class StatisticalOperationsRestAsserts {
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPolicy(), actual.getRevPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getRevPractice(), actual.getRevPractice());
         MetamacRestAsserts.assertEqualsResource(expected.getContact(), actual.getContact());
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getLegalActs(), actual.getLegalActs());
-        MetamacRestAsserts.assertEqualsInternationalString(expected.getDataSharing(), actual.getDataSharing());
+        assertEqualsLegalActs(expected.getLegalActs(), actual.getLegalActs());
+        assertEqualsDataSharings(expected.getDataSharings(), actual.getDataSharings());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityPolicy(), actual.getConfidentialityPolicy());
         MetamacRestAsserts.assertEqualsInternationalString(expected.getConfidentialityDataTreatment(), actual.getConfidentialityDataTreatment());
         MetamacRestAsserts.assertEqualsResourceLink(expected.getParentLink(), actual.getParentLink());
@@ -328,6 +330,24 @@ public class StatisticalOperationsRestAsserts {
         }
         MetamacRestAsserts.assertEqualsListBase(expected, actual);
         MetamacRestAsserts.assertEqualsResources(expected.getPublishers(), actual.getPublishers());
+    }
+
+    private static void assertEqualsLegalActs(LegalActs expected, LegalActs actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        MetamacRestAsserts.assertEqualsInternationalStrings(expected.getLegalActs(), actual.getLegalActs());
+    }
+
+    private static void assertEqualsDataSharings(DataSharings expected, DataSharings actual) {
+        MetamacRestAsserts.assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        MetamacRestAsserts.assertEqualsListBase(expected, actual);
+        MetamacRestAsserts.assertEqualsInternationalStrings(expected.getDataSharings(), actual.getDataSharings());
     }
 
     private static void assertEqualsUpdateFrequencies(UpdateFrequencies expected, UpdateFrequencies actual) {

@@ -252,12 +252,22 @@
         </cdomain:title>
         <operations:managementAppLink>http://localhost:8080/metamac-srm-web/#structuralResources/organisationSchemes/organisationScheme;type=AGENCY_SCHEME;id=SDMX:AGENCIES(1.0)/organisation;id=contact1</operations:managementAppLink>
     </operations:contact>
-    <operations:legalActs>
-        <cdomain:text xml:lang="es">legalActs1 en Español</cdomain:text>
+    <operations:legalActs total="2">
+        <operations:legalActs>
+            <cdomain:text xml:lang="es">legalActscommon1 en Español</cdomain:text>
+        </operations:legalActs>
+        <operations:legalActs>
+            <cdomain:text xml:lang="es">legalActsspecific1 en Español</cdomain:text>
+        </operations:legalActs>
     </operations:legalActs>
-    <operations:dataSharing>
-        <cdomain:text xml:lang="es">dataSharing1 en Español</cdomain:text>
-    </operations:dataSharing>
+    <operations:dataSharings total="2">
+        <operations:dataSharing>
+            <cdomain:text xml:lang="es">dataSharingcommon1 en Español</cdomain:text>
+        </operations:dataSharing>
+        <operations:dataSharing>
+            <cdomain:text xml:lang="es">dataSharingspecific1 en Español</cdomain:text>
+        </operations:dataSharing>
+    </operations:dataSharings>
     <operations:confidentialityPolicy>
         <cdomain:text xml:lang="es">confidentialityPolicy1 en Español</cdomain:text>
     </operations:confidentialityPolicy>

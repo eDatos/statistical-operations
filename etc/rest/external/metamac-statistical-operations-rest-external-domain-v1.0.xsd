@@ -37,8 +37,8 @@
             <xs:element name="revPolicy" type="common:InternationalString" minOccurs="0" />
             <xs:element name="revPractice" type="common:InternationalString" minOccurs="0" />
             <xs:element name="contact" type="common:Resource" minOccurs="1" />
-            <xs:element name="legalActs" type="common:InternationalString" minOccurs="0" />
-            <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0" />
+            <xs:element name="legalActs" type="tns:LegalActs" minOccurs="0" />
+            <xs:element name="dataSharings" type="tns:DataSharings" minOccurs="0" />
             <xs:element name="confidentialityPolicy" type="common:InternationalString" minOccurs="0" />
             <xs:element name="confidentialityDataTreatment" type="common:InternationalString" minOccurs="0" />
             <xs:element name="comment" type="common:InternationalString" minOccurs="0" />
@@ -269,7 +269,27 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>         
+    </xs:complexType>
+    
+    <xs:complexType name="LegalActs">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="legalActs" type="common:InternationalString" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="DataSharings">
+        <xs:complexContent>
+            <xs:extension base="common:ListBase">
+                <xs:sequence>
+                    <xs:element name="dataSharing" type="common:InternationalString" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>                   
 
     <xs:complexType name="StatisticalOperationTypes">
         <xs:complexContent>

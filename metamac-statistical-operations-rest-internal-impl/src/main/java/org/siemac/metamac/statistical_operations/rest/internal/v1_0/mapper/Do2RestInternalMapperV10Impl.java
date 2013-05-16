@@ -27,6 +27,7 @@ import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCrite
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Costs;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.DataSharings;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.FreqColls;
@@ -35,6 +36,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Infor
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.LegalActs;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
@@ -130,6 +132,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setRevPolicy(toInternationalString(source.getRevPolicy()));
         target.setRevPractice(toInternationalString(source.getRevPractice()));
         commonMetadataToOperation(source.getCommonMetadata(), target);
+        target.setLegalActs(toOperationLegalActs(source.getSpecificLegalActs(), null, target.getLegalActs()));
+        target.setDataSharings(toOperationDataSharings(source.getSpecificDataSharing(), null, target.getDataSharings()));
         target.setComment(toInternationalString(source.getComment()));
         target.setNotes(toInternationalString(source.getNotes()));
         target.setParentLink(toOperationParentLink());
@@ -438,10 +442,48 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
         // Transform
         target.setContact(commonMetadataResourceInternalToResourceInternal(configuration.getContact()));
-        target.setLegalActs(configuration.getLegalActs());
-        target.setDataSharing(configuration.getDataSharing());
+        target.setLegalActs(toOperationLegalActs(null, configuration.getLegalActs(), target.getLegalActs()));
+        target.setDataSharings(toOperationDataSharings(null, configuration.getDataSharing(), target.getDataSharings()));
         target.setConfidentialityPolicy(configuration.getConfPolicy());
         target.setConfidentialityDataTreatment(configuration.getConfDataTreatment());
+    }
+
+    private LegalActs toOperationLegalActs(org.siemac.metamac.core.common.ent.domain.InternationalString source1, InternationalString source2, LegalActs target) {
+        if (source1 == null && source2 == null) {
+            return target; // it can have already other internationalString
+        }
+        if (target == null) {
+            target = new LegalActs();
+            target.setTotal(BigInteger.ZERO);
+        }
+        if (source1 != null) {
+            target.getLegalActs().add(toInternationalString(source1));
+            target.setTotal(target.getTotal().add(BigInteger.ONE));
+        }
+        if (source2 != null) {
+            target.getLegalActs().add(source2);
+            target.setTotal(target.getTotal().add(BigInteger.ONE));
+        }
+        return target;
+    }
+
+    private DataSharings toOperationDataSharings(org.siemac.metamac.core.common.ent.domain.InternationalString source1, InternationalString source2, DataSharings target) {
+        if (source1 == null && source2 == null) {
+            return target; // it can have already other internationalString
+        }
+        if (target == null) {
+            target = new DataSharings();
+            target.setTotal(BigInteger.ZERO);
+        }
+        if (source1 != null) {
+            target.getDataSharings().add(toInternationalString(source1));
+            target.setTotal(target.getTotal().add(BigInteger.ONE));
+        }
+        if (source2 != null) {
+            target.getDataSharings().add(source2);
+            target.setTotal(target.getTotal().add(BigInteger.ONE));
+        }
+        return target;
     }
 
     private ResourceInternal toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source) {

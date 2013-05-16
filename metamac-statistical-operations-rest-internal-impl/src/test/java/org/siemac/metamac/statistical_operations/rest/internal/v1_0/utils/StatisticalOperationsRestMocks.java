@@ -14,6 +14,7 @@ import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.ClassSystems;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Costs;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.DataSharings;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Families;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Family;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.FreqColls;
@@ -22,6 +23,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Infor
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instance;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Instances;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.LegalActs;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Measures;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OfficialityTypes;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Operation;
@@ -623,8 +625,8 @@ public class StatisticalOperationsRestMocks {
     public Configuration mockExternalApiCommonMetadataRetrieveConfiguration1ById() {
         Configuration configuration = new Configuration();
         configuration.setContact(mockCommonMetadataResourceInternal("contact1"));
-        configuration.setLegalActs(mockInternationalStringMetadata("legalActs", "1"));
-        configuration.setDataSharing(mockInternationalStringMetadata("dataSharing", "1"));
+        configuration.setLegalActs(mockInternationalStringMetadata("legalActs", "common1"));
+        configuration.setDataSharing(mockInternationalStringMetadata("dataSharing", "common1"));
         configuration.setConfPolicy(mockInternationalStringMetadata("confidentialityPolicy", "1"));
         configuration.setConfDataTreatment(mockInternationalStringMetadata("confidentialityDataTreatment", "1"));
         return configuration;
@@ -729,8 +731,14 @@ public class StatisticalOperationsRestMocks {
         operation.setRevPolicy(mockInternationalStringMetadata("revPolicy", subId));
         operation.setRevPractice(mockInternationalStringMetadata("revPractice", subId));
         operation.setContact(mockOrganisationResourceFromExternalItemSrm("contact1"));
-        operation.setLegalActs(mockInternationalStringMetadata("legalActs", "1"));
-        operation.setDataSharing(mockInternationalStringMetadata("dataSharing", "1"));
+        operation.setLegalActs(new LegalActs());
+        operation.getLegalActs().setTotal(BigInteger.valueOf(2));
+        operation.getLegalActs().getLegalActs().add(mockInternationalStringMetadata("legalActs", "common1"));
+        operation.getLegalActs().getLegalActs().add(mockInternationalStringMetadata("legalActs", "specific1"));
+        operation.setDataSharings(new DataSharings());
+        operation.getDataSharings().setTotal(BigInteger.valueOf(2));
+        operation.getDataSharings().getDataSharings().add(mockInternationalStringMetadata("dataSharing", "common1"));
+        operation.getDataSharings().getDataSharings().add(mockInternationalStringMetadata("dataSharing", "specific1"));
         operation.setConfidentialityPolicy(mockInternationalStringMetadata("confidentialityPolicy", "1"));
         operation.setConfidentialityDataTreatment(mockInternationalStringMetadata("confidentialityDataTreatment", "1"));
         operation.setComment(mockInternationalStringMetadata("comment", subId));

@@ -632,6 +632,8 @@ public class StatisticalOperationsCoreMocks {
         operation.setRevPolicy(mockInternationalStringMetadata("revPolicy", subCode));
         operation.setRevPractice(mockInternationalStringMetadata("revPractice", subCode));
         operation.setCommonMetadata(mockExternalItemCommonMetadata("commonMetadata1", "nothing", TypeExternalArtefactsEnum.CONFIGURATION));
+        operation.setSpecificLegalActs(mockInternationalStringMetadata("legalActs", "specific1"));
+        operation.setSpecificDataSharing(mockInternationalStringMetadata("dataSharing", "specific1"));
         operation.setComment(mockInternationalStringMetadata("comment", subCode));
         operation.setNotes(mockInternationalStringMetadata("notes", subCode));
 
