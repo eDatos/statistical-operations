@@ -48,51 +48,51 @@ import org.siemac.metamac.statistical_operations.rest.external.v1_0.service.Stat
 
 public class StatisticalOperationsRestMocks {
 
-    private final String statisticalOperationsInternalApiBase;
-    private final String srmInternalApiBase;
+    private final String statisticalOperationsExternalApiBase;
+    private final String srmExternalApiBase;
 
-    public StatisticalOperationsRestMocks(String statisticalOperationsInternalApiBase, String srmInternalApiBase) {
-        assertNotNull(statisticalOperationsInternalApiBase);
-        assertNotNull(srmInternalApiBase);
+    public StatisticalOperationsRestMocks(String statisticalOperationsExternalApiBase, String srmExternalApiBase) {
+        assertNotNull(statisticalOperationsExternalApiBase);
+        assertNotNull(srmExternalApiBase);
 
-        this.statisticalOperationsInternalApiBase = statisticalOperationsInternalApiBase;
-        this.srmInternalApiBase = srmInternalApiBase;
+        this.statisticalOperationsExternalApiBase = statisticalOperationsExternalApiBase;
+        this.srmExternalApiBase = srmExternalApiBase;
     }
 
     public Operation mockOperation1() {
-        return mockOperation(statisticalOperationsInternalApiBase, "1");
+        return mockOperation(statisticalOperationsExternalApiBase, "1");
     }
 
     public Operation mockOperation2() {
-        return mockOperation(statisticalOperationsInternalApiBase, "2");
+        return mockOperation(statisticalOperationsExternalApiBase, "2");
     }
 
     public Operation mockOperation3() {
-        return mockOperation(statisticalOperationsInternalApiBase, "3");
+        return mockOperation(statisticalOperationsExternalApiBase, "3");
     }
 
     public Operation mockOperation4() {
-        return mockOperation(statisticalOperationsInternalApiBase, "4");
+        return mockOperation(statisticalOperationsExternalApiBase, "4");
     }
 
     public Operation mockOperation5() {
-        return mockOperation(statisticalOperationsInternalApiBase, "5");
+        return mockOperation(statisticalOperationsExternalApiBase, "5");
     }
 
     public Operation mockOperation6() {
-        return mockOperation(statisticalOperationsInternalApiBase, "6");
+        return mockOperation(statisticalOperationsExternalApiBase, "6");
     }
 
     public Family mockFamily1() {
-        return mockFamily(statisticalOperationsInternalApiBase, "1");
+        return mockFamily(statisticalOperationsExternalApiBase, "1");
     }
 
     public Family mockFamily2() {
-        return mockFamily(statisticalOperationsInternalApiBase, "2");
+        return mockFamily(statisticalOperationsExternalApiBase, "2");
     }
 
     public Instance mockInstance1() {
-        return mockInstance(statisticalOperationsInternalApiBase, "1", "operation1");
+        return mockInstance(statisticalOperationsExternalApiBase, "1", "operation1");
     }
 
     public Operations mockOperations(String baseApi, String limit, String offset) {
@@ -613,19 +613,19 @@ public class StatisticalOperationsRestMocks {
     private Resource mockOperationResource(String subId) {
         String operationId = "operation" + subId;
         return mockResource(operationId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId, RestExternalConstants.KIND_OPERATION,
-                statisticalOperationsInternalApiBase + "/operations/" + operationId);
+                statisticalOperationsExternalApiBase + "/operations/" + operationId);
     }
 
     private Resource mockFamilyResource(String subId) {
         String familyId = "family" + subId;
-        return mockResource(familyId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + familyId, RestExternalConstants.KIND_FAMILY, statisticalOperationsInternalApiBase
+        return mockResource(familyId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + familyId, RestExternalConstants.KIND_FAMILY, statisticalOperationsExternalApiBase
                 + "/families/" + familyId);
     }
 
     private Resource mockInstanceResource(String operationId, String subId) {
         String instanceId = "instance" + subId;
         return mockResource(instanceId, "urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operationId + "." + instanceId, RestExternalConstants.KIND_INSTANCE,
-                statisticalOperationsInternalApiBase + "/operations/" + operationId + "/instances/" + instanceId);
+                statisticalOperationsExternalApiBase + "/operations/" + operationId + "/instances/" + instanceId);
     }
 
     private Operation mockOperation(String baseApi, String subId) {
@@ -910,7 +910,7 @@ public class StatisticalOperationsRestMocks {
     }
 
     private Resource mockResourceFromExternalItemSrm(String id, String apiSubpath, String kind) {
-        return mockResourceFromExternalItem(id, srmInternalApiBase + "/v1.0", apiSubpath, kind);
+        return mockResourceFromExternalItem(id, srmExternalApiBase + "/v1.0", apiSubpath, kind);
     }
 
     private Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, String kind) {
@@ -924,7 +924,7 @@ public class StatisticalOperationsRestMocks {
         resource.setId(id);
         resource.setUrn("urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0)." + id);
         resource.setKind("structuralResources#agency");
-        resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmInternalApiBase + "/v1.0/agencyschemes/SDMX/AGENCIES/1.0/agencies/" + id));
+        resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmExternalApiBase + "/v1.0/agencyschemes/SDMX/AGENCIES/1.0/agencies/" + id));
         resource.setTitle(mockInternationalString("es", id + " en Español"));
         return resource;
     }

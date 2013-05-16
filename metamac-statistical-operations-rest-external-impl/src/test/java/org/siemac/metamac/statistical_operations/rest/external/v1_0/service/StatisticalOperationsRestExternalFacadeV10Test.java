@@ -1135,7 +1135,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         // MOCKS
         StatisticalOperationsBaseService statisticalOperationsBaseService = applicationContext.getBean(StatisticalOperationsBaseService.class);
         StatisticalOperationsListsService statisticalOperationsListsService = applicationContext.getBean(StatisticalOperationsListsService.class);
-        CommonMetadataRestExternalFacade commonMetadataRestInternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
+        CommonMetadataRestExternalFacade commonMetadataRestExternalFacade = applicationContext.getBean(CommonMetadataRestExternalFacade.class);
 
         // Retrieve operations
         when(statisticalOperationsBaseService.findOperationByCode(any(ServiceContext.class), eq(OPERATION_1))).thenReturn(statisticalOperationsCoreMocks.mockOperation1());
@@ -1196,7 +1196,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         when(statisticalOperationsListsService.findAllCosts(any(ServiceContext.class))).thenReturn(statisticalOperationsCoreMocks.mockFindAllCosts());
 
         // External APIS
-        when(commonMetadataRestInternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
+        when(commonMetadataRestExternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
     }
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;

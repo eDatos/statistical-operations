@@ -85,6 +85,8 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         initEndpoints();
     }
 
+    // TODO CAMBIAR org.siemac.metamac.srm.rest.internal.RestInternalConstants POR external
+
     @Override
     public Operation toOperation(org.siemac.metamac.statistical.operations.core.domain.Operation source) {
         if (source == null) {
@@ -792,7 +794,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         RegionalContributors targets = new RegionalContributors();
         toResourcesExternalItemsSrm(sources, targets.getRegionalContributors());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATIONS); // TODO pte
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATIONS);
         targets.setTotal(BigInteger.valueOf(targets.getRegionalContributors().size()));
         return targets;
     }
@@ -857,8 +859,8 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         Measures targets = new Measures();
-        toResourcesExternalItemsSrm(sources, targets.getMeasures());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO
+        toResourcesExternalItemsSrm(sources, targets.getMeasures()); // TODO si es un concept scheme, hay que obtener los conceptos
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
     }
@@ -868,8 +870,8 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         StatConcDefs targets = new StatConcDefs();
-        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT_SCHEMES); // TODO kind
+        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs()); // TODO si es un concept scheme, hay que obtener los conceptos
+        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
     }

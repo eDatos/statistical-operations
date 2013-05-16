@@ -29,6 +29,8 @@
             <classifier>client</classifier>
             <version>${project.version}</version>
         </dependency>
+        
+        <!-- TODO pendiente cambiar por external -->
         <dependency>
             <groupId>org.siemac.metamac.metamac-srm</groupId>
             <artifactId>metamac-srm-rest-internal-api</artifactId>
