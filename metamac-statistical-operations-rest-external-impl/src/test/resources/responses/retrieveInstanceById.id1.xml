@@ -101,7 +101,7 @@
         <cdomain:text xml:lang="es">temporalComparability1 en Español</cdomain:text>
     </operations:temporalComparability>
     <operations:basePeriod>2012</operations:basePeriod>
-    <operations:measures kind="structuralResources#conceptSchemes" total="1">
+    <operations:measures kind="structuralResources#concepts" total="1">
         <operations:measure kind="structuralResources#concept">
             <cdomain:id>measure1</cdomain:id>
             <cdomain:urn>urn:measure1</cdomain:urn>
@@ -114,27 +114,27 @@
     <operations:statConcDefsDescription>
         <cdomain:text xml:lang="es">statConcDef1 en Español</cdomain:text>
     </operations:statConcDefsDescription>
-    <operations:statConcDefs kind="structuralResources#conceptSchemes" total="3">
-        <operations:statConcDef kind="structuralResources#codelist">
+    <operations:statConcDefs kind="structuralResources#concepts" total="3">
+        <operations:statConcDef kind="structuralResources#concept">
             <cdomain:id>statConcDefList1</cdomain:id>
             <cdomain:urn>urn:statConcDefList1</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1"/>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList1"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">statConcDefList1 en Español</cdomain:text>
             </cdomain:title>
         </operations:statConcDef>
-        <operations:statConcDef kind="structuralResources#codelist">
+        <operations:statConcDef kind="structuralResources#concept">
             <cdomain:id>statConcDefList22</cdomain:id>
             <cdomain:urn>urn:statConcDefList22</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22"/>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList22"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">statConcDefList22 en Español</cdomain:text>
             </cdomain:title>
         </operations:statConcDef>
-        <operations:statConcDef kind="structuralResources#codelist">
+        <operations:statConcDef kind="structuralResources#concept">
             <cdomain:id>statConcDefList333</cdomain:id>
             <cdomain:urn>urn:statConcDefList333</cdomain:urn>
-            <cdomain:selfLink kind="structuralResources#codelist" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333"/>
+            <cdomain:selfLink kind="structuralResources#concept" href="http://data.istac.es/apis/srm/v1.0/statConcDefLists/statConcDefList333"/>
             <cdomain:title>
                 <cdomain:text xml:lang="es">statConcDefList333 en Español</cdomain:text>
             </cdomain:title>

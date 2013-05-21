@@ -673,9 +673,9 @@ public class StatisticalOperationsCoreMocks {
         instance.setBasePeriod("2012");
         instance.addUnitMeasure(mockExternalItemSrm("measure1", "measures", TypeExternalArtefactsEnum.CONCEPT));
         instance.setStatConcDef(mockInternationalStringMetadata("statConcDef", subCode));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
-        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CODELIST));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList1", "statConcDefLists", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList22", "statConcDefLists", TypeExternalArtefactsEnum.CONCEPT));
+        instance.addStatConcDefList(mockExternalItemSrm("statConcDefList333", "statConcDefLists", TypeExternalArtefactsEnum.CONCEPT));
         instance.setClassSystem(mockInternationalStringMetadata("classSystem", subCode));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList1", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
         instance.addClassSystemList(mockExternalItemSrm("classSystemList22", "classSystemLists", TypeExternalArtefactsEnum.CODELIST));
