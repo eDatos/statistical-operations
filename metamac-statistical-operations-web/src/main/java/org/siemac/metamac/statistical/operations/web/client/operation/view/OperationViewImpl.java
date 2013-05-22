@@ -522,7 +522,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem identifier = new ViewTextItem(OperationDS.OP_CODE, getCoreMessages().operation_code());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.OP_TITLE, getCoreMessages().operation_title());
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.OP_ACRONYM, getCoreMessages().operation_acronym());
-        identifiersViewForm.setFields(identifier, title, acronym);
+        ViewTextItem urn = new ViewTextItem(OperationDS.OP_URN, getCoreMessages().operation_urn());
+        identifiersViewForm.setFields(identifier, title, acronym, urn);
 
         // Content Classifiers
         classificationViewForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -548,11 +549,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem producer = new ViewTextItem(OperationDS.OP_PRODUCER, getCoreMessages().operation_producer());
         ViewTextItem regionalResposible = new ViewTextItem(OperationDS.OP_REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
         ViewTextItem regionalCont = new ViewTextItem(OperationDS.OP_REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
+        ViewTextItem createdDate = new ViewTextItem(OperationDS.OP_CREATED_DATE, getConstants().operationCreatedDate());
         ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         ViewTextItem currentlyActive = new ViewTextItem(OperationDS.OP_CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
         ViewTextItem status = new ViewTextItem(OperationDS.OP_STATUS, getCoreMessages().operation_status());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getCoreMessages().operation_proc_status());
-        productionViewForm.setFields(producer, regionalResposible, regionalCont, inventoryDate, currentlyActive, status, procStatus);
+        productionViewForm.setFields(producer, regionalResposible, regionalCont, createdDate, inventoryDate, currentlyActive, status, procStatus);
 
         // Diffusion Descriptors
         diffusionViewForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
@@ -611,7 +613,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         title = new MultiLanguageTextItem(OperationDS.OP_TITLE, getCoreMessages().operation_title());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(OperationDS.OP_ACRONYM, getCoreMessages().operation_acronym());
-        identifiersEditionForm.setFields(staticCode, code, title, acronym);
+        ViewTextItem urn = new ViewTextItem(OperationDS.OP_URN, getCoreMessages().operation_urn());
+        identifiersEditionForm.setFields(staticCode, code, title, acronym, urn);
 
         // Content classifiers
         classificationEditionForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -689,7 +692,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        ViewTextItem inventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
+        ViewTextItem createdDate = new ViewTextItem(OperationDS.OP_CREATED_DATE, getConstants().operationCreatedDate());
+        ViewTextItem internalInventoryDate = new ViewTextItem(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.OP_CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
         // currentlyActiveItem.setValidators(getRequiredIfInternallyPublished());
         statusItem = new CustomSelectItem(OperationDS.OP_STATUS, getCoreMessages().operation_status());
@@ -697,7 +701,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem procStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS, getCoreMessages().operation_proc_status());
         ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.OP_PROC_STATUS_VIEW, getCoreMessages().operation_proc_status());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
-        productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, inventoryDate, currentlyActiveItem, statusItem, staticProcStatus, procStatus);
+        productionEditionForm.setFields(producerItem, regionalResponsibleItem, regionalContributorItem, createdDate, internalInventoryDate, currentlyActiveItem, statusItem, staticProcStatus,
+                procStatus);
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
@@ -749,6 +754,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersViewForm.setValue(OperationDS.OP_CODE, operationDto.getCode());
         identifiersViewForm.setValue(OperationDS.OP_TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
         identifiersViewForm.setValue(OperationDS.OP_ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
+        identifiersViewForm.setValue(OperationDS.OP_URN, operationDto.getUrn());
 
         // Content Classifiers
         classificationViewForm.setValue(OperationDS.OP_SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : ExternalItemUtils.getExternalItemName(operationDto.getSubjectArea()));
@@ -771,6 +777,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         productionViewForm.setValue(OperationDS.OP_PRODUCER, ExternalItemUtils.getExternalItemListToString(operationDto.getProducer()));
         productionViewForm.setValue(OperationDS.OP_REG_RESPONSIBLE, ExternalItemUtils.getExternalItemListToString(operationDto.getRegionalResponsible()));
         productionViewForm.setValue(OperationDS.OP_REG_CONTRIBUTOR, ExternalItemUtils.getExternalItemListToString(operationDto.getRegionalContributor()));
+        productionViewForm.setValue(OperationDS.OP_CREATED_DATE, operationDto.getCreatedDate());
         productionViewForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         productionViewForm.setValue(OperationDS.OP_CURRENTLY_ACTIVE, (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive())
                 ? MetamacWebCommon.getConstants().yes()
@@ -818,9 +825,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Identifiers
         code.setValue(operationDto.getCode());
         identifiersEditionForm.setValue(OperationDS.OP_CODE_VIEW, operationDto.getCode());
-
         title.setValue(operationDto.getTitle());
         acronym.setValue(operationDto.getAcronym());
+        identifiersEditionForm.setValue(OperationDS.OP_URN, operationDto.getUrn());
 
         // Content classifiers
         subjectItem.clearValue();
@@ -841,6 +848,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         producerItem.clearValue();
         regionalResponsibleItem.clearValue();
         regionalContributorItem.getValue();
+        productionEditionForm.setValue(OperationDS.OP_CREATED_DATE, operationDto.getCreatedDate());
         productionEditionForm.setValue(OperationDS.OP_INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         currentlyActiveItem.setValue(operationDto.getCurrentlyActive() != null ? operationDto.getCurrentlyActive() : false);
         statusItem.setValue(operationDto.getStatus() == null ? null : operationDto.getStatus().toString());

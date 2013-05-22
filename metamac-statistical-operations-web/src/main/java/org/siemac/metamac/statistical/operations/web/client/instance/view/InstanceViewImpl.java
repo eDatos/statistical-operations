@@ -333,7 +333,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem identifier = new ViewTextItem(InstanceDS.CODE, getCoreMessages().instance_code());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(InstanceDS.TITLE, getCoreMessages().instance_title());
         ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(InstanceDS.ACRONYM, getCoreMessages().instance_acronym());
-        identifiersViewForm.setFields(identifier, title, alternativeTitle);
+        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getCoreMessages().instance_urn());
+        identifiersViewForm.setFields(identifier, title, alternativeTitle, urn);
 
         // Content classifiers
 
@@ -362,6 +363,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Production descriptors
         productionViewForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
+        ViewTextItem createdDate = new ViewTextItem(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
         staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
@@ -374,7 +376,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
         staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
         ViewTextItem cost = new ViewTextItem(InstanceDS.COST, getConstants().instanceCost());
-        productionViewForm.setFields(internalInventoryDate, procStatus, staticDocMethodItem, surveySource, collMethod, informationSuppliers, freqColl, staticDataValidationItem,
+        productionViewForm.setFields(createdDate, internalInventoryDate, procStatus, staticDocMethodItem, surveySource, collMethod, informationSuppliers, freqColl, staticDataValidationItem,
                 staticDataCompilationItem, staticAdjustmentItem, staticCostBurdenItem, cost);
 
         // Diffusion and Publication
@@ -441,7 +443,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         title = new MultiLanguageTextItem(InstanceDS.TITLE, getCoreMessages().instance_title());
         title.setRequired(true);
         acronym = new MultiLanguageTextItem(InstanceDS.ACRONYM, getCoreMessages().instance_acronym());
-        identifiersEditionForm.setFields(staticCode, code, title, acronym);
+        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getCoreMessages().instance_urn());
+        identifiersEditionForm.setFields(staticCode, code, title, acronym, urn);
 
         // Content classifiers
 
@@ -484,6 +487,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Production descriptors
         productionEditionForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
+        ViewTextItem createdDate = new ViewTextItem(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
 
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
@@ -519,8 +523,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         costBurdenItem = new MultilanguageRichTextEditorItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
         costItem = new CustomSelectItem(InstanceDS.COST, getConstants().instanceCost());
         costItem.setMultiple(true);
-        productionEditionForm.setFields(internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem, infSuppliersConceptsItem,
-                freqCollItem, dataValidationItem, dataCompilationItem, adjustmentItem, costBurdenItem, costItem);
+        productionEditionForm.setFields(createdDate, internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, infSuppliersOrganItem,
+                infSuppliersConceptsItem, freqCollItem, dataValidationItem, dataCompilationItem, adjustmentItem, costBurdenItem, costItem);
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().instanceDiffusionDescriptors());
@@ -566,6 +570,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         identifiersViewForm.setValue(InstanceDS.CODE, instanceDto.getCode());
         identifiersViewForm.setValue(InstanceDS.TITLE, RecordUtils.getInternationalStringRecord(instanceDto.getTitle()));
         identifiersViewForm.setValue(InstanceDS.ACRONYM, RecordUtils.getInternationalStringRecord(instanceDto.getAcronym()));
+        identifiersViewForm.setValue(InstanceDS.URN, instanceDto.getUrn());
 
         // Content Classifiers
 
@@ -591,6 +596,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 instanceDto.getInstanceType() != null ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription()) : "");
 
         // Production descriptors
+        productionViewForm.setValue(InstanceDS.CREATED_DATE, instanceDto.getCreatedDate());
         productionViewForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate());
         productionViewForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
 
@@ -637,9 +643,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Identifiers
         code.setValue(instanceDto.getCode());
         identifiersEditionForm.setValue(InstanceDS.CODE_VIEW, instanceDto.getCode());
-
         title.setValue(instanceDto.getTitle());
         acronym.setValue(instanceDto.getAcronym());
+        identifiersEditionForm.setValue(InstanceDS.URN, instanceDto.getUrn());
 
         // Content classifiers
 
@@ -662,6 +668,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceTypeItem.setValue(instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getId().toString() : "");
 
         // Production descriptors
+        productionEditionForm.setValue(InstanceDS.CREATED_DATE, instanceDto.getCreatedDate());
         productionEditionForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInventoryDate());
 
         productionEditionForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));

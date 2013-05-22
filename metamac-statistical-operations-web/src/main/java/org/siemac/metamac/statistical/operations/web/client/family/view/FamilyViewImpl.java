@@ -53,8 +53,8 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     private VLayout                         panel;
 
     private FamilyMainFormLayout            mainFormLayout;
-    private GroupDynamicForm                familyViewForm;
-    private GroupDynamicForm                familyEditionForm;
+    private GroupDynamicForm                form;
+    private GroupDynamicForm                editionForm;
 
     private MultiLanguageTextItem           titleItem;
     private MultiLanguageTextItem           acronymItem;
@@ -154,7 +154,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     @Override
     public FamilyDto getFamily(FamilyDto familyDto) {
-        familyDto.setCode(familyEditionForm.getValueAsString(FamilyDS.CODE));
+        familyDto.setCode(editionForm.getValueAsString(FamilyDS.CODE));
         familyDto.setTitle(titleItem.getValue());
         familyDto.setAcronym(acronymItem.getValue());
         familyDto.setDescription(descriptionItem.getValue());
@@ -166,27 +166,31 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         addOperationsToFamilyWindow.setOperations(operations, firstResult, totalResults);
     }
 
-    private void setViewForm(FamilyDto familyDto) {
-        familyViewForm.setValue(FamilyDS.CODE, familyDto.getCode());
-        familyViewForm.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
-        familyViewForm.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
-        familyViewForm.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
-        familyViewForm.setValue(FamilyDS.INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
-        familyViewForm.setValue(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
-        familyViewForm.setValue(FamilyDS.INVENTORY_DATE, familyDto.getInventoryDate());
+    private void setFamilyViewMode(FamilyDto familyDto) {
+        form.setValue(FamilyDS.CODE, familyDto.getCode());
+        form.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
+        form.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
+        form.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
+        form.setValue(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
+        form.setValue(FamilyDS.CREATED_DATE, familyDto.getCreatedDate());
+        form.setValue(FamilyDS.INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
+        form.setValue(FamilyDS.INVENTORY_DATE, familyDto.getInventoryDate());
+        form.setValue(FamilyDS.URN, familyDto.getUrn());
     }
 
-    private void setEditionForm(FamilyDto familyDto) {
-        familyEditionForm.setValue(FamilyDS.CODE, familyDto.getCode());
-        familyEditionForm.setValue(FamilyDS.CODE_VIEW, familyDto.getCode());
-        familyEditionForm.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
-        familyEditionForm.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
-        familyEditionForm.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
-        familyEditionForm.setValue(FamilyDS.INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
-        familyEditionForm.setValue(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
-        familyEditionForm.setValue(FamilyDS.PROC_STATUS_VIEW, familyDto.getProcStatus().toString());
-        familyEditionForm.setValue(FamilyDS.INVENTORY_DATE, familyDto.getInventoryDate());
-        familyEditionForm.markForRedraw();
+    private void setFamilyEditionMode(FamilyDto familyDto) {
+        editionForm.setValue(FamilyDS.CODE, familyDto.getCode());
+        editionForm.setValue(FamilyDS.CODE_VIEW, familyDto.getCode());
+        editionForm.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
+        editionForm.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
+        editionForm.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
+        editionForm.setValue(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().getString(OperationsWeb.getCoreMessages().procStatusEnum() + familyDto.getProcStatus().getName()));
+        editionForm.setValue(FamilyDS.PROC_STATUS_VIEW, familyDto.getProcStatus().toString());
+        editionForm.setValue(FamilyDS.CREATED_DATE, familyDto.getCreatedDate());
+        editionForm.setValue(FamilyDS.INTERNAL_INVENTORY_DATE, familyDto.getInternalInventoryDate());
+        editionForm.setValue(FamilyDS.INVENTORY_DATE, familyDto.getInventoryDate());
+        editionForm.setValue(FamilyDS.URN, familyDto.getUrn());
+        editionForm.markForRedraw();
     }
 
     @Override
@@ -196,27 +200,29 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     @Override
     public boolean validate() {
-        return familyEditionForm.validate(false);
+        return editionForm.validate(false);
     }
 
     private void createViewForm() {
         // Family Form
-        familyViewForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
+        form = new GroupDynamicForm(OperationsWeb.getConstants().family());
         ViewTextItem code = new ViewTextItem(FamilyDS.CODE, OperationsWeb.getCoreMessages().family_code());
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FamilyDS.TITLE, OperationsWeb.getCoreMessages().family_title());
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FamilyDS.ACRONYM, OperationsWeb.getCoreMessages().family_acronym());
         ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
+        ViewTextItem createdDate = new ViewTextItem(FamilyDS.CREATED_DATE, OperationsWeb.getConstants().familyCreatedDate());
         ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().family_proc_status());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
         ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, OperationsWeb.getCoreMessages().family_inventory_date());
-        familyViewForm.setFields(code, title, acronym, procStatus, description, internalInventoryDate, inventoryDate);
+        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, OperationsWeb.getCoreMessages().family_urn());
+        form.setFields(code, title, acronym, procStatus, description, createdDate, internalInventoryDate, inventoryDate, urn);
         // Add to main layout
-        mainFormLayout.addViewCanvas(familyViewForm);
+        mainFormLayout.addViewCanvas(form);
     }
 
     private void createEditionForm() {
         // Family Form
-        familyEditionForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
+        editionForm = new GroupDynamicForm(OperationsWeb.getConstants().family());
 
         // Code
         RequiredTextItem code = new RequiredTextItem(FamilyDS.CODE, OperationsWeb.getCoreMessages().family_code());
@@ -242,17 +248,19 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         titleItem.setRequired(true);
         acronymItem = new MultiLanguageTextItem(FamilyDS.ACRONYM, OperationsWeb.getCoreMessages().family_acronym());
         descriptionItem = new MultilanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
 
-        // Status
+        // ProcStatus
         ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().family_proc_status());
         ViewTextItem staticProcStatus = new ViewTextItem(FamilyDS.PROC_STATUS_VIEW, OperationsWeb.getCoreMessages().family_proc_status());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
+        ViewTextItem createdDate = new ViewTextItem(FamilyDS.CREATED_DATE, OperationsWeb.getConstants().familyCreatedDate());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
         ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, OperationsWeb.getCoreMessages().family_inventory_date());
-        familyEditionForm.setFields(staticCode, code, titleItem, acronymItem, procStatus, descriptionItem, internalInventoryDate, staticProcStatus, inventoryDate);
+        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, OperationsWeb.getCoreMessages().family_urn());
+        editionForm.setFields(staticCode, code, titleItem, acronymItem, procStatus, staticProcStatus, descriptionItem, createdDate, internalInventoryDate, inventoryDate, urn);
         // Add to main layout
-        mainFormLayout.addEditionCanvas(familyEditionForm);
+        mainFormLayout.addEditionCanvas(editionForm);
     }
 
     @Override
@@ -278,8 +286,8 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         mainFormLayout.setViewMode();
         mainFormLayout.updatePublishSection(familyDto.getProcStatus());
         mainFormLayout.setTitleLabelContents(InternationalStringUtils.getLocalisedString(familyDto.getTitle()));
-        setViewForm(familyDto);
-        setEditionForm(familyDto);
+        setFamilyViewMode(familyDto);
+        setFamilyEditionMode(familyDto);
     }
 
     private void setFamilyOperations(List<OperationBaseDto> operationBaseDtos) {
@@ -307,8 +315,8 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     private void setTranslationsShowed(boolean translationsShowed) {
         // Set translationsShowed value to international fields
-        familyViewForm.setTranslationsShowed(translationsShowed);
-        familyEditionForm.setTranslationsShowed(translationsShowed);
+        form.setTranslationsShowed(translationsShowed);
+        editionForm.setTranslationsShowed(translationsShowed);
     }
 
     private boolean canFamilyCodeBeEdited(DynamicForm form) {
