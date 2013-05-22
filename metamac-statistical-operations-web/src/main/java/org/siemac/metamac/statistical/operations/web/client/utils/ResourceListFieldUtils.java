@@ -51,7 +51,7 @@ public class ResourceListFieldUtils {
         CustomListGridField subjectArea = new CustomListGridField(OperationDS.OP_SUBJECT_AREA, getCoreMessages().operation_subject_area());
         subjectArea.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField surveyType = new CustomListGridField(OperationDS.OP_SURVEY_TYPE, getCoreMessages().operation_survey_type());
+        CustomListGridField surveyType = new CustomListGridField(OperationDS.OP_STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
         surveyType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
         CustomListGridField officialityType = new CustomListGridField(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());

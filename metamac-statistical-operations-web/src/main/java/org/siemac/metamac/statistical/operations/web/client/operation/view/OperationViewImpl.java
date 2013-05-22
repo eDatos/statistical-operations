@@ -538,7 +538,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Class Descriptors
         classViewForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
-        ViewTextItem survey = new ViewTextItem(OperationDS.OP_SURVEY_TYPE, getCoreMessages().operation_survey_type());
+        ViewTextItem survey = new ViewTextItem(OperationDS.OP_STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
         ViewTextItem officiality = new ViewTextItem(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
         ViewTextItem indSystem = new ViewTextItem(OperationDS.OP_INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         classViewForm.setFields(survey, officiality, indSystem);
@@ -647,7 +647,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Class Descriptors
         classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
-        surveyType = new CustomSelectItem(OperationDS.OP_SURVEY_TYPE, getCoreMessages().operation_survey_type());
+        surveyType = new CustomSelectItem(OperationDS.OP_STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
         // surveyType.setValidators(getRequiredIfInternallyPublished());
         officialityType = new CustomSelectItem(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
         // officialityType.setValidators(getRequiredIfInternallyPublished());
@@ -759,7 +759,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         contentViewForm.setValue(OperationDS.OP_OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
 
         // Class Descriptors
-        classViewForm.setValue(OperationDS.OP_SURVEY_TYPE,
+        classViewForm.setValue(OperationDS.OP_STATISTICAL_OPERATION_TYPE,
                 operationDto.getSurveyType() == null ? "" : CommonWebUtils.getElementName(operationDto.getSurveyType().getIdentifier(), operationDto.getSurveyType().getDescription()));
         classViewForm.setValue(OperationDS.OP_OFFICIALITY_TYPE,
                 operationDto.getOfficialityType() == null ? "" : CommonWebUtils.getElementName(operationDto.getOfficialityType().getIdentifier(), operationDto.getOfficialityType().getDescription()));

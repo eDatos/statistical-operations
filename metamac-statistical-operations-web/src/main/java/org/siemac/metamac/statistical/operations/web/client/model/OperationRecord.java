@@ -65,7 +65,7 @@ public class OperationRecord extends ListGridRecord {
 
     public void setSurveyType(SurveyTypeDto value) {
         if (value != null) {
-            setAttribute(OperationDS.OP_SURVEY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+            setAttribute(OperationDS.OP_STATISTICAL_OPERATION_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
         }
     }
 

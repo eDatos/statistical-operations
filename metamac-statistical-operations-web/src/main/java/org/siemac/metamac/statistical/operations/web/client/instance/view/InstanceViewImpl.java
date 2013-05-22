@@ -365,7 +365,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
         staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
-        ViewTextItem surveySource = new ViewTextItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
+        ViewTextItem surveySource = new ViewTextItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         ViewTextItem collMethod = new ViewTextItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         ViewTextItem informationSuppliers = new ViewTextItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers());
         ViewTextItem freqColl = new ViewTextItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
@@ -491,7 +491,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
         docMethodItem = new MultilanguageRichTextEditorItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
-        surveySourceItem = new CustomSelectItem(InstanceDS.SURVEY_SOURCE, getConstants().instanceSurveySource());
+        surveySourceItem = new CustomSelectItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         infSuppliersOrganItem = new ExternalMultipleSelectItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliersOrg());
         infSuppliersOrganItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
@@ -595,7 +595,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionViewForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
 
         productionViewForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));
-        productionViewForm.setValue(InstanceDS.SURVEY_SOURCE,
+        productionViewForm.setValue(InstanceDS.STATISTICAL_OPERATION_SOURCE,
                 instanceDto.getSurveySource() != null ? CommonWebUtils.getElementName(instanceDto.getSurveySource().getIdentifier(), instanceDto.getSurveySource().getDescription()) : "");
         productionViewForm.setValue(InstanceDS.COLL_METHOD,
                 instanceDto.getCollMethod() != null ? CommonWebUtils.getElementName(instanceDto.getCollMethod().getIdentifier(), instanceDto.getCollMethod().getDescription()) : "");
