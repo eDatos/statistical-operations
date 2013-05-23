@@ -83,90 +83,83 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
-    public static final int                 FAMILY_LIST_MAX_RESULTS = 17;
+    public static final int              FAMILY_LIST_MAX_RESULTS = 17;
 
-    private VLayout                         panel;
+    private VLayout                      panel;
 
-    private OperationMainFormLayout         mainFormLayout;
+    private OperationMainFormLayout      mainFormLayout;
 
-    private OperationDto                    operationDto;
+    private OperationDto                 operationDto;
 
     // IDENTIFIERS
-    private GroupDynamicForm                identifiersForm;
-    private GroupDynamicForm                identifiersEditionForm;
+    private GroupDynamicForm             identifiersForm;
+    private GroupDynamicForm             identifiersEditionForm;
 
     // CONTENT CLASSIFIERS
-    private GroupDynamicForm                classificationForm;
-    private GroupDynamicForm                classificationEditionForm;
-    private ExternalSelectItem              subjectItem;
-    private ExternalMultipleSelectItem      secondarySubjectItem;
+    private GroupDynamicForm             classificationForm;
+    private GroupDynamicForm             classificationEditionForm;
+    private ExternalSelectItem           subjectItem;
+    private ExternalMultipleSelectItem   secondarySubjectItem;
 
     // CONTENT DESCRIPTORS
-    private GroupDynamicForm                contentViewForm;
-    private GroupDynamicForm                contentEditionForm;
-    private MultilanguageRichTextEditorItem objective;
-    private MultilanguageRichTextEditorItem description;
+    private GroupDynamicForm             contentViewForm;
+    private GroupDynamicForm             contentEditionForm;
 
     // CLASS DESCRIPTORS
-    private GroupDynamicForm                classForm;
-    private GroupDynamicForm                classEditionForm;
-    private CustomSelectItem                surveyType;
-    private CustomSelectItem                officialityType;
-    private CustomCheckboxItem              indSystem;
+    private GroupDynamicForm             classForm;
+    private GroupDynamicForm             classEditionForm;
+    private CustomSelectItem             surveyType;
+    private CustomSelectItem             officialityType;
+    private CustomCheckboxItem           indSystem;
 
     // PRODUCTION DESCRIPTORS
-    private GroupDynamicForm                productionForm;
-    private GroupDynamicForm                productionEditionForm;
-    private ExternalMultipleSelectItem      producerItem;
-    private ExternalMultipleSelectItem      regionalResponsibleItem;
-    private ExternalMultipleSelectItem      regionalContributorItem;
-    private CustomCheckboxItem              currentlyActiveItem;
-    private CustomSelectItem                statusItem;
+    private GroupDynamicForm             productionForm;
+    private GroupDynamicForm             productionEditionForm;
+    private ExternalMultipleSelectItem   producerItem;
+    private ExternalMultipleSelectItem   regionalResponsibleItem;
+    private ExternalMultipleSelectItem   regionalContributorItem;
+    private CustomCheckboxItem           currentlyActiveItem;
+    private CustomSelectItem             statusItem;
 
     // DIFUSSION AND PUBLICATION
-    private GroupDynamicForm                diffusionForm;
-    private GroupDynamicForm                diffusionEditionForm;
-    private ExternalMultipleSelectItem      publisherItem;
-    private MultilanguageRichTextEditorItem relPolUsAc;
-    private CustomCheckboxItem              releaseCalendar;
-    private CustomTextItem                  releaseCalendarAccess;
-    private CustomSelectItem                updateFrequencyItem;
-    private MultilanguageRichTextEditorItem revPolicyItem;
-    private MultilanguageRichTextEditorItem revPracticeItem;
-    private CustomSelectItem                commonMetadataItem;
+    private GroupDynamicForm             diffusionForm;
+    private GroupDynamicForm             diffusionEditionForm;
+    private ExternalMultipleSelectItem   publisherItem;
+    private CustomCheckboxItem           releaseCalendar;
+    private CustomTextItem               releaseCalendarAccess;
+    private CustomSelectItem             updateFrequencyItem;
+    private CustomSelectItem             commonMetadataItem;
 
     // ANNOTATIONS
-    private GroupDynamicForm                annotationsViewForm;
-    private GroupDynamicForm                annotationsEditionForm;
-    private MultilanguageRichTextEditorItem commentItem;
-    private MultilanguageRichTextEditorItem notesItem;
+    private GroupDynamicForm             annotationsViewForm;
+    private GroupDynamicForm             annotationsEditionForm;
 
-    private ListGridToolStrip               instanceListGridToolStrip;
-    private CustomListGrid                  instanceListGrid;
-    private InstancesOrderFormLayout        instancesOrderFormLayout;
+    private ListGridToolStrip            instanceListGridToolStrip;
+    private CustomListGrid               instanceListGrid;
+    private InstancesOrderFormLayout     instancesOrderFormLayout;
     // Instance modal window
-    private ModalWindow                     newInstanceWindow;
-    private NewInstanceForm                 newInstanceForm;
+    private ModalWindow                  newInstanceWindow;
+    private NewInstanceForm              newInstanceForm;
 
-    private ToolStrip                       familiesToolStrip;
-    private ToolStripButton                 editFamiliesToolStripButton;
-    private BaseCustomListGrid              familyListGrid;
+    private ToolStrip                    familiesToolStrip;
+    private ToolStripButton              editFamiliesToolStripButton;
+    private BaseCustomListGrid           familyListGrid;
     // Families modal window
-    private AddFamiliesToOperationWindow    addFamiliesToOperationWindow;
+    private AddFamiliesToOperationWindow addFamiliesToOperationWindow;
 
-    private List<FamilyBaseDto>             familyBaseDtos;
+    private List<FamilyBaseDto>          familyBaseDtos;
 
-    private List<SurveyTypeDto>             surveyTypeDtos;
-    private List<OfficialityTypeDto>        officialityTypeDtos;
+    private List<SurveyTypeDto>          surveyTypeDtos;
+    private List<OfficialityTypeDto>     officialityTypeDtos;
 
-    private List<ExternalItemDto>           subjects;
-    private List<ExternalItemDto>           secondarySubjects;
-    private List<ExternalItemDto>           producers;
-    private List<ExternalItemDto>           regionalResponsibles;
-    private List<ExternalItemDto>           regionalContributors;
-    private List<ExternalItemDto>           publishers;
-    private List<ExternalItemDto>           commonMetadataList;
-    private List<ExternalItemDto>           updateFrequencyCodes;
+    private List<ExternalItemDto>        subjects;
+    private List<ExternalItemDto>        secondarySubjects;
+    private List<ExternalItemDto>        producers;
+    private List<ExternalItemDto>        regionalResponsibles;
+    private List<ExternalItemDto>        regionalContributors;
+    private List<ExternalItemDto>        publishers;
+    private List<ExternalItemDto>        commonMetadataList;
+    private List<ExternalItemDto>        updateFrequencyCodes;
 
     public OperationViewImpl() {
         super();
@@ -368,16 +361,20 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setSubjectArea(subjectItem.getSelectedExternalItem(subjects));
         operationDto.getSecondarySubjectAreas().clear();
         operationDto.getSecondarySubjectAreas().addAll(secondarySubjectItem.getSelectedExternalItems(secondarySubjects));
-        // Content Descriptors
-        operationDto.setDescription(description.getValue());
-        operationDto.setObjective(objective.getValue());
 
-        // Class Descriptors
+        // CONTENT DESCRIPTORS
+
+        operationDto.setDescription((InternationalStringDto) contentEditionForm.getValue(OperationDS.OP_DESCRIPTION));
+        operationDto.setObjective((InternationalStringDto) contentEditionForm.getValue(OperationDS.OP_OBJECTIVE));
+
+        // CLASS DESCRIPTORS
+
         operationDto.setSurveyType(OperationsListUtils.getSurveyTypeDto(surveyType.getValueAsString(), surveyTypeDtos));
         operationDto.setOfficialityType(OperationsListUtils.getOfficialityTypeDto(officialityType.getValueAsString(), officialityTypeDtos));
         operationDto.setIndicatorSystem(indSystem.getValueAsBoolean() == null ? false : indSystem.getValueAsBoolean());
 
-        // Production descriptors
+        // PRODUCTION DESCRIPTORS
+
         operationDto.getProducer().clear();
         operationDto.getProducer().addAll(producerItem.getSelectedExternalItems(producers));
         operationDto.getRegionalResponsible().clear();
@@ -387,21 +384,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setCurrentlyActive(currentlyActiveItem.getValueAsBoolean());
         operationDto.setStatus(statusItem.getValueAsString() != null ? StatusEnum.valueOf(statusItem.getValueAsString()) : null);
 
-        // Diffusion and Publication
+        // DIFFUSION AND PUBLICATION
+
         operationDto.getPublisher().clear();
         operationDto.getPublisher().addAll(publisherItem.getSelectedExternalItems(publishers));
-        operationDto.setRelPolUsAc(relPolUsAc.getValue());
+        operationDto.setRelPolUsAc((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.OP_RE_POL_US_AC));
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
         operationDto.getUpdateFrequency().clear();
         operationDto.getUpdateFrequency().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(updateFrequencyCodes, updateFrequencyItem.getValues()));
-        operationDto.setRevPolicy(revPolicyItem.getValue());
-        operationDto.setRevPractice(revPracticeItem.getValue());
+        operationDto.setRevPolicy((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.OP_REV_POLICY));
+        operationDto.setRevPractice((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.OP_REV_PRACTICE));
         operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemDtoFromUrn(commonMetadataList, commonMetadataItem.getValueAsString()));
 
         // ANNOTATIONS
-        operationDto.setComment(commentItem.getValue());
-        operationDto.setNotes(notesItem.getValue());
+
+        operationDto.setComment((InternationalStringDto) annotationsEditionForm.getValue(OperationDS.OP_COMMENTS));
+        operationDto.setNotes((InternationalStringDto) annotationsEditionForm.getValue(OperationDS.OP_NOTES));
         return operationDto;
     }
 
@@ -638,8 +637,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Descriptors
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        description = new MultilanguageRichTextEditorItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
-        objective = new MultilanguageRichTextEditorItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
+        MultilanguageRichTextEditorItem description = new MultilanguageRichTextEditorItem(OperationDS.OP_DESCRIPTION, getCoreMessages().operation_description());
+        MultilanguageRichTextEditorItem objective = new MultilanguageRichTextEditorItem(OperationDS.OP_OBJECTIVE, getCoreMessages().operation_objective());
         // objective.setValidators(getRequiredIfInternallyPublished());
         contentEditionForm.setFields(objective, description);
 
@@ -712,7 +711,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 }
             }
         });
-        relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.OP_RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
+        MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.OP_RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.OP_RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.OP_RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
         releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
@@ -721,8 +720,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         CustomLinkItem currentInst = new CustomLinkItem(OperationDS.OP_CURRENT_INSTANCE, getConstants().operationCurrentInstance(), getCustomLinkItemNavigationClickHandler());
         CustomLinkItem currentInternalInst = new CustomLinkItem(OperationDS.OP_CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance(), getCustomLinkItemNavigationClickHandler());
         ViewTextItem invDate = new ViewTextItem(OperationDS.OP_INVENTORY_DATE, getCoreMessages().operation_inventory_date());
-        revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
-        revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
+        MultilanguageRichTextEditorItem revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_POLICY, getCoreMessages().operation_rev_policy());
+        MultilanguageRichTextEditorItem revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.OP_REV_PRACTICE, getConstants().operationRevPractice());
         commonMetadataItem = new CustomSelectItem(OperationDS.OP_COMMON_METADATA, getCoreMessages().operation_common_metadata());
         // commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
         diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
@@ -730,8 +729,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        commentItem = new MultilanguageRichTextEditorItem(OperationDS.OP_COMMENTS, getCoreMessages().operation_comment());
-        notesItem = new MultilanguageRichTextEditorItem(OperationDS.OP_NOTES, getCoreMessages().operation_notes());
+        MultilanguageRichTextEditorItem commentItem = new MultilanguageRichTextEditorItem(OperationDS.OP_COMMENTS, getCoreMessages().operation_comment());
+        MultilanguageRichTextEditorItem notesItem = new MultilanguageRichTextEditorItem(OperationDS.OP_NOTES, getCoreMessages().operation_notes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         // Add to main layout
@@ -830,8 +829,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // secondarySubjectItem.setItemsValues(ExternalItemUtils.getExternalItemsCodeIds(operationDto.getSecundarySubjectAreas()));
 
         // Content Descriptors
-        description.setValue(operationDto.getDescription());
-        objective.setValue(operationDto.getObjective());
+        contentEditionForm.setValue(OperationDS.OP_DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getDescription()));
+        contentEditionForm.setValue(OperationDS.OP_OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
 
         // Class Descriptors
         surveyType.setValue(operationDto.getSurveyType() != null ? operationDto.getSurveyType().getId() : null);
