@@ -38,41 +38,41 @@ public class ResourceListFieldUtils {
 
     public static CustomListGridField[] getOperationFields() {
 
-        CustomListGridField code = new CustomListGridField(OperationDS.OP_CODE, getCoreMessages().operation_code());
+        CustomListGridField code = new CustomListGridField(OperationDS.CODE, getCoreMessages().operation_code());
 
-        CustomListGridField urn = new CustomListGridField(OperationDS.OP_URN, getCoreMessages().operation_urn());
+        CustomListGridField urn = new CustomListGridField(OperationDS.URN, getCoreMessages().operation_urn());
         urn.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField title = new CustomListGridField(OperationDS.OP_TITLE, getCoreMessages().operation_title());
+        CustomListGridField title = new CustomListGridField(OperationDS.TITLE, getCoreMessages().operation_title());
 
-        CustomListGridField acronym = new CustomListGridField(OperationDS.OP_ACRONYM, getCoreMessages().operation_acronym());
+        CustomListGridField acronym = new CustomListGridField(OperationDS.ACRONYM, getCoreMessages().operation_acronym());
         acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField subjectArea = new CustomListGridField(OperationDS.OP_SUBJECT_AREA, getCoreMessages().operation_subject_area());
+        CustomListGridField subjectArea = new CustomListGridField(OperationDS.SUBJECT_AREA, getCoreMessages().operation_subject_area());
         subjectArea.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField surveyType = new CustomListGridField(OperationDS.OP_STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
+        CustomListGridField surveyType = new CustomListGridField(OperationDS.STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
         surveyType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField officialityType = new CustomListGridField(OperationDS.OP_OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
+        CustomListGridField officialityType = new CustomListGridField(OperationDS.OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
         officialityType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField indicatorsSystem = new CustomListGridField(OperationDS.OP_INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
+        CustomListGridField indicatorsSystem = new CustomListGridField(OperationDS.INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         indicatorsSystem.setType(ListGridFieldType.IMAGE);
         indicatorsSystem.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField createdDate = new CustomListGridField(OperationDS.OP_CREATED_DATE, getConstants().operationCreatedDate());
+        CustomListGridField createdDate = new CustomListGridField(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         createdDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField internalInventoryDate = new CustomListGridField(OperationDS.OP_INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
+        CustomListGridField internalInventoryDate = new CustomListGridField(OperationDS.INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         internalInventoryDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField currentlyActive = new CustomListGridField(OperationDS.OP_CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
+        CustomListGridField currentlyActive = new CustomListGridField(OperationDS.CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
         currentlyActive.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField procStatus = new CustomListGridField(OperationDS.OP_PROC_STATUS, getCoreMessages().operation_proc_status());
+        CustomListGridField procStatus = new CustomListGridField(OperationDS.PROC_STATUS, getCoreMessages().operation_proc_status());
 
-        CustomListGridField status = new CustomListGridField(OperationDS.OP_STATUS, getCoreMessages().operation_status());
+        CustomListGridField status = new CustomListGridField(OperationDS.STATUS, getCoreMessages().operation_status());
 
         return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status};
     }

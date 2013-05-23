@@ -16,74 +16,74 @@ public class OperationRecord extends ListGridRecord {
     }
 
     public void setId(Long value) {
-        setAttribute(OperationDS.OP_ID, value);
+        setAttribute(OperationDS.ID, value);
     }
 
     public Long getId() {
-        return getAttributeAsLong(OperationDS.OP_ID);
+        return getAttributeAsLong(OperationDS.ID);
     }
 
     public String getCode() {
-        return getAttributeAsString(OperationDS.OP_CODE);
+        return getAttributeAsString(OperationDS.CODE);
     }
 
     public void setCode(String value) {
-        setAttribute(OperationDS.OP_CODE, value);
+        setAttribute(OperationDS.CODE, value);
     }
 
     public void setUrn(String value) {
-        setAttribute(OperationDS.OP_URN, value);
+        setAttribute(OperationDS.URN, value);
     }
 
     public void setTitle(String value) {
-        setAttribute(OperationDS.OP_TITLE, value);
+        setAttribute(OperationDS.TITLE, value);
     }
 
     public void setAcronym(String value) {
-        setAttribute(OperationDS.OP_ACRONYM, value);
+        setAttribute(OperationDS.ACRONYM, value);
     }
 
     public void setProcStatus(String value) {
-        setAttribute(OperationDS.OP_PROC_STATUS, value);
+        setAttribute(OperationDS.PROC_STATUS, value);
     }
 
     public void setStatus(String value) {
-        setAttribute(OperationDS.OP_STATUS, value);
+        setAttribute(OperationDS.STATUS, value);
     }
 
     public void setIndicatorsSystem(Boolean value) {
         if (value != null && value) {
-            setAttribute(OperationDS.OP_INDICATOR_SYSTEM, GlobalResources.RESOURCE.success().getURL());
+            setAttribute(OperationDS.INDICATOR_SYSTEM, GlobalResources.RESOURCE.success().getURL());
         }
     }
 
     public void setSubjectArea(ExternalItemDto value) {
         if (value != null) {
-            setAttribute(OperationDS.OP_SUBJECT_AREA, CommonWebUtils.getElementName(value.getCode(), value.getTitle()));
+            setAttribute(OperationDS.SUBJECT_AREA, CommonWebUtils.getElementName(value.getCode(), value.getTitle()));
         }
     }
 
     public void setSurveyType(SurveyTypeDto value) {
         if (value != null) {
-            setAttribute(OperationDS.OP_STATISTICAL_OPERATION_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+            setAttribute(OperationDS.STATISTICAL_OPERATION_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
         }
     }
 
     public void setOfficialityType(OfficialityTypeDto value) {
         if (value != null) {
-            setAttribute(OperationDS.OP_OFFICIALITY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
+            setAttribute(OperationDS.OFFICIALITY_TYPE, CommonWebUtils.getElementName(value.getIdentifier(), value.getDescription()));
         }
     }
 
     public void setCreatedDate(String value) {
-        setAttribute(OperationDS.OP_CREATED_DATE, value);
+        setAttribute(OperationDS.CREATED_DATE, value);
     }
 
     public void setInternalInventoryDate(String value) {
-        setAttribute(OperationDS.OP_INTERNAL_INVENTORY_DATE, value);
+        setAttribute(OperationDS.INTERNAL_INVENTORY_DATE, value);
     }
 
     public void setCurrentlyActive(String value) {
-        setAttribute(OperationDS.OP_CURRENTLY_ACTIVE, value);
+        setAttribute(OperationDS.CURRENTLY_ACTIVE, value);
     }
 }

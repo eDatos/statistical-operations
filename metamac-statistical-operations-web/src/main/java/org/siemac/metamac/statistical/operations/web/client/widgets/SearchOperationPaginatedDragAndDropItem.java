@@ -32,7 +32,7 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
     }
 
     private void create(String name, String title, int maxResults, String formItemWidth, PaginatedAction action) {
-        ListGridField codeField = new ListGridField(OperationDS.OP_CODE);
+        ListGridField codeField = new ListGridField(OperationDS.CODE);
         codeField.setShowHover(true);
         codeField.setHoverCustomizer(new HoverCustomizer() {
 
@@ -43,7 +43,7 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
             }
         });
 
-        ListGridField titleField = new ListGridField(OperationDS.OP_TITLE);
+        ListGridField titleField = new ListGridField(OperationDS.TITLE);
         titleField.setShowHover(true);
 
         ListGridField deleteField = new ListGridField(DELETE_FIELD_NAME);
@@ -104,8 +104,8 @@ public class SearchOperationPaginatedDragAndDropItem extends BaseSearchPaginated
 
     @Override
     protected void addNonDuplicatedRecordToTarget(Record record) {
-        String code = record.getAttribute(OperationDS.OP_CODE);
-        if (targetList.getRecordList().find(OperationDS.OP_CODE, code) == null) {
+        String code = record.getAttribute(OperationDS.CODE);
+        if (targetList.getRecordList().find(OperationDS.CODE, code) == null) {
             targetList.addData(record);
         }
     }
