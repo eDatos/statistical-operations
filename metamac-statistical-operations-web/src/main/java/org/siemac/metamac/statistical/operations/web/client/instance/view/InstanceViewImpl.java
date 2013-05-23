@@ -102,12 +102,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultilanguageRichTextEditorItem costBurdenItem;
     private CustomSelectItem                costItem;
 
-    private ViewMultiLanguageTextItem       staticDocMethodItem;
-    private ViewMultiLanguageTextItem       staticDataValidationItem;
-    private ViewMultiLanguageTextItem       staticDataCompilationItem;
-    private ViewMultiLanguageTextItem       staticAdjustmentItem;
-    private ViewMultiLanguageTextItem       staticCostBurdenItem;
-
     // DIFFUSION AND PUBLICATION
     private GroupDynamicForm                diffusionViewForm;
     private GroupDynamicForm                diffusionEditionForm;
@@ -129,28 +123,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultilanguageRichTextEditorItem coherXDomItem;
     private MultilanguageRichTextEditorItem coherInternalItem;
 
-    private ViewMultiLanguageTextItem       staticQualityDocItem;
-    private ViewMultiLanguageTextItem       staticQualityAssureItem;
-    private ViewMultiLanguageTextItem       staticQualityAssesmentItem;
-    private ViewMultiLanguageTextItem       staticUserNeedsItem;
-    private ViewMultiLanguageTextItem       staticUserSatItem;
-    private ViewMultiLanguageTextItem       staticCompletenessItem;
-    private ViewMultiLanguageTextItem       staticTimelinessItem;
-    private ViewMultiLanguageTextItem       staticPunctualityItem;
-    private ViewMultiLanguageTextItem       staticAccuracyOverallItem;
-    private ViewMultiLanguageTextItem       staticSamplingErrItem;
-    private ViewMultiLanguageTextItem       statocNonSamplingErrItem;
-    private ViewMultiLanguageTextItem       staticCoherXDomItem;
-    private ViewMultiLanguageTextItem       staticCoherInternalItem;
-
     // ANNOTATIONS
     private GroupDynamicForm                annotationsViewForm;
     private GroupDynamicForm                annotationsEditionForm;
     private MultilanguageRichTextEditorItem commentItem;
     private MultilanguageRichTextEditorItem notesItem;
-
-    private ViewMultiLanguageTextItem       staticCommentItem;
-    private ViewMultiLanguageTextItem       staticNotesItem;
 
     private List<ExternalItemDto>           conceptSchemes;
     private List<ExternalItemDto>           codeLists;
@@ -366,15 +343,15 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem createdDate = new ViewTextItem(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
         ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
-        staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
+        ViewMultiLanguageTextItem staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
         ViewTextItem surveySource = new ViewTextItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         ViewTextItem collMethod = new ViewTextItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         ViewTextItem informationSuppliers = new ViewTextItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers());
         ViewTextItem freqColl = new ViewTextItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
-        staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
-        staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
-        staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
-        staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
+        ViewMultiLanguageTextItem staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
+        ViewMultiLanguageTextItem staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
+        ViewMultiLanguageTextItem staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
+        ViewMultiLanguageTextItem staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
         ViewTextItem cost = new ViewTextItem(InstanceDS.COST, getConstants().instanceCost());
         productionViewForm.setFields(createdDate, internalInventoryDate, procStatus, staticDocMethodItem, surveySource, collMethod, informationSuppliers, freqColl, staticDataValidationItem,
                 staticDataCompilationItem, staticAdjustmentItem, staticCostBurdenItem, cost);
@@ -386,26 +363,26 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Quality descriptors
         qualityViewForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        staticQualityDocItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_DOC, getCoreMessages().instance_quality_doc());
-        staticQualityAssureItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSURE, getCoreMessages().instance_quality_assure());
-        staticQualityAssesmentItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSMNT, getCoreMessages().instance_quality_assmnt());
-        staticUserNeedsItem = new ViewMultiLanguageTextItem(InstanceDS.USER_NEEDS, getCoreMessages().instance_user_needs());
-        staticUserSatItem = new ViewMultiLanguageTextItem(InstanceDS.USER_SAT, getCoreMessages().instance_user_sat());
-        staticCompletenessItem = new ViewMultiLanguageTextItem(InstanceDS.COMPLETENESS, getCoreMessages().instance_completeness());
-        staticTimelinessItem = new ViewMultiLanguageTextItem(InstanceDS.TIMELINESS, getCoreMessages().instance_timeliness());
-        staticPunctualityItem = new ViewMultiLanguageTextItem(InstanceDS.PUNCTUALITY, getCoreMessages().instance_punctuality());
-        staticAccuracyOverallItem = new ViewMultiLanguageTextItem(InstanceDS.ACCURACY_OVERALL, getCoreMessages().instance_accuracy_overall());
-        staticSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.SAMPLING_ERROR, getCoreMessages().instance_sampling_err());
-        statocNonSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.NONSAMPLING_ERR, getCoreMessages().instance_nonsampling_err());
-        staticCoherXDomItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_X_DOM, getCoreMessages().instance_coher_x_domain());
-        staticCoherInternalItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_INTERNAL, getCoreMessages().instance_coher_internal());
+        ViewMultiLanguageTextItem staticQualityDocItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_DOC, getCoreMessages().instance_quality_doc());
+        ViewMultiLanguageTextItem staticQualityAssureItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSURE, getCoreMessages().instance_quality_assure());
+        ViewMultiLanguageTextItem staticQualityAssesmentItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSMNT, getCoreMessages().instance_quality_assmnt());
+        ViewMultiLanguageTextItem staticUserNeedsItem = new ViewMultiLanguageTextItem(InstanceDS.USER_NEEDS, getCoreMessages().instance_user_needs());
+        ViewMultiLanguageTextItem staticUserSatItem = new ViewMultiLanguageTextItem(InstanceDS.USER_SAT, getCoreMessages().instance_user_sat());
+        ViewMultiLanguageTextItem staticCompletenessItem = new ViewMultiLanguageTextItem(InstanceDS.COMPLETENESS, getCoreMessages().instance_completeness());
+        ViewMultiLanguageTextItem staticTimelinessItem = new ViewMultiLanguageTextItem(InstanceDS.TIMELINESS, getCoreMessages().instance_timeliness());
+        ViewMultiLanguageTextItem staticPunctualityItem = new ViewMultiLanguageTextItem(InstanceDS.PUNCTUALITY, getCoreMessages().instance_punctuality());
+        ViewMultiLanguageTextItem staticAccuracyOverallItem = new ViewMultiLanguageTextItem(InstanceDS.ACCURACY_OVERALL, getCoreMessages().instance_accuracy_overall());
+        ViewMultiLanguageTextItem staticSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.SAMPLING_ERROR, getCoreMessages().instance_sampling_err());
+        ViewMultiLanguageTextItem statocNonSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.NONSAMPLING_ERR, getCoreMessages().instance_nonsampling_err());
+        ViewMultiLanguageTextItem staticCoherXDomItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_X_DOM, getCoreMessages().instance_coher_x_domain());
+        ViewMultiLanguageTextItem staticCoherInternalItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_INTERNAL, getCoreMessages().instance_coher_internal());
         qualityViewForm.setFields(staticQualityDocItem, staticQualityAssureItem, staticQualityAssesmentItem, staticUserNeedsItem, staticUserSatItem, staticCompletenessItem, staticTimelinessItem,
                 staticPunctualityItem, staticAccuracyOverallItem, staticSamplingErrItem, statocNonSamplingErrItem, staticCoherXDomItem, staticCoherInternalItem);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        staticCommentItem = new ViewMultiLanguageTextItem(InstanceDS.COMMENTS, getCoreMessages().instance_comment());
-        staticNotesItem = new ViewMultiLanguageTextItem(InstanceDS.NOTES, getCoreMessages().instance_notes());
+        ViewMultiLanguageTextItem staticCommentItem = new ViewMultiLanguageTextItem(InstanceDS.COMMENTS, getCoreMessages().instance_comment());
+        ViewMultiLanguageTextItem staticNotesItem = new ViewMultiLanguageTextItem(InstanceDS.NOTES, getCoreMessages().instance_notes());
         annotationsViewForm.setFields(staticCommentItem, staticNotesItem);
 
         mainFormLayout.addViewCanvas(identifiersViewForm);
