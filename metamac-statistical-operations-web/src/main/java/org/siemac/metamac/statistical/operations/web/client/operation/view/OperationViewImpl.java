@@ -401,6 +401,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.setRevPractice((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.REV_PRACTICE));
         operationDto.setCommonMetadata(ExternalItemUtils.getExternalItemDtoFromUrn(commonMetadataList, commonMetadataItem.getValueAsString()));
 
+        // LEGAL ACTS
+        operationDto.setSpecificLegalActs((InternationalStringDto) legalActsEditionForm.getValue(OperationDS.SPECIFIC_LEGAL_ACTS));
+        operationDto.setSpecificDataSharing((InternationalStringDto) legalActsEditionForm.getValue(OperationDS.SPECIFIC_DATA_SHARING));
+
         // ANNOTATIONS
 
         operationDto.setComment((InternationalStringDto) annotationsEditionForm.getValue(OperationDS.COMMENTS));
@@ -572,6 +576,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Legal acts
         legalActsForm = new GroupDynamicForm(getConstants().formLegalActs());
+        ViewMultiLanguageTextItem specificLegalActs = new ViewMultiLanguageTextItem(OperationDS.SPECIFIC_LEGAL_ACTS, getCoreMessages().operation_specific_legal_acts());
+        ViewMultiLanguageTextItem specificDataSharing = new ViewMultiLanguageTextItem(OperationDS.SPECIFIC_DATA_SHARING, getCoreMessages().operation_specific_data_sharing());
+        legalActsForm.setFields(specificLegalActs, specificDataSharing);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().operationAnnotations());
@@ -745,6 +752,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // LEGAL ACTS
 
         legalActsEditionForm = new GroupDynamicForm(getConstants().formLegalActs());
+        MultilanguageRichTextEditorItem specificLegalActs = new MultilanguageRichTextEditorItem(OperationDS.SPECIFIC_LEGAL_ACTS, getCoreMessages().operation_specific_legal_acts());
+        MultilanguageRichTextEditorItem specificDataSharing = new MultilanguageRichTextEditorItem(OperationDS.SPECIFIC_DATA_SHARING, getCoreMessages().operation_specific_data_sharing());
+        legalActsEditionForm.setFields(specificLegalActs, specificDataSharing);
 
         // ANNOTATIONS
 
@@ -838,7 +848,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionForm.setValue(OperationDS.COMMON_METADATA, operationDto.getCommonMetadata() != null ? ExternalItemUtils.getExternalItemName(operationDto.getCommonMetadata()) : "");
 
         // LEGAL ACTS
-        // TODO
+        legalActsForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificLegalActs()));
+        legalActsForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificDataSharing()));
 
         // ANNOTATIONS
 
@@ -916,7 +927,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         commonMetadataItem.setValue(operationDto.getCommonMetadata() != null ? operationDto.getCommonMetadata().getUrn() : null);
 
         // LEGAL ACTS
-        // TODO
+        legalActsEditionForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificLegalActs()));
+        legalActsEditionForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificDataSharing()));
 
         // ANNOTATIONS
 

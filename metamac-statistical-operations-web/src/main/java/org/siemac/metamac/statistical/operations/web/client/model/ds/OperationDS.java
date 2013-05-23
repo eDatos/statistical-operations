@@ -45,7 +45,8 @@ public class OperationDS extends DataSource {
     public static final String REV_PRACTICE               = "op-rev-pract";
     public static final String COMMON_METADATA            = "op-com-met";
     // LEGAL ACTS
-    // TODO
+    public static final String SPECIFIC_LEGAL_ACTS        = "op-spe-legal-acts";
+    public static final String SPECIFIC_DATA_SHARING      = "op-spe-data-shar";
     // ANNOTATIONS
     public static final String COMMENTS                   = "op-com";
     public static final String NOTES                      = "op-not";
