@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
@@ -20,8 +21,6 @@ import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateCategorySchemesEvent.UpdateCategorySchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent.UpdateCommonMetadataHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
@@ -39,8 +38,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
+import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
@@ -63,6 +61,10 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrder
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
@@ -93,7 +95,6 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 public class OperationPresenter extends Presenter<OperationPresenter.OperationView, OperationPresenter.OperationProxy>
         implements
             OperationUiHandlers,
-            UpdateCategorySchemesHandler,
             UpdateOrganisationSchemesHandler,
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler,
@@ -125,6 +126,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     public interface OperationView extends View, HasUiHandlers<OperationUiHandlers> {
 
         // Operations
+
         void setOperation(OperationDto operationDto, List<InstanceBaseDto> instanceBaseDtos, List<FamilyBaseDto> familyBaseDtos);
         OperationDto getOperation(OperationDto operationDto);
         HasClickHandlers getSave();
@@ -133,9 +135,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         HasClickHandlers getPublishOperationInternally();
         HasClickHandlers getPublishOperationExternally();
 
-        void setCategorySchemes(List<ExternalItemDto> schemes);
-        void setSubjects(List<ExternalItemDto> subjects);
-        void setSecondarySubjetcs(List<ExternalItemDto> secondarySubjects);
+        void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
         void setOrganisationSchemes(List<ExternalItemDto> schemes);
         void setProducers(List<ExternalItemDto> organisations);
@@ -144,11 +144,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         void setPublishers(List<ExternalItemDto> organisations);
         void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
-        void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList);
+        // External resources
 
-        void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
+        void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList);
+        void setCategorySchemes(String formItemName, ExternalItemsResult result);
+        void setCategories(String formItemName, ExternalItemsResult result);
 
         // Instances
+
         HasRecordClickHandlers getSelectedInstance();
         void setInstances(List<InstanceBaseDto> instanceBaseDtos);
         com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getSaveNewInstance();
@@ -361,12 +364,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         });
     }
 
-    @ProxyEvent
-    @Override
-    public void onUpdateCategorySchemes(UpdateCategorySchemesEvent event) {
-        getView().setCategorySchemes(event.getCategorySchemes());
-    }
-
     private void retrieveOperation(String operationCode) {
         String operationUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_OPERATION_PREFIX, operationCode);
         dispatcher.execute(new GetOperationAndInstancesAction(operationUrn), new WaitingAsyncCallback<GetOperationAndInstancesResult>() {
@@ -427,36 +424,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             public void onWaitSuccess(PublishExternallyOperationResult result) {
                 retrieveOperation(operationDto.getCode());
                 ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationExternallyPublished()), MessageTypeEnum.SUCCESS);
-            }
-        });
-    }
-
-    @Override
-    public void populateSubjects(String uri) {
-        dispatcher.execute(new GetCategoriesFromSchemeAction(uri), new WaitingAsyncCallback<GetCategoriesFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetCategoriesFromSchemeResult result) {
-                getView().setSubjects(result.getCategories());
-            }
-        });
-    }
-
-    @Override
-    public void populateSecondarySubjects(String scehemUri) {
-        dispatcher.execute(new GetCategoriesFromSchemeAction(scehemUri), new WaitingAsyncCallback<GetCategoriesFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetCategoriesFromSchemeResult result) {
-                getView().setSecondarySubjetcs(result.getCategories());
             }
         });
     }
@@ -576,6 +543,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         });
     }
 
+    // EXTERNAL RESOURCES
+
     @Override
     public void retrieveCommonMetadataConfigurations() {
         dispatcher.execute(new GetCommonMetadataConfigurationsAction(null), new WaitingAsyncCallback<GetCommonMetadataConfigurationsResult>() {
@@ -590,6 +559,43 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
         });
     }
+
+    @Override
+    public void retrieveCategorySchemes(final String formItemName, int firstResult, int maxResults, String criteria) {
+        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria(TypeExternalArtefactsEnum.CATEGORY_SCHEME, criteria);
+        dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingCategorySchemes()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setCategorySchemes(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveCategories(final String formItemName, int firstResult, int maxResults, String criteria, String categorySchemeUrn) {
+        ItemWebCriteria itemWebCriteria = new ItemWebCriteria(TypeExternalArtefactsEnum.CATEGORY, criteria);
+        itemWebCriteria.setItemSchemUrn(categorySchemeUrn);
+        dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingCategories()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setCategories(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    //
+    // NAVIGATION
+    //
 
     @Override
     public void goTo(List<PlaceRequest> location) {

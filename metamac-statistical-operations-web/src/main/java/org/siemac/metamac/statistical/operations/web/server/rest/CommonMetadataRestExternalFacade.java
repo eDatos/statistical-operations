@@ -7,7 +7,5 @@ import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 public interface CommonMetadataRestExternalFacade {
 
     Configuration retrieveConfigurationById(String id) throws MetamacWebException;
-
     Configurations findConfigurations(String query) throws MetamacWebException;
-
 }

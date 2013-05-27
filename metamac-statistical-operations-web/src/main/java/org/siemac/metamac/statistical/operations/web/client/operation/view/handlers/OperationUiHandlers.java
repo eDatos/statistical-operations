@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
-import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
 
-public interface OperationUiHandlers extends BaseUiHandlers {
+public interface OperationUiHandlers extends ExternalUiHandlers {
 
     void saveOperation(OperationDto operationDto);
     void goToFamily(String familyCode);
@@ -16,15 +16,14 @@ public interface OperationUiHandlers extends BaseUiHandlers {
     void updateOperationFamilies(List<Long> familiesToAdd, List<Long> familiesToRemove);
     void retrievePaginatedFamilies(int firstResult, int maxResults, String family);
 
-    void populateSubjects(String uri);
-    void populateSecondarySubjects(String scehemUri);
-
     void populateProducers(String uri);
     void populateRegionalResposibles(String uri);
     void populateRegionalContributors(String uri);
     void populatePublishers(String uri);
 
     void updateInstancesOrder(List<Long> instancesIds);
+
+    // External resources
 
     void retrieveCommonMetadataConfigurations();
 }

@@ -21,8 +21,8 @@ import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListA
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeResult;
+import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeAction;
+import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
@@ -217,14 +217,14 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void populateSubjects(String uri) {
-        dispatcher.execute(new GetCategoriesFromSchemeAction(uri), new WaitingAsyncCallback<GetCategoriesFromSchemeResult>() {
+        dispatcher.execute(new FindCategoriesFromSchemeAction(uri), new WaitingAsyncCallback<FindCategoriesFromSchemeResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingData()), MessageTypeEnum.ERROR);
             }
             @Override
-            public void onWaitSuccess(GetCategoriesFromSchemeResult result) {
+            public void onWaitSuccess(FindCategoriesFromSchemeResult result) {
                 getView().setSubjects(result.getCategories());
             }
         });

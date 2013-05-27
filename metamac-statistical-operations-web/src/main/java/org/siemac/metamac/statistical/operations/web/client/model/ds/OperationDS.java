@@ -14,7 +14,7 @@ public class OperationDS extends DataSource {
     public static final String ACRONYM                    = "op-acron";
     // CONTENT CLASSIFIERS
     public static final String SUBJECT_AREA               = "op-subjectItem";
-    public static final String SUBJECT_SECONDARY          = "op-subjetc-secon";
+    public static final String SECONDARY_SUBJECT_AREAS    = "op-subjetc-secon";
     // CONTENT DESCRIPTORS
     public static final String DESCRIPTION                = "op-desc";
     public static final String OBJECTIVE                  = "op-obj";

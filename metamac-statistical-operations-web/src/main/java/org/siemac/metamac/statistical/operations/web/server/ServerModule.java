@@ -7,7 +7,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllCate
 import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllCodeListsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllConceptSchemesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllOrganisationSchemesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetCategoriesFromSchemeActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.FindCategoriesFromSchemeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetCodesFromCodeListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetCommonMetadataConfigurationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetConceptsFromSchemeActionHandler;
@@ -37,6 +37,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateFamil
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateInstancesOrderActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateOperationFamiliesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.ValidateTicketActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.external.GetExternalResourcesActionHandler;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
@@ -44,7 +45,7 @@ import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchem
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCategoriesFromSchemeAction;
+import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
@@ -73,6 +74,7 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetNavigationBarUrlActionHandler;
@@ -97,6 +99,7 @@ public class ServerModule extends HandlerModule {
     public ServerModule() {
     }
 
+    @Override
     protected void configureHandlers() {
 
         // Families
@@ -131,7 +134,7 @@ public class ServerModule extends HandlerModule {
         bindHandler(UpdateInstancesOrderAction.class, UpdateInstancesOrderActionHandler.class);
 
         bindHandler(FindAllCategorySchemesAction.class, FindAllCategorySchemesActionHandler.class);
-        bindHandler(GetCategoriesFromSchemeAction.class, GetCategoriesFromSchemeActionHandler.class);
+        bindHandler(FindCategoriesFromSchemeAction.class, FindCategoriesFromSchemeActionHandler.class);
         bindHandler(FindAllOrganisationSchemesAction.class, FindAllOrganisationSchemesActionHandler.class);
         bindHandler(GetOrganisationsFromSchemeAction.class, GetOrganisationsFromSchemeActionHandler.class);
         bindHandler(GetCommonMetadataConfigurationsAction.class, GetCommonMetadataConfigurationsActionHandler.class);
@@ -140,6 +143,9 @@ public class ServerModule extends HandlerModule {
         bindHandler(FindAllCodeListsAction.class, FindAllCodeListsActionHandler.class);
         bindHandler(GetCodesFromCodeListAction.class, GetCodesFromCodeListActionHandler.class);
         bindHandler(GetFrequencyCodesAction.class, GetFrequencyCodesActionHandler.class);
+
+        // External
+        bindHandler(GetExternalResourcesAction.class, GetExternalResourcesActionHandler.class);
 
         bindHandler(ValidateTicketAction.class, ValidateTicketActionHandler.class);
         bindHandler(GetLoginPageUrlAction.class, GetLoginPageUrlActionHandler.class);
