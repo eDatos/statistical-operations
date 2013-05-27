@@ -147,8 +147,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         // External resources
 
         void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList);
-        void setCategorySchemes(String formItemName, ExternalItemsResult result);
-        void setCategories(String formItemName, ExternalItemsResult result);
+        void setItemSchemes(String formItemName, ExternalItemsResult result);
+        void setItems(String formItemName, ExternalItemsResult result);
 
         // Instances
 
@@ -561,34 +561,34 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     @Override
-    public void retrieveCategorySchemes(final String formItemName, int firstResult, int maxResults, String criteria) {
-        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria(TypeExternalArtefactsEnum.CATEGORY_SCHEME, criteria);
+    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria) {
+        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria(type, criteria);
         dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingCategorySchemes()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
-                getView().setCategorySchemes(formItemName, result.getExternalItemsResult());
+                getView().setItemSchemes(formItemName, result.getExternalItemsResult());
             }
         });
     }
 
     @Override
-    public void retrieveCategories(final String formItemName, int firstResult, int maxResults, String criteria, String categorySchemeUrn) {
-        ItemWebCriteria itemWebCriteria = new ItemWebCriteria(TypeExternalArtefactsEnum.CATEGORY, criteria);
+    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria, String categorySchemeUrn) {
+        ItemWebCriteria itemWebCriteria = new ItemWebCriteria(type, criteria);
         itemWebCriteria.setItemSchemUrn(categorySchemeUrn);
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingCategories()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
-                getView().setCategories(formItemName, result.getExternalItemsResult());
+                getView().setItems(formItemName, result.getExternalItemsResult());
             }
         });
     }
