@@ -36,6 +36,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridTool
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
+import org.siemac.metamac.statistical.operations.web.client.widgets.external.ExternalItemListItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
@@ -368,7 +369,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // CONTENT CLASSIFIERS
 
         // TODO subject
-        // TODO subject areas
+        List<ExternalItemDto> secondarySubjectAreas = ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
+        operationDto.getSecondarySubjectAreas().clear();
+        operationDto.getSecondarySubjectAreas().addAll(secondarySubjectAreas);
 
         // CONTENT DESCRIPTORS
 
@@ -533,9 +536,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Content Classifiers
         contentClassifiersForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
-        ViewTextItem subject = new ViewTextItem(OperationDS.SUBJECT_AREA, getCoreMessages().operation_subject_area());
-        ViewTextItem secondarySubject = new ViewTextItem(OperationDS.SECONDARY_SUBJECT_AREAS, getCoreMessages().operation_secondary_subject_areas());
-        contentClassifiersForm.setFields(subject, secondarySubject);
+        // TODO subject
+        // ViewTextItem subject = new ViewTextItem(OperationDS.SUBJECT_AREA, getCoreMessages().operation_subject_area());
+        ExternalItemListItem secondarySubject = new ExternalItemListItem(OperationDS.SECONDARY_SUBJECT_AREAS, getCoreMessages().operation_secondary_subject_areas(), false);
+        contentClassifiersForm.setFields(secondarySubject);
 
         // Content Descriptors
         contentViewForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
@@ -770,8 +774,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // CONTENT CLASSIFIERS
 
-        contentClassifiersForm.setValue(OperationDS.SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : ExternalItemUtils.getExternalItemName(operationDto.getSubjectArea()));
-        contentClassifiersForm.setValue(OperationDS.SECONDARY_SUBJECT_AREAS, ExternalItemUtils.getExternalItemListToString(operationDto.getSecondarySubjectAreas()));
+        // TODO
+        // contentClassifiersForm.setValue(OperationDS.SUBJECT_AREA, operationDto.getSubjectArea() == null ? "" : ExternalItemUtils.getExternalItemName(operationDto.getSubjectArea()));
+        ((ExternalItemListItem) contentClassifiersForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(operationDto.getSecondarySubjectAreas());
 
         // CONTENT DESCRIPTORS
 
@@ -855,7 +860,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // CONTENT CLASSIFIERS
 
         // TODO subject area
-        // TODO secondary subject areas
+        ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(operationDto.getSecondarySubjectAreas());
 
         // CONTENT DESCRIPTORS
 
@@ -1070,9 +1075,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> categories = item.getSelectedExternalItemDtos();
+                List<ExternalItemDto> categories = item.getSelectedCategories();
                 item.markSearchWindowForDestroy();
                 ((SearchCategoriesItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(categories);
+                contentClassifiersEditionForm.markForRedraw();
             }
         };
         item.setSaveClickHandler(clickHandler);

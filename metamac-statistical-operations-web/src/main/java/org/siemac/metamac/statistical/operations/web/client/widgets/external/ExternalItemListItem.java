@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.external;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,7 +41,11 @@ public class ExternalItemListItem extends RelatedResourceBaseListItem<ExternalIt
         listGrid.setData(records);
     }
 
-    public List<ExternalItemDto> getSelectedExternalItemDtos() {
+    public void setExternalItems(Set<ExternalItemDto> externalItemDtos) {
+        setExternalItems(new ArrayList<ExternalItemDto>(externalItemDtos));
+    }
+
+    public List<ExternalItemDto> getExternalItemDtos() {
         return getSelectedRelatedResources();
     }
 

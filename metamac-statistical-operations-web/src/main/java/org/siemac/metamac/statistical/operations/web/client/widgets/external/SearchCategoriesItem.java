@@ -1,5 +1,9 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets.external;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
 import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
@@ -119,5 +123,12 @@ public class SearchCategoriesItem extends ExternalItemListItem {
 
     public SearchCategoriesWindow getSearchCategoriesWindow() {
         return searchCategoriesWindow;
+    }
+
+    public List<ExternalItemDto> getSelectedCategories() {
+        if (searchCategoriesWindow != null) {
+            return searchCategoriesWindow.getSelectedRelatedResources();
+        }
+        return new ArrayList<ExternalItemDto>();
     }
 }
