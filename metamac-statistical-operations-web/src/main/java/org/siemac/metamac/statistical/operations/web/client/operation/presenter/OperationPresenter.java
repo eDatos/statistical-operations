@@ -138,7 +138,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
         void setOrganisationSchemes(List<ExternalItemDto> schemes);
-        void setRegionalResposibles(List<ExternalItemDto> organisations);
         void setRegionalContributors(List<ExternalItemDto> organisations);
         void setPublishers(List<ExternalItemDto> organisations);
         void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
@@ -431,21 +430,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void onUpdateOperationsLists(UpdateOperationsListsEvent event) {
         getView().setOperationsLists(event.getSurveyTypeDtos(), event.getOfficialityTypeDtos());
-    }
-
-    @Override
-    public void populateRegionalResposibles(String uri) {
-        dispatcher.execute(new GetOrganisationsFromSchemeAction(uri), new WaitingAsyncCallback<GetOrganisationsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetOrganisationsFromSchemeResult result) {
-                getView().setRegionalResposibles(result.getOrganisations());
-            }
-        });
     }
 
     @Override
