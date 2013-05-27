@@ -9,4 +9,7 @@ public interface SrmRestInternalFacade {
 
     ExternalItemsResult findCategorySchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findCategories(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+
+    ExternalItemsResult findOrganisationUnitSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findOrganisationUnits(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 }

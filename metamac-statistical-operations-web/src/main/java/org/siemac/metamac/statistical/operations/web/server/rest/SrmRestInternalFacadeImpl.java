@@ -4,6 +4,8 @@ import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestCriteriaUtils;
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
@@ -66,6 +68,55 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding category schemes");
+        }
+    }
+
+    //
+    // ORGANISATION UNIT SCHEMES
+    //
+
+    @Override
+    public ExternalItemsResult findOrganisationUnitSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildOrganisationSchemeQuery(criteria);
+
+        try {
+            OrganisationUnitSchemes organisationUnitSchemes = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnitSchemes(query, orderBy, limit, offset);
+            return ExternalItemUtils.getOrganisationUnitSchemesAsExternalItemsResult(organisationUnitSchemes);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation unit schemes");
+        }
+
+    }
+
+    //
+    // ORGANISATION UNITS
+    //
+
+    @Override
+    public ExternalItemsResult findOrganisationUnits(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildOrganisationQuery(itemWebCriteria);
+
+        try {
+            OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits("~all", "~all", "~all", query, orderBy, limit, offset);
+            return ExternalItemUtils.getOrganisationUnitsAsExternalItemsResult(organisationUnits);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation units");
         }
     }
 }

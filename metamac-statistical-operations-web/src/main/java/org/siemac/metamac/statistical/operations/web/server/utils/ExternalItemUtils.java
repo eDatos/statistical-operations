@@ -8,6 +8,8 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ListBase;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal;
 import org.siemac.metamac.web.common.server.utils.DtoUtils;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -58,6 +60,54 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
         for (ResourceInternal resource : resources) {
             externalItemDtos.add(getCategoryAsExternalItemDto(resource));
+        }
+        return externalItemDtos;
+    }
+
+    //
+    // ORGANISATIONS
+    //
+
+    // OrganisationUnit Schemes
+
+    public static ExternalItemsResult getOrganisationUnitSchemesAsExternalItemsResult(OrganisationUnitSchemes organisationUnitSchemes) {
+        ExternalItemsResult result = getListBaseAsExternalItemsResult(organisationUnitSchemes);
+        result.setExternalItemDtos(getOrganisationUnitSchemesAsExternalItemDtos(organisationUnitSchemes.getOrganisationUnitSchemes()));
+        return result;
+    }
+
+    public static ExternalItemDto getOrganisationUnitSchemeAsExternalItemDto(ResourceInternal resourceInternal) {
+        ExternalItemDto externalItemDto = getResourceInternalAsExternalItemDto(resourceInternal);
+        externalItemDto.setType(TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME);
+        return externalItemDto;
+    }
+
+    public static List<ExternalItemDto> getOrganisationUnitSchemesAsExternalItemDtos(List<ResourceInternal> resources) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
+        for (ResourceInternal resource : resources) {
+            externalItemDtos.add(getOrganisationUnitSchemeAsExternalItemDto(resource));
+        }
+        return externalItemDtos;
+    }
+
+    // Organisation units
+
+    public static ExternalItemsResult getOrganisationUnitsAsExternalItemsResult(OrganisationUnits organisationUnits) {
+        ExternalItemsResult result = getListBaseAsExternalItemsResult(organisationUnits);
+        result.setExternalItemDtos(getOrganisationUnitsAsExternalItemDtos(organisationUnits.getOrganisationUnits()));
+        return result;
+    }
+
+    public static ExternalItemDto getOrganisationUnitAsExternalItemDto(ResourceInternal resourceInternal) {
+        ExternalItemDto externalItemDto = getResourceInternalAsExternalItemDto(resourceInternal);
+        externalItemDto.setType(TypeExternalArtefactsEnum.ORGANISATION_UNIT);
+        return externalItemDto;
+    }
+
+    public static List<ExternalItemDto> getOrganisationUnitsAsExternalItemDtos(List<ResourceInternal> resources) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
+        for (ResourceInternal resource : resources) {
+            externalItemDtos.add(getOrganisationUnitAsExternalItemDto(resource));
         }
         return externalItemDtos;
     }
