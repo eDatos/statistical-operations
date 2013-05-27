@@ -1,5 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
+import static org.siemac.metamac.srm.rest.internal.RestInternalConstants.WILDCARD;
+
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
@@ -60,7 +62,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestCriteriaUtils.buildCategoryQuery(itemWebCriteria);
 
         try {
-            Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories("~all", "~all", "~all", query, orderBy, limit, offset);
+            Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getCategoriesAsExternalItemsResult(categories);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
@@ -109,7 +111,8 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestCriteriaUtils.buildOrganisationQuery(itemWebCriteria);
 
         try {
-            OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits("~all", "~all", "~all", query, orderBy, limit, offset);
+
+            OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationUnitsAsExternalItemsResult(organisationUnits);
         } catch (ServerWebApplicationException e) {
             org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),

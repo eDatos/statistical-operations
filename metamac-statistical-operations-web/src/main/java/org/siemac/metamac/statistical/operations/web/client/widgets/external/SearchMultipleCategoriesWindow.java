@@ -4,9 +4,9 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 
-public class SearchCategoriesWindow extends SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow {
+public class SearchMultipleCategoriesWindow extends SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow {
 
-    public SearchCategoriesWindow(int maxResults, PaginatedAction filterListAction, PaginatedAction selectionListAction) {
+    public SearchMultipleCategoriesWindow(int maxResults, PaginatedAction filterListAction, PaginatedAction selectionListAction) {
         super(getConstants().searchCategories(), getConstants().filterCategoryScheme(), getConstants().selectedCategoryScheme(), getConstants().selectionCategories(), maxResults, filterListAction,
                 selectionListAction);
     }

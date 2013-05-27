@@ -34,6 +34,12 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
             case CATEGORY:
                 result = srmRestInternalFacade.findCategories((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
+            case ORGANISATION_UNIT_SCHEME:
+                result = srmRestInternalFacade.findOrganisationUnitSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case ORGANISATION_UNIT:
+                result = srmRestInternalFacade.findOrganisationUnits((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
         }

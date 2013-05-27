@@ -48,7 +48,13 @@ public class RestCriteriaUtils {
             queryBuilder.append(")");
         }
         if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
-            // TODO add condition
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            queryBuilder.append(CategoryCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+                    .append("\"");
+            queryBuilder.append(")");
         }
         return queryBuilder.toString();
     }
@@ -89,7 +95,13 @@ public class RestCriteriaUtils {
             queryBuilder.append(")");
         }
         if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
-            // TODO add condition
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            queryBuilder.append(OrganisationCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+                    .append("\"");
+            queryBuilder.append(")");
         }
         return queryBuilder.toString();
     }
