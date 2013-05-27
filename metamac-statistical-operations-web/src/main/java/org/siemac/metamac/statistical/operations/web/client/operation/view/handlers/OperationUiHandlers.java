@@ -17,7 +17,6 @@ public interface OperationUiHandlers extends ExternalUiHandlers {
     void retrievePaginatedFamilies(int firstResult, int maxResults, String family);
 
     void populateRegionalContributors(String uri);
-    void populatePublishers(String uri);
 
     void updateInstancesOrder(List<Long> instancesIds);
 

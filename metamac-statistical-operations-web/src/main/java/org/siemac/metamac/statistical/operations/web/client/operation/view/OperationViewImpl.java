@@ -129,7 +129,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // DIFUSSION AND PUBLICATION
     private GroupDynamicForm             diffusionForm;
     private GroupDynamicForm             diffusionEditionForm;
-    private ExternalMultipleSelectItem   publisherItem;
     private CustomCheckboxItem           releaseCalendar;
     private CustomTextItem               releaseCalendarAccess;
     private CustomSelectItem             updateFrequencyItem;
@@ -162,7 +161,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private List<OfficialityTypeDto>     officialityTypeDtos;
 
     private List<ExternalItemDto>        regionalContributors;
-    private List<ExternalItemDto>        publishers;
     private List<ExternalItemDto>        commonMetadataList;
     private List<ExternalItemDto>        updateFrequencyCodes;
 
@@ -305,6 +303,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setUiHandlers(uiHandlers);
+
+        ((SearchMultipleItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setUiHandlers(uiHandlers);
     }
 
     /*
@@ -410,8 +410,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // DIFFUSION AND PUBLICATION
 
+        List<ExternalItemDto> publishers = ((ExternalItemListItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).getExternalItemDtos();
         operationDto.getPublisher().clear();
-        operationDto.getPublisher().addAll(publisherItem.getSelectedExternalItems(publishers));
+        operationDto.getPublisher().addAll(publishers);
+
         operationDto.setRelPolUsAc((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.RE_POL_US_AC));
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
@@ -580,7 +582,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Diffusion Descriptors
         diffusionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
-        ViewTextItem publisher = new ViewTextItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
+        ExternalItemListItem publisher = new ExternalItemListItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher(), false);
         ViewMultiLanguageTextItem staticRelPolUsAc = new ViewMultiLanguageTextItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         ViewTextItem releaseCalendar = new ViewTextItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
@@ -707,17 +709,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // DIFFUSION AND PUBLICATION
 
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
-        publisherItem = new ExternalMultipleSelectItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
-        // publisherItem.setValidators(getRequiredIfInternallyPublished());
-        publisherItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
-
-            @Override
-            public void onChanged(ChangedEvent event) {
-                if (event.getValue() != null) {
-                    getUiHandlers().populatePublishers(event.getValue().toString());
-                }
-            }
-        });
+        SearchMultipleItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
         MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
@@ -731,7 +723,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         MultilanguageRichTextEditorItem revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.REV_PRACTICE, getConstants().operationRevPractice());
         commonMetadataItem = new CustomSelectItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
         // commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
-        diffusionEditionForm.setFields(publisherItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
+        diffusionEditionForm.setFields(publishersItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
                 revPracticeItem, commonMetadataItem);
 
         // LEGAL ACTS
@@ -803,7 +795,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // DIFFUSION AND PUBLICATION
 
-        diffusionForm.setValue(OperationDS.PUBLISHER, ExternalItemUtils.getExternalItemListToString(operationDto.getPublisher()));
+        ((ExternalItemListItem) diffusionForm.getItem(OperationDS.PUBLISHER)).setExternalItems(operationDto.getPublisher());
         diffusionForm.setValue(OperationDS.RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
         diffusionForm.setValue(OperationDS.RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar())
                 ? MetamacWebCommon.getConstants().yes()
@@ -883,7 +875,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // DIFFUSION AND PUBLICATION
 
-        publisherItem.clearValue();
+        ((ExternalItemListItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setExternalItems(operationDto.getPublisher());
         diffusionEditionForm.setValue(OperationDS.RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
         releaseCalendar.setValue(operationDto.getReleaseCalendar());
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
@@ -958,7 +950,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setOrganisationSchemes(List<ExternalItemDto> schemes) {
         regionalContributorItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
-        publisherItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
     }
 
     @Override
@@ -973,12 +964,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     public void setRegionalContributors(List<ExternalItemDto> organisations) {
         this.regionalContributors = organisations;
         regionalContributorItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
-    }
-
-    @Override
-    public void setPublishers(List<ExternalItemDto> organisations) {
-        this.publishers = organisations;
-        publisherItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
@@ -1047,6 +1032,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+
+        } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
+            ((SearchMultipleItemsItem) diffusionEditionForm.getItem(formItemName)).setItemSchemes(result);
         }
     }
 
@@ -1063,6 +1051,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+
+        } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
+            ((SearchMultipleItemsItem) diffusionEditionForm.getItem(formItemName)).setItems(result);
         }
     }
 
@@ -1146,6 +1137,28 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 item.markSearchWindowForDestroy();
                 ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setExternalItems(organisationUnits);
                 productionDescriptorsEditionForm.markForRedraw();
+            }
+        };
+        item.setSaveClickHandler(clickHandler);
+        return item;
+    }
+
+    private SearchMultipleItemsItem createPublishersItem(String name, String title) {
+        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUntisItem(name, title, new MultipleExternalResourceAction() {
+
+            @Override
+            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
+                return new ArrayList<ExternalItemDto>(operationDto.getPublisher());
+            }
+        });
+        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+            @Override
+            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+                List<ExternalItemDto> organisationUnits = item.getSelectedItems();
+                item.markSearchWindowForDestroy();
+                ((SearchMultipleItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setExternalItems(organisationUnits);
+                diffusionEditionForm.markForRedraw();
             }
         };
         item.setSaveClickHandler(clickHandler);

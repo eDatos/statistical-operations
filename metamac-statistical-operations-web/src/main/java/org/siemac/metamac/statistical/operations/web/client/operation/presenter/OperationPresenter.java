@@ -139,7 +139,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
         void setOrganisationSchemes(List<ExternalItemDto> schemes);
         void setRegionalContributors(List<ExternalItemDto> organisations);
-        void setPublishers(List<ExternalItemDto> organisations);
         void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
         // External resources
@@ -451,21 +450,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void onUpdateOrganisationSchemes(UpdateOrganisationSchemesEvent event) {
         getView().setOrganisationSchemes(event.getOrganisationSchemes());
-    }
-
-    @Override
-    public void populatePublishers(String uri) {
-        dispatcher.execute(new GetOrganisationsFromSchemeAction(uri), new WaitingAsyncCallback<GetOrganisationsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetOrganisationsFromSchemeResult result) {
-                getView().setPublishers(result.getOrganisations());
-            }
-        });
     }
 
     @ProxyEvent
