@@ -6,11 +6,11 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categor
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestCriteriaUtils;
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

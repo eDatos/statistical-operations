@@ -9,8 +9,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.ListBase;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal;
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.web.common.server.utils.DtoUtils;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 public class ExternalItemUtils extends org.siemac.metamac.web.common.client.utils.ExternalItemUtils {
 

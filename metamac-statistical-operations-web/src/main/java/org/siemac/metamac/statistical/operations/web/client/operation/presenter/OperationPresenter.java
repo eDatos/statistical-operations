@@ -38,7 +38,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
@@ -68,6 +67,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCrit
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

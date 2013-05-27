@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;

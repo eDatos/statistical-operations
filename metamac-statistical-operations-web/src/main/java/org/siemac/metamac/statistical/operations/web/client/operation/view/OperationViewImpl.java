@@ -38,7 +38,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceF
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.ExternalItemListItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoriesItem;
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
@@ -60,6 +59,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;

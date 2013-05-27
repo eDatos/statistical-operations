@@ -1,8 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 
 public interface SrmRestInternalFacade {

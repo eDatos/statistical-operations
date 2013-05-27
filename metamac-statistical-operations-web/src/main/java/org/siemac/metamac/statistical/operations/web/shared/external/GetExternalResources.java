@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.shared.external;
 
-import org.siemac.metamac.statistical.operations.web.shared.ExternalItemsResult;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
