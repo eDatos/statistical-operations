@@ -32,6 +32,7 @@ import org.siemac.metamac.statistical.operations.web.client.instance.view.handle
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.RestCriteriaClientUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
@@ -46,7 +47,6 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
@@ -311,8 +311,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     //
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria) {
-        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria(type, criteria);
+    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
+        ExternalResourceWebCriteria externalResourceWebCriteria = RestCriteriaClientUtils.buildItemSchemeWebCriteria(types, criteria);
         dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
@@ -327,9 +327,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @Override
-    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria, String categorySchemeUrn) {
-        ItemWebCriteria itemWebCriteria = new ItemWebCriteria(type, criteria);
-        itemWebCriteria.setItemSchemUrn(categorySchemeUrn);
+    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
+        ExternalResourceWebCriteria itemWebCriteria = RestCriteriaClientUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override

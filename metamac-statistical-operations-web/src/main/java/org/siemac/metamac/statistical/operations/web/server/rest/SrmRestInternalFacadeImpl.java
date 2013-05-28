@@ -8,6 +8,8 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categor
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ConceptSchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Concepts;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviderSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviders;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
@@ -16,6 +18,8 @@ import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestCrite
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -126,6 +130,54 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     }
 
     //
+    // CONCEPT SCHEMES
+    //
+
+    @Override
+    public ExternalItemsResult findConceptSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildConceptSchemeQuery(criteria);
+
+        try {
+            ConceptSchemes conceptSchemes = restApiLocator.getSrmRestInternalFacadeV10().findConceptSchemes(query, orderBy, limit, offset);
+            return ExternalItemUtils.getConceptSchemesAsExternalItemsResult(conceptSchemes);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding concept schemes");
+        }
+    }
+
+    //
+    // CONCEPTS
+    //
+
+    @Override
+    public ExternalItemsResult findConcepts(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildConceptQuery(itemWebCriteria);
+
+        try {
+            Concepts concepts = restApiLocator.getSrmRestInternalFacadeV10().findConcepts(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            return ExternalItemUtils.getConceptsAsExternalItemsResult(concepts);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding concepts");
+        }
+    }
+
+    //
     // ORGANISATION UNIT SCHEMES
     //
 
@@ -228,7 +280,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisiatonSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisiatonSchemes(OrganisationSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
         // TODO Auto-generated method stub
         return null;
     }
@@ -238,7 +290,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisations(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisations(OrganisationWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
         // TODO Auto-generated method stub
         return null;
     }

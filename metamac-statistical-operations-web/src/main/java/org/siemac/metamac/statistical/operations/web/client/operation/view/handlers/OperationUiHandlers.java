@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
-import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
 
-public interface OperationUiHandlers extends ExternalUiHandlers {
+public interface OperationUiHandlers extends ExternalResourcesUiHandlers {
 
     void saveOperation(OperationDto operationDto);
     void goToFamily(String familyCode);

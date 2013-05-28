@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -18,12 +18,12 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchMultipleItemsItem extends ExternalItemListItem {
 
-    private ExternalUiHandlers                                                uiHandlers;
+    private ExternalResourcesUiHandlers                                       uiHandlers;
     protected SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow searchMultipleItemsWindow;
 
     private ClickHandler                                                      saveClickHandler;
 
-    public SearchMultipleItemsItem(final String name, String title, final TypeExternalArtefactsEnum itemSchemeType, final TypeExternalArtefactsEnum itemType, final String windowTitle,
+    public SearchMultipleItemsItem(final String name, String title, final TypeExternalArtefactsEnum[] itemSchemeTypes, final TypeExternalArtefactsEnum[] itemTypes, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
         super(name, title, true);
 
@@ -33,18 +33,19 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
             public void onFormItemClick(FormItemIconClickEvent event) {
                 final int FIRST_RESULT = 0;
                 final int MAX_RESULTS = 6;
+
                 PaginatedAction filterListAction = new PaginatedAction() {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults) {
-                        getUiHandlers().retrieveItemSchemes(name, itemSchemeType, firstResult, maxResults, searchMultipleItemsWindow.getFilterListCriteria());
+                        getUiHandlers().retrieveItemSchemes(name, itemSchemeTypes, firstResult, maxResults, searchMultipleItemsWindow.getFilterListCriteria());
                     }
                 };
                 PaginatedAction selectionListAction = new PaginatedAction() {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults) {
-                        getUiHandlers().retrieveItems(name, itemType, firstResult, maxResults, searchMultipleItemsWindow.getSelectionListCriteria(),
+                        getUiHandlers().retrieveItems(name, itemTypes, firstResult, maxResults, searchMultipleItemsWindow.getSelectionListCriteria(),
                                 searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
                     }
                 };
@@ -52,8 +53,8 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                         MAX_RESULTS, filterListAction, selectionListAction);
 
                 // Load the list of item schemes (to populate the selection window)
-                getUiHandlers().retrieveItemSchemes(name, itemSchemeType, FIRST_RESULT, MAX_RESULTS, null);
-                getUiHandlers().retrieveItems(name, itemType, FIRST_RESULT, MAX_RESULTS, null, null);
+                getUiHandlers().retrieveItemSchemes(name, itemSchemeTypes, FIRST_RESULT, MAX_RESULTS, null);
+                getUiHandlers().retrieveItems(name, itemTypes, FIRST_RESULT, MAX_RESULTS, null, null);
 
                 // Set external items previously selected
                 searchMultipleItemsWindow.setTargetRelatedResources(action.getExternalItemsPreviouslySelected());
@@ -63,7 +64,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
                     @Override
                     public void onRecordClick(RecordClickEvent event) {
-                        getUiHandlers().retrieveItems(name, itemType, FIRST_RESULT, MAX_RESULTS, searchMultipleItemsWindow.getSelectionListCriteria(),
+                        getUiHandlers().retrieveItems(name, itemTypes, FIRST_RESULT, MAX_RESULTS, searchMultipleItemsWindow.getSelectionListCriteria(),
                                 searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
                     }
                 });
@@ -71,7 +72,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
                     @Override
                     public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                        getUiHandlers().retrieveItems(name, itemType, FIRST_RESULT, MAX_RESULTS, searchMultipleItemsWindow.getSelectionListCriteria(),
+                        getUiHandlers().retrieveItems(name, itemTypes, FIRST_RESULT, MAX_RESULTS, searchMultipleItemsWindow.getSelectionListCriteria(),
                                 searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
                     }
                 });
@@ -81,14 +82,14 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults, String criteria) {
-                        getUiHandlers().retrieveItems(name, itemType, firstResult, maxResults, criteria, searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
+                        getUiHandlers().retrieveItems(name, itemTypes, firstResult, maxResults, criteria, searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
                     }
                 });
                 searchMultipleItemsWindow.setFilterListSearchAction(new SearchPaginatedAction() {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults, String criteria) {
-                        getUiHandlers().retrieveItemSchemes(name, itemSchemeType, firstResult, maxResults, criteria);
+                        getUiHandlers().retrieveItemSchemes(name, itemSchemeTypes, firstResult, maxResults, criteria);
                     }
                 });
 
@@ -119,11 +120,11 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
         this.saveClickHandler = clickHandler;
     }
 
-    public void setUiHandlers(ExternalUiHandlers uiHandlers) {
+    public void setUiHandlers(ExternalResourcesUiHandlers uiHandlers) {
         this.uiHandlers = uiHandlers;
     }
 
-    public ExternalUiHandlers getUiHandlers() {
+    public ExternalResourcesUiHandlers getUiHandlers() {
         return uiHandlers;
     }
 
