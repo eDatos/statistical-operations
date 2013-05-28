@@ -27,8 +27,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequen
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent.UpdateOrganisationSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
@@ -47,8 +45,6 @@ import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListActio
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
@@ -95,7 +91,6 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 public class OperationPresenter extends Presenter<OperationPresenter.OperationView, OperationPresenter.OperationProxy>
         implements
             OperationUiHandlers,
-            UpdateOrganisationSchemesHandler,
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler,
             UpdateFrequencyCodesHandler {
@@ -137,8 +132,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
-        void setOrganisationSchemes(List<ExternalItemDto> schemes);
-        void setRegionalContributors(List<ExternalItemDto> organisations);
         void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
         // External resources
@@ -429,27 +422,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void onUpdateOperationsLists(UpdateOperationsListsEvent event) {
         getView().setOperationsLists(event.getSurveyTypeDtos(), event.getOfficialityTypeDtos());
-    }
-
-    @Override
-    public void populateRegionalContributors(String uri) {
-        dispatcher.execute(new GetOrganisationsFromSchemeAction(uri), new WaitingAsyncCallback<GetOrganisationsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetOrganisationsFromSchemeResult result) {
-                getView().setRegionalContributors(result.getOrganisations());
-            }
-        });
-    }
-
-    @ProxyEvent
-    @Override
-    public void onUpdateOrganisationSchemes(UpdateOrganisationSchemesEvent event) {
-        getView().setOrganisationSchemes(event.getOrganisationSchemes());
     }
 
     @ProxyEvent

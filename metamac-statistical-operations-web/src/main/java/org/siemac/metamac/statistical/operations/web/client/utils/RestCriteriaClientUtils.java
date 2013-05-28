@@ -46,7 +46,7 @@ public class RestCriteriaClientUtils {
 
     private static boolean areOrganisationSchemeTypes(TypeExternalArtefactsEnum[] types) {
         for (TypeExternalArtefactsEnum type : types) {
-            if (!ORGANISATION_UNIT_SCHEME.equals(type) || !AGENCY_SCHEME.equals(type) || !DATA_PROVIDER_SCHEME.equals(type) || !DATA_CONSUMER_SCHEME.equals(type)) {
+            if (!ORGANISATION_UNIT_SCHEME.equals(type) && !AGENCY_SCHEME.equals(type) && !DATA_PROVIDER_SCHEME.equals(type) && !DATA_CONSUMER_SCHEME.equals(type)) {
                 return false;
             }
         }
@@ -55,7 +55,7 @@ public class RestCriteriaClientUtils {
 
     private static boolean areOrganisationTypes(TypeExternalArtefactsEnum[] types) {
         for (TypeExternalArtefactsEnum type : types) {
-            if (!ORGANISATION_UNIT.equals(type) || !AGENCY.equals(type) || !DATA_PROVIDER.equals(type) || !DATA_CONSUMER.equals(type)) {
+            if (!ORGANISATION_UNIT.equals(type) && !AGENCY.equals(type) && !DATA_PROVIDER.equals(type) && !DATA_CONSUMER.equals(type)) {
                 return false;
             }
         }

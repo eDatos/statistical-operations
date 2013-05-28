@@ -14,8 +14,10 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Concept
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Concepts;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviderSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviders;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organisations;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal;
 import org.siemac.metamac.web.common.server.utils.DtoUtils;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -85,6 +87,22 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
     //
     // ORGANISATIONS
     //
+
+    // Organisation schemes
+
+    public static ExternalItemsResult getOrganisationSchemesAsExternalItemsResult(OrganisationSchemes organisationSchemes) {
+        ExternalItemsResult result = getListBaseAsExternalItemsResult(organisationSchemes);
+        result.setExternalItemDtos(getExternalItemDtosFromResourceInternals(organisationSchemes.getOrganisationSchemes()));
+        return result;
+    }
+
+    // Organisations
+
+    public static ExternalItemsResult getOrganisationsAsExternalItemsResult(Organisations organisations) {
+        ExternalItemsResult result = getListBaseAsExternalItemsResult(organisations);
+        result.setExternalItemDtos(getExternalItemDtosFromResourceInternals(organisations.getOrganisations()));
+        return result;
+    }
 
     // Organisation Unit Schemes
 

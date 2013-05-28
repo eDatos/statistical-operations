@@ -42,6 +42,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.external.Sea
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchItemItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemsItem;
+import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsAndDataProvidersItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
@@ -58,7 +59,6 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalItemLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalMultipleSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
@@ -80,8 +80,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
-import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
@@ -122,7 +120,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // PRODUCTION DESCRIPTORS
     private GroupDynamicForm             productionDescriptorsForm;
     private GroupDynamicForm             productionDescriptorsEditionForm;
-    private ExternalMultipleSelectItem   regionalContributorItem;
     private CustomCheckboxItem           currentlyActiveItem;
     private CustomSelectItem             statusItem;
 
@@ -160,7 +157,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private List<SurveyTypeDto>          surveyTypeDtos;
     private List<OfficialityTypeDto>     officialityTypeDtos;
 
-    private List<ExternalItemDto>        regionalContributors;
     private List<ExternalItemDto>        commonMetadataList;
     private List<ExternalItemDto>        updateFrequencyCodes;
 
@@ -303,6 +299,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setUiHandlers(uiHandlers);
+        ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setUiHandlers(uiHandlers);
     }
@@ -399,12 +396,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.getProducer().clear();
         operationDto.getProducer().addAll(producers);
 
-        List<ExternalItemDto> regionaleResponsibles = ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).getExternalItemDtos();
+        List<ExternalItemDto> regionalResponsibles = ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).getExternalItemDtos();
         operationDto.getRegionalResponsible().clear();
-        operationDto.getRegionalResponsible().addAll(regionaleResponsibles);
+        operationDto.getRegionalResponsible().addAll(regionalResponsibles);
 
+        List<ExternalItemDto> regionalContributors = ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).getExternalItemDtos();
         operationDto.getRegionalContributor().clear();
-        operationDto.getRegionalContributor().addAll(regionalContributorItem.getSelectedExternalItems(regionalContributors));
+        operationDto.getRegionalContributor().addAll(regionalContributors);
+
         operationDto.setCurrentlyActive(currentlyActiveItem.getValueAsBoolean());
         operationDto.setStatus(statusItem.getValueAsString() != null ? StatusEnum.valueOf(statusItem.getValueAsString()) : null);
 
@@ -572,13 +571,13 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         productionDescriptorsForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
         ExternalItemListItem producer = new ExternalItemListItem(OperationDS.PRODUCER, getCoreMessages().operation_producer(), false);
         ExternalItemListItem regionalResposible = new ExternalItemListItem(OperationDS.REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible(), false);
-        ViewTextItem regionalCont = new ViewTextItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
+        ExternalItemListItem regionalContibutor = new ExternalItemListItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor(), false);
         ViewTextItem createdDate = new ViewTextItem(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         ViewTextItem inventoryDate = new ViewTextItem(OperationDS.INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         ViewTextItem currentlyActive = new ViewTextItem(OperationDS.CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
         ViewTextItem status = new ViewTextItem(OperationDS.STATUS, getCoreMessages().operation_status());
         ViewTextItem procStatus = new ViewTextItem(OperationDS.PROC_STATUS, getCoreMessages().operation_proc_status());
-        productionDescriptorsForm.setFields(producer, regionalResposible, regionalCont, createdDate, inventoryDate, currentlyActive, status, procStatus);
+        productionDescriptorsForm.setFields(producer, regionalResposible, regionalContibutor, createdDate, inventoryDate, currentlyActive, status, procStatus);
 
         // Diffusion Descriptors
         diffusionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
@@ -684,16 +683,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         SearchMultipleItemsItem regionalResponsibleItem = createRegionaleResponsiblesItem(OperationDS.REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
 
-        regionalContributorItem = new ExternalMultipleSelectItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
-        regionalContributorItem.getSchemeItem().addChangedHandler(new ChangedHandler() {
+        SearchMultipleItemsItem regionalContributorItem = createRegionaleContributorsItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
 
-            @Override
-            public void onChanged(ChangedEvent event) {
-                if (event.getValue() != null) {
-                    getUiHandlers().populateRegionalContributors(event.getValue().toString());
-                }
-            }
-        });
         ViewTextItem createdDate = new ViewTextItem(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(OperationDS.INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
@@ -783,7 +774,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((ExternalItemListItem) productionDescriptorsForm.getItem(OperationDS.PRODUCER)).setExternalItems(operationDto.getProducer());
         ((ExternalItemListItem) productionDescriptorsForm.getItem(OperationDS.REG_RESPONSIBLE)).setExternalItems(operationDto.getRegionalResponsible());
-        productionDescriptorsForm.setValue(OperationDS.REG_CONTRIBUTOR, ExternalItemUtils.getExternalItemListToString(operationDto.getRegionalContributor()));
+        ((ExternalItemListItem) productionDescriptorsForm.getItem(OperationDS.REG_CONTRIBUTOR)).setExternalItems(operationDto.getRegionalContributor());
         productionDescriptorsForm.setValue(OperationDS.CREATED_DATE, operationDto.getCreatedDate());
         productionDescriptorsForm.setValue(OperationDS.INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         productionDescriptorsForm.setValue(OperationDS.CURRENTLY_ACTIVE, (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive())
@@ -865,7 +856,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setExternalItems(operationDto.getProducer());
         ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setExternalItems(operationDto.getRegionalResponsible());
-        regionalContributorItem.getValue();
+        ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setExternalItems(operationDto.getRegionalContributor());
         productionDescriptorsEditionForm.setValue(OperationDS.CREATED_DATE, operationDto.getCreatedDate());
         productionDescriptorsEditionForm.setValue(OperationDS.INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
         currentlyActiveItem.setValue(operationDto.getCurrentlyActive() != null ? operationDto.getCurrentlyActive() : false);
@@ -948,22 +939,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setOrganisationSchemes(List<ExternalItemDto> schemes) {
-        regionalContributorItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
-    }
-
-    @Override
     public void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos) {
         this.surveyTypeDtos = surveyTypeDtos;
         this.officialityTypeDtos = officialityTypeDtos;
         surveyType.setValueMap(OperationsListUtils.getSurveyTypeHashMap(surveyTypeDtos));
         officialityType.setValueMap(OperationsListUtils.getOfficialityTypeHashMap(officialityTypeDtos));
-    }
-
-    @Override
-    public void setRegionalContributors(List<ExternalItemDto> organisations) {
-        this.regionalContributors = organisations;
-        regionalContributorItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(organisations));
     }
 
     @Override
@@ -1033,6 +1013,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
+        } else if (StringUtils.equals(OperationDS.REG_CONTRIBUTOR, formItemName)) {
+            ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
             ((SearchMultipleItemsItem) diffusionEditionForm.getItem(formItemName)).setItemSchemes(result);
         }
@@ -1050,6 +1033,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
+            ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+
+        } else if (StringUtils.equals(OperationDS.REG_CONTRIBUTOR, formItemName)) {
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
@@ -1136,6 +1122,28 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 List<ExternalItemDto> organisationUnits = item.getSelectedItems();
                 item.markSearchWindowForDestroy();
                 ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setExternalItems(organisationUnits);
+                productionDescriptorsEditionForm.markForRedraw();
+            }
+        };
+        item.setSaveClickHandler(clickHandler);
+        return item;
+    }
+
+    private SearchMultipleItemsItem createRegionaleContributorsItem(String name, String title) {
+        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUnitsAndDataProvidersItem(name, title, new MultipleExternalResourceAction() {
+
+            @Override
+            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).getExternalItemDtos());
+            }
+        });
+        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+            @Override
+            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+                List<ExternalItemDto> organisations = item.getSelectedItems();
+                item.markSearchWindowForDestroy();
+                ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setExternalItems(organisations);
                 productionDescriptorsEditionForm.markForRedraw();
             }
         };

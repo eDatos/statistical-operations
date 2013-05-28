@@ -12,7 +12,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeLis
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
@@ -22,8 +21,6 @@ import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsActi
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsResult;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesResult;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFrequencyCodesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
@@ -118,7 +115,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
         loadFrequencyCodes();
 
         // TODO These lists should not be load here!
-        loadOrganisations();
         loadCategorySchemes();
         loadConceptSchemes();
     }
@@ -202,20 +198,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
             @Override
             public void onWaitSuccess(FindAllCodeListsResult result) {
                 UpdateCodeListsEvent.fire(MainPagePresenter.this, result.getCodeLists());
-            }
-        });
-    }
-
-    private void loadOrganisations() {
-        dispatcher.execute(new FindAllOrganisationSchemesAction(), new WaitingAsyncCallback<FindAllOrganisationSchemesResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(FindAllOrganisationSchemesResult result) {
-                UpdateOrganisationSchemesEvent.fire(MainPagePresenter.this, result.getOrganisationSchemes());
             }
         });
     }

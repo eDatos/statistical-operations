@@ -16,8 +16,6 @@ public interface OperationUiHandlers extends ExternalResourcesUiHandlers {
     void updateOperationFamilies(List<Long> familiesToAdd, List<Long> familiesToRemove);
     void retrievePaginatedFamilies(int firstResult, int maxResults, String family);
 
-    void populateRegionalContributors(String uri);
-
     void updateInstancesOrder(List<Long> instancesIds);
 
     // External resources

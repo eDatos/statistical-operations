@@ -5,6 +5,8 @@ import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternal
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -33,6 +35,12 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 break;
             case CATEGORY:
                 result = srmRestInternalFacade.findCategories((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case ORGANISATION_SCHEME:
+                result = srmRestInternalFacade.findOrganisationSchemes((OrganisationSchemeWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case ORGANISATION:
+                result = srmRestInternalFacade.findOrganisations((OrganisationWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT_SCHEME:
                 result = srmRestInternalFacade.findOrganisationUnitSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());

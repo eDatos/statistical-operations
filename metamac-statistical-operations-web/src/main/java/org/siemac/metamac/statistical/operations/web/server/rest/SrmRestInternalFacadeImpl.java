@@ -12,9 +12,11 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Concept
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Concepts;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviderSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviders;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
-import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestCriteriaUtils;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organisations;
+import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
@@ -43,7 +45,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildCategorySchemeQuery(criteria);
+        String query = RestQueryUtils.buildCategorySchemeQuery(criteria);
 
         try {
             CategorySchemes categorySchemes = restApiLocator.getSrmRestInternalFacadeV10().findCategorySchemes(query, orderBy, limit, offset);
@@ -67,7 +69,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildCategoryQuery(itemWebCriteria);
+        String query = RestQueryUtils.buildCategoryQuery(itemWebCriteria);
 
         try {
             Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
@@ -91,7 +93,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildCodelistQuery(criteria);
+        String query = RestQueryUtils.buildCodelistQuery(criteria);
 
         try {
             Codelists codelists = restApiLocator.getSrmRestInternalFacadeV10().findCodelists(query, orderBy, limit, offset);
@@ -115,7 +117,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildCodeQuery(itemWebCriteria);
+        String query = RestQueryUtils.buildCodeQuery(itemWebCriteria);
 
         try {
             Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
@@ -139,7 +141,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildConceptSchemeQuery(criteria);
+        String query = RestQueryUtils.buildConceptSchemeQuery(criteria);
 
         try {
             ConceptSchemes conceptSchemes = restApiLocator.getSrmRestInternalFacadeV10().findConceptSchemes(query, orderBy, limit, offset);
@@ -163,7 +165,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildConceptQuery(itemWebCriteria);
+        String query = RestQueryUtils.buildConceptQuery(itemWebCriteria);
 
         try {
             Concepts concepts = restApiLocator.getSrmRestInternalFacadeV10().findConcepts(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
@@ -187,7 +189,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildOrganisationSchemeQuery(criteria);
+        String query = RestQueryUtils.buildOrganisationSchemeQuery(criteria);
 
         try {
             OrganisationUnitSchemes organisationUnitSchemes = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnitSchemes(query, orderBy, limit, offset);
@@ -211,7 +213,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildOrganisationQuery(itemWebCriteria);
+        String query = RestQueryUtils.buildOrganisationQuery(itemWebCriteria);
 
         try {
 
@@ -236,7 +238,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildOrganisationSchemeQuery(criteria);
+        String query = RestQueryUtils.buildOrganisationSchemeQuery(criteria);
 
         try {
             DataProviderSchemes dataProviderSchemes = restApiLocator.getSrmRestInternalFacadeV10().findDataProviderSchemes(query, orderBy, limit, offset);
@@ -260,7 +262,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
         String orderBy = null;
-        String query = RestCriteriaUtils.buildOrganisationQuery(itemWebCriteria);
+        String query = RestQueryUtils.buildOrganisationQuery(itemWebCriteria);
 
         try {
 
@@ -280,9 +282,23 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisiatonSchemes(OrganisationSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
-        // TODO Auto-generated method stub
-        return null;
+    public ExternalItemsResult findOrganisationSchemes(OrganisationSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestQueryUtils.buildOrganisationSchemeQuery(criteria);
+
+        try {
+            OrganisationSchemes organisationSchemes = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationSchemes(query, orderBy, limit, offset);
+            return ExternalItemUtils.getOrganisationSchemesAsExternalItemsResult(organisationSchemes);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation schemes");
+        }
     }
 
     //
@@ -291,7 +307,22 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
     @Override
     public ExternalItemsResult findOrganisations(OrganisationWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
-        // TODO Auto-generated method stub
-        return null;
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestQueryUtils.buildOrganisationQuery(itemWebCriteria);
+
+        try {
+
+            Organisations organisations = restApiLocator.getSrmRestInternalFacadeV10().findOrganisations(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            return ExternalItemUtils.getOrganisationsAsExternalItemsResult(organisations);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisations");
+        }
     }
 }

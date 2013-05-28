@@ -20,7 +20,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCrit
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 
-public class RestCriteriaUtils {
+public class RestQueryUtils {
 
     //
     // CATEGORY SCHEME
@@ -188,7 +188,7 @@ public class RestCriteriaUtils {
             queryBuilder.append("(");
             for (int i = 0; i < organisationSchemeTypes.length; i++) {
                 if (i != 0) {
-                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
                 queryBuilder.append(OrganisationSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                         .append(getOrganisationSchemeType(organisationSchemeTypes[i])).append("\"");
@@ -233,7 +233,7 @@ public class RestCriteriaUtils {
             queryBuilder.append("(");
             for (int i = 0; i < organisationTypes.length; i++) {
                 if (i != 0) {
-                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
                 queryBuilder.append(OrganisationCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(getOrganisationType(organisationTypes[i]))
                         .append("\"");
@@ -243,31 +243,31 @@ public class RestCriteriaUtils {
         return queryBuilder.toString();
     }
 
-    private static OrganisationSchemeType getOrganisationSchemeType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
+    private static String getOrganisationSchemeType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
         switch (typeExternalArtefactsEnum) {
-            case AGENCY:
-                return OrganisationSchemeType.AGENCY_SCHEME;
-            case DATA_PROVIDER:
-                return OrganisationSchemeType.DATA_PROVIDER_SCHEME;
-            case DATA_CONSUMER:
-                return OrganisationSchemeType.DATA_CONSUMER_SCHEME;
-            case ORGANISATION_UNIT:
-                return OrganisationSchemeType.ORGANISATION_UNIT_SCHEME;
+            case AGENCY_SCHEME:
+                return OrganisationSchemeType.AGENCY_SCHEME.name();
+            case DATA_PROVIDER_SCHEME:
+                return OrganisationSchemeType.DATA_PROVIDER_SCHEME.name();
+            case DATA_CONSUMER_SCHEME:
+                return OrganisationSchemeType.DATA_CONSUMER_SCHEME.name();
+            case ORGANISATION_UNIT_SCHEME:
+                return OrganisationSchemeType.ORGANISATION_UNIT_SCHEME.name();
             default:
                 return null;
         }
     }
 
-    private static OrganisationType getOrganisationType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
+    private static String getOrganisationType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
         switch (typeExternalArtefactsEnum) {
             case AGENCY:
-                return OrganisationType.AGENCY;
+                return OrganisationType.AGENCY.name();
             case DATA_PROVIDER:
-                return OrganisationType.DATA_PROVIDER;
+                return OrganisationType.DATA_PROVIDER.name();
             case DATA_CONSUMER:
-                return OrganisationType.DATA_CONSUMER;
+                return OrganisationType.DATA_CONSUMER.name();
             case ORGANISATION_UNIT:
-                return OrganisationType.ORGANISATION_UNIT;
+                return OrganisationType.ORGANISATION_UNIT.name();
             default:
                 return null;
         }
