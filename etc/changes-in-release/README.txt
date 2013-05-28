@@ -19,5 +19,6 @@ NOTA: Los siguientes cambios ya se han añadido al manual de instalación, pero 
 	|	4. Aplicación interna:
 	|		- Se ha eliminado la propiedad 'metamac.statistical.operations.clients.common.metadata.rest.external' del DATA (se especifica en el data común)
 	|		- [DATA]/common: Refactor fichero de configuración internal-endpoints.xml por api-endpoints.xml
+	|       - Añadida propiedad 'metamac.statistical.operations.codelist.instance.geographicgranularity' a statistical-operations-freq-codelist.xml
 
 99. Reiniciar Tomcat

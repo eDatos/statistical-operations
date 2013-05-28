@@ -3,6 +3,7 @@
 <properties>
 	<comment>CodeLists for frequency metadata</comment>
 	<entry key="metamac.statistical.operations.codelist.operation.updatefrequency">FILL_ME_WITH_CODELIST_URN</entry>
-	<entry key="metamac.statistical.operations.codelist.instance.temporalgranularity">FILL_ME_WITH_CODELIST_URN</entry>
+	<entry key="metamac.statistical.operations.codelist.instance.geographicgranularity">FILL_ME_WITH_CODELIST_URN</entry>
+    <entry key="metamac.statistical.operations.codelist.instance.temporalgranularity">FILL_ME_WITH_CODELIST_URN</entry>
 	<entry key="metamac.statistical.operations.codelist.instance.freqcoll">FILL_ME_WITH_CODELIST_URN</entry>
 </properties>

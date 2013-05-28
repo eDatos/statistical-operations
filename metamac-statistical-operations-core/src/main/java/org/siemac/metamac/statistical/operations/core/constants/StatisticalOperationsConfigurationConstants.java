@@ -11,6 +11,7 @@ public class StatisticalOperationsConfigurationConstants extends ConfigurationCo
     public static final String USER_GUIDE_FILE_NAME                                    = "metamac.statistical.operations.user.guide.file.name";
 
     public static final String STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST = "metamac.statistical.operations.codelist.operation.updatefrequency";
+    public static final String INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY                 = "metamac.statistical.operations.codelist.instance.geographicgranularity";
     public static final String INSTANCE_DEFAULT_TEMPORAL_GRANULARITY                   = "metamac.statistical.operations.codelist.instance.temporalgranularity";
     public static final String INSTANCE_DEFAULT_FREQ_COLL                              = "metamac.statistical.operations.codelist.instance.freqcoll";
 
