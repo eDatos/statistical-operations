@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
+import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
@@ -26,8 +28,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequen
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateOrganisationSchemesEvent.UpdateOrganisationSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
@@ -37,18 +37,20 @@ import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchem
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -74,7 +76,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         implements
             InstanceUiHandlers,
             UpdateCodeListsHandler,
-            UpdateOrganisationSchemesHandler,
             UpdateOperationsListsHandler,
             UpdateConceptSchemesHandler,
             UpdateFrequencyCodesHandler {
@@ -109,15 +110,17 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         InstanceDto getInstance(InstanceDto instanceDto);
 
         void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
-        void setOrganisationScheme(List<ExternalItemDto> schemes);
         void setConceptScheme(List<ExternalItemDto> schemes);
         void setCodeLists(List<ExternalItemDto> codeLists);
 
-        void setInfSuppliersOrg(List<ExternalItemDto> organisations);
-        void setInfSuppliersConcept(List<ExternalItemDto> concepts);
         void setStatisticalUnitConcepts(List<ExternalItemDto> concepts);
         void setTemporalGranularityCodes(List<ExternalItemDto> codes);
         void setFreqCollCodes(List<ExternalItemDto> codes);
+
+        // External resources
+
+        void setItemSchemes(String formItemName, ExternalItemsResult result);
+        void setItems(String formItemName, ExternalItemsResult result);
 
         boolean validate();
         HasClickHandlers getPublishInstanceInternally();
@@ -271,12 +274,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @ProxyEvent
     @Override
-    public void onUpdateOrganisationSchemes(UpdateOrganisationSchemesEvent event) {
-        getView().setOrganisationScheme(event.getOrganisationSchemes());
-    }
-
-    @ProxyEvent
-    @Override
     public void onUpdateConceptSchemes(UpdateConceptSchemesEvent event) {
         getView().setConceptScheme(event.getConceptSchemes());
     }
@@ -285,36 +282,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void onUpdateCodeLists(UpdateCodeListsEvent event) {
         getView().setCodeLists(event.getCodeLists());
-    }
-
-    @Override
-    public void populateInfSuppliersOrg(String schemeUri) {
-        dispatcher.execute(new GetOrganisationsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetOrganisationsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetOrganisationsFromSchemeResult result) {
-                getView().setInfSuppliersOrg(result.getOrganisations());
-            }
-        });
-    }
-
-    @Override
-    public void populateInfSuppliersConcept(String schemeUri) {
-        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetConceptsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetConceptsFromSchemeResult result) {
-                getView().setInfSuppliersConcept(result.getConcepts());
-            }
-        });
     }
 
     @Override
@@ -339,4 +306,51 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         getView().setFreqCollCodes(event.getFreqCollCodes());
     }
 
+    //
+    // EXTERNAL RESOURCES
+    //
+
+    @Override
+    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria) {
+        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria(type, criteria);
+        dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItemSchemes(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum type, int firstResult, int maxResults, String criteria, String categorySchemeUrn) {
+        ItemWebCriteria itemWebCriteria = new ItemWebCriteria(type, criteria);
+        itemWebCriteria.setItemSchemUrn(categorySchemeUrn);
+        dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItems(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    //
+    // NAVIGATION
+    //
+
+    @Override
+    public void goTo(List<PlaceRequest> location) {
+        if (location != null && !location.isEmpty()) {
+            placeManager.revealPlaceHierarchy(location);
+        }
+    }
 }

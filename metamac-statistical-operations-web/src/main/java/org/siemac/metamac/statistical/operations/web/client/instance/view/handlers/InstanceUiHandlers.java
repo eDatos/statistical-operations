@@ -1,15 +1,11 @@
 package org.siemac.metamac.statistical.operations.web.client.instance.view.handlers;
 
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalUiHandlers;
 
-import com.gwtplatform.mvp.client.UiHandlers;
-
-public interface InstanceUiHandlers extends UiHandlers {
+public interface InstanceUiHandlers extends ExternalUiHandlers {
 
     void saveInstance(InstanceDto instanceDto);
 
-    void populateInfSuppliersOrg(String schemeUri);
-    void populateInfSuppliersConcept(String schemeUri);
     void populateStatisticalUnitConcepts(String schemeUri);
-
 }

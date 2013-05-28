@@ -5,6 +5,8 @@ import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.LogicalOperator;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategoryCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemeCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CodeCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CodelistCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeCriteriaPropertyRestriction;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
@@ -54,6 +56,52 @@ public class RestCriteriaUtils {
             queryBuilder.append("(");
             queryBuilder.append(CategoryCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
                     .append("\"");
+            queryBuilder.append(")");
+        }
+        return queryBuilder.toString();
+    }
+
+    //
+    // CODELIST
+    //
+
+    public static String buildCodelistQuery(ExternalResourceWebCriteria externalResourceWebCriteria) {
+        StringBuilder queryBuilder = new StringBuilder();
+        String criteria = externalResourceWebCriteria.getCriteria();
+        if (StringUtils.isNotBlank(criteria)) {
+            queryBuilder.append("(");
+            queryBuilder.append(CodelistCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+            queryBuilder.append(CodelistCriteriaPropertyRestriction.NAME).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+            queryBuilder.append(CodelistCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(")");
+        }
+        return queryBuilder.toString();
+    }
+
+    //
+    // CODE
+    //
+
+    public static String buildCodeQuery(ItemWebCriteria itemWebCriteria) {
+        StringBuilder queryBuilder = new StringBuilder();
+        String criteria = itemWebCriteria.getCriteria();
+        if (StringUtils.isNotBlank(criteria)) {
+            queryBuilder.append("(");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.NAME).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
+            queryBuilder.append(")");
+        }
+        if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
         return queryBuilder.toString();

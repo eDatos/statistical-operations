@@ -42,7 +42,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.external.Sea
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchItemItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemsItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUntisItem;
+import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
@@ -1082,7 +1082,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(operationDto.getSecondarySubjectAreas());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -1100,11 +1100,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     private SearchMultipleItemsItem createProducersItem(String name, String title) {
-        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUntisItem(name, title, new MultipleExternalResourceAction() {
+        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUnitsItem(name, title, new MultipleExternalResourceAction() {
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(operationDto.getProducer());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -1122,11 +1122,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     private SearchMultipleItemsItem createRegionaleResponsiblesItem(String name, String title) {
-        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUntisItem(name, title, new MultipleExternalResourceAction() {
+        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUnitsItem(name, title, new MultipleExternalResourceAction() {
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(operationDto.getRegionalResponsible());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -1144,11 +1144,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     private SearchMultipleItemsItem createPublishersItem(String name, String title) {
-        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUntisItem(name, title, new MultipleExternalResourceAction() {
+        final SearchMultipleItemsItem item = new SearchMultipleOrganisationUnitsItem(name, title, new MultipleExternalResourceAction() {
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(operationDto.getPublisher());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {

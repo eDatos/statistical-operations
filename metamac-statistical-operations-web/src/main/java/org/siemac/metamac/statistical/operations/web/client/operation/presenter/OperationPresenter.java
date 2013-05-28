@@ -495,7 +495,9 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         });
     }
 
+    //
     // EXTERNAL RESOURCES
+    //
 
     @Override
     public void retrieveCommonMetadataConfigurations() {

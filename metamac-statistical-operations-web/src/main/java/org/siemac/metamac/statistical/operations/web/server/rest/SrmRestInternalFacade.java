@@ -10,6 +10,15 @@ public interface SrmRestInternalFacade {
     ExternalItemsResult findCategorySchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findCategories(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 
+    ExternalItemsResult findCodelists(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findCodes(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+
     ExternalItemsResult findOrganisationUnitSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findOrganisationUnits(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+
+    ExternalItemsResult findDataProviderSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findDataProviders(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+
+    ExternalItemsResult findOrganisiatonSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findOrganisations(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 }

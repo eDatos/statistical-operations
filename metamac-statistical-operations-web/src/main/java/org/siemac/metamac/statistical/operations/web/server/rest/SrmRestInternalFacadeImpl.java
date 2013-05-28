@@ -6,6 +6,10 @@ import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviderSchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.DataProviders;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestCriteriaUtils;
@@ -74,6 +78,54 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     }
 
     //
+    // CODELISTS
+    //
+
+    @Override
+    public ExternalItemsResult findCodelists(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildCodelistQuery(criteria);
+
+        try {
+            Codelists codelists = restApiLocator.getSrmRestInternalFacadeV10().findCodelists(query, orderBy, limit, offset);
+            return ExternalItemUtils.getCodelistsAsExternalItemsResult(codelists);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding codelists");
+        }
+    }
+
+    //
+    // CODES
+    //
+
+    @Override
+    public ExternalItemsResult findCodes(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildCodeQuery(itemWebCriteria);
+
+        try {
+            Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            return ExternalItemUtils.getCodesAsExternalItemsResult(codes);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding codes");
+        }
+    }
+
+    //
     // ORGANISATION UNIT SCHEMES
     //
 
@@ -95,7 +147,6 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         } catch (Exception e) {
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation unit schemes");
         }
-
     }
 
     //
@@ -121,5 +172,74 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         } catch (Exception e) {
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation units");
         }
+    }
+
+    //
+    // DATA PROVIDER SCHEMES
+    //
+
+    @Override
+    public ExternalItemsResult findDataProviderSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildOrganisationSchemeQuery(criteria);
+
+        try {
+            DataProviderSchemes dataProviderSchemes = restApiLocator.getSrmRestInternalFacadeV10().findDataProviderSchemes(query, orderBy, limit, offset);
+            return ExternalItemUtils.getDataProviderSchemesAsExternalItemsResult(dataProviderSchemes);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding data provider schemes");
+        }
+    }
+
+    //
+    // DATA PROVIDERS
+    //
+
+    @Override
+    public ExternalItemsResult findDataProviders(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+
+        String limit = String.valueOf(maxResults);
+        String offset = String.valueOf(firstResult);
+        String orderBy = null;
+        String query = RestCriteriaUtils.buildOrganisationQuery(itemWebCriteria);
+
+        try {
+
+            DataProviders dataProviders = restApiLocator.getSrmRestInternalFacadeV10().findDataProviders(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            return ExternalItemUtils.getDataProvidersAsExternalItemsResult(dataProviders);
+        } catch (ServerWebApplicationException e) {
+            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+            throw WebExceptionUtils.createMetamacWebException(exception);
+        } catch (Exception e) {
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding data providers");
+        }
+    }
+
+    //
+    // ORGANISATION SCHEMES
+    //
+
+    @Override
+    public ExternalItemsResult findOrganisiatonSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    //
+    // ORGANISATIONS
+    //
+
+    @Override
+    public ExternalItemsResult findOrganisations(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

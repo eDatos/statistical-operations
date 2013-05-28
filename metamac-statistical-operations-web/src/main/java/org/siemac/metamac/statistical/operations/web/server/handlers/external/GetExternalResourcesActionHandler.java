@@ -40,6 +40,18 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
             case ORGANISATION_UNIT:
                 result = srmRestInternalFacade.findOrganisationUnits((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
+            case DATA_PROVIDER_SCHEME:
+                result = srmRestInternalFacade.findDataProviderSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case DATA_PROVIDER:
+                result = srmRestInternalFacade.findDataProviders((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case CODELIST:
+                result = srmRestInternalFacade.findCodelists(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case CODE:
+                result = srmRestInternalFacade.findCodes((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
         }
