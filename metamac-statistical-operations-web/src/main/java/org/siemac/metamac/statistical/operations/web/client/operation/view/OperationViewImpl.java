@@ -26,6 +26,7 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.handl
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
@@ -1196,6 +1197,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         };
         item.setSaveClickHandler(clickHandler);
+        // Set the default codelist specified in the configuration properties (data directory)
+        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getOperationDefaultCodelistForUpdateFrequency());
         return item;
     }
 

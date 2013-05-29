@@ -19,10 +19,11 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchMultipleItemsItem extends ExternalItemListItem {
 
-    private ExternalResourcesUiHandlers                                       uiHandlers;
     protected SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow searchMultipleItemsWindow;
+    protected ExternalResourcesUiHandlers                                     uiHandlers;
+    protected ClickHandler                                                    saveClickHandler;
 
-    private ClickHandler                                                      saveClickHandler;
+    protected String                                                          defaultItemSchemeUrn;
 
     public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final ItemWebCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
@@ -34,11 +35,6 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
             public void onFormItemClick(FormItemIconClickEvent event) {
                 final int FIRST_RESULT = 0;
                 final int MAX_RESULTS = 6;
-
-                // clear criteria each time the window is shown
-                itemSchemeCriteria.setCriteria(null);
-                itemCriteria.setCriteria(null);
-                itemCriteria.setItemSchemUrn(null);
 
                 PaginatedAction filterListAction = new PaginatedAction() {
 
@@ -59,6 +55,17 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                 };
                 searchMultipleItemsWindow = new SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow(windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle,
                         MAX_RESULTS, filterListAction, selectionListAction);
+
+                // ----------------------------------------------------------------------------
+
+                // Set the default itemScheme
+                searchMultipleItemsWindow.setFilterTextValue(defaultItemSchemeUrn);
+                searchMultipleItemsWindow.setTextInFilterSearchSection(defaultItemSchemeUrn);
+                itemSchemeCriteria.setCriteria(defaultItemSchemeUrn);
+                itemCriteria.setCriteria(null);
+                itemCriteria.setItemSchemUrn(defaultItemSchemeUrn);
+
+                // ----------------------------------------------------------------------------
 
                 // Load the list of item schemes (to populate the selection window)
                 getUiHandlers().retrieveItemSchemes(name, itemSchemeCriteria, FIRST_RESULT, MAX_RESULTS);
@@ -150,5 +157,9 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
             return searchMultipleItemsWindow.getSelectedRelatedResources();
         }
         return new ArrayList<ExternalItemDto>();
+    }
+
+    public void setDefaultItemSchemeUrn(String defaultItemSchemeUrn) {
+        this.defaultItemSchemeUrn = defaultItemSchemeUrn;
     }
 }
