@@ -3,7 +3,6 @@ package org.siemac.metamac.statistical.operations.web.client.operation.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -20,6 +19,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperation
 import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
 import org.siemac.metamac.web.common.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -127,6 +127,12 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     @Override
     public Widget asWidget() {
         return panel;
+    }
+
+    @Override
+    public void setUiHandlers(OperationListUiHandlers uiHandlers) {
+        super.setUiHandlers(uiHandlers);
+        newOperationForm.setUiHandlers(uiHandlers);
     }
 
     /*
@@ -250,16 +256,6 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         listGridToolStrip.getDeleteButton().hide();
     }
 
-    @Override
-    public void setCategorySchemes(List<ExternalItemDto> schemes) {
-        this.newOperationForm.setSubjectAreasSchemes(schemes);
-    }
-
-    @Override
-    public void setSubjects(List<ExternalItemDto> subjects) {
-        this.newOperationForm.setSubjetcAreas(subjects);
-    }
-
     private void showListGridDeleteButton() {
         List<String> selectedOperationCodes = getSelectedOperationCodes();
         boolean actionAllowed = true;
@@ -279,4 +275,17 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         searchSectionStack.reset();
     }
 
+    // ------------------------------------------------------------------------------------------------------------
+    // EXTERNAL RESOURCES DATA SETTERS
+    // ------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void setItemSchemes(String formItemName, ExternalItemsResult result) {
+        newOperationForm.setItemSchemes(formItemName, result);
+    }
+
+    @Override
+    public void setItems(String formItemName, ExternalItemsResult result) {
+        newOperationForm.setItems(formItemName, result);
+    }
 }

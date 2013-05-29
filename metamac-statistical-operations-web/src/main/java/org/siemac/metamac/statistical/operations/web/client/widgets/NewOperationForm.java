@@ -3,20 +3,19 @@ package org.siemac.metamac.statistical.operations.web.client.widgets;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
-import java.util.List;
-
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoryItem;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
-import org.siemac.metamac.web.common.client.utils.ExternalItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.types.FormErrorOrientation;
 import com.smartgwt.client.types.VerticalAlignment;
@@ -24,16 +23,14 @@ import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
 
-    private static final int      FORM_ITEM_CUSTOM_WIDTH = 300;
+    private static final int   FORM_ITEM_CUSTOM_WIDTH = 300;
 
-    private RequiredTextItem      identifier;
-    private RequiredTextItem      title;
-    private CustomCheckboxItem    releaseCalendar;
-    private ExternalSelectItem    subjectAreasItem;
-    private CustomCheckboxItem    indSystem;
-    private CustomButtonItem      saveButton;
-
-    private List<ExternalItemDto> subjectAreas;
+    private RequiredTextItem   identifier;
+    private RequiredTextItem   title;
+    private CustomCheckboxItem releaseCalendar;
+    private SearchCategoryItem subjectAreasItem;
+    private CustomCheckboxItem indSystem;
+    private CustomButtonItem   saveButton;
 
     public NewOperationForm() {
         super();
@@ -50,9 +47,18 @@ public class NewOperationForm extends CustomDynamicForm {
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
         releaseCalendar.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
-        subjectAreasItem = new ExternalSelectItem("op-subject", getCoreMessages().operation_subject_area(), String.valueOf(FORM_ITEM_CUSTOM_WIDTH));
-        subjectAreasItem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
+        subjectAreasItem = new SearchCategoryItem("op-subject", getCoreMessages().operation_subject_area());
         subjectAreasItem.setRequired(true);
+        subjectAreasItem.setSaveClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+            @Override
+            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+                ExternalItemDto category = subjectAreasItem.getSelectedItem();
+                subjectAreasItem.markSearchWindowForDestroy();
+                subjectAreasItem.setExternalItem(category);
+                NewOperationForm.this.validate(false);
+            }
+        });
 
         indSystem = new CustomCheckboxItem("op-ind-sys", getCoreMessages().operation_indicator_system());
         indSystem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
@@ -67,7 +73,7 @@ public class NewOperationForm extends CustomDynamicForm {
         setMargin(5);
         setErrorOrientation(FormErrorOrientation.RIGHT);
         setLayoutAlign(VerticalAlignment.BOTTOM);
-        setFields(identifier, title, releaseCalendar, subjectAreasItem, indSystem, saveButton);
+        setFields(identifier, title, subjectAreasItem, releaseCalendar, indSystem, saveButton);
     }
 
     public OperationDto getOperation() {
@@ -76,7 +82,7 @@ public class NewOperationForm extends CustomDynamicForm {
         operationDto.setTitle(InternationalStringUtils.updateInternationalString(new InternationalStringDto(), title.getValueAsString()));
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setProcStatus(ProcStatusEnum.DRAFT);
-        operationDto.setSubjectArea(subjectAreasItem.getSelectedExternalItem(subjectAreas));
+        operationDto.setSubjectArea(subjectAreasItem.getExternalItemDto());
         operationDto.setIndicatorSystem(indSystem.getValueAsBoolean() == null ? false : indSystem.getValueAsBoolean());
         return operationDto;
     }
@@ -85,21 +91,19 @@ public class NewOperationForm extends CustomDynamicForm {
         return saveButton;
     }
 
-    @Override
-    public boolean validate() {
-        return super.validate() && subjectAreasItem.validateItem();
+    public void setUiHandlers(ExternalResourcesUiHandlers uiHandlers) {
+        subjectAreasItem.setUiHandlers(uiHandlers);
     }
 
-    public ExternalSelectItem getSubjectAreasItem() {
-        return subjectAreasItem;
+    // ------------------------------------------------------------------------------------------------------------
+    // EXTERNAL RESOURCES DATA SETTERS
+    // ------------------------------------------------------------------------------------------------------------
+
+    public void setItemSchemes(String formItemName, ExternalItemsResult result) {
+        subjectAreasItem.setItemSchemes(result);
     }
 
-    public void setSubjectAreasSchemes(List<ExternalItemDto> schemes) {
-        subjectAreasItem.setSchemesValueMap(ExternalItemUtils.getExternalItemsHashMap(schemes));
-    }
-
-    public void setSubjetcAreas(List<ExternalItemDto> subjects) {
-        this.subjectAreas = subjects;
-        subjectAreasItem.setItemsValueMap(ExternalItemUtils.getExternalItemsHashMap(subjects));
+    public void setItems(String formItemName, ExternalItemsResult result) {
+        subjectAreasItem.setItems(result);
     }
 }

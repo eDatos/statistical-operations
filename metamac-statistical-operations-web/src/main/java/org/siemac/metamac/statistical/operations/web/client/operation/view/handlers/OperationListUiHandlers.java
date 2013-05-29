@@ -3,10 +3,9 @@ package org.siemac.metamac.statistical.operations.web.client.operation.view.hand
 import java.util.List;
 
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
 
-import com.gwtplatform.mvp.client.UiHandlers;
-
-public interface OperationListUiHandlers extends UiHandlers {
+public interface OperationListUiHandlers extends ExternalResourcesUiHandlers {
 
     void retrieveOperationList(int firstResult, int maxResults, String operation);
 

@@ -5,7 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
@@ -23,9 +23,15 @@ import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginate
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -39,6 +45,7 @@ import com.gwtplatform.mvp.client.annotations.TitleFunction;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
@@ -86,8 +93,10 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
         void clearSearchSection();
 
-        void setCategorySchemes(List<ExternalItemDto> schemes);
-        void setSubjects(List<ExternalItemDto> subjects);
+        // External resources
+
+        void setItemSchemes(String formItemName, ExternalItemsResult result);
+        void setItems(String formItemName, ExternalItemsResult result);
     }
 
     @Inject
@@ -209,5 +218,62 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
                 ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
             }
         });
+    }
+
+    //
+    // EXTERNAL RESOURCES
+    //
+
+    @Override
+    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
+        ExternalResourceWebCriteria externalResourceWebCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
+        retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
+    }
+
+    @Override
+    public void retrieveItemSchemes(final String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
+        dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItemSchemes(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
+        ItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+        retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
+    }
+
+    @Override
+    public void retrieveItems(final String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+        dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItems(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    //
+    // NAVIGATION
+    //
+
+    @Override
+    public void goTo(List<PlaceRequest> location) {
+        if (location != null && !location.isEmpty()) {
+            placeManager.revealPlaceHierarchy(location);
+        }
     }
 }
