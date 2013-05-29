@@ -2,6 +2,8 @@ package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
@@ -59,6 +61,12 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 break;
             case CODE:
                 result = srmRestInternalFacade.findCodes((ItemWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case CONCEPT_SCHEME:
+                result = srmRestInternalFacade.findConceptSchemes((ConceptSchemeWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                break;
+            case CONCEPT:
+                result = srmRestInternalFacade.findConcepts((ConceptWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());

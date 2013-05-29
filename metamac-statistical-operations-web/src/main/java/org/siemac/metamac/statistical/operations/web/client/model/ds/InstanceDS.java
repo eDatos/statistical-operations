@@ -17,7 +17,7 @@ public class InstanceDS extends DataSource {
     // CONTENT DESCRIPTORS
     public static final String DATA_DESCRIPTION             = "in-ddesc";
     public static final String STATISTICAL_POPULATION       = "in-sta-pop";
-    public static final String STATISTIAL_UNIT              = "in-sta-unit";
+    public static final String STATISTICAL_UNIT              = "in-sta-unit";
     public static final String GEOGRAPHIC_GRANULARITY       = "in-geo-gran";
     public static final String GEOGRAPHIC_COMPARABILITY     = "in-geo-com";
     public static final String TEMPORAL_GRANULARITY         = "in-tem-gran";

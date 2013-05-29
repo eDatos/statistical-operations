@@ -18,6 +18,8 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organisations;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
@@ -136,7 +138,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConceptSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConceptSchemes(ConceptSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -160,7 +162,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConcepts(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConcepts(ConceptWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);

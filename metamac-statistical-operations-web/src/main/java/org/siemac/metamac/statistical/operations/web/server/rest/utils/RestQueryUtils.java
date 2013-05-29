@@ -11,10 +11,14 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CodeCri
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CodelistCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ConceptCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ConceptSchemeCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ConceptSchemeType;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeType;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationType;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
@@ -62,7 +66,7 @@ public class RestQueryUtils {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CategoryCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
                     .append("\"");
             queryBuilder.append(")");
         }
@@ -109,7 +113,7 @@ public class RestQueryUtils {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CodeCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn()).append("\"");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
         return queryBuilder.toString();
@@ -119,9 +123,9 @@ public class RestQueryUtils {
     // CONCEPT SCHEME
     //
 
-    public static String buildConceptSchemeQuery(ExternalResourceWebCriteria externalResourceWebCriteria) {
+    public static String buildConceptSchemeQuery(ConceptSchemeWebCriteria conceptSchemeWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = externalResourceWebCriteria.getCriteria();
+        String criteria = conceptSchemeWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -131,16 +135,64 @@ public class RestQueryUtils {
             queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
+        if (!ArrayUtils.isEmpty(conceptSchemeWebCriteria.getConceptSchemeTypes())) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+
+            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptSchemeWebCriteria.getConceptSchemeTypes();
+
+            queryBuilder.append("(");
+
+            for (int i = 0; i < conceptSchemeTypes.length; i++) {
+
+                if (i != 0) {
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+                }
+
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeWebCriteria.getStatisticalOperationUrn())) {
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(conceptSchemeWebCriteria.getStatisticalOperationUrn()).append("\"");
+                    queryBuilder.append(")");
+                } else {
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                }
+            }
+
+            queryBuilder.append(")");
+        }
         return queryBuilder.toString();
+    }
+
+    private static String getConceptSchemeType(ConceptSchemeTypeEnum type) {
+        switch (type) {
+            case GLOSSARY:
+                return ConceptSchemeType.GLOSSARY.name();
+            case MEASURE:
+                return ConceptSchemeType.MEASURE.name();
+            case OPERATION:
+                return ConceptSchemeType.OPERATION.name();
+            case ROLE:
+                return ConceptSchemeType.ROLE.name();
+            case TRANSVERSAL:
+                return ConceptSchemeType.TRANSVERSAL.name();
+            default:
+                return null;
+        }
     }
 
     //
     // CONCEPT
     //
 
-    public static String buildConceptQuery(ItemWebCriteria itemWebCriteria) {
+    public static String buildConceptQuery(ConceptWebCriteria conceptWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = itemWebCriteria.getCriteria();
+        String criteria = conceptWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(ConceptCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -150,13 +202,44 @@ public class RestQueryUtils {
             queryBuilder.append(ConceptCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(conceptWebCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(ConceptCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(conceptWebCriteria.getItemSchemUrn())
                     .append("\"");
+            queryBuilder.append(")");
+        }
+        if (!ArrayUtils.isEmpty(conceptWebCriteria.getConceptSchemeTypes())) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+
+            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptWebCriteria.getConceptSchemeTypes();
+
+            queryBuilder.append("(");
+
+            for (int i = 0; i < conceptSchemeTypes.length; i++) {
+
+                if (i != 0) {
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+                }
+
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptWebCriteria.getStatisticalOperationUrn())) {
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(conceptWebCriteria.getStatisticalOperationUrn()).append("\"");
+                    queryBuilder.append(")");
+                } else {
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                }
+            }
+
             queryBuilder.append(")");
         }
         return queryBuilder.toString();
@@ -198,6 +281,21 @@ public class RestQueryUtils {
         return queryBuilder.toString();
     }
 
+    private static String getOrganisationSchemeType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
+        switch (typeExternalArtefactsEnum) {
+            case AGENCY_SCHEME:
+                return OrganisationSchemeType.AGENCY_SCHEME.name();
+            case DATA_PROVIDER_SCHEME:
+                return OrganisationSchemeType.DATA_PROVIDER_SCHEME.name();
+            case DATA_CONSUMER_SCHEME:
+                return OrganisationSchemeType.DATA_CONSUMER_SCHEME.name();
+            case ORGANISATION_UNIT_SCHEME:
+                return OrganisationSchemeType.ORGANISATION_UNIT_SCHEME.name();
+            default:
+                return null;
+        }
+    }
+
     //
     // ORGANISATION
     //
@@ -219,8 +317,8 @@ public class RestQueryUtils {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(OrganisationCriteriaPropertyRestriction.ITEM_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
-                    .append("\"");
+            queryBuilder.append(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                    .append(itemWebCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
         if (itemWebCriteria instanceof OrganisationWebCriteria && !ArrayUtils.isEmpty(((OrganisationWebCriteria) itemWebCriteria).getOrganisationTypes())) {
@@ -241,21 +339,6 @@ public class RestQueryUtils {
             queryBuilder.append(")");
         }
         return queryBuilder.toString();
-    }
-
-    private static String getOrganisationSchemeType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {
-        switch (typeExternalArtefactsEnum) {
-            case AGENCY_SCHEME:
-                return OrganisationSchemeType.AGENCY_SCHEME.name();
-            case DATA_PROVIDER_SCHEME:
-                return OrganisationSchemeType.DATA_PROVIDER_SCHEME.name();
-            case DATA_CONSUMER_SCHEME:
-                return OrganisationSchemeType.DATA_CONSUMER_SCHEME.name();
-            case ORGANISATION_UNIT_SCHEME:
-                return OrganisationSchemeType.ORGANISATION_UNIT_SCHEME.name();
-            default:
-                return null;
-        }
     }
 
     private static String getOrganisationType(TypeExternalArtefactsEnum typeExternalArtefactsEnum) {

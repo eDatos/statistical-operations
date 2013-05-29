@@ -32,10 +32,7 @@ import org.siemac.metamac.statistical.operations.web.client.instance.view.handle
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.RestCriteriaClientUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
-import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
@@ -44,9 +41,13 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyIns
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
@@ -113,7 +114,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         void setConceptScheme(List<ExternalItemDto> schemes);
         void setCodeLists(List<ExternalItemDto> codeLists);
 
-        void setStatisticalUnitConcepts(List<ExternalItemDto> concepts);
         void setTemporalGranularityCodes(List<ExternalItemDto> codes);
         void setFreqCollCodes(List<ExternalItemDto> codes);
 
@@ -284,21 +284,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         getView().setCodeLists(event.getCodeLists());
     }
 
-    @Override
-    public void populateStatisticalUnitConcepts(String schemeUri) {
-        dispatcher.execute(new GetConceptsFromSchemeAction(schemeUri), new WaitingAsyncCallback<GetConceptsFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(GetConceptsFromSchemeResult result) {
-                getView().setStatisticalUnitConcepts(result.getConcepts());
-            }
-        });
-    }
-
     @ProxyEvent
     @Override
     public void onUpdateFrequencyCodes(UpdateFrequencyCodesEvent event) {
@@ -312,7 +297,15 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
-        ExternalResourceWebCriteria externalResourceWebCriteria = RestCriteriaClientUtils.buildItemSchemeWebCriteria(types, criteria);
+        ExternalResourceWebCriteria externalResourceWebCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
+        retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
+    }
+
+    @Override
+    public void retrieveItemSchemes(final String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
+        if (externalResourceWebCriteria instanceof ConceptSchemeWebCriteria) {
+            ((ConceptSchemeWebCriteria) externalResourceWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
+        }
         dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
@@ -325,10 +318,17 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             }
         });
     }
-
     @Override
     public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
-        ExternalResourceWebCriteria itemWebCriteria = RestCriteriaClientUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+        ItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+        retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
+    }
+
+    @Override
+    public void retrieveItems(final String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+        if (itemWebCriteria instanceof ConceptWebCriteria) {
+            ((ConceptWebCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
+        }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override

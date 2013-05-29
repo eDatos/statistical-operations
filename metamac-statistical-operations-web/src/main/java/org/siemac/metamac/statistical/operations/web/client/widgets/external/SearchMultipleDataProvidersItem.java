@@ -5,11 +5,13 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 
 public class SearchMultipleDataProvidersItem extends SearchMultipleItemsItem {
 
     public SearchMultipleDataProvidersItem(String name, String title, MultipleExternalResourceAction action) {
-        super(name, title, new TypeExternalArtefactsEnum[]{DATA_PROVIDER_SCHEME}, new TypeExternalArtefactsEnum[]{DATA_PROVIDER}, getConstants().searchOrganisations(), getConstants()
-                .filterOrganisationScheme(), getConstants().selectedOrganisationScheme(), getConstants().selectionOrganisations(), action);
+        super(name, title, RestWebCriteriaUtils.buildItemSchemeWebCriteria(DATA_PROVIDER_SCHEME),
+                RestWebCriteriaUtils.buildItemWebCriteria(new TypeExternalArtefactsEnum[]{DATA_PROVIDER}, null, null), getConstants().searchOrganisations(), getConstants().filterOrganisationScheme(),
+                getConstants().selectedOrganisationScheme(), getConstants().selectionOrganisations(), action);
     }
 }

@@ -6,6 +6,4 @@ import org.siemac.metamac.statistical.operations.web.client.view.handlers.Extern
 public interface InstanceUiHandlers extends ExternalResourcesUiHandlers {
 
     void saveInstance(InstanceDto instanceDto);
-
-    void populateStatisticalUnitConcepts(String schemeUri);
 }

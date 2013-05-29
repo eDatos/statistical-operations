@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.web.client.utils;
+package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.AGENCY;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.AGENCY_SCHEME;
@@ -10,12 +10,34 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 
-public class RestCriteriaClientUtils {
+public class RestWebCriteriaUtils {
+
+    //
+    // INSTACE: STATISTICAL UNIT
+    //
+
+    public static ConceptSchemeWebCriteria buildStatisticalUnitConceptSchemeWebCriteria() {
+        ConceptSchemeWebCriteria conceptSchemeWebCriteria = new ConceptSchemeWebCriteria();
+        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
+        return conceptSchemeWebCriteria;
+    }
+
+    public static ConceptWebCriteria buildStatisticalUnitConceptWebCriteria() {
+        ConceptWebCriteria conceptWebcriteria = new ConceptWebCriteria();
+        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
+        return conceptWebcriteria;
+    }
+
+    //
+    // COMMON CRITERIA
+    //
+
+    public static ExternalResourceWebCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
+        return buildItemSchemeWebCriteria(types, null);
+    }
 
     public static ExternalResourceWebCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum[] types, String criteria) {
         ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria();
@@ -30,7 +52,7 @@ public class RestCriteriaClientUtils {
         return externalResourceWebCriteria;
     }
 
-    public static ExternalResourceWebCriteria buildItemWebCriteria(TypeExternalArtefactsEnum[] types, String criteria, String itemSchemeUrn) {
+    public static ItemWebCriteria buildItemWebCriteria(TypeExternalArtefactsEnum[] types, String criteria, String itemSchemeUrn) {
         ItemWebCriteria itemWebCriteria = new ItemWebCriteria();
         if (areOrganisationTypes(types)) {
             itemWebCriteria = new OrganisationWebCriteria();
