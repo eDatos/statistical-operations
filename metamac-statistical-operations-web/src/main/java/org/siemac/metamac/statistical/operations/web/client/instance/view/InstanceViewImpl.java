@@ -22,6 +22,7 @@ import org.siemac.metamac.statistical.operations.web.client.instance.presenter.I
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.ExternalItemListItem;
@@ -913,6 +914,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         };
         item.setSaveClickHandler(clickHandler);
+        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForGeographicGranularity());
         return item;
     }
 }
