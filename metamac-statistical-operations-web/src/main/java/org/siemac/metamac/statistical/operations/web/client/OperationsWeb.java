@@ -1,10 +1,13 @@
 package org.siemac.metamac.statistical.operations.web.client;
 
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.siemac.metamac.sso.client.MetamacPrincipal;
+import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
 import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
+import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.web.common.client.MetamacEntryPoint;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
 import org.siemac.metamac.web.common.client.utils.ApplicationEditionLanguages;
@@ -87,8 +90,11 @@ public class OperationsWeb extends MetamacEntryPoint {
             public void onWaitSuccess(MockCASUserResult result) {
                 OperationsWeb.principal = result.getMetamacPrincipal();
 
-                // Load edition languages
-                ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
+                // Load properties
+                String[] propertiesToLoad = new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
+                        StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
+                        StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
+                ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(propertiesToLoad), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
 
                     @Override
                     public void onWaitFailure(Throwable caught) {
@@ -101,6 +107,7 @@ public class OperationsWeb extends MetamacEntryPoint {
                     public void onWaitSuccess(LoadConfigurationPropertiesResult result) {
                         ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
                         ApplicationOrganisation.setCurrentOrganisation(result.getOrganisation());
+                        setConfigurationProperties(result.getPropertyValues());
                         loadApplication();
                     }
                 });
@@ -144,8 +151,11 @@ public class OperationsWeb extends MetamacEntryPoint {
     // String url = Window.Location.createUrlBuilder().setHash("").buildString();
     // Window.Location.assign(url);
     //
-    // // Load edition languages
-    // ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
+    // // Load properties
+    // String[] propertiesToLoad = new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
+    // StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
+    // StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
+    // ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(propertiesToLoad), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
     //
     // @Override
     // public void onWaitFailure(Throwable caught) {
@@ -159,6 +169,7 @@ public class OperationsWeb extends MetamacEntryPoint {
     // public void onWaitSuccess(LoadConfigurationPropertiesResult result) {
     // ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
     // ApplicationOrganisation.setCurrentOrganisation(result.getOrganisation());
+    // setConfigurationProperties(result.getPropertyValues());
     // loadApplication();
     // }
     // });
@@ -225,4 +236,11 @@ public class OperationsWeb extends MetamacEntryPoint {
         ginjector.getPlaceManager().revealErrorPlace(null);
     }
 
+    private void setConfigurationProperties(Map<String, String> propertyValues) {
+        ConfigurationPropertiesUtils.setOperationDefaultCodelistForUpdateFrequency(propertyValues
+                .get(StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST));
+        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForGeographicGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY));
+        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForTemporalGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY));
+        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForFreqColl(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL));
+    }
 }
