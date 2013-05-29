@@ -97,7 +97,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultilanguageRichTextEditorItem docMethodItem;
     private CustomSelectItem                collMethodItem;
     private CustomSelectItem                surveySourceItem;
-    private CustomSelectItem                freqCollItem;
     private MultilanguageRichTextEditorItem dataValidationItem;
     private MultilanguageRichTextEditorItem dataCompilationItem;
     private MultilanguageRichTextEditorItem adjustmentItem;
@@ -133,8 +132,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     private List<ExternalItemDto>           conceptSchemes;
     private List<ExternalItemDto>           codeLists;
-
-    private List<ExternalItemDto>           freqCollCodes;
 
     private List<InstanceTypeDto>           instanceTypeDtos;
     private List<SurveySourceDto>           surveySourceDtos;
@@ -186,6 +183,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.TEMPORAL_GRANULARITIES)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setUiHandlers(uiHandlers);
+        ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.FREQ_COLL)).setUiHandlers(uiHandlers);
     }
 
     /*
@@ -297,8 +295,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getInformationSuppliers().clear();
         instanceDto.getInformationSuppliers().addAll(informationSuppliers);
 
+        List<ExternalItemDto> freqColls = ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(InstanceDS.FREQ_COLL)).getExternalItemDtos();
         instanceDto.getFreqColl().clear();
-        instanceDto.getFreqColl().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(freqCollCodes, freqCollItem.getValues()));
+        instanceDto.getFreqColl().addAll(freqColls);
+
         instanceDto.setDataValidation(dataValidationItem.getValue());
         instanceDto.setDataCompilation(dataCompilationItem.getValue());
         instanceDto.setAdjustment(adjustmentItem.getValue());
@@ -381,7 +381,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem surveySource = new ViewTextItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         ViewTextItem collMethod = new ViewTextItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         ExternalItemListItem informationSuppliers = new ExternalItemListItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers(), false);
-        ViewTextItem freqColl = new ViewTextItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
+        ExternalItemListItem freqColl = new ExternalItemListItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll(), false);
         ViewMultiLanguageTextItem staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
         ViewMultiLanguageTextItem staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
         ViewMultiLanguageTextItem staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
@@ -501,8 +501,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         surveySourceItem = new CustomSelectItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
         SearchMultipleItemsItem informationSuppliersItem = createInformationSuppliersItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers());
-        freqCollItem = new CustomSelectItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
-        freqCollItem.setMultiple(true);
+        ExternalItemListItem freqCollItem = createFreqColl(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
         dataValidationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
         dataCompilationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
         adjustmentItem = new MultilanguageRichTextEditorItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
@@ -600,7 +599,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionDescriptorsForm.setValue(InstanceDS.COLL_METHOD,
                 instanceDto.getCollMethod() != null ? CommonWebUtils.getElementName(instanceDto.getCollMethod().getIdentifier(), instanceDto.getCollMethod().getDescription()) : "");
         ((ExternalItemListItem) productionDescriptorsForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setExternalItems(instanceDto.getInformationSuppliers());
-        productionDescriptorsForm.setValue(InstanceDS.FREQ_COLL, ExternalItemUtils.getExternalItemListToString(instanceDto.getFreqColl()));
+        ((ExternalItemListItem) productionDescriptorsForm.getItem(InstanceDS.FREQ_COLL)).setExternalItems(instanceDto.getFreqColl());
         productionDescriptorsForm.setValue(InstanceDS.DATA_VALIDATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataValidation()));
         productionDescriptorsForm.setValue(InstanceDS.DATA_COMPILATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataCompilation()));
         productionDescriptorsForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));
@@ -685,7 +684,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         surveySourceItem.setValue(instanceDto.getSurveySource() != null ? instanceDto.getSurveySource().getId() : "");
         collMethodItem.setValue(instanceDto.getCollMethod() != null ? instanceDto.getCollMethod().getId() : "");
         ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setExternalItems(instanceDto.getInformationSuppliers());
-        freqCollItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getFreqColl()));
+        ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(InstanceDS.FREQ_COLL)).setExternalItems(instanceDto.getFreqColl());
         productionDescriptorsEditionForm.setValue(InstanceDS.DATA_VALIDATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataValidation()));
         productionDescriptorsEditionForm.setValue(InstanceDS.DATA_COMPILATION, RecordUtils.getInternationalStringRecord(instanceDto.getDataCompilation()));
         productionDescriptorsEditionForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));
@@ -765,12 +764,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         unitMeasureItem.setValueMap(map);
     }
 
-    @Override
-    public void setFreqCollCodes(List<ExternalItemDto> codes) {
-        this.freqCollCodes = codes;
-        freqCollItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(codes));
-    }
-
     private void setTranslationsShowed(boolean translationsShowed) {
         // Set translationsShowed value to international fields
         identifiersViewForm.setTranslationsShowed(translationsShowed);
@@ -819,6 +812,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
             ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+
+        } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
+            ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
         }
     }
 
@@ -835,6 +831,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
             ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+
+        } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
+            ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
         }
     }
 
@@ -951,6 +950,29 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         };
         item.setSaveClickHandler(clickHandler);
         item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForTemporalGranularity());
+        return item;
+    }
+
+    private ExternalItemListItem createFreqColl(final String name, String title) {
+        final SearchMultipleItemsItem item = new SearchMultipleCodesItem(name, title, new MultipleExternalResourceAction() {
+
+            @Override
+            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
+                return ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            }
+        });
+        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+            @Override
+            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+                List<ExternalItemDto> codes = item.getSelectedItems();
+                item.markSearchWindowForDestroy();
+                ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(codes);
+                productionDescriptorsEditionForm.markForRedraw();
+            }
+        };
+        item.setSaveClickHandler(clickHandler);
+        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForFreqColl());
         return item;
     }
 }

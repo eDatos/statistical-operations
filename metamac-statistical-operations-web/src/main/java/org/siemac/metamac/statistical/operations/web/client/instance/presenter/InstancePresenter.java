@@ -24,8 +24,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeLis
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent.UpdateCodeListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
@@ -78,8 +76,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             InstanceUiHandlers,
             UpdateCodeListsHandler,
             UpdateOperationsListsHandler,
-            UpdateConceptSchemesHandler,
-            UpdateFrequencyCodesHandler {
+            UpdateConceptSchemesHandler {
 
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
@@ -113,8 +110,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
         void setConceptScheme(List<ExternalItemDto> schemes);
         void setCodeLists(List<ExternalItemDto> codeLists);
-
-        void setFreqCollCodes(List<ExternalItemDto> codes);
 
         // External resources
 
@@ -281,12 +276,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void onUpdateCodeLists(UpdateCodeListsEvent event) {
         getView().setCodeLists(event.getCodeLists());
-    }
-
-    @ProxyEvent
-    @Override
-    public void onUpdateFrequencyCodes(UpdateFrequencyCodesEvent event) {
-        getView().setFreqCollCodes(event.getFreqCollCodes());
     }
 
     //
