@@ -26,6 +26,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.OperationsList
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.ExternalItemListItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.MultipleExternalResourceAction;
+import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsForStatisticalUnitItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleDataProvidersItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemSchemesItem;
@@ -78,7 +79,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private GroupDynamicForm                contentDescriptorsEditionForm;
     private MultilanguageRichTextEditorItem dataDescriptionItem;
     private MultilanguageRichTextEditorItem statisticalPopulationItem;
-    private CustomSelectItem                geographicalGranularityItem;
     private MultilanguageRichTextEditorItem geographicalComparabilityItem;
     private CustomSelectItem                temporalGranularityItem;
     private MultilanguageRichTextEditorItem temporalComparabilityItem;
@@ -134,7 +134,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private List<ExternalItemDto>           conceptSchemes;
     private List<ExternalItemDto>           codeLists;
 
-    private List<ExternalItemDto>           temporalGranularityCodes;
     private List<ExternalItemDto>           freqCollCodes;
 
     private List<InstanceTypeDto>           instanceTypeDtos;
@@ -183,6 +182,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setUiHandlers(uiHandlers);
         ((SearchMultipleItemSchemesItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setUiHandlers(uiHandlers);
+        ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setUiHandlers(uiHandlers);
     }
@@ -258,7 +258,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.getStatisticalUnit().clear();
         instanceDto.getStatisticalUnit().addAll(statisticalUnits);
 
-        // FIXME instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemDtoFromUrn(codeLists, geographicalGranularityItem.getValueAsString()));
+        List<ExternalItemDto> geographicGranularities = ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).getExternalItemDtos();
+        instanceDto.getGeographicGranularity().clear();
+        instanceDto.getGeographicGranularity().addAll(geographicGranularities);
+
         instanceDto.setGeographicComparability(geographicalComparabilityItem.getValue());
         // FIXME instanceDto.setTemporalGranularity(ExternalItemUtils.getExternalItemDtoFromUrn(temporalGranularityCodes, temporalGranularityItem.getValueAsString()));
         instanceDto.setTemporalComparability(temporalComparabilityItem.getValue());
@@ -346,7 +349,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewMultiLanguageTextItem dataDescription = new ViewMultiLanguageTextItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
         ViewMultiLanguageTextItem statisticalPopulation = new ViewMultiLanguageTextItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
         ExternalItemListItem statisticalUnit = new ExternalItemListItem(InstanceDS.STATISTICAL_UNIT, getCoreMessages().instance_statistical_unit(), false);
-        ViewTextItem geographicGranularity = new ViewTextItem(InstanceDS.GEOGRAPHIC_GRANULARITY, getCoreMessages().instance_geographic_granularity());
+        ExternalItemListItem geographicGranularities = new ExternalItemListItem(InstanceDS.GEOGRAPHIC_GRANULARITIES, getCoreMessages().instance_geographic_granularity(), false);
         ViewMultiLanguageTextItem geographicComparability = new ViewMultiLanguageTextItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
         ViewTextItem temporalGranularity = new ViewTextItem(InstanceDS.TEMPORAL_GRANULARITY, getCoreMessages().instance_temporal_granularity());
         ViewMultiLanguageTextItem temporalComparability = new ViewMultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
@@ -356,7 +359,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewTextItem statConcDefList = new ViewTextItem(InstanceDS.STAT_CONC_DEF_LIST, getCoreMessages().instance_stat_conc_def_list());
         ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
         ExternalItemListItem classSystemList = new ExternalItemListItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list(), false);
-        contentDescriptorsForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularity, geographicComparability, temporalGranularity, temporalComparability,
+        contentDescriptorsForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularities, geographicComparability, temporalGranularity, temporalComparability,
                 basePeriodItem, unitMeasure, statConcDef, statConcDefList, classSystemDescription, classSystemList);
 
         // Class descriptors
@@ -456,7 +459,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         dataDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
         statisticalPopulationItem = new MultilanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
         ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem(InstanceDS.STATISTICAL_UNIT, getCoreMessages().instance_statistical_unit());
-        geographicalGranularityItem = new CustomSelectItem(InstanceDS.GEOGRAPHIC_GRANULARITY, getCoreMessages().instance_geographic_granularity());
+        ExternalItemListItem geographicGranularities = createGeographicGranularities(InstanceDS.GEOGRAPHIC_GRANULARITIES, getCoreMessages().instance_geographic_granularity());
         geographicalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
         temporalGranularityItem = new CustomSelectItem(InstanceDS.TEMPORAL_GRANULARITY, getCoreMessages().instance_temporal_granularity());
         temporalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
@@ -471,8 +474,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list());
 
-        contentDescriptorsEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicalGranularityItem, geographicalComparabilityItem,
-                temporalGranularityItem, basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemDescriptionItem, classSystemItem);
+        contentDescriptorsEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicGranularities, geographicalComparabilityItem, temporalGranularityItem,
+                basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemDescriptionItem, classSystemItem);
 
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
@@ -561,8 +564,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ((ExternalItemListItem) contentDescriptorsForm.getItem(InstanceDS.STATISTICAL_UNIT)).setExternalItems(instanceDto.getStatisticalUnit());
 
-        // FIXME contentViewForm
-        // .setValue(InstanceDS.GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity() != null ? ExternalItemUtils.getExternalItemName(instanceDto.getGeographicGranularity()) : "");
+        ((ExternalItemListItem) contentDescriptorsForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setExternalItems(instanceDto.getGeographicGranularity());
+
         contentDescriptorsForm.setValue(InstanceDS.GEOGRAPHIC_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getGeographicComparability()));
         // FIXME contentViewForm.setValue(InstanceDS.TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity() != null ? ExternalItemUtils.getExternalItemName(instanceDto.getTemporalGranularity()) :
         // "");
@@ -646,7 +649,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setExternalItems(instanceDto.getStatisticalUnit());
 
-        // FIXME geographicalGranularityItem.setValue(instanceDto.getGeographicGranularity() != null ? instanceDto.getGeographicGranularity().getUrn() : "");
+        ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setExternalItems(instanceDto.getGeographicGranularity());
+
         geographicalComparabilityItem.setValue(instanceDto.getGeographicComparability());
         // FIXME temporalGranularityItem.setValue(instanceDto.getTemporalGranularity() != null ? instanceDto.getTemporalGranularity().getUrn() : "");
         temporalComparabilityItem.setValue(instanceDto.getTemporalComparability());
@@ -750,14 +754,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     public void setCodeLists(List<ExternalItemDto> codeLists) {
         this.codeLists = codeLists;
         LinkedHashMap<String, String> map = ExternalItemUtils.getExternalItemsHashMap(codeLists);
-        geographicalGranularityItem.setValueMap(map);
         unitMeasureItem.setValueMap(map);
-    }
-
-    @Override
-    public void setTemporalGranularityCodes(List<ExternalItemDto> codes) {
-        this.temporalGranularityCodes = codes;
-        temporalGranularityItem.setValueMap(ExternalItemUtils.getExternalItemsHashMap(codes));
     }
 
     @Override
@@ -804,10 +801,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
         } else if (StringUtils.equals(InstanceDS.STATISTICAL_UNIT, formItemName)) {
-            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setItemSchemes(result);
+            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
         } else if (StringUtils.equals(InstanceDS.CLASS_SYSTEM_LIST, formItemName)) {
-            ((SearchMultipleItemSchemesItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setSourceExternalItems(result);
+            ((SearchMultipleItemSchemesItem) contentDescriptorsEditionForm.getItem(formItemName)).setSourceExternalItems(result);
+
+        } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
+            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
         }
     }
 
@@ -817,7 +817,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(InstanceDS.STATISTICAL_UNIT, formItemName)) {
-            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setItems(result);
+            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+
+        } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
+            ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
         }
     }
 
@@ -825,12 +828,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // EXTERNAL RESOURCES ITEMS
     // ------------------------------------------------------------------------------------------------------------
 
-    private SearchMultipleItemsItem createStatisticalUnitsItem(String name, String title) {
+    private SearchMultipleItemsItem createStatisticalUnitsItem(final String name, String title) {
         final SearchMultipleItemsItem item = new SearchMultipleConceptsForStatisticalUnitItem(name, title, new MultipleExternalResourceAction() {
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).getExternalItemDtos());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -839,7 +842,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                 List<ExternalItemDto> concepts = item.getSelectedItems();
                 item.markSearchWindowForDestroy();
-                ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setExternalItems(concepts);
+                ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(concepts);
                 contentDescriptorsEditionForm.markForRedraw();
             }
         };
@@ -847,12 +850,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         return item;
     }
 
-    private SearchMultipleItemsItem createInformationSuppliersItem(String name, String title) {
+    private SearchMultipleItemsItem createInformationSuppliersItem(final String name, String title) {
         final SearchMultipleItemsItem item = new SearchMultipleDataProvidersItem(name, title, new MultipleExternalResourceAction() {
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).getExternalItemDtos());
+                return new ArrayList<ExternalItemDto>(((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -861,7 +864,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                 List<ExternalItemDto> dataProviders = item.getSelectedItems();
                 item.markSearchWindowForDestroy();
-                ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setExternalItems(dataProviders);
+                ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(dataProviders);
                 productionDescriptorsEditionForm.markForRedraw();
             }
         };
@@ -874,7 +877,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
             @Override
             public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).getExternalItemDtos();
+                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
             }
         });
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -883,7 +886,29 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                 List<ExternalItemDto> codelists = item.getSelectedItemSchemes();
                 item.markSearchWindowForDestroy();
-                ((SearchMultipleItemSchemesItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setExternalItems(codelists);
+                ((SearchMultipleItemSchemesItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(codelists);
+                contentDescriptorsEditionForm.markForRedraw();
+            }
+        };
+        item.setSaveClickHandler(clickHandler);
+        return item;
+    }
+
+    private ExternalItemListItem createGeographicGranularities(final String name, String title) {
+        final SearchMultipleItemsItem item = new SearchMultipleCodesItem(name, title, new MultipleExternalResourceAction() {
+
+            @Override
+            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
+                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            }
+        });
+        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+            @Override
+            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+                List<ExternalItemDto> codes = item.getSelectedItems();
+                item.markSearchWindowForDestroy();
+                ((SearchMultipleItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(codes);
                 contentDescriptorsEditionForm.markForRedraw();
             }
         };

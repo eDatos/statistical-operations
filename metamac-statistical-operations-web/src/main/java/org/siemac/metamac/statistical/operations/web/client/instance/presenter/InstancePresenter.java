@@ -114,7 +114,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         void setConceptScheme(List<ExternalItemDto> schemes);
         void setCodeLists(List<ExternalItemDto> codeLists);
 
-        void setTemporalGranularityCodes(List<ExternalItemDto> codes);
         void setFreqCollCodes(List<ExternalItemDto> codes);
 
         // External resources
@@ -287,7 +286,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @ProxyEvent
     @Override
     public void onUpdateFrequencyCodes(UpdateFrequencyCodesEvent event) {
-        getView().setTemporalGranularityCodes(event.getTemporalGranularityCodes());
         getView().setFreqCollCodes(event.getFreqCollCodes());
     }
 
