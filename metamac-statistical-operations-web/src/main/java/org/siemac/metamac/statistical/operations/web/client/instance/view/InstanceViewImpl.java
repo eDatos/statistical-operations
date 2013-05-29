@@ -253,7 +253,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setDataDescription(dataDescriptionItem.getValue());
         instanceDto.setStatisticalPopulation(statisticalPopulationItem.getValue());
 
-        // TODO Statistical unit
+        List<ExternalItemDto> statisticalUnits = ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).getExternalItemDtos();
+        instanceDto.getStatisticalUnit().clear();
+        instanceDto.getStatisticalUnit().addAll(statisticalUnits);
 
         // FIXME instanceDto.setGeographicGranularity(ExternalItemUtils.getExternalItemDtoFromUrn(codeLists, geographicalGranularityItem.getValueAsString()));
         instanceDto.setGeographicComparability(geographicalComparabilityItem.getValue());
