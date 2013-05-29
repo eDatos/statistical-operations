@@ -35,6 +35,11 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                 final int FIRST_RESULT = 0;
                 final int MAX_RESULTS = 6;
 
+                // clear criteria each time the window is shown
+                itemSchemeCriteria.setCriteria(null);
+                itemCriteria.setCriteria(null);
+                itemCriteria.setItemSchemUrn(null);
+
                 PaginatedAction filterListAction = new PaginatedAction() {
 
                     @Override
