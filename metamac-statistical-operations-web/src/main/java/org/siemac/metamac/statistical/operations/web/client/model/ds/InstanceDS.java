@@ -26,7 +26,7 @@ public class InstanceDS extends DataSource {
     public static final String UNIT_MEASURE                 = "in-umeas";
     public static final String STAT_CONC_DEF                = "in-sta-con";
     public static final String STAT_CONC_DEF_LIST           = "in-sta-con-list";
-    public static final String CLASS_SYSTEM                 = "in-class-sys";
+    public static final String CLASS_SYSTEM_DESCRIPTION                 = "in-class-sys";
     public static final String CLASS_SYSTEM_LIST            = "in-class-sys-list";
     // CLASS DESCRIPTORS
     public static final String INSTANCE_TYPE                = "in-intype";
