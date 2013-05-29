@@ -22,7 +22,6 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperatio
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetOrganisationsFromSchemeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetUserGuideUrlActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyInstanceActionHandler;
@@ -60,7 +59,6 @@ import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInsta
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOrganisationsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
@@ -136,7 +134,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(FindAllCategorySchemesAction.class, FindAllCategorySchemesActionHandler.class);
         bindHandler(FindCategoriesFromSchemeAction.class, FindCategoriesFromSchemeActionHandler.class);
         bindHandler(FindAllOrganisationSchemesAction.class, FindAllOrganisationSchemesActionHandler.class);
-        bindHandler(GetOrganisationsFromSchemeAction.class, GetOrganisationsFromSchemeActionHandler.class);
         bindHandler(GetCommonMetadataConfigurationsAction.class, GetCommonMetadataConfigurationsActionHandler.class);
         bindHandler(FindAllConceptSchemesAction.class, FindAllConceptSchemesActionHandler.class);
         bindHandler(GetConceptsFromSchemeAction.class, GetConceptsFromSchemeActionHandler.class);
