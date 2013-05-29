@@ -13,8 +13,4 @@ public interface OperationListUiHandlers extends UiHandlers {
     void saveOperation(OperationDto operationDto);
     void goToOperation(String operationCode);
     void deleteOperations(List<Long> operationDtos);
-
-    void populateSubjects(String uri);
-
-    void retrieveCategorySchemes();
 }

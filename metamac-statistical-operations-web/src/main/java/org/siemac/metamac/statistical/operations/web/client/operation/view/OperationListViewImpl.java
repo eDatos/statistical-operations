@@ -27,8 +27,6 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Autofit;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
-import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
@@ -58,15 +56,6 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         panel = new VLayout();
 
         newOperationForm = new NewOperationForm();
-        newOperationForm.getSubjectAreasItem().getSchemeItem().addChangedHandler(new ChangedHandler() {
-
-            @Override
-            public void onChanged(ChangedEvent event) {
-                if (event.getValue() != null) {
-                    getUiHandlers().populateSubjects(event.getValue().toString());
-                }
-            }
-        });
 
         window = new ModalWindow();
         window.setTitle(OperationsWeb.getConstants().actionNewOperation());
@@ -80,8 +69,6 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
 
             @Override
             public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
-                // Load category schemes (required to create a new operation)
-                getUiHandlers().retrieveCategorySchemes();
 
                 // Clear new operation form
                 newOperationForm.clearValues();

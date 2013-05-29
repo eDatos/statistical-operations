@@ -3,12 +3,8 @@ package org.siemac.metamac.statistical.operations.web.server;
 import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteFamilyListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteOperationListActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllCategorySchemesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllCodeListsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllConceptSchemesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.FindAllOrganisationSchemesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.FindCategoriesFromSchemeActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetCodesFromCodeListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetCommonMetadataConfigurationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetConceptsFromSchemeActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyActionHandler;
@@ -40,12 +36,8 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.external.Ge
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllCodeListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllOrganisationSchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCodesFromCodeListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetConceptsFromSchemeAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
@@ -131,14 +123,10 @@ public class ServerModule extends HandlerModule {
         bindHandler(PublishExternallyInstanceAction.class, PublishExternallyInstanceActionHandler.class);
         bindHandler(UpdateInstancesOrderAction.class, UpdateInstancesOrderActionHandler.class);
 
-        bindHandler(FindAllCategorySchemesAction.class, FindAllCategorySchemesActionHandler.class);
-        bindHandler(FindCategoriesFromSchemeAction.class, FindCategoriesFromSchemeActionHandler.class);
-        bindHandler(FindAllOrganisationSchemesAction.class, FindAllOrganisationSchemesActionHandler.class);
         bindHandler(GetCommonMetadataConfigurationsAction.class, GetCommonMetadataConfigurationsActionHandler.class);
         bindHandler(FindAllConceptSchemesAction.class, FindAllConceptSchemesActionHandler.class);
         bindHandler(GetConceptsFromSchemeAction.class, GetConceptsFromSchemeActionHandler.class);
         bindHandler(FindAllCodeListsAction.class, FindAllCodeListsActionHandler.class);
-        bindHandler(GetCodesFromCodeListAction.class, GetCodesFromCodeListActionHandler.class);
         bindHandler(GetFrequencyCodesAction.class, GetFrequencyCodesActionHandler.class);
 
         // External

@@ -19,10 +19,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllCategorySchemesResult;
-import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindCategoriesFromSchemeResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
@@ -214,35 +210,4 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             }
         });
     }
-
-    @Override
-    public void populateSubjects(String uri) {
-        dispatcher.execute(new FindCategoriesFromSchemeAction(uri), new WaitingAsyncCallback<FindCategoriesFromSchemeResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(FindCategoriesFromSchemeResult result) {
-                getView().setSubjects(result.getCategories());
-            }
-        });
-    }
-
-    @Override
-    public void retrieveCategorySchemes() {
-        dispatcher.execute(new FindAllCategorySchemesAction(), new WaitingAsyncCallback<FindAllCategorySchemesResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(FindAllCategorySchemesResult result) {
-                getView().setCategorySchemes(result.getCategorySchemes());
-            }
-        });
-    }
-
 }
