@@ -23,8 +23,6 @@ import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateCommonMetadataEvent.UpdateCommonMetadataHandler;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateFrequencyCodesEvent.UpdateFrequencyCodesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
@@ -93,8 +91,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         implements
             OperationUiHandlers,
             UpdateOperationsListsHandler,
-            UpdateCommonMetadataHandler,
-            UpdateFrequencyCodesHandler {
+            UpdateCommonMetadataHandler {
 
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
@@ -132,8 +129,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         HasClickHandlers getPublishOperationExternally();
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
-
-        void setUpdateFrequencyCodes(List<ExternalItemDto> codes);
 
         // External resources
 
@@ -429,12 +424,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     @Override
     public void onUpdateCommonMetadata(UpdateCommonMetadataEvent event) {
         getView().setCommonMetadataConfigurations(event.getCommonMetadata());
-    }
-
-    @ProxyEvent
-    @Override
-    public void onUpdateFrequencyCodes(UpdateFrequencyCodesEvent event) {
-        getView().setUpdateFrequencyCodes(event.getUpdateFrequencyCodes());
     }
 
     @Override
