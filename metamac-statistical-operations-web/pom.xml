@@ -46,6 +46,11 @@
             <version>${metamac-common-metadata.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.siemac.metamac.metamac-srm</groupId>
+            <artifactId>metamac-srm-rest-internal-api</artifactId>
+            <version>${metamac-srm-rest-internal-api.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-web-common</artifactId>
             <version>${metamac-web-common.version}</version>
@@ -292,7 +297,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}/src/main/webapp/MetamacInternalWeb</directory>
+                            <directory>${basedir}/src/main/webapp/OperationsWeb</directory>
                         </fileset>
                     </filesets>
                 </configuration>
