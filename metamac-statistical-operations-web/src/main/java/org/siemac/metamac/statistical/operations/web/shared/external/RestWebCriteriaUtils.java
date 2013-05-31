@@ -50,6 +50,24 @@ public class RestWebCriteriaUtils {
     }
 
     //
+    // INSTACE: MEASURES
+    //
+
+    public static ConceptSchemeWebCriteria buildMeasuresConceptSchemeWebCriteria() {
+        ConceptSchemeWebCriteria conceptSchemeWebCriteria = new ConceptSchemeWebCriteria();
+        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.MEASURE);
+        return conceptSchemeWebCriteria;
+    }
+
+    public static ConceptWebCriteria buildMeasuresConceptWebCriteria() {
+        ConceptWebCriteria conceptWebcriteria = new ConceptWebCriteria();
+        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.MEASURE);
+        return conceptWebcriteria;
+    }
+
+    //
     // COMMON CRITERIA
     //
 

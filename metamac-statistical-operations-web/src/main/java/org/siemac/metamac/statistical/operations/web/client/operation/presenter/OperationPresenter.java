@@ -54,6 +54,8 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrder
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
@@ -484,6 +486,9 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void retrieveItemSchemes(final String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
+        if (externalResourceWebCriteria instanceof ConceptSchemeWebCriteria) {
+            ((ConceptSchemeWebCriteria) externalResourceWebCriteria).setStatisticalOperationUrn(operationDto.getUrn());
+        }
         dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
@@ -505,6 +510,9 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void retrieveItems(final String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+        if (itemWebCriteria instanceof ConceptWebCriteria) {
+            ((ConceptWebCriteria) itemWebCriteria).setStatisticalOperationUrn(operationDto.getUrn());
+        }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
