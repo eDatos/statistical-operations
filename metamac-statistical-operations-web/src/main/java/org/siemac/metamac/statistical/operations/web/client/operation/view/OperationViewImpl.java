@@ -586,6 +586,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // Diffusion Descriptors
         diffusionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
         ExternalItemListItem publisher = new ExternalItemListItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher(), false);
+        ViewTextItem commonMetadata = new ViewTextItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
         ViewMultiLanguageTextItem staticRelPolUsAc = new ViewMultiLanguageTextItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         ViewTextItem releaseCalendar = new ViewTextItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         ViewTextItem releaseCalendarAccess = new ViewTextItem(OperationDS.RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
@@ -595,9 +596,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem invDate = new ViewTextItem(OperationDS.INVENTORY_DATE, getCoreMessages().operation_inventory_date());
         ViewMultiLanguageTextItem staticRevPolicyItem = new ViewMultiLanguageTextItem(OperationDS.REV_POLICY, getCoreMessages().operation_rev_policy());
         ViewMultiLanguageTextItem staticRevPracticeItem = new ViewMultiLanguageTextItem(OperationDS.REV_PRACTICE, getCoreMessages().operation_rev_practice());
-        ViewTextItem commonMetadata = new ViewTextItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
-        diffusionForm.setFields(publisher, staticRelPolUsAc, releaseCalendar, releaseCalendarAccess, updateFreq, currentInst, currentInternalInst, invDate, staticRevPolicyItem, staticRevPracticeItem,
-                commonMetadata);
+        diffusionForm.setFields(publisher, commonMetadata, staticRelPolUsAc, releaseCalendar, releaseCalendarAccess, updateFreq, currentInst, currentInternalInst, invDate, staticRevPolicyItem,
+                staticRevPracticeItem);
 
         // Legal acts
         legalActsForm = new GroupDynamicForm(getConstants().formLegalActs());
@@ -705,6 +705,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
         SearchMultipleItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
+        commonMetadataItem = new CustomSelectItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
         MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.RELEASE_CALENDAR_ACCESS, getCoreMessages().operation_release_calendar_access());
@@ -715,10 +716,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewTextItem invDate = new ViewTextItem(OperationDS.INVENTORY_DATE, getCoreMessages().operation_inventory_date());
         MultilanguageRichTextEditorItem revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.REV_POLICY, getCoreMessages().operation_rev_policy());
         MultilanguageRichTextEditorItem revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.REV_PRACTICE, getConstants().operationRevPractice());
-        commonMetadataItem = new CustomSelectItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
-        // commonMetadataItem.setValidators(getRequiredIfInternallyPublished());
-        diffusionEditionForm.setFields(publishersItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate, revPolicyItem,
-                revPracticeItem, commonMetadataItem);
+        diffusionEditionForm.setFields(publishersItem, commonMetadataItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate,
+                revPolicyItem, revPracticeItem);
 
         // LEGAL ACTS
 
