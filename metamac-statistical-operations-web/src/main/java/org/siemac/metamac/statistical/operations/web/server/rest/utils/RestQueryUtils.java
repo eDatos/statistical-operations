@@ -151,12 +151,42 @@ public class RestQueryUtils {
                 }
 
                 if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeWebCriteria.getStatisticalOperationUrn())) {
+
+                    // Concept scheme type is OPERATION and the statistical operation is the specified
+
                     queryBuilder.append("(");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                             .append(conceptSchemeWebCriteria.getStatisticalOperationUrn()).append("\"");
+                    queryBuilder.append(")");
+
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeWebCriteria.getStatisticalOperationUrn())) {
+
+                    // Concept scheme type is MEASURE and the statistical operation is the specified
+
+                    queryBuilder.append("(");
+
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(conceptSchemeWebCriteria.getStatisticalOperationUrn()).append("\"");
+                    queryBuilder.append(")");
+
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+
+                    // Concept scheme type is MEASURE
+
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.IS_NULL.name());
+                    queryBuilder.append(")");
+
                     queryBuilder.append(")");
                 } else {
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
@@ -227,6 +257,9 @@ public class RestQueryUtils {
                 }
 
                 if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptWebCriteria.getStatisticalOperationUrn())) {
+
+                    // Concept scheme type is OPERATION and the statistical operation is the specified
+
                     queryBuilder.append("(");
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
@@ -234,6 +267,34 @@ public class RestQueryUtils {
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                             .append(conceptWebCriteria.getStatisticalOperationUrn()).append("\"");
                     queryBuilder.append(")");
+
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptWebCriteria.getStatisticalOperationUrn())) {
+
+                    // Concept scheme type is MEASURE and the statistical operation is the specified
+
+                    queryBuilder.append("(");
+
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(conceptWebCriteria.getStatisticalOperationUrn()).append("\"");
+                    queryBuilder.append(")");
+
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+
+                    // Concept scheme type is MEASURE
+
+                    queryBuilder.append("(");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
+                            .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
+                    queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+                    queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.IS_NULL.name());
+                    queryBuilder.append(")");
+
+                    queryBuilder.append(")");
+
                 } else {
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_TYPE).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");

@@ -363,10 +363,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ExternalItemListItem measures = new ExternalItemListItem(InstanceDS.MEASURES, getCoreMessages().instance_unit_measure(), false);
         ViewMultiLanguageTextItem statConcDefDescription = new ViewMultiLanguageTextItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getCoreMessages().instance_stat_conc_def());
         ExternalItemListItem statConcDefList = new ExternalItemListItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list(), false);
-        ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
         ExternalItemListItem classSystemList = new ExternalItemListItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list(), false);
+        ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
         contentDescriptorsForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularities, geographicComparability, temporalGranularities, temporalComparability,
-                basePeriodItem, measures, statConcDefDescription, statConcDefList, classSystemDescription, classSystemList);
+                basePeriodItem, measures, statConcDefDescription, statConcDefList, classSystemList, classSystemDescription);
 
         // Class descriptors
         classViewForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
@@ -478,12 +478,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ExternalItemListItem statConcDefItem = createStatConcDef(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list());
 
-        MultilanguageRichTextEditorItem classSystemDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
-
         ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list());
 
+        MultilanguageRichTextEditorItem classSystemDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
+
         contentDescriptorsEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicGranularities, geographicalComparabilityItem, temporalGranularities,
-                basePeriodItem, temporalComparabilityItem, measuresItem, statConcDefDescriptionItem, statConcDefItem, classSystemDescriptionItem, classSystemItem);
+                basePeriodItem, temporalComparabilityItem, measuresItem, statConcDefDescriptionItem, statConcDefItem, classSystemItem, classSystemDescriptionItem);
 
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
