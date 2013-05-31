@@ -20,8 +20,6 @@ import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateCodeListsEvent.UpdateCodeListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
@@ -74,7 +72,6 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 public class InstancePresenter extends Presenter<InstancePresenter.InstanceView, InstancePresenter.InstanceProxy>
         implements
             InstanceUiHandlers,
-            UpdateCodeListsHandler,
             UpdateOperationsListsHandler,
             UpdateConceptSchemesHandler {
 
@@ -270,12 +267,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void onUpdateConceptSchemes(UpdateConceptSchemesEvent event) {
         getView().setConceptScheme(event.getConceptSchemes());
-    }
-
-    @ProxyEvent
-    @Override
-    public void onUpdateCodeLists(UpdateCodeListsEvent event) {
-        getView().setCodeLists(event.getCodeLists());
     }
 
     //
