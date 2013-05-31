@@ -75,7 +75,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     private ConfigurationService             configurationService;
 
     @Autowired
-    private CommonMetadataRestExternalFacade commonMetadataRestInternalFacade;
+    private CommonMetadataRestExternalFacade commonMetadataRestExternalFacade;
 
     private String                           statisticalOperationsApiExternalEndpointV10;
     private String                           srmApiExternalEndpoint;
@@ -414,7 +414,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return;
         }
         // Calls to CommonMetadata API
-        Configuration configuration = commonMetadataRestInternalFacade.retrieveConfigurationById(commonMetadata.getCode());
+        Configuration configuration = commonMetadataRestExternalFacade.retrieveConfigurationById(commonMetadata.getCode());
 
         // Transform
         target.setContact(configuration.getContact());
