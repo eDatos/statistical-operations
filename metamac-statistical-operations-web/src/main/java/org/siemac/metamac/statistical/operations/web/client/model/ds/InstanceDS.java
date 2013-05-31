@@ -20,13 +20,13 @@ public class InstanceDS extends DataSource {
     public static final String STATISTICAL_UNIT             = "in-sta-unit";
     public static final String GEOGRAPHIC_GRANULARITIES     = "in-geo-gran";
     public static final String GEOGRAPHIC_COMPARABILITY     = "in-geo-com";
-    public static final String TEMPORAL_GRANULARITIES         = "in-tem-gran";
+    public static final String TEMPORAL_GRANULARITIES       = "in-tem-gran";
     public static final String TEMPORAL_COMPARABILITY       = "in-tem-com";
     public static final String BASE_PERIOD                  = "in-basep";
     public static final String UNIT_MEASURE                 = "in-umeas";
-    public static final String STAT_CONC_DEF                = "in-sta-con";
-    public static final String STAT_CONC_DEF_LIST           = "in-sta-con-list";
-    public static final String CLASS_SYSTEM_DESCRIPTION                 = "in-class-sys";
+    public static final String STAT_CONC_DEF_DESCRIPTION    = "in-sta-con";
+    public static final String STAT_CONC_DEF                = "in-sta-con-list";
+    public static final String CLASS_SYSTEM_DESCRIPTION     = "in-class-sys";
     public static final String CLASS_SYSTEM_LIST            = "in-class-sys-list";
     // CLASS DESCRIPTORS
     public static final String INSTANCE_TYPE                = "in-intype";

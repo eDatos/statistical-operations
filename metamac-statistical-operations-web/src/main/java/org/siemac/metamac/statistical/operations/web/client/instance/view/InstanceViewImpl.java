@@ -83,8 +83,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private MultilanguageRichTextEditorItem geographicalComparabilityItem;
     private MultilanguageRichTextEditorItem temporalComparabilityItem;
     private CustomSelectItem                unitMeasureItem;
-    private MultilanguageRichTextEditorItem statConcDefItem;
-    private CustomSelectItem                statConcDefListItem;
+    private CustomSelectItem                statConcDefItem;
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm                classViewForm;
@@ -271,9 +270,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         instanceDto.setBasePeriod(contentDescriptorsEditionForm.getValueAsString(InstanceDS.BASE_PERIOD));
         instanceDto.getUnitMeasure().clear();
         instanceDto.getUnitMeasure().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(codeLists, unitMeasureItem.getValues()));
-        instanceDto.setStatConcDef(statConcDefItem.getValue());
+        instanceDto.setStatConcDef((InternationalStringDto) contentDescriptorsEditionForm.getValue(InstanceDS.STAT_CONC_DEF_DESCRIPTION));
         instanceDto.getStatConcDefList().clear();
-        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(conceptSchemes, statConcDefListItem.getValues()));
+        instanceDto.getStatConcDefList().addAll(ExternalItemUtils.getExternalItemDtoListFromUrns(conceptSchemes, statConcDefItem.getValues()));
 
         instanceDto.setClassSystem((InternationalStringDto) contentDescriptorsEditionForm.getValue(InstanceDS.CLASS_SYSTEM_DESCRIPTION));
 
@@ -360,8 +359,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ViewMultiLanguageTextItem temporalComparability = new ViewMultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
         ViewTextItem basePeriodItem = new ViewTextItem(InstanceDS.BASE_PERIOD, getCoreMessages().instance_base_period());
         ViewTextItem unitMeasure = new ViewTextItem(InstanceDS.UNIT_MEASURE, getCoreMessages().instance_unit_measure());
-        ViewMultiLanguageTextItem statConcDef = new ViewMultiLanguageTextItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def());
-        ViewTextItem statConcDefList = new ViewTextItem(InstanceDS.STAT_CONC_DEF_LIST, getCoreMessages().instance_stat_conc_def_list());
+        ViewMultiLanguageTextItem statConcDef = new ViewMultiLanguageTextItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getCoreMessages().instance_stat_conc_def());
+        ViewTextItem statConcDefList = new ViewTextItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list());
         ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
         ExternalItemListItem classSystemList = new ExternalItemListItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list(), false);
         contentDescriptorsForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, geographicGranularities, geographicComparability, temporalGranularities, temporalComparability,
@@ -472,15 +471,15 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
         unitMeasureItem = new CustomSelectItem(InstanceDS.UNIT_MEASURE, getCoreMessages().instance_unit_measure());
         unitMeasureItem.setMultiple(true);
-        statConcDefItem = new MultilanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def());
-        statConcDefListItem = new CustomSelectItem(InstanceDS.STAT_CONC_DEF_LIST, getCoreMessages().instance_stat_conc_def_list());
-        statConcDefListItem.setMultiple(true);
+        MultilanguageRichTextEditorItem statConcDefDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getCoreMessages().instance_stat_conc_def());
+        statConcDefItem = new CustomSelectItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list());
+        statConcDefItem.setMultiple(true);
         MultilanguageRichTextEditorItem classSystemDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
 
         ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list());
 
         contentDescriptorsEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, geographicGranularities, geographicalComparabilityItem, temporalGranularities,
-                basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefItem, statConcDefListItem, classSystemDescriptionItem, classSystemItem);
+                basePeriodItem, temporalComparabilityItem, unitMeasureItem, statConcDefDescriptionItem, statConcDefItem, classSystemDescriptionItem, classSystemItem);
 
         // Class descriptors
         classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
@@ -577,8 +576,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentDescriptorsForm.setValue(InstanceDS.TEMPORAL_COMPARABILITY, RecordUtils.getInternationalStringRecord(instanceDto.getTemporalComparability()));
         contentDescriptorsForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
         contentDescriptorsForm.setValue(InstanceDS.UNIT_MEASURE, ExternalItemUtils.getExternalItemListToString(instanceDto.getUnitMeasure()));
-        contentDescriptorsForm.setValue(InstanceDS.STAT_CONC_DEF, RecordUtils.getInternationalStringRecord(instanceDto.getStatConcDef()));
-        contentDescriptorsForm.setValue(InstanceDS.STAT_CONC_DEF_LIST, ExternalItemUtils.getExternalItemListToString(instanceDto.getStatConcDefList()));
+        contentDescriptorsForm.setValue(InstanceDS.STAT_CONC_DEF_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getStatConcDef()));
+        contentDescriptorsForm.setValue(InstanceDS.STAT_CONC_DEF, ExternalItemUtils.getExternalItemListToString(instanceDto.getStatConcDefList()));
         contentDescriptorsForm.setValue(InstanceDS.CLASS_SYSTEM_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getClassSystem()));
         ((ExternalItemListItem) contentDescriptorsForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setExternalItems(instanceDto.getClassSystemList());
 
@@ -663,8 +662,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         temporalComparabilityItem.setValue(instanceDto.getTemporalComparability());
         contentDescriptorsEditionForm.setValue(InstanceDS.BASE_PERIOD, instanceDto.getBasePeriod());
         unitMeasureItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getUnitMeasure()));
-        statConcDefItem.setValue(instanceDto.getStatConcDef());
-        statConcDefListItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getStatConcDefList()));
+        contentDescriptorsEditionForm.setValue(InstanceDS.STAT_CONC_DEF_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getStatConcDef()));
+        statConcDefItem.setValues(ExternalItemUtils.getExternalItemsUrns(instanceDto.getStatConcDefList()));
         contentDescriptorsEditionForm.setValue(InstanceDS.CLASS_SYSTEM_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getClassSystem()));
         ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setExternalItems(instanceDto.getClassSystemList());
 
@@ -754,7 +753,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     public void setConceptScheme(List<ExternalItemDto> schemes) {
         this.conceptSchemes = schemes;
         LinkedHashMap<String, String> map = ExternalItemUtils.getExternalItemsHashMap(schemes);
-        statConcDefListItem.setValueMap(map);
+        statConcDefItem.setValueMap(map);
     }
 
     @Override
