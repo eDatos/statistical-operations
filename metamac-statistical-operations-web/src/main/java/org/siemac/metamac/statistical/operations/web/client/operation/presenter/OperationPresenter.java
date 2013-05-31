@@ -34,8 +34,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
@@ -57,6 +55,8 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamil
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.web.server.handlers;
+package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.Resource;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configurations;
 import org.siemac.metamac.statistical.operations.web.server.rest.CommonMetadataRestExternalFacade;
-import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetCommonMetadataConfigurationsResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.DtoUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.siemac.metamac.statistical.operations.web.shared;
+package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import java.util.List;
 
