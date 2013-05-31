@@ -7,13 +7,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesAction;
-import org.siemac.metamac.statistical.operations.web.shared.FindAllConceptSchemesResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
@@ -102,9 +99,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     protected void onBind() {
         super.onBind();
         loadOperationsLists();
-
-        // TODO These lists should not be load here!
-        loadConceptSchemes();
     }
 
     @Override
@@ -174,20 +168,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
     private void hideMessages() {
         getView().hideMessages();
-    }
-
-    private void loadConceptSchemes() {
-        dispatcher.execute(new FindAllConceptSchemesAction(), new WaitingAsyncCallback<FindAllConceptSchemesResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
-            }
-            @Override
-            public void onWaitSuccess(FindAllConceptSchemesResult result) {
-                UpdateConceptSchemesEvent.fire(MainPagePresenter.this, result.getConceptSchemes());
-            }
-        });
     }
 
     private void loadOperationsLists() {

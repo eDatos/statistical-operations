@@ -6,7 +6,6 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.List;
 
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
-import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.core.common.util.shared.UrnUtils;
@@ -20,8 +19,6 @@ import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent;
-import org.siemac.metamac.statistical.operations.web.client.events.UpdateConceptSchemesEvent.UpdateConceptSchemesHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
@@ -69,11 +66,7 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
 
-public class InstancePresenter extends Presenter<InstancePresenter.InstanceView, InstancePresenter.InstanceProxy>
-        implements
-            InstanceUiHandlers,
-            UpdateOperationsListsHandler,
-            UpdateConceptSchemesHandler {
+public class InstancePresenter extends Presenter<InstancePresenter.InstanceView, InstancePresenter.InstanceProxy> implements InstanceUiHandlers, UpdateOperationsListsHandler {
 
     private final DispatchAsync                dispatcher;
     private final PlaceManager                 placeManager;
@@ -105,8 +98,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         InstanceDto getInstance(InstanceDto instanceDto);
 
         void setOperationsLists(List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos);
-        void setConceptScheme(List<ExternalItemDto> schemes);
-        void setCodeLists(List<ExternalItemDto> codeLists);
 
         // External resources
 
@@ -261,12 +252,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     @Override
     public void onUpdateOperationsLists(UpdateOperationsListsEvent event) {
         getView().setOperationsLists(event.getInstanceTypeDtos(), event.getSurveySourceDtos(), event.getCollMethodDtos(), event.getCostDtos());
-    }
-
-    @ProxyEvent
-    @Override
-    public void onUpdateConceptSchemes(UpdateConceptSchemesEvent event) {
-        getView().setConceptScheme(event.getConceptSchemes());
     }
 
     //

@@ -7,7 +7,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCrit
 public class SearchMultipleConceptsForStatisticalUnitItem extends SearchMultipleItemsItem {
 
     public SearchMultipleConceptsForStatisticalUnitItem(String name, String title, MultipleExternalResourceAction action) {
-        super(name, title, RestWebCriteriaUtils.buildStatisticalUnitConceptSchemeWebCriteria(), RestWebCriteriaUtils.buildStatisticalUnitConceptWebCriteria(), getConstants().searchOrganisations(),
-                getConstants().filterOrganisationScheme(), getConstants().selectedOrganisationScheme(), getConstants().selectionOrganisations(), action);
+        super(name, title, RestWebCriteriaUtils.buildStatisticalUnitConceptSchemeWebCriteria(), RestWebCriteriaUtils.buildStatisticalUnitConceptWebCriteria(), getConstants().searchConcepts(),
+                getConstants().filterConceptScheme(), getConstants().selectedConceptScheme(), getConstants().selectionConcepts(), action);
     }
 }

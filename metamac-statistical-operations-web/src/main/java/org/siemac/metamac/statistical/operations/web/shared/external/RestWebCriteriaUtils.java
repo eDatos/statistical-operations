@@ -32,6 +32,24 @@ public class RestWebCriteriaUtils {
     }
 
     //
+    // INSTACE: STAT CONC DEF
+    //
+
+    public static ConceptSchemeWebCriteria buildStatConcDefConceptSchemeWebCriteria() {
+        ConceptSchemeWebCriteria conceptSchemeWebCriteria = new ConceptSchemeWebCriteria();
+        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
+        return conceptSchemeWebCriteria;
+    }
+
+    public static ConceptWebCriteria buildStatConcDefConceptWebCriteria() {
+        ConceptWebCriteria conceptWebcriteria = new ConceptWebCriteria();
+        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
+        return conceptWebcriteria;
+    }
+
+    //
     // COMMON CRITERIA
     //
 
