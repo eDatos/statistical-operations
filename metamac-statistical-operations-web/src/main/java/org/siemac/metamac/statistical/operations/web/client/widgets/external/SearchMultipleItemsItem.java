@@ -9,6 +9,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ExternalRes
 import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
@@ -19,29 +20,39 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchMultipleItemsItem extends ExternalItemListItem {
 
+    protected final int                                                       FIRST_RESULT = 0;
+    protected final int                                                       MAX_RESULTS  = 6;
+
     protected SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow searchMultipleItemsWindow;
     protected ExternalResourcesUiHandlers                                     uiHandlers;
     protected ClickHandler                                                    saveClickHandler;
 
     protected String                                                          defaultItemSchemeUrn;
 
+    protected CustomSelectItem                                                initialFilterSelectItem;
+
     public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final ItemWebCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
+        this(name, title, itemSchemeCriteria, itemCriteria, windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle, null, action);
+    }
+
+    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final ItemWebCriteria itemCriteria, final String windowTitle,
+            final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final CustomSelectItem initialFilterSelectItem,
+            final MultipleExternalResourceAction action) {
         super(name, title, true);
+        this.initialFilterSelectItem = initialFilterSelectItem;
 
         getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
 
             @Override
             public void onFormItemClick(FormItemIconClickEvent event) {
-                final int FIRST_RESULT = 0;
-                final int MAX_RESULTS = 6;
 
                 PaginatedAction filterListAction = new PaginatedAction() {
 
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults) {
                         itemSchemeCriteria.setCriteria(searchMultipleItemsWindow.getFilterListCriteria());
-                        getUiHandlers().retrieveItemSchemes(name, itemSchemeCriteria, firstResult, maxResults);
+                        retrieveItemSchemes(name, itemSchemeCriteria, firstResult, maxResults);
                     }
                 };
                 PaginatedAction selectionListAction = new PaginatedAction() {
@@ -50,11 +61,16 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                     public void retrieveResultSet(int firstResult, int maxResults) {
                         itemCriteria.setCriteria(searchMultipleItemsWindow.getSelectionListCriteria());
                         itemCriteria.setItemSchemUrn(searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
-                        getUiHandlers().retrieveItems(name, itemCriteria, firstResult, maxResults);
+                        retrieveItems(name, itemCriteria, firstResult, maxResults);
                     }
                 };
                 searchMultipleItemsWindow = new SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow(windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle,
                         MAX_RESULTS, filterListAction, selectionListAction);
+
+                // Add the selectItem in the initial filter form (if has been specified!)
+                if (initialFilterSelectItem != null) {
+                    searchMultipleItemsWindow.getInitialFilterForm().setFields(initialFilterSelectItem);
+                }
 
                 // ----------------------------------------------------------------------------
 
@@ -68,8 +84,8 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                 // ----------------------------------------------------------------------------
 
                 // Load the list of item schemes (to populate the selection window)
-                getUiHandlers().retrieveItemSchemes(name, itemSchemeCriteria, FIRST_RESULT, MAX_RESULTS);
-                getUiHandlers().retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
+                retrieveItemSchemes(name, itemSchemeCriteria, FIRST_RESULT, MAX_RESULTS);
+                retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
 
                 // Set external items previously selected
                 searchMultipleItemsWindow.setTargetRelatedResources(action.getExternalItemsPreviouslySelected());
@@ -81,7 +97,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                     public void onRecordClick(RecordClickEvent event) {
                         itemCriteria.setCriteria(searchMultipleItemsWindow.getSelectionListCriteria());
                         itemCriteria.setItemSchemUrn(searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
-                        getUiHandlers().retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
+                        retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
                     }
                 });
                 searchMultipleItemsWindow.getClearButton().addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
@@ -90,7 +106,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                     public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                         itemCriteria.setCriteria(searchMultipleItemsWindow.getSelectionListCriteria());
                         itemCriteria.setItemSchemUrn(searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
-                        getUiHandlers().retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
+                        retrieveItems(name, itemCriteria, FIRST_RESULT, MAX_RESULTS);
                     }
                 });
 
@@ -101,7 +117,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                     public void retrieveResultSet(int firstResult, int maxResults, String criteria) {
                         itemCriteria.setCriteria(criteria);
                         itemCriteria.setItemSchemUrn(searchMultipleItemsWindow.getSelectedRelatedResourceUrnAsFilter());
-                        getUiHandlers().retrieveItems(name, itemCriteria, firstResult, maxResults);
+                        retrieveItems(name, itemCriteria, firstResult, maxResults);
                     }
                 });
                 searchMultipleItemsWindow.setFilterListSearchAction(new SearchPaginatedAction() {
@@ -109,13 +125,21 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                     @Override
                     public void retrieveResultSet(int firstResult, int maxResults, String criteria) {
                         itemSchemeCriteria.setCriteria(criteria);
-                        getUiHandlers().retrieveItemSchemes(name, itemSchemeCriteria, firstResult, maxResults);
+                        retrieveItemSchemes(name, itemSchemeCriteria, firstResult, maxResults);
                     }
                 });
 
                 searchMultipleItemsWindow.getSave().addClickHandler(saveClickHandler);
             }
         });
+    }
+
+    protected void retrieveItemSchemes(String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
+        getUiHandlers().retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
+    }
+
+    protected void retrieveItems(String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+        getUiHandlers().retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 
     public void setItemSchemes(ExternalItemsResult result) {
@@ -161,5 +185,9 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
     public void setDefaultItemSchemeUrn(String defaultItemSchemeUrn) {
         this.defaultItemSchemeUrn = defaultItemSchemeUrn;
+    }
+
+    public CustomSelectItem getInitialFilterSelectItem() {
+        return initialFilterSelectItem;
     }
 }
