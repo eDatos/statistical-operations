@@ -75,12 +75,11 @@ public class SearchCommonMetadataItem extends SearchExternalItemLinkItem {
             setAutoSize(true);
 
             CustomListGridField codeField = new CustomListGridField(RelatedResourceBaseDS.CODE, MetamacWebCommon.getConstants().externalItemCode());
-            CustomListGridField titleField = new CustomListGridField(RelatedResourceBaseDS.TITLE, MetamacWebCommon.getConstants().externalItemTitle());
             CustomListGridField urnField = new CustomListGridField(RelatedResourceBaseDS.URN, MetamacWebCommon.getConstants().externalItemURN());
 
             listGrid.setAutoFitMaxRecords(6);
             listGrid.setAutoFitData(Autofit.VERTICAL);
-            listGrid.setFields(codeField, titleField, urnField);
+            listGrid.setFields(codeField, urnField);
             listGrid.setMargin(15);
 
             show();
