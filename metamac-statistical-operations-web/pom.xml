@@ -99,6 +99,12 @@
             <artifactId>icu4j</artifactId>
             <version>${icu4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>${urlrewritefilter.version}</version>
+        </dependency>
+        
         <!-- GWTP -->
         <dependency>
             <groupId>com.gwtplatform</groupId>

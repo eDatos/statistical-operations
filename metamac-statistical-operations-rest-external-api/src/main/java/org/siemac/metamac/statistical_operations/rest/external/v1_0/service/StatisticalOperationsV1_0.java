@@ -20,6 +20,7 @@ import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOpe
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 
 @Path("v1.0")
+// IMPORTANT: If a new version of API is added, remember change latest url y urlrewrite.xml in war
 public interface StatisticalOperationsV1_0 {
 
     /**
