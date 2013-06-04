@@ -41,7 +41,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.external.Ext
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.MultipleExternalResourceAction;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoryItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCommonMetadataItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchItemItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemsItem;
@@ -67,6 +66,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.SearchExternalItemLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
@@ -291,7 +291,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Set uiHandlers in formItems
 
-        ((SearchItemItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).setUiHandlers(uiHandlers);
+        ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).setUiHandlers(uiHandlers);
         ((SearchMultipleItemsItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
@@ -1000,7 +1000,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchMultipleItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1025,7 +1025,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItems(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchMultipleItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
@@ -1051,15 +1051,15 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // EXTERNAL RESOURCES ITEMS
     // ------------------------------------------------------------------------------------------------------------
 
-    private SearchItemItem createSubjectAreaItem(final String name, String title) {
-        final SearchItemItem item = new SearchCategoryItem(name, title);
+    private SearchSrmItemItem createSubjectAreaItem(final String name, String title) {
+        final SearchSrmItemItem item = new SearchCategoryItem(name, title);
         com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
             public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
                 ExternalItemDto category = item.getSelectedItem();
                 item.markSearchWindowForDestroy();
-                ((SearchItemItem) contentClassifiersEditionForm.getItem(name)).setExternalItem(category);
+                ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(name)).setExternalItem(category);
                 contentClassifiersEditionForm.validate(false);
             }
         };
