@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.core.utils.asserts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.siemac.metamac.core.common.constants.CoreCommonConstants.API_LATEST;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.siemac.metamac.common.test.constants.ConfigurationMockConstants;
 import org.siemac.metamac.common.test.utils.MetamacAsserts;
+import org.siemac.metamac.core.common.constants.shared.RegularExpressionConstants;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
@@ -110,7 +112,9 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
             if (MapperEnum.DO2DTO.equals(mapperEnum)) {
                 assertEquals(baseApi + entity.getUri(), dto.getUri());
             } else if (MapperEnum.DTO2DO.equals(mapperEnum)) {
-                assertEquals(dto.getUri().replaceFirst(baseApi, StringUtils.EMPTY), entity.getUri());
+                String expectedDoUri = dto.getUri().replaceFirst(baseApi, StringUtils.EMPTY);
+                expectedDoUri = expectedDoUri.replaceFirst(RegularExpressionConstants.URN_VERSION_REG_EXP, API_LATEST);
+                assertEquals(expectedDoUri, entity.getUri());
             } else {
                 fail("Mapper unexpected: " + mapperEnum);
             }
