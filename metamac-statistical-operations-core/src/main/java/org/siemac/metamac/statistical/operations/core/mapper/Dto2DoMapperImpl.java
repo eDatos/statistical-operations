@@ -52,16 +52,16 @@ import org.springframework.stereotype.Component;
 public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapper {
 
     @Autowired
-    private StatisticalOperationsListsService  statisticalOperationsListsService;
+    private StatisticalOperationsListsService statisticalOperationsListsService;
 
     @Autowired
-    private StatisticalOperationsBaseService   statisticalOperationsBaseService;
+    private StatisticalOperationsBaseService  statisticalOperationsBaseService;
 
     @Autowired
-    private InternationalStringRepository      internationalStringRepository;
+    private InternationalStringRepository     internationalStringRepository;
 
     @Autowired
-    private ExternalItemRepository             externalItemRepository;
+    private ExternalItemRepository            externalItemRepository;
 
     /**************************************************************************
      * PUBLIC - LISTS
@@ -287,7 +287,6 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setSubjectArea(externalItemDtoToEntity(source.getSubjectArea(), target.getSubjectArea(), ServiceExceptionParameters.OPERATION_SUBJECT_AREA));
 
         // SECONDARY_SUBJECT_AREAS
-        target.getSecondarySubjectAreas().clear();
         target.getSecondarySubjectAreas().addAll(
                 externalItemListToEntity(source.getSecondarySubjectAreas(), target.getSecondarySubjectAreas(), ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS));
 
@@ -313,15 +312,12 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setOfficialityType(officialityTypeDtoToEntity(source.getOfficialityType(), ctx));
 
         // PRODUCER
-        target.getProducer().clear();
         target.getProducer().addAll(externalItemListToEntity(source.getProducer(), target.getProducer(), ServiceExceptionParameters.OPERATION_PRODUCER));
 
         // REGIONAL_RESPONSIBLE
-        target.getRegionalResponsible().clear();
         target.getRegionalResponsible().addAll(externalItemListToEntity(source.getRegionalResponsible(), target.getRegionalResponsible(), ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE));
 
         // REGIONAL_CONTRIBUTOR
-        target.getRegionalContributor().clear();
         target.getRegionalContributor().addAll(externalItemListToEntity(source.getRegionalContributor(), target.getRegionalContributor(), ServiceExceptionParameters.OPERATION_REGIONAL_CONTRIBUTOR));
 
         // INTERNAL_INVENTORY_DATE
@@ -340,7 +336,6 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         // Not necessary. It can't be manually modified
 
         // PUBLISHER
-        target.getPublisher().clear();
         target.getPublisher().addAll(externalItemListToEntity(source.getPublisher(), target.getPublisher(), ServiceExceptionParameters.OPERATION_PUBLISHER));
 
         // REL_POL_US_AC
@@ -353,7 +348,6 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setReleaseCalendarAccess(source.getReleaseCalendarAccess());
 
         // UPDATE_FREQUENCY
-        target.getUpdateFrequency().clear();
         target.getUpdateFrequency().addAll(externalItemListToEntity(source.getUpdateFrequency(), target.getUpdateFrequency(), ServiceExceptionParameters.OPERATION_UPDATE_FREQUENCY));
 
         // CURRENT_INTERNAL_INSTANCE
@@ -431,11 +425,9 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setStatisticalPopulation(internationalStringToEntity(source.getStatisticalPopulation(), target.getStatisticalPopulation(), ServiceExceptionParameters.INSTANCE_STATISTICAL_POPULATION));
 
         // STATISTICAL_UNIT
-        target.getStatisticalUnit().clear();
         target.getStatisticalUnit().addAll(externalItemListToEntity(source.getStatisticalUnit(), target.getStatisticalUnit(), ServiceExceptionParameters.INSTANCE_STATISTICAL_UNIT));
 
         // GEOGRAPHIC_GRANULARITY
-        target.getGeographicGranularity().clear();
         target.getGeographicGranularity().addAll(
                 externalItemListToEntity(source.getGeographicGranularity(), target.getGeographicGranularity(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY));
 
@@ -444,7 +436,6 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
                 ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_COMPARABILITY));
 
         // TEMPORAL_GRANULARITY
-        target.getTemporalGranularity().clear();
         target.getTemporalGranularity().addAll(externalItemListToEntity(source.getTemporalGranularity(), target.getTemporalGranularity(), ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY));
 
         // TEMPORAL_COMPARABILITY
@@ -454,21 +445,18 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setBasePeriod(source.getBasePeriod());
 
         // UNIT_MEASURE
-        target.getUnitMeasure().clear();
         target.getUnitMeasure().addAll(externalItemListToEntity(source.getUnitMeasure(), target.getUnitMeasure(), ServiceExceptionParameters.INSTANCE_UNIT_MEASURE));
 
         // STAT_CONC_DEF
         target.setStatConcDef(internationalStringToEntity(source.getStatConcDef(), target.getStatConcDef(), ServiceExceptionParameters.INSTANCE_STAT_CONC_DEF));
 
         // STAT_CONC_DEF_LIST
-        target.getStatConcDefList().clear();
         target.getStatConcDefList().addAll(externalItemListToEntity(source.getStatConcDefList(), target.getStatConcDefList(), ServiceExceptionParameters.INSTANCE_STAT_CONC_DEF_LIST));
 
         // CLASS_SYSTEM
         target.setClassSystem(internationalStringToEntity(source.getClassSystem(), target.getClassSystem(), ServiceExceptionParameters.INSTANCE_CLASS_SYSTEM));
 
         // CLASS_SYSTEM_LIST
-        target.getClassSystemList().clear();
         target.getClassSystemList().addAll(externalItemListToEntity(source.getClassSystemList(), target.getClassSystemList(), ServiceExceptionParameters.INSTANCE_CLASS_SYSTEM_LIST));
 
         // INSTANCE_TYPE
@@ -490,12 +478,10 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.setCollMethod(collMethodDtoToEntity(source.getCollMethod(), ctx));
 
         // INFORMATION_SUPPLIERS
-        target.getInformationSuppliers().clear();
         target.getInformationSuppliers()
                 .addAll(externalItemListToEntity(source.getInformationSuppliers(), target.getInformationSuppliers(), ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS));
 
         // FREQ_COLL
-        target.getFreqColl().clear();
         target.getFreqColl().addAll(externalItemListToEntity(source.getFreqColl(), target.getFreqColl(), ServiceExceptionParameters.INSTANCE_FREQ_COLL));
 
         // DATA_VALIDATION
@@ -579,7 +565,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         for (ExternalItemDto source : sources) {
             boolean existsBefore = false;
             for (ExternalItem target : targetsBefore) {
-                if (source.getUrn().equals(target.getUrn())) {
+                if (source.getId() != null && target.getId().equals(source.getId())) {
                     newTargets.add(externalItemDtoToEntity(source, target, metadataName));
                     existsBefore = true;
                     break;
@@ -594,7 +580,10 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         for (ExternalItem oldTarget : targetsBefore) {
             boolean found = false;
             for (ExternalItem newTarget : newTargets) {
-                found = found || (oldTarget.getUrn().equals(newTarget.getUrn()));
+                if (newTarget.getId() != null && oldTarget.getId().equals(newTarget.getId())) {
+                    found = true;
+                    break;
+                }
             }
             if (!found) {
                 // Delete
@@ -612,7 +601,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
 
     private ExternalItem externalItemDtoToEntity(ExternalItemDto source, ExternalItem target, String metadataName) throws MetamacException {
         target = externalItemWithoutUrlDtoToEntity(source, target, metadataName);
-        
+
         if (target != null) {
             if (TypeExternalArtefactsEnumUtils.isExternalItemOfCommonMetadataApp(source.getType())) {
                 target = commonMetadataExternalItemDtoToDo(source, target);
@@ -622,7 +611,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
                 throw new MetamacException(ServiceExceptionType.UNKNOWN, "Type of externalItem not defined for externalItemDtoToEntity");
             }
         }
-        
+
         return target;
     }
 
@@ -647,19 +636,18 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
 
         return target;
     }
-    
+
     private ExternalItem commonMetadataExternalItemDtoToDo(ExternalItemDto source, ExternalItem target) throws MetamacException {
         target.setUri(commonMetadataExternalApiUrlDtoToDo(source.getUri()));
         target.setManagementAppUrl(commonMetadataInternalWebAppUrlDtoToDo(source.getManagementAppUrl()));
         return target;
     }
-    
+
     private ExternalItem srmExternalItemDtoToDo(ExternalItemDto source, ExternalItem target) throws MetamacException {
         target.setUri(srmInternalApiUrlDtoToDo(source.getUri()));
         target.setManagementAppUrl(srmInternalWebAppUrlDtoToDo(source.getManagementAppUrl()));
         return target;
     }
-
 
     // ------------------------------------------------------------
     // INTERNATIONAL STRINGS & LOCALISED STRINGS

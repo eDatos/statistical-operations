@@ -42,7 +42,7 @@ import org.springframework.stereotype.Component;
 public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapper {
 
     @Autowired
-    private DozerBeanMapper                    mapper;
+    private DozerBeanMapper mapper;
 
     /**************************************************************************
      * GETTERS
@@ -143,6 +143,7 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
      * PUBLIC - ENTITIES
      **************************************************************************/
 
+    @Override
     public FamilyDto familyToDto(Family source) {
         if (source == null) {
             return null;
@@ -179,6 +180,7 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
         return target;
     }
 
+    @Override
     public FamilyBaseDto familyToBaseDto(Family source) {
         if (source == null) {
             return null;
@@ -210,6 +212,7 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
         return target;
     }
 
+    @Override
     public OperationDto operationToDto(Operation source) throws MetamacException {
         if (source == null) {
             return null;
@@ -333,6 +336,7 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
         return target;
     }
 
+    @Override
     public OperationBaseDto operationToBaseDto(Operation source) throws MetamacException {
         if (source == null) {
             return null;
@@ -675,7 +679,7 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
         }
 
         ExternalItemDto target = new ExternalItemDto(source.getCode(), source.getUri(), source.getUrn(), source.getType(), internationalStringToDto(source.getTitle()), source.getManagementAppUrl());
-
+        target.setId(source.getId());
         return target;
     }
 
@@ -690,7 +694,6 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
         target.setManagementAppUrl(srmInternalWebAppUrlDoToDto(source.getManagementAppUrl()));
         return target;
     }
-
 
     private Set<CostDto> costListToDto(Set<Cost> costList) {
         if (costList == null) {

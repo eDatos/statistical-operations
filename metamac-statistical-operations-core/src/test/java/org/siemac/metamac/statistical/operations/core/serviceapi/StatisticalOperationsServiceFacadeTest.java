@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
@@ -1222,7 +1223,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         StatisticalOperationsAsserts.assertEqualsInternationalStringDto(expected.getSpecificLegalActs(), operationDto.getSpecificLegalActs());
     }
-    
+
     @Test
     @Transactional
     public void testCreateOperationWithSpecificDataSharing() throws MetamacException {
@@ -1390,6 +1391,40 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         externalItemsAfter = externalItemRepository.findAll().size();
         assertEquals(externalItemsBefore - 2, externalItemsAfter);
 
+    }
+
+    @Test
+    @Transactional
+    public void testUpdateOperationUpdatingAddingAndRemovingExternalItems() throws Exception {
+
+        OperationDto operationDto = createOperationDto();
+        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH1", "/uri/test/category1", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH2", "/uri/test/category2", null, TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH3", "/uri/test/category3", null, TypeExternalArtefactsEnum.CATEGORY));
+
+        // Create
+        operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
+        assertEquals(3, operationDto.getSecondarySubjectAreas().size());
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH1"));
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH2"));
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH3"));
+        for (ExternalItemDto externalItemDto : operationDto.getSecondarySubjectAreas()) {
+            assertNotNull(externalItemDto.getId());
+        }
+        // Delete one external item
+        ExternalItemDto externalItemDtoToRemove = getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH2");
+        operationDto.removeSecondarySubjectArea(externalItemDtoToRemove);
+        // Add two
+        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH4", "/uri/test/category4", null, TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH5", "/uri/test/category5", null, TypeExternalArtefactsEnum.CATEGORY));
+
+        // Update
+        operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
+        assertEquals(4, operationDto.getSecondarySubjectAreas().size());
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH1"));
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH3"));
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH4"));
+        assertNotNull(getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH5"));
     }
 
     @Test
@@ -3605,6 +3640,18 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         instanceDto.setCode("PRUEBA01" + RandomStringUtils.random(50, true, true));
 
         return instanceDto;
+    }
+
+    /**
+     * Extract external item by code. IMPORTANT: code can be not unique. This method is only for tests
+     */
+    private ExternalItemDto getExternalItemDtoByCode(Set<ExternalItemDto> sources, String code) {
+        for (ExternalItemDto externalItemDto : sources) {
+            if (externalItemDto.getCode().equals(code)) {
+                return externalItemDto;
+            }
+        }
+        return null;
     }
 
 }
