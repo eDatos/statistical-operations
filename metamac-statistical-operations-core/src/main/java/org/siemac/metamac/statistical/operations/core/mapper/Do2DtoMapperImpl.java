@@ -10,6 +10,9 @@ import org.siemac.metamac.core.common.dto.LocalisedStringDto;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
+import org.siemac.metamac.core.common.enume.utils.TypeExternalArtefactsEnumUtils;
+import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.mapper.BaseDo2DtoMapperImpl;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
@@ -31,14 +34,15 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Do2DtoMapperImpl implements Do2DtoMapper {
+public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapper {
 
     @Autowired
-    private DozerBeanMapper mapper;
+    private DozerBeanMapper                    mapper;
 
     /**************************************************************************
      * GETTERS
@@ -206,7 +210,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         return target;
     }
 
-    public OperationDto operationToDto(Operation source) {
+    public OperationDto operationToDto(Operation source) throws MetamacException {
         if (source == null) {
             return null;
         }
@@ -306,7 +310,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         // Not necessary
 
         // CONTACT: Extracted from AppCommonMetadata
-        
+
         // COMMON_LEGAL_ACTS: Extracted from AppCommonMetadata
         target.setSpecificLegalActs(internationalStringToDto(source.getSpecificLegalActs()));
         // COMMON_DATA_SHARING: Extracted from AppCommonMetadata
@@ -329,7 +333,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         return target;
     }
 
-    public OperationBaseDto operationToBaseDto(Operation source) {
+    public OperationBaseDto operationToBaseDto(Operation source) throws MetamacException {
         if (source == null) {
             return null;
         }
@@ -376,7 +380,7 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
     }
 
     @Override
-    public InstanceDto instanceToDto(Instance source) {
+    public InstanceDto instanceToDto(Instance source) throws MetamacException {
         if (source == null) {
             return null;
         }
@@ -638,18 +642,34 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
         return internationalStringDto;
     }
 
-    private Set<ExternalItemDto> externalItemListToDto(Set<ExternalItem> statisticalUnit) {
-
+    private Set<ExternalItemDto> externalItemListToDto(Set<ExternalItem> entities) throws MetamacException {
         HashSet<ExternalItemDto> result = new HashSet<ExternalItemDto>();
 
-        for (ExternalItem externalItem : statisticalUnit) {
-            result.add(externalItemToDto(externalItem));
+        if (entities != null) {
+            for (ExternalItem externalItem : entities) {
+                result.add(externalItemToDto(externalItem));
+            }
         }
 
         return result;
     }
 
-    private ExternalItemDto externalItemToDto(ExternalItem source) {
+    private ExternalItemDto externalItemToDto(ExternalItem source) throws MetamacException {
+        ExternalItemDto target = externalItemWithoutUrlsToDto(source);
+        if (target != null) {
+            if (TypeExternalArtefactsEnumUtils.isExternalItemOfCommonMetadataApp(source.getType())) {
+                target = commonMetadataExternalItemDoToDto(source, target);
+            } else if (TypeExternalArtefactsEnumUtils.isExternalItemOfSrmApp(source.getType())) {
+                target = srmExternalItemDoToDto(source, target);
+            } else {
+                throw new MetamacException(ServiceExceptionType.UNKNOWN, "Type of externalItem not defined for externalItemDoToDto");
+            }
+        }
+
+        return target;
+    }
+
+    private ExternalItemDto externalItemWithoutUrlsToDto(ExternalItem source) {
         if (source == null) {
             return null;
         }
@@ -658,6 +678,19 @@ public class Do2DtoMapperImpl implements Do2DtoMapper {
 
         return target;
     }
+
+    private ExternalItemDto commonMetadataExternalItemDoToDto(ExternalItem source, ExternalItemDto target) throws MetamacException {
+        target.setUri(commonMetadataExternalApiUrlDoToDto(source.getUri()));
+        target.setManagementAppUrl(commonMetadataInternalWebAppUrlDoToDto(source.getManagementAppUrl()));
+        return target;
+    }
+
+    private ExternalItemDto srmExternalItemDoToDto(ExternalItem source, ExternalItemDto target) throws MetamacException {
+        target.setUri(srmInternalApiUrlDoToDto(source.getUri()));
+        target.setManagementAppUrl(srmInternalWebAppUrlDoToDto(source.getManagementAppUrl()));
+        return target;
+    }
+
 
     private Set<CostDto> costListToDto(Set<Cost> costList) {
         if (costList == null) {

@@ -84,11 +84,13 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             }
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
             return null; // put default order
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
             return FamilyProperties.id();
@@ -121,11 +123,13 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             }
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
             return null; // put default order
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
             return OperationProperties.id();
@@ -158,11 +162,13 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             }
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
             return null; // put default order
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
             return InstanceProperties.id();

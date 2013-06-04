@@ -21,6 +21,11 @@ public class ExternalItem extends ExternalItemBase {
         super(code, uri, urn, type);
     }
 
+    public ExternalItem(String code, String uri, String urn, TypeExternalArtefactsEnum type, InternationalString title) {
+        super(code, uri, urn, type);
+        this.setTitle(title);
+    }
+    
     public ExternalItem(String code, String uri, String urn, TypeExternalArtefactsEnum type, InternationalString title, String managementAppUrl) {
         super(code, uri, urn, type);
         this.setTitle(title);

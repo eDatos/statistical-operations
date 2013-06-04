@@ -15,9 +15,11 @@ import org.siemac.metamac.core.common.ent.domain.ExternalItemRepository;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.InternationalStringRepository;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
+import org.siemac.metamac.core.common.enume.utils.TypeExternalArtefactsEnumUtils;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.exception.utils.ExceptionUtils;
+import org.siemac.metamac.core.common.mapper.BaseDto2DoMapperImpl;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.core.common.util.OptimisticLockingUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -47,19 +49,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Dto2DoMapperImpl implements Dto2DoMapper {
+public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapper {
 
     @Autowired
-    private StatisticalOperationsListsService statisticalOperationsListsService;
+    private StatisticalOperationsListsService  statisticalOperationsListsService;
 
     @Autowired
-    private StatisticalOperationsBaseService  statisticalOperationsBaseService;
+    private StatisticalOperationsBaseService   statisticalOperationsBaseService;
 
     @Autowired
-    private InternationalStringRepository     internationalStringRepository;
+    private InternationalStringRepository      internationalStringRepository;
 
     @Autowired
-    private ExternalItemRepository            externalItemRepository;
+    private ExternalItemRepository             externalItemRepository;
 
     /**************************************************************************
      * PUBLIC - LISTS
@@ -434,7 +436,8 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
 
         // GEOGRAPHIC_GRANULARITY
         target.getGeographicGranularity().clear();
-        target.getGeographicGranularity().addAll(externalItemListToEntity(source.getGeographicGranularity(), target.getGeographicGranularity(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY));
+        target.getGeographicGranularity().addAll(
+                externalItemListToEntity(source.getGeographicGranularity(), target.getGeographicGranularity(), ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY));
 
         // GEOGRAPHIC_COMPARABILITY
         target.setGeographicComparability(internationalStringToEntity(source.getGeographicComparability(), target.getGeographicComparability(),
@@ -561,13 +564,13 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
-        return target; 
+        return target;
     }
 
     // ------------------------------------------------------------
     // EXTERNAL ITEMS
     // ------------------------------------------------------------
-    
+
     private Set<ExternalItem> externalItemListToEntity(Set<ExternalItemDto> sources, Set<ExternalItem> targets, String metadataName) throws MetamacException {
 
         Set<ExternalItem> targetsBefore = targets;
@@ -608,6 +611,22 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
     }
 
     private ExternalItem externalItemDtoToEntity(ExternalItemDto source, ExternalItem target, String metadataName) throws MetamacException {
+        target = externalItemWithoutUrlDtoToEntity(source, target, metadataName);
+        
+        if (target != null) {
+            if (TypeExternalArtefactsEnumUtils.isExternalItemOfCommonMetadataApp(source.getType())) {
+                target = commonMetadataExternalItemDtoToDo(source, target);
+            } else if (TypeExternalArtefactsEnumUtils.isExternalItemOfSrmApp(source.getType())) {
+                target = srmExternalItemDtoToDo(source, target);
+            } else {
+                throw new MetamacException(ServiceExceptionType.UNKNOWN, "Type of externalItem not defined for externalItemDtoToEntity");
+            }
+        }
+        
+        return target;
+    }
+
+    private ExternalItem externalItemWithoutUrlDtoToEntity(ExternalItemDto source, ExternalItem target, String metadataName) throws MetamacException {
         if (source == null) {
             if (target != null) {
                 // delete previous entity
@@ -617,17 +636,27 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         }
 
         if (target == null) {
-            target = new ExternalItem(source.getCode(), source.getUri(), source.getUrn(), source.getType(), internationalStringToEntity(source.getTitle(), null, metadataName),
-                    source.getManagementAppUrl());
+            // We set uri because it's required but the information is incorrect because it includes the base
+            target = new ExternalItem(source.getCode(), source.getUri(), source.getUrn(), source.getType(), internationalStringToEntity(source.getTitle(), null, metadataName));
         } else {
             target.setCode(source.getCode());
-            target.setUri(source.getUri());
             target.setUrn(source.getUrn());
             target.setType(source.getType());
-            target.setManagementAppUrl(source.getManagementAppUrl());
             target.setTitle(internationalStringToEntity(source.getTitle(), target.getTitle(), metadataName));
         }
 
+        return target;
+    }
+    
+    private ExternalItem commonMetadataExternalItemDtoToDo(ExternalItemDto source, ExternalItem target) throws MetamacException {
+        target.setUri(commonMetadataExternalApiUrlDtoToDo(source.getUri()));
+        target.setManagementAppUrl(commonMetadataInternalWebAppUrlDtoToDo(source.getManagementAppUrl()));
+        return target;
+    }
+    
+    private ExternalItem srmExternalItemDtoToDo(ExternalItemDto source, ExternalItem target) throws MetamacException {
+        target.setUri(srmInternalApiUrlDtoToDo(source.getUri()));
+        target.setManagementAppUrl(srmInternalWebAppUrlDtoToDo(source.getManagementAppUrl()));
         return target;
     }
 
@@ -635,7 +664,7 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
     // ------------------------------------------------------------
     // INTERNATIONAL STRINGS & LOCALISED STRINGS
     // ------------------------------------------------------------
-    
+
     private InternationalString internationalStringToEntity(InternationalStringDto source, InternationalString target, String metadataName) throws MetamacException {
 
         if (source == null) {
@@ -697,11 +726,10 @@ public class Dto2DoMapperImpl implements Dto2DoMapper {
         return target;
     }
 
-    
     // ------------------------------------------------------------
     // COSTS
     // ------------------------------------------------------------
-    
+
     private Set<Cost> costDtoListToCostList(Set<CostDto> source, Set<Cost> target, ServiceContext ctx) throws MetamacException {
 
         Set<Cost> result = new HashSet<Cost>();

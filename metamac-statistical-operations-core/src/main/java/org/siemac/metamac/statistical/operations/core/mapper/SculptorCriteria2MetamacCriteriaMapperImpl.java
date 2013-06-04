@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.criteria.mapper.SculptorCriteria2MetamacCriteria;
+import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
@@ -21,7 +22,7 @@ public class SculptorCriteria2MetamacCriteriaMapperImpl implements SculptorCrite
     private Do2DtoMapper do2DtoMapper;
 
     @Override
-    public MetamacCriteriaResult<FamilyBaseDto> pageResultToMetamacCriteriaResultFamily(PagedResult<Family> source, Integer pageSize) {
+    public MetamacCriteriaResult<FamilyBaseDto> pageResultToMetamacCriteriaResultFamily(PagedResult<Family> source, Integer pageSize) throws MetamacException {
         MetamacCriteriaResult<FamilyBaseDto> target = new MetamacCriteriaResult<FamilyBaseDto>();
         target.setPaginatorResult(SculptorCriteria2MetamacCriteria.sculptorResultToMetamacCriteriaResult(source, pageSize));
         if (source.getValues() != null) {
@@ -34,7 +35,7 @@ public class SculptorCriteria2MetamacCriteriaMapperImpl implements SculptorCrite
     }
 
     @Override
-    public MetamacCriteriaResult<OperationBaseDto> pageResultToMetamacCriteriaResultOperation(PagedResult<Operation> source, Integer pageSize) {
+    public MetamacCriteriaResult<OperationBaseDto> pageResultToMetamacCriteriaResultOperation(PagedResult<Operation> source, Integer pageSize) throws MetamacException {
         MetamacCriteriaResult<OperationBaseDto> target = new MetamacCriteriaResult<OperationBaseDto>();
         target.setPaginatorResult(SculptorCriteria2MetamacCriteria.sculptorResultToMetamacCriteriaResult(source, pageSize));
         if (source.getValues() != null) {
@@ -47,7 +48,7 @@ public class SculptorCriteria2MetamacCriteriaMapperImpl implements SculptorCrite
     }
 
     @Override
-    public MetamacCriteriaResult<InstanceBaseDto> pageResultToMetamacCriteriaResultInstance(PagedResult<Instance> source, Integer pageSize) {
+    public MetamacCriteriaResult<InstanceBaseDto> pageResultToMetamacCriteriaResultInstance(PagedResult<Instance> source, Integer pageSize) throws MetamacException {
         MetamacCriteriaResult<InstanceBaseDto> target = new MetamacCriteriaResult<InstanceBaseDto>();
         target.setPaginatorResult(SculptorCriteria2MetamacCriteria.sculptorResultToMetamacCriteriaResult(source, pageSize));
         if (source.getValues() != null) {

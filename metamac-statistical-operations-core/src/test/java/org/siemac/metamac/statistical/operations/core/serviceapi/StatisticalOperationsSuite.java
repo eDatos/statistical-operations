@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDtoFieldsTest;
+import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDo2DtoMapperTest;
 import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2DoMapperTest;
 
 /**
@@ -19,6 +20,7 @@ import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2Do
                         FamilyBaseDtoFieldsTest.class,
                         OperationBaseDtoFieldsTest.class,
                         InstanceBaseDtoFieldsTest.class,
-                        ExternalItemsDto2DoMapperTest.class})
+                        ExternalItemsDto2DoMapperTest.class,
+                        ExternalItemsDo2DtoMapperTest.class})
 public class StatisticalOperationsSuite {
 }

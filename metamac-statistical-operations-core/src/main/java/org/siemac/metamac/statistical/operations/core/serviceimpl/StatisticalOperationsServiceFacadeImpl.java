@@ -881,7 +881,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     // TRANSFORM LISTS
     // --------------------------------------------------------------------------------
 
-    private List<FamilyBaseDto> familiesListDo2BaseDto(List<Family> families) {
+    private List<FamilyBaseDto> familiesListDo2BaseDto(List<Family> families) throws MetamacException {
         List<FamilyBaseDto> familiesDtos = new ArrayList<FamilyBaseDto>();
         for (Family family : families) {
             familiesDtos.add(do2DtoMapper.familyToBaseDto(family));
@@ -889,7 +889,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         return familiesDtos;
     }
 
-    private List<FamilyBaseDto> familiesSetDo2BaseDto(Set<Family> families) {
+    private List<FamilyBaseDto> familiesSetDo2BaseDto(Set<Family> families) throws MetamacException {
         List<FamilyBaseDto> familiesDtos = new ArrayList<FamilyBaseDto>();
         for (Family item : families) {
             familiesDtos.add(do2DtoMapper.familyToBaseDto(item));
@@ -897,7 +897,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         return familiesDtos;
     }
 
-    private List<OperationBaseDto> operationsSetDo2BaseDto(Set<Operation> operations) {
+    private List<OperationBaseDto> operationsSetDo2BaseDto(Set<Operation> operations) throws MetamacException {
         List<OperationBaseDto> operationsDtos = new ArrayList<OperationBaseDto>();
         for (Operation operation : operations) {
             operationsDtos.add(do2DtoMapper.operationToBaseDto(operation));
@@ -906,7 +906,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         return operationsDtos;
     }
 
-    private List<OperationBaseDto> operationsListDo2BaseDto(List<Operation> operations) {
+    private List<OperationBaseDto> operationsListDo2BaseDto(List<Operation> operations) throws MetamacException {
         List<OperationBaseDto> operationsDtos = new ArrayList<OperationBaseDto>();
         for (Operation operation : operations) {
             operationsDtos.add(do2DtoMapper.operationToBaseDto(operation));
@@ -914,7 +914,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         return operationsDtos;
     }
 
-    private List<InstanceBaseDto> instancesListDo2BaseDto(List<Instance> instances) {
+    private List<InstanceBaseDto> instancesListDo2BaseDto(List<Instance> instances) throws MetamacException {
         List<InstanceBaseDto> instancesDtos = new ArrayList<InstanceBaseDto>();
 
         if (!instances.isEmpty()) {
