@@ -23,14 +23,14 @@ import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginate
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
@@ -247,12 +247,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
-        ItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+        SrmItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
         retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 
     @Override
-    public void retrieveItems(final String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+    public void retrieveItems(final String formItemName, SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override

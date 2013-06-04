@@ -1,8 +1,9 @@
 package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 
-public class OrganisationWebCriteria extends ItemWebCriteria {
+public class OrganisationWebCriteria extends SrmItemWebCriteria {
 
     private static final long           serialVersionUID = 1L;
 

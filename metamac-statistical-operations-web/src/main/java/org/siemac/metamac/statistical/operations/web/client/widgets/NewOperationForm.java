@@ -7,10 +7,10 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoryItem;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
@@ -91,7 +91,7 @@ public class NewOperationForm extends CustomDynamicForm {
         return saveButton;
     }
 
-    public void setUiHandlers(ExternalResourcesUiHandlers uiHandlers) {
+    public void setUiHandlers(SrmExternalResourcesUiHandlers uiHandlers) {
         subjectAreasItem.setUiHandlers(uiHandlers);
     }
 

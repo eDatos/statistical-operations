@@ -3,8 +3,8 @@ package org.siemac.metamac.statistical.operations.web.client.widgets.external;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -15,9 +15,9 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleI
     private TypeExternalArtefactsEnum   selectedResourceType;
 
     private ExternalResourceWebCriteria itemSchemeCriteria;
-    private ItemWebCriteria             itemCriteria;
+    private SrmItemWebCriteria          itemCriteria;
 
-    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, ExternalResourceWebCriteria itemSchemeCriteria, ItemWebCriteria itemCriteria,
+    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, ExternalResourceWebCriteria itemSchemeCriteria, SrmItemWebCriteria itemCriteria,
             MultipleExternalResourceAction action) {
         super(name, title, itemSchemeCriteria, itemCriteria, getConstants().searchConceptsAndConceptSchemes(), getConstants().filterConceptScheme(), getConstants().selectedConceptScheme(),
                 getConstants().selectionResources(), new ConceptAndConceptSchemeSelectItem(), action);
@@ -58,7 +58,7 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleI
      * This method is overwritten because we are showing item schemes in the list where items are usually shown
      */
     @Override
-    protected void retrieveItems(String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+    protected void retrieveItems(String formItemName, SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
         if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(selectedResourceType)) {
             itemSchemeCriteria.setCriteria(searchMultipleItemsWindow.getSelectionListCriteria());
             getUiHandlers().retrieveItemSchemes(formItemName, itemSchemeCriteria, firstResult, maxResults);

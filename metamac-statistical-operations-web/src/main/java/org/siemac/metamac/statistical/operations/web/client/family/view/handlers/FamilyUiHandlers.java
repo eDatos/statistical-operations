@@ -13,5 +13,4 @@ public interface FamilyUiHandlers extends UiHandlers {
     void saveFamily(FamilyDto familyDto);
     void goToOperation(String operationCode);
     void updateFamilyOperations(List<Long> operationsToAdd, List<Long> operationsToRemove);
-
 }

@@ -19,10 +19,10 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 
 public class RestQueryUtils {
 
@@ -49,7 +49,7 @@ public class RestQueryUtils {
     // CATEGORY
     //
 
-    public static String buildCategoryQuery(ItemWebCriteria itemWebCriteria) {
+    public static String buildCategoryQuery(SrmItemWebCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -96,7 +96,7 @@ public class RestQueryUtils {
     // CODE
     //
 
-    public static String buildCodeQuery(ItemWebCriteria itemWebCriteria) {
+    public static String buildCodeQuery(SrmItemWebCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -361,7 +361,7 @@ public class RestQueryUtils {
     // ORGANISATION
     //
 
-    public static String buildOrganisationQuery(ItemWebCriteria itemWebCriteria) {
+    public static String buildOrganisationQuery(SrmItemWebCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {

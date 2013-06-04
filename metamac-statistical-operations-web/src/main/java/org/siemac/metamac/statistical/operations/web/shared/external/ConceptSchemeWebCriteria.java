@@ -1,5 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.shared.external;
 
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+
 public class ConceptSchemeWebCriteria extends ExternalResourceWebCriteria {
 
     private static final long       serialVersionUID = 1L;

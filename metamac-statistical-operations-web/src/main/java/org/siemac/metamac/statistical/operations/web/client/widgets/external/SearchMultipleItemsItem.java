@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
-import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
+import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
@@ -24,19 +24,19 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
     protected final int                                                       MAX_RESULTS  = 6;
 
     protected SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow searchMultipleItemsWindow;
-    protected ExternalResourcesUiHandlers                                     uiHandlers;
+    protected SrmExternalResourcesUiHandlers                                  uiHandlers;
     protected ClickHandler                                                    saveClickHandler;
 
     protected String                                                          defaultItemSchemeUrn;
 
     protected CustomSelectItem                                                initialFilterSelectItem;
 
-    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final ItemWebCriteria itemCriteria, final String windowTitle,
+    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemWebCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
         this(name, title, itemSchemeCriteria, itemCriteria, windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle, null, action);
     }
 
-    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final ItemWebCriteria itemCriteria, final String windowTitle,
+    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemWebCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final CustomSelectItem initialFilterSelectItem,
             final MultipleExternalResourceAction action) {
         super(name, title, true);
@@ -138,7 +138,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
         getUiHandlers().retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
     }
 
-    protected void retrieveItems(String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+    protected void retrieveItems(String formItemName, SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
         getUiHandlers().retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 
@@ -164,11 +164,11 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
         this.saveClickHandler = clickHandler;
     }
 
-    public void setUiHandlers(ExternalResourcesUiHandlers uiHandlers) {
+    public void setUiHandlers(SrmExternalResourcesUiHandlers uiHandlers) {
         this.uiHandlers = uiHandlers;
     }
 
-    public ExternalResourcesUiHandlers getUiHandlers() {
+    public SrmExternalResourcesUiHandlers getUiHandlers() {
         return uiHandlers;
     }
 

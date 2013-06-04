@@ -36,14 +36,14 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
@@ -283,12 +283,12 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
     @Override
     public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
-        ItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+        SrmItemWebCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
         retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 
     @Override
-    public void retrieveItems(final String formItemName, ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+    public void retrieveItems(final String formItemName, SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
         if (itemWebCriteria instanceof ConceptWebCriteria) {
             ((ConceptWebCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }

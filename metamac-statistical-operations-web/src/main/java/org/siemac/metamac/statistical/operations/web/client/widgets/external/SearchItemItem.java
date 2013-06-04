@@ -2,7 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.widgets.external;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.statistical.operations.web.client.view.handlers.ExternalResourcesUiHandlers;
+import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.SearchExternalItemLinkItem;
@@ -16,7 +16,7 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchItemItem extends SearchExternalItemLinkItem {
 
-    private ExternalResourcesUiHandlers                               uiHandlers;
+    private SrmExternalResourcesUiHandlers                            uiHandlers;
     protected SearchExternalItemPaginatedWithExternalItemFilterWindow searchItemWindow;
 
     private ClickHandler                                              saveClickHandler;
@@ -118,11 +118,11 @@ public class SearchItemItem extends SearchExternalItemLinkItem {
         this.saveClickHandler = clickHandler;
     }
 
-    public void setUiHandlers(ExternalResourcesUiHandlers uiHandlers) {
+    public void setUiHandlers(SrmExternalResourcesUiHandlers uiHandlers) {
         this.uiHandlers = uiHandlers;
     }
 
-    public ExternalResourcesUiHandlers getUiHandlers() {
+    public SrmExternalResourcesUiHandlers getUiHandlers() {
         return uiHandlers;
     }
 

@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 
 public class OrganisationSchemeWebCriteria extends ExternalResourceWebCriteria {
 

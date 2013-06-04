@@ -10,6 +10,8 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 
 public class RestWebCriteriaUtils {
 
@@ -88,8 +90,8 @@ public class RestWebCriteriaUtils {
         return externalResourceWebCriteria;
     }
 
-    public static ItemWebCriteria buildItemWebCriteria(TypeExternalArtefactsEnum[] types, String criteria, String itemSchemeUrn) {
-        ItemWebCriteria itemWebCriteria = new ItemWebCriteria();
+    public static SrmItemWebCriteria buildItemWebCriteria(TypeExternalArtefactsEnum[] types, String criteria, String itemSchemeUrn) {
+        SrmItemWebCriteria itemWebCriteria = new SrmItemWebCriteria();
         if (areOrganisationTypes(types)) {
             itemWebCriteria = new OrganisationWebCriteria();
             itemWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION);

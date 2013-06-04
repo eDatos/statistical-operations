@@ -20,12 +20,12 @@ import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQuery
 import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ExternalResourceWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ItemWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
+import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findCategories(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCategories(SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -114,7 +114,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findCodes(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCodes(SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -210,7 +210,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisationUnits(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisationUnits(SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -259,7 +259,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findDataProviders(ItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findDataProviders(SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
