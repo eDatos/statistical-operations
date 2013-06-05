@@ -1,9 +1,9 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -17,8 +17,8 @@ public interface SrmRestInternalFacade {
     ExternalItemsResult findCodelists(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findCodes(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 
-    ExternalItemsResult findConceptSchemes(ConceptSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
-    ExternalItemsResult findConcepts(ConceptWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findConceptSchemes(ConceptSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findConcepts(ConceptRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 
     ExternalItemsResult findOrganisationUnitSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findOrganisationUnits(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
@@ -26,6 +26,6 @@ public interface SrmRestInternalFacade {
     ExternalItemsResult findDataProviderSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findDataProviders(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 
-    ExternalItemsResult findOrganisationSchemes(OrganisationSchemeWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
-    ExternalItemsResult findOrganisations(OrganisationWebCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findOrganisationSchemes(OrganisationSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findOrganisations(OrganisationRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 }

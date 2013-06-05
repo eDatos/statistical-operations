@@ -34,8 +34,8 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyIns
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
@@ -266,8 +266,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItemSchemes(final String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
-        if (externalResourceWebCriteria instanceof ConceptSchemeWebCriteria) {
-            ((ConceptSchemeWebCriteria) externalResourceWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
+        if (externalResourceWebCriteria instanceof ConceptSchemeRestCriteria) {
+            ((ConceptSchemeRestCriteria) externalResourceWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
         dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
@@ -289,8 +289,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItems(final String formItemName, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) {
-        if (itemWebCriteria instanceof ConceptWebCriteria) {
-            ((ConceptWebCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
+        if (itemWebCriteria instanceof ConceptRestCriteria) {
+            ((ConceptRestCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 

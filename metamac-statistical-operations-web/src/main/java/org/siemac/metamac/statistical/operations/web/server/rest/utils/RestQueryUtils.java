@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.server.rest.utils;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
@@ -16,11 +17,11 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeType;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationType;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 
@@ -61,12 +62,40 @@ public class RestQueryUtils {
             queryBuilder.append(CategoryCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
+
+        // Filter by category scheme
         if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
             queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+                    .append("\"");
+            queryBuilder.append(")");
+        }
+
+        // Find categories with one of the specified URNs
+        if (itemWebCriteria.getUrns() != null && !itemWebCriteria.getUrns().isEmpty()) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            for (int i = 0; i < itemWebCriteria.getUrns().size(); i++) {
+                String urn = itemWebCriteria.getUrns().get(i);
+                if (i != 0) {
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+                }
+                queryBuilder.append(CategoryCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(urn).append("\"");
+            }
+            queryBuilder.append(")");
+        }
+        // Find categories that are externally published
+        if (BooleanUtils.isTrue(itemWebCriteria.getIsItemSchemeExternallyPublished())) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_EXTERNALLY_PUBLISHED).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(Boolean.TRUE)
                     .append("\"");
             queryBuilder.append(")");
         }
@@ -123,7 +152,7 @@ public class RestQueryUtils {
     // CONCEPT SCHEME
     //
 
-    public static String buildConceptSchemeQuery(ConceptSchemeWebCriteria conceptSchemeWebCriteria) {
+    public static String buildConceptSchemeQuery(ConceptSchemeRestCriteria conceptSchemeWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = conceptSchemeWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -220,9 +249,9 @@ public class RestQueryUtils {
     // CONCEPT
     //
 
-    public static String buildConceptQuery(ConceptWebCriteria conceptWebCriteria) {
+    public static String buildConceptQuery(ConceptRestCriteria conceptRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = conceptWebCriteria.getCriteria();
+        String criteria = conceptRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(ConceptCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -232,21 +261,27 @@ public class RestQueryUtils {
             queryBuilder.append(ConceptCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(conceptWebCriteria.getItemSchemUrn())) {
+
+        // Filter by concept scheme
+
+        if (StringUtils.isNotBlank(conceptRestCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(conceptWebCriteria.getItemSchemUrn())
+            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(conceptRestCriteria.getItemSchemUrn())
                     .append("\"");
             queryBuilder.append(")");
         }
-        if (!ArrayUtils.isEmpty(conceptWebCriteria.getConceptSchemeTypes())) {
+
+        // Filter by concept scheme types
+
+        if (!ArrayUtils.isEmpty(conceptRestCriteria.getConceptSchemeTypes())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
 
-            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptWebCriteria.getConceptSchemeTypes();
+            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptRestCriteria.getConceptSchemeTypes();
 
             queryBuilder.append("(");
 
@@ -256,7 +291,7 @@ public class RestQueryUtils {
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
 
-                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptWebCriteria.getStatisticalOperationUrn())) {
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptRestCriteria.getStatisticalOperationUrn())) {
 
                     // Concept scheme type is OPERATION and the statistical operation is the specified
 
@@ -265,10 +300,10 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptWebCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(conceptRestCriteria.getStatisticalOperationUrn()).append("\"");
                     queryBuilder.append(")");
 
-                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptWebCriteria.getStatisticalOperationUrn())) {
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptRestCriteria.getStatisticalOperationUrn())) {
 
                     // Concept scheme type is MEASURE and the statistical operation is the specified
 
@@ -279,7 +314,7 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptWebCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(conceptRestCriteria.getStatisticalOperationUrn()).append("\"");
                     queryBuilder.append(")");
 
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
@@ -300,9 +335,38 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                 }
             }
-
             queryBuilder.append(")");
         }
+
+        // Find concepts with one of the specified URNs
+
+        if (conceptRestCriteria.getUrns() != null && !conceptRestCriteria.getUrns().isEmpty()) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            for (int i = 0; i < conceptRestCriteria.getUrns().size(); i++) {
+                String urn = conceptRestCriteria.getUrns().get(i);
+                if (i != 0) {
+                    queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
+                }
+                queryBuilder.append(ConceptCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(urn).append("\"");
+            }
+            queryBuilder.append(")");
+        }
+
+        // Find concepts that are externally published
+
+        if (BooleanUtils.isTrue(conceptRestCriteria.getIsItemSchemeExternallyPublished())) {
+            if (StringUtils.isNotBlank(queryBuilder.toString())) {
+                queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
+            }
+            queryBuilder.append("(");
+            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_EXTERNALLY_PUBLISHED).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(Boolean.TRUE)
+                    .append("\"");
+            queryBuilder.append(")");
+        }
+
         return queryBuilder.toString();
     }
 
@@ -322,9 +386,9 @@ public class RestQueryUtils {
             queryBuilder.append(OrganisationSchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (externalResourceWebCriteria instanceof OrganisationSchemeWebCriteria && !ArrayUtils.isEmpty(((OrganisationSchemeWebCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes())) {
+        if (externalResourceWebCriteria instanceof OrganisationSchemeRestCriteria && !ArrayUtils.isEmpty(((OrganisationSchemeRestCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes())) {
 
-            TypeExternalArtefactsEnum[] organisationSchemeTypes = ((OrganisationSchemeWebCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes();
+            TypeExternalArtefactsEnum[] organisationSchemeTypes = ((OrganisationSchemeRestCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes();
 
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
@@ -382,9 +446,9 @@ public class RestQueryUtils {
                     .append(itemWebCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
-        if (itemWebCriteria instanceof OrganisationWebCriteria && !ArrayUtils.isEmpty(((OrganisationWebCriteria) itemWebCriteria).getOrganisationTypes())) {
+        if (itemWebCriteria instanceof OrganisationRestCriteria && !ArrayUtils.isEmpty(((OrganisationRestCriteria) itemWebCriteria).getOrganisationTypes())) {
 
-            TypeExternalArtefactsEnum[] organisationTypes = ((OrganisationWebCriteria) itemWebCriteria).getOrganisationTypes();
+            TypeExternalArtefactsEnum[] organisationTypes = ((OrganisationRestCriteria) itemWebCriteria).getOrganisationTypes();
 
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");

@@ -2,12 +2,12 @@ package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
@@ -39,10 +39,10 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findCategories((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_SCHEME:
-                result = srmRestInternalFacade.findOrganisationSchemes((OrganisationSchemeWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisationSchemes((OrganisationSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION:
-                result = srmRestInternalFacade.findOrganisations((OrganisationWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisations((OrganisationRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT_SCHEME:
                 result = srmRestInternalFacade.findOrganisationUnitSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
@@ -63,10 +63,10 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findCodes((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT_SCHEME:
-                result = srmRestInternalFacade.findConceptSchemes((ConceptSchemeWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findConceptSchemes((ConceptSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT:
-                result = srmRestInternalFacade.findConcepts((ConceptWebCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findConcepts((ConceptRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
