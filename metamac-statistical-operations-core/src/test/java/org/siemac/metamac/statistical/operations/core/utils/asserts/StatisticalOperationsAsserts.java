@@ -37,6 +37,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         assertEquals(expected.getCode(), actual.getCode());
         assertEquals(expected.getUri(), actual.getUri());
         assertEquals(expected.getUrn(), actual.getUrn());
+        assertEquals(expected.getUrnInternal(), actual.getUrnInternal());
         assertEquals(expected.getType(), actual.getType());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         assertEquals(expected.getManagementAppUrl(), actual.getManagementAppUrl());
@@ -53,7 +54,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         for (ExternalItem expec : expected) {
             boolean found = false;
             for (ExternalItem actualItem : actual) {
-                if (actualItem.getUrn().equals(expec.getUrn())) {
+                if (actualItem.getUrn().equals(expec.getUrn()) || actualItem.getUrnInternal().equals(expec.getUrnInternal())) {
                     found = true;
                 }
             }
@@ -78,16 +79,16 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
     // -----------------------------------------------------------------
     // EXTERNAL ITEMS: DTO & DO
     // -----------------------------------------------------------------
-    
+
     public static void assertEqualsExternalItem(ExternalItem entity, ExternalItemDto dto, MapperEnum mapperEnum) {
         assertEqualsNullability(entity, dto);
         if (entity == null) {
             return;
         }
-        
+
         String baseApi = null;
         String baseWebApplication = null;
-        
+
         if (TypeExternalArtefactsEnumUtils.isExternalItemOfCommonMetadataApp(dto.getType())) {
             baseWebApplication = ConfigurationMockConstants.COMMON_METADATA_INTERNAL_WEB_APP_URL_BASE;
             baseApi = ConfigurationMockConstants.COMMON_METADATA_EXTERNAL_API_URL_BASE;
@@ -100,7 +101,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         } else {
             fail("unexpected type of external item");
         }
-        
+
         assertEqualsExternalItem(entity, dto, baseApi, baseWebApplication, mapperEnum);
     }
 
@@ -131,25 +132,24 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
             }
         }
     }
-    
 
     private static void assertEqualsExternalItem(ExternalItem entity, ExternalItemDto dto) {
         assertEquals(entity.getCode(), dto.getCode());
         assertEquals(entity.getUrn(), dto.getUrn());
+        assertEquals(entity.getUrnInternal(), dto.getUrnInternal());
         assertEquals(entity.getType(), dto.getType());
         assertEqualsInternationalString(entity.getTitle(), dto.getTitle());
     }
-    
-    
+
     public static void assertEqualsExternalItemCollectionMapper(Collection<ExternalItem> entities, Collection<ExternalItemDto> dtos, MapperEnum mapperEnum) {
         if (entities == null) {
-            entities = new ArrayList<ExternalItem>(); 
+            entities = new ArrayList<ExternalItem>();
         }
-        
+
         if (dtos == null) {
             dtos = new ArrayList<ExternalItemDto>();
         }
-        
+
         assertEquals(entities.size(), dtos.size());
         for (ExternalItem entity : entities) {
             boolean found = false;
@@ -168,7 +168,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
             }
         }
     }
-    
+
     // -----------------------------------------------------------------
     // INTERNATIONAL STRING: DO & DO
     // -----------------------------------------------------------------

@@ -11,12 +11,12 @@ import org.siemac.metamac.core.common.util.shared.VersionUtil;
 
 public class StatisticalOperationsMocks extends MetamacMocks {
 
-    private static final String[] MAINTAINER_MOCK          = new String[]{"MaintainerMock"};
-    private static final String   ORGANIZATION_UNIT_MOCK   = "OrganizationUnitMock";
-    private static final String   AGENCY_SCHEME_MOCK       = "AgencySchemeMock";
-    private static final String   CONCEPT_SCHEME_MOCK      = "ConceptSchemeMock";
-    private static final String   CODELIST_MOCK            = "CodelistMock";
-    private static final String   DSD_MOCK                 = "DsdMock";
+    private static final String[] MAINTAINER_MOCK        = new String[]{"MaintainerMock"};
+    private static final String   ORGANIZATION_UNIT_MOCK = "OrganizationUnitMock";
+    private static final String   AGENCY_SCHEME_MOCK     = "AgencySchemeMock";
+    private static final String   CONCEPT_SCHEME_MOCK    = "ConceptSchemeMock";
+    private static final String   CODELIST_MOCK          = "CodelistMock";
+    private static final String   DSD_MOCK               = "DsdMock";
 
     // -----------------------------------------------------------------
     // INTERNATIONAL STRING
@@ -84,7 +84,7 @@ public class StatisticalOperationsMocks extends MetamacMocks {
         String code = mockCode();
         return mockStatisticalOperationAppExternalItem(code, mockStatisticalOperationInstanceUrn(code), TypeExternalArtefactsEnum.STATISTICAL_OPERATION_INSTANCE);
     }
-    
+
     public static ExternalItem mockAgencyExternalItem() {
         String code = mockCode();
         return mockSrmAppExternalItem(code, mockAgencyUrn(code), TypeExternalArtefactsEnum.AGENCY);
@@ -125,27 +125,28 @@ public class StatisticalOperationsMocks extends MetamacMocks {
         return mockSrmAppExternalItem(code, mockDimensionUrn(code), TypeExternalArtefactsEnum.DIMENSION);
     }
 
-
     // -----------------------------------------------------------------
     // PRIVATE
     // -----------------------------------------------------------------
 
     private static ExternalItem mockStatisticalOperationAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
-        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
+        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR
+                + code);
         item.setVersion(Long.valueOf(0));
-        return  item;
+        return item;
     }
-    
+
     private static ExternalItem mockSrmAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
-        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
+        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR
+                + code);
         item.setVersion(Long.valueOf(0));
-        return  item;
+        return item;
     }
-    
+
     private static String mockCode() {
         return mockString(8);
     }
-    
+
     private static String mockStatisticalOperationUrn(String code) {
         return GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(code);
     }

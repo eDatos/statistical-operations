@@ -410,26 +410,26 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
     }
-    
+
     @Test
     public void testCreateOperationWithSpecificLegalActs() throws MetamacException {
         Operation expected = createOperation();
         expected.setSpecificLegalActs(StatisticalOperationsMocks.mockInternationalString());
-        
+
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), expected);
-        
+
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
         StatisticalOperationsAsserts.assertEqualsInternationalString(expected.getSpecificLegalActs(), operation.getSpecificLegalActs());
     }
-    
+
     @Test
     public void testCreateOperationWithSpecificDataSharing() throws MetamacException {
         Operation expected = createOperation();
         expected.setSpecificDataSharing(StatisticalOperationsMocks.mockInternationalString());
-        
+
         Operation operation = statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), expected);
-        
+
         assertNotNull(operation);
         assertEquals("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getCode(), operation.getUrn());
         StatisticalOperationsAsserts.assertEqualsInternationalString(expected.getSpecificDataSharing(), operation.getSpecificDataSharing());
@@ -599,7 +599,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         statisticalOperationsBaseService.updateOperation(getServiceContextAdministrador(), operation);
     }
-    
+
     @Test
     public void testUpdateOperationWithReleaseCalendarAndWithoutReleaseCalendarAccess() throws Exception {
         expectedMetamacException(new MetamacException(ServiceExceptionType.METADATA_REQUIRED, ServiceExceptionParameters.OPERATION_RELEASE_CALENDAR_ACCESS));
@@ -995,7 +995,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setCurrentlyActive(false);
 
         // SUBJECT_AREA
-        operation.setSubjectArea(new ExternalItem("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
+        operation.setSubjectArea(new ExternalItem("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
 
         // INDICATOR_SYSTEM
         operation.setIndicatorSystem(false);
@@ -1049,17 +1049,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operation.addProducer(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operation.addProducer(new ExternalItem("INE", "/uri/test/agency", "URN:AGENCY:INE", TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(new ExternalItem("INE", "/uri/test/agency", "URN:AGENCY:INE", null, TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operation.addRegionalResponsible(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addRegionalResponsible(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operation.addPublisher(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operation.addPublisher(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operation.setCommonMetadata(new ExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", TypeExternalArtefactsEnum.CONFIGURATION));
+        operation.setCommonMetadata(new ExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
 
         // OFFICIALITY_TYPE
         operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));

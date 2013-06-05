@@ -117,11 +117,15 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndExistsDo() throws Exception {
         // EXISTS, EXISTS: Same elements
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(new ExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(new ExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", TypeExternalArtefactsEnum.CATEGORY));
+        dtos.add(new ExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+                TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(new ExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+                TypeExternalArtefactsEnum.CATEGORY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
-        entities.add(new ExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", TypeExternalArtefactsEnum.AGENCY));
-        entities.add(new ExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", TypeExternalArtefactsEnum.CATEGORY));
+        entities.add(new ExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+                TypeExternalArtefactsEnum.AGENCY));
+        entities.add(new ExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+                TypeExternalArtefactsEnum.CATEGORY));
 
         testExternalItemDtoListToEntitiesList(dtos, entities);
     }
@@ -130,12 +134,17 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndExistsDoWithDtoMoreElements() throws Exception {
         // EXISTS, EXISTS: More elements
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(new ExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(new ExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", TypeExternalArtefactsEnum.CATEGORY));
-        dtos.add(new ExternalItemDto("CODE_03", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_03", "URN_03", TypeExternalArtefactsEnum.CATEGORY));
+        dtos.add(new ExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+                TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(new ExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+                TypeExternalArtefactsEnum.CATEGORY));
+        dtos.add(new ExternalItemDto("CODE_03", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_03", "URN_03", "URN_03_internal",
+                TypeExternalArtefactsEnum.CATEGORY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
-        entities.add(new ExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", TypeExternalArtefactsEnum.AGENCY));
-        entities.add(new ExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", TypeExternalArtefactsEnum.CATEGORY));
+        entities.add(new ExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+                TypeExternalArtefactsEnum.AGENCY));
+        entities.add(new ExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+                TypeExternalArtefactsEnum.CATEGORY));
 
         testExternalItemDtoListToEntitiesList(dtos, entities);
     }

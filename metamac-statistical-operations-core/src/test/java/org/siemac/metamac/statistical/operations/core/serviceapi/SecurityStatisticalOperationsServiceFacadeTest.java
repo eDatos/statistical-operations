@@ -44,6 +44,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Autowired
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
+    @Override
     @Test
     public void testFindAllSurveyTypes() throws Exception {
         statisticalOperationsServiceFacade.findAllSurveyTypes(getServiceContextTecnicoApoyoDifusion());
@@ -54,6 +55,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllSurveyTypes(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindSurveyTypeById() throws Exception {
         statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -64,6 +66,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextTecnicoProduccion(), Long.valueOf(1));
     }
 
+    @Override
     @Test
     public void testFindAllInstanceTypes() throws Exception {
         statisticalOperationsServiceFacade.findAllInstanceTypes(getServiceContextTecnicoApoyoDifusion());
@@ -74,6 +77,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllInstanceTypes(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindInstanceTypeById() throws Exception {
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -84,6 +88,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceTypeById(getServiceContextTecnicoProduccion(), Long.valueOf(1));
     }
 
+    @Override
     @Test
     public void testFindAllSurveySources() throws Exception {
         statisticalOperationsServiceFacade.findAllSurveySources(getServiceContextTecnicoApoyoDifusion());
@@ -94,6 +99,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllSurveySources(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindSurveySourceById() throws Exception {
         statisticalOperationsServiceFacade.findSurveySourceById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -105,6 +111,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindAllOfficialityTypes() throws Exception {
         statisticalOperationsServiceFacade.findAllOfficialityTypes(getServiceContextTecnicoApoyoDifusion());
@@ -116,6 +123,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindOfficialityTypeById() throws Exception {
         statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -127,6 +135,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindAllCollMethods() throws Exception {
         statisticalOperationsServiceFacade.findAllCollMethods(getServiceContextTecnicoApoyoDifusion());
@@ -137,6 +146,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllCollMethods(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindCollMethodById() throws Exception {
         statisticalOperationsServiceFacade.findCollMethodById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -147,6 +157,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findCollMethodById(getServiceContextTecnicoProduccion(), Long.valueOf(1));
     }
 
+    @Override
     @Test
     public void testFindAllCosts() throws Exception {
         statisticalOperationsServiceFacade.findAllCosts(getServiceContextTecnicoApoyoDifusion());
@@ -158,6 +169,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindCostById() throws Exception {
         statisticalOperationsServiceFacade.findCostById(getServiceContextTecnicoApoyoDifusion(), Long.valueOf(1));
@@ -169,6 +181,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testCreateFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -211,6 +224,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testUpdateFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -255,6 +269,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testDeleteFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -297,6 +312,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testFindAllFamilies() throws Exception {
         statisticalOperationsServiceFacade.findAllFamilies(getServiceContextTecnicoApoyoDifusion());
@@ -307,6 +323,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllFamilies(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindFamilyByCondition() throws Exception {
         MetamacCriteria criteria = new MetamacCriteria();
@@ -319,6 +336,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextTecnicoProduccion(), criteria);
     }
 
+    @Override
     @Test
     public void testFindFamilyById() throws Exception {
         Long familyId = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
@@ -332,6 +350,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindFamilyByCode() throws Exception {
         String familyCode = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getCode();
@@ -344,6 +363,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextTecnicoProduccion(), familyCode);
     }
 
+    @Override
     @Test
     public void testFindFamilyByUrn() throws Exception {
         String familyUrn = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getUrn();
@@ -357,6 +377,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testPublishInternallyFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -379,21 +400,21 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoDifusion(), familyId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishInternallyFamily(getServiceContextTecnicoProduccion(), familyId);
             fail("operation not allowed");
@@ -402,6 +423,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testPublishExternallyFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -419,28 +441,28 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoApoyoProduccion(), familyId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoDifusion(), familyId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.publishExternallyFamily(getServiceContextTecnicoProduccion(), familyId);
             fail("operation not allowed");
@@ -449,6 +471,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testFindOperationsForFamily() throws Exception {
         Long familyId = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
@@ -461,6 +484,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationsForFamily(getServiceContextTecnicoProduccion(), familyId);
     }
 
+    @Override
     @Test
     public void testAddOperationForFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -474,28 +498,28 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoApoyoProduccion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoDifusion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextTecnicoProduccion(), familyId, operationId);
             fail("operation not allowed");
@@ -504,6 +528,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testRemoveOperationForFamily() throws Exception {
         FamilyDto familyDto = createFamilyDto();
@@ -518,28 +543,28 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoApoyoPlanificacion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoApoyoProduccion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoDifusion(), familyId, operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.removeOperationForFamily(getServiceContextTecnicoProduccion(), familyId, operationId);
             fail("operation not allowed");
@@ -548,6 +573,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testCreateOperation() throws Exception {
         OperationDto operationDto = createOperationDto();
@@ -559,28 +585,28 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoApoyoPlanificacion(), operationDto);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoApoyoProduccion(), operationDto);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoDifusion(), operationDto);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.createOperation(getServiceContextTecnicoProduccion(), operationDto);
             fail("operation not allowed");
@@ -589,6 +615,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testUpdateOperation() throws Exception {
         OperationDto operationDto = createOperationDto();
@@ -606,21 +633,21 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoApoyoProduccion(), operationDto);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoDifusion(), operationDto);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoProduccionOperation02(), operationDto);
             fail("operation not allowed");
@@ -629,6 +656,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testDeleteOperation() throws Exception {
         OperationDto operationDto = createOperationDto();
@@ -641,28 +669,28 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoApoyoPlanificacion(), operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoApoyoProduccion(), operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoDifusion(), operationId);
             fail("operation not allowed");
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
         }
-        
+
         try {
             statisticalOperationsServiceFacade.deleteOperation(getServiceContextTecnicoProduccion(), operationId);
             fail("operation not allowed");
@@ -671,6 +699,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testFindAllOperations() throws Exception {
         statisticalOperationsServiceFacade.findAllOperations(getServiceContextTecnicoApoyoDifusion());
@@ -681,6 +710,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllOperations(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindOperationsByCondition() throws Exception {
         MetamacCriteria criteria = new MetamacCriteria();
@@ -693,6 +723,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextTecnicoProduccion(), criteria);
     }
 
+    @Override
     @Test
     public void testFindOperationById() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
@@ -705,6 +736,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationById(getServiceContextTecnicoProduccion(), operationId);
     }
 
+    @Override
     @Test
     public void testFindOperationByCode() throws Exception {
         String operationCode = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getCode();
@@ -717,6 +749,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationByCode(getServiceContextTecnicoProduccion(), operationCode);
     }
 
+    @Override
     @Test
     public void testFindOperationByUrn() throws Exception {
         String operationUrn = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getUrn();
@@ -729,6 +762,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findOperationByUrn(getServiceContextTecnicoProduccion(), operationUrn);
     }
 
+    @Override
     @Test
     public void testPublishInternallyOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -843,6 +877,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testPublishExternallyOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -972,6 +1007,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testFindFamiliesForOperation() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
@@ -984,6 +1020,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findFamiliesForOperation(getServiceContextTecnicoProduccion(), operationId);
     }
 
+    @Override
     @Test
     public void testFindInstancesForOperation() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDto()).getId();
@@ -996,6 +1033,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstancesForOperation(getServiceContextTecnicoProduccion(), operationId);
     }
 
+    @Override
     @Test
     public void testAddFamilyForOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1034,6 +1072,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testRemoveFamilyForOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1073,6 +1112,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testCreateInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1106,6 +1146,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testUpdateInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1140,6 +1181,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testUpdateInstancesOrder() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1177,6 +1219,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testDeleteInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1241,6 +1284,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         }
     }
 
+    @Override
     @Test
     public void testFindAllInstances() throws Exception {
         statisticalOperationsServiceFacade.findAllInstances(getServiceContextTecnicoApoyoDifusion());
@@ -1251,6 +1295,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findAllInstances(getServiceContextTecnicoProduccion());
     }
 
+    @Override
     @Test
     public void testFindInstanceByCondition() throws Exception {
         MetamacCriteria criteria = new MetamacCriteria();
@@ -1263,6 +1308,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceByCondition(getServiceContextTecnicoProduccion(), criteria);
     }
 
+    @Override
     @Test
     public void testFindInstanceById() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1278,6 +1324,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindInstanceByCode() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1292,6 +1339,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextTecnicoProduccion(), instanceCode);
     }
 
+    @Override
     @Test
     public void testFindInstanceByUrn() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1307,6 +1355,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindInstanceBaseById() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1322,6 +1371,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testPublishInternallyInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1387,6 +1437,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testPublishExternallyInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
@@ -1441,14 +1492,14 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
-            
+
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoDifusion(), instanceId);
                 fail("operation not allowed");
             } catch (MetamacException e) {
                 assertEquals(ServiceExceptionType.SECURITY_OPERATION_NOT_ALLOWED.getCode(), e.getExceptionItems().get(0).getCode());
             }
-            
+
             try {
                 statisticalOperationsServiceFacade.publishExternallyInstance(getServiceContextTecnicoProduccionOperation02(), instanceId);
                 fail("operation not allowed");
@@ -1459,6 +1510,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     }
 
+    @Override
     @Test
     public void testFindOperationForInstance() throws Exception {
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing()).getId();
@@ -1561,7 +1613,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -1591,18 +1643,18 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:INE", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:INE", null, TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", TypeExternalArtefactsEnum.AGENCY));
-        
+        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+
         return operationDto;
     }
 
