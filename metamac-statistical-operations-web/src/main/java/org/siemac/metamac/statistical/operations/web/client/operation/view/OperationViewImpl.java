@@ -30,6 +30,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationP
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
@@ -114,7 +115,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm             classForm;
-    private GroupDynamicForm             classEditionForm;
+    private GroupDynamicForm             classDescriptorsEditionForm;
     private CustomSelectItem             surveyType;
     private CustomSelectItem             officialityType;
     private CustomCheckboxItem           indSystem;
@@ -666,14 +667,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // CLASS DESCRIPTORS
 
-        classEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
+        classDescriptorsEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
         surveyType = new CustomSelectItem(OperationDS.STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
-        // surveyType.setValidators(getRequiredIfInternallyPublished());
         officialityType = new CustomSelectItem(OperationDS.OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
-        // officialityType.setValidators(getRequiredIfInternallyPublished());
         indSystem = new CustomCheckboxItem(OperationDS.INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         indSystem.setTitleStyle("requiredFormLabel");
-        classEditionForm.setFields(surveyType, officialityType, indSystem);
+        classDescriptorsEditionForm.setFields(surveyType, officialityType, indSystem);
 
         // PRODUCTION DESCRIPTORS
 
@@ -735,7 +734,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         mainFormLayout.addEditionCanvas(identifiersEditionForm);
         mainFormLayout.addEditionCanvas(contentClassifiersEditionForm);
         mainFormLayout.addEditionCanvas(contentEditionForm);
-        mainFormLayout.addEditionCanvas(classEditionForm);
+        mainFormLayout.addEditionCanvas(classDescriptorsEditionForm);
         mainFormLayout.addEditionCanvas(productionDescriptorsEditionForm);
         mainFormLayout.addEditionCanvas(diffusionEditionForm);
         mainFormLayout.addEditionCanvas(legalActsEditionForm);
@@ -830,6 +829,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private void setOperationEditionMode(OperationDto operationDto) {
 
+        String[] requiredFieldsToNextProcStatus = RequiredFieldUtils.getOperationRequiredFieldsToNextProcStatus(operationDto.getProcStatus());
+
         // IDENTIFIERS
 
         identifiersEditionForm.setValue(OperationDS.CODE, operationDto.getCode());
@@ -837,22 +838,30 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersEditionForm.setValue(OperationDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
         identifiersEditionForm.setValue(OperationDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
         identifiersEditionForm.setValue(OperationDS.URN, operationDto.getUrn());
+        identifiersEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        identifiersEditionForm.markForRedraw();
 
         // CONTENT CLASSIFIERS
 
         ((ExternalItemLinkItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).setExternalItem(operationDto.getSubjectArea());
         ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(operationDto.getSecondarySubjectAreas());
+        contentClassifiersEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        contentClassifiersEditionForm.markForRedraw();
 
         // CONTENT DESCRIPTORS
 
         contentEditionForm.setValue(OperationDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getDescription()));
         contentEditionForm.setValue(OperationDS.OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
+        contentEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        contentEditionForm.markForRedraw();
 
         // CLASS DESCRIPTORS
 
         surveyType.setValue(operationDto.getSurveyType() != null ? operationDto.getSurveyType().getId() : null);
         officialityType.setValue(operationDto.getOfficialityType() != null ? operationDto.getOfficialityType().getId() : null);
         indSystem.setValue(operationDto.getIndicatorSystem() == null ? false : operationDto.getIndicatorSystem());
+        classDescriptorsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        classDescriptorsEditionForm.markForRedraw();
 
         // PRODUCTION DESCRIPTORS
 
@@ -865,6 +874,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         statusItem.setValue(operationDto.getStatus() == null ? null : operationDto.getStatus().toString());
         productionDescriptorsEditionForm.setValue(OperationDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + operationDto.getProcStatus().getName()));
         productionDescriptorsEditionForm.setValue(OperationDS.PROC_STATUS_VIEW, operationDto.getProcStatus().toString());
+
+        productionDescriptorsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        productionDescriptorsEditionForm.markForRedraw();
 
         // DIFFUSION AND PUBLICATION
 
@@ -898,14 +910,22 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionEditionForm.setValue(OperationDS.REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
         diffusionEditionForm.setValue(OperationDS.REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
 
+        diffusionEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        diffusionEditionForm.markForRedraw();
+
         // LEGAL ACTS
+
         legalActsEditionForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificLegalActs()));
         legalActsEditionForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificDataSharing()));
+        legalActsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        legalActsEditionForm.markForRedraw();
 
         // ANNOTATIONS
 
         annotationsEditionForm.setValue(OperationDS.COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
         annotationsEditionForm.setValue(OperationDS.NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
+        annotationsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        annotationsEditionForm.markForRedraw();
 
         identifiersEditionForm.markForRedraw();
         productionDescriptorsEditionForm.markForRedraw();

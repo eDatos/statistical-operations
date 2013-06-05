@@ -23,6 +23,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.ExternalItemListItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.MultipleExternalResourceAction;
@@ -85,7 +86,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     // CLASS DESCRIPTORS
     private GroupDynamicForm                classViewForm;
-    private GroupDynamicForm                classEditionForm;
+    private GroupDynamicForm                classDescriptorsEditionForm;
     private CustomSelectItem                instanceTypeItem;
 
     // PRODUCTION DESCRIPTORS
@@ -335,7 +336,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     public boolean validate() {
         return identifiersEditionForm.validate(false) &&
 
-        contentDescriptorsEditionForm.validate(false) && classEditionForm.validate(false) && productionDescriptorsEditionForm.validate(false) && diffusionEditionForm.validate(false)
+        contentDescriptorsEditionForm.validate(false) && classDescriptorsEditionForm.validate(false) && productionDescriptorsEditionForm.validate(false) && diffusionEditionForm.validate(false)
                 && qualityEditionForm.validate(false) && annotationsEditionForm.validate(false);
     }
 
@@ -486,10 +487,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 geographicalComparabilityItem, temporalComparabilityItem, measuresItem, statConcDefDescriptionItem, statConcDefItem, classSystemItem, classSystemDescriptionItem);
 
         // Class descriptors
-        classEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
+        classDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
         instanceTypeItem = new CustomSelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
         // instanceTypeItem.setValidators(getRequiredIfInternallyPublished());
-        classEditionForm.setFields(instanceTypeItem);
+        classDescriptorsEditionForm.setFields(instanceTypeItem);
 
         // Production descriptors
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
@@ -546,7 +547,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         mainFormLayout.addEditionCanvas(identifiersEditionForm);
 
         mainFormLayout.addEditionCanvas(contentDescriptorsEditionForm);
-        mainFormLayout.addEditionCanvas(classEditionForm);
+        mainFormLayout.addEditionCanvas(classDescriptorsEditionForm);
         mainFormLayout.addEditionCanvas(productionDescriptorsEditionForm);
         mainFormLayout.addEditionCanvas(diffusionEditionForm);
         mainFormLayout.addEditionCanvas(qualityEditionForm);
@@ -644,6 +645,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
     private void setInstanceEditionMode(InstanceDto instanceDto) {
 
+        String[] requiredFieldsToNextProcStatus = RequiredFieldUtils.getInstanceRequiredFieldsToNextProcStatus(instanceDto.getProcStatus());
+
         // IDENTIFIERS
 
         code.setValue(instanceDto.getCode());
@@ -651,6 +654,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         title.setValue(instanceDto.getTitle());
         acronym.setValue(instanceDto.getAcronym());
         identifiersEditionForm.setValue(InstanceDS.URN, instanceDto.getUrn());
+        identifiersEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        identifiersEditionForm.markForRedraw();
 
         // CONTENT CLASSIFIERS
 
@@ -679,9 +684,14 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentDescriptorsEditionForm.setValue(InstanceDS.CLASS_SYSTEM_DESCRIPTION, RecordUtils.getInternationalStringRecord(instanceDto.getClassSystem()));
         ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setExternalItems(instanceDto.getClassSystemList());
 
+        contentDescriptorsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        contentDescriptorsEditionForm.markForRedraw();
+
         // CLASS DESCRIPTORS
 
         instanceTypeItem.setValue(instanceDto.getInstanceType() != null ? instanceDto.getInstanceType().getId().toString() : "");
+        classDescriptorsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        classDescriptorsEditionForm.markForRedraw();
 
         // PRODUCTION DESCRIPTORS
 
@@ -701,10 +711,14 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionDescriptorsEditionForm.setValue(InstanceDS.ADJUSTMENT, RecordUtils.getInternationalStringRecord(instanceDto.getAdjustment()));
         productionDescriptorsEditionForm.setValue(InstanceDS.COST_BURDEN, RecordUtils.getInternationalStringRecord(instanceDto.getCostBurden()));
         costItem.setValues(getCostIds(instanceDto.getCost()));
+        productionDescriptorsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        productionDescriptorsEditionForm.markForRedraw();
 
         // DIFFUSION AND PUBLICATION
 
         diffusionEditionForm.setValue(InstanceDS.INVENTORY_DATE, instanceDto.getInventoryDate());
+        diffusionEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        diffusionEditionForm.markForRedraw();
 
         // QUALITY DESCRIPTORS
 
@@ -721,11 +735,15 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         qualityEditionForm.setValue(InstanceDS.NONSAMPLING_ERR, RecordUtils.getInternationalStringRecord(instanceDto.getNonsamplingErr()));
         qualityEditionForm.setValue(InstanceDS.COHER_X_DOM, RecordUtils.getInternationalStringRecord(instanceDto.getCoherXDomain()));
         qualityEditionForm.setValue(InstanceDS.COHER_INTERNAL, RecordUtils.getInternationalStringRecord(instanceDto.getCoherInternal()));
+        qualityEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        qualityEditionForm.markForRedraw();
 
         // ANNOTATIONS
 
         annotationsEditionForm.setValue(InstanceDS.COMMENTS, RecordUtils.getInternationalStringRecord(instanceDto.getComment()));
         annotationsEditionForm.setValue(InstanceDS.NOTES, RecordUtils.getInternationalStringRecord(instanceDto.getNotes()));
+        annotationsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
+        annotationsEditionForm.markForRedraw();
 
         identifiersEditionForm.markForRedraw();
         productionDescriptorsEditionForm.markForRedraw();
