@@ -569,13 +569,13 @@ public class StatisticalOperationsCoreMocks {
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, type, mockInternationalStringMetadata(code, null), null);
+        return new ExternalItem(code, uri, urn, urn, type, mockInternationalStringMetadata(code, null), null);
     }
 
     private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         String uri = "v1.0/" + subpathUrl + "/" + code;
         String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, type, mockInternationalStringMetadata(code, null), null);
+        return new ExternalItem(code, uri, urn, null, type, mockInternationalStringMetadata(code, null), null);
     }
 
     private Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {
