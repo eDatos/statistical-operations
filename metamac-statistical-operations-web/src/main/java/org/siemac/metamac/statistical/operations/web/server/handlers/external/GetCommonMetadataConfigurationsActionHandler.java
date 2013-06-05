@@ -7,7 +7,7 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configurations;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.ResourceInternal;
 import org.siemac.metamac.statistical.operations.web.server.rest.CommonMetadataRestExternalFacade;
-import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
+import org.siemac.metamac.statistical.operations.web.server.rest.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;

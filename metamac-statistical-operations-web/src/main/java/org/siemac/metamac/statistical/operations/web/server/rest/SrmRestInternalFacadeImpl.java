@@ -16,8 +16,8 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnitSchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationUnits;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organisations;
+import org.siemac.metamac.statistical.operations.web.server.rest.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
-import org.siemac.metamac.statistical.operations.web.server.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
