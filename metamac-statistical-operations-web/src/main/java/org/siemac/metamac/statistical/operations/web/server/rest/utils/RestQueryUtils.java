@@ -22,7 +22,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ConceptWebC
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeWebCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 
 public class RestQueryUtils {
 
@@ -49,7 +49,7 @@ public class RestQueryUtils {
     // CATEGORY
     //
 
-    public static String buildCategoryQuery(SrmItemWebCriteria itemWebCriteria) {
+    public static String buildCategoryQuery(SrmItemRestCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -96,7 +96,7 @@ public class RestQueryUtils {
     // CODE
     //
 
-    public static String buildCodeQuery(SrmItemWebCriteria itemWebCriteria) {
+    public static String buildCodeQuery(SrmItemRestCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -361,7 +361,7 @@ public class RestQueryUtils {
     // ORGANISATION
     //
 
-    public static String buildOrganisationQuery(SrmItemWebCriteria itemWebCriteria) {
+    public static String buildOrganisationQuery(SrmItemRestCriteria itemWebCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = itemWebCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {

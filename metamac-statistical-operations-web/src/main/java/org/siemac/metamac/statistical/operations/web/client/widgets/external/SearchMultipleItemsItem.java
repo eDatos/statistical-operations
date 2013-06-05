@@ -9,7 +9,7 @@ import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.actions.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
@@ -31,12 +31,12 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
     protected CustomSelectItem                                                initialFilterSelectItem;
 
-    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemWebCriteria itemCriteria, final String windowTitle,
+    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemRestCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
         this(name, title, itemSchemeCriteria, itemCriteria, windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle, null, action);
     }
 
-    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemWebCriteria itemCriteria, final String windowTitle,
+    public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemRestCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final CustomSelectItem initialFilterSelectItem,
             final MultipleExternalResourceAction action) {
         super(name, title, true);
@@ -138,7 +138,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
         getUiHandlers().retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
     }
 
-    protected void retrieveItems(String formItemName, SrmItemWebCriteria itemWebCriteria, int firstResult, int maxResults) {
+    protected void retrieveItems(String formItemName, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) {
         getUiHandlers().retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 

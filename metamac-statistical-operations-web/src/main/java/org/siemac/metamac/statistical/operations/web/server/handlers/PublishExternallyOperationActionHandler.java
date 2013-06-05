@@ -11,7 +11,6 @@ import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
@@ -26,6 +25,9 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
 
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
+
+        // FIXME validate that all ExternalItems are externally published
+
         try {
             OperationDto operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             return new PublishExternallyOperationResult(operationDto);
@@ -33,10 +35,4 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
             throw WebExceptionUtils.createMetamacWebException(e);
         }
     }
-
-    @Override
-    public void undo(PublishExternallyOperationAction action, PublishExternallyOperationResult result, ExecutionContext context) throws ActionException {
-
-    }
-
 }
