@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.instance.presenter;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
@@ -26,6 +27,8 @@ import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePr
 import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
@@ -34,8 +37,8 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyIns
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
@@ -193,6 +196,24 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
                 // Update URL
                 PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeInstancePlaceRequest(instanceDto.getCode());
                 placeManager.updateHistory(placeRequest, true);
+            }
+        });
+    }
+
+    @Override
+    public void deleteInstance(InstanceDto instanceDto) {
+        final List<Long> ids = new ArrayList<Long>();
+        ids.add(instanceDto.getId());
+        dispatcher.execute(new DeleteInstanceListAction(ids), new WaitingAsyncCallback<DeleteInstanceListResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                String message = ids.size() > 1 ? getMessages().instanceErrorDelete() : getMessages().instancesErrorDelete();
+                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, message), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(DeleteInstanceListResult result) {
+                placeManager.revealRelativePlace(-1);
             }
         });
     }

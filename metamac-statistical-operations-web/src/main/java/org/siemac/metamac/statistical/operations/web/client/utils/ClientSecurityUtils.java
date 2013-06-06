@@ -6,6 +6,7 @@ import static org.siemac.metamac.statistical.operations.core.enume.domain.Statis
 import static org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum.TECNICO_PRODUCCION;
 
 import org.siemac.metamac.sso.client.MetamacPrincipal;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.statistical.operations.core.security.shared.SharedSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -88,7 +89,12 @@ public class ClientSecurityUtils {
         return false;
     }
 
-    public static boolean canDeleteOperation(String operationCode) {
+    public static boolean canDeleteOperation(String operationCode, ProcStatusEnum procStatusEnum) {
+
+        if (!ProcStatusEnum.DRAFT.equals(procStatusEnum)) {
+            return false;
+        }
+
         StatisticalOperationsRoleEnum[] roles = {TECNICO_PLANIFICACION};
         if (isRoleAllowed(roles) && isOperationAllowed(operationCode, roles)) {
             return true;
@@ -154,7 +160,12 @@ public class ClientSecurityUtils {
         return false;
     }
 
-    public static boolean canDeleteInstance(String operationCode) {
+    public static boolean canDeleteInstance(String operationCode, ProcStatusEnum procStatusEnum) {
+
+        if (!ProcStatusEnum.DRAFT.equals(procStatusEnum)) {
+            return false;
+        }
+
         StatisticalOperationsRoleEnum[] roles = {TECNICO_PRODUCCION, TECNICO_PLANIFICACION};
         if (isRoleAllowed(roles) && isOperationAllowed(operationCode, roles)) {
             return true;

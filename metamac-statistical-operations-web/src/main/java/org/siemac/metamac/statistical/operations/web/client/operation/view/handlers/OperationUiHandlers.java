@@ -18,6 +18,8 @@ public interface OperationUiHandlers extends SrmExternalResourcesUiHandlers {
 
     void updateInstancesOrder(List<Long> instancesIds);
 
+    void deleteOperation(OperationDto operationDto);
+
     // External resources
 
     void retrieveCommonMetadataConfigurations();

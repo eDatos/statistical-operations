@@ -227,6 +227,18 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         return selectedOperations;
     }
 
+    public List<OperationRecord> getSelectedOperationRecords() {
+        List<OperationRecord> selectedOperations = new ArrayList<OperationRecord>();
+        if (operationListGrid.getListGrid().getSelectedRecords() != null) {
+            ListGridRecord[] records = operationListGrid.getListGrid().getSelectedRecords();
+            for (int i = 0; i < records.length; i++) {
+                OperationRecord record = (OperationRecord) records[i];
+                selectedOperations.add(record);
+            }
+        }
+        return selectedOperations;
+    }
+
     @Override
     public void onOperationSaved(OperationDto operationDto) {
         OperationRecord record = RecordUtils.getOperationRecord(operationDto);
@@ -257,10 +269,11 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
     }
 
     private void showListGridDeleteButton() {
-        List<String> selectedOperationCodes = getSelectedOperationCodes();
+        List<OperationRecord> selectedOperationCodes = getSelectedOperationRecords();
         boolean actionAllowed = true;
-        for (String code : selectedOperationCodes) {
-            if (!ClientSecurityUtils.canDeleteOperation(code)) {
+        for (OperationRecord record : selectedOperationCodes) {
+            OperationBaseDto operationBaseDto = record.getOperationBaseDto();
+            if (!ClientSecurityUtils.canDeleteOperation(operationBaseDto.getCode(), operationBaseDto.getProcStatus())) {
                 actionAllowed = false;
                 break;
             }

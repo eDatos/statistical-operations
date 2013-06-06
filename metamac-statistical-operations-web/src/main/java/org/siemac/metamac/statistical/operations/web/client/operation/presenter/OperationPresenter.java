@@ -34,6 +34,8 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
@@ -52,8 +54,8 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrder
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
@@ -274,6 +276,23 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                 // Update URL
                 PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeOperationPlaceRequest(operationDto.getCode());
                 placeManager.updateHistory(placeRequest, true);
+            }
+        });
+    }
+
+    @Override
+    public void deleteOperation(OperationDto operationDto) {
+        List<Long> ids = new ArrayList<Long>();
+        ids.add(operationDto.getId());
+        dispatcher.execute(new DeleteOperationListAction(ids), new WaitingAsyncCallback<DeleteOperationListResult>() {
+
+            @Override
+            public void onWaitFailure(Throwable caught) {
+                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
+            }
+            @Override
+            public void onWaitSuccess(DeleteOperationListResult result) {
+                placeManager.revealRelativePlace(-1);
             }
         });
     }

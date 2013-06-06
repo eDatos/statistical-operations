@@ -70,6 +70,7 @@ public class RecordUtils {
         record.setCurrentlyActive(CommonWebUtils.getBooleanValueAsString(operationBaseDto.getCurrentlyActive()));
         record.setProcStatus(CommonUtils.getProcStatusName(operationBaseDto.getProcStatus()));
         record.setStatus(CommonUtils.getStatusName(operationBaseDto.getStatus()));
+        record.setOperationBaseDto(operationBaseDto);
         return record;
     }
 

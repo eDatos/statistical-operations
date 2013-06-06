@@ -152,6 +152,13 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                 setTranslationsShowed(mainFormLayout.getTranslateToolStripButton().isSelected());
             }
         });
+        mainFormLayout.getDeleteConfirmationWindow().getYesButton().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                getUiHandlers().deleteInstance(instanceDto);
+            }
+        });
         createViewForm();
         createEditionForm();
 
@@ -216,6 +223,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Security
         mainFormLayout.setCanEdit(ClientSecurityUtils.canUpdateInstance(operationCode));
+        mainFormLayout.setCanDelete(ClientSecurityUtils.canDeleteInstance(operationCode, instanceDto.getProcStatus()));
         mainFormLayout.setOperationCode(operationCode);
 
         mainFormLayout.setViewMode();

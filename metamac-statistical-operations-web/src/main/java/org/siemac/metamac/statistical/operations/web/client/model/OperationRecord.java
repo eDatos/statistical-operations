@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.model;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.web.common.client.resources.GlobalResources;
@@ -45,6 +46,14 @@ public class OperationRecord extends ListGridRecord {
 
     public void setProcStatus(String value) {
         setAttribute(OperationDS.PROC_STATUS, value);
+    }
+
+    public void setOperationBaseDto(OperationBaseDto operationBaseDto) {
+        setAttribute(OperationDS.DTO, operationBaseDto);
+    }
+
+    public OperationBaseDto getOperationBaseDto() {
+        return (OperationBaseDto) getAttributeAsObject(OperationDS.DTO);
     }
 
     public void setStatus(String value) {

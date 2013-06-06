@@ -6,4 +6,5 @@ import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUi
 public interface InstanceUiHandlers extends SrmExternalResourcesUiHandlers {
 
     void saveInstance(InstanceDto instanceDto);
+    void deleteInstance(InstanceDto instanceDto);
 }

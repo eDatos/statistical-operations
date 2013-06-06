@@ -37,7 +37,7 @@ public class OperationDS extends DataSource {
     public static final String RE_POL_US_AC               = "op-pol-us";
     public static final String RELEASE_CALENDAR           = "op-calendar";
     public static final String RELEASE_CALENDAR_ACCESS    = "op-calendar-access";
-    public static final String UPDATE_FREQUENCY                = "op-up-freq";
+    public static final String UPDATE_FREQUENCY           = "op-up-freq";
     public static final String CURRENT_INSTANCE           = "op-current-inst";
     public static final String CURRENT_INTERNAL_INSTANCE  = "op-current-in-inst";
     public static final String INVENTORY_DATE             = "op-inv-date";
@@ -50,6 +50,8 @@ public class OperationDS extends DataSource {
     // ANNOTATIONS
     public static final String COMMENTS                   = "op-com";
     public static final String NOTES                      = "op-not";
+
+    public static final String DTO                        = "operation-dto";
 
     public OperationDS() {
 

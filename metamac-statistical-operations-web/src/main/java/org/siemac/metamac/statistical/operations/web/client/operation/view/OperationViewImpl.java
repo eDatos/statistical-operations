@@ -173,6 +173,13 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 setTranslationsShowed(mainFormLayout.getTranslateToolStripButton().isSelected());
             }
         });
+        mainFormLayout.getDeleteConfirmationWindow().getYesButton().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                getUiHandlers().deleteOperation(operationDto);
+            }
+        });
         createViewForm();
         createEditionForm();
 
@@ -345,6 +352,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Security
         mainFormLayout.setCanEdit(ClientSecurityUtils.canUpdateOperation(operationDto.getCode()));
+        mainFormLayout.setCanDelete(ClientSecurityUtils.canDeleteOperation(operationDto.getCode(), operationDto.getProcStatus()));
         mainFormLayout.setOperationCode(operationDto.getCode());
         instancesOrderFormLayout.setCanEdit(ClientSecurityUtils.canUpdateInstancesOrder(operationDto.getCode()));
         instanceListGridToolStrip.getNewButton().setVisibility(ClientSecurityUtils.canCreateInstance(operationDto.getCode()) ? Visibility.VISIBLE : Visibility.HIDDEN);
@@ -1056,7 +1064,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     private void showInstanceListGridDeleteButton() {
-        if (ClientSecurityUtils.canDeleteInstance(operationDto.getCode())) {
+        if (ClientSecurityUtils.canDeleteInstance(operationDto.getCode(), operationDto.getProcStatus())) {
             instanceListGridToolStrip.getDeleteButton().show();
         }
     }
