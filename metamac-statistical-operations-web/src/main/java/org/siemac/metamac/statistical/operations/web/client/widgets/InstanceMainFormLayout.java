@@ -37,6 +37,7 @@ public class InstanceMainFormLayout extends BasePublicationMainFormLayout {
         }
     }
 
+    @Override
     public void setViewMode() {
         super.setViewMode();
         updateVisibility();
@@ -53,5 +54,4 @@ public class InstanceMainFormLayout extends BasePublicationMainFormLayout {
             publishExternally.show();
         }
     }
-
 }
