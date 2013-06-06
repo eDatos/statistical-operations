@@ -49,6 +49,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.external.Sea
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
+import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
@@ -447,7 +448,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public boolean validate() {
         return identifiersEditionForm.validate(false) && productionDescriptorsEditionForm.validate(false) && contentEditionForm.validate(false) && contentClassifiersEditionForm.validate(false)
-                && diffusionEditionForm.validate(false);
+                && diffusionEditionForm.validate(false) && classDescriptorsEditionForm.validate(false);
     }
 
     @Override
@@ -661,15 +662,40 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
         MultilanguageRichTextEditorItem description = new MultilanguageRichTextEditorItem(OperationDS.DESCRIPTION, getCoreMessages().operation_description());
-        MultilanguageRichTextEditorItem objective = new MultilanguageRichTextEditorItem(OperationDS.OBJECTIVE, getCoreMessages().operation_objective());
-        // objective.setValidators(getRequiredIfInternallyPublished());
+
+        final MultilanguageRichTextEditorItem objective = new MultilanguageRichTextEditorItem(OperationDS.OBJECTIVE, getCoreMessages().operation_objective());
+        objective.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? objective.getValue() != null : true;
+            }
+        });
+
         contentEditionForm.setFields(objective, description);
 
         // CLASS DESCRIPTORS
 
         classDescriptorsEditionForm = new GroupDynamicForm(getConstants().operationClassDescriptors());
+
         surveyType = new CustomSelectItem(OperationDS.STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
+        surveyType.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !StringUtils.isBlank(surveyType.getValueAsString()) : true;
+            }
+        });
+
         officialityType = new CustomSelectItem(OperationDS.OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
+        officialityType.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !StringUtils.isBlank(officialityType.getValueAsString()) : true;
+            }
+        });
+
         indSystem = new CustomCheckboxItem(OperationDS.INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
         indSystem.setTitleStyle("requiredFormLabel");
         classDescriptorsEditionForm.setFields(surveyType, officialityType, indSystem);
@@ -678,18 +704,42 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
 
-        SearchMultipleItemsItem producerItem = createProducersItem(OperationDS.PRODUCER, getCoreMessages().operation_producer());
+        final SearchMultipleItemsItem producerItem = createProducersItem(OperationDS.PRODUCER, getCoreMessages().operation_producer());
+        // TODO producer required validator
+        // producerItem.setValidators(new CustomRequiredValidator() {
+        //
+        // @Override
+        // protected boolean condition(Object value) {
+        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !producerItem.getSelectedItems().isEmpty() : true;
+        // }
+        // });
 
-        SearchMultipleItemsItem regionalResponsibleItem = createRegionaleResponsiblesItem(OperationDS.REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
+        final SearchMultipleItemsItem regionalResponsibleItem = createRegionaleResponsiblesItem(OperationDS.REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
+        // TODO regional responible validator
+        // regionalResponsibleItem.setValidators(new CustomRequiredValidator() {
+        //
+        // @Override
+        // protected boolean condition(Object value) {
+        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !regionalResponsibleItem.getSelectedItems().isEmpty() : true;
+        // }
+        // });
 
         SearchMultipleItemsItem regionalContributorItem = createRegionaleContributorsItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
 
         ViewTextItem createdDate = new ViewTextItem(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(OperationDS.INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
         currentlyActiveItem = new CustomCheckboxItem(OperationDS.CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
-        // currentlyActiveItem.setValidators(getRequiredIfInternallyPublished());
+
         statusItem = new CustomSelectItem(OperationDS.STATUS, getCoreMessages().operation_status());
         statusItem.setValueMap(CommonUtils.getStatusEnumHashMap());
+        statusItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !StringUtils.isBlank(statusItem.getValueAsString()) : true;
+            }
+        });
+
         ViewTextItem procStatus = new ViewTextItem(OperationDS.PROC_STATUS, getCoreMessages().operation_proc_status());
         ViewTextItem staticProcStatus = new ViewTextItem(OperationDS.PROC_STATUS_VIEW, getCoreMessages().operation_proc_status());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
@@ -699,9 +749,26 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // DIFFUSION AND PUBLICATION
 
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
-        SearchMultipleItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
 
-        SearchCommonMetadataItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
+        final SearchMultipleItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
+        // TODO publisher validator
+        // publishersItem.setValidators(new CustomRequiredValidator() {
+        //
+        // @Override
+        // protected boolean condition(Object value) {
+        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !publishersItem.getSelectedItems().isEmpty() : true;
+        // }
+        // });
+
+        final SearchCommonMetadataItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
+        // TODO common metadata validator
+        // commonMetadataItem.setValidators(new CustomRequiredValidator() {
+        //
+        // @Override
+        // protected boolean condition(Object value) {
+        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? commonMetadataItem.getSelectedExternalItemDto() != null : true;
+        // }
+        // });
 
         MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());

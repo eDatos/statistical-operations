@@ -22,8 +22,6 @@ public class RequiredFieldUtils {
                 return familyFieldsToInternalPublication;
             case PUBLISH_INTERNALLY:
                 return familyFieldsToExternalPublication;
-            case PUBLISH_EXTERNALLY:
-                return familyFieldsToExternalPublication;
             default:
                 return new String[]{};
         }
