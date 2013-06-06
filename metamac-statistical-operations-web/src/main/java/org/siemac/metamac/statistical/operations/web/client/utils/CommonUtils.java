@@ -5,6 +5,7 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 import java.util.LinkedHashMap;
 
 import org.siemac.metamac.core.common.util.shared.StringUtils;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
@@ -42,15 +43,8 @@ public class CommonUtils {
         return isInternallyOrExternallyPublished(operationDto.getProcStatus());
     }
 
-    public static boolean isExternallyPublished(OperationDto operationDto) {
-        return isExternallyPublished(operationDto.getProcStatus());
-    }
-
-    private static boolean isExternallyPublished(ProcStatusEnum procStatusEnum) {
-        if (ProcStatusEnum.PUBLISH_EXTERNALLY.equals(procStatusEnum)) {
-            return true;
-        }
-        return false;
+    public static boolean isInternallyOrExternallyPublished(InstanceDto instanceDto) {
+        return isInternallyOrExternallyPublished(instanceDto.getProcStatus());
     }
 
     private static boolean isInternallyOrExternallyPublished(ProcStatusEnum procStatusEnum) {

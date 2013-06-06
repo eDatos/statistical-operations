@@ -21,6 +21,7 @@ import org.siemac.metamac.statistical.operations.web.client.instance.presenter.I
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
@@ -35,6 +36,7 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.external.Sea
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemSchemesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleItemsItem;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
+import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;
@@ -488,8 +490,16 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Class descriptors
         classDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceClassDescriptors());
+
         instanceTypeItem = new CustomSelectItem(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
-        // instanceTypeItem.setValidators(getRequiredIfInternallyPublished());
+        instanceTypeItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(instanceDto) ? !StringUtils.isBlank(instanceTypeItem.getValueAsString()) : true;
+            }
+        });
+
         classDescriptorsEditionForm.setFields(instanceTypeItem);
 
         // Production descriptors
