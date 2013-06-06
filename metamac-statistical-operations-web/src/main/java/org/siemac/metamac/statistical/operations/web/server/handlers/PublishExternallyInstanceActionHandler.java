@@ -50,6 +50,12 @@ public class PublishExternallyInstanceActionHandler extends SecurityActionHandle
      */
     private void checkExternalItemsAreExternallyPublished(InstanceDto instanceDto) throws MetamacWebException {
         externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STATISTICAL_UNIT, instanceDto.getStatisticalUnit());
-        // TODO
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_UNIT_MEASURE, instanceDto.getUnitMeasure());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STAT_CONC_DEF_LIST, instanceDto.getStatConcDefList());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_CLASS_SYSTEM_LIST, instanceDto.getClassSystemList());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_FREQ_COLL, instanceDto.getFreqColl());
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS, instanceDto.getInformationSuppliers());
     }
 }

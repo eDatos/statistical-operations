@@ -8,10 +8,12 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.DATA_PROVIDER_SCHEME;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
+import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.CODELIST;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 
 public class RestWebCriteriaUtils {
 
@@ -83,6 +85,8 @@ public class RestWebCriteriaUtils {
             externalResourceWebCriteria = new OrganisationSchemeRestCriteria();
             externalResourceWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
             ((OrganisationSchemeRestCriteria) externalResourceWebCriteria).setOrganisationSchemeTypes(types);
+        } else if (isCodeListType(types[0])) {
+            externalResourceWebCriteria = new SrmItemSchemeRestCriteria(types[0], criteria);    
         } else {
             externalResourceWebCriteria.setType(types[0]);
         }
@@ -111,6 +115,10 @@ public class RestWebCriteriaUtils {
             }
         }
         return true;
+    }
+    
+    private static boolean isCodeListType(TypeExternalArtefactsEnum type) {
+        return CODELIST.equals(type);
     }
 
     private static boolean areOrganisationTypes(TypeExternalArtefactsEnum[] types) {

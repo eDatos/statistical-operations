@@ -10,6 +10,7 @@ import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUi
 import org.siemac.metamac.web.common.client.widgets.SearchMultipleExternalItemWindow;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
@@ -35,7 +36,7 @@ public class SearchMultipleItemSchemesItem extends ExternalItemListItem {
             @Override
             public void onFormItemClick(FormItemIconClickEvent event) {
 
-                final ExternalResourceWebCriteria criteria = new ExternalResourceWebCriteria(TypeExternalArtefactsEnum.CODELIST);
+                final SrmItemSchemeRestCriteria criteria = new SrmItemSchemeRestCriteria(TypeExternalArtefactsEnum.CODELIST);
 
                 searchMultipleItemSchemesWindow = new SearchMultipleExternalItemWindow(getConstants().searchCodelists(), MAX_RESULTS, new PaginatedAction() {
 

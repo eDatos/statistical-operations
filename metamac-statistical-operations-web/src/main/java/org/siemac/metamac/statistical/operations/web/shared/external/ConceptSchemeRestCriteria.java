@@ -1,8 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.shared.external;
 
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 
-public class ConceptSchemeRestCriteria extends ExternalResourceWebCriteria {
+public class ConceptSchemeRestCriteria extends SrmItemSchemeRestCriteria {
 
     private static final long       serialVersionUID = 1L;
 
