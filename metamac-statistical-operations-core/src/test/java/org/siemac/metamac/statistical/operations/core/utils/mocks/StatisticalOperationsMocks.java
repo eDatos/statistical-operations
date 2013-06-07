@@ -142,48 +142,4 @@ public class StatisticalOperationsMocks extends MetamacMocks {
         item.setVersion(Long.valueOf(0));
         return item;
     }
-
-    private static String mockCode() {
-        return mockString(8);
-    }
-
-    private static String mockStatisticalOperationUrn(String code) {
-        return GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(code);
-    }
-
-    private static String mockStatisticalOperationInstanceUrn(String code) {
-        return GeneratorUrnUtils.generateSiemacStatisticalOperationUrn(code);
-    }
-
-    private static String mockAgencyUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxAgencyUrn(MAINTAINER_MOCK, AGENCY_SCHEME_MOCK, VersionUtil.PATTERN_X_Y_INITIAL_VERSION, code);
-    }
-
-    private static String mockOrganizationUnitUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxOrganisationUnitUrn(MAINTAINER_MOCK, ORGANIZATION_UNIT_MOCK, VersionUtil.PATTERN_X_Y_INITIAL_VERSION, code);
-    }
-
-    private static String mockConceptUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxConceptUrn(MAINTAINER_MOCK, CONCEPT_SCHEME_MOCK, VersionUtil.PATTERN_X_Y_INITIAL_VERSION, code);
-    }
-
-    private static String mockConceptSchemeUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxConceptSchemeUrn(MAINTAINER_MOCK, code, VersionUtil.PATTERN_X_Y_INITIAL_VERSION);
-    }
-
-    private static String mockCodeListUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxCodelistUrn(MAINTAINER_MOCK, code, VersionUtil.PATTERN_X_Y_INITIAL_VERSION);
-    }
-
-    private static String mockCodeUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxCodeUrn(MAINTAINER_MOCK, CODELIST_MOCK, VersionUtil.PATTERN_X_Y_INITIAL_VERSION, code);
-    }
-
-    private static String mockDsdUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxDatastructureUrn(MAINTAINER_MOCK, code, VersionUtil.PATTERN_X_Y_INITIAL_VERSION);
-    }
-
-    private static String mockDimensionUrn(String code) {
-        return GeneratorUrnUtils.generateSdmxDimensionUrn(MAINTAINER_MOCK, DSD_MOCK, VersionUtil.PATTERN_XX_YYY_INITIAL_VERSION, code);
-    }
 }
