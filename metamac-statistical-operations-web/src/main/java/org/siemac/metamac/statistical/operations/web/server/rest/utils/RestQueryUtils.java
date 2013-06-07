@@ -77,11 +77,11 @@ public class RestQueryUtils {
                     .append("\"");
             queryBuilder.append(")");
         }
-        
+
         // Find categories with one of the specified URNs
         String urnsQuery = buildUrnsQuery(CategoryCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find categories that are externally published
         String externallyPublishedQuery = buildBooleanQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
@@ -105,11 +105,11 @@ public class RestQueryUtils {
             queryBuilder.append(CodelistCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        
+
         // Find code lists with one of the specified URNs
         String urnsQuery = buildUrnsQuery(CodelistCriteriaPropertyRestriction.URN, itemSchemeWebCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find code lists that are externally published
         if (BooleanUtils.isTrue(itemSchemeWebCriteria.getIsExternallyPublished())) {
             String query = buildSrmProcStatusQuery(CodelistCriteriaPropertyRestriction.PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
@@ -143,15 +143,15 @@ public class RestQueryUtils {
             queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
-        
+
         // Find codes with one of the specified URNs
         String urnsQuery = buildUrnsQuery(CodeCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find codes that are externally published
         String externallyPublishedQuery = buildBooleanQuery(CodeCriteriaPropertyRestriction.CODELIST_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
-        
+
         return queryBuilder.toString();
     }
 
@@ -232,17 +232,17 @@ public class RestQueryUtils {
 
             queryBuilder.append(")");
         }
-        
+
         // Find concept Schemes with one of the specified URNs
         String urnsQuery = buildUrnsQuery(ConceptSchemeCriteriaPropertyRestriction.URN, conceptSchemeWebCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find concept Schemes that are externally published
         if (BooleanUtils.isTrue(conceptSchemeWebCriteria.getIsExternallyPublished())) {
             String externallyPublishedQuery = buildSrmProcStatusQuery(ConceptSchemeCriteriaPropertyRestriction.PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
             addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
         }
-        
+
         return queryBuilder.toString();
     }
 
@@ -359,11 +359,11 @@ public class RestQueryUtils {
         // Find concepts with one of the specified URNs
         String urnsQuery = buildUrnsQuery(ConceptCriteriaPropertyRestriction.URN, conceptRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find concepts that are externally published
         String externallyPublishedQuery = buildBooleanQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_EXTERNALLY_PUBLISHED, conceptRestCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
-        
+
         return queryBuilder.toString();
     }
 
@@ -400,7 +400,7 @@ public class RestQueryUtils {
             }
             queryBuilder.append(")");
         }
-        
+
         return queryBuilder.toString();
     }
 
@@ -461,19 +461,18 @@ public class RestQueryUtils {
             }
             queryBuilder.append(")");
         }
-        
+
         // Find organizations with one of the specified URNs
         String urnsQuery = buildUrnsQuery(OrganisationCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
-        
+
         // Find concepts that are externally published
         String externallyPublishedQuery = buildBooleanQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
-        
+
         return queryBuilder.toString();
     }
 
-    
     private static void addConditionToQueryBuilderIfAny(StringBuilder queryBuilder, String condition, LogicalOperator operator) {
         if (StringUtils.isNotBlank(condition)) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
@@ -482,7 +481,7 @@ public class RestQueryUtils {
             queryBuilder.append(condition);
         }
     }
-    
+
     private static String buildUrnsQuery(Enum urnPropertyEnum, List<String> urns) {
         StringBuilder queryBuilder = new StringBuilder();
         if (urns != null && !urns.isEmpty()) {
@@ -498,7 +497,7 @@ public class RestQueryUtils {
         }
         return queryBuilder.toString();
     }
-    
+
     private static String buildSrmProcStatusQuery(Enum procStatusPropertyEnum, ProcStatus procStatus) {
         StringBuilder queryBuilder = new StringBuilder();
         if (procStatus != null) {
@@ -508,7 +507,7 @@ public class RestQueryUtils {
         }
         return queryBuilder.toString();
     }
-    
+
     private static String buildBooleanQuery(Enum propertyEnum, Boolean booleanValue) {
         // Find categories that are externally published
         StringBuilder queryBuilder = new StringBuilder();

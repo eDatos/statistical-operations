@@ -50,7 +50,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
             // Divide the external items in different lists, taking into account their type
             Map<TypeExternalArtefactsEnum, List<ExternalItemDto>> externalItemsByType = new HashMap<TypeExternalArtefactsEnum, List<ExternalItemDto>>();
-            
+
             for (ExternalItemDto externalItemDto : externalItemDtos) {
                 TypeExternalArtefactsEnum type = externalItemDto.getType();
                 List<ExternalItemDto> items = externalItemsByType.get(type);
@@ -68,13 +68,12 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             checkConceptSchemesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT_SCHEME));
             checkDataProvidersAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.DATA_PROVIDER));
             checkOrganizationUnitsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.ORGANISATION_UNIT));
-            
+
             if (!externalItemsByType.keySet().isEmpty()) {
                 throwExternalItemNotFoundException(externalItemName);
             }
         }
     }
-    
 
     //
     // CATEGORIES
@@ -99,11 +98,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             validateExternalItemsResult(externalItemName, result, externalItemDtos);
         }
     }
-    
+
     //
     // CODES
     //
-    
+
     private void checkCodesAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
@@ -111,11 +110,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             validateExternalItemsResult(externalItemName, result, externalItemDtos);
         }
     }
-    
+
     //
     // CODELISTS
     //
-    
+
     private void checkCodeListsAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemSchemeRestCriteria criteria = buildItemSchemeCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
@@ -123,11 +122,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             validateExternalItemsResult(externalItemName, result, externalItemDtos);
         }
     }
-    
+
     //
     // CONCEPT SCHEMES
     //
-    
+
     private void checkConceptSchemesAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             ConceptSchemeRestCriteria criteria = buildConceptSchemeCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
@@ -135,11 +134,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             validateExternalItemsResult(externalItemName, result, externalItemDtos);
         }
     }
-    
+
     //
     // DATA PROVIDERS
     //
-    
+
     private void checkDataProvidersAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
@@ -147,11 +146,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             validateExternalItemsResult(externalItemName, result, externalItemDtos);
         }
     }
-    
+
     //
     // ORGANIZATION UNITS
     //
-    
+
     private void checkOrganizationUnitsAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
@@ -160,16 +159,13 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         }
     }
 
-
     private ConceptRestCriteria buildConceptCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         return (ConceptRestCriteria) buildItemCriteriaToCheckExternalPublication(new ConceptRestCriteria(), externalItemName, externalItemDtos);
     }
-    
+
     private ConceptSchemeRestCriteria buildConceptSchemeCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         return (ConceptSchemeRestCriteria) buildItemSchemeCriteriaToCheckExternalPublication(new ConceptSchemeRestCriteria(), externalItemName, externalItemDtos);
     }
-    
-  
 
     //
     // UTILITY METHODS
@@ -178,8 +174,9 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         return buildItemSchemeCriteriaToCheckExternalPublication(new SrmItemSchemeRestCriteria(), externalItemName, externalItemDtos);
     }
-    
-    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(SrmItemSchemeRestCriteria criteria, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+
+    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(SrmItemSchemeRestCriteria criteria, String externalItemName, List<ExternalItemDto> externalItemDtos)
+            throws MetamacWebException {
         criteria.setIsExternallyPublished(Boolean.TRUE);
         criteria.setUrns(new ArrayList<String>());
         for (ExternalItemDto externalItemDto : externalItemDtos) {
@@ -187,7 +184,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         }
         return criteria;
     }
-    
+
     private SrmItemRestCriteria buildItemCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         return buildItemCriteriaToCheckExternalPublication(new SrmItemRestCriteria(), externalItemName, externalItemDtos);
     }
@@ -200,7 +197,6 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         }
         return criteria;
     }
-    
 
     private void validateExternalItemsResult(String externalItemName, ExternalItemsResult result, List<ExternalItemDto> expectedExternalItems) throws MetamacWebException {
         for (ExternalItemDto expected : expectedExternalItems) {

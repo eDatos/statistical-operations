@@ -58,7 +58,7 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findDataProviders((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODELIST:
-                result = srmRestInternalFacade.findCodelists((SrmItemSchemeRestCriteria)action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCodelists((SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODE:
                 result = srmRestInternalFacade.findCodes((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());

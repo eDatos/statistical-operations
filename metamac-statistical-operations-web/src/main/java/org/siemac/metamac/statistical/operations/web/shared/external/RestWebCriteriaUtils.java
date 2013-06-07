@@ -86,7 +86,7 @@ public class RestWebCriteriaUtils {
             externalResourceWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
             ((OrganisationSchemeRestCriteria) externalResourceWebCriteria).setOrganisationSchemeTypes(types);
         } else if (isCodeListType(types[0])) {
-            externalResourceWebCriteria = new SrmItemSchemeRestCriteria(types[0], criteria);    
+            externalResourceWebCriteria = new SrmItemSchemeRestCriteria(types[0], criteria);
         } else {
             externalResourceWebCriteria.setType(types[0]);
         }
@@ -116,7 +116,7 @@ public class RestWebCriteriaUtils {
         }
         return true;
     }
-    
+
     private static boolean isCodeListType(TypeExternalArtefactsEnum type) {
         return CODELIST.equals(type);
     }
