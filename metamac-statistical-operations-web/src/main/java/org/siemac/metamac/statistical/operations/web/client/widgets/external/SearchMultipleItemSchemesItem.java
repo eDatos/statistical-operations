@@ -9,7 +9,6 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.SearchMultipleExternalItemWindow;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 

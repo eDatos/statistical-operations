@@ -2,13 +2,13 @@ package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.AGENCY;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.AGENCY_SCHEME;
+import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.CODELIST;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.DATA_CONSUMER;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.DATA_CONSUMER_SCHEME;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.DATA_PROVIDER;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.DATA_PROVIDER_SCHEME;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT;
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
-import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.CODELIST;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;

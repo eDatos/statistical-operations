@@ -15,7 +15,6 @@ import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.Exte
 import org.siemac.metamac.statistical.operations.web.shared.constants.WebMessageExceptionsConstants;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
