@@ -55,6 +55,7 @@ import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.view.handlers.BaseUiHandlers;
 import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
+import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
@@ -88,6 +89,7 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
 import com.smartgwt.client.widgets.grid.events.SelectionEvent;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
@@ -141,12 +143,16 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     private GroupDynamicForm             annotationsViewForm;
     private GroupDynamicForm             annotationsEditionForm;
 
+    // INSTANCES
+
     private ListGridToolStrip            instanceListGridToolStrip;
     private CustomListGrid               instanceListGrid;
     private InstancesOrderFormLayout     instancesOrderFormLayout;
     // Instance modal window
     private ModalWindow                  newInstanceWindow;
     private NewInstanceForm              newInstanceForm;
+
+    // FAMILIES
 
     private ToolStrip                    familiesToolStrip;
     private ToolStripButton              editFamiliesToolStripButton;
@@ -204,9 +210,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        TitleLabel instancesTitleLabel = new TitleLabel(getConstants().instances());
-        instancesTitleLabel.setStyleName("sectionTitleLeftMargin");
-
         // Instances list
         instanceListGrid = new CustomListGrid();
         instanceListGrid.setHeight(150);
@@ -229,13 +232,15 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        VLayout instancesListGridLayout = new VLayout();
-        instancesListGridLayout.setMargin(15);
-        instancesListGridLayout.addMember(instanceListGridToolStrip);
-        instancesListGridLayout.addMember(instanceListGrid);
+        CustomListGridSectionStack instancesSectionStack = new CustomListGridSectionStack(instanceListGrid, getConstants().instances(), "sectionStackStyle");
+        instancesSectionStack.setMargin(15);
+        instancesSectionStack.getDefaultSection().setItems(instanceListGridToolStrip);
+        instancesSectionStack.getDefaultSection().setItems(instanceListGrid);
+        instancesSectionStack.getDefaultSection().setExpanded(true);
 
         // Instances order
         instancesOrderFormLayout = new InstancesOrderFormLayout();
+        instancesOrderFormLayout.setMargin(0);
         instancesOrderFormLayout.getSave().addClickHandler(new ClickHandler() {
 
             @Override
@@ -243,6 +248,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 getUiHandlers().updateInstancesOrder(instancesOrderFormLayout.getInstancesOrder());
             }
         });
+
+        SectionStackSection ordersSection = new SectionStackSection(getConstants().instancesOrder());
+        ordersSection.setExpanded(true);
+        ordersSection.setItems(instancesOrderFormLayout);
+
+        instancesSectionStack.addSection(ordersSection);
 
         // FAMILIES
 
@@ -269,22 +280,19 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         familyListGrid.setHeight(150);
         familyListGrid.setFields(ResourceListFieldUtils.getFamilyFields());
 
-        VLayout familiesListGridLayout = new VLayout();
-        familiesListGridLayout.setMargin(15);
-        familiesListGridLayout.addMember(familiesToolStrip);
-        familiesListGridLayout.addMember(familyListGrid);
+        CustomListGridSectionStack familiesSectionStack = new CustomListGridSectionStack(familyListGrid, getConstants().families(), "sectionStackStyle");
+        familiesSectionStack.setMargin(15);
+        familiesSectionStack.getDefaultSection().setItems(familiesToolStrip);
+        familiesSectionStack.getDefaultSection().setItems(familyListGrid);
 
         VLayout subPanel = new VLayout();
         subPanel.setHeight100();
         subPanel.setOverflow(Overflow.SCROLL);
         subPanel.addMember(mainFormLayout);
 
-        subPanel.addMember(instancesTitleLabel);
-        subPanel.addMember(instancesListGridLayout);
-        subPanel.addMember(instancesOrderFormLayout);
+        subPanel.addMember(instancesSectionStack);
 
-        subPanel.addMember(familiesTitleLabel);
-        subPanel.addMember(familiesListGridLayout);
+        subPanel.addMember(familiesSectionStack);
 
         panel.addMember(subPanel);
     }
