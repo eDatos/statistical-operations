@@ -19,7 +19,6 @@ import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
@@ -55,10 +54,4 @@ public class GetFamilyPaginatedListActionHandler extends SecurityActionHandler<G
             throw WebExceptionUtils.createMetamacWebException(e);
         }
     }
-
-    @Override
-    public void undo(GetFamilyPaginatedListAction action, GetFamilyPaginatedListResult result, ExecutionContext context) throws ActionException {
-
-    }
-
 }

@@ -5,7 +5,6 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteInsta
 import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteOperationListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyAndOperationsActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
@@ -34,7 +33,6 @@ import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAc
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetFamilyListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
@@ -85,7 +83,6 @@ public class ServerModule extends HandlerModule {
     protected void configureHandlers() {
 
         // Families
-        bindHandler(GetFamilyListAction.class, GetFamilyListActionHandler.class);
         bindHandler(GetFamilyPaginatedListAction.class, GetFamilyPaginatedListActionHandler.class);
         bindHandler(GetFamilyAction.class, GetFamilyActionHandler.class);
         bindHandler(GetFamilyAndOperationsAction.class, GetFamilyAndOperationsActionHandler.class);
