@@ -9,7 +9,6 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyPa
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetUserGuideUrlActionHandler;
@@ -37,7 +36,6 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedLi
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetOperationListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
@@ -93,7 +91,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(PublishExternallyFamilyAction.class, PublishExternallyFamilyActionHandler.class);
 
         // Operations
-        bindHandler(GetOperationListAction.class, GetOperationListActionHandler.class);
         bindHandler(GetOperationPaginatedListAction.class, GetOperationPaginatedListActionHandler.class);
         bindHandler(GetOperationsListsAction.class, GetOperationsListsActionHandler.class);
         bindHandler(SaveOperationAction.class, SaveOperationActionHandler.class);
