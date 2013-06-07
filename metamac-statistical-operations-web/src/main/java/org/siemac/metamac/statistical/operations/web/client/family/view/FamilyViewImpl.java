@@ -50,7 +50,7 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> implements FamilyPresenter.FamilyView {
 
-    public static final int             OPERATION_LIST_MAX_RESULTS = 17;
+    public static final int             OPERATION_LIST_MAX_RESULTS = 6;
 
     private FamilyUiHandlers            uiHandlers;
 
