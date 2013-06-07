@@ -1,13 +1,19 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaOrder;
+import org.siemac.metamac.core.common.criteria.MetamacCriteriaOrder.OrderTypeEnum;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction.OperationType;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaOrderEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
@@ -39,6 +45,14 @@ public class GetFamilyPaginatedListActionHandler extends SecurityActionHandler<G
             criteria.getPaginator().setFirstResult(action.getFirstResult());
             criteria.getPaginator().setMaximumResultSize(action.getMaxResults());
             criteria.getPaginator().setCountTotalResults(true);
+
+            // Order
+            MetamacCriteriaOrder order = new MetamacCriteriaOrder();
+            order.setType(OrderTypeEnum.DESC);
+            order.setPropertyName(FamilyCriteriaOrderEnum.LAST_UPDATED.name());
+            List<MetamacCriteriaOrder> criteriaOrders = new ArrayList<MetamacCriteriaOrder>();
+            criteriaOrders.add(order);
+            criteria.setOrdersBy(criteriaOrders);
 
             MetamacCriteriaDisjunctionRestriction disjuction = new MetamacCriteriaDisjunctionRestriction();
             if (!StringUtils.isBlank(action.getFamily())) {

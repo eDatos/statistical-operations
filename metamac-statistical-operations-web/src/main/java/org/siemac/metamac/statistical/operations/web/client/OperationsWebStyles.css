@@ -128,3 +128,8 @@ a:HOVER {
 .orderListStyle {
     margin-bottom: 10px;
 }
+
+.sectionStackStyle {
+	border-left: 1px solid #A7ABB4;
+	border-right: 1px solid #A7ABB4;
+}
