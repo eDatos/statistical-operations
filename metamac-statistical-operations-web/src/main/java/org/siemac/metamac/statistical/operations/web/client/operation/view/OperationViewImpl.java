@@ -719,24 +719,22 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
 
         final SearchMultipleItemsItem producerItem = createProducersItem(OperationDS.PRODUCER, getCoreMessages().operation_producer());
-        // TODO producer required validator
-        // producerItem.setValidators(new CustomRequiredValidator() {
-        //
-        // @Override
-        // protected boolean condition(Object value) {
-        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !producerItem.getSelectedItems().isEmpty() : true;
-        // }
-        // });
+        producerItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !producerItem.getExternalItemDtos().isEmpty() : true;
+            }
+        });
 
         final SearchMultipleItemsItem regionalResponsibleItem = createRegionaleResponsiblesItem(OperationDS.REG_RESPONSIBLE, getCoreMessages().operation_regional_responsible());
-        // TODO regional responible validator
-        // regionalResponsibleItem.setValidators(new CustomRequiredValidator() {
-        //
-        // @Override
-        // protected boolean condition(Object value) {
-        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !regionalResponsibleItem.getSelectedItems().isEmpty() : true;
-        // }
-        // });
+        regionalResponsibleItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !regionalResponsibleItem.getExternalItemDtos().isEmpty() : true;
+            }
+        });
 
         SearchMultipleItemsItem regionalContributorItem = createRegionaleContributorsItem(OperationDS.REG_CONTRIBUTOR, getCoreMessages().operation_regional_contributor());
 
@@ -765,14 +763,13 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
 
         final SearchMultipleItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getCoreMessages().operation_publisher());
-        // TODO publisher validator
-        // publishersItem.setValidators(new CustomRequiredValidator() {
-        //
-        // @Override
-        // protected boolean condition(Object value) {
-        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !publishersItem.getSelectedItems().isEmpty() : true;
-        // }
-        // });
+        publishersItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? !publishersItem.getExternalItemDtos().isEmpty() : true;
+            }
+        });
 
         final SearchCommonMetadataItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
         commonMetadataItem.setValidators(new CustomRequiredValidator() {
