@@ -24,7 +24,7 @@ import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
-import org.siemac.metamac.web.common.client.widgets.TitleLabel;
+import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
@@ -115,22 +115,18 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         editToolStripButton.setVisibility(ClientSecurityUtils.canAddOperationToFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
         operationToolStrip.addButton(editToolStripButton);
 
-        TitleLabel operationsTitleLabel = new TitleLabel(OperationsWeb.getConstants().operations());
-        operationsTitleLabel.setStyleName("sectionTitleLeftMargin");
-
         operationListGrid = new BaseCustomListGrid();
         operationListGrid.setAutoFitMaxRecords(20);
         operationListGrid.setAutoFitData(Autofit.VERTICAL);
         operationListGrid.setFields(ResourceListFieldUtils.getOperationFields());
 
-        VLayout operationsLayout = new VLayout();
-        operationsLayout.setMargin(15);
-        operationsLayout.addMember(operationToolStrip);
-        operationsLayout.addMember(operationListGrid);
+        CustomListGridSectionStack operationsSectionStack = new CustomListGridSectionStack(operationListGrid, getConstants().operations(), "sectionStackStyle");
+        operationsSectionStack.setMargin(15);
+        operationsSectionStack.getDefaultSection().setItems(operationToolStrip, operationListGrid);
+        operationsSectionStack.getDefaultSection().setExpanded(true);
 
         panel.addMember(mainFormLayout);
-        panel.addMember(operationsTitleLabel);
-        panel.addMember(operationsLayout);
+        panel.addMember(operationsSectionStack);
     }
 
     @Override

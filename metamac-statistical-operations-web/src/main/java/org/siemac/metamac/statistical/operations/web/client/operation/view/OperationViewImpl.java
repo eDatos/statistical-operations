@@ -234,8 +234,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         CustomListGridSectionStack instancesSectionStack = new CustomListGridSectionStack(instanceListGrid, getConstants().instances(), "sectionStackStyle");
         instancesSectionStack.setMargin(15);
-        instancesSectionStack.getDefaultSection().setItems(instanceListGridToolStrip);
-        instancesSectionStack.getDefaultSection().setItems(instanceListGrid);
+        instancesSectionStack.getDefaultSection().setItems(instanceListGridToolStrip, instanceListGrid);
         instancesSectionStack.getDefaultSection().setExpanded(true);
 
         // Instances order
@@ -282,8 +281,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         CustomListGridSectionStack familiesSectionStack = new CustomListGridSectionStack(familyListGrid, getConstants().families(), "sectionStackStyle");
         familiesSectionStack.setMargin(15);
-        familiesSectionStack.getDefaultSection().setItems(familiesToolStrip);
-        familiesSectionStack.getDefaultSection().setItems(familyListGrid);
+        familiesSectionStack.getDefaultSection().setItems(familiesToolStrip, familyListGrid);
 
         VLayout subPanel = new VLayout();
         subPanel.setHeight100();
