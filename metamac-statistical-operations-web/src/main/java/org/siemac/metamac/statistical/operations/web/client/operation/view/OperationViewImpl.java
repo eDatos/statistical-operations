@@ -775,14 +775,13 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // });
 
         final SearchCommonMetadataItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getCoreMessages().operation_common_metadata());
-        // TODO common metadata validator
-        // commonMetadataItem.setValidators(new CustomRequiredValidator() {
-        //
-        // @Override
-        // protected boolean condition(Object value) {
-        // return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? commonMetadataItem.getSelectedExternalItemDto() != null : true;
-        // }
-        // });
+        commonMetadataItem.setValidators(new CustomRequiredValidator() {
+
+            @Override
+            protected boolean condition(Object value) {
+                return CommonUtils.isInternallyOrExternallyPublished(operationDto) ? commonMetadataItem.getExternalItemDto() != null : true;
+            }
+        });
 
         MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getCoreMessages().operation_rel_pol_us_ac());
         releaseCalendar = new CustomCheckboxItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
@@ -1311,6 +1310,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 ExternalItemDto selectedConfiguration = item.getSelectedExternalItemDto();
                 item.markSearchWindowForDestroy();
                 ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setExternalItem(selectedConfiguration);
+                ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).validate();
             }
         };
         item.setSaveClickHandler(saveClickHandler);
