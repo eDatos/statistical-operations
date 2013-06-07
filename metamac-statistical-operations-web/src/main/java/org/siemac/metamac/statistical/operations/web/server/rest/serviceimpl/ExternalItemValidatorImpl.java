@@ -33,11 +33,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
      * Check that an {@link ExternalItemDto} is externally published
      */
     @Override
-    public void checkExternalItemIsExternallyPublished(String externalItemName, ExternalItemDto externalItemDto) throws MetamacWebException {
+    public void checkExternalItemIsExternallyPublished(String externalItemName, ExternalItemDto externalItemDto, MetamacWebException metamacWebException) throws MetamacWebException {
         if (externalItemDto != null) {
             Set<ExternalItemDto> externalItemDtos = new HashSet<ExternalItemDto>();
             externalItemDtos.add(externalItemDto);
-            checkExternalItemsAreExternallyPublished(externalItemName, externalItemDtos);
+            checkExternalItemsAreExternallyPublished(externalItemName, externalItemDtos, metamacWebException);
         }
     };
 
@@ -45,33 +45,39 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
      * Check that the {@link ExternalItemDto}s are externally published
      */
     @Override
-    public void checkExternalItemsAreExternallyPublished(String externalItemName, Set<ExternalItemDto> externalItemDtos) throws MetamacWebException {
-        if (externalItemDtos != null) {
+    public void checkExternalItemsAreExternallyPublished(String externalItemName, Set<ExternalItemDto> externalItemDtos, MetamacWebException metamacWebException) throws MetamacWebException {
 
-            // Divide the external items in different lists, taking into account their type
-            Map<TypeExternalArtefactsEnum, List<ExternalItemDto>> externalItemsByType = new HashMap<TypeExternalArtefactsEnum, List<ExternalItemDto>>();
+        try {
 
-            for (ExternalItemDto externalItemDto : externalItemDtos) {
-                TypeExternalArtefactsEnum type = externalItemDto.getType();
-                List<ExternalItemDto> items = externalItemsByType.get(type);
-                if (items == null) {
-                    items = new ArrayList<ExternalItemDto>();
-                    externalItemsByType.put(type, items);
+            if (externalItemDtos != null) {
+
+                Map<TypeExternalArtefactsEnum, List<ExternalItemDto>> externalItemsByType = new HashMap<TypeExternalArtefactsEnum, List<ExternalItemDto>>();
+
+                for (ExternalItemDto externalItemDto : externalItemDtos) {
+                    TypeExternalArtefactsEnum type = externalItemDto.getType();
+                    List<ExternalItemDto> items = externalItemsByType.get(type);
+                    if (items == null) {
+                        items = new ArrayList<ExternalItemDto>();
+                        externalItemsByType.put(type, items);
+                    }
+                    items.add(externalItemDto);
                 }
-                items.add(externalItemDto);
+
+                checkCategoriesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CATEGORY));
+                checkConceptsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT));
+                checkCodesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODE));
+                checkCodeListsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODELIST));
+                checkConceptSchemesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT_SCHEME));
+                checkDataProvidersAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.DATA_PROVIDER));
+                checkOrganizationUnitsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.ORGANISATION_UNIT));
+
+                if (!externalItemsByType.keySet().isEmpty()) {
+                    throwExternalItemNotFoundException(externalItemName);
+                }
             }
 
-            checkCategoriesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CATEGORY));
-            checkConceptsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT));
-            checkCodesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODE));
-            checkCodeListsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODELIST));
-            checkConceptSchemesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT_SCHEME));
-            checkDataProvidersAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.DATA_PROVIDER));
-            checkOrganizationUnitsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.ORGANISATION_UNIT));
-
-            if (!externalItemsByType.keySet().isEmpty()) {
-                throwExternalItemNotFoundException(externalItemName);
-            }
+        } catch (MetamacWebException e) {
+            metamacWebException.getWebExceptionItems().addAll(e.getWebExceptionItems());
         }
     }
 

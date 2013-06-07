@@ -49,13 +49,20 @@ public class PublishExternallyInstanceActionHandler extends SecurityActionHandle
      * @throws MetamacWebException
      */
     private void checkExternalItemsAreExternallyPublished(InstanceDto instanceDto) throws MetamacWebException {
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STATISTICAL_UNIT, instanceDto.getStatisticalUnit());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_UNIT_MEASURE, instanceDto.getUnitMeasure());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STAT_CONC_DEF_LIST, instanceDto.getStatConcDefList());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_CLASS_SYSTEM_LIST, instanceDto.getClassSystemList());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_FREQ_COLL, instanceDto.getFreqColl());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS, instanceDto.getInformationSuppliers());
+
+        MetamacWebException metamacWebException = new MetamacWebException();
+
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STATISTICAL_UNIT, instanceDto.getStatisticalUnit(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_GEOGRAPHIC_GRANULARITY, instanceDto.getGeographicGranularity(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_TEMPORAL_GRANULARITY, instanceDto.getTemporalGranularity(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_UNIT_MEASURE, instanceDto.getUnitMeasure(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_STAT_CONC_DEF_LIST, instanceDto.getStatConcDefList(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_CLASS_SYSTEM_LIST, instanceDto.getClassSystemList(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_FREQ_COLL, instanceDto.getFreqColl(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.INSTANCE_INFORMATION_SUPPLIERS, instanceDto.getInformationSuppliers(), metamacWebException);
+
+        if (metamacWebException.getWebExceptionItems() != null && !metamacWebException.getWebExceptionItems().isEmpty()) {
+            throw metamacWebException;
+        }
     }
 }

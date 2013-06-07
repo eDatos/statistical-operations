@@ -9,6 +9,6 @@ public interface ExternalItemValidator {
 
     public static final String BEAN_ID = "externalItemValidator";
 
-    public void checkExternalItemIsExternallyPublished(String externalItemName, ExternalItemDto externalItemDto) throws MetamacWebException;
-    public void checkExternalItemsAreExternallyPublished(String externalItemName, Set<ExternalItemDto> externalItemDtos) throws MetamacWebException;
+    public void checkExternalItemIsExternallyPublished(String externalItemName, ExternalItemDto externalItemDto, MetamacWebException metamacWebException) throws MetamacWebException;
+    public void checkExternalItemsAreExternallyPublished(String externalItemName, Set<ExternalItemDto> externalItemDtos, MetamacWebException metamacWebException) throws MetamacWebException;
 }

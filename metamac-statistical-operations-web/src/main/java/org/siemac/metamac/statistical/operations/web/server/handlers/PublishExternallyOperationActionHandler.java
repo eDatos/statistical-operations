@@ -49,13 +49,20 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
      * @throws MetamacWebException
      */
     private void checkExternalItemsAreExternallyPublished(OperationDto operationDto) throws MetamacWebException {
+
+        MetamacWebException metamacWebException = new MetamacWebException();
+
         // CommonMetadata should be always be externally published, so there is no need to check it
-        externalItemValidator.checkExternalItemIsExternallyPublished(ServiceExceptionParameters.OPERATION_SUBJECT_AREA, operationDto.getSubjectArea());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS, operationDto.getSecondarySubjectAreas());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PRODUCER, operationDto.getProducer());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE, operationDto.getRegionalResponsible());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_CONTRIBUTOR, operationDto.getRegionalContributor());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PUBLISHER, operationDto.getPublisher());
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_UPDATE_FREQUENCY, operationDto.getUpdateFrequency());
+        externalItemValidator.checkExternalItemIsExternallyPublished(ServiceExceptionParameters.OPERATION_SUBJECT_AREA, operationDto.getSubjectArea(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS, operationDto.getSecondarySubjectAreas(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PRODUCER, operationDto.getProducer(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE, operationDto.getRegionalResponsible(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_CONTRIBUTOR, operationDto.getRegionalContributor(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PUBLISHER, operationDto.getPublisher(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_UPDATE_FREQUENCY, operationDto.getUpdateFrequency(), metamacWebException);
+
+        if (metamacWebException.getWebExceptionItems() != null && !metamacWebException.getWebExceptionItems().isEmpty()) {
+            throw metamacWebException;
+        }
     }
 }
