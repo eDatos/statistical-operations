@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
-import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.criteria.utils.CriteriaUtils;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
@@ -177,7 +177,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        condition = initCriteriaConditions(condition, Family.class);
+        condition = CriteriaUtils.initConditions(condition, Family.class);
 
         // Repository operation
         return familyRepository.findByCondition(condition);
@@ -188,8 +188,9 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        condition = initCriteriaConditions(condition, Family.class);
-
+        condition = CriteriaUtils.initConditions(condition, Family.class);
+        pagingParameter = CriteriaUtils.initPagingParameter(pagingParameter);
+        
         // Repository operation
         return familyRepository.findByCondition(condition, pagingParameter);
     }
@@ -389,7 +390,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        condition = initCriteriaConditions(condition, Operation.class);
+        condition = CriteriaUtils.initConditions(condition, Operation.class);
 
         // Repository operation
         return operationRepository.findByCondition(condition);
@@ -400,7 +401,8 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Validations
 
         // Initializations
-        condition = initCriteriaConditions(condition, Operation.class);
+        condition = CriteriaUtils.initConditions(condition, Operation.class);
+        pagingParameter = CriteriaUtils.initPagingParameter(pagingParameter);
 
         // Repository operation
         return operationRepository.findByCondition(condition, pagingParameter);
@@ -631,10 +633,8 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
 
     @Override
     public List<Instance> findInstanceByCondition(ServiceContext ctx, List<ConditionalCriteria> condition) throws MetamacException {
-        // Validations
-
         // Initializations
-        condition = initCriteriaConditions(condition, Instance.class);
+        condition = CriteriaUtils.initConditions(condition, Instance.class);
 
         // Repository operation
         return instanceRepository.findByCondition(condition);
@@ -642,10 +642,9 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
 
     @Override
     public PagedResult<Instance> findInstanceByCondition(ServiceContext ctx, List<ConditionalCriteria> condition, PagingParameter pagingParameter) throws MetamacException {
-        // Validations
-
         // Initializations
-        condition = initCriteriaConditions(condition, Instance.class);
+        condition = CriteriaUtils.initConditions(condition, Instance.class);
+        pagingParameter = CriteriaUtils.initPagingParameter(pagingParameter);
 
         // Repository operation
         return instanceRepository.findByCondition(condition, pagingParameter);
@@ -694,15 +693,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     // ----------------------------------------------------------------------
     // UTILS
     // ----------------------------------------------------------------------
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private List<ConditionalCriteria> initCriteriaConditions(List<ConditionalCriteria> conditions, Class entityClass) {
-        List<ConditionalCriteria> conditionsEntity = ConditionalCriteriaBuilder.criteriaFor(entityClass).build();
-        if (conditions != null) {
-            conditionsEntity.addAll(conditions);
-        }
-        return conditionsEntity;
-    }
-
     private void validateFamilyCodeUnique(ServiceContext ctx, String code, Long actualId) throws MetamacException {
         List<ConditionalCriteria> condition = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).ignoreCaseEq(code).build();
 

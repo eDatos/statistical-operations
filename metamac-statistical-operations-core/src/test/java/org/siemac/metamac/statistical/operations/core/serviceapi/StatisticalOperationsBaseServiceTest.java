@@ -517,6 +517,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         assertTrue(operationsList.size() != 0);
     }
+    
 
     @Test
     public void testFindOperationByConditionPaginated() throws MetamacException {
@@ -776,6 +777,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador());
         assertTrue(!instances.isEmpty());
     }
+    
 
     @Override
     @Test
@@ -791,6 +793,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         assertTrue(instancesList.size() != 0);
     }
+    
 
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {

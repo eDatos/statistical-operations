@@ -1,14 +1,19 @@
 package org.siemac.metamac.statistical.operations.core.mapper;
 
+import org.fornax.cartridges.sculptor.framework.domain.LeafProperty;
 import org.fornax.cartridges.sculptor.framework.domain.Property;
+import org.siemac.metamac.core.common.constants.CoreCommonConstants;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaOrder;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
 import org.siemac.metamac.core.common.criteria.SculptorPropertyCriteria;
 import org.siemac.metamac.core.common.criteria.mapper.MetamacCriteria2SculptorCriteria;
 import org.siemac.metamac.core.common.criteria.mapper.MetamacCriteria2SculptorCriteria.CriteriaCallback;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaOrderEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaPropertyEnum;
+import org.siemac.metamac.statistical.operations.core.criteria.InstanceCriteriaOrderEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.InstanceCriteriaPropertyEnum;
+import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaOrderEnum;
 import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaPropertyEnum;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
@@ -31,9 +36,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
      **************************************************************************/
 
     public MetamacCriteria2SculptorCriteriaMapperImpl() throws MetamacException {
-        familyCriteriaMapper = new MetamacCriteria2SculptorCriteria<Family>(Family.class, null, FamilyCriteriaPropertyEnum.class, new FamilyCriteriaCallback());
-        operationCriteriaMapper = new MetamacCriteria2SculptorCriteria<Operation>(Operation.class, null, OperationCriteriaPropertyEnum.class, new OperationCriteriaCallback());
-        instanceCriteriaMapper = new MetamacCriteria2SculptorCriteria<Instance>(Instance.class, null, InstanceCriteriaPropertyEnum.class, new InstanceCriteriaCallback());
+        familyCriteriaMapper = new MetamacCriteria2SculptorCriteria<Family>(Family.class, FamilyCriteriaOrderEnum.class, FamilyCriteriaPropertyEnum.class, new FamilyCriteriaCallback());
+        operationCriteriaMapper = new MetamacCriteria2SculptorCriteria<Operation>(Operation.class, OperationCriteriaOrderEnum.class, OperationCriteriaPropertyEnum.class,
+                new OperationCriteriaCallback());
+        instanceCriteriaMapper = new MetamacCriteria2SculptorCriteria<Instance>(Instance.class, InstanceCriteriaOrderEnum.class, InstanceCriteriaPropertyEnum.class, new InstanceCriteriaCallback());
     }
 
     /**************************************************************************
@@ -58,6 +64,10 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
     /**************************************************************************
      * CALLBACK CLASSES
      **************************************************************************/
+
+    // --------------------------------------------------------------------------
+    // FAMILY
+    // --------------------------------------------------------------------------
 
     private class FamilyCriteriaCallback implements CriteriaCallback {
 
@@ -87,16 +97,30 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null; // put default order
+            FamilyCriteriaOrderEnum propertyNameCriteria = FamilyCriteriaOrderEnum.fromValue(order.getPropertyName());
+            switch (propertyNameCriteria) {
+                case CODE:
+                    return FamilyProperties.code();
+                case NAME:
+                    return FamilyProperties.title().texts().label();
+                case LAST_UPDATED:
+                    return new LeafProperty<Family>(FamilyProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class);
+                default:
+                    throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, order.getPropertyName());
+            }
         }
 
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
-            return FamilyProperties.id();
+            return new LeafProperty<Family>(FamilyProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class);
         }
 
     }
+
+    // --------------------------------------------------------------------------
+    // OPERATIONS
+    // --------------------------------------------------------------------------
 
     private class OperationCriteriaCallback implements CriteriaCallback {
 
@@ -126,17 +150,31 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null; // put default order
+            OperationCriteriaOrderEnum propertyNameCriteria = OperationCriteriaOrderEnum.fromValue(order.getPropertyName());
+            switch (propertyNameCriteria) {
+                case CODE:
+                    return OperationProperties.code();
+                case NAME:
+                    return OperationProperties.title().texts().label();
+                case LAST_UPDATED:
+                    return new LeafProperty<Operation>(OperationProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Operation.class);
+                default:
+                    throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, order.getPropertyName());
+            }
         }
 
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
-            return OperationProperties.id();
+            return new LeafProperty<Operation>(OperationProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Operation.class);
         }
 
     }
 
+    // --------------------------------------------------------------------------
+    // INSTANCE
+    // --------------------------------------------------------------------------
+    
     private class InstanceCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -165,13 +203,23 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacCriteriaOrder order) throws MetamacException {
-            return null; // put default order
+            InstanceCriteriaOrderEnum propertyNameCriteria = InstanceCriteriaOrderEnum.fromValue(order.getPropertyName());
+            switch (propertyNameCriteria) {
+                case CODE:
+                    return InstanceProperties.code();
+                case NAME:
+                    return InstanceProperties.title().texts().label();
+                case LAST_UPDATED:
+                    return new LeafProperty<Instance>(InstanceProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Instance.class);
+                default:
+                    throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, order.getPropertyName());
+            }
         }
 
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrderDefault() throws MetamacException {
-            return InstanceProperties.id();
+            return new LeafProperty<Instance>(InstanceProperties.lastUpdated().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Instance.class);
         }
 
     }
