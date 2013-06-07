@@ -482,6 +482,7 @@ public class RestQueryUtils {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private static String buildUrnsQuery(Enum urnPropertyEnum, List<String> urns) {
         StringBuilder queryBuilder = new StringBuilder();
         if (urns != null && !urns.isEmpty()) {
@@ -498,6 +499,7 @@ public class RestQueryUtils {
         return queryBuilder.toString();
     }
 
+    @SuppressWarnings("rawtypes")
     private static String buildSrmProcStatusQuery(Enum procStatusPropertyEnum, ProcStatus procStatus) {
         StringBuilder queryBuilder = new StringBuilder();
         if (procStatus != null) {
@@ -508,6 +510,7 @@ public class RestQueryUtils {
         return queryBuilder.toString();
     }
 
+    @SuppressWarnings("rawtypes")
     private static String buildBooleanQuery(Enum propertyEnum, Boolean booleanValue) {
         // Find categories that are externally published
         StringBuilder queryBuilder = new StringBuilder();
