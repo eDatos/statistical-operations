@@ -29,7 +29,6 @@ import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
@@ -61,7 +60,6 @@ import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMe
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
@@ -265,11 +263,11 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveOperationResult result) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationSaved()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationSaved());
                 operationDto = result.getOperationSaved();
                 getView().onOperationSaved(operationDto);
 
@@ -288,7 +286,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
@@ -316,11 +314,11 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitFailure(Throwable caught) {
                 getView().closeInstanceWindow();
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveInstanceResult result) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().instanceSaved()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().instanceSaved());
                 getView().closeInstanceWindow();
                 retrieveOperation(operationDto.getCode());
             }
@@ -341,14 +339,13 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitFailure(Throwable caught) {
                 retrieveInstances();
-                String message = instanceIds.size() > 1 ? getMessages().instanceErrorDelete() : getMessages().instancesErrorDelete();
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, message), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteInstanceListResult result) {
                 retrieveOperation(operationDto.getCode());
                 String message = instanceIds.size() > 1 ? getMessages().instancesDeleted() : getMessages().instanceDeleted();
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(message), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, message);
             }
         });
     }
@@ -359,12 +356,12 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorAddToOperation()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(UpdateOperationFamiliesResult result) {
                 retrieveOperation(operationDto.getCode());
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().familiesAddedToOperation()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().familiesAddedToOperation());
             }
         });
     }
@@ -375,7 +372,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
                 OperationsWeb.showErrorPage();
             }
             @Override
@@ -394,7 +391,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instancesErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetInstanceListResult result) {
@@ -408,12 +405,12 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorInternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishInternallyOperationResult result) {
                 retrieveOperation(operationDto.getCode());
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationInternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationInternallyPublished());
             }
         });
     }
@@ -423,12 +420,12 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorExternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishExternallyOperationResult result) {
                 retrieveOperation(operationDto.getCode());
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getMessageList(getMessages().operationExternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationExternallyPublished());
             }
         });
     }
@@ -451,7 +448,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorUpdatingOrder()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(UpdateInstancesOrderResult result) {
@@ -466,7 +463,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
 
             @Override
@@ -486,7 +483,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorRetrievingConfigurations()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetCommonMetadataConfigurationsResult result) {
@@ -510,7 +507,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
@@ -534,7 +531,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {

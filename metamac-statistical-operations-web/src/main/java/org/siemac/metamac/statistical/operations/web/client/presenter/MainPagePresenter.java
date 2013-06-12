@@ -1,21 +1,16 @@
 package org.siemac.metamac.statistical.operations.web.client.presenter;
 
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
-
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlResult;
-import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
@@ -74,7 +69,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
         void clearBreadcrumbs(int size, PlaceManager placeManager);
         void setBreadcrumbs(int index, String title);
 
-        void showMessage(List<String> messages, MessageTypeEnum type);
+        void showMessage(Throwable throwable, String message, MessageTypeEnum type);
         void hideMessages();
     }
 
@@ -157,7 +152,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     @ProxyEvent
     @Override
     public void onShowMessage(ShowMessageEvent event) {
-        getView().showMessage(event.getMessages(), event.getMessageType());
+        getView().showMessage(event.getThrowable(), event.getMessage(), event.getMessageType());
     }
 
     @ProxyEvent
@@ -175,7 +170,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().listsErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(MainPagePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetOperationsListsResult result) {
@@ -206,7 +201,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(MainPagePresenter.this, ErrorUtils.getErrorMessages(caught, MetamacWebCommon.getMessages().errorDownloadingUserGuide()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(MainPagePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetUserGuideUrlResult result) {

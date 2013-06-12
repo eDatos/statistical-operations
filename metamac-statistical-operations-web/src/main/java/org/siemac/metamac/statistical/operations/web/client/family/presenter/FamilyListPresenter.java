@@ -13,7 +13,6 @@ import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
@@ -22,7 +21,6 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedLi
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
@@ -167,7 +165,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onWaitFailure(Throwable caught) {
                 getView().closeFamilyWindow();
-                ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveFamilyResult result) {
@@ -184,12 +182,12 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onWaitFailure(Throwable caught) {
                 retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
-                ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorDelete()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
                 retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
-                ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getMessageList(getMessages().familyDeleted()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(FamilyListPresenter.this, getMessages().familyDeleted());
             }
         });
     }
@@ -200,7 +198,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
             @Override
             public void onFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familiesErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
 
             @Override
@@ -212,5 +210,4 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             }
         });
     }
-
 }

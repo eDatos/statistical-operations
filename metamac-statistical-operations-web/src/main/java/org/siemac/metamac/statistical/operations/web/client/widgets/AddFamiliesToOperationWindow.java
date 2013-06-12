@@ -10,8 +10,6 @@ import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.OperationViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.CustomWindow;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
@@ -88,7 +86,7 @@ public class AddFamiliesToOperationWindow extends CustomWindow {
                     if (!familiesToAdd.isEmpty() || !familiesToRemove.isEmpty()) {
                         uiHandlers.updateOperationFamilies(familiesToAdd, familiesToRemove);
                     } else {
-                        ShowMessageEvent.fire(AddFamiliesToOperationWindow.this, ErrorUtils.getMessageList(getMessages().familiesAddedToOperation()), MessageTypeEnum.SUCCESS);
+                        ShowMessageEvent.fireSuccessMessage(AddFamiliesToOperationWindow.this, getMessages().familiesAddedToOperation());
                     }
                     destroy();
                 }

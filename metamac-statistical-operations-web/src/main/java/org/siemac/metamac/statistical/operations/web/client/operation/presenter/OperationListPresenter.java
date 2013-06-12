@@ -14,7 +14,6 @@ import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
@@ -26,7 +25,6 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
@@ -175,7 +173,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onWaitFailure(Throwable caught) {
                 getView().closeOperationWindow();
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveOperationResult result) {
@@ -191,7 +189,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetOperationPaginatedListResult result) {
@@ -210,12 +208,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onWaitFailure(Throwable caught) {
                 retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorDelete()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
                 retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getMessageList(getMessages().operationDeleted()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(OperationListPresenter.this, getMessages().operationDeleted());
             }
         });
     }
@@ -236,7 +234,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
@@ -257,7 +255,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(OperationListPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {

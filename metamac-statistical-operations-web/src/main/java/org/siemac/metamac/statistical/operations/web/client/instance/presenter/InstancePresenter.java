@@ -24,7 +24,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperati
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent.UpdateOperationsListsHandler;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
@@ -42,7 +41,6 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSche
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
@@ -185,11 +183,11 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveInstanceResult result) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceSaved()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(InstancePresenter.this, getMessages().instanceSaved());
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
 
@@ -208,8 +206,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                String message = ids.size() > 1 ? getMessages().instanceErrorDelete() : getMessages().instancesErrorDelete();
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, message), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteInstanceListResult result) {
@@ -225,7 +222,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             @Override
             public void onWaitFailure(Throwable caught) {
                 OperationsWeb.showErrorPage();
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetInstanceResult result) {
@@ -242,13 +239,13 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorInternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishInternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceInternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(InstancePresenter.this, getMessages().instanceInternallyPublished());
             }
         });
     }
@@ -258,13 +255,13 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().instanceErrorExternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishExternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
                 getView().onInstanceSaved(instanceDto);
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getMessageList(getMessages().instanceExternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(InstancePresenter.this, getMessages().instanceExternallyPublished());
             }
         });
     }
@@ -294,7 +291,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
@@ -317,7 +314,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(InstancePresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().errorRetrievingExternalStructuralResources()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {

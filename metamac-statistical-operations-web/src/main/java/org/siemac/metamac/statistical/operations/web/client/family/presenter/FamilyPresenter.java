@@ -18,7 +18,6 @@ import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
-import org.siemac.metamac.statistical.operations.web.client.utils.ErrorUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
@@ -33,7 +32,6 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsResult;
-import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
@@ -141,7 +139,6 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onClick(ClickEvent event) {
-                // TODO Validate
                 publishFamilyInternally();
             }
         }));
@@ -150,7 +147,6 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onClick(ClickEvent event) {
-                // TODO Validate
                 publishFamilyExternally();
             }
         }));
@@ -180,7 +176,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
                 OperationsWeb.showErrorPage();
             }
             @Override
@@ -199,11 +195,11 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorSave()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(SaveFamilyResult result) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familySaved()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(FamilyPresenter.this, getMessages().familySaved());
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
 
@@ -232,12 +228,12 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationErrorAddToFamily()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(UpdateFamilyOperationsResult result) {
                 operationBaseDtos = result.getOperationDtos();
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().operationsAddedToFamily()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(FamilyPresenter.this, getMessages().operationsAddedToFamily());
                 retrieveFamily(familyDto.getCode());
             }
         });
@@ -248,13 +244,13 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorInternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishInternallyFamilyResult result) {
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familyInternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(FamilyPresenter.this, getMessages().familyInternallyPublished());
             }
         });
     }
@@ -264,13 +260,13 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().familyErrorExternallyPublishing()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(PublishExternallyFamilyResult result) {
                 familyDto = result.getFamilySaved();
                 getView().onFamilySaved(familyDto);
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getMessageList(getMessages().familyExternallyPublished()), MessageTypeEnum.SUCCESS);
+                ShowMessageEvent.fireSuccessMessage(FamilyPresenter.this, getMessages().familyExternallyPublished());
             }
         });
     }
@@ -281,7 +277,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fire(FamilyPresenter.this, ErrorUtils.getErrorMessages(caught, getMessages().operationsErrorRetrievingData()), MessageTypeEnum.ERROR);
+                ShowMessageEvent.fireErrorMessage(FamilyPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(GetOperationPaginatedListResult result) {
@@ -289,5 +285,4 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
             }
         });
     }
-
 }
