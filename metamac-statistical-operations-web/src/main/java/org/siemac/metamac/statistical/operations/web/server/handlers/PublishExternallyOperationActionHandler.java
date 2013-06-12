@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
+import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
@@ -32,8 +33,11 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
         try {
+
+            ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
+
             OperationDto operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-            checkExternalItemsAreExternallyPublished(operationToPublish);
+            checkExternalItemsAreExternallyPublished(serviceContext, operationToPublish);
 
             OperationDto operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             return new PublishExternallyOperationResult(operationPublished);
@@ -48,18 +52,21 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
      * @param operationDto
      * @throws MetamacWebException
      */
-    private void checkExternalItemsAreExternallyPublished(OperationDto operationDto) throws MetamacWebException {
+    private void checkExternalItemsAreExternallyPublished(ServiceContext serviceContext, OperationDto operationDto) throws MetamacWebException {
 
         MetamacWebException metamacWebException = new MetamacWebException();
 
         // CommonMetadata should be always be externally published, so there is no need to check it
-        externalItemValidator.checkExternalItemIsExternallyPublished(ServiceExceptionParameters.OPERATION_SUBJECT_AREA, operationDto.getSubjectArea(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS, operationDto.getSecondarySubjectAreas(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PRODUCER, operationDto.getProducer(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE, operationDto.getRegionalResponsible(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_REGIONAL_CONTRIBUTOR, operationDto.getRegionalContributor(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_PUBLISHER, operationDto.getPublisher(), metamacWebException);
-        externalItemValidator.checkExternalItemsAreExternallyPublished(ServiceExceptionParameters.OPERATION_UPDATE_FREQUENCY, operationDto.getUpdateFrequency(), metamacWebException);
+        externalItemValidator.checkExternalItemIsExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_SUBJECT_AREA, operationDto.getSubjectArea(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_SECONDARY_SUBJECT_AREAS, operationDto.getSecondarySubjectAreas(),
+                metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_PRODUCER, operationDto.getProducer(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_REGIONAL_RESPONSIBLE, operationDto.getRegionalResponsible(),
+                metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_REGIONAL_CONTRIBUTOR, operationDto.getRegionalContributor(),
+                metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_PUBLISHER, operationDto.getPublisher(), metamacWebException);
+        externalItemValidator.checkExternalItemsAreExternallyPublished(serviceContext, ServiceExceptionParameters.OPERATION_UPDATE_FREQUENCY, operationDto.getUpdateFrequency(), metamacWebException);
 
         if (metamacWebException.getWebExceptionItems() != null && !metamacWebException.getWebExceptionItems().isEmpty()) {
             throw metamacWebException;

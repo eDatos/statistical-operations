@@ -1,6 +1,5 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
-import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
@@ -70,7 +69,7 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findConcepts((ConceptRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             default:
-                throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
+                throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "An unknown exception has ocurred. Please contact system administrator.");
         }
         return new GetExternalResourcesResult(result);
     }
