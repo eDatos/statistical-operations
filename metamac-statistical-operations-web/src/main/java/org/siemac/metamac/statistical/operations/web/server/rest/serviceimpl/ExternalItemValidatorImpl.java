@@ -8,10 +8,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.core.common.lang.shared.LocaleConstants;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
+import org.siemac.metamac.statistical.operations.web.server.utils.WebTranslateExceptions;
 import org.siemac.metamac.statistical.operations.web.shared.constants.WebMessageExceptionsConstants;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
@@ -19,7 +22,6 @@ import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
-import org.siemac.metamac.web.common.shared.exception.MetamacWebExceptionItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +29,21 @@ import org.springframework.stereotype.Service;
 public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     @Autowired
-    private SrmRestInternalFacade srmRestInternalFacade;
+    private SrmRestInternalFacade  srmRestInternalFacade;
+
+    @Autowired
+    private WebTranslateExceptions webTranslateExceptions;
 
     /**
      * Check that an {@link ExternalItemDto} is externally published
      */
     @Override
-    public void checkExternalItemIsExternallyPublished(String externalItemName, ExternalItemDto externalItemDto, MetamacWebException metamacWebException) throws MetamacWebException {
+    public void checkExternalItemIsExternallyPublished(ServiceContext serviceContext, String externalItemName, ExternalItemDto externalItemDto, MetamacWebException metamacWebException)
+            throws MetamacWebException {
         if (externalItemDto != null) {
             Set<ExternalItemDto> externalItemDtos = new HashSet<ExternalItemDto>();
             externalItemDtos.add(externalItemDto);
-            checkExternalItemsAreExternallyPublished(externalItemName, externalItemDtos, metamacWebException);
+            checkExternalItemsAreExternallyPublished(serviceContext, externalItemName, externalItemDtos, metamacWebException);
         }
     };
 
@@ -45,7 +51,8 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
      * Check that the {@link ExternalItemDto}s are externally published
      */
     @Override
-    public void checkExternalItemsAreExternallyPublished(String externalItemName, Set<ExternalItemDto> externalItemDtos, MetamacWebException metamacWebException) throws MetamacWebException {
+    public void checkExternalItemsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, Set<ExternalItemDto> externalItemDtos, MetamacWebException metamacWebException)
+            throws MetamacWebException {
 
         try {
 
@@ -63,16 +70,16 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
                     items.add(externalItemDto);
                 }
 
-                checkCategoriesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CATEGORY));
-                checkConceptsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT));
-                checkCodesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODE));
-                checkCodeListsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODELIST));
-                checkConceptSchemesAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT_SCHEME));
-                checkDataProvidersAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.DATA_PROVIDER));
-                checkOrganizationUnitsAreExternallyPublished(externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.ORGANISATION_UNIT));
+                checkCategoriesAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CATEGORY));
+                checkConceptsAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT));
+                checkCodesAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODE));
+                checkCodeListsAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CODELIST));
+                checkConceptSchemesAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.CONCEPT_SCHEME));
+                checkDataProvidersAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.DATA_PROVIDER));
+                checkOrganizationUnitsAreExternallyPublished(serviceContext, externalItemName, externalItemsByType.remove(TypeExternalArtefactsEnum.ORGANISATION_UNIT));
 
                 if (!externalItemsByType.keySet().isEmpty()) {
-                    throwExternalItemNotFoundException(externalItemName);
+                    throwExternalItemNotFoundException(serviceContext, externalItemName);
                 }
             }
 
@@ -85,11 +92,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // CATEGORIES
     //
 
-    private void checkCategoriesAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkCategoriesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findCategories(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -97,11 +104,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // CONCEPTS
     //
 
-    private void checkConceptsAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkConceptsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            ConceptRestCriteria criteria = buildConceptCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            ConceptRestCriteria criteria = buildConceptCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findConcepts(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -109,11 +116,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // CODES
     //
 
-    private void checkCodesAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkCodesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findCodes(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -121,11 +128,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // CODELISTS
     //
 
-    private void checkCodeListsAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkCodeListsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            SrmItemSchemeRestCriteria criteria = buildItemSchemeCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            SrmItemSchemeRestCriteria criteria = buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findCodelists(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -133,11 +140,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // CONCEPT SCHEMES
     //
 
-    private void checkConceptSchemesAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkConceptSchemesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            ConceptSchemeRestCriteria criteria = buildConceptSchemeCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            ConceptSchemeRestCriteria criteria = buildConceptSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findConceptSchemes(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -145,11 +152,11 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // DATA PROVIDERS
     //
 
-    private void checkDataProvidersAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkDataProvidersAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findDataProviders(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
@@ -157,57 +164,62 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     // ORGANIZATION UNITS
     //
 
-    private void checkOrganizationUnitsAreExternallyPublished(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private void checkOrganizationUnitsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(externalItemName, externalItemDtos);
+            SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findOrganisationUnits(criteria, 0, externalItemDtos.size());
-            validateExternalItemsResult(externalItemName, result, externalItemDtos);
+            validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
 
-    private ConceptRestCriteria buildConceptCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
-        return (ConceptRestCriteria) buildItemCriteriaToCheckExternalPublication(new ConceptRestCriteria(), externalItemName, externalItemDtos);
+    private ConceptRestCriteria buildConceptCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
+            throws MetamacWebException {
+        return (ConceptRestCriteria) buildItemCriteriaToCheckExternalPublication(serviceContext, new ConceptRestCriteria(), externalItemName, externalItemDtos);
     }
 
-    private ConceptSchemeRestCriteria buildConceptSchemeCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
-        return (ConceptSchemeRestCriteria) buildItemSchemeCriteriaToCheckExternalPublication(new ConceptSchemeRestCriteria(), externalItemName, externalItemDtos);
+    private ConceptSchemeRestCriteria buildConceptSchemeCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
+            throws MetamacWebException {
+        return (ConceptSchemeRestCriteria) buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, new ConceptSchemeRestCriteria(), externalItemName, externalItemDtos);
     }
 
     //
     // UTILITY METHODS
     //
 
-    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
-        return buildItemSchemeCriteriaToCheckExternalPublication(new SrmItemSchemeRestCriteria(), externalItemName, externalItemDtos);
+    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
+            throws MetamacWebException {
+        return buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, new SrmItemSchemeRestCriteria(), externalItemName, externalItemDtos);
     }
 
-    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(SrmItemSchemeRestCriteria criteria, String externalItemName, List<ExternalItemDto> externalItemDtos)
-            throws MetamacWebException {
+    private SrmItemSchemeRestCriteria buildItemSchemeCriteriaToCheckExternalPublication(ServiceContext serviceContext, SrmItemSchemeRestCriteria criteria, String externalItemName,
+            List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         criteria.setIsExternallyPublished(Boolean.TRUE);
         criteria.setUrns(new ArrayList<String>());
         for (ExternalItemDto externalItemDto : externalItemDtos) {
-            criteria.getUrns().add(getExternalItemUrn(externalItemName, externalItemDto));
+            criteria.getUrns().add(getExternalItemUrn(serviceContext, externalItemName, externalItemDto));
         }
         return criteria;
     }
 
-    private SrmItemRestCriteria buildItemCriteriaToCheckExternalPublication(String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
-        return buildItemCriteriaToCheckExternalPublication(new SrmItemRestCriteria(), externalItemName, externalItemDtos);
+    private SrmItemRestCriteria buildItemCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+        return buildItemCriteriaToCheckExternalPublication(serviceContext, new SrmItemRestCriteria(), externalItemName, externalItemDtos);
     }
 
-    private SrmItemRestCriteria buildItemCriteriaToCheckExternalPublication(SrmItemRestCriteria criteria, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
+    private SrmItemRestCriteria buildItemCriteriaToCheckExternalPublication(ServiceContext serviceContext, SrmItemRestCriteria criteria, String externalItemName, List<ExternalItemDto> externalItemDtos)
+            throws MetamacWebException {
         criteria.setIsItemSchemeExternallyPublished(Boolean.TRUE);
         criteria.setUrns(new ArrayList<String>());
         for (ExternalItemDto externalItemDto : externalItemDtos) {
-            criteria.getUrns().add(getExternalItemUrn(externalItemName, externalItemDto));
+            criteria.getUrns().add(getExternalItemUrn(serviceContext, externalItemName, externalItemDto));
         }
         return criteria;
     }
 
-    private void validateExternalItemsResult(String externalItemName, ExternalItemsResult result, List<ExternalItemDto> expectedExternalItems) throws MetamacWebException {
+    private void validateExternalItemsResult(ServiceContext serviceContext, String externalItemName, ExternalItemsResult result, List<ExternalItemDto> expectedExternalItems)
+            throws MetamacWebException {
         for (ExternalItemDto expected : expectedExternalItems) {
             if (!containsExternalItem(expected, result.getExternalItemDtos())) {
-                throwExternalItemNotExternallyPublishedException(externalItemName);
+                throwExternalItemNotExternallyPublishedException(serviceContext, externalItemName);
             }
         }
     }
@@ -224,12 +236,12 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         return false;
     }
 
-    private String getExternalItemUrn(String externalItemName, ExternalItemDto externalItemDto) throws MetamacWebException {
+    private String getExternalItemUrn(ServiceContext serviceContext, String externalItemName, ExternalItemDto externalItemDto) throws MetamacWebException {
         String urn = externalItemDto.getUrn();
         String urnInternal = externalItemDto.getUrnInternal();
         if (StringUtils.isBlank(urn) && StringUtils.isBlank(urnInternal)) {
             // The URN or the internal URN must be filled
-            throwExternalItemNotFoundException(externalItemName);
+            throwExternalItemNotFoundException(serviceContext, externalItemName);
         }
         if (StringUtils.isNotBlank(urn)) {
             return urn;
@@ -238,21 +250,18 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         }
     }
 
-    private void throwExternalItemNotFoundException(String externalItemName) throws MetamacWebException {
-        MetamacWebExceptionItem exceptionItem = new MetamacWebExceptionItem(WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_FOUND, "The external item has not been found",
-                externalItemName);
-        MetamacWebException metamacWebException = new MetamacWebException();
-        metamacWebException.getWebExceptionItems().add(exceptionItem);
-
-        throw metamacWebException;
+    private void throwExternalItemNotFoundException(ServiceContext serviceContext, String externalItemName) throws MetamacWebException {
+        throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_FOUND, externalItemName);
     }
 
-    private void throwExternalItemNotExternallyPublishedException(String externalItemName) throws MetamacWebException {
-        MetamacWebExceptionItem exceptionItem = new MetamacWebExceptionItem(WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_EXTERNALLY_PUBLISHED,
-                "The external item has not been externally published", externalItemName);
-        MetamacWebException metamacWebException = new MetamacWebException();
-        metamacWebException.getWebExceptionItems().add(exceptionItem);
+    private void throwExternalItemNotExternallyPublishedException(ServiceContext serviceContext, String externalItemName) throws MetamacWebException {
+        throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_EXTERNALLY_PUBLISHED, externalItemName);
+    }
 
-        throw metamacWebException;
+    private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode, String... parameters) throws MetamacWebException {
+        String locale = (String) serviceContext.getProperty(LocaleConstants.locale);
+        String exceptionnMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale, parameters);
+
+        throw new MetamacWebException(exceptionCode, exceptionnMessage);
     }
 }

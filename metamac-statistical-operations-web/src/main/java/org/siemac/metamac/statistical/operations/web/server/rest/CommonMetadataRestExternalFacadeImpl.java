@@ -4,7 +4,6 @@ import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configurations;
-import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
@@ -26,7 +25,7 @@ public class CommonMetadataRestExternalFacadeImpl implements CommonMetadataRestE
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -40,8 +39,7 @@ public class CommonMetadataRestExternalFacadeImpl implements CommonMetadataRestE
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, OperationsWeb.getCoreMessages().exception_common_unknown());
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
-
 }

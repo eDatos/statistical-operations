@@ -58,7 +58,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding category schemes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -82,7 +82,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding categoriess");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding codelists");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -130,7 +130,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding codes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding concept schemes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -178,7 +178,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding concepts");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -202,7 +202,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation unit schemes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -227,7 +227,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation units");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -251,7 +251,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding data provider schemes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -276,7 +276,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding data providers");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -300,7 +300,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisation schemes");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 
@@ -325,7 +325,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
                     org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
             throw WebExceptionUtils.createMetamacWebException(exception);
         } catch (Exception e) {
-            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "Error finding organisations");
+            throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
 }
