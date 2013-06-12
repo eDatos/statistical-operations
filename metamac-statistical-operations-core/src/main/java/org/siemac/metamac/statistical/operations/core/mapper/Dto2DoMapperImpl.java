@@ -677,6 +677,8 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         target.getTexts().clear();
         target.getTexts().addAll(localisedStringEntities);
 
+        checkExistsLocaleInDefaultLanguage(target.getTexts(), metadataName);
+
         return target;
     }
 
@@ -699,6 +701,20 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
             }
         }
         return targets;
+    }
+
+    private void checkExistsLocaleInDefaultLanguage(Set<LocalisedString> targets, String metadataName) throws MetamacException {
+        boolean existsDefaultLanguage = false;
+        for (LocalisedString localisedString : targets) {
+            if (localisedString.getLocale().equals(configurationService.retrieveLanguageDefault())) {
+                existsDefaultLanguage = true;
+                break;
+            }
+        }
+
+        if (!existsDefaultLanguage) {
+            throw new MetamacException(ServiceExceptionType.METADATA_WITHOUT_DEFAULT_LANGUAGE, metadataName);
+        }
     }
 
     private LocalisedString localisedStringDtoToDo(LocalisedStringDto source, InternationalString internationalStringTarget) {

@@ -630,20 +630,25 @@ public class Do2DtoMapperImpl extends BaseDo2DtoMapperImpl implements Do2DtoMapp
      * @param name
      * @return
      */
-    private InternationalStringDto internationalStringToDto(InternationalString internationalString) {
-        if (internationalString == null) {
+    private InternationalStringDto internationalStringToDto(InternationalString source) {
+        if (source == null) {
             return null;
         }
-
-        // InternationalString to InternationalString Dto
-        InternationalStringDto internationalStringDto = getMapper().map(internationalString, InternationalStringDto.class);
-
-        // LocalisedStringDto to LocalisedString
-        for (LocalisedString item : internationalString.getTexts()) {
-            internationalStringDto.addText(getMapper().map(item, LocalisedStringDto.class));
+        InternationalStringDto target = new InternationalStringDto();
+        target.getTexts().addAll(localisedStringDoToDto(source.getTexts()));
+        return target;
+    }
+    
+    private Set<LocalisedStringDto> localisedStringDoToDto(Set<LocalisedString> sources) {
+        Set<LocalisedStringDto> targets = new HashSet<LocalisedStringDto>();
+        for (LocalisedString source : sources) {
+            LocalisedStringDto target = new LocalisedStringDto();
+            target.setLabel(source.getLabel());
+            target.setLocale(source.getLocale());
+            target.setIsUnmodifiable(source.getIsUnmodifiable());
+            targets.add(target);
         }
-
-        return internationalStringDto;
+        return targets;
     }
 
     private Set<ExternalItemDto> externalItemListToDto(Set<ExternalItem> entities) throws MetamacException {

@@ -7,6 +7,8 @@ import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDtoFieldsT
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDo2DtoMapperTest;
 import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2DoMapperTest;
+import org.siemac.metamac.statistical.operations.core.mapper.InternationalStringsDo2DtoMapperTest;
+import org.siemac.metamac.statistical.operations.core.mapper.InternationalStringsDto2DoMapperTest;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -21,6 +23,8 @@ import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2Do
                         OperationBaseDtoFieldsTest.class,
                         InstanceBaseDtoFieldsTest.class,
                         ExternalItemsDto2DoMapperTest.class,
-                        ExternalItemsDo2DtoMapperTest.class})
+                        ExternalItemsDo2DtoMapperTest.class, 
+                        InternationalStringsDo2DtoMapperTest.class,
+                        InternationalStringsDto2DoMapperTest.class})
 public class StatisticalOperationsSuite {
 }
