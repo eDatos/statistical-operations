@@ -27,7 +27,6 @@ public class UpdateOperationsListsEvent extends GwtEvent<UpdateOperationsListsEv
         return TYPE;
     }
 
-    // TODO HasEventBus should be used instead of HasHandlers ¿?
     public static void fire(HasHandlers source, List<SurveyTypeDto> surveyTypeDtos, List<InstanceTypeDto> instanceTypeDtos, List<SurveySourceDto> surveySourceDtos,
             List<OfficialityTypeDto> officialityTypeDtos, List<CollMethodDto> collMethodDtos, List<CostDto> costDtos) {
         if (TYPE != null) {

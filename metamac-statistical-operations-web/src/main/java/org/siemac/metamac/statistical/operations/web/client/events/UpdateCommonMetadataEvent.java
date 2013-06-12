@@ -22,7 +22,6 @@ public class UpdateCommonMetadataEvent extends GwtEvent<UpdateCommonMetadataEven
         return TYPE;
     }
 
-    // TODO HasEventBus should be used instead of HasHandlers ¿?
     public static void fire(HasHandlers source, List<ExternalItemDto> categorySchemes) {
         if (TYPE != null) {
             source.fireEvent(new UpdateCommonMetadataEvent(categorySchemes));

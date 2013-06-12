@@ -143,7 +143,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onClick(ClickEvent event) {
-                // TODO Validate
                 publishInstanceInternally();
             }
         }));
@@ -152,7 +151,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
             @Override
             public void onClick(ClickEvent event) {
-                // TODO Validate
                 publishInstanceExternally();
             }
         }));
