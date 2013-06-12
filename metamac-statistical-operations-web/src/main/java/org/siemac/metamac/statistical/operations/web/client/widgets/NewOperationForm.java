@@ -1,7 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
@@ -37,17 +36,17 @@ public class NewOperationForm extends CustomDynamicForm {
 
         setValidateOnChange(true);
 
-        identifier = new RequiredTextItem("op-id", getCoreMessages().operation_code());
+        identifier = new RequiredTextItem("op-id", getConstants().operationCode());
         identifier.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
-        title = new RequiredTextItem("op-title", getCoreMessages().operation_title());
+        title = new RequiredTextItem("op-title", getConstants().operationTitle());
         title.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
         releaseCalendar.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
-        subjectAreasItem = new SearchCategoryItem("op-subject", getCoreMessages().operation_subject_area());
+        subjectAreasItem = new SearchCategoryItem("op-subject", getConstants().operationSubjectArea());
         subjectAreasItem.setRequired(true);
         subjectAreasItem.setSaveClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
@@ -60,7 +59,7 @@ public class NewOperationForm extends CustomDynamicForm {
             }
         });
 
-        indSystem = new CustomCheckboxItem("op-ind-sys", getCoreMessages().operation_indicator_system());
+        indSystem = new CustomCheckboxItem("op-ind-sys", getConstants().operationIndicatorSystem());
         indSystem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
         indSystem.setTitleStyle("requiredFormLabel");
 

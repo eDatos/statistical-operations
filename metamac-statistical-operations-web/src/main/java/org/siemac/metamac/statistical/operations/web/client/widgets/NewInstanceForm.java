@@ -25,11 +25,11 @@ public class NewInstanceForm extends CustomDynamicForm {
 
         setValidateOnChange(true);
 
-        identifier = new RequiredTextItem("in-id", OperationsWeb.getCoreMessages().instance_code());
+        identifier = new RequiredTextItem("in-id", OperationsWeb.getConstants().instanceCode());
         identifier.setWidth(200);
         identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
-        title = new RequiredTextItem("in-title", OperationsWeb.getCoreMessages().instance_title());
+        title = new RequiredTextItem("in-title", OperationsWeb.getConstants().instanceTitle());
         title.setWidth(200);
 
         saveButton = new CustomButtonItem("op-save", OperationsWeb.getConstants().actionCreateInstance());

@@ -1,7 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.family.view;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import java.util.List;
 
@@ -241,30 +240,30 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // IDENTIFIERS FORM
 
         identifiersForm = new GroupDynamicForm(getConstants().formIdentifiers());
-        ViewTextItem code = new ViewTextItem(FamilyDS.CODE, getCoreMessages().family_code());
-        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FamilyDS.TITLE, getCoreMessages().family_title());
-        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FamilyDS.ACRONYM, getCoreMessages().family_acronym());
-        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, getCoreMessages().family_urn());
+        ViewTextItem code = new ViewTextItem(FamilyDS.CODE, getConstants().familyCode());
+        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(FamilyDS.TITLE, getConstants().familyTitle());
+        ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(FamilyDS.ACRONYM, getConstants().familyAcronym());
+        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, getConstants().familyUrn());
         identifiersForm.setFields(code, title, acronym, urn);
 
         // CONTENT DESCRIPTORS FORM
 
         contentDescriptorsForm = new GroupDynamicForm(getConstants().formContentDescriptors());
-        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FamilyDS.DESCRIPTION, getCoreMessages().family_description());
+        ViewMultiLanguageTextItem description = new ViewMultiLanguageTextItem(FamilyDS.DESCRIPTION, getConstants().familyDescription());
         contentDescriptorsForm.setFields(description);
 
         // PRODUCTION DESCRIPTORS FORM
 
         productionDescriptorsForm = new GroupDynamicForm(getConstants().formProductionDescriptors());
         ViewTextItem createdDate = new ViewTextItem(FamilyDS.CREATED_DATE, getConstants().familyCreatedDate());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, getCoreMessages().family_internal_inventory_date());
-        ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, getCoreMessages().family_proc_status());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, getConstants().familyInternalInventoryDate());
+        ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, getConstants().familyProcStatus());
         productionDescriptorsForm.setFields(createdDate, internalInventoryDate, procStatus);
 
         // DIFFUSION DESCRIPTORS FORM
 
         diffusionDescriptorsForm = new GroupDynamicForm(getConstants().formDiffusionDescriptors());
-        ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, getCoreMessages().family_inventory_date());
+        ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, getConstants().familyInventoryDate());
         diffusionDescriptorsForm.setFields(inventoryDate);
 
         // Add to main layout
@@ -282,7 +281,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
         // Code
 
-        RequiredTextItem code = new RequiredTextItem(FamilyDS.CODE, getCoreMessages().family_code());
+        RequiredTextItem code = new RequiredTextItem(FamilyDS.CODE, getConstants().familyCode());
         code.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -292,7 +291,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         });
         code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
 
-        ViewTextItem staticCode = new ViewTextItem(FamilyDS.CODE_VIEW, getCoreMessages().family_code());
+        ViewTextItem staticCode = new ViewTextItem(FamilyDS.CODE_VIEW, getConstants().familyCode());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -301,32 +300,32 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
             }
         });
 
-        MultiLanguageTextItem titleItem = new MultiLanguageTextItem(FamilyDS.TITLE, getCoreMessages().family_title());
+        MultiLanguageTextItem titleItem = new MultiLanguageTextItem(FamilyDS.TITLE, getConstants().familyTitle());
         titleItem.setRequired(true);
-        MultiLanguageTextItem acronymItem = new MultiLanguageTextItem(FamilyDS.ACRONYM, getCoreMessages().family_acronym());
-        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, getCoreMessages().family_urn());
+        MultiLanguageTextItem acronymItem = new MultiLanguageTextItem(FamilyDS.ACRONYM, getConstants().familyAcronym());
+        ViewTextItem urn = new ViewTextItem(FamilyDS.URN, getConstants().familyUrn());
         identifiersEditionForm.setFields(staticCode, code, titleItem, acronymItem, urn);
 
         // CONTENT DESCRIPTORS FORM
 
         contentDescriptorsEditionForm = new GroupDynamicForm(getConstants().formContentDescriptors());
-        MultilanguageRichTextEditorItem descriptionItem = new MultilanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getCoreMessages().family_description());
+        MultilanguageRichTextEditorItem descriptionItem = new MultilanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         contentDescriptorsEditionForm.setFields(descriptionItem);
 
         // PRODUCTION DESCRIPTORS FORM
 
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().formProductionDescriptors());
         ViewTextItem createdDate = new ViewTextItem(FamilyDS.CREATED_DATE, OperationsWeb.getConstants().familyCreatedDate());
-        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getCoreMessages().family_internal_inventory_date());
-        ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getCoreMessages().family_proc_status());
-        ViewTextItem staticProcStatus = new ViewTextItem(FamilyDS.PROC_STATUS_VIEW, OperationsWeb.getCoreMessages().family_proc_status());
+        ViewTextItem internalInventoryDate = new ViewTextItem(FamilyDS.INTERNAL_INVENTORY_DATE, OperationsWeb.getConstants().familyInternalInventoryDate());
+        ViewTextItem procStatus = new ViewTextItem(FamilyDS.PROC_STATUS, OperationsWeb.getConstants().familyProcStatus());
+        ViewTextItem staticProcStatus = new ViewTextItem(FamilyDS.PROC_STATUS_VIEW, OperationsWeb.getConstants().familyProcStatus());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
         productionDescriptorsEditionForm.setFields(createdDate, internalInventoryDate, procStatus, staticProcStatus);
 
         // DIFFUSION DESCRIPTORS FORM
 
         diffusionDescriptorsEditionForm = new GroupDynamicForm(getConstants().formDiffusionDescriptors());
-        ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, OperationsWeb.getCoreMessages().family_inventory_date());
+        ViewTextItem inventoryDate = new ViewTextItem(FamilyDS.INVENTORY_DATE, getConstants().familyInventoryDate());
         diffusionDescriptorsEditionForm.setFields(inventoryDate);
 
         // Add to main layout

@@ -1,7 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.instance.view;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -353,10 +352,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     private void createViewForm() {
         // Identifiers
         identifiersViewForm = new GroupDynamicForm(getConstants().operationIdentifiers());
-        ViewTextItem identifier = new ViewTextItem(InstanceDS.CODE, getCoreMessages().instance_code());
-        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(InstanceDS.TITLE, getCoreMessages().instance_title());
-        ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(InstanceDS.ACRONYM, getCoreMessages().instance_acronym());
-        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getCoreMessages().instance_urn());
+        ViewTextItem identifier = new ViewTextItem(InstanceDS.CODE, getConstants().instanceCode());
+        ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(InstanceDS.TITLE, getConstants().instanceTitle());
+        ViewMultiLanguageTextItem alternativeTitle = new ViewMultiLanguageTextItem(InstanceDS.ACRONYM, getConstants().instanceAcronym());
+        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getConstants().instanceUrn());
         identifiersViewForm.setFields(identifier, title, alternativeTitle, urn);
 
         // Content classifiers
@@ -364,18 +363,18 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Content descriptors
         contentDescriptorsForm = new GroupDynamicForm(getConstants().instanceContentDescriptors());
         ViewMultiLanguageTextItem dataDescription = new ViewMultiLanguageTextItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
-        ViewMultiLanguageTextItem statisticalPopulation = new ViewMultiLanguageTextItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
-        ExternalItemListItem statisticalUnit = new ExternalItemListItem(InstanceDS.STATISTICAL_UNIT, getCoreMessages().instance_statistical_unit(), false);
-        ExternalItemListItem geographicGranularities = new ExternalItemListItem(InstanceDS.GEOGRAPHIC_GRANULARITIES, getCoreMessages().instance_geographic_granularity(), false);
-        ViewMultiLanguageTextItem geographicComparability = new ViewMultiLanguageTextItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
-        ExternalItemListItem temporalGranularities = new ExternalItemListItem(InstanceDS.TEMPORAL_GRANULARITIES, getCoreMessages().instance_temporal_granularity(), false);
-        ViewMultiLanguageTextItem temporalComparability = new ViewMultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
-        ViewTextItem basePeriodItem = new ViewTextItem(InstanceDS.BASE_PERIOD, getCoreMessages().instance_base_period());
-        ExternalItemListItem measures = new ExternalItemListItem(InstanceDS.MEASURES, getCoreMessages().instance_unit_measure(), false);
-        ViewMultiLanguageTextItem statConcDefDescription = new ViewMultiLanguageTextItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getCoreMessages().instance_stat_conc_def());
-        ExternalItemListItem statConcDefList = new ExternalItemListItem(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list(), false);
-        ExternalItemListItem classSystemList = new ExternalItemListItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list(), false);
-        ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
+        ViewMultiLanguageTextItem statisticalPopulation = new ViewMultiLanguageTextItem(InstanceDS.STATISTICAL_POPULATION, getConstants().instanceStatisticalPopulation());
+        ExternalItemListItem statisticalUnit = new ExternalItemListItem(InstanceDS.STATISTICAL_UNIT, getConstants().instanceStatisticalUnit(), false);
+        ExternalItemListItem geographicGranularities = new ExternalItemListItem(InstanceDS.GEOGRAPHIC_GRANULARITIES, getConstants().instanceGeographicGranularity(), false);
+        ViewMultiLanguageTextItem geographicComparability = new ViewMultiLanguageTextItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
+        ExternalItemListItem temporalGranularities = new ExternalItemListItem(InstanceDS.TEMPORAL_GRANULARITIES, getConstants().instanceTemporalGranularity(), false);
+        ViewMultiLanguageTextItem temporalComparability = new ViewMultiLanguageTextItem(InstanceDS.TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
+        ViewTextItem basePeriodItem = new ViewTextItem(InstanceDS.BASE_PERIOD, getConstants().instanceBasePeriod());
+        ExternalItemListItem measures = new ExternalItemListItem(InstanceDS.MEASURES, getConstants().instanceUnitMeasure(), false);
+        ViewMultiLanguageTextItem statConcDefDescription = new ViewMultiLanguageTextItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getConstants().instanceStatisticalConceptDefinition());
+        ExternalItemListItem statConcDefList = new ExternalItemListItem(InstanceDS.STAT_CONC_DEF, getConstants().instanceStatisticalConceptsDefinitions(), false);
+        ExternalItemListItem classSystemList = new ExternalItemListItem(InstanceDS.CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList(), false);
+        ViewMultiLanguageTextItem classSystemDescription = new ViewMultiLanguageTextItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getConstants().instanceClassSystem());
         contentDescriptorsForm.setFields(dataDescription, statisticalPopulation, statisticalUnit, basePeriodItem, geographicGranularities, temporalGranularities, geographicComparability,
                 temporalComparability, measures, statConcDefDescription, statConcDefList, classSystemList, classSystemDescription);
 
@@ -387,48 +386,48 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Production descriptors
         productionDescriptorsForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
         ViewTextItem createdDate = new ViewTextItem(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
-        ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
-        ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
-        ViewMultiLanguageTextItem staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
+        ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getConstants().instanceInternalInventoryDate());
+        ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getConstants().instanceProcStatus());
+        ViewMultiLanguageTextItem staticDocMethodItem = new ViewMultiLanguageTextItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         ViewTextItem surveySource = new ViewTextItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         ViewTextItem collMethod = new ViewTextItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
-        ExternalItemListItem informationSuppliers = new ExternalItemListItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers(), false);
-        ExternalItemListItem freqColl = new ExternalItemListItem(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll(), false);
-        ViewMultiLanguageTextItem staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
-        ViewMultiLanguageTextItem staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
-        ViewMultiLanguageTextItem staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
-        ViewMultiLanguageTextItem staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
+        ExternalItemListItem informationSuppliers = new ExternalItemListItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliers(), false);
+        ExternalItemListItem freqColl = new ExternalItemListItem(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl(), false);
+        ViewMultiLanguageTextItem staticDataValidationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
+        ViewMultiLanguageTextItem staticDataCompilationItem = new ViewMultiLanguageTextItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
+        ViewMultiLanguageTextItem staticAdjustmentItem = new ViewMultiLanguageTextItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
+        ViewMultiLanguageTextItem staticCostBurdenItem = new ViewMultiLanguageTextItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
         ViewTextItem cost = new ViewTextItem(InstanceDS.COST, getConstants().instanceCost());
         productionDescriptorsForm.setFields(createdDate, internalInventoryDate, procStatus, staticDocMethodItem, surveySource, collMethod, informationSuppliers, freqColl, staticDataValidationItem,
                 staticDataCompilationItem, staticAdjustmentItem, staticCostBurdenItem, cost);
 
         // Diffusion and Publication
         diffusionViewForm = new GroupDynamicForm(getConstants().instanceDiffusionDescriptors());
-        ViewTextItem inventoryDate = new ViewTextItem(InstanceDS.INVENTORY_DATE, getCoreMessages().instance_inventory_date());
+        ViewTextItem inventoryDate = new ViewTextItem(InstanceDS.INVENTORY_DATE, getConstants().instanceInventoryDate());
         diffusionViewForm.setFields(inventoryDate);
 
         // Quality descriptors
         qualityViewForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        ViewMultiLanguageTextItem staticQualityDocItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_DOC, getCoreMessages().instance_quality_doc());
-        ViewMultiLanguageTextItem staticQualityAssureItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSURE, getCoreMessages().instance_quality_assure());
-        ViewMultiLanguageTextItem staticQualityAssesmentItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSMNT, getCoreMessages().instance_quality_assmnt());
-        ViewMultiLanguageTextItem staticUserNeedsItem = new ViewMultiLanguageTextItem(InstanceDS.USER_NEEDS, getCoreMessages().instance_user_needs());
-        ViewMultiLanguageTextItem staticUserSatItem = new ViewMultiLanguageTextItem(InstanceDS.USER_SAT, getCoreMessages().instance_user_sat());
-        ViewMultiLanguageTextItem staticCompletenessItem = new ViewMultiLanguageTextItem(InstanceDS.COMPLETENESS, getCoreMessages().instance_completeness());
-        ViewMultiLanguageTextItem staticTimelinessItem = new ViewMultiLanguageTextItem(InstanceDS.TIMELINESS, getCoreMessages().instance_timeliness());
-        ViewMultiLanguageTextItem staticPunctualityItem = new ViewMultiLanguageTextItem(InstanceDS.PUNCTUALITY, getCoreMessages().instance_punctuality());
-        ViewMultiLanguageTextItem staticAccuracyOverallItem = new ViewMultiLanguageTextItem(InstanceDS.ACCURACY_OVERALL, getCoreMessages().instance_accuracy_overall());
-        ViewMultiLanguageTextItem staticSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.SAMPLING_ERROR, getCoreMessages().instance_sampling_err());
-        ViewMultiLanguageTextItem statocNonSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.NONSAMPLING_ERR, getCoreMessages().instance_nonsampling_err());
-        ViewMultiLanguageTextItem staticCoherXDomItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_X_DOM, getCoreMessages().instance_coher_x_domain());
-        ViewMultiLanguageTextItem staticCoherInternalItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_INTERNAL, getCoreMessages().instance_coher_internal());
+        ViewMultiLanguageTextItem staticQualityDocItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
+        ViewMultiLanguageTextItem staticQualityAssureItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
+        ViewMultiLanguageTextItem staticQualityAssesmentItem = new ViewMultiLanguageTextItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
+        ViewMultiLanguageTextItem staticUserNeedsItem = new ViewMultiLanguageTextItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
+        ViewMultiLanguageTextItem staticUserSatItem = new ViewMultiLanguageTextItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
+        ViewMultiLanguageTextItem staticCompletenessItem = new ViewMultiLanguageTextItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
+        ViewMultiLanguageTextItem staticTimelinessItem = new ViewMultiLanguageTextItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
+        ViewMultiLanguageTextItem staticPunctualityItem = new ViewMultiLanguageTextItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
+        ViewMultiLanguageTextItem staticAccuracyOverallItem = new ViewMultiLanguageTextItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
+        ViewMultiLanguageTextItem staticSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
+        ViewMultiLanguageTextItem statocNonSamplingErrItem = new ViewMultiLanguageTextItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
+        ViewMultiLanguageTextItem staticCoherXDomItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
+        ViewMultiLanguageTextItem staticCoherInternalItem = new ViewMultiLanguageTextItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
         qualityViewForm.setFields(staticQualityDocItem, staticQualityAssureItem, staticQualityAssesmentItem, staticUserNeedsItem, staticUserSatItem, staticCompletenessItem, staticTimelinessItem,
                 staticPunctualityItem, staticAccuracyOverallItem, staticSamplingErrItem, statocNonSamplingErrItem, staticCoherXDomItem, staticCoherInternalItem);
 
         // Annotations
         annotationsViewForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        ViewMultiLanguageTextItem staticCommentItem = new ViewMultiLanguageTextItem(InstanceDS.COMMENTS, getCoreMessages().instance_comment());
-        ViewMultiLanguageTextItem staticNotesItem = new ViewMultiLanguageTextItem(InstanceDS.NOTES, getCoreMessages().instance_notes());
+        ViewMultiLanguageTextItem staticCommentItem = new ViewMultiLanguageTextItem(InstanceDS.COMMENTS, getConstants().instanceComments());
+        ViewMultiLanguageTextItem staticNotesItem = new ViewMultiLanguageTextItem(InstanceDS.NOTES, getConstants().instanceNotes());
         annotationsViewForm.setFields(staticCommentItem, staticNotesItem);
 
         mainFormLayout.addViewCanvas(identifiersViewForm);
@@ -445,7 +444,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Identifiers
         identifiersEditionForm = new GroupDynamicForm(getConstants().instanceIdentifiers());
 
-        code = new RequiredTextItem(InstanceDS.CODE, getCoreMessages().instance_code());
+        code = new RequiredTextItem(InstanceDS.CODE, getConstants().instanceCode());
         code.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -454,7 +453,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         });
         code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
-        ViewTextItem staticCode = new ViewTextItem(InstanceDS.CODE_VIEW, getCoreMessages().instance_code());
+        ViewTextItem staticCode = new ViewTextItem(InstanceDS.CODE_VIEW, getConstants().instanceCode());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 
             @Override
@@ -463,10 +462,10 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         });
 
-        title = new MultiLanguageTextItem(InstanceDS.TITLE, getCoreMessages().instance_title());
+        title = new MultiLanguageTextItem(InstanceDS.TITLE, getConstants().instanceTitle());
         title.setRequired(true);
-        acronym = new MultiLanguageTextItem(InstanceDS.ACRONYM, getCoreMessages().instance_acronym());
-        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getCoreMessages().instance_urn());
+        acronym = new MultiLanguageTextItem(InstanceDS.ACRONYM, getConstants().instanceAcronym());
+        ViewTextItem urn = new ViewTextItem(InstanceDS.URN, getConstants().instanceUrn());
         identifiersEditionForm.setFields(staticCode, code, title, acronym, urn);
 
         // Content classifiers
@@ -474,24 +473,24 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Content descriptors
         contentDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceContentDescriptors());
         dataDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
-        statisticalPopulationItem = new MultilanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getCoreMessages().instance_statistical_population());
-        ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem(InstanceDS.STATISTICAL_UNIT, getCoreMessages().instance_statistical_unit());
-        ExternalItemListItem geographicGranularities = createGeographicGranularities(InstanceDS.GEOGRAPHIC_GRANULARITIES, getCoreMessages().instance_geographic_granularity());
-        geographicalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getCoreMessages().instance_geographic_comparability());
-        ExternalItemListItem temporalGranularities = createTemporalGranularities(InstanceDS.TEMPORAL_GRANULARITIES, getCoreMessages().instance_temporal_granularity());
-        temporalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getCoreMessages().instance_temporal_comparability());
-        TextItem basePeriodItem = new TextItem(InstanceDS.BASE_PERIOD, getCoreMessages().instance_base_period());
+        statisticalPopulationItem = new MultilanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getConstants().instanceStatisticalPopulation());
+        ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem(InstanceDS.STATISTICAL_UNIT, getConstants().instanceStatisticalUnit());
+        ExternalItemListItem geographicGranularities = createGeographicGranularities(InstanceDS.GEOGRAPHIC_GRANULARITIES, getConstants().instanceGeographicGranularity());
+        geographicalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
+        ExternalItemListItem temporalGranularities = createTemporalGranularities(InstanceDS.TEMPORAL_GRANULARITIES, getConstants().instanceTemporalGranularity());
+        temporalComparabilityItem = new MultilanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
+        TextItem basePeriodItem = new TextItem(InstanceDS.BASE_PERIOD, getConstants().instanceBasePeriod());
         basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
 
-        ExternalItemListItem measuresItem = createMeasures(InstanceDS.MEASURES, getCoreMessages().instance_unit_measure());
+        ExternalItemListItem measuresItem = createMeasures(InstanceDS.MEASURES, getConstants().instanceUnitMeasure());
 
-        MultilanguageRichTextEditorItem statConcDefDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getCoreMessages().instance_stat_conc_def());
+        MultilanguageRichTextEditorItem statConcDefDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getConstants().instanceStatisticalConceptDefinition());
 
-        ExternalItemListItem statConcDefItem = createStatConcDef(InstanceDS.STAT_CONC_DEF, getCoreMessages().instance_stat_conc_def_list());
+        ExternalItemListItem statConcDefItem = createStatConcDef(InstanceDS.STAT_CONC_DEF, getConstants().instanceStatisticalConceptsDefinitions());
 
-        ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getCoreMessages().instance_class_system_list());
+        ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
 
-        MultilanguageRichTextEditorItem classSystemDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getCoreMessages().instance_class_system());
+        MultilanguageRichTextEditorItem classSystemDescriptionItem = new MultilanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getConstants().instanceClassSystem());
 
         contentDescriptorsEditionForm.setFields(dataDescriptionItem, statisticalPopulationItem, statisticalUnitItem, basePeriodItem, geographicGranularities, temporalGranularities,
                 geographicalComparabilityItem, temporalComparabilityItem, measuresItem, statConcDefDescriptionItem, statConcDefItem, classSystemItem, classSystemDescriptionItem);
@@ -513,21 +512,21 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         // Production descriptors
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceProductionDescriptors());
         ViewTextItem createdDate = new ViewTextItem(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
-        ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
+        ViewTextItem internalInventoryDate = new ViewTextItem(InstanceDS.INTERNAL_INVENTORY_DATE, getConstants().instanceInternalInventoryDate());
 
-        ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
-        ViewTextItem staticProcStatus = new ViewTextItem(InstanceDS.PROC_STATUS_VIEW, getCoreMessages().instance_proc_status());
+        ViewTextItem procStatus = new ViewTextItem(InstanceDS.PROC_STATUS, getConstants().instanceProcStatus());
+        ViewTextItem staticProcStatus = new ViewTextItem(InstanceDS.PROC_STATUS_VIEW, getConstants().instanceProcStatus());
         staticProcStatus.setShowIfCondition(FormItemUtils.getFalseFormItemIfFunction());
 
-        docMethodItem = new MultilanguageRichTextEditorItem(InstanceDS.DOC_METHOD, getCoreMessages().instance_doc_method());
+        docMethodItem = new MultilanguageRichTextEditorItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         surveySourceItem = new CustomSelectItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
-        SearchMultipleItemsItem informationSuppliersItem = createInformationSuppliersItem(InstanceDS.INFORMATION_SUPPLIERS, getCoreMessages().instance_information_suppliers());
-        ExternalItemListItem freqCollItem = createFreqColl(InstanceDS.FREQ_COLL, getCoreMessages().instance_freq_coll());
-        dataValidationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_VALIDATION, getCoreMessages().instance_data_validation());
-        dataCompilationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_COMPILATION, getCoreMessages().instance_data_compilation());
-        adjustmentItem = new MultilanguageRichTextEditorItem(InstanceDS.ADJUSTMENT, getCoreMessages().instance_adjustment());
-        costBurdenItem = new MultilanguageRichTextEditorItem(InstanceDS.COST_BURDEN, getCoreMessages().instance_cost_burden());
+        SearchMultipleItemsItem informationSuppliersItem = createInformationSuppliersItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliers());
+        ExternalItemListItem freqCollItem = createFreqColl(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
+        dataValidationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
+        dataCompilationItem = new MultilanguageRichTextEditorItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
+        adjustmentItem = new MultilanguageRichTextEditorItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
+        costBurdenItem = new MultilanguageRichTextEditorItem(InstanceDS.COST_BURDEN, getConstants().instanceCostBurden());
         costItem = new CustomSelectItem(InstanceDS.COST, getConstants().instanceCost());
         costItem.setMultiple(true);
         productionDescriptorsEditionForm.setFields(createdDate, internalInventoryDate, staticProcStatus, procStatus, docMethodItem, surveySourceItem, collMethodItem, informationSuppliersItem,
@@ -535,31 +534,31 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Diffusion and Publication
         diffusionEditionForm = new GroupDynamicForm(getConstants().instanceDiffusionDescriptors());
-        ViewTextItem inventoryDate = new ViewTextItem(InstanceDS.INVENTORY_DATE, getCoreMessages().instance_inventory_date());
+        ViewTextItem inventoryDate = new ViewTextItem(InstanceDS.INVENTORY_DATE, getConstants().instanceInventoryDate());
         diffusionEditionForm.setFields(inventoryDate);
 
         // Quality Descriptors
         qualityEditionForm = new GroupDynamicForm(getConstants().instanceQualityDescriptors());
-        qualityDocItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_DOC, getCoreMessages().instance_quality_doc());
-        qualityAssureItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSURE, getCoreMessages().instance_quality_assure());
-        qualityAssesmentItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSMNT, getCoreMessages().instance_quality_assmnt());
-        userNeedsItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_NEEDS, getCoreMessages().instance_user_needs());
-        userSatItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_SAT, getCoreMessages().instance_user_sat());
-        completenessItem = new MultilanguageRichTextEditorItem(InstanceDS.COMPLETENESS, getCoreMessages().instance_completeness());
-        timelinessItem = new MultilanguageRichTextEditorItem(InstanceDS.TIMELINESS, getCoreMessages().instance_timeliness());
-        punctualityItem = new MultilanguageRichTextEditorItem(InstanceDS.PUNCTUALITY, getCoreMessages().instance_punctuality());
-        accuracyOverallItem = new MultilanguageRichTextEditorItem(InstanceDS.ACCURACY_OVERALL, getCoreMessages().instance_accuracy_overall());
-        samplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.SAMPLING_ERROR, getCoreMessages().instance_sampling_err());
-        nonSamplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.NONSAMPLING_ERR, getCoreMessages().instance_nonsampling_err());
-        coherXDomItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_X_DOM, getCoreMessages().instance_coher_x_domain());
-        coherInternalItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_INTERNAL, getCoreMessages().instance_coher_internal());
+        qualityDocItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_DOC, getConstants().instanceQDoc());
+        qualityAssureItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSURE, getConstants().instanceQAssure());
+        qualityAssesmentItem = new MultilanguageRichTextEditorItem(InstanceDS.QUALITY_ASSMNT, getConstants().instanceQAssmnt());
+        userNeedsItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_NEEDS, getConstants().instanceUserNeeds());
+        userSatItem = new MultilanguageRichTextEditorItem(InstanceDS.USER_SAT, getConstants().instanceUserSat());
+        completenessItem = new MultilanguageRichTextEditorItem(InstanceDS.COMPLETENESS, getConstants().instanceCompleteness());
+        timelinessItem = new MultilanguageRichTextEditorItem(InstanceDS.TIMELINESS, getConstants().instanceTimeliness());
+        punctualityItem = new MultilanguageRichTextEditorItem(InstanceDS.PUNCTUALITY, getConstants().instancePunctuality());
+        accuracyOverallItem = new MultilanguageRichTextEditorItem(InstanceDS.ACCURACY_OVERALL, getConstants().instanceAccuracyOverall());
+        samplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.SAMPLING_ERROR, getConstants().instanceSamplingErr());
+        nonSamplingErrItem = new MultilanguageRichTextEditorItem(InstanceDS.NONSAMPLING_ERR, getConstants().instanceNonSamplingErr());
+        coherXDomItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_X_DOM, getConstants().instanceCoherXDom());
+        coherInternalItem = new MultilanguageRichTextEditorItem(InstanceDS.COHER_INTERNAL, getConstants().instanceCoherInter());
         qualityEditionForm.setFields(qualityDocItem, qualityAssureItem, qualityAssesmentItem, userNeedsItem, userSatItem, completenessItem, timelinessItem, punctualityItem, accuracyOverallItem,
                 samplingErrItem, nonSamplingErrItem, coherXDomItem, coherInternalItem);
 
         // Annotations
         annotationsEditionForm = new GroupDynamicForm(getConstants().instanceAnnotations());
-        commentItem = new MultilanguageRichTextEditorItem(InstanceDS.COMMENTS, getCoreMessages().instance_comment());
-        notesItem = new MultilanguageRichTextEditorItem(InstanceDS.NOTES, getCoreMessages().instance_notes());
+        commentItem = new MultilanguageRichTextEditorItem(InstanceDS.COMMENTS, getConstants().instanceComments());
+        notesItem = new MultilanguageRichTextEditorItem(InstanceDS.NOTES, getConstants().instanceNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         mainFormLayout.addEditionCanvas(identifiersEditionForm);
@@ -617,7 +616,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         productionDescriptorsForm.setValue(InstanceDS.CREATED_DATE, instanceDto.getCreatedDate());
         productionDescriptorsForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInternalInventoryDate());
-        productionDescriptorsForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
+        productionDescriptorsForm.setValue(InstanceDS.PROC_STATUS, CommonUtils.getProcStatusName(instanceDto.getProcStatus()));
 
         productionDescriptorsForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));
         productionDescriptorsForm.setValue(InstanceDS.STATISTICAL_OPERATION_SOURCE,
@@ -716,7 +715,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         productionDescriptorsEditionForm.setValue(InstanceDS.CREATED_DATE, instanceDto.getCreatedDate());
         productionDescriptorsEditionForm.setValue(InstanceDS.INTERNAL_INVENTORY_DATE, instanceDto.getInventoryDate());
 
-        productionDescriptorsEditionForm.setValue(InstanceDS.PROC_STATUS, getCoreMessages().getString(getCoreMessages().procStatusEnum() + instanceDto.getProcStatus().getName()));
+        productionDescriptorsEditionForm.setValue(InstanceDS.PROC_STATUS, CommonUtils.getProcStatusName(instanceDto.getProcStatus()));
         productionDescriptorsEditionForm.setValue(InstanceDS.PROC_STATUS_VIEW, instanceDto.getProcStatus().getName());
 
         productionDescriptorsEditionForm.setValue(InstanceDS.DOC_METHOD, RecordUtils.getInternationalStringRecord(instanceDto.getDocMethod()));

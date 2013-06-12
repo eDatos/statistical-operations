@@ -1,7 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.client.utils;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
@@ -15,92 +14,92 @@ public class ResourceListFieldUtils {
 
     public static CustomListGridField[] getFamilyFields() {
 
-        CustomListGridField code = new CustomListGridField(FamilyDS.CODE, getCoreMessages().family_code());
+        CustomListGridField code = new CustomListGridField(FamilyDS.CODE, getConstants().familyCode());
 
-        CustomListGridField urn = new CustomListGridField(FamilyDS.URN, getCoreMessages().family_urn());
+        CustomListGridField urn = new CustomListGridField(FamilyDS.URN, getConstants().familyUrn());
         urn.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField title = new CustomListGridField(FamilyDS.TITLE, getCoreMessages().family_title());
+        CustomListGridField title = new CustomListGridField(FamilyDS.TITLE, getConstants().familyTitle());
 
-        CustomListGridField acronym = new CustomListGridField(FamilyDS.ACRONYM, getCoreMessages().family_acronym());
+        CustomListGridField acronym = new CustomListGridField(FamilyDS.ACRONYM, getConstants().familyAcronym());
         acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
         CustomListGridField createdDate = new CustomListGridField(FamilyDS.CREATED_DATE, getConstants().familyCreatedDate());
         createdDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField internalInventoryDate = new CustomListGridField(FamilyDS.INTERNAL_INVENTORY_DATE, getCoreMessages().family_internal_inventory_date());
+        CustomListGridField internalInventoryDate = new CustomListGridField(FamilyDS.INTERNAL_INVENTORY_DATE, getConstants().familyInternalInventoryDate());
         internalInventoryDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField procStatus = new CustomListGridField(FamilyDS.PROC_STATUS, getCoreMessages().family_proc_status());
+        CustomListGridField procStatus = new CustomListGridField(FamilyDS.PROC_STATUS, getConstants().familyProcStatus());
 
         return new CustomListGridField[]{code, urn, title, acronym, createdDate, internalInventoryDate, procStatus};
     }
 
     public static CustomListGridField[] getOperationFields() {
 
-        CustomListGridField code = new CustomListGridField(OperationDS.CODE, getCoreMessages().operation_code());
+        CustomListGridField code = new CustomListGridField(OperationDS.CODE, getConstants().operationCode());
 
-        CustomListGridField urn = new CustomListGridField(OperationDS.URN, getCoreMessages().operation_urn());
+        CustomListGridField urn = new CustomListGridField(OperationDS.URN, getConstants().operationUrn());
         urn.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField title = new CustomListGridField(OperationDS.TITLE, getCoreMessages().operation_title());
+        CustomListGridField title = new CustomListGridField(OperationDS.TITLE, getConstants().operationTitle());
 
-        CustomListGridField acronym = new CustomListGridField(OperationDS.ACRONYM, getCoreMessages().operation_acronym());
+        CustomListGridField acronym = new CustomListGridField(OperationDS.ACRONYM, getConstants().operationAcronym());
         acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField subjectArea = new CustomListGridField(OperationDS.SUBJECT_AREA, getCoreMessages().operation_subject_area());
+        CustomListGridField subjectArea = new CustomListGridField(OperationDS.SUBJECT_AREA, getConstants().operationSubjectArea());
         subjectArea.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField surveyType = new CustomListGridField(OperationDS.STATISTICAL_OPERATION_TYPE, getCoreMessages().operation_survey_type());
+        CustomListGridField surveyType = new CustomListGridField(OperationDS.STATISTICAL_OPERATION_TYPE, getConstants().operationSurveyType());
         surveyType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField officialityType = new CustomListGridField(OperationDS.OFFICIALITY_TYPE, getCoreMessages().operation_officiality_type());
+        CustomListGridField officialityType = new CustomListGridField(OperationDS.OFFICIALITY_TYPE, getConstants().operationOfficialityType());
         officialityType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField indicatorsSystem = new CustomListGridField(OperationDS.INDICATOR_SYSTEM, getCoreMessages().operation_indicator_system());
+        CustomListGridField indicatorsSystem = new CustomListGridField(OperationDS.INDICATOR_SYSTEM, getConstants().operationIndicatorSystem());
         indicatorsSystem.setType(ListGridFieldType.IMAGE);
         indicatorsSystem.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
         CustomListGridField createdDate = new CustomListGridField(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         createdDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField internalInventoryDate = new CustomListGridField(OperationDS.INTERNAL_INVENTORY_DATE, getCoreMessages().operation_internal_inventory_date());
+        CustomListGridField internalInventoryDate = new CustomListGridField(OperationDS.INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
         internalInventoryDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField currentlyActive = new CustomListGridField(OperationDS.CURRENTLY_ACTIVE, getCoreMessages().operation_currently_active());
+        CustomListGridField currentlyActive = new CustomListGridField(OperationDS.CURRENTLY_ACTIVE, getConstants().operationCurrentlyActive());
         currentlyActive.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField procStatus = new CustomListGridField(OperationDS.PROC_STATUS, getCoreMessages().operation_proc_status());
+        CustomListGridField procStatus = new CustomListGridField(OperationDS.PROC_STATUS, getConstants().operationProcStatus());
 
-        CustomListGridField status = new CustomListGridField(OperationDS.STATUS, getCoreMessages().operation_status());
+        CustomListGridField status = new CustomListGridField(OperationDS.STATUS, getConstants().operationStatus());
 
         return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status};
     }
 
     public static CustomListGridField[] getInstanceFields() {
 
-        CustomListGridField code = new CustomListGridField(InstanceDS.CODE, getCoreMessages().instance_code());
+        CustomListGridField code = new CustomListGridField(InstanceDS.CODE, getConstants().instanceCode());
 
-        CustomListGridField urn = new CustomListGridField(InstanceDS.URN, getCoreMessages().instance_urn());
+        CustomListGridField urn = new CustomListGridField(InstanceDS.URN, getConstants().instanceUrn());
         urn.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField title = new CustomListGridField(InstanceDS.TITLE, getCoreMessages().instance_title());
+        CustomListGridField title = new CustomListGridField(InstanceDS.TITLE, getConstants().instanceTitle());
 
-        CustomListGridField acronym = new CustomListGridField(InstanceDS.TITLE, getCoreMessages().instance_title());
+        CustomListGridField acronym = new CustomListGridField(InstanceDS.TITLE, getConstants().instanceTitle());
         acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField instanceType = new CustomListGridField(InstanceDS.INSTANCE_TYPE, getCoreMessages().instance_instance_type());
+        CustomListGridField instanceType = new CustomListGridField(InstanceDS.INSTANCE_TYPE, getConstants().instanceType());
         instanceType.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
         CustomListGridField createdDate = new CustomListGridField(InstanceDS.CREATED_DATE, getConstants().instanceCreatedDate());
         createdDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField internalInventoryDate = new CustomListGridField(InstanceDS.INTERNAL_INVENTORY_DATE, getCoreMessages().instance_internal_inventory_date());
+        CustomListGridField internalInventoryDate = new CustomListGridField(InstanceDS.INTERNAL_INVENTORY_DATE, getConstants().instanceInternalInventoryDate());
         internalInventoryDate.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField procStatus = new CustomListGridField(InstanceDS.PROC_STATUS, getCoreMessages().instance_proc_status());
+        CustomListGridField procStatus = new CustomListGridField(InstanceDS.PROC_STATUS, getConstants().instanceProcStatus());
 
-        CustomListGridField order = new CustomListGridField(InstanceDS.ORDER, getCoreMessages().instance_order());
+        CustomListGridField order = new CustomListGridField(InstanceDS.ORDER, getConstants().instanceOrder());
 
         return new CustomListGridField[]{code, urn, title, acronym, instanceType, createdDate, internalInventoryDate, procStatus, order};
     }
