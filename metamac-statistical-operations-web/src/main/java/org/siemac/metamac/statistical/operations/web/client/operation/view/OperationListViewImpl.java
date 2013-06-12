@@ -239,13 +239,6 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         return selectedOperations;
     }
 
-    @Override
-    public void onOperationSaved(OperationDto operationDto) {
-        OperationRecord record = RecordUtils.getOperationRecord(operationDto);
-        operationListGrid.getListGrid().addData(record);
-        operationListGrid.goToLastPageAfterCreate();
-    }
-
     /**
      * Select Operation in ListGrid
      * 

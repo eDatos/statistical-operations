@@ -9,7 +9,7 @@ public interface OperationListUiHandlers extends SrmExternalResourcesUiHandlers 
 
     void retrieveOperationList(int firstResult, int maxResults, String operation);
 
-    void saveOperation(OperationDto operationDto);
+    void createOperation(OperationDto operationDto);
     void goToOperation(String operationCode);
     void deleteOperations(List<Long> operationDtos);
 }

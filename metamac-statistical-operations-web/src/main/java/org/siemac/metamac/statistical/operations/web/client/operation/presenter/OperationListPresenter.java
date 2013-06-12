@@ -87,7 +87,6 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
         void closeOperationWindow();
         com.smartgwt.client.widgets.events.HasClickHandlers getDelete();
         List<Long> getSelectedOperations();
-        void onOperationSaved(OperationDto operationDto);
 
         void clearSearchSection();
 
@@ -132,7 +131,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onClick(ClickEvent event) {
                 if (getView().validate()) {
-                    saveOperation(getView().getOperation());
+                    createOperation(getView().getOperation());
                 }
             }
         }));
@@ -167,7 +166,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     }
 
     @Override
-    public void saveOperation(OperationDto operationToSave) {
+    public void createOperation(OperationDto operationToSave) {
         dispatcher.execute(new SaveOperationAction(operationToSave), new WaitingAsyncCallback<SaveOperationResult>() {
 
             @Override
@@ -178,7 +177,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onWaitSuccess(SaveOperationResult result) {
                 getView().closeOperationWindow();
-                getView().onOperationSaved(result.getOperationSaved());
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
             }
         });
     }

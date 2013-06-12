@@ -7,7 +7,6 @@ import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
@@ -71,18 +70,6 @@ public class RecordUtils {
         record.setProcStatus(CommonUtils.getProcStatusName(operationBaseDto.getProcStatus()));
         record.setStatus(CommonUtils.getStatusName(operationBaseDto.getStatus()));
         record.setOperationBaseDto(operationBaseDto);
-        return record;
-    }
-
-    /**
-     * Returns {@link OperationRecord} from {@link OperationDto}
-     * 
-     * @param operationDto
-     * @return
-     */
-    public static OperationRecord getOperationRecord(OperationDto operationDto) {
-        OperationRecord record = new OperationRecord();
-        // TODO
         return record;
     }
 
