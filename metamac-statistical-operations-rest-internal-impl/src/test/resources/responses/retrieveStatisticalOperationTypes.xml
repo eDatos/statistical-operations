@@ -2,14 +2,14 @@
 <operations:statisticalOperationTypes xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations-internal/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#statisticalOperationTypes" total="2">
     <operations:statisticalOperationType>
         <cdomain:id>statisticalOperationType1</cdomain:id>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">statisticalOperationType1 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:statisticalOperationType>
     <operations:statisticalOperationType>
         <cdomain:id>statisticalOperationType2</cdomain:id>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">statisticalOperationType2 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:statisticalOperationType>
 </operations:statisticalOperationTypes>

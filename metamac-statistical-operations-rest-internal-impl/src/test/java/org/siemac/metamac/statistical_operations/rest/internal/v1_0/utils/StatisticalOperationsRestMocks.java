@@ -609,7 +609,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind("structuralResources#agency");
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmApiBaseV10 + "/agencyschemes/SDMX/AGENCIES/1.0/agencies/" + id));
         resource.setManagementAppLink(srmWebApplicationBase + "/#structuralResources/organisationSchemes/organisationScheme;type=AGENCY_SCHEME;id=SDMX:AGENCIES(1.0)/organisation;id=" + id);
-        resource.setTitle(mockInternationalString("es", id + " en Español"));
+        resource.setName(mockInternationalString("es", id + " en Español"));
         return resource;
     }
 
@@ -620,7 +620,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind("structuralResources#agency");
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmApiBaseV10 + "/agencyschemes/SDMX/AGENCIES/1.0/agencies/" + id));
         resource.setManagementAppLink(srmWebApplicationBase + "/#structuralResources/organisationSchemes/organisationScheme;type=AGENCY_SCHEME;id=SDMX:AGENCIES(1.0)/organisation;id=" + id);
-        resource.setTitle(mockInternationalString("es", id + " en Español"));
+        resource.setName(mockInternationalString("es", id + " en Español"));
         return resource;
     }
 
@@ -649,7 +649,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind(RestInternalConstants.KIND_OPERATION);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/operations/" + operationId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operationId);
-        resource.setTitle(mockInternationalString("es", operationId + " en Español"));
+        resource.setName(mockInternationalString("es", operationId + " en Español"));
         return resource;
     }
 
@@ -661,7 +661,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind(RestInternalConstants.KIND_FAMILY);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/families/" + familyId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#families/family;id=" + familyId);
-        resource.setTitle(mockInternationalString("es", familyId + " en Español"));
+        resource.setName(mockInternationalString("es", familyId + " en Español"));
         return resource;
     }
 
@@ -673,7 +673,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind(RestInternalConstants.KIND_INSTANCE);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/operations/" + operationId + "/instances/" + instanceId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operationId + "/instance;id=" + instanceId);
-        resource.setTitle(mockInternationalString("es", instanceId + " en Español"));
+        resource.setName(mockInternationalString("es", instanceId + " en Español"));
         return resource;
     }
 
@@ -683,7 +683,7 @@ public class StatisticalOperationsRestMocks {
         operation.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getId());
         operation.setKind(RestInternalConstants.KIND_OPERATION);
         operation.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATION, statisticalOperationsApiBaseV10 + "/operations/operation" + subId));
-        operation.setTitle(mockInternationalStringMetadata("operation", subId));
+        operation.setName(mockInternationalStringMetadata("operation", subId));
         operation.setAcronym(mockInternationalStringMetadata("acronym", subId));
         operation.setSubjectArea(mockResourceFromExternalItemSrm("subjectArea1", "subjectAreas", "structuralResources#category"));
         operation.setSecondarySubjectAreas(new SecondarySubjectAreas());
@@ -769,7 +769,7 @@ public class StatisticalOperationsRestMocks {
         family.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getId());
         family.setKind(RestInternalConstants.KIND_FAMILY);
         family.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILY, statisticalOperationsApiBaseV10 + "/families/family" + subId));
-        family.setTitle(mockInternationalStringMetadata("family", subId));
+        family.setName(mockInternationalStringMetadata("family", subId));
         family.setAcronym(mockInternationalStringMetadata("acronym", subId));
         family.setDescription(mockInternationalStringMetadata("description", subId));
         family.setCreatedDate(new DateTime(2011, 1, 2, 15, 14, 13, 0).toDate());
@@ -792,7 +792,7 @@ public class StatisticalOperationsRestMocks {
         instance.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation + "." + instance.getId());
         instance.setKind(RestInternalConstants.KIND_INSTANCE);
         instance.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCE, statisticalOperationsApiBaseV10 + "/operations/" + operation + "/instances/instance" + subId));
-        instance.setTitle(mockInternationalStringMetadata("instance", subId));
+        instance.setName(mockInternationalStringMetadata("instance", subId));
         instance.setAcronym(mockInternationalStringMetadata("acronym", subId));
         instance.setStatisticalOperation(mockOperationResource(operation));
         instance.setPredecessor(mockInstanceResource(operation, "333"));
@@ -997,14 +997,14 @@ public class StatisticalOperationsRestMocks {
         resource.setKind(kind);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(kind, endpointApi + "/" + sampleResourceSubpath + "/" + id));
         resource.setManagementAppLink(managementApp + "/" + sampleResourceSubpath + "/" + id);
-        resource.setTitle(mockInternationalString("es", id + " en Español"));
+        resource.setName(mockInternationalString("es", id + " en Español"));
         return resource;
     }
 
     private Item mockItem(String id) {
         Item item = new Item();
         item.setId(id);
-        item.setTitle(mockInternationalString("es", id + " en Español"));
+        item.setName(mockInternationalString("es", id + " en Español"));
         return item;
     }
 
@@ -1015,7 +1015,7 @@ public class StatisticalOperationsRestMocks {
         resource.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), srmApiBaseV10 + "/concepts/" + resource.getId()));
         resource.setManagementAppLink(srmWebApplicationBase + "/concepts/" + resource.getId());
-        resource.setTitle(mockInternationalString("es", resource.getId() + " en Español"));
+        resource.setName(mockInternationalString("es", resource.getId() + " en Español"));
         return resource;
     }
 }

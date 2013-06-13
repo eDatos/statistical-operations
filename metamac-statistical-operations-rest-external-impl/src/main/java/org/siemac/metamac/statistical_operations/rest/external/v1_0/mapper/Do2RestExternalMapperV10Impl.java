@@ -97,7 +97,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_OPERATION);
         target.setSelfLink(toOperationSelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setSubjectArea(toResourceExternalItemSrm(source.getSubjectArea()));
         target.setSecondarySubjectAreas(toSecondarySubjectAreas(source.getSecondarySubjectAreas()));
@@ -176,7 +176,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_FAMILY);
         target.setSelfLink(toFamilySelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setDescription(toInternationalString(source.getDescription()));
         target.setInventoryDate(toDate(source.getInventoryDate()));
@@ -232,7 +232,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceSelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
         target.setStatisticalOperation(toResource(source.getOperation()));
         target.setPredecessor(toResource(getInstanceInOrder(source.getOperation().getInstances(), source.getOrder() - 1)));
@@ -471,7 +471,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_OPERATION);
         target.setSelfLink(toOperationSelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         return target;
     }
 
@@ -484,7 +484,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_FAMILY);
         target.setSelfLink(toFamilySelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         return target;
     }
 
@@ -497,7 +497,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(RestExternalConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceSelfLink(source));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         return target;
     }
 
@@ -507,7 +507,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -517,7 +517,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -527,7 +527,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -537,7 +537,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -547,7 +547,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -557,7 +557,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Item target = new Item();
         target.setId(source.getIdentifier());
-        target.setTitle(toInternationalString(source.getDescription()));
+        target.setName(toInternationalString(source.getDescription()));
         return target;
     }
 
@@ -591,7 +591,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         target.setUrn(source.getUrn());
         target.setKind(source.getType().getValue());
         target.setSelfLink(toResourceLink(target.getKind(), RestUtils.createLink(apiExternalItem, source.getUri())));
-        target.setTitle(toInternationalString(source.getTitle()));
+        target.setName(toInternationalString(source.getTitle()));
         return target;
     }
 

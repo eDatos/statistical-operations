@@ -8,9 +8,9 @@
         <cdomain:childLink kind="statisticalOperations#operations" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1/operations"/>
     </operations:childLinks>
     <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#families/family;id=family1</operations:managementAppLink>
-    <operations:title>
+    <operations:name>
         <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
-    </operations:title>
+    </operations:name>
     <operations:acronym>
         <cdomain:text xml:lang="es">acronym1 en Español</cdomain:text>
     </operations:acronym>

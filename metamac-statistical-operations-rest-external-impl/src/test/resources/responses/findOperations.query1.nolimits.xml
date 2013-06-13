@@ -4,16 +4,16 @@
         <cdomain:id>operation1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation1"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">operation1 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:operation>
     <operations:operation kind="statisticalOperations#operation">
         <cdomain:id>operation10</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=operation10</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#operation" href="http://data.istac.es/apis/operations/v1.0/operations/operation10"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">operation10 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:operation>
 </operations:operations>

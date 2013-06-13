@@ -164,7 +164,7 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
         externalItemDto.setUrn(resourceInternal.getUrn());
         externalItemDto.setUrnInternal(resourceInternal.getUrnInternal());
         externalItemDto.setType(TypeExternalArtefactsEnum.fromValue(resourceInternal.getKind()));
-        externalItemDto.setTitle(DtoUtils.getInternationalStringDtoFromInternationalString(resourceInternal.getTitle()));
+        externalItemDto.setTitle(DtoUtils.getInternationalStringDtoFromInternationalString(resourceInternal.getName()));
         externalItemDto.setManagementAppUrl(resourceInternal.getManagementAppLink());
         return externalItemDto;
     }
@@ -175,7 +175,7 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
         externalItemDto.setUri(resourceInternal.getSelfLink().getHref());
         externalItemDto.setUrn(resourceInternal.getUrn());
         externalItemDto.setType(TypeExternalArtefactsEnum.fromValue(resourceInternal.getKind()));
-        externalItemDto.setTitle(DtoUtils.getInternationalStringDtoFromInternationalString(resourceInternal.getTitle()));
+        externalItemDto.setTitle(DtoUtils.getInternationalStringDtoFromInternationalString(resourceInternal.getName()));
         externalItemDto.setManagementAppUrl(resourceInternal.getManagementAppLink());
         return externalItemDto;
     }

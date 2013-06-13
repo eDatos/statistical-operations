@@ -2,14 +2,14 @@
 <operations:statisticalOperationSources xmlns:operations="http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain" xmlns:cdomain="http://www.siemac.org/metamac/rest/common/v1.0/domain" kind="statisticalOperations#statisticalOperationSources" total="2">
     <operations:statisticalOperationSource>
         <cdomain:id>statisticalOperationSource1</cdomain:id>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">statisticalOperationSource1 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:statisticalOperationSource>
     <operations:statisticalOperationSource>
         <cdomain:id>statisticalOperationSource2</cdomain:id>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">statisticalOperationSource2 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:statisticalOperationSource>
 </operations:statisticalOperationSources>

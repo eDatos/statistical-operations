@@ -4,9 +4,9 @@
         <cdomain:id>instance1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=operation1.instance1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#instance" href="http://data.istac.es/apis/operations-internal/v1.0/operations/operation1/instances/instance1"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">instance1 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
         <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#operations/operation;id=operation1/instance;id=instance1</operations:managementAppLink>
     </operations:instance>
 </operations:instances>

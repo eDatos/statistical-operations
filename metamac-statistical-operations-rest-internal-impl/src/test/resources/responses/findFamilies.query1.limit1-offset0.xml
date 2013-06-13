@@ -4,9 +4,9 @@
         <cdomain:id>family1</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family1</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations-internal/v1.0/families/family1"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">family1 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
         <operations:managementAppLink>http://localhost:8080/metamac-statistical-operations-web/#families/family;id=family1</operations:managementAppLink>
     </operations:family>
 </operations:families>

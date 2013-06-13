@@ -4,16 +4,16 @@
         <cdomain:id>family3</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family3</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations/v1.0/families/family3"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">family3 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:family>
     <operations:family kind="statisticalOperations#family">
         <cdomain:id>family4</cdomain:id>
         <cdomain:urn>urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=family4</cdomain:urn>
         <cdomain:selfLink kind="statisticalOperations#family" href="http://data.istac.es/apis/operations/v1.0/families/family4"/>
-        <cdomain:title>
+        <cdomain:name>
             <cdomain:text xml:lang="es">family4 en Español</cdomain:text>
-        </cdomain:title>
+        </cdomain:name>
     </operations:family>
 </operations:families>
