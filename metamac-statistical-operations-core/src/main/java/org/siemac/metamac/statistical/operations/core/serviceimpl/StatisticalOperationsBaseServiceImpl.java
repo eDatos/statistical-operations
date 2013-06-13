@@ -15,7 +15,6 @@ import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.criteria.utils.CriteriaUtils;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
-import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyRepository;
@@ -31,6 +30,7 @@ import org.siemac.metamac.statistical.operations.core.exception.FamilyNotFoundEx
 import org.siemac.metamac.statistical.operations.core.exception.InstanceNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.OperationNotFoundException;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.CheckMandatoryMetadataUtil;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.StatisticalOperationsValidationUtils;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +58,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Family findFamilyById(ServiceContext ctx, Long id) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(id, ServiceExceptionParameters.ID, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(id, ServiceExceptionParameters.ID, new ArrayList<MetamacExceptionItem>());
 
         // Return family
         try {
@@ -71,7 +71,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Family findFamilyByCode(ServiceContext ctx, String code) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.code()).eq(code).distinctRoot().build();
@@ -92,7 +92,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Family findFamilyByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Family.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.FamilyProperties.urn()).eq(urn).distinctRoot().build();
@@ -284,7 +284,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Operation findOperationByCode(ServiceContext ctx, String code) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).eq(code).distinctRoot()
@@ -306,7 +306,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Operation findOperationByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.urn()).eq(urn).distinctRoot()
@@ -467,7 +467,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Instance findInstanceByCode(ServiceContext ctx, String code) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(code, ServiceExceptionParameters.CODE, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).eq(code).distinctRoot()
@@ -489,7 +489,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Override
     public Instance findInstanceByUrn(ServiceContext ctx, String urn) throws MetamacException {
         // Validations
-        ValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
+        StatisticalOperationsValidationUtils.checkParameterRequired(urn, ServiceExceptionParameters.URN, new ArrayList<MetamacExceptionItem>());
 
         // Prepare criteria
         List<ConditionalCriteria> conditions = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.urn()).eq(urn).distinctRoot().build();

@@ -20,7 +20,6 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.core.common.exception.utils.ExceptionUtils;
 import org.siemac.metamac.core.common.mapper.BaseDto2DoMapperImpl;
-import org.siemac.metamac.core.common.serviceimpl.utils.ValidationUtils;
 import org.siemac.metamac.core.common.util.OptimisticLockingUtils;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
@@ -45,6 +44,7 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionPara
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.StatisticalOperationsValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -153,7 +153,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
             // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
-                ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
+                StatisticalOperationsValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.FAMILY_CODE, exceptions);
                 ExceptionUtils.throwIfException(exceptions);
             }
         }
@@ -178,7 +178,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
             // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
-                ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
+                StatisticalOperationsValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.OPERATION_CODE, exceptions);
                 ExceptionUtils.throwIfException(exceptions);
             }
         }
@@ -203,7 +203,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
             // It's necessary to check that all the metadata that conforms the URN are unmodifibale.
             if (!ProcStatusEnum.DRAFT.equals(target.getProcStatus())) {
                 List<MetamacExceptionItem> exceptions = new ArrayList<MetamacExceptionItem>();
-                ValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
+                StatisticalOperationsValidationUtils.checkMetadataUnmodifiable(target.getCode(), source.getCode(), ServiceExceptionParameters.INSTANCE_CODE, exceptions);
                 ExceptionUtils.throwIfException(exceptions);
             }
         }
@@ -669,7 +669,7 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
             target = new InternationalString();
         }
 
-        if (ValidationUtils.isEmpty(source)) {
+        if (StatisticalOperationsValidationUtils.isEmpty(source)) {
             throw new MetamacException(ServiceExceptionType.METADATA_REQUIRED, metadataName);
         }
 

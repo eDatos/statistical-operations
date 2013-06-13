@@ -1653,7 +1653,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
 
         return operationDto;
     }
