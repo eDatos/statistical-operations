@@ -2,8 +2,13 @@ package org.siemac.metamac.statistical.operations.web.server.rest;
 
 import static org.siemac.metamac.srm.rest.internal.RestInternalConstants.WILDCARD;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.siemac.metamac.core.common.lang.shared.LocaleConstants;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
@@ -18,6 +23,8 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organisations;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
+import org.siemac.metamac.statistical.operations.web.server.utils.WebTranslateExceptions;
+import org.siemac.metamac.statistical.operations.web.shared.constants.WebMessageExceptionsConstants;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
@@ -35,15 +42,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
+    private static Logger          logger = Logger.getLogger(SrmRestInternalFacadeImpl.class.getName());
+
     @Autowired
-    private RestApiLocator restApiLocator;
+    private RestApiLocator         restApiLocator;
+
+    @Autowired
+    private WebTranslateExceptions webTranslateExceptions;
 
     //
     // CATEGORY SCHEMES
     //
 
     @Override
-    public ExternalItemsResult findCategorySchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCategorySchemes(ServiceContext serviceContext, ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -54,10 +66,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             CategorySchemes categorySchemes = restApiLocator.getSrmRestInternalFacadeV10().findCategorySchemes(query, orderBy, limit, offset);
             return ExternalItemUtils.getCategorySchemesAsExternalItemsResult(categorySchemes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -67,7 +79,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findCategories(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCategories(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -78,10 +90,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getCategoriesAsExternalItemsResult(categories);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -91,7 +103,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findCodelists(SrmItemSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCodelists(ServiceContext serviceContext, SrmItemSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -102,10 +114,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             Codelists codelists = restApiLocator.getSrmRestInternalFacadeV10().findCodelists(query, orderBy, limit, offset);
             return ExternalItemUtils.getCodelistsAsExternalItemsResult(codelists);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -115,7 +127,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findCodes(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findCodes(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -126,10 +138,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getCodesAsExternalItemsResult(codes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -139,7 +151,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConceptSchemes(ConceptSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConceptSchemes(ServiceContext serviceContext, ConceptSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -150,10 +162,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             ConceptSchemes conceptSchemes = restApiLocator.getSrmRestInternalFacadeV10().findConceptSchemes(query, orderBy, limit, offset);
             return ExternalItemUtils.getConceptSchemesAsExternalItemsResult(conceptSchemes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -163,7 +175,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConcepts(ConceptRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConcepts(ServiceContext serviceContext, ConceptRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -174,10 +186,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             Concepts concepts = restApiLocator.getSrmRestInternalFacadeV10().findConcepts(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getConceptsAsExternalItemsResult(concepts);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -187,7 +199,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisationUnitSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisationUnitSchemes(ServiceContext serviceContext, ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -198,10 +210,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             OrganisationUnitSchemes organisationUnitSchemes = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnitSchemes(query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationUnitSchemesAsExternalItemsResult(organisationUnitSchemes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -211,7 +223,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisationUnits(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisationUnits(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -223,10 +235,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationUnitsAsExternalItemsResult(organisationUnits);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -236,7 +248,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findDataProviderSchemes(ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findDataProviderSchemes(ServiceContext serviceContext, ExternalResourceWebCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -247,10 +259,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             DataProviderSchemes dataProviderSchemes = restApiLocator.getSrmRestInternalFacadeV10().findDataProviderSchemes(query, orderBy, limit, offset);
             return ExternalItemUtils.getDataProviderSchemesAsExternalItemsResult(dataProviderSchemes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -260,7 +272,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findDataProviders(SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findDataProviders(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -272,10 +284,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             DataProviders dataProviders = restApiLocator.getSrmRestInternalFacadeV10().findDataProviders(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getDataProvidersAsExternalItemsResult(dataProviders);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -285,7 +297,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisationSchemes(OrganisationSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisationSchemes(ServiceContext serviceContext, OrganisationSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -296,10 +308,10 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             OrganisationSchemes organisationSchemes = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationSchemes(query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationSchemesAsExternalItemsResult(organisationSchemes);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
     }
@@ -309,7 +321,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findOrganisations(OrganisationRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findOrganisations(ServiceContext serviceContext, OrganisationRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -321,11 +333,38 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
             Organisations organisations = restApiLocator.getSrmRestInternalFacadeV10().findOrganisations(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationsAsExternalItemsResult(organisations);
         } catch (ServerWebApplicationException e) {
-            org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
-                    org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
-            throw WebExceptionUtils.createMetamacWebException(exception);
+            throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
+            return null;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
             throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, e.getMessage());
         }
+    }
+
+    //
+    // EXCEPTION HANDLERS
+    //
+
+    private void throwMetamacWebExceptionFromServerWebApplicationException(ServiceContext serviceContext, ServerWebApplicationException e) throws MetamacWebException {
+        org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getSrmRestInternalFacadeV10()),
+                org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
+
+        if (exception == null) {
+            logger.log(Level.SEVERE, e.getMessage());
+            if (e.getResponse().getStatus() == 404) {
+                throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.REST_API_SRM_INVOCATION_ERROR_404);
+            } else {
+                throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.REST_API_SRM_INVOCATION_ERROR_UNKNOWN);
+            }
+        }
+
+        throw WebExceptionUtils.createMetamacWebException(exception);
+    }
+
+    private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode) throws MetamacWebException {
+        String locale = (String) serviceContext.getProperty(LocaleConstants.locale);
+        String exceptionnMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale);
+
+        throw new MetamacWebException(exceptionCode, exceptionnMessage);
     }
 }

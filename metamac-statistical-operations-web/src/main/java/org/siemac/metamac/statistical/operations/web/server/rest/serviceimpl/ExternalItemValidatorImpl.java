@@ -95,7 +95,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkCategoriesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findCategories(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findCategories(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -107,7 +107,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkConceptsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             ConceptRestCriteria criteria = buildConceptCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findConcepts(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findConcepts(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -119,7 +119,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkCodesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findCodes(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findCodes(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -131,7 +131,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkCodeListsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemSchemeRestCriteria criteria = buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findCodelists(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findCodelists(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -143,7 +143,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkConceptSchemesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             ConceptSchemeRestCriteria criteria = buildConceptSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findConceptSchemes(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findConceptSchemes(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -155,7 +155,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkDataProvidersAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findDataProviders(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findDataProviders(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }
@@ -167,7 +167,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     private void checkOrganizationUnitsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
             SrmItemRestCriteria criteria = buildItemCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
-            ExternalItemsResult result = srmRestInternalFacade.findOrganisationUnits(criteria, 0, externalItemDtos.size());
+            ExternalItemsResult result = srmRestInternalFacade.findOrganisationUnits(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
     }

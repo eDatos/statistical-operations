@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
+import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
@@ -7,6 +8,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.GetExternal
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
+import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
@@ -30,43 +32,47 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
 
     @Override
     public GetExternalResourcesResult executeSecurityAction(GetExternalResourcesAction action) throws ActionException {
+
+        ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
+
         ExternalItemsResult result = null;
         switch (action.getExternalResourceWebCriteria().getType()) {
             case CATEGORY_SCHEME:
-                result = srmRestInternalFacade.findCategorySchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCategorySchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CATEGORY:
-                result = srmRestInternalFacade.findCategories((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCategories(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_SCHEME:
-                result = srmRestInternalFacade.findOrganisationSchemes((OrganisationSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisationSchemes(serviceContext, (OrganisationSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                        action.getMaxResults());
                 break;
             case ORGANISATION:
-                result = srmRestInternalFacade.findOrganisations((OrganisationRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisations(serviceContext, (OrganisationRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT_SCHEME:
-                result = srmRestInternalFacade.findOrganisationUnitSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisationUnitSchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT:
-                result = srmRestInternalFacade.findOrganisationUnits((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisationUnits(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case DATA_PROVIDER_SCHEME:
-                result = srmRestInternalFacade.findDataProviderSchemes(action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findDataProviderSchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case DATA_PROVIDER:
-                result = srmRestInternalFacade.findDataProviders((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findDataProviders(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODELIST:
-                result = srmRestInternalFacade.findCodelists((SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCodelists(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODE:
-                result = srmRestInternalFacade.findCodes((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCodes(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT_SCHEME:
-                result = srmRestInternalFacade.findConceptSchemes((ConceptSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findConceptSchemes(serviceContext, (ConceptSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT:
-                result = srmRestInternalFacade.findConcepts((ConceptRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findConcepts(serviceContext, (ConceptRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "An unknown exception has ocurred. Please contact system administrator.");
