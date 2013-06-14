@@ -671,14 +671,22 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
     }
 
     // API/operations/OPERATION_ID
-    private String toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
+    private String toOperationLink(String operationCode) {
         String linkOperations = toOperationsLink();
-        return RestUtils.createLink(linkOperations, operation.getCode());
+        return RestUtils.createLink(linkOperations, operationCode);
+    }
+    private String toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
+        return toOperationLink(operation.getCode());
     }
 
     // API/operations/OPERATION_ID/instances
     private String toInstancesLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
-        String linkOperation = toOperationLink(operation);
+        String linkOperation = null;
+        if (operation != null) {
+            linkOperation = toOperationLink(operation);
+        } else {
+            linkOperation = toOperationLink(RestExternalConstants.WILDCARD);
+        }
         return RestUtils.createLink(linkOperation, RestExternalConstants.LINK_SUBPATH_INSTANCES);
     }
 

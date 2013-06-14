@@ -39,6 +39,7 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
+import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper.Do2RestExternalMapperV10;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper.RestCriteria2SculptorCriteriaMapper;
@@ -109,17 +110,24 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
     @Override
     public Instances findInstances(String operationId, String query, String orderBy, String limit, String offset) {
         try {
-            // Retrieve operation to check exists and it is published
-            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = retrieveOperationEntityPublishedExternally(operationId);
-
             // Retrieve instances by criteria
             SculptorCriteria sculptorCriteria = restCriteria2SculptorCriteriaMapper.getInstanceCriteriaMapper().restCriteriaToSculptorCriteria(query, orderBy, limit, offset);
-            // Find for operation and only published
-            List<ConditionalCriteria> conditionalCriteriaOperationAndProcStatus = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
-                    .withProperty(InstanceProperties.operation().code()).eq(operationId).withProperty(InstanceProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).build();
-
             List<ConditionalCriteria> conditionalCriteria = new ArrayList<ConditionalCriteria>();
-            conditionalCriteria.addAll(conditionalCriteriaOperationAndProcStatus);
+
+            // Find for operation
+            org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = null;
+            if (!RestExternalConstants.WILDCARD.equals(operationId)) {
+                operationEntity = retrieveOperationEntityPublishedExternally(operationId);
+                ConditionalCriteria conditionalCriteriaOperationId = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
+                        .withProperty(InstanceProperties.operation().code()).eq(operationId).buildSingle();
+                conditionalCriteria.add(conditionalCriteriaOperationId);
+            }
+            // Find only instances externally published
+            ConditionalCriteria conditionalCriteriaPublished = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
+                    .withProperty(InstanceProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle();
+            conditionalCriteria.add(conditionalCriteriaPublished);
+
+            // Conditions requested
             conditionalCriteria.addAll(sculptorCriteria.getConditions());
 
             // Retrieve
@@ -129,7 +137,6 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
             // Transform
             Instances instances = do2RestExternalMapper.toInstances(operationEntity, instancesEntitiesResult, query, orderBy, sculptorCriteria.getLimit());
             return instances;
-
         } catch (Exception e) {
             throw manageException(e);
         }

@@ -9,12 +9,13 @@ import org.siemac.metamac.rest.common.test.mockito.ConditionalCriteriasMatcher;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
 
 public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher {
 
-    private String                    operationCode;
-    private List<ConditionalCriteria> conditionalCriteriaQueries;
-    private List<ConditionalCriteria> conditionalCriteriaOrderBy;
+    private final String                    operationCode;
+    private final List<ConditionalCriteria> conditionalCriteriaQueries;
+    private final List<ConditionalCriteria> conditionalCriteriaOrderBy;
 
     public FindInstancesByOperationMatcher(String operationCode, List<ConditionalCriteria> conditionalCriteriaQueries, List<ConditionalCriteria> conditionalCriteriaOrderBy) {
         this.operationCode = operationCode;
@@ -22,15 +23,17 @@ public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher
         this.conditionalCriteriaOrderBy = conditionalCriteriaOrderBy;
     }
 
+    @Override
     public boolean matches(Object actual) {
 
         List<ConditionalCriteria> expected = new ArrayList<ConditionalCriteria>();
 
-        // By operation and procStatus
-        expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.operation().code()).eq(operationCode)
-                .buildSingle());
-        expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.procStatus())
-                .eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
+        // By operation
+        if (!RestExternalConstants.WILDCARD.equals(operationCode)) {
+            expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.operation().code()).eq(operationCode).buildSingle());
+        }
+        // By procStatus
+        expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY).buildSingle());
 
         // orderBy
         if (conditionalCriteriaOrderBy != null) {

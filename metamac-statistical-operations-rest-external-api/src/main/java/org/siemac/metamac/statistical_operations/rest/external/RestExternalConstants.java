@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical_operations.rest.external;
 public class RestExternalConstants {
 
     public static String KIND_SEPARATOR                     = "#";
+    public static String WILDCARD                           = "~all";
 
     public static String LINK_SUBPATH_OPERATIONS            = "operations";
     public static String LINK_SUBPATH_FAMILIES              = "families";
