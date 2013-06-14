@@ -60,11 +60,13 @@ public class CommonMetadataRestExternalFacadeImpl implements CommonMetadataRestE
     //
 
     private void throwMetamacWebExceptionFromServerWebApplicationException(ServiceContext serviceContext, ServerWebApplicationException e) throws MetamacWebException {
+
+        logger.log(Level.SEVERE, e.getMessage());
+
         org.siemac.metamac.rest.common.v1_0.domain.Exception exception = e.toErrorObject(WebClient.client(restApiLocator.getCommonMetadataRestExternalFacadeV10()),
                 org.siemac.metamac.rest.common.v1_0.domain.Exception.class);
 
         if (exception == null) {
-            logger.log(Level.SEVERE, e.getMessage());
             if (e.getResponse().getStatus() == 404) {
                 throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.REST_API_COMMON_METADATA_INVOCATION_ERROR_404);
             } else {
