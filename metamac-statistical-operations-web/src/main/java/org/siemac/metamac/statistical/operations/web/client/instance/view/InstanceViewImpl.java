@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.client.instance.view;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getMessages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.utils.TimeVariableWebUtils;
+import org.siemac.metamac.web.common.client.widgets.InformationWindow;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
@@ -60,6 +62,8 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
+import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
@@ -970,7 +974,30 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         };
         item.setSaveClickHandler(clickHandler);
-        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForGeographicGranularity());
+
+        String defaultCodelistUrn = ConfigurationPropertiesUtils.getInstanceDefaultCodelistForGeographicGranularity();
+
+        // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
+        if (StringUtils.isBlank(defaultCodelistUrn)) {
+            item.getSearchIconClickHandlerRegistration().removeHandler();
+            item.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
+
+                @Override
+                public void onFormItemClick(FormItemIconClickEvent event) {
+                    InformationWindow infoWindow = new InformationWindow(getConstants().instanceGranularityDefaultCodelistTitle(), getConstants().instanceGranularityDefaultCodelistInfoMessage());
+                    infoWindow.show();
+                }
+            });
+        }
+
+        item.setDefaultItemSchemeUrn(defaultCodelistUrn);
+
+        // Disable the filter by codelist. The codes for the granularity must belongs to the codelist specified in the data directory.
+        item.hideSearchWindowFilters();
+
+        // Show an information label to inform that the codes show belongs to the codelist specified in the data directory.
+        item.showSearchWindowInformationLabel(getMessages().instanceGeographicGranularityCodesInfoMesage());
+
         return item;
     }
 
@@ -993,7 +1020,31 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         };
         item.setSaveClickHandler(clickHandler);
-        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForTemporalGranularity());
+
+        String defaultCodelistUrn = ConfigurationPropertiesUtils.getInstanceDefaultCodelistForTemporalGranularity();
+
+        // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
+        if (StringUtils.isBlank(defaultCodelistUrn)) {
+            item.getSearchIconClickHandlerRegistration().removeHandler();
+            item.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
+
+                @Override
+                public void onFormItemClick(FormItemIconClickEvent event) {
+                    InformationWindow infoWindow = new InformationWindow(getConstants().instanceGranularityDefaultCodelistTitle(), getConstants().instanceGranularityDefaultCodelistInfoMessage());
+                    infoWindow.show();
+                }
+            });
+        }
+
+        // Set default codelist
+        item.setDefaultItemSchemeUrn(defaultCodelistUrn);
+
+        // Disable the filter by codelist. The codes for the granularity must belongs to the codelist specified in the data directory.
+        item.hideSearchWindowFilters();
+
+        // Show an information label to inform that the codes show belongs to the codelist specified in the data directory.
+        item.showSearchWindowInformationLabel(getMessages().instanceTemporalGranularityCodesInfoMesage());
+
         return item;
     }
 
@@ -1063,5 +1114,4 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         item.setSaveClickHandler(clickHandler);
         return item;
     }
-
 }

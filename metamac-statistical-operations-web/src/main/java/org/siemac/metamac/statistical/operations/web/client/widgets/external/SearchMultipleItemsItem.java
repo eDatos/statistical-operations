@@ -12,6 +12,7 @@ import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
@@ -31,6 +32,12 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
     protected CustomSelectItem                                                initialFilterSelectItem;
 
+    protected boolean                                                         areSearchWindowFiltersVisible;
+    protected boolean                                                         isInformationLabelVisible;
+    protected String                                                          informationLabelContents;
+
+    protected HandlerRegistration                                             searchIconClickHandlerRegistration;
+
     public SearchMultipleItemsItem(final String name, String title, final ExternalResourceWebCriteria itemSchemeCriteria, final SrmItemRestCriteria itemCriteria, final String windowTitle,
             final String windowFilterListTitle, final String windowFilterTextTitle, final String windowSelectionListTitle, final MultipleExternalResourceAction action) {
         this(name, title, itemSchemeCriteria, itemCriteria, windowTitle, windowFilterListTitle, windowFilterTextTitle, windowSelectionListTitle, null, action);
@@ -42,7 +49,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
         super(name, title, true);
         this.initialFilterSelectItem = initialFilterSelectItem;
 
-        getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
+        searchIconClickHandlerRegistration = getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
 
             @Override
             public void onFormItemClick(FormItemIconClickEvent event) {
@@ -130,6 +137,18 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
                 });
 
                 searchMultipleItemsWindow.getSave().addClickHandler(saveClickHandler);
+
+                // Hide filters (if needed)
+
+                if (!areSearchWindowFiltersVisible) {
+                    searchMultipleItemsWindow.hideFilters();
+                }
+
+                // Show information label (if needed)
+                if (isInformationLabelVisible) {
+                    searchMultipleItemsWindow.setInformationLabelContents(informationLabelContents);
+                    searchMultipleItemsWindow.showInformationLabel();
+                }
             }
         });
     }
@@ -189,5 +208,22 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
     public CustomSelectItem getInitialFilterSelectItem() {
         return initialFilterSelectItem;
+    }
+
+    public void hideSearchWindowFilters() {
+        areSearchWindowFiltersVisible = false;
+    }
+
+    public void showSearchWindowInformationLabel(String contents) {
+        isInformationLabelVisible = true;
+        informationLabelContents = contents;
+    }
+
+    public HandlerRegistration getSearchIconClickHandlerRegistration() {
+        return searchIconClickHandlerRegistration;
+    }
+
+    public void setSearchIconClickHandlerRegistration(HandlerRegistration searchIconClickHandlerRegistration) {
+        this.searchIconClickHandlerRegistration = searchIconClickHandlerRegistration;
     }
 }
