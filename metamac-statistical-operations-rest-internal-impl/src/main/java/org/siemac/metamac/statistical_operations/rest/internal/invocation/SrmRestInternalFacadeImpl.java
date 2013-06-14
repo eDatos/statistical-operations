@@ -7,7 +7,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component("srmRestInternalFacade")
 public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
-    private final Logger       logger = LoggerFactory.getLogger(LoggingInterceptor.class);
+    private final Logger       logger = LoggerFactory.getLogger(SrmRestInternalFacadeImpl.class);
 
     @Autowired
     private MetamacApisLocator restApiLocator;

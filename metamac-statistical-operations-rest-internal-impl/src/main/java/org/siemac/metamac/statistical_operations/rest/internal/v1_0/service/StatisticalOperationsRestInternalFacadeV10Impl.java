@@ -10,7 +10,6 @@ import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBui
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.domain.PagingParameter;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
-import org.siemac.metamac.core.common.aop.LoggingInterceptor;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.exception.RestCommonServiceExceptionType;
 import org.siemac.metamac.rest.exception.RestException;
@@ -64,7 +63,7 @@ public class StatisticalOperationsRestInternalFacadeV10Impl implements Statistic
     private RestCriteria2SculptorCriteriaMapper restCriteria2SculptorCriteriaMapper;
 
     private final ServiceContext                serviceContextRestInternal = new ServiceContext("restInternal", "restInternal", "restInternal");
-    private final Logger                        logger                     = LoggerFactory.getLogger(LoggingInterceptor.class);
+    private final Logger                        logger                     = LoggerFactory.getLogger(StatisticalOperationsRestInternalFacadeV10Impl.class);
 
     @Override
     public Operation retrieveOperationById(String id) {
