@@ -34,6 +34,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Autofit;
+import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -124,8 +125,12 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         operationsSectionStack.getDefaultSection().setItems(operationToolStrip, operationListGrid);
         operationsSectionStack.getDefaultSection().setExpanded(true);
 
-        panel.addMember(mainFormLayout);
-        panel.addMember(operationsSectionStack);
+        VLayout subPanel = new VLayout();
+        subPanel.setOverflow(Overflow.SCROLL);
+        subPanel.addMember(mainFormLayout);
+        subPanel.addMember(operationsSectionStack);
+
+        panel.addMember(subPanel);
     }
 
     @Override

@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.smartgwt.client.types.Autofit;
+import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
@@ -119,9 +120,13 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             }
         });
 
-        panel.addMember(listGridToolStrip);
-        panel.addMember(searchSectionStack);
-        panel.addMember(operationListGrid);
+        VLayout subPanel = new VLayout();
+        subPanel.setOverflow(Overflow.SCROLL);
+        subPanel.addMember(listGridToolStrip);
+        subPanel.addMember(searchSectionStack);
+        subPanel.addMember(operationListGrid);
+
+        panel.addMember(subPanel);
     }
 
     @Override
