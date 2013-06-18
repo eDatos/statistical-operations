@@ -394,6 +394,12 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // Set translationsShowed value to international fields
         identifiersForm.setTranslationsShowed(translationsShowed);
         identifiersEditionForm.setTranslationsShowed(translationsShowed);
+        contentDescriptorsForm.setTranslationsShowed(translationsShowed);
+        contentDescriptorsEditionForm.setTranslationsShowed(translationsShowed);
+        productionDescriptorsForm.setTranslationsShowed(translationsShowed);
+        productionDescriptorsEditionForm.setTranslationsShowed(translationsShowed);
+        diffusionDescriptorsForm.setTranslationsShowed(translationsShowed);
+        diffusionDescriptorsEditionForm.setTranslationsShowed(translationsShowed);
     }
 
     private boolean canFamilyCodeBeEdited(DynamicForm form) {
