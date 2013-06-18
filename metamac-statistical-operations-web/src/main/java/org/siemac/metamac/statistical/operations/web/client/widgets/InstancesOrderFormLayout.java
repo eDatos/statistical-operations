@@ -9,6 +9,7 @@ import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
+import org.siemac.metamac.web.common.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
@@ -18,6 +19,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import com.smartgwt.client.types.SortDirection;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.form.fields.CanvasItem;
+import com.smartgwt.client.widgets.form.fields.FormItemIcon;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridFieldIfFunction;
@@ -80,6 +82,15 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         canvasItem.setTitleStyle("staticFormItemTitle");
         canvasItem.setCanvas(list);
         canvasItem.setCellHeight(150);
+
+        FormItemIcon infoIcon = new FormItemIcon();
+        infoIcon.setSrc(GlobalResources.RESOURCE.info().getURL());
+        infoIcon.setPrompt(getConstants().instanceOrderInfoMessage());
+
+        canvasItem.setIcons(infoIcon);
+        canvasItem.setIconVAlign(VerticalAlignment.TOP);
+        canvasItem.setIconHeight(14);
+        canvasItem.setIconWidth(14);
 
         editionForm.setFields(canvasItem);
 
