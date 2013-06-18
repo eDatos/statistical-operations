@@ -16,6 +16,8 @@ import org.siemac.metamac.web.common.client.events.HideMessageEvent;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
+import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
+import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent.UpdatePlaceHistoryHandler;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
@@ -45,7 +47,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 
-public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy> implements MainPageUiHandlers, ShowMessageHandler, HideMessageHandler {
+public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy> implements MainPageUiHandlers, ShowMessageHandler, UpdatePlaceHistoryHandler, HideMessageHandler {
 
     private static Logger       logger = Logger.getLogger(MainPagePresenter.class.getName());
 
@@ -110,6 +112,10 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     protected void onReset() {
         super.onReset();
         hideMessages();
+        updateBreadcrumbs();
+    }
+    
+    private void updateBreadcrumbs() {
         int size = placeManager.getHierarchyDepth();
         getView().clearBreadcrumbs(size, placeManager);
         for (int i = 0; i < size; ++i) {
@@ -153,6 +159,13 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     @Override
     public void onShowMessage(ShowMessageEvent event) {
         getView().showMessage(event.getThrowable(), event.getMessage(), event.getMessageType());
+    }
+    
+    @ProxyEvent
+    @Override
+    public void onUpdatePlaceHistory(UpdatePlaceHistoryEvent event) {
+        placeManager.updateHistory(event.getPlaceRequest(), true);
+        updateBreadcrumbs();
     }
 
     @ProxyEvent

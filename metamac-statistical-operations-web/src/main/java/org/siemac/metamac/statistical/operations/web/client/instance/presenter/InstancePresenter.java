@@ -42,6 +42,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.GetExternal
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
+import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
@@ -87,8 +88,9 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @TitleFunction
-    public static String getTranslatedTitle() {
-        return getConstants().breadcrumbInstance();
+    public static String getTranslatedTitle(PlaceRequest placeRequest) {
+        String instanceCode = placeRequest.getParameter(PlaceRequestParams.instanceParam, null);
+        return instanceCode != null ? instanceCode : getConstants().breadcrumbInstance();
     }
 
     public interface InstanceView extends View, HasUiHandlers<InstanceUiHandlers> {
@@ -191,7 +193,10 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
                 // Update URL
                 PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeInstancePlaceRequest(instanceDto.getCode());
-                placeManager.updateHistory(placeRequest, true);
+                //placeManager.updateHistory(placeRequest, true);
+                UpdatePlaceHistoryEvent.fireUpdate(InstancePresenter.this, placeRequest);
+                MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));
+                
             }
         });
     }

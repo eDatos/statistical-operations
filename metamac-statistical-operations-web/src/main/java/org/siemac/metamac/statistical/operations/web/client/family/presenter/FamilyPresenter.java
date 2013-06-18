@@ -77,8 +77,9 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     @TitleFunction
-    public static String getTranslatedTitle() {
-        return getConstants().breadcrumbStatisticalFamily();
+    public static String getTranslatedTitle(PlaceRequest request) {
+        String familyCode = request.getParameter(PlaceRequestParams.familyParam, null);
+        return familyCode != null ? familyCode : getConstants().breadcrumbStatisticalFamily();
     }
 
     public interface FamilyView extends View, HasUiHandlers<FamilyUiHandlers> {

@@ -114,8 +114,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     @TitleFunction
-    public static String getTranslatedTitle() {
-        return getConstants().breadcrumbStatisticalOperation();
+    public static String getTranslatedTitle(PlaceRequest placeRequest) {
+        return placeRequest.getParameter(PlaceRequestParams.operationParam, getConstants().breadcrumbStatisticalOperation());
     }
 
     public interface OperationView extends View, HasUiHandlers<OperationUiHandlers> {
