@@ -655,6 +655,9 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
     // ------------------------------------------------------------
 
     private InternationalString internationalStringToEntity(InternationalStringDto source, InternationalString target, String metadataName) throws MetamacException {
+        // Preprocess international string
+        internationalStringHtmlToTextPlain(source);
+
         // Check it is valid
         checkInternationalStringDtoValid(source, metadataName);
 
