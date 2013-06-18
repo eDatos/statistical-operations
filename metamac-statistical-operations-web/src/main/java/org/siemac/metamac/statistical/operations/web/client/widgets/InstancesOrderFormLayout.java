@@ -49,6 +49,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         editionForm.setStyleName("form");
 
         list = new ListGrid();
+        list.setCanFocus(false); // To avoid scrolling when a record is clicked
         list.setCanDragRecordsOut(true);
         list.setCanAcceptDroppedRecords(true);
         list.setCanReorderRecords(true);
