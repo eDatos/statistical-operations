@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
-import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
@@ -67,7 +66,6 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
         MasterHead getMasterHead();
 
-        BreadCrumbsPanel getBreadCrumbsPanel();
         void clearBreadcrumbs(int size, PlaceManager placeManager);
         void setBreadcrumbs(int index, String title);
 

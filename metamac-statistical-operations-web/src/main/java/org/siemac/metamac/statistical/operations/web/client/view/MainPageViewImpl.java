@@ -4,8 +4,8 @@ import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
-import org.siemac.metamac.statistical.operations.web.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
+import org.siemac.metamac.web.common.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.web.common.client.widgets.ErrorMessagePanel;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.client.widgets.MetamacNavBar;
@@ -150,11 +150,6 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
     /****************************************************
      * End code for nested presenters.
      ***************************************************/
-
-    @Override
-    public BreadCrumbsPanel getBreadCrumbsPanel() {
-        return breadCrumbsPanel;
-    }
 
     @Override
     public MasterHead getMasterHead() {
