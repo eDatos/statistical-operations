@@ -7,6 +7,7 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ListBase;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategoryResourceInternal;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codes;
@@ -48,8 +49,18 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
 
     public static ExternalItemsResult getCategoriesAsExternalItemsResult(Categories categories) {
         ExternalItemsResult result = getListBaseAsExternalItemsResult(categories);
-        result.setExternalItemDtos(getExternalItemDtosFromResourceInternals(categories.getCategories()));
+        result.setExternalItemDtos(getExternalItemDtosFromCategoryResourceInternals(categories.getCategories()));
         return result;
+    }
+
+    private static List<ExternalItemDto> getExternalItemDtosFromCategoryResourceInternals(List<CategoryResourceInternal> resources) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
+        for (ResourceInternal resource : resources) {
+            ExternalItemDto externalItemDto = getExternalItemDtoFromSrmResourceInternal(resource);
+            // TODO Code FULL
+            externalItemDtos.add(externalItemDto);
+        }
+        return externalItemDtos;
     }
 
     //
