@@ -6,10 +6,13 @@ import java.util.logging.Logger;
 
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
+import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
 import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
 import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
 import org.siemac.metamac.web.common.client.MetamacEntryPoint;
+import org.siemac.metamac.web.common.client.MetamacSecurityEntryPoint;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
+import org.siemac.metamac.web.common.client.gin.MetamacWebGinjector;
 import org.siemac.metamac.web.common.client.utils.ApplicationEditionLanguages;
 import org.siemac.metamac.web.common.client.utils.ApplicationOrganisation;
 import org.siemac.metamac.web.common.client.widgets.MetamacNavBar;
@@ -37,7 +40,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class OperationsWeb extends MetamacEntryPoint {
+public class OperationsWeb extends MetamacSecurityEntryPoint {
 
     private static final Boolean               SECURITY_ENABLED = true;
 
@@ -50,167 +53,18 @@ public class OperationsWeb extends MetamacEntryPoint {
 
     public static final OperationsWebGinjector ginjector        = GWT.create(OperationsWebGinjector.class);
 
-    interface GlobalResources extends ClientBundle {
-
-        @NotStrict
-        @Source("OperationsWebStyles.css")
-        CssResource css();
-    }
-
     @Override
     public void onModuleLoad() {
         setUncaughtExceptionHandler();
-        ginjector.getDispatcher().execute(new GetNavigationBarUrlAction(), new WaitingAsyncCallback<GetNavigationBarUrlResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                logger.log(Level.SEVERE, "Error loading toolbar");
-                init();
-            }
-            @Override
-            public void onWaitSuccess(GetNavigationBarUrlResult result) {
-                // Load scripts for navigation bar
-                if (result.getNavigationBarUrl() != null) {
-                    MetamacNavBar.loadScripts(result.getNavigationBarUrl());
-                } else {
-                    logger.log(Level.SEVERE, "Error loading toolbar");
-                }
-                init();
-            };
-        });
-
+        
+        prepareApplication(SECURITY_ENABLED);
     }
 
-    private void init() {
-        if (SECURITY_ENABLED) {
-            loadSecuredApplication();
-        } else {
-            loadNonSecuredApplication();
-        }
-    }
-
-    // Application id should be the same than the one defined in org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants.SECURITY_APPLICATION_ID
-    private void loadNonSecuredApplication() {
-        ginjector.getDispatcher().execute(new MockCASUserAction("GESTOR_OPERACIONES"), new WaitingAsyncCallback<MockCASUserResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                logger.log(Level.SEVERE, "Error mocking CAS user");
-            }
-            @Override
-            public void onWaitSuccess(MockCASUserResult result) {
-                OperationsWeb.principal = result.getMetamacPrincipal();
-
-                // Load properties
-                String[] propertiesToLoad = new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
-                        StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
-                        StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
-                ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(propertiesToLoad), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
-
-                    @Override
-                    public void onWaitFailure(Throwable caught) {
-                        logger.log(Level.SEVERE, "Error loading edition languages");
-                        // If an error occurs while loading edition languages, enable SPANISH, ENGLISH and PORTUGUESE by default
-                        ApplicationEditionLanguages.setEditionLanguages(new String[]{ApplicationEditionLanguages.SPANISH, ApplicationEditionLanguages.ENGLISH, ApplicationEditionLanguages.PORTUGUESE});
-                        loadApplication();
-                    }
-                    @Override
-                    public void onWaitSuccess(LoadConfigurationPropertiesResult result) {
-                        ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
-                        ApplicationOrganisation.setCurrentOrganisation(result.getOrganisation());
-                        setConfigurationProperties(result.getPropertyValues());
-                        loadApplication();
-                    }
-                });
-            }
-        });
-    }
-
-    private void loadSecuredApplication() {
-        String ticketParam = Window.Location.getParameter(TICKET);
-        if (ticketParam != null) {
-            UrlBuilder urlBuilder = Window.Location.createUrlBuilder();
-            urlBuilder.removeParameter(TICKET);
-            urlBuilder.setHash(Window.Location.getHash() + TICKET_HASH + ticketParam);
-            String url = urlBuilder.buildString();
-            Window.Location.replace(url);
-            return;
-        }
-
-        String hash = Window.Location.getHash();
-
-        String ticketHash = null;
-        if (hash.contains(TICKET_HASH)) {
-            ticketHash = hash.substring(hash.indexOf(TICKET_HASH) + TICKET_HASH.length(), hash.length());
-        }
-
-        if (ticketHash == null || ticketHash.length() == 0) {
-            displayLoginView();
-        } else {
-            String serviceUrl = Window.Location.createUrlBuilder().buildString();
-            ginjector.getDispatcher().execute(new ValidateTicketAction(ticketHash, serviceUrl), new WaitingAsyncCallback<ValidateTicketResult>() {
-
-                @Override
-                public void onWaitFailure(Throwable arg0) {
-                    logger.log(Level.SEVERE, "Error validating ticket");
-                }
-                @Override
-                public void onWaitSuccess(ValidateTicketResult result) {
-                    OperationsWeb.principal = result.getMetamacPrincipal();
-
-                    String url = Window.Location.createUrlBuilder().setHash("").buildString();
-                    Window.Location.assign(url);
-
-                    // Load properties
-                    String[] propertiesToLoad = new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
-                            StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
-                            StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
-                    ginjector.getDispatcher().execute(new LoadConfigurationPropertiesAction(propertiesToLoad), new WaitingAsyncCallback<LoadConfigurationPropertiesResult>() {
-
-                        @Override
-                        public void onWaitFailure(Throwable caught) {
-                            logger.log(Level.SEVERE, "Error loading edition languages");
-                            // If an error occurs while loading edition languages, enable SPANISH, ENGLISH and PORTUGUESE by default
-                            ApplicationEditionLanguages.setEditionLanguages(new String[]{ApplicationEditionLanguages.SPANISH, ApplicationEditionLanguages.ENGLISH,
-                                    ApplicationEditionLanguages.PORTUGUESE});
-                            loadApplication();
-                        }
-                        @Override
-                        public void onWaitSuccess(LoadConfigurationPropertiesResult result) {
-                            ApplicationEditionLanguages.setEditionLanguages(result.getLanguages());
-                            ApplicationOrganisation.setCurrentOrganisation(result.getOrganisation());
-                            setConfigurationProperties(result.getPropertyValues());
-                            loadApplication();
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    private void loadApplication() {
-        LoginAuthenticatedEvent.fire(ginjector.getEventBus(), OperationsWeb.principal);
-        // This is required for GWT-Platform proxy's generator.
-        DelayedBindRegistry.bind(ginjector);
-        ginjector.getPlaceManager().revealCurrentPlace();
-        // Inject global styles
-        GWT.<GlobalResources> create(GlobalResources.class).css().ensureInjected();
-        Document.get().setTitle(getConstants().appTitle());
-    }
-
-    public void displayLoginView() {
-        String serviceUrl = Window.Location.createUrlBuilder().buildString();
-        ginjector.getDispatcher().execute(new GetLoginPageUrlAction(serviceUrl), new WaitingAsyncCallback<GetLoginPageUrlResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                logger.log(Level.SEVERE, "Error getting login page URL");
-            }
-            @Override
-            public void onWaitSuccess(GetLoginPageUrlResult result) {
-                Window.Location.replace(result.getLoginPageUrl());
-            }
-        });
+    @Override
+    protected String[] getPropertiesToLoad() {
+        return new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
+                StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
+                StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
     }
 
     public static MetamacPrincipal getCurrentUser() {
@@ -246,11 +100,37 @@ public class OperationsWeb extends MetamacEntryPoint {
         ginjector.getPlaceManager().revealErrorPlace(null);
     }
 
-    private void setConfigurationProperties(Map<String, String> propertyValues) {
+    @Override
+    protected void setConfigurationProperties(Map<String, String> propertyValues) {
         ConfigurationPropertiesUtils.setOperationDefaultCodelistForUpdateFrequency(propertyValues
                 .get(StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST));
         ConfigurationPropertiesUtils.setInstanceDefaultCodelistForGeographicGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY));
         ConfigurationPropertiesUtils.setInstanceDefaultCodelistForTemporalGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY));
         ConfigurationPropertiesUtils.setInstanceDefaultCodelistForFreqColl(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL));
+    }
+    
+    @Override
+    protected String getApplicationTitle() {
+        return getConstants().appTitle();
+    }
+    
+    @Override
+    protected MetamacPrincipal getPrincipal() {
+        return principal;
+    }
+    
+    @Override
+    protected void setPrincipal(MetamacPrincipal principal) {
+        this.principal = principal;
+    }
+    
+    @Override
+    protected String getSecurityApplicationId() {
+        return StatisticalOperationsConstants.SECURITY_APPLICATION_ID;
+    }
+    
+    @Override
+    protected MetamacWebGinjector getWebGinjector() {
+        return ginjector;
     }
 }
