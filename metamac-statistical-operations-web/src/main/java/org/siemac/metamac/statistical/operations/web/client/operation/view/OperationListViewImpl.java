@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.operation.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -16,6 +17,7 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFi
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewOperationForm;
+import org.siemac.metamac.web.common.client.constants.CommonWebConstants;
 import org.siemac.metamac.web.common.client.widgets.PaginatedCheckListGrid;
 import org.siemac.metamac.web.common.client.widgets.SearchSectionStack;
 import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
@@ -31,6 +33,8 @@ import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
+import com.smartgwt.client.widgets.form.fields.events.KeyPressEvent;
+import com.smartgwt.client.widgets.form.fields.events.KeyPressHandler;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
@@ -87,6 +91,16 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             @Override
             public void onFormItemClick(FormItemIconClickEvent event) {
                 getUiHandlers().retrieveOperationList(OperationListPresenter.OPERATION_LIST_FIRST_RESULT, OperationListPresenter.OPERATION_LIST_MAX_RESULTS, searchSectionStack.getSearchCriteria());
+            }
+        });
+        searchSectionStack.addSearchItemKeyPressHandler(new KeyPressHandler() {
+
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (StringUtils.equals(event.getKeyName(), CommonWebConstants.ENTER_KEY)) {
+                    getUiHandlers()
+                            .retrieveOperationList(OperationListPresenter.OPERATION_LIST_FIRST_RESULT, OperationListPresenter.OPERATION_LIST_MAX_RESULTS, searchSectionStack.getSearchCriteria());
+                }
             }
         });
 
