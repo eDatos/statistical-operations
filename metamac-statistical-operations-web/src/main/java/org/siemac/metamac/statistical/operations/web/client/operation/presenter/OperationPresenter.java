@@ -30,7 +30,6 @@ import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
@@ -95,16 +94,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler {
 
-    private final DispatchAsync                dispatcher;
-    private final PlaceManager                 placeManager;
+    private final DispatchAsync   dispatcher;
+    private final PlaceManager    placeManager;
 
-    private OperationDto                       operationDto;
-    private List<InstanceBaseDto>              instanceBaseDtos;
-    private List<FamilyBaseDto>                familyBaseDtos;
+    private OperationDto          operationDto;
+    private List<InstanceBaseDto> instanceBaseDtos;
+    private List<FamilyBaseDto>   familyBaseDtos;
 
-    private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
-
-    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object    TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)
@@ -156,12 +153,10 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     @Inject
-    public OperationPresenter(EventBus eventBus, OperationView operationView, OperationProxy operationProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
+    public OperationPresenter(EventBus eventBus, OperationView operationView, OperationProxy operationProxy, DispatchAsync dispatcher, PlaceManager placeManager) {
         super(eventBus, operationView, operationProxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
 
@@ -243,7 +238,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().statisticalOperation());
-        setInSlot(TYPE_SetContextAreaContentToolBar, operationsToolStripPresenterWidget);
     }
 
     @Override

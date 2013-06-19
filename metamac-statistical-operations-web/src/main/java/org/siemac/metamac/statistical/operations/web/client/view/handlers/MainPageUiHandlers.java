@@ -7,6 +7,9 @@ public interface MainPageUiHandlers extends UiHandlers {
     void downloadUserGuide();
     void closeSession();
 
+    void goToFamilies();
+    void goToOperations();
+
     void onNavigationPaneSectionHeaderClicked(String name);
     void onNavigationPaneSectionClicked(String name);
 }

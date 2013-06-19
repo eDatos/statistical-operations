@@ -21,8 +21,6 @@ import org.siemac.metamac.statistical.operations.web.client.presenter.Unauthoriz
 import org.siemac.metamac.statistical.operations.web.client.view.ErrorPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.view.MainPageViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.view.UnauthorizedPageViewImpl;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
-import org.siemac.metamac.statistical.operations.web.client.widgets.view.OperationsToolStripViewImpl;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -58,12 +56,8 @@ public class ClientModule extends AbstractPresenterModule {
         bindPresenter(ErrorPagePresenter.class, ErrorPagePresenter.ErrorPageView.class, ErrorPageViewImpl.class, ErrorPagePresenter.ErrorPageProxy.class);
         bindPresenter(UnauthorizedPagePresenter.class, UnauthorizedPagePresenter.UnauthorizedPageView.class, UnauthorizedPageViewImpl.class, UnauthorizedPagePresenter.UnauthorizedPageProxy.class);
 
-        // Presenter widgets
-        bindSingletonPresenterWidget(OperationsToolStripPresenterWidget.class, OperationsToolStripPresenterWidget.OperationsToolStripView.class, OperationsToolStripViewImpl.class);
-
         // Interfaces
         bind(OperationsWebConstants.class).in(Singleton.class);
         bind(OperationsWebMessages.class).in(Singleton.class);
     }
-
 }

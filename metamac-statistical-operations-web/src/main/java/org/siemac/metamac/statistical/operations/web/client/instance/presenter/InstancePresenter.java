@@ -25,7 +25,6 @@ import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperati
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
@@ -70,15 +69,13 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 
 public class InstancePresenter extends Presenter<InstancePresenter.InstanceView, InstancePresenter.InstanceProxy> implements InstanceUiHandlers, UpdateOperationsListsHandler {
 
-    private final DispatchAsync                dispatcher;
-    private final PlaceManager                 placeManager;
+    private final DispatchAsync dispatcher;
+    private final PlaceManager  placeManager;
 
-    private OperationBaseDto                   operationBaseDto;
-    private InstanceDto                        instanceDto;
+    private OperationBaseDto    operationBaseDto;
+    private InstanceDto         instanceDto;
 
-    private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
-
-    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object  TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.instancePage)
@@ -113,12 +110,10 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @Inject
-    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
+    public InstancePresenter(EventBus eventBus, InstanceView instanceView, InstanceProxy instanceProxy, DispatchAsync dispatcher, PlaceManager placeManager) {
         super(eventBus, instanceView, instanceProxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
 
@@ -162,7 +157,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().instance());
-        setInSlot(TYPE_SetContextAreaContentToolBar, operationsToolStripPresenterWidget);
     }
 
     @Override
@@ -193,10 +187,10 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
                 // Update URL
                 PlaceRequest placeRequest = PlaceRequestUtils.buildRelativeInstancePlaceRequest(instanceDto.getCode());
-                //placeManager.updateHistory(placeRequest, true);
+                // placeManager.updateHistory(placeRequest, true);
                 UpdatePlaceHistoryEvent.fireUpdate(InstancePresenter.this, placeRequest);
                 MainPagePresenter.getMasterHead().setTitleLabel(getMessages().titleInstance(instanceDto.getCode()));
-                
+
             }
         });
     }

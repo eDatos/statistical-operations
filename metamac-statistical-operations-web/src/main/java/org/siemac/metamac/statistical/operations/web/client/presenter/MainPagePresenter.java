@@ -46,7 +46,12 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 
-public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy> implements MainPageUiHandlers, ShowMessageHandler, UpdatePlaceHistoryHandler, HideMessageHandler {
+public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView, MainPagePresenter.MainPageProxy>
+        implements
+            MainPageUiHandlers,
+            ShowMessageHandler,
+            UpdatePlaceHistoryHandler,
+            HideMessageHandler {
 
     private static Logger       logger = Logger.getLogger(MainPagePresenter.class.getName());
 
@@ -112,7 +117,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
         hideMessages();
         updateBreadcrumbs();
     }
-    
+
     private void updateBreadcrumbs() {
         int size = placeManager.getHierarchyDepth();
         getView().clearBreadcrumbs(size, placeManager);
@@ -158,7 +163,7 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     public void onShowMessage(ShowMessageEvent event) {
         getView().showMessage(event.getThrowable(), event.getMessage(), event.getMessageType());
     }
-    
+
     @ProxyEvent
     @Override
     public void onUpdatePlaceHistory(UpdatePlaceHistoryEvent event) {
@@ -219,5 +224,15 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
                 CommonWebUtils.showDownloadFileWindow(SharedTokens.FILE_DOWNLOAD_DIR_PATH, SharedTokens.PARAM_FILE_NAME, result.getUserGuideUrl());
             }
         });
+    }
+
+    @Override
+    public void goToFamilies() {
+        placeManager.revealPlace(new PlaceRequest(NameTokens.familyListPage));
+    }
+
+    @Override
+    public void goToOperations() {
+        placeManager.revealPlace(new PlaceRequest(NameTokens.operationListPage));
     }
 }

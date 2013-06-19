@@ -4,6 +4,7 @@ import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
+import org.siemac.metamac.statistical.operations.web.client.widgets.OperationsMenu;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.web.common.client.widgets.ErrorMessagePanel;
@@ -33,6 +34,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
     private MainPageUiHandlers        uiHandlers;
 
     private final MasterHead          masterHead;
+    private final OperationsMenu      operationsMenu;
     private final BreadCrumbsPanel    breadCrumbsPanel;
 
     private final SuccessMessagePanel successMessagePanel;
@@ -44,8 +46,9 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
     private VLayout                   footerLayout;
 
     @Inject
-    public MainPageViewImpl(MasterHead masterHead, BreadCrumbsPanel breadCrumbsPanel, SuccessMessagePanel successMessagePanel, ErrorMessagePanel errorMessagePanel) {
+    public MainPageViewImpl(MasterHead masterHead, OperationsMenu operationsMenu, BreadCrumbsPanel breadCrumbsPanel, SuccessMessagePanel successMessagePanel, ErrorMessagePanel errorMessagePanel) {
         this.masterHead = masterHead;
+        this.operationsMenu = operationsMenu;
         this.breadCrumbsPanel = breadCrumbsPanel;
         this.successMessagePanel = successMessagePanel;
         this.errorMessagePanel = errorMessagePanel;
@@ -68,7 +71,12 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
         // Nested layout container
         VLayout vLayout = new VLayout();
         vLayout.addMember(this.masterHead);
-        vLayout.addMember(this.breadCrumbsPanel);
+        vLayout.addMember(this.operationsMenu);
+
+        VLayout breadCrumbLayout = new VLayout();
+        breadCrumbLayout.addMember(this.breadCrumbsPanel);
+        breadCrumbLayout.setMargin(10);
+        vLayout.addMember(breadCrumbLayout);
 
         // Nested layout container to the North layout container
         northLayout.addMember(vLayout);
@@ -194,6 +202,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
     @Override
     public void setUiHandlers(MainPageUiHandlers uiHandlers) {
         this.uiHandlers = uiHandlers;
+        this.operationsMenu.setUiHandlers(uiHandlers);
     }
 
     private String getUserName() {

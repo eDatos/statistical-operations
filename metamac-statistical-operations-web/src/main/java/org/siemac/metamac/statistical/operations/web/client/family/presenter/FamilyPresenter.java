@@ -19,7 +19,6 @@ import org.siemac.metamac.statistical.operations.web.client.family.view.handlers
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.presenter.OperationsToolStripPresenterWidget;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
@@ -59,15 +58,13 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, FamilyPresenter.FamilyProxy> implements FamilyUiHandlers {
 
-    private final DispatchAsync                dispatcher;
-    private final PlaceManager                 placeManager;
+    private final DispatchAsync    dispatcher;
+    private final PlaceManager     placeManager;
 
-    private FamilyDto                          familyDto;
-    private List<OperationBaseDto>             operationBaseDtos;
+    private FamilyDto              familyDto;
+    private List<OperationBaseDto> operationBaseDtos;
 
-    private OperationsToolStripPresenterWidget operationsToolStripPresenterWidget;
-
-    public static final Object                 TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object     TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.familyPage)
@@ -99,12 +96,10 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     @Inject
-    public FamilyPresenter(EventBus eventBus, FamilyView familyView, FamilyProxy familyProxy, DispatchAsync dispatcher, PlaceManager placeManager,
-            OperationsToolStripPresenterWidget operationsToolStripPresenterWidget) {
+    public FamilyPresenter(EventBus eventBus, FamilyView familyView, FamilyProxy familyProxy, DispatchAsync dispatcher, PlaceManager placeManager) {
         super(eventBus, familyView, familyProxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
-        this.operationsToolStripPresenterWidget = operationsToolStripPresenterWidget;
         getView().setUiHandlers(this);
     }
 
@@ -157,7 +152,6 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().statisticalFamily());
-        setInSlot(TYPE_SetContextAreaContentToolBar, operationsToolStripPresenterWidget);
     }
 
     @Override
