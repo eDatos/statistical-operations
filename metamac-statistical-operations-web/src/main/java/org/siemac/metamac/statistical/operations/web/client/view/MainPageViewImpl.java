@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.web.client.view;
 
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationsMenu;
@@ -21,10 +22,12 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.AnimationEffect;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> implements MainPagePresenter.MainPageView {
 
@@ -211,5 +214,19 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
             return metamacPrincipal.getUserId();
         }
         return new String();
+    }
+
+    @Override
+    public void selectStructuralResourceMenuButton(ToolStripButtonEnum type) {
+        Canvas[] canvas = operationsMenu.getMembers();
+        for (int i = 0; i < canvas.length; i++) {
+            if (canvas[i] instanceof ToolStripButton) {
+                if (type != null && type.getValue().equals(((ToolStripButton) canvas[i]).getID())) {
+                    ((ToolStripButton) canvas[i]).select();
+                } else {
+                    ((ToolStripButton) canvas[i]).deselect();
+                }
+            }
+        }
     }
 }

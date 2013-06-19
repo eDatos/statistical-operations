@@ -4,6 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
+import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuButtonEvent;
+import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuButtonEvent.SelectMenuButtonHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
@@ -51,7 +54,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
             MainPageUiHandlers,
             ShowMessageHandler,
             UpdatePlaceHistoryHandler,
-            HideMessageHandler {
+            HideMessageHandler,
+            SelectMenuButtonHandler {
 
     private static Logger       logger = Logger.getLogger(MainPagePresenter.class.getName());
 
@@ -70,6 +74,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     public interface MainPageView extends View, HasUiHandlers<MainPageUiHandlers> {
 
         MasterHead getMasterHead();
+
+        void selectStructuralResourceMenuButton(ToolStripButtonEnum toolStripButtonEnum);
 
         void clearBreadcrumbs(int size, PlaceManager placeManager);
         void setBreadcrumbs(int index, String title);
@@ -175,6 +181,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     @Override
     public void onHideMessage(HideMessageEvent event) {
         hideMessages();
+    }
+
+    @ProxyEvent
+    @Override
+    public void onSelectMenuButton(SelectMenuButtonEvent event) {
+        getView().selectStructuralResourceMenuButton(event.getResourceType());
     }
 
     private void hideMessages() {

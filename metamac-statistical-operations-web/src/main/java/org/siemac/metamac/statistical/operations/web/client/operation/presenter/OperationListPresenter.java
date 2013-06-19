@@ -11,6 +11,8 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
+import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuButtonEvent;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
@@ -150,6 +152,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     protected void onReveal() {
         super.onReveal();
         MainPagePresenter.getMasterHead().setTitleLabel(getConstants().statisticalOperations());
+        SelectMenuButtonEvent.fire(this, ToolStripButtonEnum.OPERATIONS);
     }
 
     @Override

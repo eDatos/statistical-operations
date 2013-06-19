@@ -10,6 +10,8 @@ import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
+import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
+import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuButtonEvent;
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyListUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
@@ -137,6 +139,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
     protected void onReset() {
         super.onReset();
         retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
+        SelectMenuButtonEvent.fire(this, ToolStripButtonEnum.FAMILIES);
     }
 
     @Override
