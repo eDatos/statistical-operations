@@ -26,7 +26,6 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -191,15 +190,15 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void retrieveFamilyList(int firstResult, int maxResults, final String family) {
-        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new AsyncCallback<GetFamilyPaginatedListResult>() {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new WaitingAsyncCallback<GetFamilyPaginatedListResult>() {
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onWaitFailure(Throwable caught) {
                 ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
 
             @Override
-            public void onSuccess(GetFamilyPaginatedListResult result) {
+            public void onWaitSuccess(GetFamilyPaginatedListResult result) {
                 getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
                 if (StringUtils.isBlank(family)) {
                     getView().clearSearchSection();
