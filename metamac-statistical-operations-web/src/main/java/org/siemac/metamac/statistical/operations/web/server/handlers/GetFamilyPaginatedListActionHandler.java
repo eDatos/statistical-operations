@@ -59,6 +59,7 @@ public class GetFamilyPaginatedListActionHandler extends SecurityActionHandler<G
                 disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.CODE.name(), action.getFamily(), OperationType.ILIKE));
                 disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.TITLE.name(), action.getFamily(), OperationType.ILIKE));
                 disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.DESCRIPTION.name(), action.getFamily(), OperationType.ILIKE));
+                disjuction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.ACRONYM.name(), action.getFamily(), OperationType.ILIKE));
             }
             criteria.setRestriction(disjuction);
 
