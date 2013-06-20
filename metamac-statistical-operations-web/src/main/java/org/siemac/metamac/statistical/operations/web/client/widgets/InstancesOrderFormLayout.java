@@ -11,6 +11,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.web.common.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
+import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.MainFormLayout;
@@ -27,10 +28,10 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class InstancesOrderFormLayout extends MainFormLayout {
 
-    private ListGrid     list;
-    private ViewTextItem textItem;
+    private BaseCustomListGrid list;
+    private ViewTextItem       textItem;
 
-    private String       instancesTitleList;
+    private String             instancesTitleList;
 
     public InstancesOrderFormLayout() {
         super();
@@ -50,7 +51,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         GroupDynamicForm editionForm = new GroupDynamicForm(getConstants().instancesOrder());
         editionForm.setStyleName("form");
 
-        list = new ListGrid();
+        list = new BaseCustomListGrid();
         list.setCanFocus(false); // To avoid scrolling when a record is clicked
         list.setCanDragRecordsOut(true);
         list.setCanAcceptDroppedRecords(true);
@@ -60,7 +61,6 @@ public class InstancesOrderFormLayout extends MainFormLayout {
         list.setBorder("1px solid #D9D9D9");
         list.setBodyStyleName("normal");
         list.setShowHeader(false);
-        list.setLeaveScrollbarGap(false);
         CustomListGridField codeField = new CustomListGridField(InstanceDS.CODE, getConstants().instanceCode());
         codeField.setWidth(150);
         CustomListGridField titleField = new CustomListGridField(InstanceDS.TITLE, getConstants().instanceTitle());
