@@ -21,8 +21,8 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class SearchMultipleItemsItem extends ExternalItemListItem {
 
-    protected final int                                                       FIRST_RESULT = 0;
-    protected final int                                                       MAX_RESULTS  = 6;
+    protected final int                                                       FIRST_RESULT                  = 0;
+    protected final int                                                       MAX_RESULTS                   = 6;
 
     protected SearchMultipleExternalItemPaginatedWithExternalItemFilterWindow searchMultipleItemsWindow;
     protected SrmExternalResourcesUiHandlers                                  uiHandlers;
@@ -32,7 +32,7 @@ public class SearchMultipleItemsItem extends ExternalItemListItem {
 
     protected CustomSelectItem                                                initialFilterSelectItem;
 
-    protected boolean                                                         areSearchWindowFiltersVisible;
+    protected boolean                                                         areSearchWindowFiltersVisible = true;
     protected boolean                                                         isInformationLabelVisible;
     protected String                                                          informationLabelContents;
 
