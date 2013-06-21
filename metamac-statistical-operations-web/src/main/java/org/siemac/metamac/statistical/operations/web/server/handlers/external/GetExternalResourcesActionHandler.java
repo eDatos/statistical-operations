@@ -38,7 +38,8 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
         ExternalItemsResult result = null;
         switch (action.getExternalResourceWebCriteria().getType()) {
             case CATEGORY_SCHEME:
-                result = srmRestInternalFacade.findCategorySchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade
+                        .findCategorySchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CATEGORY:
                 result = srmRestInternalFacade.findCategories(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
@@ -51,13 +52,15 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findOrganisations(serviceContext, (OrganisationRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT_SCHEME:
-                result = srmRestInternalFacade.findOrganisationUnitSchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findOrganisationUnitSchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                        action.getMaxResults());
                 break;
             case ORGANISATION_UNIT:
                 result = srmRestInternalFacade.findOrganisationUnits(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case DATA_PROVIDER_SCHEME:
-                result = srmRestInternalFacade.findDataProviderSchemes(serviceContext, action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findDataProviderSchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                        action.getMaxResults());
                 break;
             case DATA_PROVIDER:
                 result = srmRestInternalFacade.findDataProviders(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
