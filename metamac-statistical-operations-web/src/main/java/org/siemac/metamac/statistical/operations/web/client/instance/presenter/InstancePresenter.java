@@ -45,8 +45,8 @@ import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCrit
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.event.shared.EventBus;
@@ -278,16 +278,16 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
-        ExternalResourceWebCriteria externalResourceWebCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
-        retrieveItemSchemes(formItemName, externalResourceWebCriteria, firstResult, maxResults);
+        SrmItemSchemeRestCriteria srmItemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
+        retrieveItemSchemes(formItemName, srmItemSchemeRestCriteria, firstResult, maxResults);
     }
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, ExternalResourceWebCriteria externalResourceWebCriteria, int firstResult, int maxResults) {
-        if (externalResourceWebCriteria instanceof ConceptSchemeRestCriteria) {
-            ((ConceptSchemeRestCriteria) externalResourceWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
+    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
+        if (srmItemSchemeRestCriteria instanceof ConceptSchemeRestCriteria) {
+            ((ConceptSchemeRestCriteria) srmItemSchemeRestCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
-        dispatcher.execute(new GetExternalResourcesAction(externalResourceWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+        dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
 
             @Override
             public void onWaitFailure(Throwable caught) {
@@ -299,6 +299,7 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             }
         });
     }
+
     @Override
     public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
         SrmItemRestCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
