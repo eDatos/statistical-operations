@@ -219,9 +219,9 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     //
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
-        SrmItemSchemeRestCriteria srmItemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
-        retrieveItemSchemes(formItemName, srmItemSchemeRestCriteria, firstResult, maxResults);
+    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+        itemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(itemSchemeRestCriteria, types);
+        retrieveItemSchemes(formItemName, itemSchemeRestCriteria, firstResult, maxResults);
     }
 
     @Override
@@ -240,8 +240,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     }
 
     @Override
-    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
-        SrmItemRestCriteria itemRestCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+    public void retrieveItems(final String formItemName, SrmItemRestCriteria itemRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+        itemRestCriteria = RestWebCriteriaUtils.buildItemWebCriteria(itemRestCriteria, types);
         retrieveItems(formItemName, itemRestCriteria, firstResult, maxResults);
     }
 

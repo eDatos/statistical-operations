@@ -35,7 +35,7 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleS
 
                     SearchMultipleConceptsAndConceptSchemesItem.this.itemSchemeCriteria.setCriteria(null);
                     SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria.setCriteria(null);
-                    SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria.setItemSchemUrn(null);
+                    SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria.setItemSchemeUrn(null);
                     searchMultipleItemsWindow.clearListSearchSections();
 
                     selectedResourceType = TypeExternalArtefactsEnum.valueOf((String) event.getValue());

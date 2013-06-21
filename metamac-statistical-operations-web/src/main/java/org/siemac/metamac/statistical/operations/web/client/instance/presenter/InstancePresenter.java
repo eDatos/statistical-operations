@@ -277,8 +277,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     //
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria) {
-        SrmItemSchemeRestCriteria srmItemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(types, criteria);
+    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+        srmItemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(srmItemSchemeRestCriteria, types);
         retrieveItemSchemes(formItemName, srmItemSchemeRestCriteria, firstResult, maxResults);
     }
 
@@ -301,8 +301,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     @Override
-    public void retrieveItems(final String formItemName, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults, String criteria, String itemSchemeUrn) {
-        SrmItemRestCriteria itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(types, criteria, itemSchemeUrn);
+    public void retrieveItems(final String formItemName, SrmItemRestCriteria itemWebCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+        itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(itemWebCriteria, types);
         retrieveItems(formItemName, itemWebCriteria, firstResult, maxResults);
     }
 

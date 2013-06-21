@@ -75,36 +75,48 @@ public class RestWebCriteriaUtils {
     //
 
     public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
-        return buildItemSchemeWebCriteria(types, null);
+        return buildItemSchemeWebCriteria(new SrmItemSchemeRestCriteria(), types);
     }
 
-    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum[] types, String criteria) {
-        SrmItemSchemeRestCriteria externalResourceWebCriteria = new SrmItemSchemeRestCriteria();
+    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(SrmItemSchemeRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types) {
         if (areOrganisationSchemeTypes(types)) {
-            externalResourceWebCriteria = new OrganisationSchemeRestCriteria();
-            externalResourceWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
-            ((OrganisationSchemeRestCriteria) externalResourceWebCriteria).setOrganisationSchemeTypes(types);
+
+            OrganisationSchemeRestCriteria organisationSchemeRestCriteria = new OrganisationSchemeRestCriteria();
+            organisationSchemeRestCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
+            organisationSchemeRestCriteria.setOrganisationSchemeTypes(types);
+            organisationSchemeRestCriteria.setCriteria(itemSchemeRestCriteria.getCriteria());
+            organisationSchemeRestCriteria.setIsExternallyPublished(itemSchemeRestCriteria.getIsExternallyPublished());
+            organisationSchemeRestCriteria.setIsLastVersion(itemSchemeRestCriteria.getIsLastVersion());
+            organisationSchemeRestCriteria.setUrn(itemSchemeRestCriteria.getUrn());
+            organisationSchemeRestCriteria.setUrns(itemSchemeRestCriteria.getUrns());
+            return organisationSchemeRestCriteria;
+
         } else if (isCodeListType(types[0])) {
-            externalResourceWebCriteria = new SrmItemSchemeRestCriteria(types[0], criteria);
+            itemSchemeRestCriteria.setType(types[0]);
         } else {
-            externalResourceWebCriteria.setType(types[0]);
+            itemSchemeRestCriteria.setType(types[0]);
         }
-        externalResourceWebCriteria.setCriteria(criteria);
-        return externalResourceWebCriteria;
+        return itemSchemeRestCriteria;
     }
 
-    public static SrmItemRestCriteria buildItemWebCriteria(TypeExternalArtefactsEnum[] types, String criteria, String itemSchemeUrn) {
-        SrmItemRestCriteria itemWebCriteria = new SrmItemRestCriteria();
+    public static SrmItemRestCriteria buildItemWebCriteria(SrmItemRestCriteria itemRestCriteria, TypeExternalArtefactsEnum[] types) {
         if (areOrganisationTypes(types)) {
-            itemWebCriteria = new OrganisationRestCriteria();
-            itemWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION);
-            ((OrganisationRestCriteria) itemWebCriteria).setOrganisationTypes(types);
+
+            OrganisationRestCriteria organisationRestCriteria = new OrganisationRestCriteria();
+            organisationRestCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION);
+            organisationRestCriteria.setOrganisationTypes(types);
+            organisationRestCriteria.setCriteria(itemRestCriteria.getCriteria());
+            organisationRestCriteria.setUrn(itemRestCriteria.getUrn());
+            organisationRestCriteria.setUrns(itemRestCriteria.getUrns());
+            organisationRestCriteria.setIsItemSchemeExternallyPublished(itemRestCriteria.getIsItemSchemeExternallyPublished());
+            organisationRestCriteria.setIsItemSchemeLastVersion(itemRestCriteria.getIsItemSchemeLastVersion());
+            organisationRestCriteria.setItemSchemeUrn(itemRestCriteria.getItemSchemeUrn());
+            return organisationRestCriteria;
+
         } else {
-            itemWebCriteria.setType(types[0]);
+            itemRestCriteria.setType(types[0]);
+            return itemRestCriteria;
         }
-        itemWebCriteria.setItemSchemUrn(itemSchemeUrn);
-        itemWebCriteria.setCriteria(criteria);
-        return itemWebCriteria;
     }
 
     private static boolean areOrganisationSchemeTypes(TypeExternalArtefactsEnum[] types) {

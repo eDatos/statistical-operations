@@ -72,12 +72,12 @@ public class RestQueryUtils {
         }
 
         // Filter by category scheme
-        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemeUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemUrn())
+            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemeUrn())
                     .append("\"");
             queryBuilder.append(")");
         }
@@ -147,12 +147,12 @@ public class RestQueryUtils {
             queryBuilder.append(CodeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemeUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemUrn()).append("\"");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemeUrn()).append("\"");
             queryBuilder.append(")");
         }
 
@@ -302,12 +302,12 @@ public class RestQueryUtils {
 
         // Filter by concept scheme
 
-        if (StringUtils.isNotBlank(conceptRestCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(conceptRestCriteria.getItemSchemeUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(conceptRestCriteria.getItemSchemUrn())
+            queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(conceptRestCriteria.getItemSchemeUrn())
                     .append("\"");
             queryBuilder.append(")");
         }
@@ -463,13 +463,13 @@ public class RestQueryUtils {
             queryBuilder.append(OrganisationCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemeUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
             queryBuilder.append(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                    .append(itemRestCriteria.getItemSchemUrn()).append("\"");
+                    .append(itemRestCriteria.getItemSchemeUrn()).append("\"");
             queryBuilder.append(")");
         }
         if (itemRestCriteria instanceof OrganisationRestCriteria && !ArrayUtils.isEmpty(((OrganisationRestCriteria) itemRestCriteria).getOrganisationTypes())) {
