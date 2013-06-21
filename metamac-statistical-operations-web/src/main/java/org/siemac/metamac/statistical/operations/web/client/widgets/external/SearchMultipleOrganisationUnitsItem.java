@@ -6,8 +6,10 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 
-public class SearchMultipleOrganisationUnitsItem extends SearchMultipleItemsItem {
+public class SearchMultipleOrganisationUnitsItem extends SearchMultipleSrmItemsItem {
 
     public SearchMultipleOrganisationUnitsItem(String name, String title, MultipleExternalResourceAction action) {
         super(name, title, RestWebCriteriaUtils.buildItemSchemeWebCriteria(ORGANISATION_UNIT_SCHEME), RestWebCriteriaUtils.buildItemWebCriteria(new TypeExternalArtefactsEnum[]{ORGANISATION_UNIT},

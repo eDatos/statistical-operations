@@ -3,21 +3,23 @@ package org.siemac.metamac.statistical.operations.web.client.widgets.external;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
-public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleItemsItem {
+public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleSrmItemsItem {
 
-    private TypeExternalArtefactsEnum   selectedResourceType;
+    private TypeExternalArtefactsEnum selectedResourceType;
 
-    private ExternalResourceWebCriteria itemSchemeCriteria;
-    private SrmItemRestCriteria         itemCriteria;
+    private SrmItemSchemeRestCriteria itemSchemeCriteria;
+    private SrmItemRestCriteria       itemCriteria;
 
-    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, ExternalResourceWebCriteria itemSchemeCriteria, SrmItemRestCriteria itemCriteria,
+    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, SrmItemSchemeRestCriteria itemSchemeCriteria, SrmItemRestCriteria itemCriteria,
             MultipleExternalResourceAction action) {
         super(name, title, itemSchemeCriteria, itemCriteria, getConstants().searchConceptsAndConceptSchemes(), getConstants().filterConceptScheme(), getConstants().selectedConceptScheme(),
                 getConstants().selectionResources(), new ConceptAndConceptSchemeSelectItem(), action);
