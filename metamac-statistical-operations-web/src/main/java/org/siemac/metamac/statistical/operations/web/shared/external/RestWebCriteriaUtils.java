@@ -11,7 +11,6 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 
@@ -75,12 +74,12 @@ public class RestWebCriteriaUtils {
     // COMMON CRITERIA
     //
 
-    public static ExternalResourceWebCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
+    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
         return buildItemSchemeWebCriteria(types, null);
     }
 
-    public static ExternalResourceWebCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum[] types, String criteria) {
-        ExternalResourceWebCriteria externalResourceWebCriteria = new ExternalResourceWebCriteria();
+    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum[] types, String criteria) {
+        SrmItemSchemeRestCriteria externalResourceWebCriteria = new SrmItemSchemeRestCriteria();
         if (areOrganisationSchemeTypes(types)) {
             externalResourceWebCriteria = new OrganisationSchemeRestCriteria();
             externalResourceWebCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);

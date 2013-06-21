@@ -25,7 +25,6 @@ import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSche
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.ExternalResourceWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 
@@ -35,9 +34,9 @@ public class RestQueryUtils {
     // CATEGORY SCHEME
     //
 
-    public static String buildCategorySchemeQuery(ExternalResourceWebCriteria externalResourceWebCriteria) {
+    public static String buildCategorySchemeQuery(SrmItemSchemeRestCriteria itemSchemeRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = externalResourceWebCriteria.getCriteria();
+        String criteria = itemSchemeRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(CategorySchemeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -47,6 +46,11 @@ public class RestQueryUtils {
             queryBuilder.append(CategorySchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(CategorySchemeCriteriaPropertyRestriction.LATEST, itemSchemeRestCriteria.getIsLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
+
         return queryBuilder.toString();
     }
 
@@ -54,9 +58,9 @@ public class RestQueryUtils {
     // CATEGORY
     //
 
-    public static String buildCategoryQuery(SrmItemRestCriteria itemWebCriteria) {
+    public static String buildCategoryQuery(SrmItemRestCriteria itemRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = itemWebCriteria.getCriteria();
+        String criteria = itemRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(CategoryCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -68,23 +72,27 @@ public class RestQueryUtils {
         }
 
         // Filter by category scheme
-        if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn())
+            queryBuilder.append(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemUrn())
                     .append("\"");
             queryBuilder.append(")");
         }
 
         // Find categories with one of the specified URNs
-        String urnsQuery = buildUrnsQuery(CategoryCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
+        String urnsQuery = buildUrnsQuery(CategoryCriteriaPropertyRestriction.URN, itemRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find categories that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
+        String externallyPublishedQuery = buildBooleanQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -93,9 +101,9 @@ public class RestQueryUtils {
     // CODELIST
     //
 
-    public static String buildCodelistQuery(SrmItemSchemeRestCriteria itemSchemeWebCriteria) {
+    public static String buildCodelistQuery(SrmItemSchemeRestCriteria itemSchemeRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = itemSchemeWebCriteria.getCriteria();
+        String criteria = itemSchemeRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(CodelistCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -106,15 +114,19 @@ public class RestQueryUtils {
             queryBuilder.append(")");
         }
 
-        // Find code lists with one of the specified URNs
-        String urnsQuery = buildUrnsQuery(CodelistCriteriaPropertyRestriction.URN, itemSchemeWebCriteria.getUrns());
+        // Find codelists with one of the specified URNs
+        String urnsQuery = buildUrnsQuery(CodelistCriteriaPropertyRestriction.URN, itemSchemeRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
-        // Find code lists that are externally published
-        if (BooleanUtils.isTrue(itemSchemeWebCriteria.getIsExternallyPublished())) {
+        // Find codelists that are externally published
+        if (BooleanUtils.isTrue(itemSchemeRestCriteria.getIsExternallyPublished())) {
             String query = buildSrmProcStatusQuery(CodelistCriteriaPropertyRestriction.PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
             addConditionToQueryBuilderIfAny(queryBuilder, query, LogicalOperator.AND);
         }
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(CodelistCriteriaPropertyRestriction.LATEST, itemSchemeRestCriteria.getIsLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -123,9 +135,9 @@ public class RestQueryUtils {
     // CODE
     //
 
-    public static String buildCodeQuery(SrmItemRestCriteria itemWebCriteria) {
+    public static String buildCodeQuery(SrmItemRestCriteria itemRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = itemWebCriteria.getCriteria();
+        String criteria = itemRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(CodeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -135,22 +147,26 @@ public class RestQueryUtils {
             queryBuilder.append(CodeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
-            queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemWebCriteria.getItemSchemUrn()).append("\"");
+            queryBuilder.append(CodeCriteriaPropertyRestriction.CODELIST_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(itemRestCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
 
         // Find codes with one of the specified URNs
-        String urnsQuery = buildUrnsQuery(CodeCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
+        String urnsQuery = buildUrnsQuery(CodeCriteriaPropertyRestriction.URN, itemRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find codes that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(CodeCriteriaPropertyRestriction.CODELIST_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
+        String externallyPublishedQuery = buildBooleanQuery(CodeCriteriaPropertyRestriction.CODELIST_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(CodeCriteriaPropertyRestriction.CODELIST_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -159,9 +175,9 @@ public class RestQueryUtils {
     // CONCEPT SCHEME
     //
 
-    public static String buildConceptSchemeQuery(ConceptSchemeRestCriteria conceptSchemeWebCriteria) {
+    public static String buildConceptSchemeQuery(ConceptSchemeRestCriteria conceptSchemeRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = conceptSchemeWebCriteria.getCriteria();
+        String criteria = conceptSchemeRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -171,12 +187,12 @@ public class RestQueryUtils {
             queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (!ArrayUtils.isEmpty(conceptSchemeWebCriteria.getConceptSchemeTypes())) {
+        if (!ArrayUtils.isEmpty(conceptSchemeRestCriteria.getConceptSchemeTypes())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
 
-            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptSchemeWebCriteria.getConceptSchemeTypes();
+            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptSchemeRestCriteria.getConceptSchemeTypes();
 
             queryBuilder.append("(");
 
@@ -186,7 +202,7 @@ public class RestQueryUtils {
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
 
-                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeWebCriteria.getStatisticalOperationUrn())) {
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeRestCriteria.getStatisticalOperationUrn())) {
 
                     // Concept scheme type is OPERATION and the statistical operation is the specified
 
@@ -195,10 +211,10 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptSchemeWebCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(conceptSchemeRestCriteria.getStatisticalOperationUrn()).append("\"");
                     queryBuilder.append(")");
 
-                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeWebCriteria.getStatisticalOperationUrn())) {
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeRestCriteria.getStatisticalOperationUrn())) {
 
                     // Concept scheme type is MEASURE and the statistical operation is the specified
 
@@ -209,7 +225,7 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptSchemeWebCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(conceptSchemeRestCriteria.getStatisticalOperationUrn()).append("\"");
                     queryBuilder.append(")");
 
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
@@ -234,14 +250,18 @@ public class RestQueryUtils {
         }
 
         // Find concept Schemes with one of the specified URNs
-        String urnsQuery = buildUrnsQuery(ConceptSchemeCriteriaPropertyRestriction.URN, conceptSchemeWebCriteria.getUrns());
+        String urnsQuery = buildUrnsQuery(ConceptSchemeCriteriaPropertyRestriction.URN, conceptSchemeRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find concept Schemes that are externally published
-        if (BooleanUtils.isTrue(conceptSchemeWebCriteria.getIsExternallyPublished())) {
+        if (BooleanUtils.isTrue(conceptSchemeRestCriteria.getIsExternallyPublished())) {
             String externallyPublishedQuery = buildSrmProcStatusQuery(ConceptSchemeCriteriaPropertyRestriction.PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
             addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
         }
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(ConceptSchemeCriteriaPropertyRestriction.LATEST, conceptSchemeRestCriteria.getIsLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -364,6 +384,10 @@ public class RestQueryUtils {
         String externallyPublishedQuery = buildBooleanQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_EXTERNALLY_PUBLISHED, conceptRestCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
 
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_LATEST, conceptRestCriteria.getIsItemSchemeLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
+
         return queryBuilder.toString();
     }
 
@@ -371,9 +395,9 @@ public class RestQueryUtils {
     // ORGANISATION SCHEME
     //
 
-    public static String buildOrganisationSchemeQuery(ExternalResourceWebCriteria externalResourceWebCriteria) {
+    public static String buildOrganisationSchemeQuery(SrmItemSchemeRestCriteria itemSchemeRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = externalResourceWebCriteria.getCriteria();
+        String criteria = itemSchemeRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(OrganisationSchemeCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -383,9 +407,9 @@ public class RestQueryUtils {
             queryBuilder.append(OrganisationSchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (externalResourceWebCriteria instanceof OrganisationSchemeRestCriteria && !ArrayUtils.isEmpty(((OrganisationSchemeRestCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes())) {
+        if (itemSchemeRestCriteria instanceof OrganisationSchemeRestCriteria && !ArrayUtils.isEmpty(((OrganisationSchemeRestCriteria) itemSchemeRestCriteria).getOrganisationSchemeTypes())) {
 
-            TypeExternalArtefactsEnum[] organisationSchemeTypes = ((OrganisationSchemeRestCriteria) externalResourceWebCriteria).getOrganisationSchemeTypes();
+            TypeExternalArtefactsEnum[] organisationSchemeTypes = ((OrganisationSchemeRestCriteria) itemSchemeRestCriteria).getOrganisationSchemeTypes();
 
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
@@ -400,6 +424,10 @@ public class RestQueryUtils {
             }
             queryBuilder.append(")");
         }
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(OrganisationSchemeCriteriaPropertyRestriction.LATEST, itemSchemeRestCriteria.getIsLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -423,9 +451,9 @@ public class RestQueryUtils {
     // ORGANISATION
     //
 
-    public static String buildOrganisationQuery(SrmItemRestCriteria itemWebCriteria) {
+    public static String buildOrganisationQuery(SrmItemRestCriteria itemRestCriteria) {
         StringBuilder queryBuilder = new StringBuilder();
-        String criteria = itemWebCriteria.getCriteria();
+        String criteria = itemRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
             queryBuilder.append("(");
             queryBuilder.append(OrganisationCriteriaPropertyRestriction.ID).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
@@ -435,18 +463,18 @@ public class RestQueryUtils {
             queryBuilder.append(OrganisationCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (StringUtils.isNotBlank(itemWebCriteria.getItemSchemUrn())) {
+        if (StringUtils.isNotBlank(itemRestCriteria.getItemSchemUrn())) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
             queryBuilder.append("(");
             queryBuilder.append(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                    .append(itemWebCriteria.getItemSchemUrn()).append("\"");
+                    .append(itemRestCriteria.getItemSchemUrn()).append("\"");
             queryBuilder.append(")");
         }
-        if (itemWebCriteria instanceof OrganisationRestCriteria && !ArrayUtils.isEmpty(((OrganisationRestCriteria) itemWebCriteria).getOrganisationTypes())) {
+        if (itemRestCriteria instanceof OrganisationRestCriteria && !ArrayUtils.isEmpty(((OrganisationRestCriteria) itemRestCriteria).getOrganisationTypes())) {
 
-            TypeExternalArtefactsEnum[] organisationTypes = ((OrganisationRestCriteria) itemWebCriteria).getOrganisationTypes();
+            TypeExternalArtefactsEnum[] organisationTypes = ((OrganisationRestCriteria) itemRestCriteria).getOrganisationTypes();
 
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
@@ -463,12 +491,16 @@ public class RestQueryUtils {
         }
 
         // Find organizations with one of the specified URNs
-        String urnsQuery = buildUrnsQuery(OrganisationCriteriaPropertyRestriction.URN, itemWebCriteria.getUrns());
+        String urnsQuery = buildUrnsQuery(OrganisationCriteriaPropertyRestriction.URN, itemRestCriteria.getUrns());
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find concepts that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_EXTERNALLY_PUBLISHED, itemWebCriteria.getIsItemSchemeExternallyPublished());
+        String externallyPublishedQuery = buildBooleanQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
         addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+
+        // Only last versions
+        String lastVersionQuery = buildIsLastVersionQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
+        addConditionToQueryBuilderIfAny(queryBuilder, lastVersionQuery, LogicalOperator.AND);
 
         return queryBuilder.toString();
     }
@@ -512,9 +544,19 @@ public class RestQueryUtils {
 
     @SuppressWarnings("rawtypes")
     private static String buildBooleanQuery(Enum propertyEnum, Boolean booleanValue) {
-        // Find categories that are externally published
         StringBuilder queryBuilder = new StringBuilder();
         if (booleanValue != null) {
+            queryBuilder.append("(");
+            queryBuilder.append(propertyEnum).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(booleanValue).append("\"");
+            queryBuilder.append(")");
+        }
+        return queryBuilder.toString();
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static String buildIsLastVersionQuery(Enum propertyEnum, Boolean booleanValue) {
+        StringBuilder queryBuilder = new StringBuilder();
+        if (BooleanUtils.isTrue(booleanValue)) {
             queryBuilder.append("(");
             queryBuilder.append(propertyEnum).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(booleanValue).append("\"");
             queryBuilder.append(")");
