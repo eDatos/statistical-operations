@@ -10,12 +10,8 @@ import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
-import com.smartgwt.client.widgets.form.fields.events.ChangeEvent;
-import com.smartgwt.client.widgets.form.fields.events.ChangeHandler;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
-import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 
 public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleSrmItemsItem {
 
@@ -32,22 +28,6 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleS
         this.itemSchemeCriteria = itemSchemeCriteria;
         this.itemCriteria = itemCriteria;
 
-        getInitialFilterSelectItem().addChangeHandler(new ChangeHandler() {
-
-            @Override
-            public void onChange(ChangeEvent event) {
-                System.out.println();
-            }
-        });
-
-        getInitialFilterSelectItem().addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                System.out.println();
-            }
-        });
-
         getInitialFilterSelectItem().addChangedHandler(new ChangedHandler() {
 
             @Override
@@ -58,6 +38,8 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleS
                     SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria.setCriteria(null);
                     SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria.setItemSchemeUrn(null);
                     searchMultipleItemsWindow.clearListSearchSections();
+                    SearchMultipleConceptsAndConceptSchemesItem.this.clearDefaultItemScheme(SearchMultipleConceptsAndConceptSchemesItem.this.itemSchemeCriteria,
+                            SearchMultipleConceptsAndConceptSchemesItem.this.itemCriteria);
 
                     TypeExternalArtefactsEnum selectedResourceType = getSelectedTypeExternalArtefactsEnum();
 
