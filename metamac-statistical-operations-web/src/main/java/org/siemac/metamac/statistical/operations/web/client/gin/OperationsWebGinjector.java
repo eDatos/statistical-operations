@@ -13,13 +13,10 @@ import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePr
 import org.siemac.metamac.statistical.operations.web.client.presenter.UnauthorizedPagePresenter;
 import org.siemac.metamac.web.common.client.gin.MetamacWebGinjector;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.inject.Provider;
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
-import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 @GinModules({DispatchAsyncModule.class, ClientModule.class})
 public interface OperationsWebGinjector extends MetamacWebGinjector {
@@ -40,5 +37,4 @@ public interface OperationsWebGinjector extends MetamacWebGinjector {
     // Interfaces
     public OperationsWebConstants getOperationsWebConstants();
     public OperationsWebMessages getOperationsWebMessages();
-
 }
