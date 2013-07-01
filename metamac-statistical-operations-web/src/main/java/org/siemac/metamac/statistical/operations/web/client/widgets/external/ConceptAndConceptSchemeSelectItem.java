@@ -9,11 +9,11 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem
 
 public class ConceptAndConceptSchemeSelectItem extends CustomSelectItem {
 
-    public ConceptAndConceptSchemeSelectItem() {
+    public ConceptAndConceptSchemeSelectItem(TypeExternalArtefactsEnum initialValue) {
         setTitle(getConstants().resourceTypeToAdd());
         setTitleStyle("staticFormItemTitle");
         setValueMap(getConceptAndConceptSchemeValueMap());
-        setValue(TypeExternalArtefactsEnum.CONCEPT.name()); // Initialize with concept
+        setValue(initialValue.name());
     }
 
     private LinkedHashMap<String, String> getConceptAndConceptSchemeValueMap() {
