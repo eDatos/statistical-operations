@@ -36,6 +36,7 @@ public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleS
     @Override
     public FormItem[] getFormItemtsToAddToInitialFilterForm() {
         CustomSelectItem resourceType = new CustomSelectItem(RESOURCE_TYPE_FIELD_NAME, getConstants().resourceTypeToAdd());
+        resourceType.setTitleStyle("staticFormItemTitle");
         resourceType.setValueMap(getConceptAndConceptSchemeValueMap());
         resourceType.setValue(TypeExternalArtefactsEnum.CONCEPT.name());
         resourceType.setVisible(true);
