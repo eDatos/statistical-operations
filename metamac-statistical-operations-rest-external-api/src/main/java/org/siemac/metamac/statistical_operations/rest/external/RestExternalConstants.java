@@ -1,9 +1,8 @@
 package org.siemac.metamac.statistical_operations.rest.external;
 
-public class RestExternalConstants {
+import org.siemac.metamac.rest.api.constants.RestApiConstants;
 
-    public static String KIND_SEPARATOR                     = "#";
-    public static String WILDCARD                           = "~all";
+public class RestExternalConstants extends RestApiConstants {
 
     public static String LINK_SUBPATH_OPERATIONS            = "operations";
     public static String LINK_SUBPATH_FAMILIES              = "families";
