@@ -7,7 +7,6 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ListBase;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
-import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategoryResourceInternal;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codes;
@@ -53,12 +52,10 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
         return result;
     }
 
-    private static List<ExternalItemDto> getExternalItemDtosFromCategoryResourceInternals(List<CategoryResourceInternal> resources) {
+    private static List<ExternalItemDto> getExternalItemDtosFromCategoryResourceInternals(List<ResourceInternal> resources) {
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
         for (ResourceInternal resource : resources) {
-            ExternalItemDto externalItemDto = getExternalItemDtoFromSrmResourceInternal(resource);
-            // TODO Code FULL
-            externalItemDtos.add(externalItemDto);
+            externalItemDtos.add(getExternalItemDtoFromSrmResourceInternal(resource));
         }
         return externalItemDtos;
     }
@@ -171,6 +168,7 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
     private static ExternalItemDto getExternalItemDtoFromSrmResourceInternal(ResourceInternal resourceInternal) {
         ExternalItemDto externalItemDto = new ExternalItemDto();
         externalItemDto.setCode(resourceInternal.getId());
+        externalItemDto.setCodeNested(resourceInternal.getNestedId());
         externalItemDto.setUri(resourceInternal.getSelfLink().getHref());
         externalItemDto.setUrn(resourceInternal.getUrn());
         externalItemDto.setUrnInternal(resourceInternal.getUrnInternal());
