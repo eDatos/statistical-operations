@@ -82,6 +82,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     return buildSculptorPropertyCriteria(OperationProperties.urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case TITLE:
                     return buildSculptorPropertyCriteria(OperationProperties.title().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
+                case ACRONYM:
+                    return buildSculptorPropertyCriteria(OperationProperties.acronym().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case SUBJECT_AREA_URN:
                     return buildSculptorPropertyCriteria(OperationProperties.subjectArea().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case SECONDARY_SUBJECT_AREA_URN:
