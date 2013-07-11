@@ -1,15 +1,19 @@
 package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.domain.LeafProperty;
 import org.fornax.cartridges.sculptor.framework.domain.Property;
 import org.siemac.metamac.core.common.constants.CoreCommonConstants;
 import org.siemac.metamac.core.common.util.CoreCommonUtil;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestOrder;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestQueryPropertyRestriction;
+import org.siemac.metamac.rest.common.query.domain.OperationTypeEnum;
 import org.siemac.metamac.rest.common.query.domain.SculptorPropertyCriteria;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
@@ -38,6 +42,10 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
     private RestCriteria2SculptorCriteria<Operation> operationCriteriaMapper = null;
     private RestCriteria2SculptorCriteria<Instance>  instanceCriteriaMapper  = null;
     private RestCriteria2SculptorCriteria<Family>    familyCriteriaMapper    = null;
+
+    public static enum PropertyTypeEnum {
+        STRING, DATE, BOOLEAN, PROC_STATUS, STATUS
+    }
 
     public RestCriteria2SculptorCriteriaMapperImpl() {
         operationCriteriaMapper = new RestCriteria2SculptorCriteria<Operation>(Operation.class, OperationCriteriaPropertyOrder.class, OperationCriteriaPropertyRestriction.class,
@@ -69,42 +77,39 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             OperationCriteriaPropertyRestriction propertyNameCriteria = OperationCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.code(), PropertyTypeEnum.STRING, propertyRestriction);
                 case URN:
-                    return new SculptorPropertyCriteria(OperationProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case TITLE:
-                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.title().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case SUBJECT_AREA_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.subjectArea().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.subjectArea().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case SECONDARY_SUBJECT_AREA_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.secondarySubjectAreas().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.secondarySubjectAreas().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.description().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case STATISTICAL_OPERATION_TYPE_ID:
-                    return new SculptorPropertyCriteria(OperationProperties.surveyType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.surveyType().identifier(), PropertyTypeEnum.STRING, propertyRestriction);
                 case OFFICIALITY_TYPE_ID:
-                    return new SculptorPropertyCriteria(OperationProperties.officialityType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.officialityType().identifier(), PropertyTypeEnum.STRING, propertyRestriction);
                 case IS_INDICATORS_SYSTEM:
-                    return new SculptorPropertyCriteria(OperationProperties.indicatorSystem(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()),
-                            propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.indicatorSystem(), PropertyTypeEnum.BOOLEAN, propertyRestriction);
                 case PRODUCER_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.producer().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.producer().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME,
+                            true, Operation.class), PropertyTypeEnum.DATE, propertyRestriction);
                 case CURRENTLY_ACTIVE:
-                    return new SculptorPropertyCriteria(OperationProperties.currentlyActive(), propertyRestrictionValueToBoolean(propertyRestriction.getValue()),
-                            propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.currentlyActive(), PropertyTypeEnum.BOOLEAN, propertyRestriction);
                 case STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.status(), propertyRestrictionValueToStatusEnum(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.status(), PropertyTypeEnum.STATUS, propertyRestriction);
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()),
-                            propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.procStatus(), PropertyTypeEnum.PROC_STATUS, propertyRestriction);
                 case PUBLISHER_URN:
-                    return new SculptorPropertyCriteria(OperationProperties.publisher().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(OperationProperties.publisher().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Operation.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(new LeafProperty<Operation>(OperationProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
+                            Operation.class), PropertyTypeEnum.DATE, propertyRestriction);
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -136,24 +141,24 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             FamilyCriteriaPropertyRestriction propertyNameCriteria = FamilyCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.code(), PropertyTypeEnum.STRING, propertyRestriction);
                 case URN:
-                    return new SculptorPropertyCriteria(FamilyProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case TITLE:
-                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.title().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.description().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Family>(FamilyProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Family.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(new LeafProperty<Family>(FamilyProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
+                            Family.class), PropertyTypeEnum.DATE, propertyRestriction);
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(FamilyProperties.procStatus(), PropertyTypeEnum.PROC_STATUS, propertyRestriction);
                 case INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(
-                            new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class),
-                            propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(
+                            new LeafProperty<Family>(FamilyProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true, Family.class), PropertyTypeEnum.DATE,
+                            propertyRestriction);
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
@@ -184,35 +189,33 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
             InstanceCriteriaPropertyRestriction propertyNameCriteria = InstanceCriteriaPropertyRestriction.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.code(), PropertyTypeEnum.STRING, propertyRestriction);
                 case URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case TITLE:
-                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.title().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case DATA_DESCRIPTION:
-                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), PropertyTypeEnum.STRING, propertyRestriction);
                 case GEOGRAPHIC_GRANULARITY_URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.geographicGranularity().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.geographicGranularity().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case TEMPORAL_GRANULARITY_URN:
-                    return new SculptorPropertyCriteria(InstanceProperties.temporalGranularity().urn(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.temporalGranularity().urn(), PropertyTypeEnum.STRING, propertyRestriction);
                 case INSTANCE_TYPE_ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.instanceType().identifier(), propertyRestriction.getValue(), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.instanceType().identifier(), PropertyTypeEnum.STRING, propertyRestriction);
                 case INTERNAL_INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.internalInventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
+                            Instance.class), PropertyTypeEnum.DATE, propertyRestriction);
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestrictionValueToProcStatusEnum(propertyRestriction.getValue()),
-                            propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(InstanceProperties.procStatus(), PropertyTypeEnum.PROC_STATUS, propertyRestriction);
                 case INVENTORY_DATE:
-                    return new SculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
-                            Instance.class), propertyRestrictionValueToDate(propertyRestriction.getValue()), propertyRestriction.getOperationType());
+                    return buildSculptorPropertyCriteria(new LeafProperty<Instance>(InstanceProperties.inventoryDate().getName(), CoreCommonConstants.CRITERIA_DATETIME_COLUMN_DATETIME, true,
+                            Instance.class), PropertyTypeEnum.DATE, propertyRestriction);
                 default:
                     throw toRestExceptionParameterIncorrect(propertyNameCriteria.name());
             }
         }
-
         @SuppressWarnings("rawtypes")
         @Override
         public Property retrievePropertyOrder(MetamacRestOrder order) throws RestException {
@@ -234,22 +237,47 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
 
     private RestException toRestExceptionParameterIncorrect(String parameter) {
         org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.PARAMETER_INCORRECT, parameter);
-        throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
+        return new RestException(exception, Status.INTERNAL_SERVER_ERROR);
     }
 
-    private ProcStatusEnum propertyRestrictionValueToProcStatusEnum(String value) {
-        return value != null ? ProcStatusEnum.valueOf(value) : null;
+    @SuppressWarnings("rawtypes")
+    private SculptorPropertyCriteria buildSculptorPropertyCriteria(Property propertyEntity, PropertyTypeEnum propertyEntityType, MetamacRestQueryPropertyRestriction restPropertyRestriction) {
+        String propertyName = restPropertyRestriction.getPropertyName();
+        OperationTypeEnum operationType = restPropertyRestriction.getOperationType();
+        if (!StringUtils.isEmpty(restPropertyRestriction.getValue())) {
+            Object value = propertyRestrictionValueToSpecificType(propertyName, restPropertyRestriction.getValue(), propertyEntityType);
+            return new SculptorPropertyCriteria(propertyEntity, value, operationType);
+        } else if (!CollectionUtils.isEmpty(restPropertyRestriction.getValueList())) {
+            List<Object> values = new ArrayList<Object>(restPropertyRestriction.getValueList().size());
+            for (String value : restPropertyRestriction.getValueList()) {
+                if (StringUtils.isEmpty(value)) {
+                    throw toRestExceptionParameterIncorrect(propertyName);
+                }
+                values.add(propertyRestrictionValueToSpecificType(propertyName, value, propertyEntityType));
+            }
+            return new SculptorPropertyCriteria(propertyEntity, values, operationType);
+        } else {
+            throw toRestExceptionParameterIncorrect(propertyName);
+        }
     }
 
-    private Boolean propertyRestrictionValueToBoolean(String value) {
-        return value != null ? Boolean.valueOf(value) : null;
-    }
-
-    private Date propertyRestrictionValueToDate(String value) {
-        return value != null ? CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate() : null;
-    }
-
-    private StatusEnum propertyRestrictionValueToStatusEnum(String value) {
-        return value != null ? StatusEnum.valueOf(value) : null;
+    private Object propertyRestrictionValueToSpecificType(String propertyName, String value, PropertyTypeEnum propertyTypeEnum) {
+        if (value == null) {
+            return null;
+        }
+        switch (propertyTypeEnum) {
+            case STRING:
+                return value;
+            case DATE:
+                return CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate();
+            case BOOLEAN:
+                return Boolean.valueOf(value);
+            case PROC_STATUS:
+                return ProcStatusEnum.valueOf(value);
+            case STATUS:
+                return StatusEnum.valueOf(value);
+            default:
+                throw toRestExceptionParameterIncorrect(propertyName);
+        }
     }
 }
