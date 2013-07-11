@@ -1,22 +1,18 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.domain.LeafProperty;
 import org.fornax.cartridges.sculptor.framework.domain.Property;
 import org.siemac.metamac.core.common.constants.CoreCommonConstants;
 import org.siemac.metamac.core.common.util.CoreCommonUtil;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestOrder;
 import org.siemac.metamac.rest.common.query.domain.MetamacRestQueryPropertyRestriction;
-import org.siemac.metamac.rest.common.query.domain.OperationTypeEnum;
 import org.siemac.metamac.rest.common.query.domain.SculptorPropertyCriteria;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
+import org.siemac.metamac.rest.search.criteria.mapper.CriteriaUtils;
+import org.siemac.metamac.rest.search.criteria.mapper.CriteriaUtils.PropertyValueRestToPropertyValueEntityInterface;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria;
 import org.siemac.metamac.rest.search.criteria.mapper.RestCriteria2SculptorCriteria.CriteriaCallback;
 import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FamilyCriteriaPropertyOrder;
@@ -38,15 +34,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2SculptorCriteriaMapper {
 
-    private RestCriteria2SculptorCriteria<Operation> operationCriteriaMapper = null;
-    private RestCriteria2SculptorCriteria<Instance>  instanceCriteriaMapper  = null;
-    private RestCriteria2SculptorCriteria<Family>    familyCriteriaMapper    = null;
+    private RestCriteria2SculptorCriteria<Operation>        operationCriteriaMapper                = null;
+    private RestCriteria2SculptorCriteria<Instance>         instanceCriteriaMapper                 = null;
+    private RestCriteria2SculptorCriteria<Family>           familyCriteriaMapper                   = null;
+    private PropertyValueRestToPropertyValueEntityInterface propertyValueRestToPropertyValueEntity = null;
 
-    public static enum PropertyTypeEnum {
+    private enum PropertyTypeEnum {
         STRING, DATE, BOOLEAN, STATUS
     }
 
     public RestCriteria2SculptorCriteriaMapperImpl() {
+        propertyValueRestToPropertyValueEntity = new PropertyValueRestToPropertyValueEntity();
         operationCriteriaMapper = new RestCriteria2SculptorCriteria<Operation>(Operation.class, OperationCriteriaPropertyOrder.class, OperationCriteriaPropertyRestriction.class,
                 new OperationCriteriaCallback());
         familyCriteriaMapper = new RestCriteria2SculptorCriteria<Family>(Family.class, FamilyCriteriaPropertyOrder.class, FamilyCriteriaPropertyRestriction.class, new FamilyCriteriaCallback());
@@ -226,40 +224,30 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
 
     @SuppressWarnings("rawtypes")
     private SculptorPropertyCriteria buildSculptorPropertyCriteria(Property propertyEntity, PropertyTypeEnum propertyEntityType, MetamacRestQueryPropertyRestriction restPropertyRestriction) {
-        String propertyName = restPropertyRestriction.getPropertyName();
-        OperationTypeEnum operationType = restPropertyRestriction.getOperationType();
-        if (!StringUtils.isEmpty(restPropertyRestriction.getValue())) {
-            Object value = propertyRestrictionValueToSpecificType(propertyName, restPropertyRestriction.getValue(), propertyEntityType);
-            return new SculptorPropertyCriteria(propertyEntity, value, operationType);
-        } else if (!CollectionUtils.isEmpty(restPropertyRestriction.getValueList())) {
-            List<Object> values = new ArrayList<Object>(restPropertyRestriction.getValueList().size());
-            for (String value : restPropertyRestriction.getValueList()) {
-                if (StringUtils.isEmpty(value)) {
-                    throw toRestExceptionParameterIncorrect(propertyName);
-                }
-                values.add(propertyRestrictionValueToSpecificType(propertyName, value, propertyEntityType));
-            }
-            return new SculptorPropertyCriteria(propertyEntity, values, operationType);
-        } else {
-            throw toRestExceptionParameterIncorrect(propertyName);
-        }
+        return CriteriaUtils.buildSculptorPropertyCriteria(propertyEntity, propertyEntityType.name(), restPropertyRestriction, propertyValueRestToPropertyValueEntity);
     }
 
-    private Object propertyRestrictionValueToSpecificType(String propertyName, String value, PropertyTypeEnum propertyTypeEnum) {
-        if (value == null) {
-            return null;
-        }
-        switch (propertyTypeEnum) {
-            case STRING:
-                return value;
-            case DATE:
-                return CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate();
-            case BOOLEAN:
-                return Boolean.valueOf(value);
-            case STATUS:
-                return StatusEnum.valueOf(value);
-            default:
-                throw toRestExceptionParameterIncorrect(propertyName);
+    private class PropertyValueRestToPropertyValueEntity implements PropertyValueRestToPropertyValueEntityInterface {
+
+        @Override
+        public Object restValueToEntityValue(String propertyName, String value, String propertyType) {
+            if (value == null) {
+                return null;
+            }
+
+            PropertyTypeEnum propertyTypeEnum = PropertyTypeEnum.valueOf(propertyType);
+            switch (propertyTypeEnum) {
+                case STRING:
+                    return value;
+                case DATE:
+                    return CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate();
+                case BOOLEAN:
+                    return Boolean.valueOf(value);
+                case STATUS:
+                    return StatusEnum.valueOf(value);
+                default:
+                    throw toRestExceptionParameterIncorrect(propertyName);
+            }
         }
     }
 }
