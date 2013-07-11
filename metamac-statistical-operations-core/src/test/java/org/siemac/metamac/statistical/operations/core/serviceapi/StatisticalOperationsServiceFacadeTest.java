@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -1397,7 +1398,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // ADD PRODUCER
         externalItemsBefore = externalItemRepository.findAll().size();
 
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency?mod", "URN:AGENCY:ISTAC?MOD", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("ISTAC", "/uri/test/agency?mod", "URN:AGENCY:ISTAC?MOD", null, TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1407,8 +1408,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         externalItemsBefore = externalItemRepository.findAll().size();
 
         operationDto.getProducer().clear();
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
         externalItemsAfter = externalItemRepository.findAll().size();
@@ -1430,9 +1431,9 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testUpdateOperationUpdatingAddingAndRemovingExternalItems() throws Exception {
 
         OperationDto operationDto = createOperationDto();
-        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH1", "/uri/test/category1", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH_internal", TypeExternalArtefactsEnum.CATEGORY));
-        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH2", "/uri/test/category2", null, "URN:CATEGORY:HEALTH2", TypeExternalArtefactsEnum.CATEGORY));
-        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH3", "/uri/test/category3", null, "URN:CATEGORY:HEALTH3", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH1", "/uri/test/category1", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH_internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH2", "/uri/test/category2", null, "URN:CATEGORY:HEALTH2", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH3", "/uri/test/category3", null, "URN:CATEGORY:HEALTH3", TypeExternalArtefactsEnum.CATEGORY));
 
         // Create
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
@@ -1447,8 +1448,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         ExternalItemDto externalItemDtoToRemove = getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH2");
         operationDto.removeSecondarySubjectArea(externalItemDtoToRemove);
         // Add two
-        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH4", "/uri/test/category4", null, "URN:CATEGORY:HEALTH4_internal", TypeExternalArtefactsEnum.CATEGORY));
-        operationDto.getSecondarySubjectAreas().add(new ExternalItemDto("HEALTH5", "/uri/test/category5", "URN:CATEGORY:HEALTH5", null, TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH4", "/uri/test/category4", null, "URN:CATEGORY:HEALTH4_internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH5", "/uri/test/category5", "URN:CATEGORY:HEALTH5", null, TypeExternalArtefactsEnum.CATEGORY));
 
         // Update
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
@@ -1468,8 +1469,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // ADD REGIONAL CONTRIBUTOR
         int externalItemsBefore = externalItemRepository.findAll().size();
 
-        operationDto.addRegionalContributor(new ExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addRegionalContributor(new ExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalContributor(mockExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalContributor(mockExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDto);
 
@@ -3630,7 +3631,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(mockExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -3660,17 +3661,17 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("INE", "/uri/test/agency", "URN:AGENCY:INE", null, TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalResponsible(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addPublisher(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
+        operationDto.setCommonMetadata(mockExternalItemDto("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
 
         return operationDto;
     }
@@ -3679,8 +3680,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = createOperationDto();
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("ISTAC", "/uri/test/agency?remove", "URN:AGENCY:ISTAC?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("INE", "/uri/test/agency?remove", "URN:AGENCY:INE?REMOVE", null, TypeExternalArtefactsEnum.AGENCY));
 
         return operationDto;
     }
@@ -3726,7 +3727,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         InstanceDto instanceDto = createInstanceDto();
 
         // GEOGRAPHIC_GRANULARITY
-        instanceDto.addGeographicGranularity(new ExternalItemDto("GEOGRAPHIC_GRANULARITY", "/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", null, TypeExternalArtefactsEnum.CONCEPT));
+        instanceDto.addGeographicGranularity(mockExternalItemDto("GEOGRAPHIC_GRANULARITY", "/uri/test/concept", "URN:CONCEPT:GEOGRAPHIC_GRANULARITY", null, TypeExternalArtefactsEnum.CONCEPT));
 
         return instanceDto;
 

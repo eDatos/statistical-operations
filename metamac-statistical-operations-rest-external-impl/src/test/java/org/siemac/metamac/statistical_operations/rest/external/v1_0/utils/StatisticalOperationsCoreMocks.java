@@ -567,15 +567,29 @@ public class StatisticalOperationsCoreMocks {
     }
 
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
-        String uri = "v1.0/" + subpathUrl + "/" + code;
-        String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, urn, type, mockInternationalStringMetadata(code, null), null);
+        ExternalItem target = new ExternalItem();
+        target.setCode(code);
+        target.setCodeNested(code + "Nested");
+        target.setUri("v1.0/" + subpathUrl + "/" + code);
+        target.setUrn("urn:" + code);
+        target.setUrnInternal(target.getUrn());
+        target.setType(type);
+        target.setTitle(mockInternationalStringMetadata(code, null));
+        target.setManagementAppUrl(null);
+        return target;
     }
 
     private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
-        String uri = "v1.0/" + subpathUrl + "/" + code;
-        String urn = "urn:" + code;
-        return new ExternalItem(code, uri, urn, null, type, mockInternationalStringMetadata(code, null), null);
+        ExternalItem target = new ExternalItem();
+        target.setCode(code);
+        target.setCodeNested(code + "Nested");
+        target.setUri("v1.0/" + subpathUrl + "/" + code);
+        target.setUrn("urn:" + code);
+        target.setUrnInternal(target.getUrn());
+        target.setType(type);
+        target.setTitle(mockInternationalStringMetadata(code, null));
+        target.setManagementAppUrl(null);
+        return target;
     }
 
     private Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {

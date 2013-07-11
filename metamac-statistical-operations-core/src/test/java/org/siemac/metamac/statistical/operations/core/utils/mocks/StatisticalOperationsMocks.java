@@ -6,17 +6,8 @@ import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
-import org.siemac.metamac.core.common.util.shared.VersionUtil;
 
 public class StatisticalOperationsMocks extends MetamacMocks {
-
-    private static final String[] MAINTAINER_MOCK        = new String[]{"MaintainerMock"};
-    private static final String   ORGANIZATION_UNIT_MOCK = "OrganizationUnitMock";
-    private static final String   AGENCY_SCHEME_MOCK     = "AgencySchemeMock";
-    private static final String   CONCEPT_SCHEME_MOCK    = "ConceptSchemeMock";
-    private static final String   CODELIST_MOCK          = "CodelistMock";
-    private static final String   DSD_MOCK               = "DsdMock";
 
     // -----------------------------------------------------------------
     // INTERNATIONAL STRING
@@ -125,21 +116,33 @@ public class StatisticalOperationsMocks extends MetamacMocks {
         return mockSrmAppExternalItem(code, mockDimensionUrn(code), TypeExternalArtefactsEnum.DIMENSION);
     }
 
+    public static ExternalItem mockExternalItem(String code, String uri, String urn, String urnInternal, TypeExternalArtefactsEnum type) {
+        ExternalItem target = new ExternalItem();
+        target.setVersion(Long.valueOf(0));
+        target.setCode(code);
+        target.setUri(uri);
+        target.setUrn(urn);
+        target.setUrnInternal(urnInternal);
+        target.setType(type);
+        return target;
+    }
+
+    public static ExternalItem mockExternalItem(String code, String uri, String urn, String urnInternal, TypeExternalArtefactsEnum type, InternationalString title, String managementAppUrl) {
+        ExternalItem target = mockExternalItem(code, uri, urn, urnInternal, type);
+        target.setTitle(title);
+        target.setManagementAppUrl(managementAppUrl);
+        return target;
+    }
+
     // -----------------------------------------------------------------
     // PRIVATE
     // -----------------------------------------------------------------
 
     private static ExternalItem mockStatisticalOperationAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
-        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR
-                + code);
-        item.setVersion(Long.valueOf(0));
-        return item;
+        return mockExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
     }
 
     private static ExternalItem mockSrmAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
-        ExternalItem item = new ExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR
-                + code);
-        item.setVersion(Long.valueOf(0));
-        return item;
+        return mockExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":internal", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks.mockExternalItem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +20,6 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.siemac.metamac.core.common.constants.CoreCommonConstants;
-import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
@@ -517,7 +517,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         assertTrue(operationsList.size() != 0);
     }
-    
 
     @Test
     public void testFindOperationByConditionPaginated() throws MetamacException {
@@ -777,7 +776,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         List<Instance> instances = statisticalOperationsBaseService.findAllInstances(getServiceContextAdministrador());
         assertTrue(!instances.isEmpty());
     }
-    
 
     @Override
     @Test
@@ -793,7 +791,6 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
 
         assertTrue(instancesList.size() != 0);
     }
-    
 
     @Test
     public void testFindInstanceByConditionPaginated() throws MetamacException {
@@ -998,7 +995,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setCurrentlyActive(false);
 
         // SUBJECT_AREA
-        operation.setSubjectArea(new ExternalItem("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
+        operation.setSubjectArea(mockExternalItem("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
 
         // INDICATOR_SYSTEM
         operation.setIndicatorSystem(false);
@@ -1052,17 +1049,17 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         operation.setSurveyType(statisticalOperationsListsService.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operation.addProducer(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
-        operation.addProducer(new ExternalItem("INE", "/uri/test/agency", "URN:AGENCY:INE", null, TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(mockExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operation.addProducer(mockExternalItem("INE", "/uri/test/agency", "URN:AGENCY:INE", null, TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operation.addRegionalResponsible(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operation.addRegionalResponsible(mockExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operation.addPublisher(new ExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operation.addPublisher(mockExternalItem("ISTAC", "/uri/test/agency", "URN:AGENCY:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operation.setCommonMetadata(new ExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
+        operation.setCommonMetadata(mockExternalItem("ISTAC", "/uri/test/common_metadata", "URN:COMMON_METADATA:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
 
         // OFFICIALITY_TYPE
         operation.setOfficialityType(statisticalOperationsListsService.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));

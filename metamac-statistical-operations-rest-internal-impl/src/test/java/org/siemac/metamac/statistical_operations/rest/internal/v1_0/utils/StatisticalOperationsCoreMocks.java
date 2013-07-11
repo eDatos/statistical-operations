@@ -567,22 +567,33 @@ public class StatisticalOperationsCoreMocks {
     }
 
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
-        String uri = "v1.0/" + subpathUrl + "/" + code;
-        String urn = null;
+        ExternalItem target = new ExternalItem();
+        target.setCode(code);
+        target.setCodeNested(code + "Nested");
+        target.setUri("v1.0/" + subpathUrl + "/" + code);
         if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(type)) {
-            urn = "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:" + code + "(1.0)";
+            target.setUrn("urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=SDMX:" + code + "(1.0)");
         } else {
-            urn = "urn:" + code; // any
+            target.setUrn("urn:" + code); // any
         }
-        String managementUrlPart = "/" + subpathUrl + "/" + code;
-        return new ExternalItem(code, uri, urn, urn, type, mockInternationalStringMetadata(code, null), managementUrlPart);
+        target.setUrnInternal(target.getUrn());
+        target.setType(type);
+        target.setTitle(mockInternationalStringMetadata(code, null));
+        target.setManagementAppUrl("/" + subpathUrl + "/" + code);
+        return target;
     }
 
     private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
-        String uri = "v1.0/" + subpathUrl + "/" + code;
-        String urn = "urn:" + code;
-        String managementUrlPart = "/" + subpathUrl + "/" + code;
-        return new ExternalItem(code, uri, urn, null, type, mockInternationalStringMetadata(code, null), managementUrlPart);
+        ExternalItem target = new ExternalItem();
+        target.setCode(code);
+        target.setCodeNested(code + "Nested");
+        target.setUri("v1.0/" + subpathUrl + "/" + code);
+        target.setUrn("urn:" + code);
+        target.setUrnInternal(target.getUrn());
+        target.setType(type);
+        target.setTitle(mockInternationalStringMetadata(code, null));
+        target.setManagementAppUrl("/" + subpathUrl + "/" + code);
+        return target;
     }
 
     private Operation mockOperation(String subCode, ProcStatusEnum procStatus, Boolean isIndicatorsSystem, Family... families) {

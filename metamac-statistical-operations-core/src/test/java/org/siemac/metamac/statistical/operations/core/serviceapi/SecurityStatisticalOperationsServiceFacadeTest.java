@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.core.serviceapi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +12,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
-import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.core.common.dto.LocalisedStringDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
@@ -1613,7 +1613,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(new ExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(mockExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
@@ -1643,17 +1643,17 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setSurveyType(statisticalOperationsServiceFacade.findSurveyTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // PRODUCER
-        operationDto.addProducer(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
-        operationDto.addProducer(new ExternalItemDto("INE", "/uri/test/agency", "URN:INE", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addProducer(mockExternalItemDto("INE", "/uri/test/agency", "URN:INE", null, TypeExternalArtefactsEnum.AGENCY));
 
         // REGIONAL_RESPONSIBLE
-        operationDto.addRegionalResponsible(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addRegionalResponsible(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // PUBLISHER
-        operationDto.addPublisher(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
+        operationDto.addPublisher(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.AGENCY));
 
         // COMMON_METADATA
-        operationDto.setCommonMetadata(new ExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
+        operationDto.setCommonMetadata(mockExternalItemDto("ISTAC", "/uri/test/agency", "URN:ISTAC", null, TypeExternalArtefactsEnum.CONFIGURATION));
 
         return operationDto;
     }
