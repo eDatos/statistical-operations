@@ -113,14 +113,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     }
 
     @Override
-    protected void onReveal() {
-        super.onReveal();
-    }
-
-    @Override
     protected void onReset() {
         super.onReset();
-        hideMessages();
         updateBreadcrumbs();
     }
 
