@@ -30,6 +30,8 @@ import org.siemac.metamac.statistical.operations.core.domain.OperationProperties
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -39,6 +41,8 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
     private RestCriteria2SculptorCriteria<Instance>         instanceCriteriaMapper                 = null;
     private RestCriteria2SculptorCriteria<Family>           familyCriteriaMapper                   = null;
     private PropertyValueRestToPropertyValueEntityInterface propertyValueRestToPropertyValueEntity = null;
+
+    private final Logger                                    logger                                 = LoggerFactory.getLogger(RestCriteria2SculptorCriteriaMapperImpl.class);
 
     private enum PropertyTypeEnum {
         STRING, DATE, BOOLEAN, PROC_STATUS, STATUS
@@ -253,20 +257,29 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 return null;
             }
 
-            PropertyTypeEnum propertyTypeEnum = PropertyTypeEnum.valueOf(propertyType);
-            switch (propertyTypeEnum) {
-                case STRING:
-                    return value;
-                case DATE:
-                    return CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate();
-                case BOOLEAN:
-                    return Boolean.valueOf(value);
-                case PROC_STATUS:
-                    return ProcStatusEnum.valueOf(value);
-                case STATUS:
-                    return StatusEnum.valueOf(value);
-                default:
+            try {
+                PropertyTypeEnum propertyTypeEnum = PropertyTypeEnum.valueOf(propertyType);
+                switch (propertyTypeEnum) {
+                    case STRING:
+                        return value;
+                    case DATE:
+                        return CoreCommonUtil.transformISODateTimeLexicalRepresentationToDateTime(value).toDate();
+                    case BOOLEAN:
+                        return Boolean.valueOf(value);
+                    case PROC_STATUS:
+                        return ProcStatusEnum.valueOf(value);
+                    case STATUS:
+                        return StatusEnum.valueOf(value);
+                    default:
+                        throw toRestExceptionParameterIncorrect(propertyName);
+                }
+            } catch (Exception e) {
+                logger.error("Error parsing Rest query", e);
+                if (e instanceof RestException) {
+                    throw (RestException) e;
+                } else {
                     throw toRestExceptionParameterIncorrect(propertyName);
+                }
             }
         }
     }
