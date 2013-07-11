@@ -569,7 +569,9 @@ public class StatisticalOperationsCoreMocks {
     private ExternalItem mockExternalItemSrm(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         ExternalItem target = new ExternalItem();
         target.setCode(code);
-        target.setCodeNested(code + "Nested");
+        if (TypeExternalArtefactsEnum.AGENCY.equals(type) || TypeExternalArtefactsEnum.CATEGORY.equals(type)) {
+            target.setCodeNested(code + "Nested");
+        }
         target.setUri("v1.0/" + subpathUrl + "/" + code);
         target.setUrn("urn:" + code);
         target.setUrnInternal(target.getUrn());
@@ -582,7 +584,7 @@ public class StatisticalOperationsCoreMocks {
     private ExternalItem mockExternalItemCommonMetadata(String code, String subpathUrl, TypeExternalArtefactsEnum type) {
         ExternalItem target = new ExternalItem();
         target.setCode(code);
-        target.setCodeNested(code + "Nested");
+        target.setCodeNested(null);
         target.setUri("v1.0/" + subpathUrl + "/" + code);
         target.setUrn("urn:" + code);
         target.setUrnInternal(target.getUrn());

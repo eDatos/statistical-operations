@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.math.BigInteger;
 
 import org.joda.time.DateTime;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.test.utils.MetamacRestMocks;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -916,7 +917,11 @@ public class StatisticalOperationsRestMocks {
     private Resource mockResourceFromExternalItem(String id, String endpointApi, String apiSubpath, String kind) {
         String urn = "urn:" + id;
         String selfLink = endpointApi + "/" + apiSubpath + "/" + id;
-        return mockResource(id, urn, kind, selfLink);
+        Resource target = mockResource(id, urn, kind, selfLink);
+        if (TypeExternalArtefactsEnum.AGENCY.getValue().equals(kind) || TypeExternalArtefactsEnum.CATEGORY.getValue().equals(kind)) {
+            target.setNestedId(id + "Nested");
+        }
+        return target;
     }
 
     private ResourceInternal mockOrganisationResourceFromExternalItemSrm(String id) {

@@ -588,6 +588,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         }
         Resource target = new Resource();
         target.setId(source.getCode());
+        target.setNestedId(source.getCodeNested());
         target.setUrn(source.getUrn());
         target.setKind(source.getType().getValue());
         target.setSelfLink(toResourceLink(target.getKind(), RestUtils.createLink(apiExternalItem, source.getUri())));
