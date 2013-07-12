@@ -1,6 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
-import static org.siemac.metamac.srm.rest.internal.RestInternalConstants.WILDCARD;
+import static org.siemac.metamac.rest.api.constants.RestApiConstants.WILDCARD_ALL;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,7 +86,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestQueryUtils.buildCategoryQuery(itemWebCriteria);
 
         try {
-            Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            Categories categories = restApiLocator.getSrmRestInternalFacadeV10().findCategories(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getCategoriesAsExternalItemsResult(categories);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
@@ -134,7 +134,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestQueryUtils.buildCodeQuery(itemWebCriteria);
 
         try {
-            Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getCodesAsExternalItemsResult(codes);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
@@ -182,7 +182,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestQueryUtils.buildConceptQuery(itemWebCriteria);
 
         try {
-            Concepts concepts = restApiLocator.getSrmRestInternalFacadeV10().findConcepts(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            Concepts concepts = restApiLocator.getSrmRestInternalFacadeV10().findConcepts(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getConceptsAsExternalItemsResult(concepts);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
@@ -231,7 +231,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
         try {
 
-            OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationUnitsAsExternalItemsResult(organisationUnits);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
@@ -280,7 +280,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
         try {
 
-            DataProviders dataProviders = restApiLocator.getSrmRestInternalFacadeV10().findDataProviders(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            DataProviders dataProviders = restApiLocator.getSrmRestInternalFacadeV10().findDataProviders(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getDataProvidersAsExternalItemsResult(dataProviders);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
@@ -329,7 +329,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
 
         try {
 
-            Organisations organisations = restApiLocator.getSrmRestInternalFacadeV10().findOrganisations(WILDCARD, WILDCARD, WILDCARD, query, orderBy, limit, offset);
+            Organisations organisations = restApiLocator.getSrmRestInternalFacadeV10().findOrganisations(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationsAsExternalItemsResult(organisations);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
