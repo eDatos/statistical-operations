@@ -686,7 +686,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         if (operation != null) {
             linkOperation = toOperationLink(operation);
         } else {
-            linkOperation = toOperationLink(RestExternalConstants.WILDCARD);
+            linkOperation = toOperationLink(RestExternalConstants.WILDCARD_ALL);
         }
         return RestUtils.createLink(linkOperation, RestExternalConstants.LINK_SUBPATH_INSTANCES);
     }

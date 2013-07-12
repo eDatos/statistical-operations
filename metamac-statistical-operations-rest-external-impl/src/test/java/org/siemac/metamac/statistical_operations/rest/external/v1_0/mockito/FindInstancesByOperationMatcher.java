@@ -29,7 +29,7 @@ public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher
         List<ConditionalCriteria> expected = new ArrayList<ConditionalCriteria>();
 
         // By operation
-        if (!RestExternalConstants.WILDCARD.equals(operationCode)) {
+        if (!RestExternalConstants.WILDCARD_ALL.equals(operationCode)) {
             expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.operation().code()).eq(operationCode).buildSingle());
         }
         // By procStatus

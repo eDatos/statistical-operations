@@ -116,7 +116,7 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
 
             // Find for operation
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = null;
-            if (!RestExternalConstants.WILDCARD.equals(operationId)) {
+            if (!RestExternalConstants.WILDCARD_ALL.equals(operationId)) {
                 operationEntity = retrieveOperationEntityPublishedExternally(operationId);
                 ConditionalCriteria conditionalCriteriaOperationId = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
                         .withProperty(InstanceProperties.operation().code()).eq(operationId).buildSingle();

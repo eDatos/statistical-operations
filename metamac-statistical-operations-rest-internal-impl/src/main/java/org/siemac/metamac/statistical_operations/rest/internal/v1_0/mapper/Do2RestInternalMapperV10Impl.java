@@ -722,7 +722,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         if (operation != null) {
             linkOperation = toOperationLink(operation);
         } else {
-            linkOperation = toOperationLink(RestInternalConstants.WILDCARD);
+            linkOperation = toOperationLink(RestInternalConstants.WILDCARD_ALL);
         }
         return RestUtils.createLink(linkOperation, RestInternalConstants.LINK_SUBPATH_INSTANCES);
     }
