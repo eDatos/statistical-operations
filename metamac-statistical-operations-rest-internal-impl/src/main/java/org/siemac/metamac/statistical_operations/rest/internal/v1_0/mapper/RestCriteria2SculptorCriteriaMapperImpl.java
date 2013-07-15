@@ -21,6 +21,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Insta
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.InstanceCriteriaPropertyRestriction;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OperationCriteriaPropertyOrder;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.OperationCriteriaPropertyRestriction;
+import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.ProcStatus;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
@@ -267,9 +268,9 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                     case BOOLEAN:
                         return Boolean.valueOf(value);
                     case PROC_STATUS:
-                        return ProcStatusEnum.valueOf(value);
+                        return propertyRestrictionValueToProcStatusEnum(propertyName, value);
                     case STATUS:
-                        return StatusEnum.valueOf(value);
+                        return propertyRestrictionValueToStatusEnum(propertyName, value);
                     default:
                         throw toRestExceptionParameterIncorrect(propertyName);
                 }
@@ -282,5 +283,21 @@ public class RestCriteria2SculptorCriteriaMapperImpl implements RestCriteria2Scu
                 }
             }
         }
+    }
+
+    private ProcStatusEnum propertyRestrictionValueToProcStatusEnum(String propertyName, String value) {
+        ProcStatus procStatus = ProcStatus.valueOf(value);
+        switch (procStatus) {
+            case INTERNALLY_PUBLISHED:
+                return ProcStatusEnum.PUBLISH_INTERNALLY;
+            case EXTERNALLY_PUBLISHED:
+                return ProcStatusEnum.PUBLISH_EXTERNALLY;
+            default:
+                throw toRestExceptionParameterIncorrect(propertyName);
+        }
+    }
+
+    private StatusEnum propertyRestrictionValueToStatusEnum(String propertyName, String value) {
+        return value != null ? StatusEnum.valueOf(value) : null;
     }
 }
