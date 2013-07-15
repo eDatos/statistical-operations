@@ -975,7 +975,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         };
         item.setSaveClickHandler(clickHandler);
 
-        String defaultCodelistUrn = ConfigurationPropertiesUtils.getInstanceDefaultCodelistForGeographicGranularity();
+        String defaultCodelistUrn = ConfigurationPropertiesUtils.getDefaultCodelistGeographicalGranularityUrn();
 
         // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
         if (StringUtils.isBlank(defaultCodelistUrn)) {
@@ -1021,7 +1021,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         };
         item.setSaveClickHandler(clickHandler);
 
-        String defaultCodelistUrn = ConfigurationPropertiesUtils.getInstanceDefaultCodelistForTemporalGranularity();
+        String defaultCodelistUrn = ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn();
 
         // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
         if (StringUtils.isBlank(defaultCodelistUrn)) {
@@ -1067,7 +1067,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             }
         };
         item.setSaveClickHandler(clickHandler);
-        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getInstanceDefaultCodelistForFreqColl());
+        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn());
         return item;
     }
 

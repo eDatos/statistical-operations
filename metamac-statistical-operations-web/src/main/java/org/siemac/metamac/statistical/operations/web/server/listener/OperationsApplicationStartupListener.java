@@ -41,13 +41,11 @@ public class OperationsApplicationStartupListener extends ApplicationStartupList
         checkNavBarUrlProperty();
         checkOrganisationProperty();
 
+        checkDefaultCodelistTemporalGranularityUrn();
+        checkDefaultCodelistGeographicalGranularityUrn();
+
         // Statistical operations properties
 
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME);
-
-        checkOptionalProperty(StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST);
-        checkOptionalProperty(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY);
-        checkOptionalProperty(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY);
-        checkOptionalProperty(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL);
     }
 }

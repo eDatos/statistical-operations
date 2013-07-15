@@ -1292,7 +1292,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         };
         item.setSaveClickHandler(clickHandler);
         // Set the default codelist specified in the configuration properties (data directory)
-        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getOperationDefaultCodelistForUpdateFrequency());
+        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn());
         return item;
     }
 

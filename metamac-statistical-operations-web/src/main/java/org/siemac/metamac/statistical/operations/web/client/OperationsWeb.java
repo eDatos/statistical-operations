@@ -35,9 +35,8 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
 
     @Override
     protected String[] getPropertiesToLoad() {
-        return new String[]{StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST,
-                StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL, StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY,
-                StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY};
+        return new String[]{StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN,
+                StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN};
     }
 
     public static MetamacPrincipal getCurrentUser() {
@@ -75,11 +74,8 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
 
     @Override
     protected void setConfigurationProperties(Map<String, String> propertyValues) {
-        ConfigurationPropertiesUtils.setOperationDefaultCodelistForUpdateFrequency(propertyValues
-                .get(StatisticalOperationsConfigurationConstants.STATISTICAL_OPERATION_DEFAULT_UPDATE_FREQUENCY_CODELIST));
-        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForGeographicGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_GEOGRAPHIC_GRANULARITY));
-        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForTemporalGranularity(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_TEMPORAL_GRANULARITY));
-        ConfigurationPropertiesUtils.setInstanceDefaultCodelistForFreqColl(propertyValues.get(StatisticalOperationsConfigurationConstants.INSTANCE_DEFAULT_FREQ_COLL));
+        ConfigurationPropertiesUtils.setDefaultCodelistTemporalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN));
+        ConfigurationPropertiesUtils.setDefaultCodelistGeographicalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN));
     }
 
     @Override
