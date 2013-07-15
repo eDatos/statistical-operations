@@ -63,39 +63,39 @@ public class StatisticalOperationsRestMocks {
     }
 
     public Operation mockOperation1() {
-        return mockOperation("1", ProcStatus.PUBLISH_INTERNALLY);
+        return mockOperation("1", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Operation mockOperation2() {
-        return mockOperation("2", ProcStatus.PUBLISH_INTERNALLY);
+        return mockOperation("2", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Operation mockOperation3() {
-        return mockOperation("3", ProcStatus.PUBLISH_EXTERNALLY);
+        return mockOperation("3", ProcStatus.EXTERNALLY_PUBLISHED);
     }
 
     public Operation mockOperation4() {
-        return mockOperation("4", ProcStatus.PUBLISH_INTERNALLY);
+        return mockOperation("4", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Operation mockOperation5() {
-        return mockOperation("5", ProcStatus.PUBLISH_INTERNALLY);
+        return mockOperation("5", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Operation mockOperation6() {
-        return mockOperation("6", ProcStatus.PUBLISH_EXTERNALLY);
+        return mockOperation("6", ProcStatus.EXTERNALLY_PUBLISHED);
     }
 
     public Family mockFamily1() {
-        return mockFamily("1", ProcStatus.PUBLISH_INTERNALLY);
+        return mockFamily("1", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Family mockFamily2() {
-        return mockFamily("2", ProcStatus.PUBLISH_EXTERNALLY);
+        return mockFamily("2", ProcStatus.EXTERNALLY_PUBLISHED);
     }
 
     public Instance mockInstance1() {
-        return mockInstance("1", "operation1", ProcStatus.PUBLISH_INTERNALLY);
+        return mockInstance("1", "operation1", ProcStatus.INTERNALLY_PUBLISHED);
     }
 
     public Operations mockOperations(String limit, String offset) {

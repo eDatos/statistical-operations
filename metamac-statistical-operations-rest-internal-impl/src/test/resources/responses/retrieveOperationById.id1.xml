@@ -156,7 +156,7 @@
     <operations:internalInventoryDate>2012-12-01T13:15:14Z</operations:internalInventoryDate>
     <operations:currentlyActive>false</operations:currentlyActive>
     <operations:status>DESIGN</operations:status>
-    <operations:procStatus>PUBLISH_INTERNALLY</operations:procStatus>
+    <operations:procStatus>INTERNALLY_PUBLISHED</operations:procStatus>
     <operations:publishers kind="structuralResources#organisationUnits" total="3">
         <operations:publisher kind="structuralResources#agency">
             <cdomain:id>publisher1</cdomain:id>

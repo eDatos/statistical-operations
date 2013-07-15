@@ -787,9 +787,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         switch (source) {
             case PUBLISH_INTERNALLY:
-                return ProcStatus.PUBLISH_INTERNALLY;
+                return ProcStatus.INTERNALLY_PUBLISHED;
             case PUBLISH_EXTERNALLY:
-                return ProcStatus.PUBLISH_EXTERNALLY;
+                return ProcStatus.EXTERNALLY_PUBLISHED;
             default:
                 org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
                 throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
