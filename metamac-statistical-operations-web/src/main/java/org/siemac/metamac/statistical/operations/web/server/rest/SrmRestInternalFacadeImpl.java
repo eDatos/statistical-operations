@@ -230,7 +230,6 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestQueryUtils.buildOrganisationQuery(itemWebCriteria);
 
         try {
-
             OrganisationUnits organisationUnits = restApiLocator.getSrmRestInternalFacadeV10().findOrganisationUnits(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
             return ExternalItemUtils.getOrganisationUnitsAsExternalItemsResult(organisationUnits);
         } catch (ServerWebApplicationException e) {
