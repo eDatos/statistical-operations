@@ -87,8 +87,10 @@ public class RestQueryUtils {
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find categories that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
-        addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        if (BooleanUtils.isTrue(itemRestCriteria.getIsItemSchemeExternallyPublished())) {
+            String externallyPublishedQuery = buildSrmProcStatusQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
+            addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        }
 
         // Only last versions
         String lastVersionQuery = buildIsLastVersionQuery(CategoryCriteriaPropertyRestriction.CATEGORY_SCHEME_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
@@ -161,8 +163,10 @@ public class RestQueryUtils {
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find codes that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(CodeCriteriaPropertyRestriction.CODELIST_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
-        addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        if (BooleanUtils.isTrue(itemRestCriteria.getIsItemSchemeExternallyPublished())) {
+            String externallyPublishedQuery = buildSrmProcStatusQuery(CodeCriteriaPropertyRestriction.CODELIST_PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
+            addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        }
 
         // Only last versions
         String lastVersionQuery = buildIsLastVersionQuery(CodeCriteriaPropertyRestriction.CODELIST_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
@@ -381,8 +385,10 @@ public class RestQueryUtils {
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find concepts that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_EXTERNALLY_PUBLISHED, conceptRestCriteria.getIsItemSchemeExternallyPublished());
-        addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        if (BooleanUtils.isTrue(conceptRestCriteria.getIsItemSchemeExternallyPublished())) {
+            String externallyPublishedQuery = buildSrmProcStatusQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
+            addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        }
 
         // Only last versions
         String lastVersionQuery = buildIsLastVersionQuery(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_LATEST, conceptRestCriteria.getIsItemSchemeLastVersion());
@@ -495,8 +501,10 @@ public class RestQueryUtils {
         addConditionToQueryBuilderIfAny(queryBuilder, urnsQuery, LogicalOperator.AND);
 
         // Find concepts that are externally published
-        String externallyPublishedQuery = buildBooleanQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_EXTERNALLY_PUBLISHED, itemRestCriteria.getIsItemSchemeExternallyPublished());
-        addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        if (BooleanUtils.isTrue(itemRestCriteria.getIsItemSchemeExternallyPublished())) {
+            String externallyPublishedQuery = buildSrmProcStatusQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_PROC_STATUS, ProcStatus.EXTERNALLY_PUBLISHED);
+            addConditionToQueryBuilderIfAny(queryBuilder, externallyPublishedQuery, LogicalOperator.AND);
+        }
 
         // Only last versions
         String lastVersionQuery = buildIsLastVersionQuery(OrganisationCriteriaPropertyRestriction.ORGANISATION_SCHEME_LATEST, itemRestCriteria.getIsItemSchemeLastVersion());
@@ -537,17 +545,6 @@ public class RestQueryUtils {
         if (procStatus != null) {
             queryBuilder.append("(");
             queryBuilder.append(procStatusPropertyEnum).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(procStatus).append("\"");
-            queryBuilder.append(")");
-        }
-        return queryBuilder.toString();
-    }
-
-    @SuppressWarnings("rawtypes")
-    private static String buildBooleanQuery(Enum propertyEnum, Boolean booleanValue) {
-        StringBuilder queryBuilder = new StringBuilder();
-        if (booleanValue != null) {
-            queryBuilder.append("(");
-            queryBuilder.append(propertyEnum).append(" ").append(ComparisonOperator.EQ.name()).append(" \"").append(booleanValue).append("\"");
             queryBuilder.append(")");
         }
         return queryBuilder.toString();
