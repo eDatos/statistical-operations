@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,8 +79,8 @@ public class CommonMetadataRestExternalFacadeImpl implements CommonMetadataRestE
     }
 
     private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode) throws MetamacWebException {
-        String locale = (String) serviceContext.getProperty(LocaleConstants.locale);
-        String exceptionnMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale);
+        Locale locale = (Locale) serviceContext.getProperty(LocaleConstants.locale);
+        String exceptionnMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale.getLanguage());
 
         throw new MetamacWebException(exceptionCode, exceptionnMessage);
     }
