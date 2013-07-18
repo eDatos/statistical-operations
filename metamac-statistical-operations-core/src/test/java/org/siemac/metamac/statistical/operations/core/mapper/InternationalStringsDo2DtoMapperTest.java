@@ -17,17 +17,16 @@ import org.siemac.metamac.statistical.operations.core.utils.asserts.StatisticalO
 import org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks;
 import org.springframework.beans.factory.annotation.Value;
 
-
 public class InternationalStringsDo2DtoMapperTest extends MetamacBaseTest {
 
-    @Value("${metamac.common.metadata.db.provider}")
-    private String               databaseProvider;
+    @Value("${metamac.statistical_operations.db.provider}")
+    private String                     databaseProvider;
 
-    private Do2DtoMapper         do2DtoMapper         = new Do2DtoMapperImpl();
+    private final Do2DtoMapper         do2DtoMapper         = new Do2DtoMapperImpl();
 
-    private ConfigurationService configurationService = new ConfigurationServiceMockImpl();
+    private final ConfigurationService configurationService = new ConfigurationServiceMockImpl();
 
-    private DozerBeanMapper      mapper               = Mockito.mock(DozerBeanMapper.class);
+    private final DozerBeanMapper      mapper               = Mockito.mock(DozerBeanMapper.class);
 
     @Before
     public void setConfigurationToMapper() throws Exception {
@@ -54,7 +53,7 @@ public class InternationalStringsDo2DtoMapperTest extends MetamacBaseTest {
         field.setAccessible(true);
         field.set(do2DtoMapper, fieldValue);
     }
-    
+
     private void setFieldToMapper(String fieldName, Object fieldValue) throws Exception {
         Field field = do2DtoMapper.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);

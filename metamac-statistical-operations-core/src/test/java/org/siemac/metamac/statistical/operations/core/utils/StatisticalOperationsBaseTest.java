@@ -17,11 +17,11 @@ import org.springframework.beans.factory.annotation.Value;
 
 public abstract class StatisticalOperationsBaseTest extends MetamacDBUnitBaseTests {
 
-    @Value("${metamac.statistical.operations.db.provider}")
-    private String           databaseProvider;
+    @Value("${metamac.statistical_operations.db.provider}")
+    private String      databaseProvider;
 
-    public final String      OPERATION_01 = "C0025A";
-    public final String      OPERATION_02 = "C0025B";
+    public final String OPERATION_01 = "C0025A";
+    public final String OPERATION_02 = "C0025B";
 
     // --------------------------------------------------------------------------------------------------------------
     // SERVICE CONTEXT
