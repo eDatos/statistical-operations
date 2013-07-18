@@ -8,13 +8,13 @@ public class StatisticalOperationsConfigurationConstants extends ConfigurationCo
 
     // Configuration
 
-    public static final String USER_GUIDE_FILE_NAME = "metamac.statistical.operations.user.guide.file.name";
+    public static final String USER_GUIDE_FILE_NAME = "metamac.statistical_operations.user_guide.file_name";
 
     // DataSource
 
-    public static final String DB_URL               = "metamac.statistical.operations.db.url";
-    public static final String DB_USERNAME          = "metamac.statistical.operations.db.username";
-    public static final String DB_PASSWORD          = "metamac.statistical.operations.db.password";
-    public static final String DB_DIALECT           = "metamac.statistical.operations.db.dialect";
-    public static final String DB_DRIVER_NAME       = "metamac.statistical.operations.db.driverName";
+    public static final String DB_URL               = "metamac.statistical_operations.db.url";
+    public static final String DB_USERNAME          = "metamac.statistical_operations.db.username";
+    public static final String DB_PASSWORD          = "metamac.statistical_operations.db.password";
+    public static final String DB_DIALECT           = "metamac.statistical_operations.db.dialect";
+    public static final String DB_DRIVER_NAME       = "metamac.statistical_operations.db.driver_name";
 }
