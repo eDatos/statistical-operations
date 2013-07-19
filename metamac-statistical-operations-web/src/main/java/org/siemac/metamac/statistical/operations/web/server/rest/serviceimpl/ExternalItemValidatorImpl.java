@@ -261,7 +261,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode, String... parameters) throws MetamacWebException {
         Locale locale = (Locale) serviceContext.getProperty(LocaleConstants.locale);
-        String exceptionMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale.getLanguage(), parameters);
+        String exceptionMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale, parameters);
 
         throw new MetamacWebException(exceptionCode, exceptionMessage);
     }

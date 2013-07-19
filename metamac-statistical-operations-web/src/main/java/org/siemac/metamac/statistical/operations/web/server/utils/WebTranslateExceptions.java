@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WebTranslateExceptions extends TranslateExceptions {
 
-    public String getTranslatedMessage(String code, String localString, String... parameters) {
-        Locale locale = LocaleUtil.getLocaleFromLocaleString(localString);
+    public String getTranslatedMessage(String code, Locale locale, String... parameters) {
 
         String translatedMessage = translateMessage(code, locale);
 
