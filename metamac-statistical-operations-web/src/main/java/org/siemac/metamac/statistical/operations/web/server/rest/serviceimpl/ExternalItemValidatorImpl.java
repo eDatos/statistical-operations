@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -259,8 +260,8 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     }
 
     private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode, String... parameters) throws MetamacWebException {
-        String locale = (String) serviceContext.getProperty(LocaleConstants.locale);
-        String exceptionMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale, parameters);
+        Locale locale = (Locale) serviceContext.getProperty(LocaleConstants.locale);
+        String exceptionMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale.getLanguage(), parameters);
 
         throw new MetamacWebException(exceptionCode, exceptionMessage);
     }
