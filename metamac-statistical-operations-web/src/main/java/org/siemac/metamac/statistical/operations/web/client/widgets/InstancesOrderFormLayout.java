@@ -53,6 +53,7 @@ public class InstancesOrderFormLayout extends MainFormLayout {
 
         list = new BaseCustomListGrid();
         list.setCanFocus(false); // To avoid scrolling when a record is clicked
+        list.setCanDragSelectText(false);
         list.setCanDragRecordsOut(true);
         list.setCanAcceptDroppedRecords(true);
         list.setCanReorderRecords(true);
