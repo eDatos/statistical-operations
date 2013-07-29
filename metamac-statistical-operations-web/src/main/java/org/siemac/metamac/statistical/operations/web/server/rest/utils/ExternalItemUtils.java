@@ -8,6 +8,7 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.rest.common.v1_0.domain.ListBase;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Categories;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CategorySchemes;
+import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.CodeResource;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codelists;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Codes;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ConceptSchemes;
@@ -69,7 +70,7 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
 
     public static ExternalItemsResult getCodesAsExternalItemsResult(Codes codes) {
         ExternalItemsResult result = getListBaseAsExternalItemsResult(codes);
-        result.setExternalItemDtos(getExternalItemDtosFromItemResourceInternals(codes.getCodes()));
+        result.setExternalItemDtos(getExternalItemDtosFromCodeResourceInternals(codes.getCodes()));
         return result;
     }
 
@@ -192,6 +193,14 @@ public class ExternalItemUtils extends org.siemac.metamac.web.common.client.util
     }
 
     private static List<ExternalItemDto> getExternalItemDtosFromItemResourceInternals(List<ItemResourceInternal> resources) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
+        for (ResourceInternal resource : resources) {
+            externalItemDtos.add(getExternalItemDtoFromSrmResourceInternal(resource));
+        }
+        return externalItemDtos;
+    }
+
+    private static List<ExternalItemDto> getExternalItemDtosFromCodeResourceInternals(List<CodeResource> resources) {
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(resources.size());
         for (ResourceInternal resource : resources) {
             externalItemDtos.add(getExternalItemDtoFromSrmResourceInternal(resource));

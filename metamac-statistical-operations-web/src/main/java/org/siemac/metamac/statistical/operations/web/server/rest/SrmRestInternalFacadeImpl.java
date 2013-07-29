@@ -135,7 +135,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
         String query = RestQueryUtils.buildCodeQuery(itemWebCriteria);
 
         try {
-            Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset);
+            Codes codes = restApiLocator.getSrmRestInternalFacadeV10().findCodes(WILDCARD_ALL, WILDCARD_ALL, WILDCARD_ALL, query, orderBy, limit, offset, null, null);
             return ExternalItemUtils.getCodesAsExternalItemsResult(codes);
         } catch (ServerWebApplicationException e) {
             throwMetamacWebExceptionFromServerWebApplicationException(serviceContext, e);
