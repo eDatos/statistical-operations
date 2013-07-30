@@ -635,8 +635,8 @@ public class StatisticalOperationsRestMocks {
         return configuration;
     }
 
-    public List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal> mockSrmInternalApiRetrieveConceptsByConceptScheme(String conceptSchemeId) {
-        List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal> concepts = new ArrayList<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal>();
+    public List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal> mockSrmInternalApiRetrieveConceptsByConceptScheme(String conceptSchemeId) {
+        List<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal> concepts = new ArrayList<org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal>();
         concepts.add(mockSrmConcept(conceptSchemeId, "concept1"));
         concepts.add(mockSrmConcept(conceptSchemeId, "concept2"));
         return concepts;
@@ -1012,8 +1012,8 @@ public class StatisticalOperationsRestMocks {
         return item;
     }
 
-    private org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal mockSrmConcept(String conceptSchemeId, String conceptId) {
-        org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal resource = new org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ResourceInternal();
+    private org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal mockSrmConcept(String conceptSchemeId, String conceptId) {
+        org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal resource = new org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ItemResourceInternal();
         resource.setId(conceptSchemeId + conceptId);
         resource.setUrn("urn:" + resource.getId());
         resource.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPT);
