@@ -38,7 +38,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         assertEquals(expected.getCodeNested(), actual.getCodeNested());
         assertEquals(expected.getUri(), actual.getUri());
         assertEquals(expected.getUrn(), actual.getUrn());
-        assertEquals(expected.getUrnInternal(), actual.getUrnInternal());
+        assertEquals(expected.getUrnProvider(), actual.getUrnProvider());
         assertEquals(expected.getType(), actual.getType());
         assertEqualsInternationalString(expected.getTitle(), actual.getTitle());
         assertEquals(expected.getManagementAppUrl(), actual.getManagementAppUrl());
@@ -55,8 +55,17 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         for (ExternalItem expec : expected) {
             boolean found = false;
             for (ExternalItem actualItem : actual) {
-                if (actualItem.getUrn().equals(expec.getUrn()) || actualItem.getUrnInternal().equals(expec.getUrnInternal())) {
-                    found = true;
+                if (expec.getUrn() != null) {
+                    if (expec.getUrn().equals(actualItem.getUrn())) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    if (expec.getUrnProvider() != null) {
+                        if (expec.getUrnProvider().equals(actualItem.getUrnProvider())) {
+                            found = true;
+                        }
+                    }
                 }
             }
             if (!found) {
@@ -64,7 +73,6 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
             }
         }
     }
-
     public static void assertEqualsExternalItemList(List<ExternalItem> expected, List<ExternalItem> actual) {
         assertEqualsNullability(expected, actual);
         if (expected == null) {
@@ -138,7 +146,7 @@ public class StatisticalOperationsAsserts extends MetamacAsserts {
         assertEquals(entity.getCode(), dto.getCode());
         assertEquals(entity.getCodeNested(), dto.getCodeNested());
         assertEquals(entity.getUrn(), dto.getUrn());
-        assertEquals(entity.getUrnInternal(), dto.getUrnInternal());
+        assertEquals(entity.getUrnProvider(), dto.getUrnProvider());
         assertEquals(entity.getType(), dto.getType());
         assertEqualsInternationalString(entity.getTitle(), dto.getTitle());
     }

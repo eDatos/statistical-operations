@@ -119,14 +119,14 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndExistsDo() throws Exception {
         // EXISTS, EXISTS: Same elements
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(mockExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+        dtos.add(mockExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_provider",
                 TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(mockExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+        dtos.add(mockExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_provider",
                 TypeExternalArtefactsEnum.CATEGORY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
-        entities.add(mockExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+        entities.add(mockExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_provider",
                 TypeExternalArtefactsEnum.AGENCY));
-        entities.add(mockExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+        entities.add(mockExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_provider",
                 TypeExternalArtefactsEnum.CATEGORY));
 
         testExternalItemDtoListToEntitiesList(dtos, entities);
@@ -136,16 +136,16 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndExistsDoWithDtoMoreElements() throws Exception {
         // EXISTS, EXISTS: More elements
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(mockExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+        dtos.add(mockExternalItemDto("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_provider",
                 TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(mockExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+        dtos.add(mockExternalItemDto("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_provider",
                 TypeExternalArtefactsEnum.CATEGORY));
-        dtos.add(mockExternalItemDto("CODE_03", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_03", "URN_03", "URN_03_internal",
+        dtos.add(mockExternalItemDto("CODE_03", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_03", "URN_03", "URN_03_provider",
                 TypeExternalArtefactsEnum.CATEGORY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
-        entities.add(mockExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_internal",
+        entities.add(mockExternalItem("CODE_01", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_01", "URN_01", "URN_01_provider",
                 TypeExternalArtefactsEnum.AGENCY));
-        entities.add(mockExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_internal",
+        entities.add(mockExternalItem("CODE_02", ConfigurationMockConstants.SRM_INTERNAL_API_URL_BASE + CoreCommonConstants.URL_SEPARATOR + "URI_02", "URN_02", "URN_02_provider",
                 TypeExternalArtefactsEnum.CATEGORY));
 
         testExternalItemDtoListToEntitiesList(dtos, entities);

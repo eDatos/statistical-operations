@@ -578,7 +578,7 @@ public class StatisticalOperationsCoreMocks {
         } else {
             target.setUrn("urn:" + code); // any
         }
-        target.setUrnInternal(target.getUrn());
+        target.setUrnProvider(target.getUrn());
         target.setType(type);
         target.setTitle(mockInternationalStringMetadata(code, null));
         target.setManagementAppUrl("/" + subpathUrl + "/" + code);
@@ -591,7 +591,7 @@ public class StatisticalOperationsCoreMocks {
         target.setCodeNested(null);
         target.setUri("v1.0/" + subpathUrl + "/" + code);
         target.setUrn("urn:" + code);
-        target.setUrnInternal(target.getUrn());
+        target.setUrnProvider(target.getUrn());
         target.setType(type);
         target.setTitle(mockInternationalStringMetadata(code, null));
         target.setManagementAppUrl("/" + subpathUrl + "/" + code);

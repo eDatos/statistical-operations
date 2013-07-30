@@ -1431,9 +1431,9 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testUpdateOperationUpdatingAddingAndRemovingExternalItems() throws Exception {
 
         OperationDto operationDto = createOperationDto();
-        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH1", "/uri/test/category1", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH_internal", TypeExternalArtefactsEnum.CATEGORY));
-        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH2", "/uri/test/category2", null, "URN:CATEGORY:HEALTH2", TypeExternalArtefactsEnum.CATEGORY));
-        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH3", "/uri/test/category3", null, "URN:CATEGORY:HEALTH3", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH1", "/uri/test/category1", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH_provider", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH2", "/uri/test/category2", "URN:CATEGORY:HEALTH2", null, TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH3", "/uri/test/category3", "URN:CATEGORY:HEALTH3", null, TypeExternalArtefactsEnum.CATEGORY));
 
         // Create
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
@@ -1448,7 +1448,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         ExternalItemDto externalItemDtoToRemove = getExternalItemDtoByCode(operationDto.getSecondarySubjectAreas(), "HEALTH2");
         operationDto.removeSecondarySubjectArea(externalItemDtoToRemove);
         // Add two
-        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH4", "/uri/test/category4", null, "URN:CATEGORY:HEALTH4_internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH4", "/uri/test/category4", "URN:CATEGORY:HEALTH4", null, TypeExternalArtefactsEnum.CATEGORY));
         operationDto.getSecondarySubjectAreas().add(mockExternalItemDto("HEALTH5", "/uri/test/category5", "URN:CATEGORY:HEALTH5", null, TypeExternalArtefactsEnum.CATEGORY));
 
         // Update
@@ -3631,7 +3631,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setOfficialityType(statisticalOperationsServiceFacade.findOfficialityTypeById(getServiceContextAdministrador(), Long.valueOf(1)));
 
         // SUBJECT_AREA
-        operationDto.setSubjectArea(mockExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:internal", TypeExternalArtefactsEnum.CATEGORY));
+        operationDto.setSubjectArea(mockExternalItemDto("HEALTH", "/uri/test/category", "URN:CATEGORY:HEALTH", "URN:CATEGORY:HEALTH:provider", TypeExternalArtefactsEnum.CATEGORY));
 
         // STATUS
         operationDto.setStatus(StatusEnum.PLANNING);
