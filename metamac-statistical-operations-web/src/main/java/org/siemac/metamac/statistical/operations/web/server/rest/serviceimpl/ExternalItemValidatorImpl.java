@@ -230,7 +230,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
             if (StringUtils.equals(expectedExternalItem.getUrn(), ei.getUrn()) && expectedExternalItem.getUrn() != null) {
                 return true;
             }
-            if (StringUtils.equals(expectedExternalItem.getUrnInternal(), ei.getUrnInternal()) && expectedExternalItem.getUrnInternal() != null) {
+            if (StringUtils.equals(expectedExternalItem.getUrnProvider(), ei.getUrnProvider()) && expectedExternalItem.getUrnProvider() != null) {
                 return true;
             }
         }
@@ -239,15 +239,15 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     private String getExternalItemUrn(ServiceContext serviceContext, String externalItemName, ExternalItemDto externalItemDto) throws MetamacWebException {
         String urn = externalItemDto.getUrn();
-        String urnInternal = externalItemDto.getUrnInternal();
-        if (StringUtils.isBlank(urn) && StringUtils.isBlank(urnInternal)) {
+        String urnProvider = externalItemDto.getUrnProvider();
+        if (StringUtils.isBlank(urn) && StringUtils.isBlank(urnProvider)) {
             // The URN or the internal URN must be filled
             throwExternalItemNotFoundException(serviceContext, externalItemName);
         }
         if (StringUtils.isNotBlank(urn)) {
             return urn;
         } else {
-            return urnInternal;
+            return urnProvider;
         }
     }
 
