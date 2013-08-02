@@ -39,6 +39,8 @@ public class ExternalItemsDto2DoMapperTest {
     protected ConfigurationService configurationService = new ConfigurationServiceMockImpl();
     ExternalItemRepository         repository           = Mockito.mock(ExternalItemRepository.class);
 
+    private static final String    CODE_01              = "mock01";
+    private static final String    CODE_02              = "mock02";
     private static final String    URN_01               = "lorem:ipsum:externalItem:mock:01";
     private static final String    URN_02               = "lorem:ipsum:externalItem:mock:02";
     private static final String    METADATA_NAME        = "LOREM_IPSUM";
@@ -63,7 +65,7 @@ public class ExternalItemsDto2DoMapperTest {
     @Test
     public void testExternalItemDtoToEntityExistsDtoAndNullDo() throws Exception {
         // EXISTS, NULL
-        ExternalItemDto externalItemDto = StatisticalOperationsMocks.mockExternalItemDtoComplete(URN_01, TypeExternalArtefactsEnum.AGENCY);
+        ExternalItemDto externalItemDto = StatisticalOperationsMocks.mockExternalItemDtoComplete(CODE_01, URN_01, TypeExternalArtefactsEnum.AGENCY);
         testExternalItemDtoToEntity(externalItemDto, null);
     }
 
@@ -78,7 +80,7 @@ public class ExternalItemsDto2DoMapperTest {
     @Test
     public void testExternalItemDtoToEntityExistsDtoAndExistsDo() throws Exception {
         // EXISTS, EXISTS
-        ExternalItemDto externalItemDto = MetamacMocks.mockExternalItemDtoComplete(URN_01, TypeExternalArtefactsEnum.AGENCY);
+        ExternalItemDto externalItemDto = MetamacMocks.mockExternalItemDtoComplete(CODE_01, URN_01, TypeExternalArtefactsEnum.AGENCY);
         ExternalItem externalItem = StatisticalOperationsMocks.mockAgencyExternalItem();
         testExternalItemDtoToEntity(externalItemDto, externalItem);
     }
@@ -95,8 +97,8 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndEmptyDo() throws Exception {
         // EXISTS, EMPTY
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(URN_01, TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(URN_02, TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(CODE_01, URN_01, TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(CODE_02, URN_02, TypeExternalArtefactsEnum.AGENCY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
 
         testExternalItemDtoListToEntitiesList(dtos, entities);
@@ -160,8 +162,8 @@ public class ExternalItemsDto2DoMapperTest {
     public void testExternalItemListToEntityExistsDtoAndExistsDoWithDtoDifferentElements() throws Exception {
         // EXISTS, EXISTS: Different elements
         Set<ExternalItemDto> dtos = new HashSet<ExternalItemDto>();
-        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(URN_01, TypeExternalArtefactsEnum.AGENCY));
-        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(URN_02, TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(CODE_01, URN_01, TypeExternalArtefactsEnum.AGENCY));
+        dtos.add(StatisticalOperationsMocks.mockExternalItemDtoComplete(CODE_02, URN_02, TypeExternalArtefactsEnum.AGENCY));
         Set<ExternalItem> entities = new HashSet<ExternalItem>();
         entities.add(StatisticalOperationsMocks.mockAgencyExternalItem());
         entities.add(StatisticalOperationsMocks.mockAgencyExternalItem());
