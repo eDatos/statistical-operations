@@ -168,6 +168,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onWaitSuccess(SaveFamilyResult result) {
                 getView().closeFamilyWindow();
+                ShowMessageEvent.fireSuccessMessage(FamilyListPresenter.this, getMessages().familySaved());
                 retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
             }
         });

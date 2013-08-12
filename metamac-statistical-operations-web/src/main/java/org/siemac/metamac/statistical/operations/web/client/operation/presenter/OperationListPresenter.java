@@ -177,6 +177,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             public void onWaitSuccess(SaveOperationResult result) {
                 getView().closeOperationWindow();
                 retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
+                ShowMessageEvent.fireSuccessMessage(OperationListPresenter.this, getMessages().operationSaved());
             }
         });
     }
