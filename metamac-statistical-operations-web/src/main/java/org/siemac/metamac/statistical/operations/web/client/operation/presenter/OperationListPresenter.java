@@ -32,8 +32,8 @@ import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -87,7 +87,9 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
         com.smartgwt.client.widgets.events.HasClickHandlers getDelete();
         List<Long> getSelectedOperations();
 
+        // Search
         void clearSearchSection();
+        String getOperationCriteria();
 
         // External resources
 
@@ -174,7 +176,7 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
             @Override
             public void onWaitSuccess(SaveOperationResult result) {
                 getView().closeOperationWindow();
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
             }
         });
     }
@@ -203,12 +205,12 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
                 ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, null);
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
                 ShowMessageEvent.fireSuccessMessage(OperationListPresenter.this, getMessages().operationDeleted());
             }
         });

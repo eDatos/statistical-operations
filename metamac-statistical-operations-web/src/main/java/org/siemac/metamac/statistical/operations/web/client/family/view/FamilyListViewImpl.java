@@ -233,6 +233,11 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
         familyListGrid.goToLastPageAfterCreate();
     }
 
+    @Override
+    public String getFamilyCriteria() {
+        return searchSectionStack.getSearchCriteria();
+    }
+
     /**
      * Select Family in ListGrid
      * 

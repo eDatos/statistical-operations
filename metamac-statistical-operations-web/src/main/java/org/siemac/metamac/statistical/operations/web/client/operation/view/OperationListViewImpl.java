@@ -300,6 +300,11 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
         searchSectionStack.reset();
     }
 
+    @Override
+    public String getOperationCriteria() {
+        return searchSectionStack.getSearchCriteria();
+    }
+
     // ------------------------------------------------------------------------------------------------------------
     // EXTERNAL RESOURCES DATA SETTERS
     // ------------------------------------------------------------------------------------------------------------

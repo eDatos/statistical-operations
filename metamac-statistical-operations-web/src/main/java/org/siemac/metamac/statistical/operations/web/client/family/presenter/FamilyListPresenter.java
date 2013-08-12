@@ -25,8 +25,8 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -81,7 +81,9 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
         FamilyDto getFamily();
         void onFamilySaved(FamilyDto familyDto);
 
+        // Search
         void clearSearchSection();
+        String getFamilyCriteria();
 
         boolean validate();
         void closeFamilyWindow();
@@ -166,7 +168,7 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onWaitSuccess(SaveFamilyResult result) {
                 getView().closeFamilyWindow();
-                getView().onFamilySaved(result.getFamilySaved());
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
             }
         });
     }
@@ -177,12 +179,12 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
             @Override
             public void onWaitFailure(Throwable caught) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
                 ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
             @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, null);
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
                 ShowMessageEvent.fireSuccessMessage(FamilyListPresenter.this, getMessages().familyDeleted());
             }
         });
