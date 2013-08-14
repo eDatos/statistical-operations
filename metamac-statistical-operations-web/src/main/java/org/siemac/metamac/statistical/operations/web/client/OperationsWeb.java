@@ -74,6 +74,7 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
 
     @Override
     protected void setConfigurationProperties(Map<String, String> propertyValues) {
+        super.setConfigurationProperties(propertyValues);
         ConfigurationPropertiesUtils.setDefaultCodelistTemporalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN));
         ConfigurationPropertiesUtils.setDefaultCodelistGeographicalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN));
     }
@@ -101,5 +102,10 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
     @Override
     protected MetamacWebGinjector getWebGinjector() {
         return ginjector;
+    }
+
+    @Override
+    protected String getBundleName() {
+        return "messages-statistical_operations-web";
     }
 }
