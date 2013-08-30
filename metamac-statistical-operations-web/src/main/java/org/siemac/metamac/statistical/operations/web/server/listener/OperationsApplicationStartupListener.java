@@ -1,13 +1,21 @@
 package org.siemac.metamac.statistical.operations.web.server.listener;
 
-import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
+import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants; 
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
 import org.siemac.metamac.web.common.server.listener.ApplicationStartupListener;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class OperationsApplicationStartupListener extends ApplicationStartupListener {
 
+    private static final Log     LOG = LogFactory.getLog(OperationsApplicationStartupListener.class);
+    
     @Override
     public void checkConfiguration() {
+
+        LOG.info("************************************************************************");
+        LOG.info("[metamac-statistical-operations-web] Checking application configuration");
+        LOG.info("************************************************************************");
 
         // SECURITY
 
@@ -47,5 +55,9 @@ public class OperationsApplicationStartupListener extends ApplicationStartupList
         // Statistical operations properties
 
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME);
+        
+        LOG.info("************************************************************************");
+        LOG.info("[metamac-statistical-operations-web] Application configuration checked");
+        LOG.info("************************************************************************");
     }
 }
