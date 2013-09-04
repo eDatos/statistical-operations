@@ -30,11 +30,10 @@
             <version>${project.version}</version>
         </dependency>
         
-        <!-- TODO pendiente cambiar por external -->
         <dependency>
             <groupId>org.siemac.metamac.metamac-srm</groupId>
-            <artifactId>metamac-srm-rest-internal-api</artifactId>
-            <version>${metamac-srm-rest-internal-api.version}</version>
+            <artifactId>metamac-srm-rest-api-common</artifactId>
+            <version>${metamac-srm-rest-api-common.version}</version>
         </dependency>        
         <dependency>
             <groupId>org.siemac.metamac</groupId>

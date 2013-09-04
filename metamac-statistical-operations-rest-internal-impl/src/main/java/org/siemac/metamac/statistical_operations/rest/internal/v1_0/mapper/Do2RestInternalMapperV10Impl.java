@@ -57,6 +57,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Stati
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
+import org.siemac.metamac.srm.rest.common.SrmRestConstants;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -821,7 +822,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         SecondarySubjectAreas targets = new SecondarySubjectAreas();
         toResourcesExternalItemsSrm(sources, targets.getSecondarySubjectAreas());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CATEGORIES);
+        targets.setKind(SrmRestConstants.KIND_CATEGORIES);
         targets.setTotal(BigInteger.valueOf(targets.getSecondarySubjectAreas().size()));
         return targets;
     }
@@ -832,7 +833,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Producers targets = new Producers();
         toResourcesExternalItemsSrm(sources, targets.getProducers());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATION_UNITS);
+        targets.setKind(SrmRestConstants.KIND_ORGANISATION_UNITS);
         targets.setTotal(BigInteger.valueOf(targets.getProducers().size()));
         return targets;
     }
@@ -843,7 +844,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         RegionalResponsibles targets = new RegionalResponsibles();
         toResourcesExternalItemsSrm(sources, targets.getRegionalResponsibles());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATION_UNITS);
+        targets.setKind(SrmRestConstants.KIND_ORGANISATION_UNITS);
         targets.setTotal(BigInteger.valueOf(targets.getRegionalResponsibles().size()));
         return targets;
     }
@@ -854,7 +855,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         RegionalContributors targets = new RegionalContributors();
         toResourcesExternalItemsSrm(sources, targets.getRegionalContributors());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATIONS);
+        targets.setKind(SrmRestConstants.KIND_ORGANISATIONS);
         targets.setTotal(BigInteger.valueOf(targets.getRegionalContributors().size()));
         return targets;
     }
@@ -865,7 +866,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Publishers targets = new Publishers();
         toResourcesExternalItemsSrm(sources, targets.getPublishers());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_ORGANISATION_UNITS);
+        targets.setKind(SrmRestConstants.KIND_ORGANISATION_UNITS);
         targets.setTotal(BigInteger.valueOf(targets.getPublishers().size()));
         return targets;
     }
@@ -876,7 +877,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         UpdateFrequencies targets = new UpdateFrequencies();
         toResourcesExternalItemsSrm(sources, targets.getUpdateFrequencies());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CODES);
+        targets.setKind(SrmRestConstants.KIND_CODES);
         targets.setTotal(BigInteger.valueOf(targets.getUpdateFrequencies().size()));
         return targets;
     }
@@ -887,7 +888,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         StatisticalUnits targets = new StatisticalUnits();
         toResourcesExternalItemsSrm(sources, targets.getStatisticalUnits());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
+        targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatisticalUnits().size()));
         return targets;
     }
@@ -898,7 +899,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         GeographicGranularities targets = new GeographicGranularities();
         toResourcesExternalItemsSrm(sources, targets.getGeographicGranularities());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CODES);
+        targets.setKind(SrmRestConstants.KIND_CODES);
         targets.setTotal(BigInteger.valueOf(targets.getGeographicGranularities().size()));
         return targets;
     }
@@ -909,7 +910,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         TemporalGranularities targets = new TemporalGranularities();
         toResourcesExternalItemsSrm(sources, targets.getTemporalGranularities());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CODES);
+        targets.setKind(SrmRestConstants.KIND_CODES);
         targets.setTotal(BigInteger.valueOf(targets.getTemporalGranularities().size()));
         return targets;
     }
@@ -920,7 +921,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         Measures targets = new Measures();
         toResourcesInternalFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getMeasures());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
+        targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
     }
@@ -931,7 +932,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         StatConcDefs targets = new StatConcDefs();
         toResourcesInternalFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getStatConcDefs());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CONCEPTS);
+        targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
     }
@@ -960,7 +961,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         ClassSystems targets = new ClassSystems();
         toResourcesExternalItemsSrm(sources, targets.getClassSystems());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CODELISTS);
+        targets.setKind(SrmRestConstants.KIND_CODELISTS);
         targets.setTotal(BigInteger.valueOf(targets.getClassSystems().size()));
         return targets;
     }
@@ -971,7 +972,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         InformationSuppliers targets = new InformationSuppliers();
         toResourcesExternalItemsSrm(sources, targets.getInformationSuppliers());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_DATA_PROVIDERS);
+        targets.setKind(SrmRestConstants.KIND_DATA_PROVIDERS);
         targets.setTotal(BigInteger.valueOf(targets.getInformationSuppliers().size()));
         return targets;
     }
@@ -982,7 +983,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         }
         FreqColls targets = new FreqColls();
         toResourcesExternalItemsSrm(sources, targets.getFreqColls());
-        targets.setKind(org.siemac.metamac.srm.rest.internal.RestInternalConstants.KIND_CODES);
+        targets.setKind(SrmRestConstants.KIND_CODES);
         targets.setTotal(BigInteger.valueOf(targets.getFreqColls().size()));
         return targets;
     }
