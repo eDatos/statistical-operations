@@ -43,6 +43,11 @@
             <!-- Does not include in classpath -->
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-rest-api-common</artifactId>
+            <version>${metamac-statistical-operations-rest-api-common.version}</version>
+        </dependency>        
     </dependencies>
 
     <build>

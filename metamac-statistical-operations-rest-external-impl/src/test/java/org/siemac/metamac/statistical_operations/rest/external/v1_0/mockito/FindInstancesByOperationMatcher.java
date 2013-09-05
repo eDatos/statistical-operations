@@ -9,7 +9,7 @@ import org.siemac.metamac.rest.common.test.mockito.ConditionalCriteriasMatcher;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
+import org.siemac.metamac.statistical_operations.rest.common.StatisticalOperationsRestConstants;
 
 public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher {
 
@@ -29,7 +29,7 @@ public class FindInstancesByOperationMatcher extends ConditionalCriteriasMatcher
         List<ConditionalCriteria> expected = new ArrayList<ConditionalCriteria>();
 
         // By operation
-        if (!RestExternalConstants.WILDCARD_ALL.equals(operationCode)) {
+        if (!StatisticalOperationsRestConstants.WILDCARD_ALL.equals(operationCode)) {
             expected.add(ConditionalCriteriaBuilder.criteriaFor(Instance.class).withProperty(InstanceProperties.operation().code()).eq(operationCode).buildSingle());
         }
         // By procStatus

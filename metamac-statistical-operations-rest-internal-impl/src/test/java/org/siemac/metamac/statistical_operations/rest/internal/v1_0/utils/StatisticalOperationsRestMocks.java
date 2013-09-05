@@ -46,7 +46,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Statu
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.TemporalGranularities;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.srm.rest.common.SrmRestConstants;
-import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical_operations.rest.common.StatisticalOperationsRestConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.StatisticalOperationsRestInternalFacadeV10Test;
 
 public class StatisticalOperationsRestMocks {
@@ -101,7 +101,7 @@ public class StatisticalOperationsRestMocks {
 
     public Operations mockOperations(String limit, String offset) {
         Operations operations = new Operations();
-        operations.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operations.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(10));
         if (limit == null && (offset == null || "0".equals(offset))) {
             operations.getOperations().add(mockOperation1Resource());
@@ -180,7 +180,7 @@ public class StatisticalOperationsRestMocks {
 
     public Operations mockOperations(String limit, String offset, String query) {
         Operations operations = new Operations();
-        operations.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operations.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
         String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1;
         String querySupported2 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_OPERATION_ID_LIKE_1_AND_INDICATORS_SYSTEM;
         if (querySupported1.equals(query)) {
@@ -233,7 +233,7 @@ public class StatisticalOperationsRestMocks {
 
     public Operations mockOperationsByFamily1(String limit, String offset) {
         Operations operations = new Operations();
-        operations.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operations.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(6));
         if (limit == null && (offset == null || "0".equals(offset))) {
             operations.getOperations().add(mockOperation1Resource());
@@ -304,7 +304,7 @@ public class StatisticalOperationsRestMocks {
 
     public Operations mockOperationsByFamily2(String limit, String offset) {
         Operations operations = new Operations();
-        operations.setKind(RestInternalConstants.KIND_OPERATIONS);
+        operations.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
         operations.setTotal(BigInteger.valueOf(4));
         if ("1".equals(limit) && "2".equals(offset)) {
             operations.getOperations().add(mockOperation8Resource());
@@ -322,7 +322,7 @@ public class StatisticalOperationsRestMocks {
 
     public Families mockFamilies(String limit, String offset) {
         Families families = new Families();
-        families.setKind(RestInternalConstants.KIND_FAMILIES);
+        families.setKind(StatisticalOperationsRestConstants.KIND_FAMILIES);
         families.setTotal(BigInteger.valueOf(5));
         if (limit == null && (offset == null || "0".equals(offset))) {
             families.getFamilies().add(mockFamily1Resource());
@@ -390,7 +390,7 @@ public class StatisticalOperationsRestMocks {
 
     public Families mockFamilies(String limit, String offset, String query) {
         Families families = new Families();
-        families.setKind(RestInternalConstants.KIND_FAMILIES);
+        families.setKind(StatisticalOperationsRestConstants.KIND_FAMILIES);
 
         String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_FAMILY_ID_LIKE_1;
         if (querySupported1.equals(query)) {
@@ -431,7 +431,7 @@ public class StatisticalOperationsRestMocks {
 
     public Families mockFamiliesByOperation1() {
         Families families = new Families();
-        families.setKind(RestInternalConstants.KIND_FAMILIES);
+        families.setKind(StatisticalOperationsRestConstants.KIND_FAMILIES);
         families.setTotal(BigInteger.valueOf(2));
         families.getFamilies().add(mockFamily1Resource());
         families.getFamilies().add(mockFamily2Resource());
@@ -440,7 +440,7 @@ public class StatisticalOperationsRestMocks {
 
     public Instances mockInstancesByOperation1(String limit, String offset) {
         Instances instances = new Instances();
-        instances.setKind(RestInternalConstants.KIND_INSTANCES);
+        instances.setKind(StatisticalOperationsRestConstants.KIND_INSTANCES);
         instances.setTotal(BigInteger.valueOf(5));
         String operation = StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1;
         if (limit == null && (offset == null || "0".equals(offset))) {
@@ -509,7 +509,7 @@ public class StatisticalOperationsRestMocks {
 
     public Instances mockInstancesByOperation1(String limit, String offset, String query) {
         Instances instances = new Instances();
-        instances.setKind(RestInternalConstants.KIND_INSTANCES);
+        instances.setKind(StatisticalOperationsRestConstants.KIND_INSTANCES);
         String operation = StatisticalOperationsRestInternalFacadeV10Test.OPERATION_1;
 
         String querySupported1 = StatisticalOperationsRestInternalFacadeV10Test.QUERY_INSTANCE_ID_LIKE_1;
@@ -551,7 +551,7 @@ public class StatisticalOperationsRestMocks {
 
     public StatisticalOperationTypes mockStatisticalOperationTypes() {
         StatisticalOperationTypes statisticalOperationTypes = new StatisticalOperationTypes();
-        statisticalOperationTypes.setKind(RestInternalConstants.KIND_STATISTICAL_OPERATION_TYPES);
+        statisticalOperationTypes.setKind(StatisticalOperationsRestConstants.KIND_STATISTICAL_OPERATION_TYPES);
         statisticalOperationTypes.setTotal(BigInteger.valueOf(2));
         statisticalOperationTypes.getStatisticalOperationTypes().add(mockItem("statisticalOperationType1"));
         statisticalOperationTypes.getStatisticalOperationTypes().add(mockItem("statisticalOperationType2"));
@@ -560,7 +560,7 @@ public class StatisticalOperationsRestMocks {
 
     public OfficialityTypes mockOfficialityTypes() {
         OfficialityTypes officialityTypes = new OfficialityTypes();
-        officialityTypes.setKind(RestInternalConstants.KIND_OFFICIALITY_TYPES);
+        officialityTypes.setKind(StatisticalOperationsRestConstants.KIND_OFFICIALITY_TYPES);
         officialityTypes.setTotal(BigInteger.valueOf(3));
         officialityTypes.getOfficialityTypes().add(mockItem("officialityType1"));
         officialityTypes.getOfficialityTypes().add(mockItem("officialityType2"));
@@ -570,7 +570,7 @@ public class StatisticalOperationsRestMocks {
 
     public InstanceTypes mockInstanceTypes() {
         InstanceTypes instanceTypes = new InstanceTypes();
-        instanceTypes.setKind(RestInternalConstants.KIND_INSTANCE_TYPES);
+        instanceTypes.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE_TYPES);
         instanceTypes.setTotal(BigInteger.valueOf(2));
         instanceTypes.getInstanceTypes().add(mockItem("instanceType1"));
         instanceTypes.getInstanceTypes().add(mockItem("instanceType2"));
@@ -579,7 +579,7 @@ public class StatisticalOperationsRestMocks {
 
     public StatisticalOperationSources mockStatisticalOperationSources() {
         StatisticalOperationSources statisticalOperationSources = new StatisticalOperationSources();
-        statisticalOperationSources.setKind(RestInternalConstants.KIND_STATISTICAL_OPERATION_SOURCES);
+        statisticalOperationSources.setKind(StatisticalOperationsRestConstants.KIND_STATISTICAL_OPERATION_SOURCES);
         statisticalOperationSources.setTotal(BigInteger.valueOf(2));
         statisticalOperationSources.getStatisticalOperationSources().add(mockItem("statisticalOperationSource1"));
         statisticalOperationSources.getStatisticalOperationSources().add(mockItem("statisticalOperationSource2"));
@@ -588,7 +588,7 @@ public class StatisticalOperationsRestMocks {
 
     public CollMethods mockCollMethods() {
         CollMethods collMethods = new CollMethods();
-        collMethods.setKind(RestInternalConstants.KIND_COLL_METHODS);
+        collMethods.setKind(StatisticalOperationsRestConstants.KIND_COLL_METHODS);
         collMethods.setTotal(BigInteger.valueOf(2));
         collMethods.getCollMethods().add(mockItem("collMethod1"));
         collMethods.getCollMethods().add(mockItem("collMethod2"));
@@ -597,7 +597,7 @@ public class StatisticalOperationsRestMocks {
 
     public Costs mockCosts() {
         Costs costs = new Costs();
-        costs.setKind(RestInternalConstants.KIND_COSTS);
+        costs.setKind(StatisticalOperationsRestConstants.KIND_COSTS);
         costs.setTotal(BigInteger.valueOf(2));
         costs.getCosts().add(mockItem("cost1"));
         costs.getCosts().add(mockItem("cost2"));
@@ -648,7 +648,7 @@ public class StatisticalOperationsRestMocks {
         ResourceInternal resource = new ResourceInternal();
         resource.setId(operationId);
         resource.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operationId);
-        resource.setKind(RestInternalConstants.KIND_OPERATION);
+        resource.setKind(StatisticalOperationsRestConstants.KIND_OPERATION);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/operations/" + operationId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operationId);
         resource.setName(mockInternationalString("es", operationId + " en Español"));
@@ -660,7 +660,7 @@ public class StatisticalOperationsRestMocks {
         ResourceInternal resource = new ResourceInternal();
         resource.setId(familyId);
         resource.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + familyId);
-        resource.setKind(RestInternalConstants.KIND_FAMILY);
+        resource.setKind(StatisticalOperationsRestConstants.KIND_FAMILY);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/families/" + familyId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#families/family;id=" + familyId);
         resource.setName(mockInternationalString("es", familyId + " en Español"));
@@ -672,7 +672,7 @@ public class StatisticalOperationsRestMocks {
         ResourceInternal resource = new ResourceInternal();
         resource.setId(instanceId);
         resource.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operationId + "." + instanceId);
-        resource.setKind(RestInternalConstants.KIND_INSTANCE);
+        resource.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE);
         resource.setSelfLink(MetamacRestMocks.mockResourceLink(resource.getKind(), statisticalOperationsApiBaseV10 + "/operations/" + operationId + "/instances/" + instanceId));
         resource.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operationId + "/instance;id=" + instanceId);
         resource.setName(mockInternationalString("es", instanceId + " en Español"));
@@ -683,8 +683,8 @@ public class StatisticalOperationsRestMocks {
         Operation operation = new Operation();
         operation.setId("operation" + subId);
         operation.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Operation=" + operation.getId());
-        operation.setKind(RestInternalConstants.KIND_OPERATION);
-        operation.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATION, statisticalOperationsApiBaseV10 + "/operations/operation" + subId));
+        operation.setKind(StatisticalOperationsRestConstants.KIND_OPERATION);
+        operation.setSelfLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_OPERATION, statisticalOperationsApiBaseV10 + "/operations/operation" + subId));
         operation.setName(mockInternationalStringMetadata("operation", subId));
         operation.setAcronym(mockInternationalStringMetadata("acronym", subId));
         operation.setSubjectArea(mockResourceFromExternalItemSrm("subjectArea1", "subjectAreas", "structuralResources#category"));
@@ -754,13 +754,13 @@ public class StatisticalOperationsRestMocks {
         operation.setConfidentialityDataTreatment(mockInternationalStringMetadata("confidentialityDataTreatment", "1"));
         operation.setComment(mockInternationalStringMetadata("comment", subId));
         operation.setNotes(mockInternationalStringMetadata("notes", subId));
-        operation.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, statisticalOperationsApiBaseV10 + "/operations"));
+        operation.setParentLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_OPERATIONS, statisticalOperationsApiBaseV10 + "/operations"));
         operation.setChildLinks(new ChildLinks());
         operation.getChildLinks().setTotal(BigInteger.valueOf(2));
         operation.getChildLinks().getChildLinks()
-                .add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, statisticalOperationsApiBaseV10 + "/operations/operation" + subId + "/families"));
+                .add(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_FAMILIES, statisticalOperationsApiBaseV10 + "/operations/operation" + subId + "/families"));
         operation.getChildLinks().getChildLinks()
-                .add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCES, statisticalOperationsApiBaseV10 + "/operations/operation" + subId + "/instances"));
+                .add(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_INSTANCES, statisticalOperationsApiBaseV10 + "/operations/operation" + subId + "/instances"));
         operation.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operation.getId());
         return operation;
     }
@@ -769,8 +769,8 @@ public class StatisticalOperationsRestMocks {
         Family family = new Family();
         family.setId("family" + subId);
         family.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Family=" + family.getId());
-        family.setKind(RestInternalConstants.KIND_FAMILY);
-        family.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILY, statisticalOperationsApiBaseV10 + "/families/family" + subId));
+        family.setKind(StatisticalOperationsRestConstants.KIND_FAMILY);
+        family.setSelfLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_FAMILY, statisticalOperationsApiBaseV10 + "/families/family" + subId));
         family.setName(mockInternationalStringMetadata("family", subId));
         family.setAcronym(mockInternationalStringMetadata("acronym", subId));
         family.setDescription(mockInternationalStringMetadata("description", subId));
@@ -778,11 +778,11 @@ public class StatisticalOperationsRestMocks {
         family.setInternalInventoryDate(new DateTime(2012, 12, 1, 13, 15, 14, 0).toDate());
         family.setProcStatus(procStatus);
         family.setInventoryDate(new DateTime(2013, 2, 4, 13, 15, 14, 0).toDate());
-        family.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_FAMILIES, statisticalOperationsApiBaseV10 + "/families"));
+        family.setParentLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_FAMILIES, statisticalOperationsApiBaseV10 + "/families"));
         family.setChildLinks(new ChildLinks());
         family.getChildLinks().setTotal(BigInteger.valueOf(1));
         family.getChildLinks().getChildLinks()
-                .add(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATIONS, statisticalOperationsApiBaseV10 + "/families/family" + subId + "/operations"));
+                .add(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_OPERATIONS, statisticalOperationsApiBaseV10 + "/families/family" + subId + "/operations"));
         family.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#families/family;id=" + family.getId());
         return family;
     }
@@ -792,8 +792,9 @@ public class StatisticalOperationsRestMocks {
         Instance instance = new Instance();
         instance.setId("instance" + subId);
         instance.setUrn("urn:siemac:org.siemac.metamac.infomodel.statisticaloperations.Instance=" + operation + "." + instance.getId());
-        instance.setKind(RestInternalConstants.KIND_INSTANCE);
-        instance.setSelfLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_INSTANCE, statisticalOperationsApiBaseV10 + "/operations/" + operation + "/instances/instance" + subId));
+        instance.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE);
+        instance.setSelfLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_INSTANCE, statisticalOperationsApiBaseV10 + "/operations/" + operation + "/instances/instance"
+                + subId));
         instance.setName(mockInternationalStringMetadata("instance", subId));
         instance.setAcronym(mockInternationalStringMetadata("acronym", subId));
         instance.setStatisticalOperation(mockOperationResource(operation));
@@ -862,7 +863,7 @@ public class StatisticalOperationsRestMocks {
         instance.setCostBurden(mockInternationalStringMetadata("costBurden", subId));
         instance.setCosts(new Costs());
         instance.getCosts().setTotal(BigInteger.valueOf(4));
-        instance.getCosts().setKind(RestInternalConstants.KIND_COSTS);
+        instance.getCosts().setKind(StatisticalOperationsRestConstants.KIND_COSTS);
         instance.getCosts().getCosts().add(mockItem("cost1"));
         instance.getCosts().getCosts().add(mockItem("cost22"));
         instance.getCosts().getCosts().add(mockItem("cost333"));
@@ -883,7 +884,7 @@ public class StatisticalOperationsRestMocks {
         instance.setCoherInternal(mockInternationalStringMetadata("coherInternal", subId));
         instance.setComment(mockInternationalStringMetadata("comment", subId));
         instance.setNotes(mockInternationalStringMetadata("notes", subId));
-        instance.setParentLink(MetamacRestMocks.mockResourceLink(RestInternalConstants.KIND_OPERATION, statisticalOperationsApiBaseV10 + "/operations/" + operation));
+        instance.setParentLink(MetamacRestMocks.mockResourceLink(StatisticalOperationsRestConstants.KIND_OPERATION, statisticalOperationsApiBaseV10 + "/operations/" + operation));
         // no children
         instance.setManagementAppLink(statisticalOperationsWebApplicationBase + "/#operations/operation;id=" + operation + "/instance;id=" + instance.getId());
         return instance;

@@ -39,7 +39,7 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsBaseService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
-import org.siemac.metamac.statistical_operations.rest.external.RestExternalConstants;
+import org.siemac.metamac.statistical_operations.rest.common.StatisticalOperationsRestConstants;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper.Do2RestExternalMapperV10;
 import org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper.RestCriteria2SculptorCriteriaMapper;
@@ -116,7 +116,7 @@ public class StatisticalOperationsRestExternalFacadeV10Impl implements Statistic
 
             // Find for operation
             org.siemac.metamac.statistical.operations.core.domain.Operation operationEntity = null;
-            if (!RestExternalConstants.WILDCARD_ALL.equals(operationId)) {
+            if (!StatisticalOperationsRestConstants.WILDCARD_ALL.equals(operationId)) {
                 operationEntity = retrieveOperationEntityPublishedExternally(operationId);
                 ConditionalCriteria conditionalCriteriaOperationId = ConditionalCriteriaBuilder.criteriaFor(org.siemac.metamac.statistical.operations.core.domain.Instance.class)
                         .withProperty(InstanceProperties.operation().code()).eq(operationId).buildSingle();

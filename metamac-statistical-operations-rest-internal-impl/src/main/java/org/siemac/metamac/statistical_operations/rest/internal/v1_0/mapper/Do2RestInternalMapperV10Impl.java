@@ -66,7 +66,7 @@ import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
 import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
-import org.siemac.metamac.statistical_operations.rest.internal.RestInternalConstants;
+import org.siemac.metamac.statistical_operations.rest.common.StatisticalOperationsRestConstants;
 import org.siemac.metamac.statistical_operations.rest.internal.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestExternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.SrmRestInternalFacade;
@@ -109,7 +109,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Operation target = new Operation();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_OPERATION);
+        target.setKind(StatisticalOperationsRestConstants.KIND_OPERATION);
         target.setSelfLink(toOperationSelfLink(source));
         target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
@@ -153,7 +153,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     public Operations toOperations(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, String query, String orderBy, Integer limit) {
 
         Operations targets = new Operations();
-        targets.setKind(RestInternalConstants.KIND_OPERATIONS);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
 
         // Pagination
         String baseLink = toOperationsLink();
@@ -172,7 +172,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> sourcesPagedResult, String query, String orderBy, Integer limit) {
 
         Operations targets = new Operations();
-        targets.setKind(RestInternalConstants.KIND_OPERATIONS);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_OPERATIONS);
 
         // Pagination
         String baseLink = toOperationsByFamilyLink(family);
@@ -194,7 +194,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Family target = new Family();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_FAMILY);
+        target.setKind(StatisticalOperationsRestConstants.KIND_FAMILY);
         target.setSelfLink(toFamilySelfLink(source));
         target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
@@ -213,7 +213,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     public Families toFamilies(PagedResult<org.siemac.metamac.statistical.operations.core.domain.Family> sourcesPagedResult, String query, String orderBy, Integer limit) {
 
         Families targets = new Families();
-        targets.setKind(RestInternalConstants.KIND_FAMILIES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_FAMILIES);
 
         // Pagination
         String baseLink = toFamiliesLink();
@@ -231,7 +231,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     public Families toFamiliesByOperation(List<org.siemac.metamac.statistical.operations.core.domain.Family> sources) {
 
         Families targets = new Families();
-        targets.setKind(RestInternalConstants.KIND_FAMILIES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_FAMILIES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -254,7 +254,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         Instance target = new Instance();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_INSTANCE);
+        target.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceSelfLink(source));
         target.setName(toInternationalString(source.getTitle()));
         target.setAcronym(toInternationalString(source.getAcronym()));
@@ -314,7 +314,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sourcesPagedResult, String query, String orderBy, Integer limit) {
 
         Instances targets = new Instances();
-        targets.setKind(RestInternalConstants.KIND_INSTANCES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_INSTANCES);
 
         // Pagination
         String baseLink = toInstancesLink(operation);
@@ -331,7 +331,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     @Override
     public StatisticalOperationTypes toStatisticalOperationTypes(List<SurveyType> sources) {
         StatisticalOperationTypes targets = new StatisticalOperationTypes();
-        targets.setKind(RestInternalConstants.KIND_STATISTICAL_OPERATION_TYPES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_STATISTICAL_OPERATION_TYPES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -349,7 +349,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     @Override
     public OfficialityTypes toOfficialityTypes(List<OfficialityType> sources) {
         OfficialityTypes targets = new OfficialityTypes();
-        targets.setKind(RestInternalConstants.KIND_OFFICIALITY_TYPES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_OFFICIALITY_TYPES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -367,7 +367,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     @Override
     public InstanceTypes toInstanceTypes(List<InstanceType> sources) {
         InstanceTypes targets = new InstanceTypes();
-        targets.setKind(RestInternalConstants.KIND_INSTANCE_TYPES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE_TYPES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -385,7 +385,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     @Override
     public StatisticalOperationSources toStatisticalOperationSources(List<SurveySource> sources) {
         StatisticalOperationSources targets = new StatisticalOperationSources();
-        targets.setKind(RestInternalConstants.KIND_STATISTICAL_OPERATION_SOURCES);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_STATISTICAL_OPERATION_SOURCES);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -403,7 +403,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     @Override
     public CollMethods toCollMethods(List<CollMethod> sources) {
         CollMethods targets = new CollMethods();
-        targets.setKind(RestInternalConstants.KIND_COLL_METHODS);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_COLL_METHODS);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -425,7 +425,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     private Costs toCosts(Collection<Cost> sources) {
         Costs targets = new Costs();
-        targets.setKind(RestInternalConstants.KIND_COSTS);
+        targets.setKind(StatisticalOperationsRestConstants.KIND_COSTS);
 
         if (sources == null) {
             targets.setTotal(BigInteger.ZERO);
@@ -500,7 +500,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         ResourceInternal target = new ResourceInternal();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_OPERATION);
+        target.setKind(StatisticalOperationsRestConstants.KIND_OPERATION);
         target.setSelfLink(toOperationSelfLink(source));
         target.setManagementAppLink(toOperationManagementApplicationLink(source));
         target.setName(toInternationalString(source.getTitle()));
@@ -514,7 +514,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         ResourceInternal target = new ResourceInternal();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_FAMILY);
+        target.setKind(StatisticalOperationsRestConstants.KIND_FAMILY);
         target.setManagementAppLink(toFamilyManagementApplicationLink(source));
         target.setSelfLink(toFamilySelfLink(source));
         target.setName(toInternationalString(source.getTitle()));
@@ -528,7 +528,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         ResourceInternal target = new ResourceInternal();
         target.setId(source.getCode());
         target.setUrn(source.getUrn());
-        target.setKind(RestInternalConstants.KIND_INSTANCE);
+        target.setKind(StatisticalOperationsRestConstants.KIND_INSTANCE);
         target.setSelfLink(toInstanceSelfLink(source));
         target.setManagementAppLink(toInstanceManagementApplicationLink(source));
         target.setName(toInternationalString(source.getTitle()));
@@ -634,47 +634,47 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     }
 
     private ResourceLink toOperationSelfLink(org.siemac.metamac.statistical.operations.core.domain.Operation source) {
-        return toResourceLink(RestInternalConstants.KIND_OPERATION, toOperationLink(source));
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_OPERATION, toOperationLink(source));
     }
 
     private ResourceLink toOperationParentLink() {
-        return toResourceLink(RestInternalConstants.KIND_OPERATIONS, toOperationsLink());
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_OPERATIONS, toOperationsLink());
     }
 
     private ChildLinks toOperationChildLinks(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         ChildLinks targets = new ChildLinks();
 
-        targets.getChildLinks().add(toResourceLink(RestInternalConstants.KIND_INSTANCES, toInstancesLink(operation)));
-        targets.getChildLinks().add(toResourceLink(RestInternalConstants.KIND_FAMILIES, toFamiliesByOperationLink(operation)));
+        targets.getChildLinks().add(toResourceLink(StatisticalOperationsRestConstants.KIND_INSTANCES, toInstancesLink(operation)));
+        targets.getChildLinks().add(toResourceLink(StatisticalOperationsRestConstants.KIND_FAMILIES, toFamiliesByOperationLink(operation)));
 
         targets.setTotal(BigInteger.valueOf(targets.getChildLinks().size()));
         return targets;
     }
 
     private ResourceLink toFamilySelfLink(org.siemac.metamac.statistical.operations.core.domain.Family source) {
-        return toResourceLink(RestInternalConstants.KIND_FAMILY, toFamilyLink(source));
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_FAMILY, toFamilyLink(source));
     }
 
     private ResourceLink toFamilyParentLink() {
-        return toResourceLink(RestInternalConstants.KIND_FAMILIES, toFamiliesLink());
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_FAMILIES, toFamiliesLink());
     }
 
     private ChildLinks toFamilyChildLinks(org.siemac.metamac.statistical.operations.core.domain.Family family) {
         ChildLinks targets = new ChildLinks();
 
         // Operations of family
-        targets.getChildLinks().add(toResourceLink(RestInternalConstants.KIND_OPERATIONS, toOperationsByFamilyLink(family)));
+        targets.getChildLinks().add(toResourceLink(StatisticalOperationsRestConstants.KIND_OPERATIONS, toOperationsByFamilyLink(family)));
 
         targets.setTotal(BigInteger.valueOf(targets.getChildLinks().size()));
         return targets;
     }
 
     private ResourceLink toInstanceSelfLink(org.siemac.metamac.statistical.operations.core.domain.Instance instance) {
-        return toResourceLink(RestInternalConstants.KIND_INSTANCE, toInstanceLink(instance));
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_INSTANCE, toInstanceLink(instance));
     }
 
     private ResourceLink toInstanceParentLink(org.siemac.metamac.statistical.operations.core.domain.Instance instance) {
-        return toResourceLink(RestInternalConstants.KIND_OPERATION, toOperationLink(instance.getOperation()));
+        return toResourceLink(StatisticalOperationsRestConstants.KIND_OPERATION, toOperationLink(instance.getOperation()));
     }
 
     private ChildLinks toInstanceChildLinks(org.siemac.metamac.statistical.operations.core.domain.Instance instance) {
@@ -705,7 +705,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     // API/operations
     private String toOperationsLink() {
-        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
+        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, StatisticalOperationsRestConstants.LINK_SUBPATH_OPERATIONS);
     }
 
     // API/operations/OPERATION_ID
@@ -723,9 +723,9 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         if (operation != null) {
             linkOperation = toOperationLink(operation);
         } else {
-            linkOperation = toOperationLink(RestInternalConstants.WILDCARD_ALL);
+            linkOperation = toOperationLink(StatisticalOperationsRestConstants.WILDCARD_ALL);
         }
-        return RestUtils.createLink(linkOperation, RestInternalConstants.LINK_SUBPATH_INSTANCES);
+        return RestUtils.createLink(linkOperation, StatisticalOperationsRestConstants.LINK_SUBPATH_INSTANCES);
     }
 
     // API/operations/OPERATION_ID/instances/INSTANCE_ID
@@ -736,7 +736,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     // API/families
     private String toFamiliesLink() {
-        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, RestInternalConstants.LINK_SUBPATH_FAMILIES);
+        return RestUtils.createLink(statisticalOperationsApiInternalEndpointV10, StatisticalOperationsRestConstants.LINK_SUBPATH_FAMILIES);
     }
 
     // API/families/family
@@ -748,13 +748,13 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
     // API/operations/OPERATION_ID/families
     private String toFamiliesByOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         String linkFamily = toOperationLink(operation);
-        return RestUtils.createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_FAMILIES);
+        return RestUtils.createLink(linkFamily, StatisticalOperationsRestConstants.LINK_SUBPATH_FAMILIES);
     }
 
     // API/families/FAMILY_ID/operations
     private String toOperationsByFamilyLink(org.siemac.metamac.statistical.operations.core.domain.Family family) {
         String linkFamily = toFamilyLink(family);
-        return RestUtils.createLink(linkFamily, RestInternalConstants.LINK_SUBPATH_OPERATIONS);
+        return RestUtils.createLink(linkFamily, StatisticalOperationsRestConstants.LINK_SUBPATH_OPERATIONS);
     }
 
     private org.siemac.metamac.statistical.operations.core.domain.Instance getInstanceInProcStatus(List<org.siemac.metamac.statistical.operations.core.domain.Instance> instances,
@@ -1014,7 +1014,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
         // Statistical operations Internal Api v1.0
         String statisticalOperationsApiInternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_INTERNAL_API);
-        statisticalOperationsApiInternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiInternalEndpoint, RestInternalConstants.API_VERSION_1_0);
+        statisticalOperationsApiInternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiInternalEndpoint, StatisticalOperationsRestConstants.API_VERSION_1_0);
 
         // Srm Internal Api (do not add api version! it is already stored in database)
         srmApiInternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_SRM_INTERNAL_API);
