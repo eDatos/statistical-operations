@@ -5,7 +5,6 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,8 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.ServerWebApplicationException;
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -132,8 +133,12 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
 
         String requestUri = baseApi + "/nomatch";
 
-        // Request and validate
-        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_XML, Status.NOT_FOUND, new ByteArrayInputStream(new byte[0]));
+        WebClient webClient = WebClient.create(requestUri).accept(APPLICATION_XML);
+        Response response = webClient.get();
+
+        assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
+        InputStream responseActual = (InputStream) response.getEntity();
+        assertTrue(StringUtils.isBlank(IOUtils.toString(responseActual)));
     }
 
     @Test
