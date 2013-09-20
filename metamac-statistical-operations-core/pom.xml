@@ -42,18 +42,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.siemac.metamac</groupId>
-            <artifactId>metamac-common-test</artifactId>
-            <version>${metamac-common-test.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>metamac-core-common</artifactId>
-                    <groupId>org.siemac.metamac</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>${commons-dbcp.version}</version>
@@ -252,24 +240,6 @@
             <version>${commons-pool.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>${dbunit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>${commons-dbcp.version}</version>
@@ -297,12 +267,6 @@
                 <!-- <artifactId>com.google.inject</artifactId> -->
                 <!-- </exclusion> -->
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.fornax.cartridges</groupId>
-            <artifactId>fornax-cartridges-sculptor-framework-test</artifactId>
-            <version>${sculptor.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
@@ -353,6 +317,13 @@
             <!--scope>provided</scope -->
         </dependency>
         <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>${dozer.version}</version>
+        </dependency>
+        
+        <!-- DB -->
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>oracle</artifactId>
             <version>${oracle.version}</version>
@@ -364,17 +335,51 @@
             <version>${mssql.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- TESTS -->
+        <dependency>
+            <groupId>org.siemac.metamac</groupId>
+            <artifactId>metamac-core-common</artifactId>
+            <version>${metamac-core-common.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>   
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-version}</version>
+            <scope>test</scope>
+        </dependency>        
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fornax.cartridges</groupId>
+            <artifactId>fornax-cartridges-sculptor-framework-test</artifactId>
+            <version>${sculptor.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>${servlet-api.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>${dozer.version}</version>
-        </dependency>
+        </dependency>        
     </dependencies>
 
     <profiles>
