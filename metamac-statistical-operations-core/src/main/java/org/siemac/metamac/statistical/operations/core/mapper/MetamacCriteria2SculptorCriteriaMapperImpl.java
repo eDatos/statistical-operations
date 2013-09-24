@@ -76,21 +76,21 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             FamilyCriteriaPropertyEnum propertyNameCriteria = FamilyCriteriaPropertyEnum.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case CODE:
-                    return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.title().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.acronym().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.description().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestriction.getEnumValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.procStatus(), propertyRestriction.getEnumValue(), propertyRestriction.getOperationType());
                 case OPERATION_CODE:
-                    return new SculptorPropertyCriteria(FamilyProperties.operations().code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.operations().code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case OPERATION_ID:
-                    return new SculptorPropertyCriteria(FamilyProperties.operations().id(), propertyRestriction.getLongValue());
+                    return new SculptorPropertyCriteria(FamilyProperties.operations().id(), propertyRestriction.getLongValue(), propertyRestriction.getOperationType());
                 default:
-                    throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
+                    throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName(), propertyRestriction.getOperationType());
             }
         }
 
@@ -129,19 +129,19 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             OperationCriteriaPropertyEnum propertyNameCriteria = OperationCriteriaPropertyEnum.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case CODE:
-                    return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(OperationProperties.code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(OperationProperties.title().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(OperationProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(OperationProperties.acronym().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case DESCRIPTION:
-                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(OperationProperties.description().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestriction.getEnumValue());
+                    return new SculptorPropertyCriteria(OperationProperties.procStatus(), propertyRestriction.getEnumValue(), propertyRestriction.getOperationType());
                 case FAMILY_CODE:
-                    return new SculptorPropertyCriteria(OperationProperties.families().code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(OperationProperties.families().code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case FAMILY_ID:
-                    return new SculptorPropertyCriteria(OperationProperties.families().id(), propertyRestriction.getLongValue());
+                    return new SculptorPropertyCriteria(OperationProperties.families().id(), propertyRestriction.getLongValue(), propertyRestriction.getOperationType());
                 default:
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }
@@ -174,7 +174,7 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
     // --------------------------------------------------------------------------
     // INSTANCE
     // --------------------------------------------------------------------------
-    
+
     private class InstanceCriteriaCallback implements CriteriaCallback {
 
         @Override
@@ -182,19 +182,19 @@ public class MetamacCriteria2SculptorCriteriaMapperImpl implements MetamacCriter
             InstanceCriteriaPropertyEnum propertyNameCriteria = InstanceCriteriaPropertyEnum.fromValue(propertyRestriction.getPropertyName());
             switch (propertyNameCriteria) {
                 case CODE:
-                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case TITLE:
-                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.title().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case ACRONYM:
-                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.acronym().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case DATA_DESCRIPTION:
-                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.dataDescription().texts().label(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case PROC_STATUS:
-                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestriction.getEnumValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.procStatus(), propertyRestriction.getEnumValue(), propertyRestriction.getOperationType());
                 case OPERATION_CODE:
-                    return new SculptorPropertyCriteria(InstanceProperties.operation().code(), propertyRestriction.getStringValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.operation().code(), propertyRestriction.getStringValue(), propertyRestriction.getOperationType());
                 case OPERATION_ID:
-                    return new SculptorPropertyCriteria(InstanceProperties.operation().id(), propertyRestriction.getLongValue());
+                    return new SculptorPropertyCriteria(InstanceProperties.operation().id(), propertyRestriction.getLongValue(), propertyRestriction.getOperationType());
                 default:
                     throw new MetamacException(ServiceExceptionType.PARAMETER_INCORRECT, propertyRestriction.getPropertyName());
             }
