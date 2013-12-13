@@ -2,11 +2,7 @@
 <!DOCTYPE configuration>
 <configuration>
 
-
-
-    <property name="LOGS_HOME" value="/data/metamac/statistical-operations/logs" />
-
-
+    <property name="LOGS_HOME" value="/data/istac/statistical-operations/logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
