@@ -47,10 +47,21 @@
             <version>${commons-dbcp.version}</version>
         </dependency>
 
-        <!-- Add dependency to JMS when consumers are used, deployment.type=ear <dependency> <groupId>javax.jms</groupId> <artifactId>jms</artifactId>
-            <version>1.1</version> <scope>provided</scope> </dependency> -->
-        <!-- Add dependency to EJB when deployment.type=ear <dependency> <groupId>javax.ejb</groupId> <artifactId>ejb-api</artifactId> <version>3.0</version>
-            <scope>provided</scope> </dependency> -->
+        <!-- Add dependency to JMS when consumers are used, deployment.type=ear -->
+        <!-- <dependency> -->
+        <!-- <groupId>javax.jms</groupId> -->
+        <!-- <artifactId>jms</artifactId> -->
+        <!-- <version>1.1</version> -->
+        <!-- <scope>provided</scope> -->
+        <!-- </dependency> -->
+
+        <!-- Add dependency to EJB when deployment.type=ear -->
+        <!-- <dependency> -->
+        <!-- <groupId>javax.ejb</groupId> -->
+        <!-- <artifactId>ejb-api</artifactId> -->
+        <!-- <version>3.0</version> -->
+        <!-- <scope>provided</scope> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>jsr250-api</artifactId>
@@ -321,7 +332,7 @@
             <artifactId>dozer</artifactId>
             <version>${dozer.version}</version>
         </dependency>
-        
+
         <!-- DB -->
         <dependency>
             <groupId>com.oracle</groupId>
@@ -343,13 +354,13 @@
             <version>${metamac-core-common.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>   
+        </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito-version}</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
@@ -379,7 +390,7 @@
             <artifactId>servlet-api</artifactId>
             <version>${servlet-api.version}</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
     </dependencies>
 
     <profiles>
