@@ -1,0 +1,436 @@
+========================================================================
+METAMAC-STATISTICAL-OPERATIONS -- Gestor de operaciones estadísticas
+========================================================================
+
+El gestor de operaciones estadísticas se encarga de inventariar y documentar
+todas las operaciones estadísticas, familias de operaciones estadísticas e
+instancias de operaciones estadísticas que se manejan dentro de la organización.
+
+Por favor, consulta nuestro gestor de incidencia para obtener más información
+de las incidencias con el id [METAMAC-xxx].
+http://jira.arte-consultores.com/browse/METAMAC
+
+------------------------------------------------------------------------------
+Release 1.6.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.6.0
+
+** Defecto
+    * [METAMAC-1654] - Se debe lanzar un error si se indica que no existe releaseCalendar y sí existe releaseCalendarAccess
+
+------------------------------------------------------------------------------
+Release 1.5.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.5.0
+
+** Defecto
+    * [METAMAC-1650] - Transformación de listas de externalItems
+    * [METAMAC-1652] - Revisar todos los tests para asegurar que fallan cuando deben hacerlo
+    * [METAMAC-1703] - Los scripts de creación de la función de secuencia están incorrectos.
+    * [METAMAC-1754] - Problema con la codificación de URLs con dos puntos (:) en IE y Chrome
+    * [METAMAC-1791] - Búsquedas REST: No funcionan las búsquedas por IN
+
+** Mejora
+    * [METAMAC-702] - Incluir URL de aplicación interna en los ExternalItems
+    * [METAMAC-1516] - [Test] Refactor de la clase MetamacBaseTest para que pase a ser MetamacDBUnitBaseTest
+    * [METAMAC-1594] - Modificar los campos de tipo ML para que sean ML+URL 
+    * [METAMAC-1629] - Los metadatos de granularidades (tanto geográficas como temporales) en las instancias de operaciones estadísticas deben cambiarse por metadatos repetibles. No obstante, conservan su funcionamiento y forma de gestión.
+    * [METAMAC-1630] - Los metadatos LEGAL_ACTS y DATA_SHARING de la entidad de operaciones estadísticas deben duplicarse para que unos sean COMMON_* y otros SPECIFIC_*.
+    * [METAMAC-1712] - Añadir funcionalidades de orden a las búsquedas
+
+** Tarea
+    * [METAMAC-522] - CU-21 Consultar ayuda
+    * [METAMAC-528] - Orden de las instancias
+    * [METAMAC-774] - En el fichero de propiedades de errores, comprobar si en alguna traducción no se han indicado los parámetros
+    * [METAMAC-843] - Identificar API de cada ExternalItem para añadir el endpoint a la uri de base de datos
+    * [METAMAC-1383] - Búsqueda (ver descripción)
+    * [METAMAC-1430] - Visualización de instancias
+    * [METAMAC-1439] - Revisar todos los metadatos de la API tras modificaciones en el excel de metadatos
+    * [METAMAC-1443] - Revisar traducción de mensajes de error y parámetros de los mensajes de error
+    * [METAMAC-1475] - Problema con longitud de campos con valores con acentos en Oracle 
+    * [METAMAC-1511] - API: Revisar links
+    * [METAMAC-1527] - Quitar los logs de respuestas Rest
+    * [METAMAC-1541] - [Interceptores] Modificación de la configuración de update de los interceptores
+    * [METAMAC-1564] - Configuración y control de propiedades del DATA para aplicaciones internas y externas
+    * [METAMAC-1619] - Integración con API de SRM
+    * [METAMAC-1669] - Cambiar nombre de metadatos survey_type y survey_source por staitistical_operation_type y statistical_operation_source
+    * [METAMAC-1673] - Revisar el título de las aplicaciones web internas (ver el que se muestra en el navegador)
+    * [METAMAC-1676] - Añadir botón de borrado cuando se está visualizando un recurso
+    * [METAMAC-1681] - Revisión de metadatos de familias, operaciones e instancias estadísticas
+    * [METAMAC-1682] - Al publicar externamente operaciones e instancias, comprobar que los metadatos de tipo ExternalItem están publicados externamente
+    * [METAMAC-1694] - ExternalItems: no almacenar la versión específica de la api, sino latest
+    * [METAMAC-1698] - Comprobar que todos los internationalString tienen traducción en el idioma por defecto
+    * [METAMAC-1710] - Al publicar externamente operaciones o instancias deben comprobarse que sus recursos externos estan pub externamente
+    * [METAMAC-1726] - Modificar el comportamiento de los codelist que se establecen en el DATA (para granularidades de instancias)
+    * [METAMAC-1743] - Validar la longitud de los LocalisedString
+    * [METAMAC-1758] - Búsqueda de recursos de operaciones estadísticas
+    * [METAMAC-1792] - Refactor ProcStatus para poner el módulo como prefijo
+    * [METAMAC-1796] - Añadir al directorio DATA común propiedades para especificar los codelists por defecto para las granularidades temporales y geográficas y los lenguajes
+    * [METAMAC-1797] - [API] Refactor valores de ProcStatus
+    * [METAMAC-1808] - Refactor propiedades de configuración
+
+
+------------------------------------------------------------------------------
+Release 1.4.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.4.0
+
+** Defecto
+    * [METAMAC-1166] - En los tests no se está almacenando el usuario de ServiceContext
+    * [METAMAC-1269] - Actualizar la URL de los recursos cuando se actualiza alguno de los elementos que la componen
+    * [METAMAC-1347] - Problema de concurrencia con el Pooled optimizer (generación de ids de Hibernate)
+    * [METAMAC-1418] - NO guardar el endpoint de la API en la base de datos
+
+** Mejora
+    * [METAMAC-628] - Validación de formularios según el ProcStatus de operaciones, familias e instancias
+    * [METAMAC-1304] - Renombrar los métodos mockInternationalString del MetamacMocks para que sea mockInternationalStringDto
+
+** Soporte
+    * [METAMAC-1163] - Configuración de tests JUnit: cambio en la estrategia de filtrado de FilteredDataSet
+
+** Tarea
+    * [METAMAC-113] - Modificar el análisis del GOPESTAT
+    * [METAMAC-293] - Código de familias estadísticas
+    * [METAMAC-519] - Al crear una nueva instancia heredar metadatos
+    * [METAMAC-988] - Problema de external items y versiones de las APIs
+    * [METAMAC-1280] - Añadir soporte para SQL Server
+    * [METAMAC-1298] - Añadir configuración para SQL Server
+    * [METAMAC-1415] - Cambio de formato de links: selfLink, parent...
+    * [METAMAC-1432] - Dividir directorio DATA para que las aplicaciones internas y externas no utilicen los mismos ficheros de configuración
+
+** Sub-tarea
+    * [METAMAC-1313] - Permitir consultar el manual de usuario desde la aplicación
+
+
+------------------------------------------------------------------------------
+Release 1.3.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.3.0
+
+** Defecto
+    * [METAMAC-730] - Problemas con bloqueo optimista en la web
+    * [METAMAC-897] - Idioma de los widgets definidos en metamac-web-common
+    * [METAMAC-904] - No utilizar mapper JacksonJsonMapper
+    * [METAMAC-909] - Servicio Rest: en cada operación, hacer try{}catch de cualquier excepción
+    * [METAMAC-931] - Enunciate: bug al ocultar ejemplos de json de los tipos de datos
+
+** Mejora
+    * [METAMAC-596] - En la URL debe ir el código semántico como parámetro, NO el identificador de BBDD
+    * [METAMAC-743] - Cambiar formato de los formularios: todos los campos deben tener el máximo ancho que les permita la columna
+    * [METAMAC-791] - Cambio en el formato de las URLs de las aplicaciones internas
+    * [METAMAC-811] - Modificar la longitud del campo URN de todas las entidades para que tenga 4000 caracteres.
+    * [METAMAC-841] - Botondes de barrar superior de tipo "RADIO"
+
+** Nueva Funcionalidad
+    * [METAMAC-590] - Parseo de URLs
+    * [METAMAC-685] - Añadir la versión de la aplicación en el footer
+    * [METAMAC-699] - Paginación de listados: instancias de una operación, familias de una operación y operaciones de una familia
+    * [METAMAC-704] - Obtener familias, operaciones e instancias por URN
+
+
+** Soporte
+    * [METAMAC-930] - Subida a demos de todas la aplicaciones de METAMAC
+    * [METAMAC-952] - Enviar documentación referente a la API
+    * [METAMAC-1113] - Cambio en la configuración de Maven: uniqueVersion
+    * [METAMAC-1128] - Actualizar el manual de instalación para que contemple los nuevos requerimientos
+    * [METAMAC-1129] - Migración de bases de datos de jenkins a laguna
+
+** Tarea
+    * [METAMAC-59] - Mostrar description (InternationalStringDto) en los selectItem de listados (operationType, activityType, activityClass...)
+    * [METAMAC-461] - Metadato releaseCalendarAccess (ver descripción)
+    * [METAMAC-469] - PENDIENTES Web services
+    * [METAMAC-500] - Problemas al cambiar los pointscut a nivel de Facade con el ws
+    * [METAMAC-509] - Crear API Rest de Operaciones estadísticas
+    * [METAMAC-520] - Permitir la existencia de varias instancias en estado borrador simultáneamente
+    * [METAMAC-521] - CU-19 Buscar Operaciones
+    * [METAMAC-524] - Modificar los pointcut para que estén a nivel de Facade
+    * [METAMAC-526] - Relacionar el metadato AppCommonMetadata con una configuración de metadatos comunes del proyecto metamac-common-metadata
+    * [METAMAC-635] - Paginación de listado de familias, operaciones e instancias
+    * [METAMAC-666] - Configuración de idiomas de la aplicación
+    * [METAMAC-690] - Atributos de Common-Metadata en la entidad Operation
+    * [METAMAC-708] - Eliminar URI de las entidades
+    * [METAMAC-728] - Publicar en la aplicación web interna la API Rest interna
+    * [METAMAC-729] - Modificar los campos ML+URL de para que usen el componente de edición de texto enriquecido
+    * [METAMAC-744] - Migrar la ubicación de los Dto a su propio proyecto
+    * [METAMAC-747] - Cambiar formato de links en entidades según decisiones de formato
+    * [METAMAC-748] - En los resultados de las búsquedas, devolver objetos base, no toda la entidad
+    * [METAMAC-749] - Modificar los métodos del servicio de tipo find<Entity>ByCode para que sea case sensitive
+    * [METAMAC-751] - Documentación de la API
+    * [METAMAC-752] - Adaptar proyectos de metamac al MetamacBaseTests que corrige problemas de rendimiento
+    * [METAMAC-753] - Permitir establecer criterios de búsqueda en los "find"
+    * [METAMAC-764] - Búsqueda de familias, operaciones e instancias por título
+    * [METAMAC-776] - Modificar specialCase que evita que se cree unique constraints para que contemple ExternalItem
+    * [METAMAC-779] - Los ExternalItem deben tener los nuevos campos acordados y requeridos por las APIS
+    * [METAMAC-805] - Añadir el campo "CODE" en los ExternalItem
+    * [METAMAC-822] - Cambio en la construcción de los Hashmaps
+    * [METAMAC-826] - Modificar la tabla del listado de operaciones estadísticas para que muestre los campos de subject_area, survey_type y officiliaty_type
+    * [METAMAC-829] - Corregir queries de BBDD con tipos de datos Joda-time mapeados en múltiples columnas
+    * [METAMAC-864] - No proveer en Json
+    * [METAMAC-891] - Permitir indicar el formato de respuesta indicando en la url ".json" o ".xml"
+    * [METAMAC-900] - Hacer xml estético
+    * [METAMAC-901] - Eliminar el wadl
+    * [METAMAC-910] - No guardar el título (en los external items) de las operaciones estadísticas en las aplicaciones que consumen la API
+    * [METAMAC-921] - Gestión de "principalException" en excepciones de la web
+    * [METAMAC-925] - Cambiar clientes de APIs internas
+    * [METAMAC-926] - Las excepciones del core no se mostrarán detalladas en la API, sino sólo "unknown", y sin mensaje explicativo
+    * [METAMAC-936] - Publicar en la web interna la documentación de la api
+    * [METAMAC-937] - Definir formato de urls de las apis
+    * [METAMAC-939] - Construir los self links obteniendo la url base de un fichero de propiedades (endpoints.xml)
+    * [METAMAC-945] - Cambiar namespace de api interna y externa
+    * [METAMAC-947] - Actualización del manual de instalación v1.2.1
+    * [METAMAC-948] - Refactor para actualizar a cambios hechos en las APIs
+    * [METAMAC-949] - Configuración del DATA según el endpoints.xml definido en metamac-parent
+    * [METAMAC-962] - En la aplicación web para Cibercentro los datasources deben ir en el war
+    * [METAMAC-997] - Documentar más extensamente las operaciones "find"
+    * [METAMAC-1017] - InternationalString: Hacer más eficiente la creación de los LocalisedString
+    * [METAMAC-1038] - Actualización del endpoint de la API de metamac-common-metadata
+    * [METAMAC-1057] - Modificar la configuración de Base de Datos para evitar errores de arranque en Cibercentro
+
+
+** Sub-tarea
+    * [METAMAC-648] - Crear todas las operaciones necesarias en la Api
+    * [METAMAC-664] - En la aplicación metamac-statistical-operations-external-web, publicar sólo la API externa
+    * [METAMAC-668] - Eliminar proyectos de ws
+    * [METAMAC-669] - Publicar el wadl, en vez de que CXF lo autogenere
+    * [METAMAC-672] - Formato API según requerimientos ISTAC
+    * [METAMAC-676] - API: obtener operación
+    * [METAMAC-677] - API: buscar operaciones
+    * [METAMAC-678] - API: buscar familias
+    * [METAMAC-679] - API: obtener familia
+    * [METAMAC-680] - API: obtener instancia
+    * [METAMAC-681] - API: buscar instancias
+    * [METAMAC-682] - Crear la API externa
+    * [METAMAC-686] - ¿Cómo devolver los InternationalString en Rest?
+    * [METAMAC-694] - Ubicación de recursos comunes de api
+    * [METAMAC-709] - Gestionar URN para todas las entidades
+    * [METAMAC-711] - Tratar que en el wadl se puedan devolver un tipo de dato concreto, no un Response genérico
+    * [METAMAC-715] - Revisar obligatoriedad de campos en xsd
+    * [METAMAC-716] - API: obtener operaciones de una familia
+    * [METAMAC-717] - API: obtener familias de una operación
+    * [METAMAC-763] - Adaptarse a nueva versión de ExternalItem en metamac-core-common
+    * [METAMAC-796] - Clientes Rest ThreadSafe
+    * [METAMAC-797] - Mapear excepciones para que los clientes obtengan el tipo Java, no el xml
+    * [METAMAC-798] - Completar todos los metadatos por los que se podrá realizar las búsquedas
+    * [METAMAC-800] - Añadir a Resource el campo urn
+    * [METAMAC-801] - Añadir a Operación, Familia e Instancia el campo urn
+    * [METAMAC-813] - Los metadatos que provengan de una tabla de valores no deben ser Resource
+    * [METAMAC-814] - Normalmente, el parent y los children serán de tipo ResourceLink
+    * [METAMAC-817] - Refactor: code por id
+    * [METAMAC-820] - Validación de la API
+    * [METAMAC-827] - Crear operaciones para obtener las listas de tablas de valores (SurveyType...)
+    * [METAMAC-828] - Poner como enumerados en la API lo que esté como enumerado en el Core
+    * [METAMAC-840] - Refactor MetadataComplexValue por SimpleItem
+    * [METAMAC-845] - Añadir endpoint a uri de ExternalItems
+
+------------------------------------------------------------------------------
+Release 1.2.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.2.0
+
+** Defecto
+    * [METAMAC-683] - Problema a la hora de obtener de la fachada de servicios los listados paginados de operaciones y familias
+
+** Tarea
+    * [METAMAC-639] - Refactor LoggingSetup
+    * [METAMAC-643] - Preparar paquete de instalación Release 1.1.0
+    * [METAMAC-649] - Integración de METAMAC en Jenkins
+    * [METAMAC-652] - Cambiar configuración de BBDD de tests para que se adapte al Jenkins
+    * [METAMAC-653] - Refactor de las clases *SuiteTest por *Suite
+    * [METAMAC-655] - Modificar la clase de spring que se usa para crear el bean "dataSource"
+
+
+** Sub-tarea
+    * [METAMAC-647] - Esqueleto inicial del rest
+    * [METAMAC-667] - Eliminar dependencias a commons-dbcp
+    * [METAMAC-675] - ¿Respuestas en Json y/o Xml?
+
+------------------------------------------------------------------------------
+Release 1.1.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.1.0
+
+** Defecto
+    * [METAMAC-482] - Errores de visualización en IE8
+    * [METAMAC-600] - No permitir la edición de código de la operación/familia/instancia cuando el estado no es DRAFT
+    * [METAMAC-601] - No permitir la edición de código de la operación/familia/instancia cuando el estado no es DRAFT
+
+** Mejora
+    * [METAMAC-615] - Modificar la implementación de los métodos validateCodeUnique para que reutilicen los métodos findByCode
+
+** Nueva Funcionalidad
+    * [METAMAC-584] - En el listado de operaciones estadísticas, añadir una columna que indique si la operación es sistema de indicadores
+    * [METAMAC-587] - Filtrado de acciones en interfaz web según rol de usuario
+    * [METAMAC-589] - Añadir atributo indicatorsSystem a OperationBaseDto
+    * [METAMAC-591] - Formato de fechas
+    * [METAMAC-592] - TextArea en campos te texto grandes
+
+** Tarea
+    * [METAMAC-397] - Cambiar ubicación de environment.xml
+    * [METAMAC-460] - Revisar nombre de propiedades con Status (debería ser ProcStatus)
+    * [METAMAC-570] - Refactor en groupId de proyectos multimódulo
+    * [METAMAC-572] - Panel de espera, corregir image bundle (IE), ServiceContextHolder y gestión de excepciones
+    * [METAMAC-573] - Configuración del LoggingSetup
+    * [METAMAC-602] - Revisar los metadatos que pueden modificarse de las operaciones estadísticas según su ProcStatus
+    * [METAMAC-603] - Comprobar que una vez publicada una operación estadística no se puede cambiar su código
+    * [METAMAC-604] - Comprobar que una vez publicada una instancia estadística no se puede cambiar su código
+    * [METAMAC-605] - Comprobar que una vez publicada una familia estadística no se puede cambiar su código
+    * [METAMAC-606] - CriteriaPropertyRestriction para operaciones, familias e instancias
+    * [METAMAC-611] - Crear métodos en el facade para obtener entidades byCode
+    * [METAMAC-614] - Bloquear el acceso a la aplicación si el usuario logueado no tiene permisos para ello (Gatekeeper)
+    * [METAMAC-627] - Ancho de los campos
+    * [METAMAC-633] - Crear war para publicar servicio web externo
+    * [METAMAC-634] - Crear servicio web externo
+    * [METAMAC-641] - Release 1.1.0
+
+
+** Sub-tarea
+    * [METAMAC-579] - Configuración del CAS
+
+
+------------------------------------------------------------------------------
+Release 1.0.0
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.0.0
+
+** Defecto
+    * [METAMAC-12] - Error al guardar instancias
+    * [METAMAC-13] - ErrorPage
+    * [METAMAC-23] - Al crear una instancia, comprobar que el estado de la operación no es DRAFT.
+    * [METAMAC-54] - Tabbing a través de un CanvasItem
+    * [METAMAC-64] - Cuando se publica una operación internamente comprobar que las familias no se tienen que pasar a publicadas internamente
+    * [METAMAC-231] - Problemas de transaccionalidad
+    * [METAMAC-232] - Modificar la configuración de transaccionalidad general del proyecto
+    * [METAMAC-272] - Modificar "secundary" por "secondary"
+    * [METAMAC-307] - Error con los metadatos de tipo ExternalItem al guardar y al publicar una operación
+    * [METAMAC-308] - Error no capturado durante la validación del valor del metadato releaseCalendarAccess de una operación
+    * [METAMAC-398] - Al crear una nueva operación, a veces el desplegable con las áreas no se despliega
+    * [METAMAC-479] - Comprobar que no se pueden crear instancias sobre operaciones en estado "Borrador
+
+
+
+** Mejora
+    * [METAMAC-24] - No navegar tras crear una nueva familia u operación
+    * [METAMAC-47] - Incluir dependencia de metamac-web-common (ver detalles)
+    * [METAMAC-138] - Modificar la clase GopestatBaseService para que genere excepciones del tipo GopestatBaseException
+    * [METAMAC-141] - Unificar los mensajes de error en GopestatException
+    * [METAMAC-145] - Mejorar las validaciones de los metadatos requeridos para evitar duplicar la excepción
+    * [METAMAC-198] - Modificar las interfaces de los servicios para que reciban ID's en lugar de DTO's cuando sea posible
+    * [METAMAC-202] - Eliminar el dozer
+    * [METAMAC-219] - Generar las columnas de BBDD con "_" entre palabras.
+    * [METAMAC-273] - Modificar el validador de metadatos comunes
+    * [METAMAC-346] - Modificar la arquitectura de servicios del GOPESTAT
+    * [METAMAC-355] - Eliminar los ficheros de la configuración de spring que no se están usando.
+
+** Nueva Funcionalidad
+    * [METAMAC-5] - Guardar instancias
+    * [METAMAC-7] - Menú acceso familias y operaciones
+    * [METAMAC-8] - Global scrolling
+    * [METAMAC-10] - Popup para añadir familias y operaciones
+    * [METAMAC-11] - Validar formularios
+    * [METAMAC-19] - Locale en ServiceContext
+    * [METAMAC-25] - Crear instancias
+    * [METAMAC-26] - Borrar instancias
+    * [METAMAC-63] - Publicar familias, operaciones e instancias
+
+** Reuniones
+    * [METAMAC-454] - Hablar con Alberto de cómo deben cumplimentarse las URIs de los recursos
+    * [METAMAC-480] - Escribir e-mail relativos a los problemas de instalación del gestor de operaciones con indicadores
+
+
+** Tarea
+    * [METAMAC-1] - Tarea de prueba
+    * [METAMAC-17] - Formulario en modal windows
+    * [METAMAC-40] - ¿Seleccionar operaciones o familias en el toolstrip según lo que se esté visualizando?
+    * [METAMAC-50] - Cumplimentar correctamente el metadato METADATA_LAST_UPDATE de las operaciones
+    * [METAMAC-56] - Identificadores y campos requridos de familias, operaciones e instancias
+    * [METAMAC-57] - Validate lenght en TextItem, TextAreaItem, etc...
+    * [METAMAC-58] - Contributor e Information Suppliers de una Operación
+    * [METAMAC-65] - Gestión de incidencias GopestatBaseException (mensajes de error)
+    * [METAMAC-67] - En el método publishInternallyOperation, publicar operación en primer lugar, y a continuación familias e instancias (cuando se va a pasar de estado publicado externamente a internamente).
+    * [METAMAC-68] - Scroll FamilyView and InstanceView
+    * [METAMAC-69] - Compilar con compatibilidad para todos los navegadores
+    * [METAMAC-107] - Crear proyecto Maven metamac-gopestat
+    * [METAMAC-116] - Modificar los elementos comunes para que usen el proyecto común
+    * [METAMAC-139] - Modificar la forma en la que se realiza la transformación de Dto2Entity
+    * [METAMAC-147] - Modificar los metadatos de las entidades así como la gestión de los mismos.
+    * [METAMAC-153] - Test para comprobar la optimización de la transformación de dto2do de los internationalString.
+    * [METAMAC-165] - Setear suceror y predecesor + Test
+    * [METAMAC-199] - Realizar test para comprobar que el paso de publicado externamente a publicado internamente produce un error
+    * [METAMAC-200] - Setear currentInstance y currentInternalInstance
+    * [METAMAC-201] - Revisar la longitud de los String en BBDD y tomar decisiones al respecto
+    * [METAMAC-203] - Cumplimentar los metadatos requeridos por el ciclo de vida + Test
+    * [METAMAC-204] - Realizar test para comprobar la transformación de Dto2Do y Do2Dto
+    * [METAMAC-205] - Probar a eliminar un ExternalItem (EI) para verificar que se elimina la relación al EI de BBDD
+    * [METAMAC-206] - Eliminar entidad con EI para verificar que realiza la casacada
+    * [METAMAC-207] - Probar a crear una operación con PRODUCER
+    * [METAMAC-208] - Comprobar que al eliminar una operación o el coste de una operación, no se elimina el valor vinculado en la tabla de costos
+    * [METAMAC-209] - Comprobar que la fecha de inactividad no se modifica
+    * [METAMAC-211] - En las instancias, setear inactiveDate
+    * [METAMAC-212] - Comprobar que tras actualizar una familia sigue teniendo el mismo número de operaciones vinculadas
+    * [METAMAC-213] - Modificar los servicios que devuelven List<*Dto> para que devuelvan List<*BaseDto>
+    * [METAMAC-214] - Comprobar que tras eliminar una instancia, el listado de las instancias de la operación se reordenan
+    * [METAMAC-220] - Revisar la propuesta de gestión de usuarios enviada por Alberto
+    * [METAMAC-233] - Crear el metadato de estado de ejecución de la operación y eliminar los metadatos INACTIVE_DATE
+    * [METAMAC-240] - Refactorizar el proyecto para que GopestatException pase a ser MetamacException
+    * [METAMAC-243] - Vincular las operaciones estadísticas con el módulo de metadatos comunes.
+    * [METAMAC-248] - Cambio en los metadatos de familias, operaciones e instancias
+    * [METAMAC-258] - Crear extensión de ActionException para excepciones causadas por los servicios
+    * [METAMAC-266] - ¿Filtrar CodeLists por concepto/esquema de conceptos?
+    * [METAMAC-267] - Configuarción de las propiedades del data para obtener los frequency codes.
+    * [METAMAC-271] - Refactor del metadato titleAlternative por acronym
+    * [METAMAC-274] - Actualizar el proyecto metamac-core-common y comprobar que gopestat-core sigue funcionando
+    * [METAMAC-275] - Revisar funcionamiento del metadato BASE_PERIOD
+    * [METAMAC-276] - Revisión de publicación de familias, operaciones e instancias
+    * [METAMAC-278] - ¿Cómo cumplimentar metadato BASE_PERIOD de instancias?
+    * [METAMAC-294] - Modificar el nombre de usuarios de BBDD del GOPESTAT
+    * [METAMAC-303] - MultiLanguage en metadatos
+    * [METAMAC-306] - Modificar ubicación de los scripts de BBDD
+    * [METAMAC-316] - Mejoras widgets
+    * [METAMAC-323] - Modificar interceptor.xml para añadir MetamacException a las excepciones que deben hacer rollback
+    * [METAMAC-343] - Web service de Gopestat
+    * [METAMAC-361] - Unificación del GopestatBaseFacade y GopestatListsFacade en GopestatFacade
+    * [METAMAC-362] - Refactor de los paquetes en los que se generan los dto y los enum
+    * [METAMAC-363] - Añadir metadato a la entidad Operación que indique si la operación es de tipo sistema de indicadores
+    * [METAMAC-364] - Gestionar el metadato indicatorSystem de operciones.
+    * [METAMAC-392] - Evitar la creación de hibernate_sequence
+    * [METAMAC-393] - Eliminar uuid de las entidades InternationalString y LocalisedString
+    * [METAMAC-396] - Cambiar ubicación del data
+    * [METAMAC-400] - Validar formulario de creación de operaciones
+    * [METAMAC-414] - Migrar los Dto al api-domain
+    * [METAMAC-415] - Renombrar los prefijos de las tablas TBL por TB y LIS_ por TB_LIS_
+    * [METAMAC-416] - Refactor: GOPESTAT por metamac-statistical-operations
+    * [METAMAC-421] - Validación de códidos semánticos
+    * [METAMAC-430] - Adaptar web service según decisiones de diseño para todos los ws
+    * [METAMAC-434] - Modificar la operación "findOperations" para realizar paginación de resultados
+    * [METAMAC-435] - Web services: Transformación MetamacCriteria a criteria de Sculptor
+    * [METAMAC-438] - Paginación en web services
+    * [METAMAC-450] - Adaptar web a cambios en metamac-api-domain
+    * [METAMAC-459] - Corregir en la web "Unidad de medidad"
+    * [METAMAC-474] - Eliminar URI de las entity y los Dto de familias, operaciones e instancias
+    * [METAMAC-475] - Añadir intecerptor
+    * [METAMAC-476] - Sustituir parámetros en mensajes de error por constantes
+    * [METAMAC-481] - Añadir seguridad
+    * [METAMAC-485] - Cambios en la web
+    * [METAMAC-487] - Cambiar los test a nivel de servicio para añadir los interceptores "pointcut"
+    * [METAMAC-497] - Crear columnas de optimisticLocking en BBDD
+    * [METAMAC-511] - Optimistic Locking manual
+    * [METAMAC-518] - Eliminar los ficheros Date2JodaTimeConverter y Long2JodaDurationConverter
+    * [METAMAC-528] - Orden de las instancias
+    * [METAMAC-534] - Modificar aspect de flushing
+    * [METAMAC-535] - Modificar la configuración de spring
+    * [METAMAC-537] - Crear clase de SuiteTest
+
+
+** Sub-tarea
+    * [METAMAC-115] - Modificar el ciclo de vida
+    * [METAMAC-117] - Modificar los metadatos de familias
+    * [METAMAC-118] - Modificar los metadatos de operaciones (modelo y lógica)
+    * [METAMAC-119] - Modificar los metadatos de instancias (modelo y lógica)
+    * [METAMAC-143] - Eliminar gestión de AppCommonMetadata
