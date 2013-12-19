@@ -6,7 +6,6 @@ import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.common_metadata.rest.external.v1_0.service.CommonMetadataV1_0;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
-import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.srm.rest.internal.v1_0.service.SrmRestInternalFacadeV10;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +21,10 @@ public class MetamacApisLocator {
 
     @PostConstruct
     public void initService() throws Exception {
-        String commonMetadataExternalApi = configurationService.getProperties().getProperty(ConfigurationConstants.ENDPOINT_COMMON_METADATA_EXTERNAL_API);
+        String commonMetadataExternalApi = configurationService.retrieveCommonMetadataExternalApiUrlBase();
         commonMetadataRestExternalFacadeV10 = JAXRSClientFactory.create(commonMetadataExternalApi, CommonMetadataV1_0.class, null, true); // true to do thread safe
 
-        String srmInternalApi = configurationService.getProperties().getProperty(ConfigurationConstants.ENDPOINT_SRM_INTERNAL_API);
+        String srmInternalApi = configurationService.retrieveSrmInternalApiUrlBase();
         srmRestInternalFacadeV10 = JAXRSClientFactory.create(srmInternalApi, SrmRestInternalFacadeV10.class, null, true); // true to do thread safe
     }
 

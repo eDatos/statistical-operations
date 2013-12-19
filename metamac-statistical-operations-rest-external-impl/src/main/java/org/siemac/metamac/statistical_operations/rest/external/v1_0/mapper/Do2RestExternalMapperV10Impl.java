@@ -12,8 +12,8 @@ import javax.ws.rs.core.Response.Status;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
-import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
+import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Item;
@@ -24,34 +24,6 @@ import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.exception.RestException;
 import org.siemac.metamac.rest.exception.utils.RestExceptionUtils;
 import org.siemac.metamac.rest.search.criteria.mapper.SculptorCriteria2RestCriteria;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.ClassSystems;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.DataSharings;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FreqColls;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.GeographicGranularities;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InformationSuppliers;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.LegalActs;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Measures;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Producers;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Publishers;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalContributors;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.RegionalResponsibles;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.SecondarySubjectAreas;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatConcDefs;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalUnits;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.TemporalGranularities;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.srm.rest.common.SrmRestConstants;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
@@ -675,6 +647,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         String linkOperations = toOperationsLink();
         return RestUtils.createLink(linkOperations, operationCode);
     }
+
     private String toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         return toOperationLink(operation.getCode());
     }
@@ -932,12 +905,12 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         return propertyValue;
     }
 
-    private void initEndpoints() {
+    private void initEndpoints() throws MetamacException {
         // Statistical operations External Api v1.0
-        String statisticalOperationsApiExternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_EXTERNAL_API);
+        String statisticalOperationsApiExternalEndpoint = configurationService.retrieveStatisticalOperationsExternalApiUrlBase();
         statisticalOperationsApiExternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiExternalEndpoint, StatisticalOperationsRestConstants.API_VERSION_1_0);
 
         // Srm External Api (do not add api version! it is already stored in database)
-        srmApiExternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
+        srmApiExternalEndpoint = configurationService.retrieveSrmExternalApiUrlBase();
     }
 }

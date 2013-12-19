@@ -26,7 +26,6 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
-import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.util.ApplicationContextProvider;
 import org.siemac.metamac.rest.common.test.MetamacRestBaseTest;
@@ -35,21 +34,6 @@ import org.siemac.metamac.rest.common.test.mockito.PagingParameterMatcher;
 import org.siemac.metamac.rest.common.v1_0.domain.ComparisonOperator;
 import org.siemac.metamac.rest.common.v1_0.domain.LogicalOperator;
 import org.siemac.metamac.rest.constants.RestConstants;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.CollMethods;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Costs;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Families;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Family;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.FamilyCriteriaPropertyRestriction;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instance;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceCriteriaPropertyRestriction;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.InstanceTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Instances;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OfficialityTypes;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operation;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.OperationCriteriaPropertyRestriction;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.Operations;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationSources;
-import org.siemac.metamac.rest.statistical_operations.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
@@ -120,7 +104,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
 
         // Configuration
         ConfigurationService configurationService = applicationContext.getBean(ConfigurationService.class);
-        srmApiExternalEndpoint = configurationService.getProperty(ConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
+        srmApiExternalEndpoint = configurationService.retrieveSrmExternalApiUrlBase();
 
         // Mockito
         statisticalOperationsRestMocks = new StatisticalOperationsRestMocks(statisticalOperationsApiExternalEndpointV10, srmApiExternalEndpoint);
@@ -1203,6 +1187,7 @@ public class StatisticalOperationsRestExternalFacadeV10Test extends MetamacRestB
         // External APIS
         when(commonMetadataRestExternalFacade.retrieveConfigurationById(COMMON_METADATA_1)).thenReturn(statisticalOperationsRestMocks.mockExternalApiCommonMetadataRetrieveConfiguration1ById());
     }
+
     private static void mockitoFindOperationByConditionByFamily(StatisticalOperationsBaseService statisticalOperationsBaseService, String family, int limit, int offset) throws MetamacException {
         PagedResult<org.siemac.metamac.statistical.operations.core.domain.Operation> operations = null;
         if (FAMILY_1.equals(family)) {
