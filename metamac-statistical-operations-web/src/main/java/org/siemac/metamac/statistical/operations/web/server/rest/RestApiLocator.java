@@ -2,13 +2,13 @@ package org.siemac.metamac.statistical.operations.web.server.rest;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.siemac.metamac.common_metadata.rest.external.v1_0.service.CommonMetadataV1_0;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.srm.rest.internal.v1_0.service.SrmRestInternalFacadeV10;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.gargoylesoftware.htmlunit.WebClient;
 
 @Component
 public class RestApiLocator {
