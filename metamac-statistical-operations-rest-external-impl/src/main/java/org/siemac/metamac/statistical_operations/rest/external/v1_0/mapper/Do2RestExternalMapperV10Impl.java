@@ -868,7 +868,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         Measures targets = new Measures();
-        toResourcesExternalItemsSrm(sources, targets.getMeasures()); // TODO si es un concept scheme, hay que obtener los conceptos
+        toResourcesExternalItemsSrm(sources, targets.getMeasures()); // TODO si es un concept scheme, hay que obtener los conceptos (METAMAC-916)
         targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
@@ -879,7 +879,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         StatConcDefs targets = new StatConcDefs();
-        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs()); // TODO si es un concept scheme, hay que obtener los conceptos
+        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs()); // TODO si es un concept scheme, hay que obtener los conceptos (METAMAC-916)
         targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
