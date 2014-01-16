@@ -493,7 +493,6 @@ Application StatisticalOperations {
        		"Metadata COST"
        		- Set<@Cost> cost cascade="none" databaseColumn="COST_FK" databaseJoinTable="TB_INSTANCES_COSTS";
 
-			// TODO CURRENT_INSTANCE       		
        		"INVENTORY_DATE"
        		DateTimeTZ inventoryDate nullable;
        		
