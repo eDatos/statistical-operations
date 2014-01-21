@@ -11,6 +11,15 @@ de las incidencias con el id [METAMAC-xxx].
 http://jira.arte-consultores.com/browse/METAMAC
 
 ------------------------------------------------------------------------------
+Release 1.6.2
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - hito metamac-statistical-operations - 1.6.2
+
+** Defecto
+    * [METAMAC-2044] - Corregir ubicación de los bean de configurationService
+
+------------------------------------------------------------------------------
 Release 1.6.1
 ------------------------------------------------------------------------------
 Notas de publicación - Metamac - hito metamac-statistical-operations - 1.6.1
