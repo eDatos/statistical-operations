@@ -25,44 +25,44 @@ Release 1.6.1
 Notas de publicación - Metamac - hito metamac-statistical-operations - 1.6.1
 
 ** Defecto
-* [METAMAC-1998] - [CORE] Modificar los tipos de datos de MSSQL que usen "VARCHAR" por "NVARCHAR"
-* [METAMAC-2043] - Corregir problema con factorypathentry para el gwtplatform 0.6
+	* [METAMAC-1998] - [CORE] Modificar los tipos de datos de MSSQL que usen "VARCHAR" por "NVARCHAR"
+	* [METAMAC-2043] - Corregir problema con factorypathentry para el gwtplatform 0.6
 
 ** Mejora
-* [METAMAC-1618] - External Items linkables
-* [METAMAC-1620] - Quitar título de los listados y poner una sección de tipo stack
-* [METAMAC-1621] - Añadir en todos los árboles una columna que muestre un pop-up con la información en detalle
-* [METAMAC-1622] - En las tablas, mostrar más columnas que las que aparecen por defecto. Inicialmente estarán ocultas.
-* [METAMAC-1623] - [WEB] Los datos obligatorios para pasar un recurso de fase deben especificarse de alguna forma en la interfaz web para que el usuario sepa en cada momento cuáles les van a hacer requeridos al intentar pasar de fase.
-* [METAMAC-1624] - Related Resources linkables
+	* [METAMAC-1618] - External Items linkables
+	* [METAMAC-1620] - Quitar título de los listados y poner una sección de tipo stack
+	* [METAMAC-1621] - Añadir en todos los árboles una columna que muestre un pop-up con la información en detalle
+	* [METAMAC-1622] - En las tablas, mostrar más columnas que las que aparecen por defecto. Inicialmente estarán ocultas.
+	* [METAMAC-1623] - [WEB] Los datos obligatorios para pasar un recurso de fase deben especificarse de alguna forma en la interfaz web para que el usuario sepa en cada momento cuáles les van a hacer requeridos al intentar pasar de fase.
+	* [METAMAC-1624] - Related Resources linkables
 
 ** Nueva Funcionalidad
-* [METAMAC-1976] - Posibilidad de setear en la WEB los datos por defecto de data
+	* [METAMAC-1976] - Posibilidad de setear en la WEB los datos por defecto de data
 
 ** Soporte
-* [METAMAC-2003] - Añadir RELEASE-NOTES al proyecto
+	
 
 ** Tarea
-* [METAMAC-1426] - Visualización de las migas de pan
-* [METAMAC-1502] - Comprobar el cálculo de la instancia actual (interna y externa)
-* [METAMAC-1674] - [WEB] Permitir borrar un recurso cuando se está visualizando
-* [METAMAC-1695] - External Item con URN opcional
-* [METAMAC-1755] - Configurar la visualización o no de SQL en logback
-* [METAMAC-1756] - Logs: los cambios del logback no se reflejan sin reiniciar el servidor
-* [METAMAC-1788] - Añadir el nestedId a ExternalItem, recursos de la API...
-* [METAMAC-1811] - Añadir en el listener qué aplicación está iniciándose
-* [METAMAC-1827] - Revisar clientes de API de SRM tras cambios al obtener los items
-* [METAMAC-1832] - ExternalItem: refactor urns
-* [METAMAC-1848] - [Mocks] Modificación del método del metamac-common-test que crea un mock de un ExternalItemComplete
-* [METAMAC-1901] - [APIs] Modificar generación automática de wadl: prefijos con "ns"
-* [METAMAC-1902] - Aplicaciones web externa: eliminar listener y servlet no necesarios
-* [METAMAC-1941] - Refactor y mejora de tipos de criteria SculptorPropertyCriteria*
-* [METAMAC-2000] - Modificar la estructura changes-in-release de los proyectos
-* [METAMAC-2020] - Revisar los TODO y FIXME antes de dar por finalizado cada módulo
+	* [METAMAC-1426] - Visualización de las migas de pan
+	* [METAMAC-1502] - Comprobar el cálculo de la instancia actual (interna y externa)
+	* [METAMAC-1674] - [WEB] Permitir borrar un recurso cuando se está visualizando
+	* [METAMAC-1695] - External Item con URN opcional
+	* [METAMAC-1755] - Configurar la visualización o no de SQL en logback
+	* [METAMAC-1756] - Logs: los cambios del logback no se reflejan sin reiniciar el servidor
+	* [METAMAC-1788] - Añadir el nestedId a ExternalItem, recursos de la API...
+	* [METAMAC-1811] - Añadir en el listener qué aplicación está iniciándose
+	* [METAMAC-1827] - Revisar clientes de API de SRM tras cambios al obtener los items
+	* [METAMAC-1832] - ExternalItem: refactor urns
+	* [METAMAC-1848] - [Mocks] Modificación del método del metamac-common-test que crea un mock de un ExternalItemComplete
+	* [METAMAC-1901] - [APIs] Modificar generación automática de wadl: prefijos con "ns"
+	* [METAMAC-1902] - Aplicaciones web externa: eliminar listener y servlet no necesarios
+	* [METAMAC-1941] - Refactor y mejora de tipos de criteria SculptorPropertyCriteria*
+	* [METAMAC-2000] - Modificar la estructura changes-in-release de los proyectos
+	* [METAMAC-2020] - Revisar los TODO y FIXME antes de dar por finalizado cada módulo
 
 ** Sub-tarea
-* [METAMAC-1142] - Determinar si es necesario omitir la configuración del logback
-* [METAMAC-1831] - [API] Refactor urn por urnProvider
+	* [METAMAC-1142] - Determinar si es necesario omitir la configuración del logback
+	* [METAMAC-1831] - [API] Refactor urn por urnProvider
 
 ------------------------------------------------------------------------------
 Release 1.6.0
