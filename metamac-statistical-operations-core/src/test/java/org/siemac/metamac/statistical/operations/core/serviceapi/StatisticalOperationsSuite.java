@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDtoFieldsTest;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDtoFieldsTest;
+import org.siemac.metamac.statistical.operations.core.error.StatisticalOperationsCheckTranslationsTest;
 import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDo2DtoMapperTest;
 import org.siemac.metamac.statistical.operations.core.mapper.ExternalItemsDto2DoMapperTest;
 import org.siemac.metamac.statistical.operations.core.mapper.InternationalStringsDo2DtoMapperTest;
@@ -15,7 +16,8 @@ import org.siemac.metamac.statistical.operations.core.mapper.InternationalString
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({SecurityStatisticalOperationsServiceFacadeTest.class, 
+@Suite.SuiteClasses({StatisticalOperationsCheckTranslationsTest.class,
+                        SecurityStatisticalOperationsServiceFacadeTest.class, 
                         StatisticalOperationsBaseServiceTest.class, 
                         StatisticalOperationsListsServiceTest.class,
                         StatisticalOperationsServiceFacadeTest.class,
