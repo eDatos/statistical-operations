@@ -1,6 +1,7 @@
 package org.siemac.metamac.statistical_operations.rest.external.v1_0.mapper;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
 import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
@@ -65,6 +67,7 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical_operations.rest.common.StatisticalOperationsRestConstants;
 import org.siemac.metamac.statistical_operations.rest.external.exception.RestServiceExceptionType;
 import org.siemac.metamac.statistical_operations.rest.external.invocation.CommonMetadataRestExternalFacade;
+import org.siemac.metamac.statistical_operations.rest.external.invocation.SrmRestExternalFacade;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -77,6 +80,9 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
 
     @Autowired
     private CommonMetadataRestExternalFacade commonMetadataRestExternalFacade;
+
+    @Autowired
+    private SrmRestExternalFacade            srmRestExternalFacade;
 
     private String                           statisticalOperationsApiExternalEndpointV10;
     private String                           srmApiExternalEndpoint;
@@ -868,7 +874,7 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         Measures targets = new Measures();
-        toResourcesExternalItemsSrm(sources, targets.getMeasures()); // TODO si es un concept scheme, hay que obtener los conceptos (METAMAC-916)
+        toResourcesFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getMeasures());
         targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getMeasures().size()));
         return targets;
@@ -879,10 +885,54 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
             return null;
         }
         StatConcDefs targets = new StatConcDefs();
-        toResourcesExternalItemsSrm(sources, targets.getStatConcDefs()); // TODO si es un concept scheme, hay que obtener los conceptos (METAMAC-916)
+        toResourcesFromExternalItemWithConceptSchemesAndConcepts(sources, targets.getStatConcDefs());
         targets.setKind(SrmRestConstants.KIND_CONCEPTS);
         targets.setTotal(BigInteger.valueOf(targets.getStatConcDefs().size()));
         return targets;
+    }
+
+    private void toResourcesFromExternalItemWithConceptSchemesAndConcepts(Set<ExternalItem> sources, List<Resource> targets) {
+        if (sources == null || sources.size() == 0) {
+            return;
+        }
+        for (ExternalItem source : sources) {
+            if (TypeExternalArtefactsEnum.CONCEPT.equals(source.getType())) {
+                Resource target = toResourceExternalItemSrm(source);
+                targets.add(target);
+            } else if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(source.getType())) {
+                List<Resource> targetConcepts = srmConceptSchemeToResourceConcepts(source);
+                targets.addAll(targetConcepts);
+            } else {
+                org.siemac.metamac.rest.common.v1_0.domain.Exception exception = RestExceptionUtils.getException(RestServiceExceptionType.UNKNOWN);
+                throw new RestException(exception, Status.INTERNAL_SERVER_ERROR);
+            }
+        }
+    }
+
+    private List<Resource> srmConceptSchemeToResourceConcepts(ExternalItem conceptSchemeSource) {
+        // Return from API
+        List<org.siemac.metamac.rest.structural_resources.v1_0.domain.ItemResource> conceptSources = srmRestExternalFacade.retrieveConceptsByConceptScheme(conceptSchemeSource.getUrn());
+
+        // Transform
+        List<Resource> targets = new ArrayList<Resource>(conceptSources.size());
+        for (org.siemac.metamac.rest.common.v1_0.domain.Resource conceptSource : conceptSources) {
+            Resource conceptTarget = srmResourceToResource(conceptSource);
+            targets.add(conceptTarget);
+        }
+        return targets;
+    }
+
+    private Resource srmResourceToResource(org.siemac.metamac.rest.common.v1_0.domain.Resource source) {
+        if (source == null) {
+            return null;
+        }
+        Resource target = new Resource();
+        target.setId(source.getId());
+        target.setUrn(source.getUrn());
+        target.setKind(source.getKind());
+        target.setSelfLink(source.getSelfLink());
+        target.setName(source.getName());
+        return target;
     }
 
     private ClassSystems toClassSystems(Set<ExternalItem> sources) {
