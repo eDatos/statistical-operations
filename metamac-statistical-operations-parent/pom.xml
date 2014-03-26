@@ -31,6 +31,7 @@
     <properties>
         <metamac-statistical-operations.baseDir>${basedir}/..</metamac-statistical-operations.baseDir>
         <metamac-statistical-operations-rest-internal-api.version>1.5.1</metamac-statistical-operations-rest-internal-api.version>
+        <metamac-srm-rest-external-api.version>1.0.0-SNAPSHOT</metamac-srm-rest-external-api.version>
         <metamac-statistical-operations-rest-api-common.version>1.0.0</metamac-statistical-operations-rest-api-common.version>
         <metamac-srm-rest-internal-api.version>1.0.1</metamac-srm-rest-internal-api.version>
         <metamac-srm-rest-api-common.version>1.0.0</metamac-srm-rest-api-common.version>
