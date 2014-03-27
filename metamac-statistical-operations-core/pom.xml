@@ -402,7 +402,9 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.6</version><!--$NO-MVN-MAN-VER$ -->
                         <executions>
                             <execution>
                                 <id>clean-sculptor-conf</id>
@@ -432,7 +434,9 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.6</version><!--$NO-MVN-MAN-VER$ -->
                         <executions>
                             <execution>
                                 <id>clean-sculptor-conf</id>
@@ -518,6 +522,43 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                    <argLine>-Xms512m -Xmx1256m -XX:PermSize=64m -XX:MaxPermSize=128m</argLine>
+                </configuration>
+                <executions>
+                    <!-- Oracle -->
+                    <!-- The execution is called default-test because this is the name of the default execution of this plugin -->
+                    <execution>
+                        <id>default-test</id>
+                        <configuration>
+                            <skip>${maven.surefire.execution.oracle.skip}</skip>
+                            <systemPropertyVariables>
+                                <TEST_DATABASE_PROVIDER>ORACLE</TEST_DATABASE_PROVIDER>
+                            </systemPropertyVariables>
+                            <reportsDirectory>${project.build.directory}/surefire-reports/oracle</reportsDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>mssql</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${maven.surefire.execution.mssql.skip}</skip>
+                            <systemPropertyVariables>
+                                <TEST_DATABASE_PROVIDER>MSSQL</TEST_DATABASE_PROVIDER>
+                            </systemPropertyVariables>
+                            <reportsDirectory>${project.build.directory}/surefire-reports/mssql</reportsDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
