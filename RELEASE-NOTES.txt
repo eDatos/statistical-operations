@@ -11,6 +11,28 @@ de las incidencias con el id [METAMAC-xxx].
 http://jira.arte-consultores.com/browse/METAMAC
 
 ------------------------------------------------------------------------------
+Release 1.6.3
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - Versión statistical-operations - 1.6.3
+
+** Error
+    * [METAMAC-2109] - Problemas actualización desde versión anterior instalada a nueva versión enviada
+    * [METAMAC-2116] - Revisar los environment.xml porque están puestas las properties mal
+    * [METAMAC-2117] - Los manuales tienen los ejemplos de environment.xml incorrecto
+    * [METAMAC-2120] - Corregir error en el valor de las propiedades del datasource en el fichero environment.xml
+    * [METAMAC-2215] - [BBDD] Las constraints no pueden ser DEFERRED porque no hay soporte para SQLServer
+
+** Mejora
+    * [METAMAC-2073] - Revisar los CSS necesarios en las aplicaciones y eliminar lo obsoleto
+
+** Tarea
+    * [METAMAC-916] - Integración con API SRM
+    * [METAMAC-2082] - Cambio de los nombres de los war
+    * [METAMAC-2131] - [CORE] Añadir método para comprobar que no faltan traducciones de parámetros ni mensajes de error
+    * [METAMAC-2133] - Cambiar driver a oracle 11 para pasar los tests en jenkins
+
+------------------------------------------------------------------------------
 Release 1.6.2
 ------------------------------------------------------------------------------
 
