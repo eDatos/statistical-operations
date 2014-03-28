@@ -10,6 +10,16 @@ Por favor, consulta nuestro gestor de incidencia para obtener más información
 de las incidencias con el id [METAMAC-xxx].
 http://jira.arte-consultores.com/browse/METAMAC
 
+
+------------------------------------------------------------------------------
+Release 1.6.4
+------------------------------------------------------------------------------
+
+Notas de publicación - Metamac - Versión statistical-operations - 1.6.4
+
+** Subtarea
+    * [METAMAC-2219] - Proceso de release en el jenkins
+    
 ------------------------------------------------------------------------------
 Release 1.6.3
 ------------------------------------------------------------------------------
