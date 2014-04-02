@@ -9,6 +9,7 @@ public class StatisticalOperationsConfigurationConstants extends ConfigurationCo
     // Configuration
 
     public static final String USER_GUIDE_FILE_NAME = "metamac.statistical_operations.user_guide.file_name";
+    public static final String DOCS_PATH            = "metamac.data.docs.statistical_operations.path";
 
     // DataSource
 

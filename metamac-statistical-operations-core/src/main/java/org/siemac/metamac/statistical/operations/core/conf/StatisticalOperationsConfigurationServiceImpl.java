@@ -11,4 +11,9 @@ public class StatisticalOperationsConfigurationServiceImpl extends Configuration
         return retrieveProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME, Boolean.TRUE);
     }
 
+    @Override
+    public String retrieveDocsPath() throws MetamacException {
+        return retrieveProperty(StatisticalOperationsConfigurationConstants.DOCS_PATH, Boolean.TRUE);
+    }
+
 }

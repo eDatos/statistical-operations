@@ -25,9 +25,9 @@ public class GetUserGuideUrlActionHandler extends SecurityActionHandler<GetUserG
     @Override
     public GetUserGuideUrlResult executeSecurityAction(GetUserGuideUrlAction action) throws ActionException {
         try {
-            String dataUrl = configurationService.getConfig().getString(StatisticalOperationsWebConstants.ENVIRONMENT_DATA_URL);
+            String dataUrl = configurationService.retrieveDocsPath();
             String userGuideFileName = configurationService.retrieveUserGuideFileName();
-            return new GetUserGuideUrlResult(dataUrl + "/statistical-operations/statistical-operations-web/docs/" + userGuideFileName);
+            return new GetUserGuideUrlResult(dataUrl + "/" + userGuideFileName);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
