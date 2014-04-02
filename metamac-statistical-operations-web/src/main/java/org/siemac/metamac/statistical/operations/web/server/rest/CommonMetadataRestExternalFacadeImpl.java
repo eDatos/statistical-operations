@@ -10,10 +10,12 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.lang.shared.LocaleConstants;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configuration;
 import org.siemac.metamac.rest.common_metadata.v1_0.domain.Configurations;
+import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
 import org.siemac.metamac.statistical.operations.web.shared.constants.WebMessageExceptionsConstants;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.server.utils.WebTranslateExceptions;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
+import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,8 +45,9 @@ public class CommonMetadataRestExternalFacadeImpl implements CommonMetadataRestE
     }
 
     @Override
-    public Configurations findConfigurations(ServiceContext serviceContext, String query) throws MetamacWebException {
+    public Configurations findConfigurations(ServiceContext serviceContext, CommonConfigurationRestCriteria criteria) throws MetamacWebException {
         try {
+            String query = RestQueryUtils.buildCommonConfigurationQuery(criteria);
             // Only returns enabled configurations
             return restApiLocator.getCommonMetadataRestExternalFacadeV10().findConfigurations(query, null);
         } catch (ServerWebApplicationException e) {

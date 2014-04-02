@@ -5,6 +5,7 @@ import java.util.List;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
+import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
 
 public interface OperationUiHandlers extends SrmExternalResourcesUiHandlers {
 
@@ -22,5 +23,5 @@ public interface OperationUiHandlers extends SrmExternalResourcesUiHandlers {
 
     // External resources
 
-    void retrieveCommonMetadataConfigurations();
+    void retrieveCommonMetadataConfigurations(CommonConfigurationRestCriteria criteria);
 }

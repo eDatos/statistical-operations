@@ -4,7 +4,6 @@ import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb
 
 import java.util.List;
 
-import org.siemac.metamac.core.common.dto.InternationalStringDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
@@ -25,8 +24,8 @@ import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
@@ -165,9 +164,9 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     @Override
     public FamilyDto getFamily(FamilyDto familyDto) {
         familyDto.setCode(identifiersEditionForm.getValueAsString(FamilyDS.CODE));
-        familyDto.setTitle((InternationalStringDto) identifiersEditionForm.getValue(FamilyDS.TITLE));
-        familyDto.setAcronym((InternationalStringDto) identifiersEditionForm.getValue(FamilyDS.ACRONYM));
-        familyDto.setDescription((InternationalStringDto) contentDescriptorsEditionForm.getValue(FamilyDS.DESCRIPTION));
+        familyDto.setTitle(identifiersEditionForm.getValueAsInternationalStringDto(FamilyDS.TITLE));
+        familyDto.setAcronym(identifiersEditionForm.getValueAsInternationalStringDto(FamilyDS.ACRONYM));
+        familyDto.setDescription(contentDescriptorsEditionForm.getValueAsInternationalStringDto(FamilyDS.DESCRIPTION));
         return familyDto;
     }
 
@@ -181,13 +180,13 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // IDENTIFIERS FORM
 
         identifiersForm.setValue(FamilyDS.CODE, familyDto.getCode());
-        identifiersForm.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
-        identifiersForm.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
+        identifiersForm.setValue(FamilyDS.TITLE, familyDto.getTitle());
+        identifiersForm.setValue(FamilyDS.ACRONYM, familyDto.getAcronym());
         identifiersForm.setValue(FamilyDS.URN, familyDto.getUrn());
 
         // CONTENT DESCRIPTORS FORM
 
-        contentDescriptorsForm.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
+        contentDescriptorsForm.setValue(FamilyDS.DESCRIPTION, familyDto.getDescription());
 
         // PRODUCTION DESCRIPTORS FORM
 
@@ -207,14 +206,14 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
         identifiersEditionForm.setValue(FamilyDS.CODE, familyDto.getCode());
         identifiersEditionForm.setValue(FamilyDS.CODE_VIEW, familyDto.getCode());
-        identifiersEditionForm.setValue(FamilyDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getTitle()));
-        identifiersEditionForm.setValue(FamilyDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getAcronym()));
+        identifiersEditionForm.setValue(FamilyDS.TITLE, familyDto.getTitle());
+        identifiersEditionForm.setValue(FamilyDS.ACRONYM, familyDto.getAcronym());
         identifiersEditionForm.setValue(FamilyDS.URN, familyDto.getUrn());
         identifiersEditionForm.markForRedraw();
 
         // CONTENT DESCRIPTORS FORM
 
-        contentDescriptorsEditionForm.setValue(FamilyDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(familyDto.getDescription()));
+        contentDescriptorsEditionForm.setValue(FamilyDS.DESCRIPTION, familyDto.getDescription());
 
         // PRODUCTION DESCRIPTORS FORM
 
@@ -314,7 +313,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
         // CONTENT DESCRIPTORS FORM
 
         contentDescriptorsEditionForm = new GroupDynamicForm(getConstants().formContentDescriptors());
-        MultilanguageRichTextEditorItem descriptionItem = new MultilanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
+        MultiLanguageRichTextEditorItem descriptionItem = new MultiLanguageRichTextEditorItem(FamilyDS.DESCRIPTION, OperationsWeb.getConstants().familyDescription());
         contentDescriptorsEditionForm.setFields(descriptionItem);
 
         // PRODUCTION DESCRIPTORS FORM

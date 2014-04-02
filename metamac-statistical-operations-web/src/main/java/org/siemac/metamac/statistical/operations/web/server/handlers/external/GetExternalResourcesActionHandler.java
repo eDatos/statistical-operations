@@ -11,8 +11,8 @@ import org.siemac.metamac.statistical.operations.web.shared.external.Organisatio
 import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.shared.constants.CommonSharedConstants;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +36,10 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
 
         ExternalItemsResult result = null;
-        switch (action.getExternalResourceWebCriteria().getType()) {
+        switch (action.getExternalResourceWebCriteria().getExternalArtifactType()) {
             case CATEGORY_SCHEME:
-                result = srmRestInternalFacade
-                        .findCategorySchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade.findCategorySchemes(serviceContext, (SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                        action.getMaxResults());
                 break;
             case CATEGORY:
                 result = srmRestInternalFacade.findCategories(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
@@ -52,21 +52,22 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findOrganisations(serviceContext, (OrganisationRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case ORGANISATION_UNIT_SCHEME:
-                result = srmRestInternalFacade.findOrganisationUnitSchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                result = srmRestInternalFacade.findOrganisationUnitSchemes(serviceContext, (SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
                         action.getMaxResults());
                 break;
             case ORGANISATION_UNIT:
                 result = srmRestInternalFacade.findOrganisationUnits(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case DATA_PROVIDER_SCHEME:
-                result = srmRestInternalFacade.findDataProviderSchemes(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
+                result = srmRestInternalFacade.findDataProviderSchemes(serviceContext, (SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(),
                         action.getMaxResults());
                 break;
             case DATA_PROVIDER:
                 result = srmRestInternalFacade.findDataProviders(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODELIST:
-                result = srmRestInternalFacade.findCodelists(serviceContext, (SrmItemSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                result = srmRestInternalFacade
+                        .findCodelists(serviceContext, (SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CODE:
                 result = srmRestInternalFacade.findCodes(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());

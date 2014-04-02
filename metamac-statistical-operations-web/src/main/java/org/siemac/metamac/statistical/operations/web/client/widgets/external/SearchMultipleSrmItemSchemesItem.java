@@ -15,7 +15,7 @@ import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -45,7 +45,7 @@ public class SearchMultipleSrmItemSchemesItem extends ExternalItemListItem {
             @Override
             public void onFormItemClick(FormItemIconClickEvent event) {
 
-                final SrmItemSchemeRestCriteria itemSchemeRestcriteria = new SrmItemSchemeRestCriteria(TypeExternalArtefactsEnum.CODELIST);
+                final SrmExternalResourceRestCriteria itemSchemeRestcriteria = new SrmExternalResourceRestCriteria(TypeExternalArtefactsEnum.CODELIST);
 
                 searchMultipleItemSchemesWindow = new SearchMultipleExternalItemWindow(getConstants().searchCodelists(), MAX_RESULTS, new PaginatedAction() {
 
@@ -87,9 +87,9 @@ public class SearchMultipleSrmItemSchemesItem extends ExternalItemListItem {
         });
     }
 
-    private void retrieveItemSchemes(String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
+    private void retrieveItemSchemes(String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
         srmItemSchemeRestCriteria.setCriteria(searchMultipleItemSchemesWindow.getSearchCriteria());
-        srmItemSchemeRestCriteria.setIsLastVersion(isLastVersionItem.getValueAsBoolean());
+        srmItemSchemeRestCriteria.setOnlyLastVersion(isLastVersionItem.getValueAsBoolean());
         getUiHandlers().retrieveItemSchemes(formItemName, srmItemSchemeRestCriteria, firstResult, maxResults);
     }
 

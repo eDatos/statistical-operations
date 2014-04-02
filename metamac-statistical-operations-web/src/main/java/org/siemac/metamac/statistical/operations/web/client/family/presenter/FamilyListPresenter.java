@@ -23,7 +23,7 @@ import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedLi
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -158,13 +158,13 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void saveFamily(FamilyDto familyToSave) {
-        dispatcher.execute(new SaveFamilyAction(familyToSave), new WaitingAsyncCallback<SaveFamilyResult>() {
+        dispatcher.execute(new SaveFamilyAction(familyToSave), new WaitingAsyncCallbackHandlingError<SaveFamilyResult>(this) {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
+            protected void afterFailure() {
                 getView().closeFamilyWindow();
-                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
             }
+
             @Override
             public void onWaitSuccess(SaveFamilyResult result) {
                 getView().closeFamilyWindow();
@@ -176,29 +176,23 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
 
     @Override
     public void deleteFamilies(List<Long> familyIds) {
-        dispatcher.execute(new DeleteFamilyListAction(familyIds), new WaitingAsyncCallback<DeleteFamilyListResult>() {
+        dispatcher.execute(new DeleteFamilyListAction(familyIds), new WaitingAsyncCallbackHandlingError<DeleteFamilyListResult>(this) {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
-                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
-            }
-            @Override
             public void onWaitSuccess(DeleteFamilyListResult result) {
-                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
                 ShowMessageEvent.fireSuccessMessage(FamilyListPresenter.this, getMessages().familyDeleted());
+            }
+
+            @Override
+            protected void afterResult() {
+                retrieveFamilyList(FAMILY_LIST_FIRST_RESULT, FAMILY_LIST_MAX_RESULTS, getView().getFamilyCriteria());
             }
         });
     }
 
     @Override
     public void retrieveFamilyList(int firstResult, int maxResults, final String family) {
-        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new WaitingAsyncCallback<GetFamilyPaginatedListResult>() {
-
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(FamilyListPresenter.this, caught);
-            }
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new WaitingAsyncCallbackHandlingError<GetFamilyPaginatedListResult>(this) {
 
             @Override
             public void onWaitSuccess(GetFamilyPaginatedListResult result) {

@@ -33,7 +33,7 @@ public class GetCommonMetadataConfigurationsActionHandler extends SecurityAction
 
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
 
-        Configurations result = commonMetadataRestExternalFacade.findConfigurations(serviceContext, action.getQuery());
+        Configurations result = commonMetadataRestExternalFacade.findConfigurations(serviceContext, action.getCriteria());
         List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>();
         if (result != null && result.getConfigurations() != null) {
             for (ResourceInternal resource : result.getConfigurations()) {

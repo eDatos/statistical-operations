@@ -21,17 +21,17 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageH
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent.UpdatePlaceHistoryHandler;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
+import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
-import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
 import org.siemac.metamac.web.common.shared.CloseSessionAction;
 import org.siemac.metamac.web.common.shared.CloseSessionResult;
 import org.siemac.metamac.web.common.shared.utils.SharedTokens;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -188,12 +188,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     }
 
     private void loadOperationsLists() {
-        dispatcher.execute(new GetOperationsListsAction(), new WaitingAsyncCallback<GetOperationsListsResult>() {
+        dispatcher.execute(new GetOperationsListsAction(), new WaitingAsyncCallbackHandlingError<GetOperationsListsResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(MainPagePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetOperationsListsResult result) {
                 UpdateOperationsListsEvent.fire(MainPagePresenter.this, result.getSurveyTypeDtos(), result.getInstanceTypeDtos(), result.getSurveySourceDtos(), result.getOfficialityTypeDtos(),
@@ -220,12 +216,8 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
 
     @Override
     public void downloadUserGuide() {
-        dispatcher.execute(new GetUserGuideUrlAction(), new WaitingAsyncCallback<GetUserGuideUrlResult>() {
+        dispatcher.execute(new GetUserGuideUrlAction(), new WaitingAsyncCallbackHandlingError<GetUserGuideUrlResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(MainPagePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetUserGuideUrlResult result) {
                 CommonWebUtils.showDownloadFileWindow(SharedTokens.FILE_DOWNLOAD_DIR_PATH, SharedTokens.PARAM_FILE_NAME, result.getUserGuideUrl());

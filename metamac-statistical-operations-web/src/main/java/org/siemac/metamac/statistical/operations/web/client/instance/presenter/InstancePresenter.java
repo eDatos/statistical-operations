@@ -44,13 +44,13 @@ import org.siemac.metamac.statistical.operations.web.shared.external.GetExternal
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
-import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -176,12 +176,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void saveInstance(InstanceDto instanceToSave) {
-        dispatcher.execute(new SaveInstanceAction(operationBaseDto.getId(), instanceToSave), new WaitingAsyncCallback<SaveInstanceResult>() {
+        dispatcher.execute(new SaveInstanceAction(operationBaseDto.getId(), instanceToSave), new WaitingAsyncCallbackHandlingError<SaveInstanceResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(SaveInstanceResult result) {
                 ShowMessageEvent.fireSuccessMessage(InstancePresenter.this, getMessages().instanceSaved());
@@ -202,12 +198,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     public void deleteInstance(InstanceDto instanceDto) {
         final List<Long> ids = new ArrayList<Long>();
         ids.add(instanceDto.getId());
-        dispatcher.execute(new DeleteInstanceListAction(ids), new WaitingAsyncCallback<DeleteInstanceListResult>() {
+        dispatcher.execute(new DeleteInstanceListAction(ids), new WaitingAsyncCallbackHandlingError<DeleteInstanceListResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(DeleteInstanceListResult result) {
                 placeManager.revealRelativePlace(-1);
@@ -217,13 +209,13 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     private void retrieveInstance(String operationCode, String instanceCode) {
         String instanceUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_INSTANCE_PREFIX, operationCode, instanceCode);
-        dispatcher.execute(new GetInstanceAction(instanceUrn), new WaitingAsyncCallback<GetInstanceResult>() {
+        dispatcher.execute(new GetInstanceAction(instanceUrn), new WaitingAsyncCallbackHandlingError<GetInstanceResult>(this) {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
+            protected void afterFailure() {
                 OperationsWeb.showErrorPage();
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
             }
+
             @Override
             public void onWaitSuccess(GetInstanceResult result) {
                 instanceDto = result.getInstanceDto();
@@ -235,12 +227,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void publishInstanceInternally() {
-        dispatcher.execute(new PublishInternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallback<PublishInternallyInstanceResult>() {
+        dispatcher.execute(new PublishInternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallbackHandlingError<PublishInternallyInstanceResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(PublishInternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
@@ -251,12 +239,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     }
 
     private void publishInstanceExternally() {
-        dispatcher.execute(new PublishExternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallback<PublishExternallyInstanceResult>() {
+        dispatcher.execute(new PublishExternallyInstanceAction(instanceDto.getId()), new WaitingAsyncCallbackHandlingError<PublishExternallyInstanceResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(PublishExternallyInstanceResult result) {
                 instanceDto = result.getInstanceSaved();
@@ -277,22 +261,18 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
     //
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+    public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
         srmItemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(srmItemSchemeRestCriteria, types);
         retrieveItemSchemes(formItemName, srmItemSchemeRestCriteria, firstResult, maxResults);
     }
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
+    public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
         if (srmItemSchemeRestCriteria instanceof ConceptSchemeRestCriteria) {
             ((ConceptSchemeRestCriteria) srmItemSchemeRestCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
-        dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+        dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
                 getView().setItemSchemes(formItemName, result.getExternalItemsResult());
@@ -311,12 +291,8 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
         if (itemWebCriteria instanceof ConceptRestCriteria) {
             ((ConceptRestCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
-        dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+        dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(InstancePresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
                 getView().setItems(formItemName, result.getExternalItemsResult());

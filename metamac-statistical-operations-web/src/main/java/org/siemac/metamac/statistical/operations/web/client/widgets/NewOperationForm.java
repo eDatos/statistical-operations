@@ -2,11 +2,11 @@ package org.siemac.metamac.statistical.operations.web.client.widgets;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
-import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.dto.InternationalStringDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoryItem;
+import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
@@ -14,6 +14,9 @@ import org.siemac.metamac.web.common.client.widgets.form.CustomDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomButtonItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.types.FormErrorOrientation;
@@ -22,14 +25,16 @@ import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 
 public class NewOperationForm extends CustomDynamicForm {
 
-    private static final int   FORM_ITEM_CUSTOM_WIDTH = 300;
+    private static final int                          FORM_ITEM_CUSTOM_WIDTH = 300;
 
-    private RequiredTextItem   identifier;
-    private RequiredTextItem   title;
-    private CustomCheckboxItem releaseCalendar;
-    private SearchCategoryItem subjectAreasItem;
-    private CustomCheckboxItem indSystem;
-    private CustomButtonItem   saveButton;
+    private RequiredTextItem                          identifier;
+    private RequiredTextItem                          title;
+    private CustomCheckboxItem                        releaseCalendar;
+    private SearchSrmItemLinkItemWithSchemeFilterItem subjectAreasItem;
+    private CustomCheckboxItem                        indSystem;
+    private CustomButtonItem                          saveButton;
+
+    private SrmExternalResourcesUiHandlers            uiHandlers;
 
     public NewOperationForm() {
         super();
@@ -46,18 +51,8 @@ public class NewOperationForm extends CustomDynamicForm {
         releaseCalendar = new CustomCheckboxItem("op-release-cal", getConstants().operationReleaseCalendar());
         releaseCalendar.setWidth(FORM_ITEM_CUSTOM_WIDTH);
 
-        subjectAreasItem = new SearchCategoryItem("op-subject", getConstants().operationSubjectArea());
+        subjectAreasItem = createSubjectAreaItem("op-subject", getConstants().operationSubjectArea());
         subjectAreasItem.setRequired(true);
-        subjectAreasItem.setSaveClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
-
-            @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                ExternalItemDto category = subjectAreasItem.getSelectedItem();
-                subjectAreasItem.markSearchWindowForDestroy();
-                subjectAreasItem.setExternalItem(category);
-                NewOperationForm.this.validate(false);
-            }
-        });
 
         indSystem = new CustomCheckboxItem("op-ind-sys", getConstants().operationIndicatorSystem());
         indSystem.setWidth(FORM_ITEM_CUSTOM_WIDTH);
@@ -91,7 +86,7 @@ public class NewOperationForm extends CustomDynamicForm {
     }
 
     public void setUiHandlers(SrmExternalResourcesUiHandlers uiHandlers) {
-        subjectAreasItem.setUiHandlers(uiHandlers);
+        this.uiHandlers = uiHandlers;
     }
 
     // ------------------------------------------------------------------------------------------------------------
@@ -99,10 +94,28 @@ public class NewOperationForm extends CustomDynamicForm {
     // ------------------------------------------------------------------------------------------------------------
 
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
-        subjectAreasItem.setItemSchemes(result);
+        subjectAreasItem.setFilterResources(result.getExternalItemDtos(), result.getFirstResult(), result.getExternalItemDtos().size(), result.getTotalResults());
     }
 
     public void setItems(String formItemName, ExternalItemsResult result) {
-        subjectAreasItem.setItems(result);
+        subjectAreasItem.setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getExternalItemDtos().size(), result.getTotalResults());
+    }
+
+    private SearchSrmItemLinkItemWithSchemeFilterItem createSubjectAreaItem(final String name, String title) {
+        final SearchSrmItemLinkItemWithSchemeFilterItem item = new SearchSrmItemLinkItemWithSchemeFilterItem(name, title, StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
+
+            @Override
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                webCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CATEGORY);
+                uiHandlers.retrieveItems(name, webCriteria, firstResult, maxResults);
+            }
+
+            @Override
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                webCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CATEGORY_SCHEME);
+                uiHandlers.retrieveItemSchemes(name, webCriteria, firstResult, maxResults);
+            }
+        };
+        return item;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
-import org.siemac.metamac.core.common.dto.InternationalStringDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
@@ -37,8 +38,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridTool
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCategoryItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchCommonMetadataItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsAndDataProvidersItem;
@@ -59,17 +58,21 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalItemLinkItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultilanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.SearchExternalItemLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchExternalItemLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSingleCommonConfigurationItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
+import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -305,7 +308,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Set uiHandlers in formItems
 
-        ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
@@ -314,7 +316,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.UPDATE_FREQUENCY)).setUiHandlers(uiHandlers);
-        ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setUiHandlers(uiHandlers);
     }
 
     /*
@@ -379,12 +380,12 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // IDENTIFIERS
 
         operationDto.setCode(identifiersEditionForm.getValueAsString(OperationDS.CODE));
-        operationDto.setTitle((InternationalStringDto) identifiersEditionForm.getValue(OperationDS.TITLE));
-        operationDto.setAcronym((InternationalStringDto) identifiersEditionForm.getValue(OperationDS.ACRONYM));
+        operationDto.setTitle(identifiersEditionForm.getValueAsInternationalStringDto(OperationDS.TITLE));
+        operationDto.setAcronym(identifiersEditionForm.getValueAsInternationalStringDto(OperationDS.ACRONYM));
 
         // CONTENT CLASSIFIERS
 
-        operationDto.setSubjectArea(((ExternalItemLinkItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).getExternalItemDto());
+        operationDto.setSubjectArea(contentClassifiersEditionForm.getValueAsExternalItemDto(OperationDS.SUBJECT_AREA));
 
         List<ExternalItemDto> secondarySubjectAreas = ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
         operationDto.getSecondarySubjectAreas().clear();
@@ -392,8 +393,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // CONTENT DESCRIPTORS
 
-        operationDto.setDescription((InternationalStringDto) contentEditionForm.getValue(OperationDS.DESCRIPTION));
-        operationDto.setObjective((InternationalStringDto) contentEditionForm.getValue(OperationDS.OBJECTIVE));
+        operationDto.setDescription(contentEditionForm.getValueAsInternationalStringDto(OperationDS.DESCRIPTION));
+        operationDto.setObjective(contentEditionForm.getValueAsInternationalStringDto(OperationDS.OBJECTIVE));
 
         // CLASS DESCRIPTORS
 
@@ -424,9 +425,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.getPublisher().clear();
         operationDto.getPublisher().addAll(publishers);
 
-        operationDto.setCommonMetadata(((ExternalItemLinkItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).getExternalItemDto());
+        operationDto.setCommonMetadata(diffusionEditionForm.getValueAsExternalItemDto(OperationDS.COMMON_METADATA));
 
-        operationDto.setRelPolUsAc((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.RE_POL_US_AC));
+        operationDto.setRelPolUsAc(diffusionEditionForm.getValueAsInternationalStringDto(OperationDS.RE_POL_US_AC));
         operationDto.setReleaseCalendar(releaseCalendar.getValueAsBoolean());
         operationDto.setReleaseCalendarAccess(releaseCalendarAccess.getValueAsString());
 
@@ -434,17 +435,17 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         operationDto.getUpdateFrequency().clear();
         operationDto.getUpdateFrequency().addAll(updateFrequencies);
 
-        operationDto.setRevPolicy((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.REV_POLICY));
-        operationDto.setRevPractice((InternationalStringDto) diffusionEditionForm.getValue(OperationDS.REV_PRACTICE));
+        operationDto.setRevPolicy(diffusionEditionForm.getValueAsInternationalStringDto(OperationDS.REV_POLICY));
+        operationDto.setRevPractice(diffusionEditionForm.getValueAsInternationalStringDto(OperationDS.REV_PRACTICE));
 
         // LEGAL ACTS
-        operationDto.setSpecificLegalActs((InternationalStringDto) legalActsEditionForm.getValue(OperationDS.SPECIFIC_LEGAL_ACTS));
-        operationDto.setSpecificDataSharing((InternationalStringDto) legalActsEditionForm.getValue(OperationDS.SPECIFIC_DATA_SHARING));
+        operationDto.setSpecificLegalActs(legalActsEditionForm.getValueAsInternationalStringDto(OperationDS.SPECIFIC_LEGAL_ACTS));
+        operationDto.setSpecificDataSharing(legalActsEditionForm.getValueAsInternationalStringDto(OperationDS.SPECIFIC_DATA_SHARING));
 
         // ANNOTATIONS
 
-        operationDto.setComment((InternationalStringDto) annotationsEditionForm.getValue(OperationDS.COMMENTS));
-        operationDto.setNotes((InternationalStringDto) annotationsEditionForm.getValue(OperationDS.NOTES));
+        operationDto.setComment(annotationsEditionForm.getValueAsInternationalStringDto(OperationDS.COMMENTS));
+        operationDto.setNotes(annotationsEditionForm.getValueAsInternationalStringDto(OperationDS.NOTES));
         return operationDto;
     }
 
@@ -674,9 +675,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // CONTENT DESCRIPTORS
 
         contentEditionForm = new GroupDynamicForm(getConstants().operationContentDescriptors());
-        MultilanguageRichTextEditorItem description = new MultilanguageRichTextEditorItem(OperationDS.DESCRIPTION, getConstants().operationDescription());
+        MultiLanguageRichTextEditorItem description = new MultiLanguageRichTextEditorItem(OperationDS.DESCRIPTION, getConstants().operationDescription());
 
-        final MultilanguageRichTextEditorItem objective = new MultilanguageRichTextEditorItem(OperationDS.OBJECTIVE, getConstants().operationObjective());
+        final MultiLanguageRichTextEditorItem objective = new MultiLanguageRichTextEditorItem(OperationDS.OBJECTIVE, getConstants().operationObjective());
         objective.setValidators(new CustomRequiredValidator() {
 
             @Override
@@ -770,7 +771,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        final SearchCommonMetadataItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getConstants().operationCommonMetadata());
+        final SearchSingleCommonConfigurationItem commonMetadataItem = createCommonMetadataItem(OperationDS.COMMON_METADATA, getConstants().operationCommonMetadata());
         commonMetadataItem.setValidators(new CustomRequiredValidator() {
 
             @Override
@@ -779,7 +780,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        MultilanguageRichTextEditorItem relPolUsAc = new MultilanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
+        MultiLanguageRichTextEditorItem relPolUsAc = new MultiLanguageRichTextEditorItem(OperationDS.RE_POL_US_AC, getConstants().operationReleaseUsersPolicy());
         releaseCalendar = new CustomCheckboxItem(OperationDS.RELEASE_CALENDAR, getConstants().operationReleaseCalendar());
         releaseCalendarAccess = new CustomTextItem(OperationDS.RELEASE_CALENDAR_ACCESS, getConstants().operationReleaseCalendarAccess());
         releaseCalendarAccess.setValidators(CommonWebUtils.getUrlValidator());
@@ -787,23 +788,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         CustomLinkItem currentInst = new CustomLinkItem(OperationDS.CURRENT_INSTANCE, getConstants().operationCurrentInstance(), getCustomLinkItemNavigationClickHandler());
         CustomLinkItem currentInternalInst = new CustomLinkItem(OperationDS.CURRENT_INTERNAL_INSTANCE, getConstants().operationCurrentInternalInstance(), getCustomLinkItemNavigationClickHandler());
         ViewTextItem invDate = new ViewTextItem(OperationDS.INVENTORY_DATE, getConstants().operationInventoryDate());
-        MultilanguageRichTextEditorItem revPolicyItem = new MultilanguageRichTextEditorItem(OperationDS.REV_POLICY, getConstants().operationRevPolicy());
-        MultilanguageRichTextEditorItem revPracticeItem = new MultilanguageRichTextEditorItem(OperationDS.REV_PRACTICE, getConstants().operationRevPractice());
+        MultiLanguageRichTextEditorItem revPolicyItem = new MultiLanguageRichTextEditorItem(OperationDS.REV_POLICY, getConstants().operationRevPolicy());
+        MultiLanguageRichTextEditorItem revPracticeItem = new MultiLanguageRichTextEditorItem(OperationDS.REV_PRACTICE, getConstants().operationRevPractice());
         diffusionEditionForm.setFields(publishersItem, commonMetadataItem, relPolUsAc, releaseCalendar, releaseCalendarAccess, updateFrequencyItem, currentInst, currentInternalInst, invDate,
                 revPolicyItem, revPracticeItem);
 
         // LEGAL ACTS
 
         legalActsEditionForm = new GroupDynamicForm(getConstants().formLegalActs());
-        MultilanguageRichTextEditorItem specificLegalActs = new MultilanguageRichTextEditorItem(OperationDS.SPECIFIC_LEGAL_ACTS, getConstants().operationSpecificLegalActs());
-        MultilanguageRichTextEditorItem specificDataSharing = new MultilanguageRichTextEditorItem(OperationDS.SPECIFIC_DATA_SHARING, getConstants().operationSpecificDataSharing());
+        MultiLanguageRichTextEditorItem specificLegalActs = new MultiLanguageRichTextEditorItem(OperationDS.SPECIFIC_LEGAL_ACTS, getConstants().operationSpecificLegalActs());
+        MultiLanguageRichTextEditorItem specificDataSharing = new MultiLanguageRichTextEditorItem(OperationDS.SPECIFIC_DATA_SHARING, getConstants().operationSpecificDataSharing());
         legalActsEditionForm.setFields(specificLegalActs, specificDataSharing);
 
         // ANNOTATIONS
 
         annotationsEditionForm = new GroupDynamicForm(getConstants().operationAnnotations());
-        MultilanguageRichTextEditorItem commentItem = new MultilanguageRichTextEditorItem(OperationDS.COMMENTS, getConstants().operationComments());
-        MultilanguageRichTextEditorItem notesItem = new MultilanguageRichTextEditorItem(OperationDS.NOTES, getConstants().operationNotes());
+        MultiLanguageRichTextEditorItem commentItem = new MultiLanguageRichTextEditorItem(OperationDS.COMMENTS, getConstants().operationComments());
+        MultiLanguageRichTextEditorItem notesItem = new MultiLanguageRichTextEditorItem(OperationDS.NOTES, getConstants().operationNotes());
         annotationsEditionForm.setFields(commentItem, notesItem);
 
         // Add to main layout
@@ -822,19 +823,19 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         // IDENTIFIERS
 
         identifiersForm.setValue(OperationDS.CODE, operationDto.getCode());
-        identifiersForm.setValue(OperationDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
-        identifiersForm.setValue(OperationDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
+        identifiersForm.setValue(OperationDS.TITLE, operationDto.getTitle());
+        identifiersForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersForm.setValue(OperationDS.URN, operationDto.getUrn());
 
         // CONTENT CLASSIFIERS
 
-        ((ExternalItemLinkItem) contentClassifiersForm.getItem(OperationDS.SUBJECT_AREA)).setExternalItem(operationDto.getSubjectArea());
+        contentClassifiersForm.setValue(OperationDS.SUBJECT_AREA, operationDto.getSubjectArea());
         ((ExternalItemListItem) contentClassifiersForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(operationDto.getSecondarySubjectAreas());
 
         // CONTENT DESCRIPTORS
 
-        contentViewForm.setValue(OperationDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getDescription()));
-        contentViewForm.setValue(OperationDS.OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
+        contentViewForm.setValue(OperationDS.DESCRIPTION, operationDto.getDescription());
+        contentViewForm.setValue(OperationDS.OBJECTIVE, operationDto.getObjective());
 
         // CLASS DESCRIPTORS
 
@@ -862,9 +863,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((ExternalItemListItem) diffusionForm.getItem(OperationDS.PUBLISHER)).setExternalItems(operationDto.getPublisher());
 
-        ((ExternalItemLinkItem) diffusionForm.getItem(OperationDS.COMMON_METADATA)).setExternalItem(operationDto.getCommonMetadata());
+        diffusionForm.setValue(OperationDS.COMMON_METADATA, operationDto.getCommonMetadata());
 
-        diffusionForm.setValue(OperationDS.RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
+        diffusionForm.setValue(OperationDS.RE_POL_US_AC, operationDto.getRelPolUsAc());
         diffusionForm.setValue(OperationDS.RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar())
                 ? MetamacWebCommon.getConstants().yes()
                 : MetamacWebCommon.getConstants().no());
@@ -889,17 +890,17 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         }
 
         diffusionForm.setValue(OperationDS.INVENTORY_DATE, operationDto.getInventoryDate());
-        diffusionForm.setValue(OperationDS.REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
-        diffusionForm.setValue(OperationDS.REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
+        diffusionForm.setValue(OperationDS.REV_POLICY, operationDto.getRevPolicy());
+        diffusionForm.setValue(OperationDS.REV_PRACTICE, operationDto.getRevPractice());
 
         // LEGAL ACTS
-        legalActsForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificLegalActs()));
-        legalActsForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificDataSharing()));
+        legalActsForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, operationDto.getSpecificLegalActs());
+        legalActsForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, operationDto.getSpecificDataSharing());
 
         // ANNOTATIONS
 
-        annotationsViewForm.setValue(OperationDS.COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
-        annotationsViewForm.setValue(OperationDS.NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
+        annotationsViewForm.setValue(OperationDS.COMMENTS, operationDto.getComment());
+        annotationsViewForm.setValue(OperationDS.NOTES, operationDto.getNotes());
     }
 
     private void setOperationEditionMode(OperationDto operationDto) {
@@ -910,23 +911,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         identifiersEditionForm.setValue(OperationDS.CODE, operationDto.getCode());
         identifiersEditionForm.setValue(OperationDS.CODE_VIEW, operationDto.getCode());
-        identifiersEditionForm.setValue(OperationDS.TITLE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getTitle()));
-        identifiersEditionForm.setValue(OperationDS.ACRONYM, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getAcronym()));
+        identifiersEditionForm.setValue(OperationDS.TITLE, operationDto.getTitle());
+        identifiersEditionForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersEditionForm.setValue(OperationDS.URN, operationDto.getUrn());
         identifiersEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         identifiersEditionForm.markForRedraw();
 
         // CONTENT CLASSIFIERS
 
-        ((ExternalItemLinkItem) contentClassifiersEditionForm.getItem(OperationDS.SUBJECT_AREA)).setExternalItem(operationDto.getSubjectArea());
+        contentClassifiersEditionForm.setValue(OperationDS.SUBJECT_AREA, operationDto.getSubjectArea());
         ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setExternalItems(operationDto.getSecondarySubjectAreas());
         contentClassifiersEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         contentClassifiersEditionForm.markForRedraw();
 
         // CONTENT DESCRIPTORS
 
-        contentEditionForm.setValue(OperationDS.DESCRIPTION, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getDescription()));
-        contentEditionForm.setValue(OperationDS.OBJECTIVE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getObjective()));
+        contentEditionForm.setValue(OperationDS.DESCRIPTION, operationDto.getDescription());
+        contentEditionForm.setValue(OperationDS.OBJECTIVE, operationDto.getObjective());
         contentEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         contentEditionForm.markForRedraw();
 
@@ -957,9 +958,9 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         ((ExternalItemListItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setExternalItems(operationDto.getPublisher());
 
-        ((ExternalItemLinkItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setExternalItem(operationDto.getCommonMetadata());
+        diffusionEditionForm.setValue(OperationDS.COMMON_METADATA, operationDto.getCommonMetadata());
 
-        diffusionEditionForm.setValue(OperationDS.RE_POL_US_AC, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRelPolUsAc()));
+        diffusionEditionForm.setValue(OperationDS.RE_POL_US_AC, operationDto.getRelPolUsAc());
         releaseCalendar.setValue(operationDto.getReleaseCalendar());
         releaseCalendarAccess.setValue(operationDto.getReleaseCalendarAccess());
 
@@ -982,23 +983,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         }
 
         diffusionEditionForm.setValue(OperationDS.INVENTORY_DATE, operationDto.getInventoryDate());
-        diffusionEditionForm.setValue(OperationDS.REV_POLICY, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPolicy()));
-        diffusionEditionForm.setValue(OperationDS.REV_PRACTICE, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getRevPractice()));
+        diffusionEditionForm.setValue(OperationDS.REV_POLICY, operationDto.getRevPolicy());
+        diffusionEditionForm.setValue(OperationDS.REV_PRACTICE, operationDto.getRevPractice());
 
         diffusionEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         diffusionEditionForm.markForRedraw();
 
         // LEGAL ACTS
 
-        legalActsEditionForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificLegalActs()));
-        legalActsEditionForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getSpecificDataSharing()));
+        legalActsEditionForm.setValue(OperationDS.SPECIFIC_LEGAL_ACTS, operationDto.getSpecificLegalActs());
+        legalActsEditionForm.setValue(OperationDS.SPECIFIC_DATA_SHARING, operationDto.getSpecificDataSharing());
         legalActsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         legalActsEditionForm.markForRedraw();
 
         // ANNOTATIONS
 
-        annotationsEditionForm.setValue(OperationDS.COMMENTS, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getComment()));
-        annotationsEditionForm.setValue(OperationDS.NOTES, org.siemac.metamac.web.common.client.utils.RecordUtils.getInternationalStringRecord(operationDto.getNotes()));
+        annotationsEditionForm.setValue(OperationDS.COMMENTS, operationDto.getComment());
+        annotationsEditionForm.setValue(OperationDS.NOTES, operationDto.getNotes());
         annotationsEditionForm.setRequiredTitleSuffix(requiredFieldsToNextProcStatus);
         annotationsEditionForm.markForRedraw();
 
@@ -1048,7 +1049,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     @Override
     public void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataConfigurations) {
-        ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setCommonMetadataConfigurations(commonMetadataConfigurations);
+        ((SearchSingleCommonConfigurationItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setCommonConfigurationsList(commonMetadataConfigurations);
     }
 
     private void setTranslationsShowed(boolean translationsShowed) {
@@ -1095,7 +1096,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(), result
+                    .getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1120,7 +1122,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItems(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result
+                    .getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
@@ -1146,19 +1149,21 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     // EXTERNAL RESOURCES ITEMS
     // ------------------------------------------------------------------------------------------------------------
 
-    private SearchSrmItemItem createSubjectAreaItem(final String name, String title) {
-        final SearchSrmItemItem item = new SearchCategoryItem(name, title);
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+    private SearchSrmItemLinkItemWithSchemeFilterItem createSubjectAreaItem(final String name, String title) {
+        final SearchSrmItemLinkItemWithSchemeFilterItem item = new SearchSrmItemLinkItemWithSchemeFilterItem(name, title, StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                ExternalItemDto category = item.getSelectedItem();
-                item.markSearchWindowForDestroy();
-                ((SearchSrmItemItem) contentClassifiersEditionForm.getItem(name)).setExternalItem(category);
-                contentClassifiersEditionForm.validate(false);
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                webCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CATEGORY);
+                getUiHandlers().retrieveItems(name, webCriteria, firstResult, maxResults);
+            }
+
+            @Override
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                webCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CATEGORY_SCHEME);
+                getUiHandlers().retrieveItemSchemes(name, webCriteria, firstResult, maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
@@ -1296,19 +1301,14 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return item;
     }
 
-    private SearchCommonMetadataItem createCommonMetadataItem(String name, String title) {
-        final SearchCommonMetadataItem item = new SearchCommonMetadataItem(name, title);
-        ClickHandler saveClickHandler = new ClickHandler() {
+    private SearchSingleCommonConfigurationItem createCommonMetadataItem(String name, String title) {
+        final SearchSingleCommonConfigurationItem item = new SearchSingleCommonConfigurationItem(name, title) {
 
             @Override
-            public void onClick(ClickEvent event) {
-                ExternalItemDto selectedConfiguration = item.getSelectedExternalItemDto();
-                item.markSearchWindowForDestroy();
-                ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).setExternalItem(selectedConfiguration);
-                ((SearchCommonMetadataItem) diffusionEditionForm.getItem(OperationDS.COMMON_METADATA)).validate();
+            protected void retrieveCommonConfigurations(CommonConfigurationRestCriteria criteria) {
+                getUiHandlers().retrieveCommonMetadataConfigurations(criteria);
             }
         };
-        item.setSaveClickHandler(saveClickHandler);
         return item;
     }
 

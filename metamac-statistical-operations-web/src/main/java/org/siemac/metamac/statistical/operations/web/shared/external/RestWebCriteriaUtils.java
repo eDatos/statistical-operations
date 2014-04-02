@@ -11,8 +11,8 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 
 public class RestWebCriteriaUtils {
 
@@ -22,14 +22,14 @@ public class RestWebCriteriaUtils {
 
     public static ConceptSchemeRestCriteria buildStatisticalUnitConceptSchemeWebCriteria() {
         ConceptSchemeRestCriteria conceptSchemeWebCriteria = new ConceptSchemeRestCriteria();
-        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
         conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
         return conceptSchemeWebCriteria;
     }
 
     public static ConceptRestCriteria buildStatisticalUnitConceptWebCriteria() {
         ConceptRestCriteria conceptWebcriteria = new ConceptRestCriteria();
-        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
         conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
         return conceptWebcriteria;
     }
@@ -40,14 +40,14 @@ public class RestWebCriteriaUtils {
 
     public static ConceptSchemeRestCriteria buildStatConcDefConceptSchemeWebCriteria() {
         ConceptSchemeRestCriteria conceptSchemeWebCriteria = new ConceptSchemeRestCriteria();
-        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
         conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
         return conceptSchemeWebCriteria;
     }
 
     public static ConceptRestCriteria buildStatConcDefConceptWebCriteria() {
         ConceptRestCriteria conceptWebcriteria = new ConceptRestCriteria();
-        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
         conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
         return conceptWebcriteria;
     }
@@ -58,14 +58,14 @@ public class RestWebCriteriaUtils {
 
     public static ConceptSchemeRestCriteria buildMeasuresConceptSchemeWebCriteria() {
         ConceptSchemeRestCriteria conceptSchemeWebCriteria = new ConceptSchemeRestCriteria();
-        conceptSchemeWebCriteria.setType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
+        conceptSchemeWebCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
         conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.MEASURE);
         return conceptSchemeWebCriteria;
     }
 
     public static ConceptRestCriteria buildMeasuresConceptWebCriteria() {
         ConceptRestCriteria conceptWebcriteria = new ConceptRestCriteria();
-        conceptWebcriteria.setType(TypeExternalArtefactsEnum.CONCEPT);
+        conceptWebcriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
         conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.MEASURE);
         return conceptWebcriteria;
     }
@@ -74,27 +74,27 @@ public class RestWebCriteriaUtils {
     // COMMON CRITERIA
     //
 
-    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
-        return buildItemSchemeWebCriteria(new SrmItemSchemeRestCriteria(), types);
+    public static SrmExternalResourceRestCriteria buildItemSchemeWebCriteria(TypeExternalArtefactsEnum... types) {
+        return buildItemSchemeWebCriteria(new SrmExternalResourceRestCriteria(), types);
     }
 
-    public static SrmItemSchemeRestCriteria buildItemSchemeWebCriteria(SrmItemSchemeRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types) {
+    public static SrmExternalResourceRestCriteria buildItemSchemeWebCriteria(SrmExternalResourceRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types) {
         if (areOrganisationSchemeTypes(types)) {
 
             OrganisationSchemeRestCriteria organisationSchemeRestCriteria = new OrganisationSchemeRestCriteria();
-            organisationSchemeRestCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
+            organisationSchemeRestCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.ORGANISATION_SCHEME);
             organisationSchemeRestCriteria.setOrganisationSchemeTypes(types);
             organisationSchemeRestCriteria.setCriteria(itemSchemeRestCriteria.getCriteria());
-            organisationSchemeRestCriteria.setIsExternallyPublished(itemSchemeRestCriteria.getIsExternallyPublished());
-            organisationSchemeRestCriteria.setIsLastVersion(itemSchemeRestCriteria.getIsLastVersion());
+            organisationSchemeRestCriteria.setOnlyExternallyPublished(itemSchemeRestCriteria.isOnlyExternallyPublished());
+            organisationSchemeRestCriteria.setOnlyLastVersion(itemSchemeRestCriteria.isOnlyLastVersion());
             organisationSchemeRestCriteria.setUrn(itemSchemeRestCriteria.getUrn());
             organisationSchemeRestCriteria.setUrns(itemSchemeRestCriteria.getUrns());
             return organisationSchemeRestCriteria;
 
         } else if (isCodeListType(types[0])) {
-            itemSchemeRestCriteria.setType(types[0]);
+            itemSchemeRestCriteria.setExternalArtifactType(types[0]);
         } else {
-            itemSchemeRestCriteria.setType(types[0]);
+            itemSchemeRestCriteria.setExternalArtifactType(types[0]);
         }
         return itemSchemeRestCriteria;
     }
@@ -103,18 +103,18 @@ public class RestWebCriteriaUtils {
         if (areOrganisationTypes(types)) {
 
             OrganisationRestCriteria organisationRestCriteria = new OrganisationRestCriteria();
-            organisationRestCriteria.setType(TypeExternalArtefactsEnum.ORGANISATION);
+            organisationRestCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.ORGANISATION);
             organisationRestCriteria.setOrganisationTypes(types);
             organisationRestCriteria.setCriteria(itemRestCriteria.getCriteria());
             organisationRestCriteria.setUrn(itemRestCriteria.getUrn());
             organisationRestCriteria.setUrns(itemRestCriteria.getUrns());
-            organisationRestCriteria.setIsItemSchemeExternallyPublished(itemRestCriteria.getIsItemSchemeExternallyPublished());
-            organisationRestCriteria.setIsItemSchemeLastVersion(itemRestCriteria.getIsItemSchemeLastVersion());
+            organisationRestCriteria.setItemSchemeExternallyPublished(itemRestCriteria.isItemSchemeExternallyPublished());
+            organisationRestCriteria.setItemSchemeLastVersion(itemRestCriteria.isItemSchemeLastVersion());
             organisationRestCriteria.setItemSchemeUrn(itemRestCriteria.getItemSchemeUrn());
             return organisationRestCriteria;
 
         } else {
-            itemRestCriteria.setType(types[0]);
+            itemRestCriteria.setExternalArtifactType(types[0]);
             return itemRestCriteria;
         }
     }

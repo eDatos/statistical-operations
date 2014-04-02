@@ -9,8 +9,8 @@ import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.smartgwt.client.widgets.form.fields.FormItem;
@@ -19,12 +19,12 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
 public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleSrmItemsItem {
 
-    private static final String       RESOURCE_TYPE_FIELD_NAME = "resource-type";
+    private static final String             RESOURCE_TYPE_FIELD_NAME = "resource-type";
 
-    private SrmItemSchemeRestCriteria itemSchemeCriteria;
-    private SrmItemRestCriteria       itemCriteria;
+    private SrmExternalResourceRestCriteria itemSchemeCriteria;
+    private SrmItemRestCriteria             itemCriteria;
 
-    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, SrmItemSchemeRestCriteria itemSchemeCriteria, SrmItemRestCriteria itemCriteria,
+    public SearchMultipleConceptsAndConceptSchemesItem(final String name, String title, SrmExternalResourceRestCriteria itemSchemeCriteria, SrmItemRestCriteria itemCriteria,
             MultipleExternalResourceAction action) {
         super(name, title, itemSchemeCriteria, itemCriteria, getConstants().searchConceptsAndConceptSchemes(), getConstants().filterConceptScheme(), getConstants().selectedConceptScheme(),
                 getConstants().selectionResources(), action);

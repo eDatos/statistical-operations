@@ -27,9 +27,9 @@ import org.siemac.metamac.statistical.operations.web.shared.external.GetExternal
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
-import org.siemac.metamac.web.common.client.widgets.WaitingAsyncCallback;
+import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
-import org.siemac.metamac.web.common.shared.criteria.SrmItemSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.inject.Inject;
@@ -166,13 +166,13 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void createOperation(OperationDto operationToSave) {
-        dispatcher.execute(new SaveOperationAction(operationToSave), new WaitingAsyncCallback<SaveOperationResult>() {
+        dispatcher.execute(new SaveOperationAction(operationToSave), new WaitingAsyncCallbackHandlingError<SaveOperationResult>(this) {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
+            protected void afterFailure() {
                 getView().closeOperationWindow();
-                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
             }
+
             @Override
             public void onWaitSuccess(SaveOperationResult result) {
                 getView().closeOperationWindow();
@@ -184,12 +184,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void retrieveOperationList(int firstResult, int maxResults, final String operation) {
-        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, operation), new WaitingAsyncCallback<GetOperationPaginatedListResult>() {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, operation), new WaitingAsyncCallbackHandlingError<GetOperationPaginatedListResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetOperationPaginatedListResult result) {
                 getView().setOperations(result.getOperationBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
@@ -202,17 +198,16 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void deleteOperations(List<Long> operationIds) {
-        dispatcher.execute(new DeleteOperationListAction(operationIds), new WaitingAsyncCallback<DeleteOperationListResult>() {
+        dispatcher.execute(new DeleteOperationListAction(operationIds), new WaitingAsyncCallbackHandlingError<DeleteOperationListResult>(this) {
 
             @Override
-            public void onWaitFailure(Throwable caught) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
-                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
-            }
-            @Override
             public void onWaitSuccess(DeleteOperationListResult result) {
-                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
                 ShowMessageEvent.fireSuccessMessage(OperationListPresenter.this, getMessages().operationDeleted());
+            }
+
+            @Override
+            protected void afterResult() {
+                retrieveOperationList(OPERATION_LIST_FIRST_RESULT, OPERATION_LIST_MAX_RESULTS, getView().getOperationCriteria());
             }
         });
     }
@@ -222,19 +217,15 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
     //
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
+    public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria itemSchemeRestCriteria, TypeExternalArtefactsEnum[] types, int firstResult, int maxResults) {
         itemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(itemSchemeRestCriteria, types);
         retrieveItemSchemes(formItemName, itemSchemeRestCriteria, firstResult, maxResults);
     }
 
     @Override
-    public void retrieveItemSchemes(final String formItemName, SrmItemSchemeRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
-        dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+    public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
+        dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
                 getView().setItemSchemes(formItemName, result.getExternalItemsResult());
@@ -250,12 +241,8 @@ public class OperationListPresenter extends Presenter<OperationListPresenter.Ope
 
     @Override
     public void retrieveItems(final String formItemName, SrmItemRestCriteria itemRestCriteria, int firstResult, int maxResults) {
-        dispatcher.execute(new GetExternalResourcesAction(itemRestCriteria, firstResult, maxResults), new WaitingAsyncCallback<GetExternalResourcesResult>() {
+        dispatcher.execute(new GetExternalResourcesAction(itemRestCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
-            @Override
-            public void onWaitFailure(Throwable caught) {
-                ShowMessageEvent.fireErrorMessage(OperationListPresenter.this, caught);
-            }
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {
                 getView().setItems(formItemName, result.getExternalItemsResult());
