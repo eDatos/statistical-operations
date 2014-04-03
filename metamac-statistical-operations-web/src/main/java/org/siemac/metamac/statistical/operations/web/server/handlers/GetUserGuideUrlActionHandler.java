@@ -2,7 +2,6 @@ package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
-import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlResult;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
@@ -25,9 +24,8 @@ public class GetUserGuideUrlActionHandler extends SecurityActionHandler<GetUserG
     @Override
     public GetUserGuideUrlResult executeSecurityAction(GetUserGuideUrlAction action) throws ActionException {
         try {
-            String dataUrl = configurationService.retrieveDocsPath();
             String userGuideFileName = configurationService.retrieveUserGuideFileName();
-            return new GetUserGuideUrlResult(dataUrl + "/" + userGuideFileName);
+            return new GetUserGuideUrlResult(userGuideFileName);
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
