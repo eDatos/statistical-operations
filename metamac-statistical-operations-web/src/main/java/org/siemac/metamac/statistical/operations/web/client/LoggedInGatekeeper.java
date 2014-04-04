@@ -10,8 +10,8 @@ import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOp
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent;
 import org.siemac.metamac.web.common.client.events.LoginAuthenticatedEvent.LoginAuthenticatedEventHandler;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 public class LoggedInGatekeeper implements Gatekeeper {
@@ -36,7 +36,7 @@ public class LoggedInGatekeeper implements Gatekeeper {
 
     private boolean hasAnyAllowedRole(MetamacPrincipal metamacPrincipal) {
         for (MetamacPrincipalAccess access : metamacPrincipal.getAccesses()) {
-            if (StatisticalOperationsConstants.SECURITY_APPLICATION_ID.equals(access.getApplication()) && isRoleAllowed(access.getRole())) {
+            if (StatisticalOperationsConstants.APPLICATION_ID.equals(access.getApplication()) && isRoleAllowed(access.getRole())) {
                 return true;
             }
         }

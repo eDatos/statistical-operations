@@ -96,7 +96,7 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
 
     @Override
     protected String getSecurityApplicationId() {
-        return StatisticalOperationsConstants.SECURITY_APPLICATION_ID;
+        return StatisticalOperationsConstants.APPLICATION_ID;
     }
 
     @Override

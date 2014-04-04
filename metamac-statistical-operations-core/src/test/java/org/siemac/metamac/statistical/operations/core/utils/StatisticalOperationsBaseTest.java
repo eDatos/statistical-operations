@@ -84,14 +84,14 @@ public abstract class StatisticalOperationsBaseTest extends MetamacDBUnitBaseTes
     private void putMetamacPrincipalInServiceContext(ServiceContext serviceContext, StatisticalOperationsRoleEnum role) {
         MetamacPrincipal metamacPrincipal = new MetamacPrincipal();
         metamacPrincipal.setUserId(serviceContext.getUserId());
-        metamacPrincipal.getAccesses().add(new MetamacPrincipalAccess(role.getName(), StatisticalOperationsConstants.SECURITY_APPLICATION_ID, null));
+        metamacPrincipal.getAccesses().add(new MetamacPrincipalAccess(role.getName(), StatisticalOperationsConstants.APPLICATION_ID, null));
         serviceContext.setProperty(SsoClientConstants.PRINCIPAL_ATTRIBUTE, metamacPrincipal);
     }
 
     private void putMetamacPrincipalInServiceContext(ServiceContext serviceContext, StatisticalOperationsRoleEnum role, String operationCode) {
         MetamacPrincipal metamacPrincipal = new MetamacPrincipal();
         metamacPrincipal.setUserId(serviceContext.getUserId());
-        metamacPrincipal.getAccesses().add(new MetamacPrincipalAccess(role.getName(), StatisticalOperationsConstants.SECURITY_APPLICATION_ID, operationCode));
+        metamacPrincipal.getAccesses().add(new MetamacPrincipalAccess(role.getName(), StatisticalOperationsConstants.APPLICATION_ID, operationCode));
         serviceContext.setProperty(SsoClientConstants.PRINCIPAL_ATTRIBUTE, metamacPrincipal);
     }
 
