@@ -51,6 +51,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Opera
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationSources;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.StatisticalOperationTypes;
 import org.siemac.metamac.rest.utils.RestUtils;
+import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
@@ -127,10 +128,10 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         }
 
         // Configuration
-        ConfigurationService configurationService = applicationContext.getBean(ConfigurationService.class);
-        statisticalOperationsInternalWebApplication = configurationService.getProperty(ConfigurationConstants.WEB_APPLICATION_STATISTICAL_OPERATIONS_INTERNAL_WEB);
-        srmInternalWebApplication = configurationService.getProperty(ConfigurationConstants.WEB_APPLICATION_SRM_INTERNAL_WEB);
-        srmApiInternalEndpoint = configurationService.getProperty(ConfigurationConstants.ENDPOINT_SRM_INTERNAL_API);
+        StatisticalOperationsConfigurationService configurationService = applicationContext.getBean(StatisticalOperationsConfigurationService.class);
+        statisticalOperationsInternalWebApplication = configurationService.retrieveStatisticalOperationsInternalWebApplicationUrlBase();
+        srmInternalWebApplication = configurationService.retrieveSrmInternalWebApplicationUrlBase();
+        srmApiInternalEndpoint = configurationService.retrieveSrmInternalApiUrlBase();
         // Mockito
         statisticalOperationsCoreMocks = new StatisticalOperationsCoreMocks();
         statisticalOperationsRestMocks = new StatisticalOperationsRestMocks(statisticalOperationsApiInternalEndpointV10, statisticalOperationsInternalWebApplication, srmApiInternalEndpoint,
