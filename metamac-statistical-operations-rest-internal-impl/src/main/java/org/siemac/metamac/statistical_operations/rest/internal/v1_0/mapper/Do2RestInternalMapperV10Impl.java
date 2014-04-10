@@ -58,6 +58,7 @@ import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Tempo
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.UpdateFrequencies;
 import org.siemac.metamac.rest.utils.RestUtils;
 import org.siemac.metamac.srm.rest.common.SrmRestConstants;
+import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
 import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
 import org.siemac.metamac.statistical.operations.core.domain.Cost;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
@@ -79,20 +80,20 @@ import org.springframework.stereotype.Component;
 public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
 
     @Autowired
-    private ConfigurationService             configurationService;
+    private StatisticalOperationsConfigurationService configurationService;
 
     @Autowired
-    private CommonMetadataRestExternalFacade commonMetadataRestExternalFacade;
+    private CommonMetadataRestExternalFacade          commonMetadataRestExternalFacade;
 
     @Autowired
-    private SrmRestInternalFacade            srmRestInternalFacade;
+    private SrmRestInternalFacade                     srmRestInternalFacade;
 
-    private String                           statisticalOperationsApiInternalEndpointV10;
-    private String                           statisticalOperationsInternalWebApplication;
-    private String                           srmApiInternalEndpoint;
-    private String                           srmInternalWebApplication;
+    private String                                    statisticalOperationsApiInternalEndpointV10;
+    private String                                    statisticalOperationsInternalWebApplication;
+    private String                                    srmApiInternalEndpoint;
+    private String                                    srmInternalWebApplication;
 
-    private InternalWebApplicationNavigation internalWebApplicationNavigation;
+    private InternalWebApplicationNavigation          internalWebApplicationNavigation;
 
     @PostConstruct
     public void init() throws Exception {
@@ -995,29 +996,21 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private String readProperty(String property) {
-        String propertyValue = configurationService.getProperty(property);
-        if (propertyValue == null) {
-            throw new BeanCreationException("Property not found: " + property);
-        }
-        return propertyValue;
-    }
-
     private void initEndpoints() {
         // Srm internal application
-        srmInternalWebApplication = readProperty(ConfigurationConstants.WEB_APPLICATION_SRM_INTERNAL_WEB);
+        srmInternalWebApplication = configurationService.retrieveSrmInternalWebApplicationUrlBase();
         srmInternalWebApplication = StringUtils.removeEnd(srmInternalWebApplication, "/");
 
         // Statistical operations internal application
-        statisticalOperationsInternalWebApplication = readProperty(ConfigurationConstants.WEB_APPLICATION_STATISTICAL_OPERATIONS_INTERNAL_WEB);
+        statisticalOperationsInternalWebApplication = configurationService.retrieveStatisticalOperationsInternalWebApplicationUrlBase();
         statisticalOperationsInternalWebApplication = StringUtils.removeEnd(statisticalOperationsInternalWebApplication, "/");
 
         // Statistical operations Internal Api v1.0
-        String statisticalOperationsApiInternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_INTERNAL_API);
+        String statisticalOperationsApiInternalEndpoint = configurationService.retrieveStatisticalOperationsInternalApiUrlBase();
         statisticalOperationsApiInternalEndpointV10 = RestUtils.createLink(statisticalOperationsApiInternalEndpoint, StatisticalOperationsRestConstants.API_VERSION_1_0);
 
         // Srm Internal Api (do not add api version! it is already stored in database)
-        srmApiInternalEndpoint = readProperty(ConfigurationConstants.ENDPOINT_SRM_INTERNAL_API);
+        srmApiInternalEndpoint = configurationService.retrieveSrmInternalApiUrlBase();
     }
 
     private String toOperationManagementApplicationLink(org.siemac.metamac.statistical.operations.core.domain.Operation source) {
