@@ -975,14 +975,6 @@ public class Do2RestExternalMapperV10Impl implements Do2RestExternalMapperV10 {
         return target;
     }
 
-    private String readProperty(String property) {
-        String propertyValue = configurationService.getProperty(property);
-        if (propertyValue == null) {
-            throw new BeanCreationException("Property not found: " + property);
-        }
-        return propertyValue;
-    }
-
     private void initEndpoints() throws MetamacException {
         // Statistical operations External Api v1.0
         String statisticalOperationsApiExternalEndpoint = configurationService.retrieveStatisticalOperationsExternalApiUrlBase();
