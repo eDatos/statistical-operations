@@ -17,6 +17,7 @@ import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.rest.common.v1_0.domain.ChildLinks;
 import org.siemac.metamac.rest.common.v1_0.domain.InternationalString;
 import org.siemac.metamac.rest.common.v1_0.domain.Item;
@@ -996,7 +997,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private void initEndpoints() {
+    private void initEndpoints() throws MetamacException {
         // Srm internal application
         srmInternalWebApplication = configurationService.retrieveSrmInternalWebApplicationUrlBase();
         srmInternalWebApplication = StringUtils.removeEnd(srmInternalWebApplication, "/");
