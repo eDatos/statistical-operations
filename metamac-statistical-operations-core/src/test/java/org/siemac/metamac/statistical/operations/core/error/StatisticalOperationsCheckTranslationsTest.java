@@ -2,9 +2,40 @@ package org.siemac.metamac.statistical.operations.core.error;
 
 import java.util.Locale;
 
+import org.junit.Test;
 import org.siemac.metamac.common.test.translations.CheckTranslationsTestBase;
+import org.siemac.metamac.statistical.operations.core.notices.ServiceNoticeAction;
+import org.siemac.metamac.statistical.operations.core.notices.ServiceNoticeMessage;
 
 public class StatisticalOperationsCheckTranslationsTest extends CheckTranslationsTestBase {
+
+    // ----------------------------------------------------------------------------------------
+    // MORE TESTS
+    // ----------------------------------------------------------------------------------------
+
+    @Test
+    public void testCheckExistsAllTranslationsForServiceNoticeActions() throws Exception {
+        checkExistsAllTranslationsForStrings(getServiceNoticeActionClasses(), getLocalesToTranslate());
+    }
+
+    @SuppressWarnings("rawtypes")
+    public Class[] getServiceNoticeActionClasses() {
+        return new Class[]{ServiceNoticeAction.class};
+    }
+
+    @Test
+    public void testCheckExistsAllTranslationsForServiceNoticeMessages() throws Exception {
+        checkExistsAllTranslationsForStrings(getServiceNoticeMessagesClasses(), getLocalesToTranslate());
+    }
+
+    @SuppressWarnings("rawtypes")
+    public Class[] getServiceNoticeMessagesClasses() {
+        return new Class[]{ServiceNoticeMessage.class};
+    }
+
+    // ----------------------------------------------------------------------------------------
+    // OVERRIDE METHODS
+    // ----------------------------------------------------------------------------------------
 
     @Override
     @SuppressWarnings("rawtypes")

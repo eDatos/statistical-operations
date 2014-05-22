@@ -51,6 +51,11 @@
             <version>${metamac-srm-rest-internal-api.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.siemac.metamac.metamac-notifications</groupId>
+            <artifactId>metamac-notifications-rest-internal-api</artifactId>
+            <version>${metamac-notifications-rest-internal-api.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.siemac.metamac</groupId>
             <artifactId>metamac-web-common</artifactId>
             <version>${metamac-web-common.version}</version>

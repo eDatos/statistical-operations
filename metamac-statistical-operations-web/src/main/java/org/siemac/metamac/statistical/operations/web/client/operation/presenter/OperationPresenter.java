@@ -123,11 +123,17 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         // Operations
 
         void setOperation(OperationDto operationDto, List<InstanceBaseDto> instanceBaseDtos, List<FamilyBaseDto> familyBaseDtos);
+
         OperationDto getOperation(OperationDto operationDto);
+
         HasClickHandlers getSave();
+
         void onOperationSaved(OperationDto operationDto);
+
         boolean validate();
+
         HasClickHandlers getPublishOperationInternally();
+
         HasClickHandlers getPublishOperationExternally();
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
@@ -135,23 +141,34 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         // External resources
 
         void setCommonMetadataConfigurations(List<ExternalItemDto> commonMetadataList);
+
         void setItemSchemes(String formItemName, ExternalItemsResult result);
+
         void setItems(String formItemName, ExternalItemsResult result);
 
         // Instances
 
         HasRecordClickHandlers getSelectedInstance();
+
         void setInstances(List<InstanceBaseDto> instanceBaseDtos);
+
         com.smartgwt.client.widgets.form.fields.events.HasClickHandlers getSaveNewInstance();
+
         InstanceDto getNewInstace();
+
         void onInstanceSaved(InstanceDto instanceDto);
+
         boolean validateNewInstance();
+
         void closeInstanceWindow();
+
         HasClickHandlers getDeleteInstance();
+
         List<Long> getSelectedInstances();
 
         // Families
         HasRecordClickHandlers getSelectedFamily();
+
         void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults);
     }
 
@@ -351,6 +368,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             }
         });
     }
+
     private void retrieveOperation(String operationCode) {
         String operationUrn = UrnUtils.generateUrn(UrnConstants.URN_SIEMAC_CLASS_OPERATION_PREFIX, operationCode);
         dispatcher.execute(new GetOperationAndInstancesAction(operationUrn), new WaitingAsyncCallbackHandlingError<GetOperationAndInstancesResult>(this) {
@@ -387,7 +405,12 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitSuccess(PublishInternallyOperationResult result) {
                 retrieveOperation(operationDto.getCode());
-                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationInternallyPublished());
+
+                if (result.getNotificationException() != null) {
+                    ShowMessageEvent.fireWarningMessageWithError(OperationPresenter.this, getMessages().operationInternallyPublishedWithNotificationError(), result.getNotificationException());
+                } else {
+                    ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationInternallyPublished());
+                }
             }
         });
     }
@@ -398,7 +421,12 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onWaitSuccess(PublishExternallyOperationResult result) {
                 retrieveOperation(operationDto.getCode());
-                ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationExternallyPublished());
+
+                if (result.getNotificationException() != null) {
+                    ShowMessageEvent.fireWarningMessageWithError(OperationPresenter.this, getMessages().operationExternallyPublishedWithNotificationError(), result.getNotificationException());
+                } else {
+                    ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationExternallyPublished());
+                }
             }
         });
     }

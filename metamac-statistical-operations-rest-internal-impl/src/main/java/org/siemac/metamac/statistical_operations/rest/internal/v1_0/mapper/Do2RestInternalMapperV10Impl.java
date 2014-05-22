@@ -13,8 +13,6 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.joda.time.DateTime;
-import org.siemac.metamac.core.common.conf.ConfigurationService;
-import org.siemac.metamac.core.common.constants.shared.ConfigurationConstants;
 import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
@@ -73,7 +71,6 @@ import org.siemac.metamac.statistical_operations.rest.internal.exception.RestSer
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.CommonMetadataRestExternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.invocation.SrmRestInternalFacade;
 import org.siemac.metamac.statistical_operations.rest.internal.v1_0.service.utils.InternalWebApplicationNavigation;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -311,6 +308,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         target.setManagementAppLink(toInstanceManagementApplicationLink(source));
         return target;
     }
+
     @Override
     public Instances toInstances(org.siemac.metamac.statistical.operations.core.domain.Operation operation,
             PagedResult<org.siemac.metamac.statistical.operations.core.domain.Instance> sourcesPagedResult, String query, String orderBy, Integer limit) {
@@ -495,7 +493,8 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         return target;
     }
 
-    private ResourceInternal toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source) {
+    @Override
+    public ResourceInternal toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source) {
         if (source == null) {
             return null;
         }
@@ -715,6 +714,7 @@ public class Do2RestInternalMapperV10Impl implements Do2RestInternalMapperV10 {
         String linkOperations = toOperationsLink();
         return RestUtils.createLink(linkOperations, operationCode);
     }
+
     private String toOperationLink(org.siemac.metamac.statistical.operations.core.domain.Operation operation) {
         return toOperationLink(operation.getCode());
     }

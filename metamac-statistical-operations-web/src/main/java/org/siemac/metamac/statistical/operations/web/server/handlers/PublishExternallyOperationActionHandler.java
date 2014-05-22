@@ -5,6 +5,7 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalService;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationResult;
@@ -26,24 +27,33 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     @Autowired
     private ExternalItemValidator              externalItemValidator;
 
+    @Autowired
+    private NoticesRestInternalService         noticesRestInternalService;
+
     public PublishExternallyOperationActionHandler() {
         super(PublishExternallyOperationAction.class);
     }
 
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
+        ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
+        OperationDto operationPublished = null;
+
         try {
-
-            ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-
             OperationDto operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             checkExternalItemsAreExternallyPublished(serviceContext, operationToPublish);
-
-            OperationDto operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-            return new PublishExternallyOperationResult(operationPublished);
+            operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
+
+        try {
+            noticesRestInternalService.createNotificationForPublishExternallyOperation(serviceContext, operationPublished);
+        } catch (MetamacWebException e) {
+            return new PublishExternallyOperationResult(operationPublished, e);
+        }
+
+        return new PublishExternallyOperationResult(operationPublished, null);
     }
 
     /**
