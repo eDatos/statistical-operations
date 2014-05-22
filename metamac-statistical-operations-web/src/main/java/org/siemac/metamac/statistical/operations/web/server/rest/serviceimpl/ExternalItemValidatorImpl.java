@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,13 +11,12 @@ import org.apache.commons.lang.StringUtils;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
-import org.siemac.metamac.core.common.lang.shared.LocaleConstants;
+import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
-import org.siemac.metamac.statistical.operations.web.shared.constants.WebMessageExceptionsConstants;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
-import org.siemac.metamac.web.common.server.utils.WebTranslateExceptions;
+import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -30,10 +28,7 @@ import org.springframework.stereotype.Service;
 public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     @Autowired
-    private SrmRestInternalFacade  srmRestInternalFacade;
-
-    @Autowired
-    private WebTranslateExceptions webTranslateExceptions;
+    private SrmRestInternalFacade srmRestInternalFacade;
 
     /**
      * Check that an {@link ExternalItemDto} is externally published
@@ -252,17 +247,10 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
     }
 
     private void throwExternalItemNotFoundException(ServiceContext serviceContext, String externalItemName) throws MetamacWebException {
-        throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_FOUND, externalItemName);
+        WebExceptionUtils.throwMetamacWebException(serviceContext, ServiceExceptionType.EXTERNAL_ITEM_NOT_FOUND, externalItemName);
     }
 
     private void throwExternalItemNotExternallyPublishedException(ServiceContext serviceContext, String externalItemName) throws MetamacWebException {
-        throwMetamacWebException(serviceContext, WebMessageExceptionsConstants.RESOURCE_ERROR_EXTERNAL_ITEM_NOT_EXTERNALLY_PUBLISHED, externalItemName);
-    }
-
-    private void throwMetamacWebException(ServiceContext serviceContext, String exceptionCode, String... parameters) throws MetamacWebException {
-        Locale locale = (Locale) serviceContext.getProperty(LocaleConstants.locale);
-        String exceptionMessage = webTranslateExceptions.getTranslatedMessage(exceptionCode, locale, parameters);
-
-        throw new MetamacWebException(exceptionCode, exceptionMessage);
+        WebExceptionUtils.throwMetamacWebException(serviceContext, ServiceExceptionType.EXTERNAL_ITEM_NOT_PUBLISHED, externalItemName);
     }
 }
