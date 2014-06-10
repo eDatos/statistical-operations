@@ -1,55 +1,29 @@
 package org.siemac.metamac.statistical.operations.web.external;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.siemac.metamac.core.common.conf.ConfigurationService;
-import org.siemac.metamac.core.common.util.ApplicationContextProvider;
+import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.listener.ApplicationStartupListener;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
 
-public class ApplicationStartup implements ServletContextListener {
-
-    private static final Log     LOG = LogFactory.getLog(ApplicationStartup.class);
-
-    private ConfigurationService configurationService;
+public class ApplicationStartup extends ApplicationStartupListener {
 
     @Override
-    public void contextInitialized(ServletContextEvent sce) {
-        try {
-            configurationService = ApplicationContextProvider.getApplicationContext().getBean(ConfigurationService.class);
-            checkConfiguration();
-        } catch (Exception e) {
-            // Abort startup application
-            throw new RuntimeException(e);
-        }
+    public String projectName() {
+        return "statistical-operations";
     }
 
-    private void checkConfiguration() {
-        LOG.info("**********************************************************************************");
-        LOG.info("[metamac-statistical-operations-external-web] Checking application configuration");
-        LOG.info("**********************************************************************************");
-
+    @Override
+    public void checkApplicationProperties() throws MetamacException {
         // Datasource
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_DRIVER_NAME);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_URL);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_USERNAME);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_PASSWORD);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_DIALECT);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_DRIVER_NAME);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_URL);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_USERNAME);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_PASSWORD);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.DB_DIALECT);
 
         // Api
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_EXTERNAL_API);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_COMMON_METADATA_EXTERNAL_API);
-        configurationService.checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
-
-        LOG.info("**********************************************************************************");
-        LOG.info("[metamac-statistical-operations-external-web] Application configuration checked");
-        LOG.info("**********************************************************************************");
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_STATISTICAL_OPERATIONS_EXTERNAL_API);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_COMMON_METADATA_EXTERNAL_API);
+        checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
     }
 
 }

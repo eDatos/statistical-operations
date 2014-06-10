@@ -8,12 +8,12 @@ public class StatisticalOperationsConfigurationServiceImpl extends Configuration
 
     @Override
     public String retrieveUserGuideFileName() throws MetamacException {
-        return retrieveProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME, Boolean.TRUE);
+        return retrieveProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME);
     }
 
     @Override
     public String retrieveDocsPath() throws MetamacException {
-        return retrieveProperty(StatisticalOperationsConfigurationConstants.DOCS_PATH, Boolean.TRUE);
+        return retrieveProperty(StatisticalOperationsConfigurationConstants.DOCS_PATH);
     }
 
 }
