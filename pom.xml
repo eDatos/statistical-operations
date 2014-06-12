@@ -23,7 +23,6 @@
     <modules>
         <module>metamac-statistical-operations-parent</module>
         <module>metamac-statistical-operations-core</module>
-        <module>metamac-statistical-operations-rest-internal-impl</module>
         <module>metamac-statistical-operations-rest-external-api</module>
         <module>metamac-statistical-operations-rest-external-impl</module>
         <module>metamac-statistical-operations-external-web</module>
