@@ -172,8 +172,6 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
 
     @Override
     public void showMessage(Throwable throwable, String message, MessageTypeEnum type) {
-        // Hide messages before showing the new ones
-        hideMessages();
         messagePanel.showMessage(throwable, message, type);
     }
 
