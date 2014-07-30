@@ -308,7 +308,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setUiHandlers(uiHandlers);
 
@@ -385,7 +384,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         operationDto.setSubjectArea(contentClassifiersEditionForm.getValueAsExternalItemDto(OperationDS.SUBJECT_AREA));
 
-        List<ExternalItemDto> secondarySubjectAreas = ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
+        List<ExternalItemDto> secondarySubjectAreas = ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
         operationDto.getSecondarySubjectAreas().clear();
         operationDto.getSecondarySubjectAreas().addAll(secondarySubjectAreas);
 
@@ -716,7 +715,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         productionDescriptorsEditionForm = new GroupDynamicForm(getConstants().operationProductionDescriptors());
 
-        final SearchMultipleSrmItemsItem producerItem = createProducersItem(OperationDS.PRODUCER, getConstants().operationProducers());
+        final SearchSrmListItemWithSchemeFilterItem producerItem = createProducersItem();
         producerItem.setValidators(new CustomRequiredValidator() {
 
             @Override
@@ -1102,7 +1101,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PRODUCER, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
             ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1128,7 +1128,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PRODUCER, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.REG_RESPONSIBLE, formItemName)) {
             ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -1167,42 +1168,38 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     private SearchSrmListItemWithSchemeFilterItem createSecondarySubjectAreasItem() {
-        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(OperationDS.SECONDARY_SUBJECT_AREAS, getConstants().operationSubjectAreasSecondary(),
+        final String field = OperationDS.SECONDARY_SUBJECT_AREAS;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().operationSubjectAreasSecondary(),
                 StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
             protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
-                getUiHandlers().retrieveItemSchemes(OperationDS.SECONDARY_SUBJECT_AREAS, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY_SCHEME}, firstResult,
-                        maxResults);
+                getUiHandlers().retrieveItemSchemes(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY_SCHEME}, firstResult, maxResults);
             }
 
             @Override
             protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
-                getUiHandlers().retrieveItems(OperationDS.SECONDARY_SUBJECT_AREAS, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY}, firstResult, maxResults);
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY}, firstResult, maxResults);
             }
         };
         return item;
     }
 
-    private SearchMultipleSrmItemsItem createProducersItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleOrganisationUnitsItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createProducersItem() {
+        final String field = OperationDS.PRODUCER;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().operationProducers(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME}, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> organisationUnits = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(organisationUnits);
-                productionDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT}, firstResult, maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
