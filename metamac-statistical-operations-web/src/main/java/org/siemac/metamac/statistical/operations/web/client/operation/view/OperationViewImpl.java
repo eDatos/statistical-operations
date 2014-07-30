@@ -38,7 +38,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridTool
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCategoriesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsAndDataProvidersItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
@@ -69,6 +68,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchE
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSingleCommonConfigurationItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
@@ -308,8 +308,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).setUiHandlers(uiHandlers);
-
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.PRODUCER)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_RESPONSIBLE)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setUiHandlers(uiHandlers);
@@ -387,7 +385,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         operationDto.setSubjectArea(contentClassifiersEditionForm.getValueAsExternalItemDto(OperationDS.SUBJECT_AREA));
 
-        List<ExternalItemDto> secondarySubjectAreas = ((ExternalItemListItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
+        List<ExternalItemDto> secondarySubjectAreas = ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(OperationDS.SECONDARY_SUBJECT_AREAS)).getExternalItemDtos();
         operationDto.getSecondarySubjectAreas().clear();
         operationDto.getSecondarySubjectAreas().addAll(secondarySubjectAreas);
 
@@ -669,7 +667,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         contentClassifiersEditionForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
         SearchExternalItemLinkItem subjectAreaItem = createSubjectAreaItem(OperationDS.SUBJECT_AREA, getConstants().operationSubjectArea());
         subjectAreaItem.setRequired(true);
-        SearchMultipleSrmItemsItem secondarySubjectAreasItem = createSecondarySubjectAreasItem(OperationDS.SECONDARY_SUBJECT_AREAS, getConstants().operationSubjectAreasSecondary());
+        SearchSrmListItemWithSchemeFilterItem secondarySubjectAreasItem = createSecondarySubjectAreasItem();
         contentClassifiersEditionForm.setFields(subjectAreaItem, secondarySubjectAreasItem);
 
         // CONTENT DESCRIPTORS
@@ -1100,7 +1098,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     .getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PRODUCER, formItemName)) {
             ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1126,7 +1125,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     .getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PRODUCER, formItemName)) {
             ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -1167,25 +1166,21 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return item;
     }
 
-    private SearchMultipleSrmItemsItem createSecondarySubjectAreasItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleCategoriesItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createSecondarySubjectAreasItem() {
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(OperationDS.SECONDARY_SUBJECT_AREAS, getConstants().operationSubjectAreasSecondary(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(OperationDS.SECONDARY_SUBJECT_AREAS, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY_SCHEME}, firstResult,
+                        maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> categories = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) contentClassifiersEditionForm.getItem(name)).setExternalItems(categories);
-                contentClassifiersEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(OperationDS.SECONDARY_SUBJECT_AREAS, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CATEGORY}, firstResult, maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
