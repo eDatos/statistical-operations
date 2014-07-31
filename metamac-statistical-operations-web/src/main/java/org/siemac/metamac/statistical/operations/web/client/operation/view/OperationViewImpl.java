@@ -39,7 +39,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
@@ -307,7 +306,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.UPDATE_FREQUENCY)).setUiHandlers(uiHandlers);
     }
 
@@ -755,7 +753,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
         diffusionEditionForm = new GroupDynamicForm(getConstants().operationDiffusionAndPublication());
 
-        final SearchMultipleSrmItemsItem publishersItem = createPublishersItem(OperationDS.PUBLISHER, getConstants().operationPublisher());
+        final SearchSrmListItemWithSchemeFilterItem publishersItem = createPublishersItem();
         publishersItem.setValidators(new CustomRequiredValidator() {
 
             @Override
@@ -1109,7 +1107,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
-            ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) diffusionEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.UPDATE_FREQUENCY, formItemName)) {
             ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1138,7 +1136,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
-            ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) diffusionEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.UPDATE_FREQUENCY, formItemName)) {
             ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItems(result);
@@ -1241,25 +1239,21 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return item;
     }
 
-    private SearchMultipleSrmItemsItem createPublishersItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleOrganisationUnitsItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createPublishersItem() {
+        final String field = OperationDS.PUBLISHER;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().operationPublisher(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME}, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> organisationUnits = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(name)).setExternalItems(organisationUnits);
-                diffusionEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT}, firstResult, maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 

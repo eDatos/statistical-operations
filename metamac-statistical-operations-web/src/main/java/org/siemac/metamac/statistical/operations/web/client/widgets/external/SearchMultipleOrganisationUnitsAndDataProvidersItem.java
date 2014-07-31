@@ -14,6 +14,7 @@ import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 
 public class SearchMultipleOrganisationUnitsAndDataProvidersItem extends SearchMultipleSrmItemsItem {
 
+    @Deprecated
     public SearchMultipleOrganisationUnitsAndDataProvidersItem(String name, String title, MultipleExternalResourceAction action) {
         super(name, title, RestWebCriteriaUtils.buildItemSchemeWebCriteria(ORGANISATION_UNIT_SCHEME, DATA_PROVIDER_SCHEME), RestWebCriteriaUtils.buildItemWebCriteria(new SrmItemRestCriteria(),
                 new TypeExternalArtefactsEnum[]{ORGANISATION_UNIT, DATA_PROVIDER}), getConstants().searchOrganisations(), getConstants().filterOrganisationScheme(), getConstants()
