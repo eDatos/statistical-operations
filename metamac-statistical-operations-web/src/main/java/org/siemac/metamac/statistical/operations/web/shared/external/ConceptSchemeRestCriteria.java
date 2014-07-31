@@ -2,6 +2,7 @@ package org.siemac.metamac.statistical.operations.web.shared.external;
 
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 
+@Deprecated
 public class ConceptSchemeRestCriteria extends SrmExternalResourceRestCriteria {
 
     private static final long       serialVersionUID = 1L;

@@ -39,7 +39,9 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction.Builder;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
@@ -292,6 +294,36 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             ((ConceptRestCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
         }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
+
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItems(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveConceptSchemes(final String formItemName, SrmExternalResourceRestCriteria itemSchemeRestCriteria, int firstResult, int maxResults, ConceptSchemeTypeEnum[] types) {
+        itemSchemeRestCriteria = RestWebCriteriaUtils.buildItemSchemeWebCriteria(itemSchemeRestCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CONCEPT_SCHEME});
+        GetExternalResourcesAction.Builder builder = new Builder(itemSchemeRestCriteria, firstResult, maxResults);
+        builder.statisticalOperationUrn(operationBaseDto.getUrn());
+        builder.conceptSchemeTypes(types);
+        dispatcher.execute(builder.build(), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
+
+            @Override
+            public void onWaitSuccess(GetExternalResourcesResult result) {
+                getView().setItemSchemes(formItemName, result.getExternalItemsResult());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveConcepts(final String formItemName, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults, ConceptSchemeTypeEnum[] types) {
+        itemWebCriteria = RestWebCriteriaUtils.buildItemWebCriteria(itemWebCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CONCEPT});
+        GetExternalResourcesAction.Builder builder = new Builder(itemWebCriteria, firstResult, maxResults);
+        builder.statisticalOperationUrn(operationBaseDto.getUrn());
+        builder.conceptSchemeTypes(types);
+        dispatcher.execute(builder.build(), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
             @Override
             public void onWaitSuccess(GetExternalResourcesResult result) {

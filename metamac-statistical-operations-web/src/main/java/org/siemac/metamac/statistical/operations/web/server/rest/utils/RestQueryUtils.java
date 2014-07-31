@@ -25,8 +25,6 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationSchemeType;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.OrganisationType;
 import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.ProcStatus;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
@@ -189,7 +187,7 @@ public class RestQueryUtils {
     // CONCEPT SCHEME
     //
 
-    public static String buildConceptSchemeQuery(ConceptSchemeRestCriteria conceptSchemeRestCriteria) {
+    public static String buildConceptSchemeQuery(SrmExternalResourceRestCriteria conceptSchemeRestCriteria, ConceptSchemeTypeEnum[] conceptSchemeTypes, String statisticalOperationUrn) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = conceptSchemeRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -201,12 +199,10 @@ public class RestQueryUtils {
             queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.URN).append(" ").append(ComparisonOperator.ILIKE.name()).append(" \"").append(criteria).append("\"");
             queryBuilder.append(")");
         }
-        if (!ArrayUtils.isEmpty(conceptSchemeRestCriteria.getConceptSchemeTypes())) {
+        if (!ArrayUtils.isEmpty(conceptSchemeTypes)) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
-
-            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptSchemeRestCriteria.getConceptSchemeTypes();
 
             queryBuilder.append("(");
 
@@ -216,7 +212,7 @@ public class RestQueryUtils {
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
 
-                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeRestCriteria.getStatisticalOperationUrn())) {
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(statisticalOperationUrn)) {
 
                     // Concept scheme type is OPERATION and the statistical operation is the specified
 
@@ -225,10 +221,10 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptSchemeRestCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(statisticalOperationUrn).append("\"");
                     queryBuilder.append(")");
 
-                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptSchemeRestCriteria.getStatisticalOperationUrn())) {
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(statisticalOperationUrn)) {
 
                     // Concept scheme type is MEASURE and the statistical operation is the specified
 
@@ -239,7 +235,7 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptSchemeCriteriaPropertyRestriction.STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptSchemeRestCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(statisticalOperationUrn).append("\"");
                     queryBuilder.append(")");
 
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
@@ -303,7 +299,7 @@ public class RestQueryUtils {
     // CONCEPT
     //
 
-    public static String buildConceptQuery(ConceptRestCriteria conceptRestCriteria) {
+    public static String buildConceptQuery(SrmItemRestCriteria conceptRestCriteria, ConceptSchemeTypeEnum[] conceptSchemeTypes, String statisticalOperationUrn) {
         StringBuilder queryBuilder = new StringBuilder();
         String criteria = conceptRestCriteria.getCriteria();
         if (StringUtils.isNotBlank(criteria)) {
@@ -330,12 +326,10 @@ public class RestQueryUtils {
 
         // Filter by concept scheme types
 
-        if (!ArrayUtils.isEmpty(conceptRestCriteria.getConceptSchemeTypes())) {
+        if (!ArrayUtils.isEmpty(conceptSchemeTypes)) {
             if (StringUtils.isNotBlank(queryBuilder.toString())) {
                 queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
             }
-
-            ConceptSchemeTypeEnum[] conceptSchemeTypes = conceptRestCriteria.getConceptSchemeTypes();
 
             queryBuilder.append("(");
 
@@ -345,7 +339,7 @@ public class RestQueryUtils {
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");
                 }
 
-                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptRestCriteria.getStatisticalOperationUrn())) {
+                if (ConceptSchemeTypeEnum.OPERATION.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(statisticalOperationUrn)) {
 
                     // Concept scheme type is OPERATION and the statistical operation is the specified
 
@@ -354,10 +348,10 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptRestCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(statisticalOperationUrn).append("\"");
                     queryBuilder.append(")");
 
-                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(conceptRestCriteria.getStatisticalOperationUrn())) {
+                } else if (ConceptSchemeTypeEnum.MEASURE.equals(conceptSchemeTypes[i]) && StringUtils.isNotBlank(statisticalOperationUrn)) {
 
                     // Concept scheme type is MEASURE and the statistical operation is the specified
 
@@ -368,7 +362,7 @@ public class RestQueryUtils {
                             .append(getConceptSchemeType(conceptSchemeTypes[i])).append("\"");
                     queryBuilder.append(" ").append(LogicalOperator.AND.name()).append(" ");
                     queryBuilder.append(ConceptCriteriaPropertyRestriction.CONCEPT_SCHEME_STATISTICAL_OPERATION_URN).append(" ").append(ComparisonOperator.EQ.name()).append(" \"")
-                            .append(conceptRestCriteria.getStatisticalOperationUrn()).append("\"");
+                            .append(statisticalOperationUrn).append("\"");
                     queryBuilder.append(")");
 
                     queryBuilder.append(" ").append(LogicalOperator.OR.name()).append(" ");

@@ -34,6 +34,10 @@ public class RestWebCriteriaUtils {
         return conceptWebcriteria;
     }
 
+    public static ConceptSchemeTypeEnum[] getConceptSchemeTypesForInstanceStatisticalUnit() {
+        return new ConceptSchemeTypeEnum[]{ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION};
+    }
+
     //
     // INSTACE: STAT CONC DEF
     //

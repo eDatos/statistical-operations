@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
@@ -15,6 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
 import org.siemac.metamac.statistical.operations.web.client.instance.presenter.InstancePresenter;
 import org.siemac.metamac.statistical.operations.web.client.instance.view.handlers.InstanceUiHandlers;
@@ -28,9 +30,9 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMain
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForMeasuresItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForStatConcDefItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsForStatisticalUnitItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleDataProvidersItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleSrmItemSchemesItem;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
+import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
@@ -47,6 +49,9 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -156,15 +161,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STATISTICAL_UNIT)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemSchemesItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.TEMPORAL_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.MEASURES)).setUiHandlers(uiHandlers);
 
-        ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.INFORMATION_SUPPLIERS)).setUiHandlers(uiHandlers);
-        ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(InstanceDS.FREQ_COLL)).setUiHandlers(uiHandlers);
     }
 
     /*
@@ -451,7 +453,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         contentDescriptorsEditionForm = new GroupDynamicForm(getConstants().instanceContentDescriptors());
         MultiLanguageRichTextEditorItem dataDescriptionItem = new MultiLanguageRichTextEditorItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
         MultiLanguageRichTextEditorItem statisticalPopulationItem = new MultiLanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getConstants().instanceStatisticalPopulation());
-        ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem(InstanceDS.STATISTICAL_UNIT, getConstants().instanceStatisticalUnit());
+        ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem();
         ExternalItemListItem geographicGranularities = createGeographicGranularities(InstanceDS.GEOGRAPHIC_GRANULARITIES, getConstants().instanceGeographicGranularity());
         MultiLanguageRichTextEditorItem geographicalComparabilityItem = new MultiLanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
         ExternalItemListItem temporalGranularities = createTemporalGranularities(InstanceDS.TEMPORAL_GRANULARITIES, getConstants().instanceTemporalGranularity());
@@ -498,8 +500,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         MultiLanguageRichTextEditorItem docMethodItem = new MultiLanguageRichTextEditorItem(InstanceDS.DOC_METHOD, getConstants().instanceDocMethod());
         surveySourceItem = new CustomSelectItem(InstanceDS.STATISTICAL_OPERATION_SOURCE, getConstants().instanceStatisticalOperationSource());
         collMethodItem = new CustomSelectItem(InstanceDS.COLL_METHOD, getConstants().instanceCollMethod());
-        SearchMultipleSrmItemsItem informationSuppliersItem = createInformationSuppliersItem(InstanceDS.INFORMATION_SUPPLIERS, getConstants().instanceInformationSuppliers());
-        ExternalItemListItem freqCollItem = createFreqColl(InstanceDS.FREQ_COLL, getConstants().instanceFreqColl());
+        ExternalItemListItem informationSuppliersItem = createInformationSuppliersItem();
+        ExternalItemListItem freqCollItem = createFreqColl();
         MultiLanguageRichTextEditorItem dataValidationItem = new MultiLanguageRichTextEditorItem(InstanceDS.DATA_VALIDATION, getConstants().instanceDataValidation());
         MultiLanguageRichTextEditorItem dataCompilationItem = new MultiLanguageRichTextEditorItem(InstanceDS.DATA_COMPILATION, getConstants().instanceDataCompilation());
         MultiLanguageRichTextEditorItem adjustmentItem = new MultiLanguageRichTextEditorItem(InstanceDS.ADJUSTMENT, getConstants().instanceAdjustment());
@@ -807,10 +809,12 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     @Override
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(InstanceDS.INFORMATION_SUPPLIERS, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STATISTICAL_UNIT, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.CLASS_SYSTEM_LIST, formItemName)) {
             ((SearchMultipleSrmItemSchemesItem) contentDescriptorsEditionForm.getItem(formItemName)).setSourceExternalItems(result);
@@ -822,7 +826,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
         } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STAT_CONC_DEF, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -835,10 +840,11 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     @Override
     public void setItems(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(InstanceDS.INFORMATION_SUPPLIERS, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STATISTICAL_UNIT, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -847,7 +853,8 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STAT_CONC_DEF, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -861,47 +868,40 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
     // EXTERNAL RESOURCES ITEMS
     // ------------------------------------------------------------------------------------------------------------
 
-    private SearchMultipleSrmItemsItem createStatisticalUnitsItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleConceptsForStatisticalUnitItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createStatisticalUnitsItem() {
+        final String field = InstanceDS.STATISTICAL_UNIT;
+        final ConceptSchemeTypeEnum[] conceptTypes = RestWebCriteriaUtils.getConceptSchemeTypesForInstanceStatisticalUnit();
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().instanceStatisticalUnit(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveConceptSchemes(field, webCriteria, firstResult, maxResults, conceptTypes);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> concepts = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(concepts);
-                contentDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveConcepts(field, webCriteria, firstResult, maxResults, conceptTypes);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
-    private SearchMultipleSrmItemsItem createInformationSuppliersItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleDataProvidersItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createInformationSuppliersItem() {
+        final String field = InstanceDS.INFORMATION_SUPPLIERS;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().instanceInformationSuppliers(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.DATA_PROVIDER_SCHEME}, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> dataProviders = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(dataProviders);
-                productionDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.DATA_PROVIDER}, firstResult, maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
@@ -1020,26 +1020,25 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         return item;
     }
 
-    private ExternalItemListItem createFreqColl(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleCodesItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createFreqColl() {
+        final String field = InstanceDS.FREQ_COLL;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().instanceFreqColl(), StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CODELIST}, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> codes = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(codes);
-                productionDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CODE}, firstResult, maxResults);
+            }
+
+            @Override
+            protected ExternalItemDto getDefaultItemSchemeForFilterForm() {
+                return ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularity();
             }
         };
-        item.setSaveClickHandler(clickHandler);
-        item.setDefaultItemSchemeUrn(ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn());
         return item;
     }
 

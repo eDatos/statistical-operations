@@ -14,8 +14,8 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria_NO_INHERITANCE;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria_NO_INHERITANCE;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
@@ -102,7 +102,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     private void checkConceptsAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            ConceptRestCriteria criteria = buildConceptCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
+            ConceptRestCriteria_NO_INHERITANCE criteria = buildConceptCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findConcepts(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
@@ -138,7 +138,7 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
 
     private void checkConceptSchemesAreExternallyPublished(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos) throws MetamacWebException {
         if (externalItemDtos != null && !externalItemDtos.isEmpty()) {
-            ConceptSchemeRestCriteria criteria = buildConceptSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
+            ConceptSchemeRestCriteria_NO_INHERITANCE criteria = buildConceptSchemeCriteriaToCheckExternalPublication(serviceContext, externalItemName, externalItemDtos);
             ExternalItemsResult result = srmRestInternalFacade.findConceptSchemes(serviceContext, criteria, 0, externalItemDtos.size());
             validateExternalItemsResult(serviceContext, externalItemName, result, externalItemDtos);
         }
@@ -168,14 +168,18 @@ public class ExternalItemValidatorImpl implements ExternalItemValidator {
         }
     }
 
-    private ConceptRestCriteria buildConceptCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
+    private ConceptRestCriteria_NO_INHERITANCE buildConceptCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
             throws MetamacWebException {
-        return (ConceptRestCriteria) buildItemCriteriaToCheckExternalPublication(serviceContext, new ConceptRestCriteria(), externalItemName, externalItemDtos);
+        SrmItemRestCriteria srmItemRestCriteria = new SrmItemRestCriteria();
+        srmItemRestCriteria = buildItemCriteriaToCheckExternalPublication(serviceContext, srmItemRestCriteria, externalItemName, externalItemDtos);
+        return new ConceptRestCriteria_NO_INHERITANCE(srmItemRestCriteria);
     }
 
-    private ConceptSchemeRestCriteria buildConceptSchemeCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
+    private ConceptSchemeRestCriteria_NO_INHERITANCE buildConceptSchemeCriteriaToCheckExternalPublication(ServiceContext serviceContext, String externalItemName, List<ExternalItemDto> externalItemDtos)
             throws MetamacWebException {
-        return (ConceptSchemeRestCriteria) buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, new ConceptSchemeRestCriteria(), externalItemName, externalItemDtos);
+        SrmExternalResourceRestCriteria srmExternalResourceRestCriteria = new SrmExternalResourceRestCriteria();
+        srmExternalResourceRestCriteria = buildItemSchemeCriteriaToCheckExternalPublication(serviceContext, srmExternalResourceRestCriteria, externalItemName, externalItemDtos);
+        return new ConceptSchemeRestCriteria_NO_INHERITANCE(srmExternalResourceRestCriteria);
     }
 
     //

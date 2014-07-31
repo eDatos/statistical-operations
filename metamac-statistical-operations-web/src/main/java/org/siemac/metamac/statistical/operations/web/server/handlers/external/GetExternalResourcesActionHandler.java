@@ -2,8 +2,8 @@ package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria_NO_INHERITANCE;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria_NO_INHERITANCE;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
@@ -73,10 +73,14 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findCodes(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT_SCHEME:
-                result = srmRestInternalFacade.findConceptSchemes(serviceContext, (ConceptSchemeRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                ConceptSchemeRestCriteria_NO_INHERITANCE conceptSchemeRestCriteria = new ConceptSchemeRestCriteria_NO_INHERITANCE((SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(),
+                        action.getConceptSchemeTypes(), action.getStatisticalOperationUrn());
+                result = srmRestInternalFacade.findConceptSchemes(serviceContext, conceptSchemeRestCriteria, action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT:
-                result = srmRestInternalFacade.findConcepts(serviceContext, (ConceptRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
+                ConceptRestCriteria_NO_INHERITANCE conceptRestCriteria = new ConceptRestCriteria_NO_INHERITANCE((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getConceptSchemeTypes(),
+                        action.getStatisticalOperationUrn());
+                result = srmRestInternalFacade.findConcepts(serviceContext, conceptRestCriteria, action.getFirstResult(), action.getMaxResults());
                 break;
             default:
                 throw new MetamacWebException(CommonSharedConstants.EXCEPTION_UNKNOWN, "An unknown exception has ocurred. Please contact system administrator.");

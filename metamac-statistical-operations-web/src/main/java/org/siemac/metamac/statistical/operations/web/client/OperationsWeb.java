@@ -1,16 +1,24 @@
 package org.siemac.metamac.statistical.operations.web.client;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
+import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.sso.client.MetamacPrincipal;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConstants;
 import org.siemac.metamac.statistical.operations.web.client.gin.OperationsWebGinjector;
 import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationPropertiesUtils;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.web.common.client.MetamacSecurityEntryPoint;
 import org.siemac.metamac.web.common.client.gin.MetamacWebGinjector;
+import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -75,8 +83,33 @@ public class OperationsWeb extends MetamacSecurityEntryPoint {
     @Override
     protected void setConfigurationProperties(Map<String, String> propertyValues) {
         super.setConfigurationProperties(propertyValues);
-        ConfigurationPropertiesUtils.setDefaultCodelistTemporalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN));
-        ConfigurationPropertiesUtils.setDefaultCodelistGeographicalGranularityUrn(propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN));
+
+        String defaultCodelistTemporalGranularityUrn = propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN);
+        ConfigurationPropertiesUtils.setDefaultCodelistTemporalGranularityUrn(defaultCodelistTemporalGranularityUrn);
+        loadDefaultCodelist(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_TEMPORAL_GRANULARITY_URN, defaultCodelistTemporalGranularityUrn);
+
+        String defaultCodelistGeographicalGranularityUrn = propertyValues.get(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN);
+        ConfigurationPropertiesUtils.setDefaultCodelistGeographicalGranularityUrn(defaultCodelistGeographicalGranularityUrn);
+        loadDefaultCodelist(StatisticalOperationsConfigurationConstants.DEFAULT_CODELIST_GEOGRAPHICAL_GRANULARITY_URN, defaultCodelistGeographicalGranularityUrn);
+    }
+
+    private void loadDefaultCodelist(final String configurationConstant, String urn) {
+        SrmExternalResourceRestCriteria criteria = new SrmExternalResourceRestCriteria(TypeExternalArtefactsEnum.CODELIST);
+        criteria.setUrns(new ArrayList<String>());
+        criteria.getUrns().add(urn);
+        getWebGinjector().getDispatcher().execute(new GetExternalResourcesAction(criteria, 0, 1), new AsyncCallback<GetExternalResourcesResult>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+            }
+            @Override
+            public void onSuccess(GetExternalResourcesResult result) {
+                List<ExternalItemDto> externalItemDtos = result.getExternalItemsResult().getExternalItemDtos();
+                if (!externalItemDtos.isEmpty()) {
+                    ConfigurationPropertiesUtils.setDefaultValue(configurationConstant, externalItemDtos.get(0));
+                }
+            }
+        });
     }
 
     @Override
