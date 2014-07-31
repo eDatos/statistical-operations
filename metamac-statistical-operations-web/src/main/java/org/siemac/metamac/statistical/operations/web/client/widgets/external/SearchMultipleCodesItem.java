@@ -10,6 +10,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.external.Multipl
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 
+@Deprecated
 public class SearchMultipleCodesItem extends SearchMultipleSrmItemsItem {
 
     public SearchMultipleCodesItem(String name, String title, MultipleExternalResourceAction action) {
