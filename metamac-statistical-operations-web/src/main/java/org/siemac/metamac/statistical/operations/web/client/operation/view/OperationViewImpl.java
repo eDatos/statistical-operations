@@ -39,7 +39,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsAndDataProvidersItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleOrganisationUnitsItem;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
@@ -307,8 +306,6 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         super.setUiHandlers(uiHandlers);
 
         // Set uiHandlers in formItems
-
-        ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(OperationDS.REG_CONTRIBUTOR)).setUiHandlers(uiHandlers);
 
         ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.PUBLISHER)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(OperationDS.UPDATE_FREQUENCY)).setUiHandlers(uiHandlers);
@@ -732,7 +729,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
             }
         });
 
-        SearchMultipleSrmItemsItem regionalContributorItem = createRegionaleContributorsItem(OperationDS.REG_CONTRIBUTOR, getConstants().operationRegionalContributors());
+        SearchSrmListItemWithSchemeFilterItem regionalContributorItem = createRegionaleContributorsItem();
 
         ViewTextItem createdDate = new ViewTextItem(OperationDS.CREATED_DATE, getConstants().operationCreatedDate());
         ViewTextItem internalInventoryDate = new ViewTextItem(OperationDS.INTERNAL_INVENTORY_DATE, getConstants().operationInternalInventoryDate());
@@ -1108,7 +1105,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.REG_CONTRIBUTOR, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
             ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -1136,7 +1134,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                     result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.REG_CONTRIBUTOR, formItemName)) {
-            ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.PUBLISHER, formItemName)) {
             ((SearchMultipleSrmItemsItem) diffusionEditionForm.getItem(formItemName)).setItems(result);
@@ -1222,25 +1221,23 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return item;
     }
 
-    private SearchMultipleSrmItemsItem createRegionaleContributorsItem(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleOrganisationUnitsAndDataProvidersItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createRegionaleContributorsItem() {
+        final String field = OperationDS.REG_CONTRIBUTOR;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().operationRegionalContributors(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return new ArrayList<ExternalItemDto>(((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).getExternalItemDtos());
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                getUiHandlers().retrieveItemSchemes(field, webCriteria,
+                        new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME, TypeExternalArtefactsEnum.DATA_PROVIDER_SCHEME}, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> organisations = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) productionDescriptorsEditionForm.getItem(name)).setExternalItems(organisations);
-                productionDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                getUiHandlers().retrieveItems(field, webCriteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.ORGANISATION_UNIT, TypeExternalArtefactsEnum.DATA_PROVIDER}, firstResult,
+                        maxResults);
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 
