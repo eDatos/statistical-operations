@@ -27,7 +27,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationP
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForMeasuresItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForStatConcDefItem;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
@@ -37,7 +36,6 @@ import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.utils.TimeVariableWebUtils;
-import org.siemac.metamac.web.common.client.widgets.InformationWindow;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
@@ -66,8 +64,6 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.FormItemIfFunction;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
-import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
-import com.smartgwt.client.widgets.form.fields.events.FormItemIconClickEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
@@ -162,7 +158,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.TEMPORAL_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.MEASURES)).setUiHandlers(uiHandlers);
     }
@@ -454,7 +449,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem();
         ExternalItemListItem geographicGranularities = createGeographicGranularities();
         MultiLanguageRichTextEditorItem geographicalComparabilityItem = new MultiLanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
-        ExternalItemListItem temporalGranularities = createTemporalGranularities(InstanceDS.TEMPORAL_GRANULARITIES, getConstants().instanceTemporalGranularity());
+        ExternalItemListItem temporalGranularities = createTemporalGranularities();
         MultiLanguageRichTextEditorItem temporalComparabilityItem = new MultiLanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
         TextItem basePeriodItem = new TextItem(InstanceDS.BASE_PERIOD, getConstants().instanceBasePeriod());
         basePeriodItem.setValidators(TimeVariableWebUtils.getTimeCustomValidator());
@@ -547,6 +542,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         mainFormLayout.addEditionCanvas(qualityEditionForm);
         mainFormLayout.addEditionCanvas(annotationsEditionForm);
     }
+
     private void setInstanceViewMode(InstanceDto instanceDto) {
 
         // IDENTIFIERS
@@ -817,9 +813,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         } else if (StringUtils.equals(InstanceDS.CLASS_SYSTEM_LIST, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
-        } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
-
         } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
                     result.getTotalResults());
@@ -845,7 +838,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchMultiExternalItemSimpleItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchMultiExternalItemSimpleItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.FREQ_COLL, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) productionDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
@@ -943,51 +936,23 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         };
     }
 
-    private ExternalItemListItem createTemporalGranularities(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleCodesItem(name, title, new MultipleExternalResourceAction() {
+    private SearchMultiExternalItemSimpleItem createTemporalGranularities() {
+        final String field = InstanceDS.TEMPORAL_GRANULARITIES;
+        return new SearchMultiExternalItemSimpleItem(field, getConstants().instanceTemporalGranularity(), StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            protected void retrieveResources(int firstResult, int maxResults, MetamacWebCriteria webCriteria) {
+                SrmItemRestCriteria criteria = RestWebCriteriaUtils.buildSrmItemRestCriteriaFromMetamacWebCriteria(webCriteria);
+                criteria.setExternalArtifactType(TypeExternalArtefactsEnum.CODE);
+                criteria.setItemSchemeUrn(ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn());
+                getUiHandlers().retrieveItems(field, criteria, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> codes = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(codes);
-                contentDescriptorsEditionForm.markForRedraw();
+            public String getInformationLabelContents() {
+                return getMessages().instanceTemporalGranularityCodesInfoMesage();
             }
         };
-        item.setSaveClickHandler(clickHandler);
-
-        String defaultCodelistUrn = ConfigurationPropertiesUtils.getDefaultCodelistTemporalGranularityUrn();
-
-        // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
-        if (StringUtils.isBlank(defaultCodelistUrn)) {
-            item.getSearchIconClickHandlerRegistration().removeHandler();
-            item.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
-
-                @Override
-                public void onFormItemClick(FormItemIconClickEvent event) {
-                    InformationWindow infoWindow = new InformationWindow(getConstants().instanceGranularityDefaultCodelistTitle(), getConstants().instanceGranularityDefaultCodelistInfoMessage());
-                    infoWindow.show();
-                }
-            });
-        }
-
-        // Set default codelist
-        item.setDefaultItemSchemeUrn(defaultCodelistUrn);
-
-        // Disable the filter by codelist. The codes for the granularity must belongs to the codelist specified in the data directory.
-        item.hideSearchWindowFilters();
-
-        // Show an information label to inform that the codes show belongs to the codelist specified in the data directory.
-        item.showSearchWindowInformationLabel(getMessages().instanceTemporalGranularityCodesInfoMesage());
-
-        return item;
     }
 
     private SearchSrmListItemWithSchemeFilterItem createFreqColl() {
