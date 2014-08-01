@@ -30,7 +30,6 @@ import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMain
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleCodesItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForMeasuresItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForStatConcDefItem;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleSrmItemSchemesItem;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
@@ -161,7 +160,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemSchemesItem) contentDescriptorsEditionForm.getItem(InstanceDS.CLASS_SYSTEM_LIST)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.TEMPORAL_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
@@ -467,7 +465,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         ExternalItemListItem statConcDefItem = createStatConcDef(InstanceDS.STAT_CONC_DEF, getConstants().instanceStatisticalConceptsDefinitions());
 
-        ExternalItemListItem classSystemItem = createClassSystemItem(InstanceDS.CLASS_SYSTEM_LIST, getConstants().instanceClassSystemList());
+        ExternalItemListItem classSystemItem = createClassSystemItem();
 
         MultiLanguageRichTextEditorItem classSystemDescriptionItem = new MultiLanguageRichTextEditorItem(InstanceDS.CLASS_SYSTEM_DESCRIPTION, getConstants().instanceClassSystem());
 
@@ -817,7 +815,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                     result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.CLASS_SYSTEM_LIST, formItemName)) {
-            ((SearchMultipleSrmItemSchemesItem) contentDescriptorsEditionForm.getItem(formItemName)).setSourceExternalItems(result);
+            ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -905,25 +903,27 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         return item;
     }
 
-    private ExternalItemListItem createClassSystemItem(final String name, String title) {
-        final SearchMultipleSrmItemSchemesItem item = new SearchMultipleSrmItemSchemesItem(name, title, new MultipleExternalResourceAction() {
+    private SearchSrmListItemWithSchemeFilterItem createClassSystemItem() {
+        final String field = InstanceDS.CLASS_SYSTEM_LIST;
+        final SearchSrmListItemWithSchemeFilterItem item = new SearchSrmListItemWithSchemeFilterItem(field, getConstants().instanceClassSystemList(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            protected void retrieveItemSchemes(int firstResult, int maxResults, SrmExternalResourceRestCriteria webCriteria) {
+                // Do nothing (there is no filter for item schemes)
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> codelists = item.getSelectedItemSchemes();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemSchemesItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(codelists);
-                contentDescriptorsEditionForm.markForRedraw();
+            protected void retrieveItems(int firstResult, int maxResults, SrmItemRestCriteria webCriteria) {
+                SrmExternalResourceRestCriteria criteria = RestWebCriteriaUtils.buildSrmExternalResourceRestCriteriaFromSrmItemRestCriteria(webCriteria);
+                getUiHandlers().retrieveItemSchemes(field, criteria, new TypeExternalArtefactsEnum[]{TypeExternalArtefactsEnum.CODELIST}, firstResult, maxResults);
+            }
+
+            @Override
+            protected boolean isItemSchemeFilterFacetVisible() {
+                return false;
             }
         };
-        item.setSaveClickHandler(clickHandler);
         return item;
     }
 

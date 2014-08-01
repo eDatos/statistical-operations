@@ -20,20 +20,6 @@ public class RestWebCriteriaUtils {
     // INSTACE: STATISTICAL UNIT
     //
 
-    public static ConceptSchemeRestCriteria buildStatisticalUnitConceptSchemeWebCriteria() {
-        ConceptSchemeRestCriteria conceptSchemeWebCriteria = new ConceptSchemeRestCriteria();
-        conceptSchemeWebCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
-        conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
-        return conceptSchemeWebCriteria;
-    }
-
-    public static ConceptRestCriteria buildStatisticalUnitConceptWebCriteria() {
-        ConceptRestCriteria conceptWebcriteria = new ConceptRestCriteria();
-        conceptWebcriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
-        conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION);
-        return conceptWebcriteria;
-    }
-
     public static ConceptSchemeTypeEnum[] getConceptSchemeTypesForInstanceStatisticalUnit() {
         return new ConceptSchemeTypeEnum[]{ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.GLOSSARY, ConceptSchemeTypeEnum.OPERATION};
     }
@@ -143,5 +129,15 @@ public class RestWebCriteriaUtils {
             }
         }
         return true;
+    }
+    
+    public static SrmExternalResourceRestCriteria buildSrmExternalResourceRestCriteriaFromSrmItemRestCriteria(SrmItemRestCriteria srmItemRestCriteria) {
+        SrmExternalResourceRestCriteria criteria = new SrmExternalResourceRestCriteria();
+        if (srmItemRestCriteria != null) {
+            criteria.setCriteria(srmItemRestCriteria.getCriteria());
+            criteria.setOnlyLastVersion(srmItemRestCriteria.isItemSchemeLastVersion());
+            criteria.setExternalArtifactType(srmItemRestCriteria.getExternalArtifactType());
+        }
+        return criteria;
     }
 }
