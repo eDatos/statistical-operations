@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.siemac.metamac.core.common.constants.shared.UrnConstants;
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.core.common.util.shared.UrnUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
@@ -20,6 +21,7 @@ import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuBut
 import org.siemac.metamac.statistical.operations.web.client.family.view.handlers.FamilyUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.model.OperationRecord;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsResult;
@@ -35,6 +37,7 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperatio
 import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsResult;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -94,7 +97,7 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
 
         // Operations
         HasRecordClickHandlers getSelectedOperation();
-        void setOperations(List<OperationBaseDto> operations, int firstResult, int totalResults);
+        void setOperations(List<ExternalItemDto> operations, int firstResult, int totalResults);
     }
 
     @Inject
@@ -254,13 +257,15 @@ public class FamilyPresenter extends Presenter<FamilyPresenter.FamilyView, Famil
     }
 
     @Override
-    public void retrievePaginatedOperations(int firstResult, int maxResults, String operationCode) {
-        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, operationCode), new WaitingAsyncCallbackHandlingError<GetOperationPaginatedListResult>(this) {
+    public void retrieveOperations(int firstResult, int maxResults, MetamacWebCriteria metamacWebCriteria) {
+        dispatcher.execute(new GetOperationPaginatedListAction(firstResult, maxResults, metamacWebCriteria.getCriteria()),
+                new WaitingAsyncCallbackHandlingError<GetOperationPaginatedListResult>(this) {
 
-            @Override
-            public void onWaitSuccess(GetOperationPaginatedListResult result) {
-                getView().setOperations(result.getOperationBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
-            }
-        });
+                    @Override
+                    public void onWaitSuccess(GetOperationPaginatedListResult result) {
+                        List<ExternalItemDto> operations = CommonUtils.createOperations(result.getOperationBaseDtos());
+                        getView().setOperations(operations, result.getFirstResultOut(), result.getTotalResults());
+                    }
+                });
     }
 }

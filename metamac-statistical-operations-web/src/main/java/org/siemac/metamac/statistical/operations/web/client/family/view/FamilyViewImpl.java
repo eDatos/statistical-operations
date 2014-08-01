@@ -2,8 +2,10 @@ package org.siemac.metamac.statistical.operations.web.client.family.view;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
@@ -14,21 +16,24 @@ import org.siemac.metamac.statistical.operations.web.client.family.view.handlers
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.AddOperationsToFamilyWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.FamilyMainFormLayout;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.FormItemUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
+import org.siemac.metamac.web.common.client.widgets.actions.search.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
+import org.siemac.metamac.web.common.client.widgets.windows.search.SearchMultipleExternalItemPaginatedWindow;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -49,34 +54,31 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> implements FamilyPresenter.FamilyView {
 
-    public static final int             OPERATION_LIST_MAX_RESULTS = 6;
+    public static final int                           OPERATION_LIST_MAX_RESULTS = 6;
 
-    private FamilyUiHandlers            uiHandlers;
+    private VLayout                                   panel;
 
-    private VLayout                     panel;
-
-    private FamilyMainFormLayout        mainFormLayout;
+    private FamilyMainFormLayout                      mainFormLayout;
 
     // View forms
-    private GroupDynamicForm            identifiersForm;
-    private GroupDynamicForm            contentDescriptorsForm;
-    private GroupDynamicForm            productionDescriptorsForm;
-    private GroupDynamicForm            diffusionDescriptorsForm;
+    private GroupDynamicForm                          identifiersForm;
+    private GroupDynamicForm                          contentDescriptorsForm;
+    private GroupDynamicForm                          productionDescriptorsForm;
+    private GroupDynamicForm                          diffusionDescriptorsForm;
 
     // EditionForms
-    private GroupDynamicForm            identifiersEditionForm;
-    private GroupDynamicForm            contentDescriptorsEditionForm;
-    private GroupDynamicForm            productionDescriptorsEditionForm;
-    private GroupDynamicForm            diffusionDescriptorsEditionForm;
+    private GroupDynamicForm                          identifiersEditionForm;
+    private GroupDynamicForm                          contentDescriptorsEditionForm;
+    private GroupDynamicForm                          productionDescriptorsEditionForm;
+    private GroupDynamicForm                          diffusionDescriptorsEditionForm;
 
-    private ToolStrip                   operationToolStrip;
-    private ToolStripButton             editToolStripButton;
-    private BaseCustomListGrid          operationListGrid;
+    private ToolStrip                                 operationToolStrip;
+    private ToolStripButton                           editToolStripButton;
+    private BaseCustomListGrid                        operationListGrid;
 
-    private List<OperationBaseDto>      operationBaseDtos;
+    private List<OperationBaseDto>                    operationBaseDtos;
 
-    // Add operations to family modal
-    private AddOperationsToFamilyWindow addOperationsToFamilyWindow;
+    private SearchMultipleExternalItemPaginatedWindow windowToAddOperationsToFamily;
 
     public FamilyViewImpl() {
         super();
@@ -104,13 +106,32 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
             @Override
             public void onClick(ClickEvent event) {
-                // Load family operations
-                uiHandlers.retrievePaginatedOperations(0, OPERATION_LIST_MAX_RESULTS, null);
+                windowToAddOperationsToFamily = new SearchMultipleExternalItemPaginatedWindow(OperationsWeb.getConstants().actionAddOperationsToFamily(), FamilyViewImpl.OPERATION_LIST_MAX_RESULTS,
+                        new SearchPaginatedAction<MetamacWebCriteria>() {
 
-                addOperationsToFamilyWindow = new AddOperationsToFamilyWindow(uiHandlers);
-                addOperationsToFamilyWindow.setSelectedOperations(operationBaseDtos);
+                            @Override
+                            public void retrieveResultSet(int firstResult, int maxResults, MetamacWebCriteria webCriteria) {
+                                getUiHandlers().retrieveOperations(firstResult, maxResults, webCriteria);
+
+                            }
+                        });
+                windowToAddOperationsToFamily.retrieveItems();
+                windowToAddOperationsToFamily.setSelectedResources(CommonUtils.createOperations(operationBaseDtos));
+                windowToAddOperationsToFamily.setSaveAction(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+                    @Override
+                    public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+
+                        List<Long> operationsToAdd = new ArrayList<Long>();
+                        List<Long> operationsToRemove = new ArrayList<Long>();
+                        CommonUtils.calculateOperationsToUpdateInFamily(operationBaseDtos, windowToAddOperationsToFamily.getSelectedResources(), operationsToAdd, operationsToRemove);
+                        getUiHandlers().updateFamilyOperations(operationsToAdd, operationsToRemove);
+                        windowToAddOperationsToFamily.markForDestroy();
+                    }
+                });
             }
         });
+
         editToolStripButton.setVisibility(ClientSecurityUtils.canAddOperationToFamily() ? Visibility.VISIBLE : Visibility.HIDDEN);
         operationToolStrip.addButton(editToolStripButton);
 
@@ -171,8 +192,11 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     }
 
     @Override
-    public void setOperations(List<OperationBaseDto> operations, int firstResult, int totalResults) {
-        addOperationsToFamilyWindow.setOperations(operations, firstResult, totalResults);
+    public void setOperations(List<ExternalItemDto> operations, int firstResult, int totalResults) {
+        if (windowToAddOperationsToFamily != null) {
+            windowToAddOperationsToFamily.setResources(operations);
+            windowToAddOperationsToFamily.refreshSourcePaginationInfo(firstResult, operations.size(), totalResults);
+        }
     }
 
     private void setFamilyViewMode(FamilyDto familyDto) {
@@ -404,10 +428,5 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
     private boolean canFamilyCodeBeEdited(DynamicForm form) {
         // Family code can be edited only when ProcStatus is DRAFT
         return (form.getValue(FamilyDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(form.getValue(FamilyDS.PROC_STATUS_VIEW)));
-    }
-
-    @Override
-    public void setUiHandlers(FamilyUiHandlers uiHandlers) {
-        this.uiHandlers = uiHandlers;
     }
 }

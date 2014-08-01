@@ -2,10 +2,15 @@ package org.siemac.metamac.statistical.operations.web.client.utils;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
@@ -52,5 +57,73 @@ public class CommonUtils {
             return true;
         }
         return false;
+    }
+
+    public static ExternalItemDto create(OperationBaseDto operationBaseDto) {
+        ExternalItemDto externalItemDto = new ExternalItemDto();
+        externalItemDto.setId(operationBaseDto.getId());
+        externalItemDto.setCode(operationBaseDto.getCode());
+        externalItemDto.setTitle(operationBaseDto.getTitle());
+        externalItemDto.setUrn(operationBaseDto.getUrn());
+        return externalItemDto;
+    }
+
+    public static List<ExternalItemDto> createOperations(List<OperationBaseDto> operations) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>();
+        for (OperationBaseDto operation : operations) {
+            externalItemDtos.add(create(operation));
+        }
+        return externalItemDtos;
+    }
+
+    public static ExternalItemDto create(FamilyBaseDto familyBaseDto) {
+        ExternalItemDto externalItemDto = new ExternalItemDto();
+        externalItemDto.setId(familyBaseDto.getId());
+        externalItemDto.setCode(familyBaseDto.getCode());
+        externalItemDto.setTitle(familyBaseDto.getTitle());
+        externalItemDto.setUrn(familyBaseDto.getUrn());
+        return externalItemDto;
+    }
+
+    public static List<ExternalItemDto> createFamilies(List<FamilyBaseDto> families) {
+        List<ExternalItemDto> externalItemDtos = new ArrayList<ExternalItemDto>(families.size());
+        for (FamilyBaseDto family : families) {
+            externalItemDtos.add(create(family));
+        }
+        return externalItemDtos;
+    }
+
+    public static void calculateOperationsToUpdateInFamily(List<OperationBaseDto> initialSelectedOperations, List<ExternalItemDto> selectedOperations, List<Long> operationsToAdd,
+            List<Long> operationsToRemove) {
+
+        List<Long> initialOperationsIds = getOperationIds(initialSelectedOperations);
+        List<Long> selectedOperationIds = getExternalItemIds(selectedOperations);
+
+        for (Long id : selectedOperationIds) {
+            if (!initialOperationsIds.contains(id)) {
+                operationsToAdd.add(id);
+            }
+        }
+        for (Long id : initialOperationsIds) {
+            if (!selectedOperationIds.contains(id)) {
+                operationsToRemove.add(id);
+            }
+        }
+    }
+
+    public static List<Long> getOperationIds(List<OperationBaseDto> operationBaseDtos) {
+        List<Long> ids = new ArrayList<Long>(operationBaseDtos.size());
+        for (OperationBaseDto operationBaseDto : operationBaseDtos) {
+            ids.add(operationBaseDto.getId());
+        }
+        return ids;
+    }
+
+    public static List<Long> getExternalItemIds(List<ExternalItemDto> externalItemDtos) {
+        List<Long> ids = new ArrayList<Long>(externalItemDtos.size());
+        for (ExternalItemDto externalItemDto : externalItemDtos) {
+            ids.add(externalItemDto.getId());
+        }
+        return ids;
     }
 }
