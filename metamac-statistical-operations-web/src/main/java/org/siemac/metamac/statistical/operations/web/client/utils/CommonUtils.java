@@ -95,18 +95,27 @@ public class CommonUtils {
 
     public static void calculateOperationsToUpdateInFamily(List<OperationBaseDto> initialSelectedOperations, List<ExternalItemDto> selectedOperations, List<Long> operationsToAdd,
             List<Long> operationsToRemove) {
-
         List<Long> initialOperationsIds = getOperationIds(initialSelectedOperations);
         List<Long> selectedOperationIds = getExternalItemIds(selectedOperations);
+        calculateResourcesToUpdate(initialOperationsIds, selectedOperationIds, operationsToAdd, operationsToRemove);
+    }
 
+    public static void calculateFamiliesToUpdateInOperation(List<FamilyBaseDto> initialSelectedFamilies, List<ExternalItemDto> selectedOperations, List<Long> operationsToAdd,
+            List<Long> operationsToRemove) {
+        List<Long> initialFamiliesIds = getFamilyIds(initialSelectedFamilies);
+        List<Long> selectedFamilyIds = getExternalItemIds(selectedOperations);
+        calculateResourcesToUpdate(initialFamiliesIds, selectedFamilyIds, operationsToAdd, operationsToRemove);
+    }
+
+    private static void calculateResourcesToUpdate(List<Long> initialResourcesIds, List<Long> selectedOperationIds, List<Long> resourcesToAdd, List<Long> resourcesToRemove) {
         for (Long id : selectedOperationIds) {
-            if (!initialOperationsIds.contains(id)) {
-                operationsToAdd.add(id);
+            if (!initialResourcesIds.contains(id)) {
+                resourcesToAdd.add(id);
             }
         }
-        for (Long id : initialOperationsIds) {
+        for (Long id : initialResourcesIds) {
             if (!selectedOperationIds.contains(id)) {
-                operationsToRemove.add(id);
+                resourcesToRemove.add(id);
             }
         }
     }
@@ -115,6 +124,14 @@ public class CommonUtils {
         List<Long> ids = new ArrayList<Long>(operationBaseDtos.size());
         for (OperationBaseDto operationBaseDto : operationBaseDtos) {
             ids.add(operationBaseDto.getId());
+        }
+        return ids;
+    }
+
+    public static List<Long> getFamilyIds(List<FamilyBaseDto> familyBaseDtos) {
+        List<Long> ids = new ArrayList<Long>(familyBaseDtos.size());
+        for (FamilyBaseDto familyBaseDto : familyBaseDtos) {
+            ids.add(familyBaseDto.getId());
         }
         return ids;
     }

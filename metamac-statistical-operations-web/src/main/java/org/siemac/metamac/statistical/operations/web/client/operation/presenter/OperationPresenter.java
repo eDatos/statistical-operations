@@ -31,6 +31,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.FamilyRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
@@ -64,6 +65,7 @@ import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCrit
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -169,7 +171,7 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         // Families
         HasRecordClickHandlers getSelectedFamily();
 
-        void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults);
+        void setFamilies(List<ExternalItemDto> families, int firstResult, int totalResults);
     }
 
     @Inject
@@ -455,12 +457,13 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
     }
 
     @Override
-    public void retrievePaginatedFamilies(int firstResult, int maxResults, String family) {
-        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, family), new WaitingAsyncCallbackHandlingError<GetFamilyPaginatedListResult>(this) {
+    public void retrieveFamilies(int firstResult, int maxResults, MetamacWebCriteria metamacWebCriteria) {
+        dispatcher.execute(new GetFamilyPaginatedListAction(firstResult, maxResults, metamacWebCriteria.getCriteria()), new WaitingAsyncCallbackHandlingError<GetFamilyPaginatedListResult>(this) {
 
             @Override
             public void onWaitSuccess(GetFamilyPaginatedListResult result) {
-                getView().setFamilies(result.getFamilyBaseDtos(), result.getFirstResultOut(), result.getTotalResults());
+                List<ExternalItemDto> families = CommonUtils.createFamilies(result.getFamilyBaseDtos());
+                getView().setFamilies(families, result.getFirstResultOut(), result.getTotalResults());
             }
         });
     }

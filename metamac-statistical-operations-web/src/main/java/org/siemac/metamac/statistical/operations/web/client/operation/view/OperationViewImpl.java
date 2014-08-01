@@ -16,8 +16,10 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
+import org.siemac.metamac.statistical.operations.web.client.family.view.FamilyViewImpl;
 import org.siemac.metamac.statistical.operations.web.client.model.InstanceRecord;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
@@ -31,7 +33,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUt
 import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.AddFamiliesToOperationWindow;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
@@ -47,6 +48,7 @@ import org.siemac.metamac.web.common.client.widgets.BaseCustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGrid;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
+import org.siemac.metamac.web.common.client.widgets.actions.search.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
@@ -64,7 +66,9 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchS
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
+import org.siemac.metamac.web.common.client.widgets.windows.search.SearchMultipleExternalItemPaginatedWindow;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -92,74 +96,73 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
-    public static final int              FAMILY_LIST_MAX_RESULTS = 17;
+    public static final int                           FAMILY_LIST_MAX_RESULTS = 17;
 
-    private VLayout                      panel;
+    private VLayout                                   panel;
 
-    private OperationMainFormLayout      mainFormLayout;
+    private OperationMainFormLayout                   mainFormLayout;
 
-    private OperationDto                 operationDto;
+    private OperationDto                              operationDto;
 
     // IDENTIFIERS
-    private GroupDynamicForm             identifiersForm;
-    private GroupDynamicForm             identifiersEditionForm;
+    private GroupDynamicForm                          identifiersForm;
+    private GroupDynamicForm                          identifiersEditionForm;
 
     // CONTENT CLASSIFIERS
-    private GroupDynamicForm             contentClassifiersForm;
-    private GroupDynamicForm             contentClassifiersEditionForm;
+    private GroupDynamicForm                          contentClassifiersForm;
+    private GroupDynamicForm                          contentClassifiersEditionForm;
 
     // CONTENT DESCRIPTORS
-    private GroupDynamicForm             contentViewForm;
-    private GroupDynamicForm             contentEditionForm;
+    private GroupDynamicForm                          contentViewForm;
+    private GroupDynamicForm                          contentEditionForm;
 
     // CLASS DESCRIPTORS
-    private GroupDynamicForm             classForm;
-    private GroupDynamicForm             classDescriptorsEditionForm;
-    private CustomSelectItem             surveyType;
-    private CustomSelectItem             officialityType;
-    private CustomCheckboxItem           indSystem;
+    private GroupDynamicForm                          classForm;
+    private GroupDynamicForm                          classDescriptorsEditionForm;
+    private CustomSelectItem                          surveyType;
+    private CustomSelectItem                          officialityType;
+    private CustomCheckboxItem                        indSystem;
 
     // PRODUCTION DESCRIPTORS
-    private GroupDynamicForm             productionDescriptorsForm;
-    private GroupDynamicForm             productionDescriptorsEditionForm;
-    private CustomCheckboxItem           currentlyActiveItem;
-    private CustomSelectItem             statusItem;
+    private GroupDynamicForm                          productionDescriptorsForm;
+    private GroupDynamicForm                          productionDescriptorsEditionForm;
+    private CustomCheckboxItem                        currentlyActiveItem;
+    private CustomSelectItem                          statusItem;
 
     // DIFUSSION AND PUBLICATION
-    private GroupDynamicForm             diffusionForm;
-    private GroupDynamicForm             diffusionEditionForm;
-    private CustomCheckboxItem           releaseCalendar;
-    private CustomTextItem               releaseCalendarAccess;
+    private GroupDynamicForm                          diffusionForm;
+    private GroupDynamicForm                          diffusionEditionForm;
+    private CustomCheckboxItem                        releaseCalendar;
+    private CustomTextItem                            releaseCalendarAccess;
 
     // LEGAL ACTS
-    private GroupDynamicForm             legalActsForm;
-    private GroupDynamicForm             legalActsEditionForm;
+    private GroupDynamicForm                          legalActsForm;
+    private GroupDynamicForm                          legalActsEditionForm;
 
     // ANNOTATIONS
-    private GroupDynamicForm             annotationsViewForm;
-    private GroupDynamicForm             annotationsEditionForm;
+    private GroupDynamicForm                          annotationsViewForm;
+    private GroupDynamicForm                          annotationsEditionForm;
 
     // INSTANCES
 
-    private ListGridToolStrip            instanceListGridToolStrip;
-    private CustomListGrid               instanceListGrid;
-    private InstancesOrderFormLayout     instancesOrderFormLayout;
+    private ListGridToolStrip                         instanceListGridToolStrip;
+    private CustomListGrid                            instanceListGrid;
+    private InstancesOrderFormLayout                  instancesOrderFormLayout;
     // Instance modal window
-    private ModalWindow                  newInstanceWindow;
-    private NewInstanceForm              newInstanceForm;
+    private ModalWindow                               newInstanceWindow;
+    private NewInstanceForm                           newInstanceForm;
 
     // FAMILIES
 
-    private ToolStrip                    familiesToolStrip;
-    private ToolStripButton              editFamiliesToolStripButton;
-    private BaseCustomListGrid           familyListGrid;
-    // Families modal window
-    private AddFamiliesToOperationWindow addFamiliesToOperationWindow;
+    private ToolStrip                                 familiesToolStrip;
+    private ToolStripButton                           editFamiliesToolStripButton;
+    private BaseCustomListGrid                        familyListGrid;
+    private SearchMultipleExternalItemPaginatedWindow windowToAddFamiliesToOperation;
 
-    private List<FamilyBaseDto>          familyBaseDtos;
+    private List<FamilyBaseDto>                       familyBaseDtos;
 
-    private List<SurveyTypeDto>          surveyTypeDtos;
-    private List<OfficialityTypeDto>     officialityTypeDtos;
+    private List<SurveyTypeDto>                       surveyTypeDtos;
+    private List<OfficialityTypeDto>                  officialityTypeDtos;
 
     public OperationViewImpl() {
         super();
@@ -259,13 +262,34 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
             @Override
             public void onClick(ClickEvent event) {
-                // Load operation families
-                getUiHandlers().retrievePaginatedFamilies(0, FAMILY_LIST_MAX_RESULTS, null);
 
-                addFamiliesToOperationWindow = new AddFamiliesToOperationWindow(getUiHandlers());
-                addFamiliesToOperationWindow.setSelectedFamilies(familyBaseDtos);
+                windowToAddFamiliesToOperation = new SearchMultipleExternalItemPaginatedWindow(OperationsWeb.getConstants().actionAddOperationsToFamily(), FamilyViewImpl.OPERATION_LIST_MAX_RESULTS,
+                        new SearchPaginatedAction<MetamacWebCriteria>() {
+
+                            @Override
+                            public void retrieveResultSet(int firstResult, int maxResults, MetamacWebCriteria webCriteria) {
+                                getUiHandlers().retrieveFamilies(firstResult, maxResults, webCriteria);
+
+                            }
+                        });
+                windowToAddFamiliesToOperation.retrieveItems();
+                windowToAddFamiliesToOperation.setSelectedResources(CommonUtils.createFamilies(familyBaseDtos));
+                windowToAddFamiliesToOperation.setSaveAction(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+
+                    @Override
+                    public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+
+                        List<Long> familiesToAdd = new ArrayList<Long>();
+                        List<Long> familiesToRemove = new ArrayList<Long>();
+                        CommonUtils.calculateFamiliesToUpdateInOperation(familyBaseDtos, windowToAddFamiliesToOperation.getSelectedResources(), familiesToAdd, familiesToRemove);
+                        getUiHandlers().updateOperationFamilies(familiesToAdd, familiesToRemove);
+                        windowToAddFamiliesToOperation.markForDestroy();
+                    }
+                });
+
             }
         });
+
         familiesToolStrip.addButton(editFamiliesToolStripButton);
 
         TitleLabel familiesTitleLabel = new TitleLabel(getConstants().families());
@@ -1068,8 +1092,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     }
 
     @Override
-    public void setFamilies(List<FamilyBaseDto> familyBaseDtos, int firstResult, int totalResults) {
-        addFamiliesToOperationWindow.setFamilies(familyBaseDtos, firstResult, totalResults);
+    public void setFamilies(List<ExternalItemDto> families, int firstResult, int totalResults) {
+        if (windowToAddFamiliesToOperation != null) {
+            windowToAddFamiliesToOperation.setResources(families);
+            windowToAddFamiliesToOperation.refreshSourcePaginationInfo(firstResult, families.size(), totalResults);
+        }
     }
 
     // ------------------------------------------------------------------------------------------------------------
