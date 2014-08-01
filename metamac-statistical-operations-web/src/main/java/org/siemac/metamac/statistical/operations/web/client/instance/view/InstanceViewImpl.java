@@ -47,8 +47,10 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguag
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultiExternalItemSimpleItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
@@ -160,11 +162,9 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.GEOGRAPHIC_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.TEMPORAL_GRANULARITIES)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
         ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.MEASURES)).setUiHandlers(uiHandlers);
-
     }
 
     /*
@@ -452,7 +452,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         MultiLanguageRichTextEditorItem dataDescriptionItem = new MultiLanguageRichTextEditorItem(InstanceDS.DATA_DESCRIPTION, getConstants().instanceDataDescription());
         MultiLanguageRichTextEditorItem statisticalPopulationItem = new MultiLanguageRichTextEditorItem(InstanceDS.STATISTICAL_POPULATION, getConstants().instanceStatisticalPopulation());
         ExternalItemListItem statisticalUnitItem = createStatisticalUnitsItem();
-        ExternalItemListItem geographicGranularities = createGeographicGranularities(InstanceDS.GEOGRAPHIC_GRANULARITIES, getConstants().instanceGeographicGranularity());
+        ExternalItemListItem geographicGranularities = createGeographicGranularities();
         MultiLanguageRichTextEditorItem geographicalComparabilityItem = new MultiLanguageRichTextEditorItem(InstanceDS.GEOGRAPHIC_COMPARABILITY, getConstants().instanceGeographicComparability());
         ExternalItemListItem temporalGranularities = createTemporalGranularities(InstanceDS.TEMPORAL_GRANULARITIES, getConstants().instanceTemporalGranularity());
         MultiLanguageRichTextEditorItem temporalComparabilityItem = new MultiLanguageRichTextEditorItem(InstanceDS.TEMPORAL_COMPARABILITY, getConstants().instanceTemporalComparability());
@@ -817,9 +817,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         } else if (StringUtils.equals(InstanceDS.CLASS_SYSTEM_LIST, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
-        } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
-
         } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
@@ -845,7 +842,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             ((SearchSrmListItemWithSchemeFilterItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.GEOGRAPHIC_GRANULARITIES, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchMultiExternalItemSimpleItem) contentDescriptorsEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.TEMPORAL_GRANULARITIES, formItemName)) {
             ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -927,50 +924,23 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         return item;
     }
 
-    private ExternalItemListItem createGeographicGranularities(final String name, String title) {
-        final SearchMultipleSrmItemsItem item = new SearchMultipleCodesItem(name, title, new MultipleExternalResourceAction() {
+    private SearchMultiExternalItemSimpleItem createGeographicGranularities() {
+        final String field = InstanceDS.GEOGRAPHIC_GRANULARITIES;
+        return new SearchMultiExternalItemSimpleItem(field, getConstants().instanceGeographicGranularity(), StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
 
             @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
+            protected void retrieveResources(int firstResult, int maxResults, MetamacWebCriteria webCriteria) {
+                SrmItemRestCriteria criteria = RestWebCriteriaUtils.buildSrmItemRestCriteriaFromMetamacWebCriteria(webCriteria);
+                criteria.setExternalArtifactType(TypeExternalArtefactsEnum.CODE);
+                criteria.setItemSchemeUrn(ConfigurationPropertiesUtils.getDefaultCodelistGeographicalGranularityUrn());
+                getUiHandlers().retrieveItems(field, criteria, firstResult, maxResults);
             }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
 
             @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> codes = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(codes);
-                contentDescriptorsEditionForm.markForRedraw();
+            public String getInformationLabelContents() {
+                return getMessages().instanceGeographicGranularityCodesInfoMesage();
             }
         };
-        item.setSaveClickHandler(clickHandler);
-
-        String defaultCodelistUrn = ConfigurationPropertiesUtils.getDefaultCodelistGeographicalGranularityUrn();
-
-        // If the default codelist has not been specified (in the data directory), do not show the window to select the codes
-        if (StringUtils.isBlank(defaultCodelistUrn)) {
-            item.getSearchIconClickHandlerRegistration().removeHandler();
-            item.getSearchIcon().addFormItemClickHandler(new FormItemClickHandler() {
-
-                @Override
-                public void onFormItemClick(FormItemIconClickEvent event) {
-                    InformationWindow infoWindow = new InformationWindow(getConstants().instanceGranularityDefaultCodelistTitle(), getConstants().instanceGranularityDefaultCodelistInfoMessage());
-                    infoWindow.show();
-                }
-            });
-        }
-
-        item.setDefaultItemSchemeUrn(defaultCodelistUrn);
-
-        // Disable the filter by codelist. The codes for the granularity must belongs to the codelist specified in the data directory.
-        item.hideSearchWindowFilters();
-
-        // Show an information label to inform that the codes show belongs to the codelist specified in the data directory.
-        item.showSearchWindowInformationLabel(getMessages().instanceGeographicGranularityCodesInfoMesage());
-
-        return item;
     }
 
     private ExternalItemListItem createTemporalGranularities(final String name, String title) {

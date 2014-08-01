@@ -11,6 +11,7 @@ import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsE
 import static org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum.ORGANISATION_UNIT_SCHEME;
 
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
+import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 
@@ -130,13 +131,21 @@ public class RestWebCriteriaUtils {
         }
         return true;
     }
-    
+
     public static SrmExternalResourceRestCriteria buildSrmExternalResourceRestCriteriaFromSrmItemRestCriteria(SrmItemRestCriteria srmItemRestCriteria) {
         SrmExternalResourceRestCriteria criteria = new SrmExternalResourceRestCriteria();
         if (srmItemRestCriteria != null) {
             criteria.setCriteria(srmItemRestCriteria.getCriteria());
             criteria.setOnlyLastVersion(srmItemRestCriteria.isItemSchemeLastVersion());
             criteria.setExternalArtifactType(srmItemRestCriteria.getExternalArtifactType());
+        }
+        return criteria;
+    }
+
+    public static SrmItemRestCriteria buildSrmItemRestCriteriaFromMetamacWebCriteria(MetamacWebCriteria metamacWebCriteria) {
+        SrmItemRestCriteria criteria = new SrmItemRestCriteria();
+        if (metamacWebCriteria != null) {
+            criteria.setCriteria(metamacWebCriteria.getCriteria());
         }
         return criteria;
     }
