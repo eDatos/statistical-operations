@@ -1,8 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.server.rest;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria_NO_INHERITANCE;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria_NO_INHERITANCE;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
@@ -18,8 +18,8 @@ public interface SrmRestInternalFacade {
     ExternalItemsResult findCodelists(ServiceContext serviceContext, SrmExternalResourceRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findCodes(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;
 
-    ExternalItemsResult findConceptSchemes(ServiceContext serviceContext, ConceptSchemeRestCriteria_NO_INHERITANCE criteria, int firstResult, int maxResults) throws MetamacWebException;
-    ExternalItemsResult findConcepts(ServiceContext serviceContext, ConceptRestCriteria_NO_INHERITANCE criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findConceptSchemes(ServiceContext serviceContext, ConceptSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
+    ExternalItemsResult findConcepts(ServiceContext serviceContext, ConceptRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
 
     ExternalItemsResult findOrganisationUnitSchemes(ServiceContext serviceContext, SrmExternalResourceRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException;
     ExternalItemsResult findOrganisationUnits(ServiceContext serviceContext, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) throws MetamacWebException;

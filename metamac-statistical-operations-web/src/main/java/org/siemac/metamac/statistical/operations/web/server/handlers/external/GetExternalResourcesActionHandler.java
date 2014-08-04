@@ -2,8 +2,8 @@ package org.siemac.metamac.statistical.operations.web.server.handlers.external;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.statistical.operations.web.server.rest.SrmRestInternalFacade;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria_NO_INHERITANCE;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria_NO_INHERITANCE;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
@@ -73,12 +73,12 @@ public class GetExternalResourcesActionHandler extends SecurityActionHandler<Get
                 result = srmRestInternalFacade.findCodes(serviceContext, (SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT_SCHEME:
-                ConceptSchemeRestCriteria_NO_INHERITANCE conceptSchemeRestCriteria = new ConceptSchemeRestCriteria_NO_INHERITANCE((SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(),
+                ConceptSchemeRestCriteria conceptSchemeRestCriteria = new ConceptSchemeRestCriteria((SrmExternalResourceRestCriteria) action.getExternalResourceWebCriteria(),
                         action.getConceptSchemeTypes(), action.getStatisticalOperationUrn());
                 result = srmRestInternalFacade.findConceptSchemes(serviceContext, conceptSchemeRestCriteria, action.getFirstResult(), action.getMaxResults());
                 break;
             case CONCEPT:
-                ConceptRestCriteria_NO_INHERITANCE conceptRestCriteria = new ConceptRestCriteria_NO_INHERITANCE((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getConceptSchemeTypes(),
+                ConceptRestCriteria conceptRestCriteria = new ConceptRestCriteria((SrmItemRestCriteria) action.getExternalResourceWebCriteria(), action.getConceptSchemeTypes(),
                         action.getStatisticalOperationUrn());
                 result = srmRestInternalFacade.findConcepts(serviceContext, conceptRestCriteria, action.getFirstResult(), action.getMaxResults());
                 break;

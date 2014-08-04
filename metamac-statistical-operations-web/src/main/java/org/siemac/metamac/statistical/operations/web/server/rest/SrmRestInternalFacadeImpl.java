@@ -19,8 +19,8 @@ import org.siemac.metamac.rest.structural_resources_internal.v1_0.domain.Organis
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.ExternalItemUtils;
 import org.siemac.metamac.statistical.operations.web.server.rest.utils.RestQueryUtils;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria_NO_INHERITANCE;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria_NO_INHERITANCE;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
+import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.OrganisationSchemeRestCriteria;
 import org.siemac.metamac.web.common.server.rest.utils.RestExceptionUtils;
@@ -125,7 +125,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConceptSchemes(ServiceContext serviceContext, ConceptSchemeRestCriteria_NO_INHERITANCE criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConceptSchemes(ServiceContext serviceContext, ConceptSchemeRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);
@@ -145,7 +145,7 @@ public class SrmRestInternalFacadeImpl implements SrmRestInternalFacade {
     //
 
     @Override
-    public ExternalItemsResult findConcepts(ServiceContext serviceContext, ConceptRestCriteria_NO_INHERITANCE criteria, int firstResult, int maxResults) throws MetamacWebException {
+    public ExternalItemsResult findConcepts(ServiceContext serviceContext, ConceptRestCriteria criteria, int firstResult, int maxResults) throws MetamacWebException {
 
         String limit = String.valueOf(maxResults);
         String offset = String.valueOf(firstResult);

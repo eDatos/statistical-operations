@@ -55,8 +55,6 @@ import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrder
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
@@ -491,9 +489,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
-        if (srmItemSchemeRestCriteria instanceof ConceptSchemeRestCriteria) {
-            ((ConceptSchemeRestCriteria) srmItemSchemeRestCriteria).setStatisticalOperationUrn(operationDto.getUrn());
-        }
         dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
             @Override
@@ -511,9 +506,6 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
 
     @Override
     public void retrieveItems(final String formItemName, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) {
-        if (itemWebCriteria instanceof ConceptRestCriteria) {
-            ((ConceptRestCriteria) itemWebCriteria).setStatisticalOperationUrn(operationDto.getUrn());
-        }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
             @Override

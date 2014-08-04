@@ -37,8 +37,6 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyIns
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptRestCriteria;
-import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeRestCriteria;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction.Builder;
@@ -270,9 +268,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItemSchemes(final String formItemName, SrmExternalResourceRestCriteria srmItemSchemeRestCriteria, int firstResult, int maxResults) {
-        if (srmItemSchemeRestCriteria instanceof ConceptSchemeRestCriteria) {
-            ((ConceptSchemeRestCriteria) srmItemSchemeRestCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
-        }
         dispatcher.execute(new GetExternalResourcesAction(srmItemSchemeRestCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
             @Override
@@ -290,9 +285,6 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
 
     @Override
     public void retrieveItems(final String formItemName, SrmItemRestCriteria itemWebCriteria, int firstResult, int maxResults) {
-        if (itemWebCriteria instanceof ConceptRestCriteria) {
-            ((ConceptRestCriteria) itemWebCriteria).setStatisticalOperationUrn(operationBaseDto.getUrn());
-        }
         dispatcher.execute(new GetExternalResourcesAction(itemWebCriteria, firstResult, maxResults), new WaitingAsyncCallbackHandlingError<GetExternalResourcesResult>(this) {
 
             @Override
