@@ -101,8 +101,6 @@ public abstract class SearchSrmListConceptAndConceptSchemeItem extends ExternalI
                 TypeExternalArtefactsEnum selectedResourceType = getSelectedTypeExternalArtefactsEnum();
 
                 SrmItemRestCriteria criteria = new SrmItemRestCriteria();
-                criteria.setCriteria(window.getFilter().getSearchCriteria().getCriteria());
-                criteria.setItemSchemeLastVersion(window.getFilter().getSearchCriteria().isItemSchemeLastVersion());
 
                 if (TypeExternalArtefactsEnum.CONCEPT_SCHEME.equals(selectedResourceType)) {
                     window.getFilter().getItemSchemeFilterFacet().getFormItem().setVisible(false);
@@ -110,8 +108,12 @@ public abstract class SearchSrmListConceptAndConceptSchemeItem extends ExternalI
                 }
                 if (TypeExternalArtefactsEnum.CONCEPT.equals(selectedResourceType)) {
                     window.getFilter().getItemSchemeFilterFacet().getFormItem().setVisible(true);
+                    criteria = window.getFilter().getSearchCriteria();
                     criteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
                 }
+
+                criteria.setCriteria(window.getFilter().getSearchCriteria().getCriteria());
+                criteria.setItemSchemeLastVersion(window.getFilter().getSearchCriteria().isItemSchemeLastVersion());
 
                 retrieveItems(0, StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS, criteria);
                 window.getFilter().getItemSchemeFilterFacet().getFormItem().getForm().markForRedraw();

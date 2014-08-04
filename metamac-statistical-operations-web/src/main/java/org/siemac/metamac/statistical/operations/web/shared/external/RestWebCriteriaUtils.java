@@ -29,18 +29,8 @@ public class RestWebCriteriaUtils {
     // INSTACE: STAT CONC DEF
     //
 
-    public static ConceptSchemeRestCriteria buildStatConcDefConceptSchemeWebCriteria() {
-        ConceptSchemeRestCriteria conceptSchemeWebCriteria = new ConceptSchemeRestCriteria();
-        conceptSchemeWebCriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT_SCHEME);
-        conceptSchemeWebCriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
-        return conceptSchemeWebCriteria;
-    }
-
-    public static ConceptRestCriteria buildStatConcDefConceptWebCriteria() {
-        ConceptRestCriteria conceptWebcriteria = new ConceptRestCriteria();
-        conceptWebcriteria.setExternalArtifactType(TypeExternalArtefactsEnum.CONCEPT);
-        conceptWebcriteria.setConceptSchemeTypes(ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION);
-        return conceptWebcriteria;
+    public static ConceptSchemeTypeEnum[] getConceptSchemeTypesForInstanceStatConcDef() {
+        return new ConceptSchemeTypeEnum[]{ConceptSchemeTypeEnum.TRANSVERSAL, ConceptSchemeTypeEnum.OPERATION};
     }
 
     //

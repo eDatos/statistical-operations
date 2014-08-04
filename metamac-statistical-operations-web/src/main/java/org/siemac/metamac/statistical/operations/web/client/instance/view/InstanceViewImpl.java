@@ -27,7 +27,6 @@ import org.siemac.metamac.statistical.operations.web.client.utils.ConfigurationP
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstanceMainFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchMultipleConceptsAndConceptSchemesForStatConcDefItem;
 import org.siemac.metamac.statistical.operations.web.client.widgets.external.SearchSrmListConceptAndConceptSchemeItem;
 import org.siemac.metamac.statistical.operations.web.shared.external.ConceptSchemeTypeEnum;
 import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
@@ -44,9 +43,7 @@ import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.MultipleExternalResourceAction;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultiExternalItemSimpleItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchMultipleSrmItemsItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.shared.criteria.MetamacWebCriteria;
 import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCriteria;
@@ -158,7 +155,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         // Set uiHandlers in formItems
 
-        ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
+        ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(InstanceDS.STAT_CONC_DEF)).setUiHandlers(uiHandlers);
         ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(InstanceDS.MEASURES)).setUiHandlers(uiHandlers);
     }
 
@@ -458,7 +455,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
 
         MultiLanguageRichTextEditorItem statConcDefDescriptionItem = new MultiLanguageRichTextEditorItem(InstanceDS.STAT_CONC_DEF_DESCRIPTION, getConstants().instanceStatisticalConceptDefinition());
 
-        ExternalItemListItem statConcDefItem = createStatConcDef(InstanceDS.STAT_CONC_DEF, getConstants().instanceStatisticalConceptsDefinitions());
+        ExternalItemListItem statConcDefItem = createStatConcDef();
 
         ExternalItemListItem classSystemItem = createClassSystemItem();
 
@@ -818,7 +815,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                     result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STAT_CONC_DEF, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
+            ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
 
         } else if (StringUtils.equals(InstanceDS.MEASURES, formItemName)) {
             ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(formItemName)).setItemSchemes(result);
@@ -845,7 +842,7 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
                     result.getTotalResults());
 
         } else if (StringUtils.equals(InstanceDS.STAT_CONC_DEF, formItemName)) {
-            ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
+            ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
 
         } else if (StringUtils.equals(InstanceDS.MEASURES, formItemName)) {
             ((SearchSrmListConceptAndConceptSchemeItem) contentDescriptorsEditionForm.getItem(formItemName)).setItems(result);
@@ -977,28 +974,6 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
         return item;
     }
 
-    private ExternalItemListItem createStatConcDef(final String name, String title) {
-        final SearchMultipleConceptsAndConceptSchemesForStatConcDefItem item = new SearchMultipleConceptsAndConceptSchemesForStatConcDefItem(name, title, new MultipleExternalResourceAction() {
-
-            @Override
-            public List<ExternalItemDto> getExternalItemsPreviouslySelected() {
-                return ((ExternalItemListItem) contentDescriptorsEditionForm.getItem(name)).getExternalItemDtos();
-            }
-        });
-        com.smartgwt.client.widgets.form.fields.events.ClickHandler clickHandler = new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
-
-            @Override
-            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
-                List<ExternalItemDto> resources = item.getSelectedItems();
-                item.markSearchWindowForDestroy();
-                ((SearchMultipleSrmItemsItem) contentDescriptorsEditionForm.getItem(name)).setExternalItems(resources);
-                contentDescriptorsEditionForm.markForRedraw();
-            }
-        };
-        item.setSaveClickHandler(clickHandler);
-        return item;
-    }
-
     private SearchSrmListConceptAndConceptSchemeItem createMeasures() {
         final String field = InstanceDS.MEASURES;
         final SearchSrmListConceptAndConceptSchemeItem item = new SearchSrmListConceptAndConceptSchemeItem(field, getConstants().instanceUnitMeasure(),
@@ -1007,6 +982,19 @@ public class InstanceViewImpl extends ViewWithUiHandlers<InstanceUiHandlers> imp
             @Override
             protected ConceptSchemeTypeEnum[] getConceptSchemeTypes() {
                 return RestWebCriteriaUtils.getConceptSchemeTypesForInstanceMeasures();
+            }
+        };
+        return item;
+    }
+
+    private SearchSrmListConceptAndConceptSchemeItem createStatConcDef() {
+        final String field = InstanceDS.STAT_CONC_DEF;
+        final SearchSrmListConceptAndConceptSchemeItem item = new SearchSrmListConceptAndConceptSchemeItem(field, getConstants().instanceStatisticalConceptsDefinitions(),
+                StatisticalOperationsWebConstants.FORM_LIST_MAX_RESULTS) {
+
+            @Override
+            protected ConceptSchemeTypeEnum[] getConceptSchemeTypes() {
+                return RestWebCriteriaUtils.getConceptSchemeTypesForInstanceStatConcDef();
             }
         };
         return item;
