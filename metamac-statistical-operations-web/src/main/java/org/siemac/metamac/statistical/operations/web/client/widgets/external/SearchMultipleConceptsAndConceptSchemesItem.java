@@ -17,6 +17,7 @@ import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
+@Deprecated
 public class SearchMultipleConceptsAndConceptSchemesItem extends SearchMultipleSrmItemsItem {
 
     private static final String             RESOURCE_TYPE_FIELD_NAME = "resource-type";
