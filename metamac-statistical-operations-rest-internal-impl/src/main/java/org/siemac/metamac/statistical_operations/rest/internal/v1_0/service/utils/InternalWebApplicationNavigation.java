@@ -12,41 +12,46 @@ import org.springframework.web.util.UriTemplate;
 
 public class InternalWebApplicationNavigation {
 
-    private final String      ANCHOR                 = "#";
-    private final String      SEPARATOR              = "/";
-    private final String      OPERATION_ID_PARAMETER = "operationIdParam";
-    private final String      RESOURCE_ID_PARAMETER  = "resourceIdParam";
+    private final String ANCHOR = "#";
+    private final String SEPARATOR = "/";
+    private final String OPERATION_ID_PARAMETER = "operationIdParam";
+    private final String RESOURCE_ID_PARAMETER = "resourceIdParam";
 
     private final UriTemplate familyTemplate;
     private final UriTemplate operationTemplate;
     private final UriTemplate instanceTemplate;
 
     public InternalWebApplicationNavigation(String webApplicationPath) {
-        operationTemplate = new UriTemplate(webApplicationPath + SEPARATOR + ANCHOR + NameTokens.operationListPage + SEPARATOR + NameTokens.operationPage + ";" + PlaceRequestParams.operationParam
-                + "=" + "{" + RESOURCE_ID_PARAMETER + "}");
-        instanceTemplate = new UriTemplate(webApplicationPath + SEPARATOR + ANCHOR + NameTokens.operationListPage + SEPARATOR + NameTokens.operationPage + ";" + PlaceRequestParams.operationParam
-                + "=" + "{" + OPERATION_ID_PARAMETER + "}/" + NameTokens.instancePage + ";" + PlaceRequestParams.instanceParam + "={" + RESOURCE_ID_PARAMETER + "}");
-        familyTemplate = new UriTemplate(webApplicationPath + SEPARATOR + ANCHOR + NameTokens.familyListPage + SEPARATOR + NameTokens.familyPage + ";" + PlaceRequestParams.familyParam + "=" + "{"
-                + RESOURCE_ID_PARAMETER + "}");
+        this.operationTemplate = new UriTemplate(webApplicationPath + this.SEPARATOR + this.ANCHOR + NameTokens.operationListPage + this.SEPARATOR + NameTokens.operationPage + ";"
+                + PlaceRequestParams.operationParam + "=" + "{" + this.RESOURCE_ID_PARAMETER + "}");
+        this.instanceTemplate = new UriTemplate(webApplicationPath + this.SEPARATOR + this.ANCHOR + NameTokens.operationListPage + this.SEPARATOR + NameTokens.operationPage + ";"
+                + PlaceRequestParams.operationParam + "=" + "{" + this.OPERATION_ID_PARAMETER + "}/" + NameTokens.instancePage + ";" + PlaceRequestParams.instanceParam + "={"
+                + this.RESOURCE_ID_PARAMETER + "}");
+        this.familyTemplate = new UriTemplate(webApplicationPath + this.SEPARATOR + this.ANCHOR + NameTokens.familyListPage + this.SEPARATOR + NameTokens.familyPage + ";"
+                + PlaceRequestParams.familyParam + "=" + "{" + this.RESOURCE_ID_PARAMETER + "}");
+    }
+
+    public String buildOperationUrl(String operationCode) {
+        Map<String, String> parameters = new HashMap<String, String>(1);
+        parameters.put(this.RESOURCE_ID_PARAMETER, operationCode);
+        return this.operationTemplate.expand(parameters).toString();
     }
 
     public String buildOperationUrl(Operation operation) {
-        Map<String, String> parameters = new HashMap<String, String>(1);
-        parameters.put(RESOURCE_ID_PARAMETER, operation.getCode());
-        return operationTemplate.expand(parameters).toString();
+        return this.buildOperationUrl(operation.getCode());
     }
 
     public String buildInstanceUrl(Instance instance) {
         Map<String, String> parameters = new HashMap<String, String>(2);
-        parameters.put(OPERATION_ID_PARAMETER, instance.getOperation().getCode());
-        parameters.put(RESOURCE_ID_PARAMETER, instance.getCode());
-        return instanceTemplate.expand(parameters).toString();
+        parameters.put(this.OPERATION_ID_PARAMETER, instance.getOperation().getCode());
+        parameters.put(this.RESOURCE_ID_PARAMETER, instance.getCode());
+        return this.instanceTemplate.expand(parameters).toString();
     }
 
     public String buildFamilyUrl(Family family) {
         Map<String, String> parameters = new HashMap<String, String>(1);
-        parameters.put(RESOURCE_ID_PARAMETER, family.getCode());
-        return familyTemplate.expand(parameters).toString();
+        parameters.put(this.RESOURCE_ID_PARAMETER, family.getCode());
+        return this.familyTemplate.expand(parameters).toString();
     }
 
 }

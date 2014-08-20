@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical_operations.rest.internal.v1_0.mapper;
 import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
+import org.siemac.metamac.rest.common.v1_0.domain.ResourceLink;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.CollMethods;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Costs;
 import org.siemac.metamac.rest.statistical_operations_internal.v1_0.domain.Families;
@@ -71,4 +72,10 @@ public interface Do2RestInternalMapperV10 {
     // Resources
     // -----------
     ResourceInternal toResource(org.siemac.metamac.statistical.operations.core.domain.Operation source);
+
+    // -----------
+    // Links
+    // -----------
+    ResourceLink toOperationSelfLink(String operationCode);
+    String toOperationManagementApplicationLink(String operationCode);
 }
