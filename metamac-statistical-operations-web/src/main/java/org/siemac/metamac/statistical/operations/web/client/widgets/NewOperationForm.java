@@ -7,6 +7,7 @@ import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.InternationalStringUtils;
 import org.siemac.metamac.web.common.client.view.handlers.SrmExternalResourcesUiHandlers;
@@ -43,7 +44,7 @@ public class NewOperationForm extends CustomDynamicForm {
 
         identifier = new RequiredTextItem("op-id", getConstants().operationCode());
         identifier.setWidth(FORM_ITEM_CUSTOM_WIDTH);
-        identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
+        identifier.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator(), CommonUtils.getOperationCodeLengthValidator());
 
         title = new RequiredTextItem("op-title", getConstants().operationTitle());
         title.setWidth(FORM_ITEM_CUSTOM_WIDTH);

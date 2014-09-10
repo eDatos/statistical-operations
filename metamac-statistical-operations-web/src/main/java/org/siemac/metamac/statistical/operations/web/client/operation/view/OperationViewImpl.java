@@ -655,7 +655,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 return canOperationCodeBeEdited();
             }
         });
-        code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator());
+        code.setValidators(CommonWebUtils.getSemanticIdentifierCustomValidator(), CommonUtils.getOperationCodeLengthValidator());
         ViewTextItem staticCode = new ViewTextItem(OperationDS.CODE_VIEW, getConstants().operationCode());
         staticCode.setShowIfCondition(new FormItemIfFunction() {
 

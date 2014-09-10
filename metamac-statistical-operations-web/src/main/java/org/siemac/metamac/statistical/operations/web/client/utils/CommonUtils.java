@@ -14,6 +14,9 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
+
+import com.smartgwt.client.widgets.form.validator.LengthRangeValidator;
 
 public class CommonUtils {
 
@@ -142,5 +145,14 @@ public class CommonUtils {
             ids.add(externalItemDto.getId());
         }
         return ids;
+    }
+
+    // Operation code length validator
+
+    public static LengthRangeValidator getOperationCodeLengthValidator() {
+        LengthRangeValidator lengthRangeValidator = new LengthRangeValidator();
+        lengthRangeValidator.setMin(0);
+        lengthRangeValidator.setMax(StatisticalOperationsWebConstants.OPERATION_CODE_MAX_LENGTH);
+        return lengthRangeValidator;
     }
 }
