@@ -1,12 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +55,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -905,9 +906,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01a = createOperationDtoForInternalPublishing();
-        operationDto01a.setCode("operationDto01-a");
+        String operation01ACode = "ope01-a";
+        operationDto01a.setCode(operation01ACode);
         OperationDto operationDto01b = createOperationDtoForInternalPublishing();
-        operationDto01b.setCode("operationDto01-b");
+        String operation01BCode = "ope01-b";
+        operationDto01b.setCode(operation01BCode);
 
         FamilyDto familyDto011 = createFamilyDto();
         familyDto011.setCode("familyDto011");
@@ -928,14 +931,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Retrieve families with operation code "operationDto01-a" --> familyDto011 && familyDto012
         MetamacCriteria criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), "operationDto01-a", OperationType.EQ));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), operation01ACode, OperationType.EQ));
 
         MetamacCriteriaResult<FamilyBaseDto> result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(2, result.getResults().size());
 
         // Retrieve families with operation code "operationDto01-b" --> familyDto011
         criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), "operationDto01-b", OperationType.EQ));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(FamilyCriteriaPropertyEnum.OPERATION_CODE.name(), operation01BCode, OperationType.EQ));
 
         result = statisticalOperationsServiceFacade.findFamilyByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(1, result.getResults().size());
@@ -948,9 +951,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01a = createOperationDtoForInternalPublishing();
-        operationDto01a.setCode("operationDto01-a");
+        String operation01ACode = "ope01-a";
+        operationDto01a.setCode(operation01ACode);
         OperationDto operationDto01b = createOperationDtoForInternalPublishing();
-        operationDto01b.setCode("operationDto01-b");
+        String operation01BCode = "ope01-b";
+        operationDto01b.setCode(operation01BCode);
 
         FamilyDto familyDto011 = createFamilyDto();
         familyDto011.setCode("familyDto011");
@@ -1243,6 +1248,17 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Check number of operations
         int operationsAfter = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
         assertEquals(1, operationsAfter);
+    }
+
+    @Test
+    @Transactional
+    public void testCreateOperationErrorCodeWithIllegalLength() throws MetamacException {
+        expectedMetamacException(new MetamacException(ServiceExceptionType.UNKNOWN, "validation failed for: org.siemac.metamac.statistical.operations.core.domain.Operation"));
+
+        OperationDto operationDto = createOperationDto();
+        operationDto.setCode("CODE_HAS_INVALID_LENGTH");
+
+        statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
     }
 
     @Test
@@ -1570,7 +1586,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         }
 
         // Update operation - session 1
-        operationDtoSession1AfterUpdate.setCode("newCode1_secondUpdate");
+        operationDtoSession1AfterUpdate.setCode("code_2updat");
         OperationDto operationDtoSession1AfterUpdate2 = statisticalOperationsServiceFacade.updateOperation(getServiceContextAdministrador(), operationDtoSession1AfterUpdate);
         assertEquals(Long.valueOf(2), operationDtoSession1AfterUpdate2.getOptimisticLockingVersion());
     }
@@ -1779,11 +1795,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01 = createOperationDto();
-        operationDto01.setCode("operationDto01");
+        operationDto01.setCode("ope01");
         OperationDto operationDto02 = createOperationDto();
-        operationDto02.setCode("operationDto02");
+        operationDto02.setCode("ope02");
         OperationDto operationDto03 = createOperationDto();
-        operationDto03.setCode("operationDto03");
+        operationDto03.setCode("ope03");
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto02);
@@ -1792,8 +1808,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Retrieve "operationDto01" or "operationDto02"
         MetamacCriteria criteria = new MetamacCriteria();
         MetamacCriteriaDisjunctionRestriction disjunction = new MetamacCriteriaDisjunctionRestriction();
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto02", OperationType.EQ));
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto01", OperationType.EQ));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "ope02", OperationType.EQ));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "ope01", OperationType.EQ));
         criteria.setRestriction(disjunction);
 
         MetamacCriteriaResult<OperationBaseDto> result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
@@ -1801,14 +1817,14 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Retrieve "operationDto01"
         criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto01", OperationType.EQ));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "ope01", OperationType.EQ));
 
         result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(1, result.getResults().size());
 
         // Retrieve "*Dto*"
         criteria = new MetamacCriteria();
-        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "Dto", OperationType.ILIKE));
+        criteria.setRestriction(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "0", OperationType.ILIKE));
 
         result = statisticalOperationsServiceFacade.findOperationsByCondition(getServiceContextAdministrador(), criteria);
         assertEquals(3, result.getResults().size());
@@ -1821,15 +1837,18 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01 = createOperationDto();
-        operationDto01.setCode("operationDto01");
+        String operation01Code = "ope01";
+        operationDto01.setCode(operation01Code);
         operationDto01.setTitle(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         OperationDto operationDto02 = createOperationDto();
-        operationDto02.setCode("operationDto02");
+        String operation02Code = "ope02";
+        operationDto02.setCode(operation02Code);
         operationDto02.setTitle(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         OperationDto operationDto03 = createOperationDto();
-        operationDto03.setCode("operationDto03");
+        String operation03Code = "ope03";
+        operationDto03.setCode(operation03Code);
         operationDto03.setTitle(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
@@ -1866,7 +1885,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Find title "index" or code "operationDto02"--> operationDto01 and operationDto02
         criteria = new MetamacCriteria();
         disjunction = new MetamacCriteriaDisjunctionRestriction();
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), operation02Code, OperationType.ILIKE));
         disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.TITLE.name(), "index", OperationType.ILIKE));
         criteria.setRestriction(disjunction);
 
@@ -1890,15 +1909,18 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01 = createOperationDto();
-        operationDto01.setCode("operationDto01");
+        String operation01Code = "ope01";
+        operationDto01.setCode(operation01Code);
         operationDto01.setAcronym(MetamacMocks.mockInternationalStringDto("es", "IPC", "en", "CPI"));
 
         OperationDto operationDto02 = createOperationDto();
-        operationDto02.setCode("operationDto02");
+        String operation02Code = "ope02";
+        operationDto02.setCode(operation02Code);
         operationDto02.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CALIDAD_VIDA", "en", "QL"));
 
         OperationDto operationDto03 = createOperationDto();
-        operationDto03.setCode("operationDto03");
+        String operation03Code = "ope03";
+        operationDto03.setCode(operation03Code);
         operationDto03.setAcronym(MetamacMocks.mockInternationalStringDto("es", "CONDICIONES_VIDA", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
@@ -1935,7 +1957,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Find title "index" or code "operationDto02"--> operationDto01 and operationDto02
         criteria = new MetamacCriteria();
         disjunction = new MetamacCriteriaDisjunctionRestriction();
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), operation02Code, OperationType.ILIKE));
         disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.ACRONYM.name(), "cp", OperationType.ILIKE));
         criteria.setRestriction(disjunction);
 
@@ -1959,15 +1981,18 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01 = createOperationDto();
-        operationDto01.setCode("operationDto01");
+        String operation01Code = "ope01";
+        operationDto01.setCode(operation01Code);
         operationDto01.setDescription(MetamacMocks.mockInternationalStringDto("es", "Índice Precio de Consumo", "en", "Consumer Price Index"));
 
         OperationDto operationDto02 = createOperationDto();
-        operationDto02.setCode("operationDto02");
+        String operation02Code = "ope02";
+        operationDto02.setCode(operation02Code);
         operationDto02.setDescription(MetamacMocks.mockInternationalStringDto("es", "Calidad de Vida", "en", "Quality of Life"));
 
         OperationDto operationDto03 = createOperationDto();
-        operationDto03.setCode("operationDto03");
+        String operation03Code = "ope03";
+        operationDto03.setCode(operation03Code);
         operationDto03.setDescription(MetamacMocks.mockInternationalStringDto("es", "Condiciones de vida", "en", "Living"));
 
         statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01);
@@ -2004,7 +2029,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Find title "index" or code "operationDto02"--> operationDto01 and operationDto02
         criteria = new MetamacCriteria();
         disjunction = new MetamacCriteriaDisjunctionRestriction();
-        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), "operationDto02", OperationType.ILIKE));
+        disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.CODE.name(), operation02Code, OperationType.ILIKE));
         disjunction.getRestrictions().add(new MetamacCriteriaPropertyRestriction(OperationCriteriaPropertyEnum.DESCRIPTION.name(), "index", OperationType.ILIKE));
         criteria.setRestriction(disjunction);
 
@@ -2082,9 +2107,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01a = createOperationDtoForInternalPublishing();
-        operationDto01a.setCode("operationDto01-a");
+        String operation01ACode = "ope01-a";
+        operationDto01a.setCode(operation01ACode);
         OperationDto operationDto01b = createOperationDtoForInternalPublishing();
-        operationDto01b.setCode("operationDto01-b");
+        String operation01B = "ope01-b";
+        operationDto01b.setCode(operation01B);
 
         FamilyDto familyDto011 = createFamilyDto();
         familyDto011.setCode("familyDto011");
@@ -2125,9 +2152,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Insert data
         OperationDto operationDto01a = createOperationDtoForInternalPublishing();
-        operationDto01a.setCode("operationDto01-a");
+        String operation01A = "ope01-a";
+        operationDto01a.setCode(operation01A);
         OperationDto operationDto01b = createOperationDtoForInternalPublishing();
-        operationDto01b.setCode("operationDto01-b");
+        String operation01B = "ope01-b";
+        operationDto01b.setCode(operation01B);
 
         FamilyDto familyDto011 = createFamilyDto();
         familyDto011.setCode("familyDto011");
@@ -3592,7 +3621,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         operationDto.setCreatedDate(new Date());
 
         // Identifier
-        operationDto.setCode("PRUEBA01" + RandomStringUtils.random(50, true, true));
+        operationDto.setCode("PRUEBA01" + RandomStringUtils.random(3, true, true));
 
         // TITLE
         InternationalStringDto title = new InternationalStringDto();

@@ -326,7 +326,7 @@ Application StatisticalOperations {
 			- @ExternalItem commonMetadata nullable cascade="all" databaseColumn="COMMON_METADATA_FK";
 			
 			"Metadata CODE"
-       		String code;
+       		String code length="11";
        		"URN"
        		String urn length="4000";
        		"Metadata TITLE"

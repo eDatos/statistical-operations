@@ -1,9 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +26,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
+
 /**
  * Spring based transactional test with DbUnit support.
  */
@@ -41,6 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
+    private static final String                  OOEE_CODE_C0025A = "C0025A";
     @Autowired
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
@@ -619,7 +621,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testUpdateOperation() throws Exception {
         OperationDto operationDto = createOperationDto();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
 
         operationDto = statisticalOperationsServiceFacade.updateOperation(getServiceContextTecnicoPlanificacion(), operationDto);
@@ -766,7 +768,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
 
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
@@ -777,7 +779,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishInternallyOperationPlanificacion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
 
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoPlanificacion(), operationId);
@@ -786,7 +788,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperationOperation01() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoProduccionOperation01(), operationId);
@@ -799,7 +801,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperationTecnicoProduccion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
 
         try {
@@ -814,7 +816,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishInternallyOperationTecnicoApoyoDifusion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoDifusion(), operationId);
@@ -828,7 +830,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishInternallyOperationTecnicoApoyoProduccion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoProduccion(), operationId);
@@ -841,7 +843,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperationTecnicoDifusion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoDifusion(), operationId);
@@ -854,7 +856,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperationTecnicoProduccionOperation02() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoProduccionOperation02(), operationId);
@@ -867,7 +869,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyOperationTecnicoApoyoPlanificacion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         try {
             statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextTecnicoApoyoPlanificacion(), operationId);
@@ -881,7 +883,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -893,7 +895,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishExternallyOperationTecnicoPlanificacion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -903,7 +905,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperationOperation01() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -918,7 +920,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperationTecnicoProduccion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -934,7 +936,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishExternallyOperationTecnicoApoyoDifusion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -950,7 +952,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     public void testPublishExternallyOperationTecnicoApoyoProduccion() throws Exception {
 
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -965,7 +967,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperationTecnicoDifusion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -980,7 +982,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperationTecnicoProduccionOperation02() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -995,7 +997,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyOperationTecnicoApoyoPlanificacion() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -1037,7 +1039,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testAddFamilyForOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         Long familyId = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
 
@@ -1076,7 +1078,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testRemoveFamilyForOperation() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         Long familyId = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDto()).getId();
 
@@ -1116,7 +1118,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testCreateInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -1150,7 +1152,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testUpdateInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto());
@@ -1185,7 +1187,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testUpdateInstancesOrder() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto());
@@ -1223,7 +1225,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testDeleteInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -1375,7 +1377,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishInternallyInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
 
@@ -1441,7 +1443,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Test
     public void testPublishExternallyInstance() throws Exception {
         OperationDto operationDto = createOperationDtoForInternalPublishing();
-        operationDto.setCode("C0025A");
+        operationDto.setCode(OOEE_CODE_C0025A);
         Long operationId = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto).getId();
         statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationId);
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationId);
@@ -1574,7 +1576,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
         operationDto.setCreatedDate(new Date());
 
         // Identifier
-        operationDto.setCode("PRUEBA01" + RandomStringUtils.random(50, true, true));
+        operationDto.setCode("PRUEBA01" + RandomStringUtils.random(3, true, true));
 
         // TITLE
         InternationalStringDto title = new InternationalStringDto();

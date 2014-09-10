@@ -1,12 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
-import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks.mockExternalItem;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +39,15 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+
+import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks.mockExternalItem;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -364,7 +366,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     @Override
     @Test
     public void testFindOperationByCode() throws Exception {
-        String operation_code = "operation_01";
+        String operation_code = "ope_01";
 
         Operation operation = createOperation();
         operation.setCode(operation_code);
@@ -510,8 +512,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
     public void testFindOperationByCondition() throws MetamacException {
         statisticalOperationsBaseService.createOperation(getServiceContextAdministrador(), createOperation());
 
-        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
-                .distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPE-%").distinctRoot()
+                .build();
 
         List<Operation> operationsList = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions);
 
@@ -527,8 +529,8 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         PagingParameter pagingParameterPage1 = PagingParameter.pageAccess(2, 1, true);
         PagingParameter pagingParameterPage2 = PagingParameter.pageAccess(2, 2, true);
 
-        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPERATION-%")
-                .distinctRoot().build();
+        List<ConditionalCriteria> conditions = criteriaFor(Operation.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.OperationProperties.code()).like("OPE-%").distinctRoot()
+                .build();
 
         PagedResult<Operation> operationsList1 = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage1);
         PagedResult<Operation> operationsList2 = statisticalOperationsBaseService.findOperationByCondition(getServiceContextAdministrador(), conditions, pagingParameterPage2);
@@ -959,7 +961,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         Operation operation = new Operation();
 
         // IDENTIFIER
-        operation.setCode("OPERATION-" + RandomStringUtils.random(50, true, true));
+        operation.setCode("OPE-" + RandomStringUtils.random(7, true, true));
 
         // TITLE
         InternationalString title = new InternationalString();

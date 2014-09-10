@@ -1,7 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceimpl;
 
-import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,6 +32,8 @@ import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.Statisti
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
 
 /**
  * Implementation of StatisticalOperationsBaseService.
@@ -190,7 +190,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         // Initializations
         condition = CriteriaUtils.initConditions(condition, Family.class);
         pagingParameter = CriteriaUtils.initPagingParameter(pagingParameter);
-        
+
         // Repository operation
         return familyRepository.findByCondition(condition, pagingParameter);
     }
