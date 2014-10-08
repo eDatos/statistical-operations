@@ -34,19 +34,19 @@ import org.springframework.stereotype.Component;
 public class NoticesRestInternalFacadeImpl implements NoticesRestInternalService {
 
     @Autowired
-    private RestApiLocator restApiLocator;
+    private RestApiLocator                    restApiLocator;
 
     @Autowired
-    private RestExceptionUtils restExceptionUtils;
+    private RestExceptionUtils                restExceptionUtils;
 
     @Autowired
     StatisticalOperationsConfigurationService configurationService;
 
     @Autowired
-    Dto2DoMapper dto2DoMapper;
+    Dto2DoMapper                              dto2DoMapper;
 
     @Autowired
-    Do2RestInternalMapperV10 do2RestInternalMapperV10;
+    Do2RestInternalMapperV10                  do2RestInternalMapperV10;
 
     // ---------------------------------------------------------------------------------
     // NOTIFICATIONS
@@ -70,11 +70,9 @@ public class NoticesRestInternalFacadeImpl implements NoticesRestInternalService
 
     private void createNotification(ServiceContext ctx, String actionCode, String messageCode, ResourceInternal[] resources) throws MetamacWebException {
         Locale locale = ServiceContextUtils.getLocale(ctx);
-        String localisedAction = LocaleUtil.getMessageForCode(actionCode, locale);
+        String subject = LocaleUtil.getMessageForCode(actionCode, locale);
         String localisedMessage = LocaleUtil.getMessageForCode(messageCode, locale);
-
         String sendingApp = MetamacApplicationsEnum.GESTOR_OPERACIONES.getName();
-        String subject = "[" + sendingApp + "] " + localisedAction;
 
         // @formatter:off
 		Message message = MessageBuilder.message().withText(localisedMessage)
