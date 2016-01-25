@@ -1,12 +1,5 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +55,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -241,9 +242,9 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     @Test
     @Transactional
     public void testUpdateFamily() throws MetamacException {
-        FamilyDto familyDto = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate());
+        String familyCode = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), createFamilyDtoForUpdate()).getCode();
 
-        int familiesBefore = statisticalOperationsServiceFacade.findAllFamilies(getServiceContextAdministrador()).size();
+        FamilyDto familyBeforeUpdate = statisticalOperationsServiceFacade.findFamilyByCode(getServiceContextAdministrador(), familyCode);
 
         // TITLE
         InternationalStringDto title = new InternationalStringDto();
@@ -255,7 +256,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         title_en.setLocale("en");
         title.addText(title_es);
         title.addText(title_en);
-        familyDto.setTitle(title);
+        familyBeforeUpdate.setTitle(title);
 
         // DESCRIPTION
         InternationalStringDto description = new InternationalStringDto();
@@ -267,14 +268,10 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         description_en.setLocale("en");
         description.addText(description_es);
         description.addText(description_en);
-        familyDto.setDescription(description);
+        familyBeforeUpdate.setDescription(description);
 
-        familyDto = statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyDto);
-
-        assertNotNull(familyDto);
-
-        int familiesAfter = statisticalOperationsServiceFacade.findAllFamilies(getServiceContextAdministrador()).size();
-        assertEquals(familiesBefore, familiesAfter);
+        FamilyDto familyAfterUpdate = statisticalOperationsServiceFacade.updateFamily(getServiceContextAdministrador(), familyBeforeUpdate);
+        StatisticalOperationsAsserts.assertEqualsFamilyDto(familyBeforeUpdate, familyAfterUpdate);
     }
 
     @Test

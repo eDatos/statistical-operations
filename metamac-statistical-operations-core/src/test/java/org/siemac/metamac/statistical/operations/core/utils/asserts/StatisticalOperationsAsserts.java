@@ -1,15 +1,13 @@
 package org.siemac.metamac.statistical.operations.core.utils.asserts;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.siemac.metamac.core.common.constants.CoreCommonConstants.API_LATEST;
-
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Assert;
 import org.siemac.metamac.common.test.constants.ConfigurationMockConstants;
 import org.siemac.metamac.common.test.utils.MetamacAsserts;
@@ -20,8 +18,42 @@ import org.siemac.metamac.core.common.ent.domain.ExternalItem;
 import org.siemac.metamac.core.common.ent.domain.InternationalString;
 import org.siemac.metamac.core.common.ent.domain.LocalisedString;
 import org.siemac.metamac.core.common.enume.utils.TypeExternalArtefactsEnumUtils;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import static org.siemac.metamac.core.common.constants.CoreCommonConstants.API_LATEST;
 
 public class StatisticalOperationsAsserts extends MetamacAsserts {
+
+    // -----------------------------------------------------------------
+    // FAMILY: DTO & DTO
+    // -----------------------------------------------------------------
+
+    public static void assertEqualsFamilyDto(FamilyDto expected, FamilyDto actual) {
+        assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+        assertEqualsInternationalStringDto(expected.getTitle(), actual.getTitle());
+        assertEqualsInternationalStringDto(expected.getDescription(), actual.getDescription());
+        assertEqualsInternationalStringDto(expected.getAcronym(), actual.getAcronym());
+        assertEquals(expected.getCode(), actual.getCode());
+        assertEqualsDate(expected.getInternalInventoryDate(), actual.getInventoryDate());
+        assertEqualsDate(expected.getInventoryDate(), actual.getInventoryDate());
+        assertEquals(expected.getProcStatus(), actual.getProcStatus());
+        assertEquals(expected.getUrn(), actual.getUrn());
+    }
+
+    private static void assertEqualsDate(Date expected, Date actual) {
+        assertEqualsNullability(expected, actual);
+        if (expected == null) {
+            return;
+        }
+
+        DateUtils.isSameInstant(expected, actual);
+    }
 
     // -----------------------------------------------------------------
     // EXTERNAL ITEMS: DO & DO
