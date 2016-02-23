@@ -260,7 +260,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
 
     @Override
     public boolean validate() {
-        return identifiersEditionForm.validate(false);
+        return identifiersEditionForm.validate(false) && contentDescriptorsEditionForm.validate(false);
     }
 
     private void createViewForm() {
