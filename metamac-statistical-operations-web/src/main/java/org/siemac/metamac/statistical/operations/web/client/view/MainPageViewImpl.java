@@ -7,11 +7,12 @@ import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePr
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationsMenu;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
+import org.siemac.metamac.web.common.client.utils.ApplicationOrganisation;
 import org.siemac.metamac.web.common.client.widgets.BreadCrumbsPanel;
+import org.siemac.metamac.web.common.client.widgets.FooterLayout;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.client.widgets.MessagePanel;
 import org.siemac.metamac.web.common.client.widgets.MetamacNavBar;
-import org.siemac.metamac.web.common.client.widgets.VersionFooter;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
@@ -40,9 +41,9 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
     private final MessagePanel     messagePanel;
 
     private VLayout                panel;
-    private HLayout                northLayout;
+    private VLayout                northLayout;
     private HLayout                southLayout;
-    private VLayout                footerLayout;
+    private FooterLayout           footerLayout;
 
     @Inject
     public MainPageViewImpl(MasterHead masterHead, OperationsMenu operationsMenu, BreadCrumbsPanel breadCrumbsPanel, MessagePanel messagePanel) {
@@ -63,7 +64,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
         panel.setCanDrag(false);
 
         // Initialize the North layout container
-        northLayout = new HLayout();
+        northLayout = new VLayout();
         northLayout.setHeight(NORTH_HEIGHT);
 
         // Nested layout container
@@ -77,6 +78,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
         vLayout.addMember(breadCrumbLayout);
 
         // Nested layout container to the North layout container
+        northLayout.addMember(this.masterHead);
         northLayout.addMember(vLayout);
         northLayout.setHeight(65);
 
@@ -84,9 +86,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
         southLayout = new HLayout();
         southLayout.setHeight100();
 
-        footerLayout = new VLayout();
-        footerLayout.addMember(this.messagePanel);
-        footerLayout.addMember(new VersionFooter(OperationsWeb.getProjectVersion()));
+        footerLayout = new FooterLayout(this.messagePanel, ApplicationOrganisation.getCurrentOrganisation(), OperationsWeb.getProjectVersion());
 
         // Set user name
         masterHead.getUserNameLabel().setContents(getUserName());
