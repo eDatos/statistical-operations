@@ -7,7 +7,6 @@ import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePr
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.widgets.OperationsMenu;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
-import org.siemac.metamac.web.common.client.utils.ApplicationOrganisation;
 import org.siemac.metamac.web.common.client.widgets.BreadCrumbsPanel;
 import org.siemac.metamac.web.common.client.widgets.FooterLayout;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
@@ -86,7 +85,7 @@ public class MainPageViewImpl extends ViewWithUiHandlers<MainPageUiHandlers> imp
         southLayout = new HLayout();
         southLayout.setHeight100();
 
-        footerLayout = new FooterLayout(this.messagePanel, ApplicationOrganisation.getCurrentOrganisation(), OperationsWeb.getProjectVersion());
+        footerLayout = new FooterLayout(this.messagePanel, OperationsWeb.getProjectVersion());
 
         // Set user name
         masterHead.getUserNameLabel().setContents(getUserName());
