@@ -9,10 +9,10 @@ import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuBut
 import org.siemac.metamac.statistical.operations.web.client.events.SelectMenuButtonEvent.SelectMenuButtonHandler;
 import org.siemac.metamac.statistical.operations.web.client.events.UpdateOperationsListsEvent;
 import org.siemac.metamac.statistical.operations.web.client.view.handlers.MainPageUiHandlers;
+import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlResult;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsResult;
-import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlResult;
 import org.siemac.metamac.web.common.client.enums.MessageTypeEnum;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent;
 import org.siemac.metamac.web.common.client.events.HideMessageEvent.HideMessageHandler;
@@ -20,12 +20,10 @@ import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent.ShowMessageHandler;
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent;
 import org.siemac.metamac.web.common.client.events.UpdatePlaceHistoryEvent.UpdatePlaceHistoryHandler;
-import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 import org.siemac.metamac.web.common.client.widgets.MasterHead;
 import org.siemac.metamac.web.common.shared.CloseSessionAction;
 import org.siemac.metamac.web.common.shared.CloseSessionResult;
-import org.siemac.metamac.web.common.shared.utils.SharedTokens;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Window;
@@ -215,12 +213,12 @@ public class MainPagePresenter extends Presenter<MainPagePresenter.MainPageView,
     }
 
     @Override
-    public void downloadUserGuide() {
-        dispatcher.execute(new GetUserGuideUrlAction(), new WaitingAsyncCallbackHandlingError<GetUserGuideUrlResult>(this) {
+    public void openHelpUrl() {
+        dispatcher.execute(new GetHelpUrlAction(), new WaitingAsyncCallbackHandlingError<GetHelpUrlResult>(this) {
 
             @Override
-            public void onWaitSuccess(GetUserGuideUrlResult result) {
-                CommonWebUtils.showDownloadFileWindow(SharedTokens.FILE_DOWNLOAD_DIR_PATH, SharedTokens.PARAM_DOC, result.getUserGuideUrl());
+            public void onWaitSuccess(GetHelpUrlResult result) {
+                Window.open(result.getHelpUrl(), "_blank", "");
             }
         });
     }

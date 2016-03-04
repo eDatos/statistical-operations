@@ -11,7 +11,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstance
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetUserGuideUrlActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.GetHelpUrlActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyOperationActionHandler;
@@ -38,7 +38,7 @@ import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListActio
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetUserGuideUrlAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
@@ -120,7 +120,7 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetNavigationBarUrlAction.class, GetNavigationBarUrlActionHandler.class);
 
         bindHandler(LoadConfigurationPropertiesAction.class, LoadConfigurationPropertiesActionHandler.class);
-        bindHandler(GetUserGuideUrlAction.class, GetUserGuideUrlActionHandler.class);
+        bindHandler(GetHelpUrlAction.class, GetHelpUrlActionHandler.class);
 
         // This action should be removed to use CAS authentication
         bindHandler(MockCASUserAction.class, MockCASUserActionHandler.class);

@@ -7,13 +7,12 @@ import org.siemac.metamac.statistical.operations.core.constants.StatisticalOpera
 public class StatisticalOperationsConfigurationServiceImpl extends ConfigurationServiceImpl implements StatisticalOperationsConfigurationService {
 
     @Override
-    public String retrieveUserGuideFileName() throws MetamacException {
-        return retrieveProperty(StatisticalOperationsConfigurationConstants.USER_GUIDE_FILE_NAME);
+    public String retrieveHelpUrl() throws MetamacException {
+        return retrieveProperty(StatisticalOperationsConfigurationConstants.HELP_URL);
     }
 
     @Override
     public String retrieveDocsPath() throws MetamacException {
         return retrieveProperty(StatisticalOperationsConfigurationConstants.DOCS_PATH);
     }
-
 }
