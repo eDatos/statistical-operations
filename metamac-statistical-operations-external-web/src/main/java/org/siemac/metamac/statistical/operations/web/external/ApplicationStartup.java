@@ -1,10 +1,27 @@
 package org.siemac.metamac.statistical.operations.web.external;
 
+import javax.servlet.ServletContextEvent;
+
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.listener.ApplicationStartupListener;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApplicationStartup extends ApplicationStartupListener {
+
+    private static final Logger log = LoggerFactory.getLogger(ApplicationStartup.class);
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        super.contextInitialized(sce);
+        try {
+            String organisation = configurationService.retrieveOrganisation();
+            WebUtils.setOrganisation(organisation);
+        } catch (MetamacException e) {
+            log.error("Error retrieving the organisation from the configuration", e);
+        }
+    }
 
     @Override
     public String projectName() {
@@ -25,5 +42,4 @@ public class ApplicationStartup extends ApplicationStartupListener {
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_COMMON_METADATA_EXTERNAL_API);
         checkRequiredProperty(StatisticalOperationsConfigurationConstants.ENDPOINT_SRM_EXTERNAL_API);
     }
-
 }
