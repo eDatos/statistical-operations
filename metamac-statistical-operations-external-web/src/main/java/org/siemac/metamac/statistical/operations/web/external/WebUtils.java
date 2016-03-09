@@ -12,14 +12,19 @@ import org.siemac.metamac.core.common.enume.shared.ApplicationOrganisationEnum;
 public class WebUtils {
 
     protected static String organisation = null;
+    protected static String apiBaseUrl   = null;
 
     public static String getBaseURL(HttpServletRequest request) throws MalformedURLException {
-        URL url = new URL(request.getRequestURL().toString());
-        return url.getAuthority() + url.getPath().replace("/docs/api/swagger.jsp", StringUtils.EMPTY);
+        URL url = new URL(apiBaseUrl);
+        return url.getAuthority() + url.getPath();
     }
 
     public static void setOrganisation(String organisation) {
         WebUtils.organisation = organisation;
+    }
+
+    public static void setApiBaseUrl(String apiBaseUrl) {
+        WebUtils.apiBaseUrl = apiBaseUrl;
     }
 
     public static String getFavicon() {

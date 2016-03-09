@@ -30,6 +30,16 @@
     </filter-mapping>
         
     <!-- Rest -->
+    
+    <filter>
+            <filter-name>DocFilter</filter-name>
+            <filter-class>org.siemac.metamac.statistical.operations.web.external.DocFilter</filter-class>
+    </filter>
+    <filter-mapping>
+            <filter-name>DocFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
