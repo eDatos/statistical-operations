@@ -5,7 +5,7 @@
     "version" : "1.7.2-SNAPSHOT",
     "title" : "API de operaciones estadísticas"
   },
-  "host" : "<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getBaseURL(request)%>",
+  "host" : "<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getBaseURL()%>",
   "schemes" : [],
   "tags" : [
     {
