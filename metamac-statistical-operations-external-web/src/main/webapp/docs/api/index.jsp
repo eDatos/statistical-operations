@@ -6,28 +6,28 @@
   <title>Statistical Operations API</title>
   <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-  <link href='../../../swagger-ui/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='../../../swagger-ui/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='../../../swagger-ui/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='../../../swagger-ui/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='../../../swagger-ui/css/print.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/css/typography.css" media='screen' rel='stylesheet' type='text/css'/>
+  <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/css/reset.css" media='screen' rel='stylesheet' type='text/css'/>
+  <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/css/screen.css" media='screen' rel='stylesheet' type='text/css'/>
+  <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/css/reset.css" media='print' rel='stylesheet' type='text/css'/>
+  <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/css/print.css" media='print' rel='stylesheet' type='text/css'/>
   <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getFavicon()%>" rel="shortcut icon"/>
-  <script src='../../../swagger-ui/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/handlebars-2.0.0.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/underscore-min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/backbone-min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/swagger-ui.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/jsoneditor.min.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/marked.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lib/swagger-oauth.js' type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/jquery-1.8.0.min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/jquery.slideto.min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/jquery.wiggle.min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/jquery.ba-bbq.min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/handlebars-2.0.0.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/underscore-min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/backbone-min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/swagger-ui.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/highlight.7.3.pack.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/jsoneditor.min.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/marked.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lib/swagger-oauth.js" type='text/javascript'></script>
 
   <!-- Some basic translations -->
-  <script src='../../../swagger-ui/lang/translator.js' type='text/javascript'></script>
-  <script src='../../../swagger-ui/lang/es.js' type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lang/translator.js" type='text/javascript'></script>
+  <script src="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>/swagger-ui/lang/es.js" type='text/javascript'></script>
 
   <script type="text/javascript">
     $(function () {
