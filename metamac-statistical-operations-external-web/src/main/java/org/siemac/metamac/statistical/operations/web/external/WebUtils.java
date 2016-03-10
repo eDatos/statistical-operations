@@ -1,6 +1,9 @@
 package org.siemac.metamac.statistical.operations.web.external;
 
 import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.siemac.metamac.core.common.constants.shared.WebFaviconConstants;
@@ -21,6 +24,11 @@ public class WebUtils {
 
     public static String getApiBaseURL() throws MalformedURLException {
         return apiBaseUrl;
+    }
+
+    public static String getResourceBaseURL(HttpServletRequest request) throws MalformedURLException {
+        URL url = new URL(request.getRequestURL().toString());
+        return url.getProtocol() + "://" + url.getAuthority() + url.getPath().replace("/docs/api/index.jsp", StringUtils.EMPTY);
     }
 
     public static void setOrganisation(String organisation) {
