@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Statistical Operations API</title>
-
   <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
   <link href='../../../swagger-ui/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -11,9 +11,7 @@
   <link href='../../../swagger-ui/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='../../../swagger-ui/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
   <link href='../../../swagger-ui/css/print.css' media='print' rel='stylesheet' type='text/css'/>
-
   <link href="<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getFavicon()%>" rel="shortcut icon"/>
-
   <script src='../../../swagger-ui/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/lib/jquery.slideto.min.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/lib/jquery.wiggle.min.js' type='text/javascript'></script>
@@ -23,6 +21,7 @@
   <script src='../../../swagger-ui/lib/backbone-min.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/swagger-ui.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/lib/highlight.7.3.pack.js' type='text/javascript'></script>
+  <script src='../../../swagger-ui/lib/jsoneditor.min.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/lib/marked.js' type='text/javascript'></script>
   <script src='../../../swagger-ui/lib/swagger-oauth.js' type='text/javascript'></script>
 
@@ -35,24 +34,22 @@
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
-      }
-      else {
-        var baseUrl = document.location.href;
-        //this removes the anchor at the end, if there is one
-        baseUrl = baseUrl.substring(0, (baseUrl.indexOf("#") == -1) ? baseUrl.length : baseUrl.indexOf("#"));
-        //this removes the query after the file name, if there is one
-        baseUrl = baseUrl.substring(0, (baseUrl.indexOf("?") == -1) ? baseUrl.length : baseUrl.indexOf("?"));
-        //this removes everything after the last slash in the path
-        baseUrl = baseUrl.substring(0, (baseUrl.lastIndexOf("/") == -1) ? baseUrl.length : baseUrl.lastIndexOf("/"));
+      } else {
+    	  var baseUrl = document.location.href;
+          //this removes the anchor at the end, if there is one
+          baseUrl = baseUrl.substring(0, (baseUrl.indexOf("#") == -1) ? baseUrl.length : baseUrl.indexOf("#"));
+          //this removes the query after the file name, if there is one
+          baseUrl = baseUrl.substring(0, (baseUrl.indexOf("?") == -1) ? baseUrl.length : baseUrl.indexOf("?"));
+          //this removes everything after the last slash in the path
+          baseUrl = baseUrl.substring(0, (baseUrl.lastIndexOf("/") == -1) ? baseUrl.length : baseUrl.lastIndexOf("/"));
 
-        url = baseUrl + "/swagger.jsp";
+          url = baseUrl + "/swagger.jsp";
       }
 
       // Pre load translate...
       if(window.SwaggerTranslator) {
         window.SwaggerTranslator.translate();
       }
-
       window.swaggerUi = new SwaggerUi({
         url: url,
         dom_id: "swagger-ui-container",
@@ -61,10 +58,11 @@
           if(typeof initOAuth == "function") {
             initOAuth({
               clientId: "your-client-id",
-              clientSecret: "your-client-secret",
+              clientSecret: "your-client-secret-if-required",
               realm: "your-realms",
               appName: "your-app-name", 
-              scopeSeparator: ","
+              scopeSeparator: ",",
+              additionalQueryStringParams: {}
             });
           }
 
@@ -76,13 +74,15 @@
             hljs.highlightBlock(e)
           });
 
-          //addApiKeyAuthorization();
+          addApiKeyAuthorization();
         },
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
         docExpansion: "none",
+        jsonEditor: false,
         apisSorter: "alpha",
+        defaultModelRendering: 'model',
         showRequestHeaders: false
       });
 
