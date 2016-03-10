@@ -3,11 +3,15 @@
         "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
 <urlrewrite>
 	<rule>
-		<from>/apis/operations/latest</from>
-		<to type="redirect">%{context-path}/v1.0/</to>
+		<from>/apis/operations/latest/</from>
+		<to type="redirect">/operations/v1.0/</to>
 	</rule>
 	<rule>
-		<from>^/v1.0$</from>
-		<to type="redirect">%{context-path}/v1.0/</to>
+		<from>/apis/operations/latest</from>
+		<to type="redirect">/operations/v1.0/</to>
+	</rule>
+	<rule>
+		<from>^/apis/operations/v1.0$</from>
+		<to type="redirect">/operations/v1.0/</to>
 	</rule>
 </urlrewrite>
