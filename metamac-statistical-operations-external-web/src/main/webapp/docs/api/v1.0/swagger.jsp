@@ -43,7 +43,7 @@
                }
             }
          ],
-         "description":"<p>Java class for ClassSystems complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"ClassSystems\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"classSystem\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Clasificaciones usadas en la instancia de la operación estadística."
       },
       "CollMethods":{
          "type":"object",
@@ -85,7 +85,7 @@
                }
             }
          ],
-         "description":"Valores aceptados para los tipos de costes"
+         "description":"Valores aceptados para los tipos de costes asociados a la operación."
       },
       "DataSharings":{
          "type":"object",
@@ -106,7 +106,7 @@
                }
             }
          ],
-         "description":"<p>Java class for DataSharings complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"DataSharings\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"dataSharing\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Acuerdos y convenios existentes entre organizaciones productoras de datos para la coordinación y compartición de los mismos. "
       },
       "Families":{
          "type":"object",
@@ -127,7 +127,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Families complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Families\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"family\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listado de familias en las que se agrupan las diferentes operaciones estadísticas"
       },
       "Family":{
          "type":"object",
@@ -209,7 +209,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Family complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Family\">\r\n   &lt;complexContent>\r\n     &lt;restriction base=\"{http://www.w3.org/2001/XMLSchema}anyType\">\r\n       &lt;sequence>\r\n         &lt;element name=\"id\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"urn\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"selfLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"parentLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"childLinks\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ChildLinks\"/>\r\n         &lt;element name=\"name\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\"/>\r\n         &lt;element name=\"acronym\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"description\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"inventoryDate\" type=\"{http://www.w3.org/2001/XMLSchema}dateTime\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n       &lt;attribute name=\"kind\" use=\"required\" type=\"{http://www.w3.org/2001/XMLSchema}string\" />\r\n     &lt;/restriction>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Familia de operaciones estadísticas"
       },
       "FreqColls":{
          "type":"object",
@@ -230,7 +230,7 @@
                }
             }
          ],
-         "description":"<p>Java class for FreqColls complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"FreqColls\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"freqColl\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Frecuencias de recolección de los datos."
       },
       "GeographicGranularities":{
          "type":"object",
@@ -251,7 +251,7 @@
                }
             }
          ],
-         "description":"<p>Java class for GeographicGranularities complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"GeographicGranularities\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"geographicGranularity\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Granularidades geográficas."
       },
       "InformationSuppliers":{
          "type":"object",
@@ -272,7 +272,7 @@
                }
             }
          ],
-         "description":"<p>Java class for InformationSuppliers complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"InformationSuppliers\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"informationSupplier\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Organizaciones obligadas a suministrar información para la elaboración de la operación estadística."
       },
       "Instance":{
          "type":"object",
@@ -613,7 +613,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Instance complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Instance\">\r\n   &lt;complexContent>\r\n     &lt;restriction base=\"{http://www.w3.org/2001/XMLSchema}anyType\">\r\n       &lt;sequence>\r\n         &lt;element name=\"id\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"urn\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"selfLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"parentLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"childLinks\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ChildLinks\" minOccurs=\"0\"/>\r\n         &lt;element name=\"name\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\"/>\r\n         &lt;element name=\"acronym\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statisticalOperation\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\"/>\r\n         &lt;element name=\"successor\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" minOccurs=\"0\"/>\r\n         &lt;element name=\"predecessor\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" minOccurs=\"0\"/>\r\n         &lt;element name=\"dataDescription\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statisticalPopulation\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statisticalUnits\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}StatisticalUnits\" minOccurs=\"0\"/>\r\n         &lt;element name=\"geographicGranularity\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}GeographicGranularities\" minOccurs=\"0\"/>\r\n         &lt;element name=\"geographicComparability\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"temporalGranularity\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}TemporalGranularities\" minOccurs=\"0\"/>\r\n         &lt;element name=\"temporalComparability\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"basePeriod\" type=\"{http://www.w3.org/2001/XMLSchema}string\" minOccurs=\"0\"/>\r\n         &lt;element name=\"measures\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}Measures\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statConcDefsDescription\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statConcDefs\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}StatConcDefs\" minOccurs=\"0\"/>\r\n         &lt;element name=\"classSystemsDescription\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"classSystems\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}ClassSystems\" minOccurs=\"0\"/>\r\n         &lt;element name=\"docMethod\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statisticalOperationSource\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" minOccurs=\"0\"/>\r\n         &lt;element name=\"collMethod\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" minOccurs=\"0\"/>\r\n         &lt;element name=\"informationSuppliers\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}InformationSuppliers\" minOccurs=\"0\"/>\r\n         &lt;element name=\"freqColls\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}FreqColls\" minOccurs=\"0\"/>\r\n         &lt;element name=\"dataValidation\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"dataCompilation\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"adjustment\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"inventoryDate\" type=\"{http://www.w3.org/2001/XMLSchema}dateTime\" minOccurs=\"0\"/>\r\n         &lt;element name=\"qualityDoc\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"qualityAssure\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"qualityAssmnt\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"userNeeds\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"userSat\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"completeness\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"timeliness\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"punctuality\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"accuracyOverall\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"samplingErr\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"nonsamplingErr\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"coherXDom\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"coherInternal\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"comment\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n       &lt;attribute name=\"kind\" use=\"required\" type=\"{http://www.w3.org/2001/XMLSchema}string\" />\r\n     &lt;/restriction>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"La instancia de operación estadística es cada una de las realizaciones de una misma operación estadística. Las instancias pueden ser de dos tipos: SERIE o SECCIÓN. Las instancias de tipo serie proveen información de una serie temporal completa y la instancia acaba cuando se produce una rotura de la serie. Las instancias de tipo sección proveen información de un único instante de tiempo."
       },
       "InstanceTypes":{
          "type":"object",
@@ -634,7 +634,7 @@
                }
             }
          ],
-         "description":"<p>Java class for InstanceTypes complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"InstanceTypes\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"instanceType\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Tipos de instancias"
       },
       "Instances":{
          "type":"object",
@@ -655,7 +655,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Instances complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Instances\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"instance\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listados de instancias de operaciones estadísticas."
       },
       "LegalActs":{
          "type":"object",
@@ -676,7 +676,7 @@
                }
             }
          ],
-         "description":"<p>Java class for LegalActs complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"LegalActs\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"legalActs\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Leyes u otro tipo de convenios (formales o informales) que otorgan reponsabilidad y autoridad al organismo para la recolección, procesado y diseminación de la estadística."
       },
       "Measures":{
          "type":"object",
@@ -697,7 +697,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Measures complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Measures\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"measure\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Unidades en las que se miden los datos."
       },
       "OfficialityTypes":{
          "type":"object",
@@ -718,7 +718,7 @@
                }
             }
          ],
-         "description":"<p>Java class for OfficialityTypes complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"OfficialityTypes\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"officialityType\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Tipos de oficialidad que se le puede asignar a una operación estadística."
       },
       "Operation":{
          "type":"object",
@@ -975,7 +975,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Operation complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Operation\">\r\n   &lt;complexContent>\r\n     &lt;restriction base=\"{http://www.w3.org/2001/XMLSchema}anyType\">\r\n       &lt;sequence>\r\n         &lt;element name=\"id\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"urn\" type=\"{http://www.w3.org/2001/XMLSchema}string\"/>\r\n         &lt;element name=\"selfLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"parentLink\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ResourceLink\"/>\r\n         &lt;element name=\"childLinks\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ChildLinks\"/>\r\n         &lt;element name=\"name\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\"/>\r\n         &lt;element name=\"acronym\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"subjectArea\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\"/>\r\n         &lt;element name=\"secondarySubjectAreas\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}SecondarySubjectAreas\" minOccurs=\"0\"/>\r\n         &lt;element name=\"objective\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\"/>\r\n         &lt;element name=\"description\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"statisticalOperationType\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\"/>\r\n         &lt;element name=\"officialityType\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\"/>\r\n         &lt;element name=\"indicatorSystem\" type=\"{http://www.w3.org/2001/XMLSchema}boolean\" minOccurs=\"0\"/>\r\n         &lt;element name=\"producers\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}Producers\"/>\r\n         &lt;element name=\"regionalResponsibles\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}RegionalResponsibles\"/>\r\n         &lt;element name=\"regionalContributors\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}RegionalContributors\" minOccurs=\"0\"/>\r\n         &lt;element name=\"currentlyActive\" type=\"{http://www.w3.org/2001/XMLSchema}boolean\" minOccurs=\"0\"/>\r\n         &lt;element name=\"status\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}Status\"/>\r\n         &lt;element name=\"publishers\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}Publishers\"/>\r\n         &lt;element name=\"relPolUsAc\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"releaseCalendar\" type=\"{http://www.w3.org/2001/XMLSchema}boolean\" minOccurs=\"0\"/>\r\n         &lt;element name=\"releaseCalendarAccess\" type=\"{http://www.w3.org/2001/XMLSchema}string\" minOccurs=\"0\"/>\r\n         &lt;element name=\"updateFrequencies\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}UpdateFrequencies\" minOccurs=\"0\"/>\r\n         &lt;element name=\"currentInstance\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" minOccurs=\"0\"/>\r\n         &lt;element name=\"inventoryDate\" type=\"{http://www.w3.org/2001/XMLSchema}dateTime\" minOccurs=\"0\"/>\r\n         &lt;element name=\"revPolicy\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"revPractice\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"contact\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\"/>\r\n         &lt;element name=\"legalActs\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}LegalActs\" minOccurs=\"0\"/>\r\n         &lt;element name=\"dataSharings\" type=\"{http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain}DataSharings\" minOccurs=\"0\"/>\r\n         &lt;element name=\"confidentialityPolicy\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"confidentialityDataTreatment\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n         &lt;element name=\"comment\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}InternationalString\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n       &lt;attribute name=\"kind\" use=\"required\" type=\"{http://www.w3.org/2001/XMLSchema}string\" />\r\n     &lt;/restriction>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Conjunto de actividades, incluidas las preparatorias, que conducen a la obtención y/o difusión de resultados estadísticos sobre un determinado sector o tema o territorio. También se incluyen en el ámbito de esta definición los trabajos de infraestructura y de normalización estadística que posibilitan la coordinación, homogeneización e integración de las estadísticas, así como la recopilación de resultados y la confección de síntesis."
       },
       "Operations":{
          "type":"object",
@@ -996,7 +996,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Operations complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Operations\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"operation\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listado de operaciones estadísticas."
       },
       "Producers":{
          "type":"object",
@@ -1017,7 +1017,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Producers complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Producers\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"producer\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listado de organismos que colaboran en la producción de la estadística."
       },
       "Publishers":{
          "type":"object",
@@ -1038,7 +1038,7 @@
                }
             }
          ],
-         "description":"<p>Java class for Publishers complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"Publishers\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"publisher\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listado de organismos que difunden los resultados de la operación estadística."
       },
       "RegionalContributors":{
          "type":"object",
@@ -1059,7 +1059,7 @@
                }
             }
          ],
-         "description":"<p>Java class for RegionalContributors complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"RegionalContributors\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"regionalContributor\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Organismos regionales colaboradores de la operación."
       },
       "RegionalResponsibles":{
          "type":"object",
@@ -1080,7 +1080,7 @@
                }
             }
          ],
-         "description":"<p>Java class for RegionalResponsibles complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"RegionalResponsibles\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"regionalResponsible\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Organismos regionales responsables de la operación."
       },
       "SecondarySubjectAreas":{
          "type":"object",
@@ -1101,7 +1101,7 @@
                }
             }
          ],
-         "description":"<p>Java class for SecondarySubjectAreas complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"SecondarySubjectAreas\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"secondarySubjectArea\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Áreas temáticas secundarias relacionadas con la operación."
       },
       "StatConcDefs":{
          "type":"object",
@@ -1122,7 +1122,7 @@
                }
             }
          ],
-         "description":"<p>Java class for StatConcDefs complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"StatConcDefs\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"statConcDef\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Listado de conceptos que se manejan en la operación."
       },
       "StatisticalOperationSources":{
          "type":"object",
@@ -1143,7 +1143,7 @@
                }
             }
          ],
-         "description":"<p>Java class for StatisticalOperationSources complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"StatisticalOperationSources\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"statisticalOperationSource\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Fuentes usadas para la elaboración de la operación estadística."
       },
       "StatisticalOperationTypes":{
          "type":"object",
@@ -1164,7 +1164,7 @@
                }
             }
          ],
-         "description":"<p>Java class for StatisticalOperationTypes complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"StatisticalOperationTypes\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"statisticalOperationType\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Item\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Tipos de operaciones estadísticas."
       },
       "StatisticalUnits":{
          "type":"object",
@@ -1185,7 +1185,7 @@
                }
             }
          ],
-         "description":"<p>Java class for StatisticalUnits complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"StatisticalUnits\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"statisticalUnit\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Unidades básicas de observación estadística para las que se proporcionan los datos."
       },
       "Status":{
          "type":"string",
@@ -1196,7 +1196,7 @@
             "PRODUCTION",
             "OUT_OF_PRINT"
          ],
-         "description":"<p>Java class for Status.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n<p>\r\n<pre>\r\n &lt;simpleType name=\"Status\">\r\n   &lt;restriction base=\"{http://www.w3.org/2001/XMLSchema}token\">\r\n     &lt;enumeration value=\"PLANNING\"/>\r\n     &lt;enumeration value=\"DESIGN\"/>\r\n     &lt;enumeration value=\"PRODUCTION\"/>\r\n     &lt;enumeration value=\"OUT_OF_PRINT\"/>\r\n   &lt;/restriction>\r\n &lt;/simpleType>\r\n <\/pre>"
+         "description":"Estado de la operación estadística."
       },
       "TemporalGranularities":{
          "type":"object",
@@ -1217,7 +1217,7 @@
                }
             }
          ],
-         "description":"<p>Java class for TemporalGranularities complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"TemporalGranularities\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"temporalGranularity\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Granularidades temporales que contemplan los datos de la operación estadística."
       },
       "UpdateFrequencies":{
          "type":"object",
@@ -1238,7 +1238,7 @@
                }
             }
          ],
-         "description":"<p>Java class for UpdateFrequencies complex type.\r\n\r\n<p>The following schema fragment specifies the expected content contained within this class.\r\n\r\n<pre>\r\n &lt;complexType name=\"UpdateFrequencies\">\r\n   &lt;complexContent>\r\n     &lt;extension base=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}ListBase\">\r\n       &lt;sequence>\r\n         &lt;element name=\"updateFrequency\" type=\"{http://www.siemac.org/metamac/rest/common/v1.0/domain}Resource\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>\r\n       &lt;/sequence>\r\n     &lt;/extension>\r\n   &lt;/complexContent>\r\n &lt;/complexType>\r\n <\/pre>"
+         "description":"Frecuencias de acualización de los datos."
       },
       "ChildLinks":{
          "type":"object",
@@ -1264,7 +1264,7 @@
                }
             }
          ],
-         "description":""
+         "description":"Recursos a los que se puede acceder desde el presente recurso."
       },
       "InternationalString":{
          "type":"object",
@@ -1282,7 +1282,7 @@
                }
             }
          ],
-         "description":""
+         "description":"Texto en múltiples lenguajes."
       },
       "Item":{
          "type":"object",
@@ -1416,7 +1416,7 @@
                }
             }
          ],
-         "description":""
+         "description":"Texto en un idioma en particular."
       },
       "Resource":{
          "type":"object",
@@ -1506,7 +1506,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all statistical operations sources",
+            "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
             "produces":[
                "application/xml"
@@ -1525,8 +1525,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1536,7 +1539,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Find operations",
+            "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario.",
             "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
             "produces":[
                "application/xml"
@@ -1546,25 +1549,25 @@
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"Maximum number of results per page"
+                  "description":"Número máximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Position of first result"
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to order the results by metadata <br/>\r\n- Order operators: ASC, DESC<br/>\r\n- Metadata to order: ID<br/>\r\n- Example: ID ASC<br/>"
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to filter results by metadata <br/>\r\n- Logical operators: AND, OR <br/>\r\n- Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>\r\n- Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, StatisticalOperation_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM,\r\nPRODUCER_URN,\r\nCURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>\r\n- Example: (ID LIKE \"Operation1\" AND OFFICIALITY_TYPE_ID EQ \"OfficialityType1\") OR (ACRONYM EQ \"Op1\") OR (INVENTORY_DATE IS_NULL)"
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
                }
             ],
             "responses":{
@@ -1578,8 +1581,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1589,7 +1595,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Retrieve families by operation",
+            "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
             "produces":[
                "application/xml"
@@ -1599,7 +1605,7 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Id operation"
+                  "description":"Identificador de la operación estadística"
                }
             ],
             "responses":{
@@ -1613,8 +1619,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1624,7 +1633,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Retrieve instance by id",
+            "description":"Permite obtener una instancia en particular de una operación estadística.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
             "produces":[
                "application/xml"
@@ -1634,13 +1643,13 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Instance id"
+                  "description":"Identificador de la instancia"
                },
                {
                   "name":"operationId",
                   "in":"path",
                   "type":"string",
-                  "description":"Operation id"
+                  "description":"Identificador de la operación estadística"
                }
             ],
             "responses":{
@@ -1654,8 +1663,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1665,7 +1677,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all officiality types",
+            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
             "produces":[
                "application/xml"
@@ -1684,8 +1696,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1695,7 +1710,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Find instances by operation",
+            "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
             "produces":[
                "application/xml"
@@ -1705,31 +1720,31 @@
                   "name":"operationId",
                   "in":"path",
                   "type":"string",
-                  "description":"Operation id"
+                  "description":"Identificador de la operación."
                },
                {
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"Maximum number of results per page"
+                  "description":"Número máximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Position of first result"
+                  "description":"Deplazamiento. Número a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to order the results by metadata <br/>\r\n- Order operators: ASC, DESC<br/>\r\n- Metadata to order: ID<br/>\r\n- Example: ID ASC<br/>"
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to filter results by metadata <br/>\r\n- Logical operators: AND, OR <br/>\r\n- Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>\r\n- Metadata to filter: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN, INVENTORY_DATE <br/>\r\n- Example: (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
                }
             ],
             "responses":{
@@ -1743,8 +1758,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1754,7 +1772,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Find families",
+            "description":"Permite obtener el listado de familias de operaciones estadísticas.",
             "operationId":"resource_StatisticalOperationsV1_0_findFamilies_GET",
             "produces":[
                "application/xml"
@@ -1764,25 +1782,25 @@
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"Maximum number of results per page"
+                  "description":"Número máximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Position of first result"
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to order the results by metadata <br/>\r\n- Order operators: ASC, DESC<br/>\r\n- Metadata to order: ID<br/>\r\n- Example: ID ASC<br/>"
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to filter results by metadata <br/>\r\n- Logical operators: AND, OR <br/>\r\n- Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>\r\n- Metadata to filter: ID, URN, TITLE, ACRONYM, DESCRIPTION, INVENTORY_DATE <br/>\r\n- Example: (ID LIKE \"Family1\" AND ACRONYM EQ \"Family1\") OR (DESCRIPTION IS_NOT_NULL)"
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DESCRIPTION e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Family1\" AND ACRONYM EQ \"Family1\") OR (DESCRIPTION IS_NOT_NULL)"
                }
             ],
             "responses":{
@@ -1796,8 +1814,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1807,7 +1828,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all costs",
+            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
             "produces":[
                "application/xml"
@@ -1826,8 +1847,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1837,7 +1861,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Find operations by family",
+            "description":"Permite obtener todas las operaciones que forman parte de una determina familia.",
             "operationId":"resource_StatisticalOperationsV1_0_findOperationsByFamily_GET",
             "produces":[
                "application/xml"
@@ -1847,31 +1871,31 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Family id"
+                  "description":"Identificador de la familia estadística"
                },
                {
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"Maximum number of results per page"
+                  "description":"Número máximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Position of first result"
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to order the results by metadata <br/>\r\n- Order operators: ASC, DESC<br/>\r\n- Metadata to order: ID<br/>\r\n- Example: ID ASC<br/>"
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Clause to filter results by metadata <br/>\r\n- Logical operators: AND, OR <br/>\r\n- Comparison operators: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL, IN <br/>\r\n- Metadata to filter: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, StatisticalOperation_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM,\r\nPRODUCER_URN,\r\nCURRENTLY_ACTIVE, STATUS, PROC_STATUS, PUBLISHER_URN, INVENTORY_DATE <br/>\r\n- Example: (ID LIKE \"Operation1\" AND OFFICIALITY_TYPE_ID EQ \"OfficialityType1\") OR (ACRONYM EQ \"Op1\") OR (INVENTORY_DATE IS_NULL)"
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
                }
             ],
             "responses":{
@@ -1885,8 +1909,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1896,7 +1923,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Retrieve operation by id",
+            "description":"Permite obtener una operación estadística en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOperationById_GET",
             "produces":[
                "application/xml"
@@ -1906,7 +1933,7 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Id"
+                  "description":"Identificador de la operación estadística"
                }
             ],
             "responses":{
@@ -1920,8 +1947,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1931,7 +1961,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all coll methods",
+            "description":"Permite obtener todos los métodos de recolección de datos existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCollMethods_GET",
             "produces":[
                "application/xml"
@@ -1950,8 +1980,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1961,7 +1994,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all instance types",
+            "description":"Permite obtener todos los tipos de instancias de operaciones que existen.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceTypes_GET",
             "produces":[
                "application/xml"
@@ -1980,8 +2013,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -1991,7 +2027,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Retrieve family by id",
+            "description":"Permite obtener una familia en particular.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamilyById_GET",
             "produces":[
                "application/xml"
@@ -2001,7 +2037,7 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Family id"
+                  "description":"Identificador de la familia"
                }
             ],
             "responses":{
@@ -2015,8 +2051,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
@@ -2026,7 +2065,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Retrieve all statistical operations types",
+            "description":"Permite obtener todos los tipos de operaciones estadísticas existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationTypes_GET",
             "produces":[
                "application/xml"
@@ -2045,8 +2084,11 @@
                   },
                   "description":"Success"
                },
-               "default":{
-                  "description":"Unexpected error."
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
                }
             }
          }
