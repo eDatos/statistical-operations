@@ -11,15 +11,15 @@
    ],
    "tags":[
       {
-         "name":"Familias",
+         "name":"Familias de operaciones",
          "description":""
       },
       {
-         "name":"Operaciones",
+         "name":"Operaciones estadísticas",
          "description":""
       },
       {
-         "name":"Listados de valores",
+         "name":"Tablas de valores auxiliares",
          "description":""
       }
    ],
@@ -1501,276 +1501,10 @@
       }
    },
    "paths":{
-      "/v1.0/statisticalOperationSources":{
-         "get":{
-            "tags":[
-               "Listados de valores"
-            ],
-            "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/StatisticalOperationSources"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
-      "/v1.0/operations":{
-         "get":{
-            "tags":[
-               "Operaciones"
-            ],
-            "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario.",
-            "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"limit",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Número máximo de resultados a obtener"
-               },
-               {
-                  "name":"offset",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
-               },
-               {
-                  "name":"orderBy",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
-               },
-               {
-                  "name":"query",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/Operations"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
-      "/v1.0/operations/{id}/families":{
-         "get":{
-            "tags":[
-               "Familias"
-            ],
-            "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "type":"string",
-                  "description":"Identificador de la operación estadística"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/Families"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
-      "/v1.0/operations/{operationId}/instances/{id}":{
-         "get":{
-            "tags":[
-               "Operaciones"
-            ],
-            "description":"Permite obtener una instancia en particular de una operación estadística.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "type":"string",
-                  "description":"Identificador de la instancia"
-               },
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "type":"string",
-                  "description":"Identificador de la operación estadística"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/Instance"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
-      "/v1.0/officialityTypes":{
-         "get":{
-            "tags":[
-               "Listados de valores"
-            ],
-            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/OfficialityTypes"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
-      "/v1.0/operations/{operationId}/instances":{
-         "get":{
-            "tags":[
-               "Operaciones"
-            ],
-            "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto.",
-            "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"operationId",
-                  "in":"path",
-                  "type":"string",
-                  "description":"Identificador de la operación."
-               },
-               {
-                  "name":"limit",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Número máximo de resultados a obtener"
-               },
-               {
-                  "name":"offset",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Deplazamiento. Número a partir del cual se comienzan a obtener los resultados."
-               },
-               {
-                  "name":"orderBy",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
-               },
-               {
-                  "name":"query",
-                  "in":"query",
-                  "type":"string",
-                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/Instances"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
       "/v1.0/families":{
          "get":{
             "tags":[
-               "Familias"
+               "Familias de operaciones"
             ],
             "description":"Permite obtener el listado de familias de operaciones estadísticas.",
             "operationId":"resource_StatisticalOperationsV1_0_findFamilies_GET",
@@ -1823,24 +1557,29 @@
             }
          }
       },
-      "/v1.0/costs":{
+      "/v1.0/families/{id}":{
          "get":{
             "tags":[
-               "Listados de valores"
+               "Familias de operaciones"
             ],
-            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
+            "description":"Permite obtener una familia en particular.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveFamilyById_GET",
             "produces":[
                "application/xml"
             ],
             "parameters":[
-
+               {
+                  "name":"id",
+                  "in":"path",
+                  "type":"string",
+                  "description":"Identificador de la familia"
+               }
             ],
             "responses":{
                "200":{
                   "schema":{
                      "description":"",
-                     "$ref":"#/definitions/Costs"
+                     "$ref":"#/definitions/Family"
                   },
                   "headers":{
 
@@ -1859,7 +1598,7 @@
       "/v1.0/families/{id}/operations":{
          "get":{
             "tags":[
-               "Familias"
+               "Familias de operaciones"
             ],
             "description":"Permite obtener todas las operaciones que forman parte de una determina familia.",
             "operationId":"resource_StatisticalOperationsV1_0_findOperationsByFamily_GET",
@@ -1918,10 +1657,66 @@
             }
          }
       },
+      "/v1.0/operations":{
+         "get":{
+            "tags":[
+               "Operaciones estadísticas"
+            ],
+            "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario.",
+            "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+               {
+                  "name":"limit",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Número máximo de resultados a obtener"
+               },
+               {
+                  "name":"offset",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+               },
+               {
+                  "name":"orderBy",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+               },
+               {
+                  "name":"query",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/Operations"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
       "/v1.0/operations/{id}":{
          "get":{
             "tags":[
-               "Operaciones"
+               "Operaciones estadísticas"
             ],
             "description":"Permite obtener una operación estadística en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOperationById_GET",
@@ -1956,10 +1751,253 @@
             }
          }
       },
+      "/v1.0/operations/{operationId}/instances":{
+         "get":{
+            "tags":[
+               "Operaciones estadísticas"
+            ],
+            "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto.",
+            "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "type":"string",
+                  "description":"Identificador de la operación."
+               },
+               {
+                  "name":"limit",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Número máximo de resultados a obtener"
+               },
+               {
+                  "name":"offset",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Deplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+               },
+               {
+                  "name":"orderBy",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Permite ordenar la lista de resultados según un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+               },
+               {
+                  "name":"query",
+                  "in":"query",
+                  "type":"string",
+                  "description":"Permite realizar una búsqueda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN e INVENTORY_DATE.<br/>\r\n Los operadores lógicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparación que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/Instances"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
+      "/v1.0/operations/{operationId}/instances/{id}":{
+         "get":{
+            "tags":[
+               "Operaciones estadísticas"
+            ],
+            "description":"Permite obtener una instancia en particular de una operación estadística.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "type":"string",
+                  "description":"Identificador de la instancia"
+               },
+               {
+                  "name":"operationId",
+                  "in":"path",
+                  "type":"string",
+                  "description":"Identificador de la operación estadística"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/Instance"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
+      "/v1.0/operations/{id}/families":{
+         "get":{
+            "tags":[
+               "Operaciones estadísticas"
+            ],
+            "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "type":"string",
+                  "description":"Identificador de la operación estadística"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/Families"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
+      "/v1.0/statisticalOperationSources":{
+         "get":{
+            "tags":[
+               "Tablas de valores auxiliares"
+            ],
+            "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/StatisticalOperationSources"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
+      "/v1.0/officialityTypes":{
+         "get":{
+            "tags":[
+               "Tablas de valores auxiliares"
+            ],
+            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/OfficialityTypes"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
+      "/v1.0/costs":{
+         "get":{
+            "tags":[
+               "Tablas de valores auxiliares"
+            ],
+            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas.",
+            "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
+            "produces":[
+               "application/xml"
+            ],
+            "parameters":[
+
+            ],
+            "responses":{
+               "200":{
+                  "schema":{
+                     "description":"",
+                     "$ref":"#/definitions/Costs"
+                  },
+                  "headers":{
+
+                  },
+                  "description":"Success"
+               },
+               "406":{
+                  "description":"No aceptable. El formato solicitado no es válido."
+               },
+               "500":{
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+               }
+            }
+         }
+      },
       "/v1.0/collMethods":{
          "get":{
             "tags":[
-               "Listados de valores"
+               "Tablas de valores auxiliares"
             ],
             "description":"Permite obtener todos los métodos de recolección de datos existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCollMethods_GET",
@@ -1992,7 +2030,7 @@
       "/v1.0/instanceTypes":{
          "get":{
             "tags":[
-               "Listados de valores"
+               "Tablas de valores auxiliares"
             ],
             "description":"Permite obtener todos los tipos de instancias de operaciones que existen.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceTypes_GET",
@@ -2022,48 +2060,10 @@
             }
          }
       },
-      "/v1.0/families/{id}":{
-         "get":{
-            "tags":[
-               "Familias"
-            ],
-            "description":"Permite obtener una familia en particular.",
-            "operationId":"resource_StatisticalOperationsV1_0_retrieveFamilyById_GET",
-            "produces":[
-               "application/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "type":"string",
-                  "description":"Identificador de la familia"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "schema":{
-                     "description":"",
-                     "$ref":"#/definitions/Family"
-                  },
-                  "headers":{
-
-                  },
-                  "description":"Success"
-               },
-               "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
-               },
-               "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
-               }
-            }
-         }
-      },
       "/v1.0/statisticalOperationTypes":{
          "get":{
             "tags":[
-               "Listados de valores"
+               "Tablas de valores auxiliares"
             ],
             "description":"Permite obtener todos los tipos de operaciones estadísticas existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationTypes_GET",
