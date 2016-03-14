@@ -1,9 +1,9 @@
 {
    "swagger":"2.0",
    "info":{
-      "description":"Las operaciones estadÌsticas son el elemento principal sobre el que se define toda la actividad estadÌstica del organismo. Todos los recursos que se publican en el organismo guardan relaciÛn de manera directa o indirecta con la operaciÛn estadÌstica. La API de operaciones estadÌsticas permite consultar el inventario de operaciones estadÌsticas del organismo, las diferencias que existen entre las diferentes realizaciones de una misma operaciÛn estadÌstica (instancias) y su agrupaciÛn en familias.",
+      "description":"Las operaciones estad√≠sticas son el elemento principal sobre el que se define toda la actividad estad√≠stica del organismo. Todos los recursos que se publican en el organismo guardan relaci√≥n de manera directa o indirecta con la operaci√≥n estad√≠stica. La API de operaciones estad√≠sticas permite consultar el inventario de operaciones estad√≠sticas del organismo, las diferencias que existen entre las diferentes realizaciones de una misma operaci√≥n estad√≠stica (instancias) y su agrupaci√≥n en familias.",
       "version":"1.0",
-      "title":"API de operaciones estadÌsticas v1.0"
+      "title":"API de operaciones estad√≠sticas v1.0"
    },
    "host":"<%=org.siemac.metamac.statistical.operations.web.external.WebUtils.getApiBaseURL()%>",
    "schemes":[
@@ -43,7 +43,7 @@
                }
             }
          ],
-         "description":"Clasificaciones usadas en la instancia de la operaciÛn estadÌstica."
+         "description":"Clasificaciones usadas en la instancia de la operaci√≥n estad√≠stica."
       },
       "CollMethods":{
          "type":"object",
@@ -64,7 +64,7 @@
                }
             }
          ],
-         "description":"Valores aceptados para los mÈtodos de recolecciÛn de los datos"
+         "description":"Valores aceptados para los m√©todos de recolecci√≥n de los datos"
       },
       "Costs":{
          "type":"object",
@@ -85,7 +85,7 @@
                }
             }
          ],
-         "description":"Valores aceptados para los tipos de costes asociados a la operaciÛn."
+         "description":"Valores aceptados para los tipos de costes asociados a la operaci√≥n."
       },
       "DataSharings":{
          "type":"object",
@@ -106,7 +106,7 @@
                }
             }
          ],
-         "description":"Acuerdos y convenios existentes entre organizaciones productoras de datos para la coordinaciÛn y comparticiÛn de los mismos. "
+         "description":"Acuerdos y convenios existentes entre organizaciones productoras de datos para la coordinaci√≥n y compartici√≥n de los mismos. "
       },
       "Families":{
          "type":"object",
@@ -127,7 +127,7 @@
                }
             }
          ],
-         "description":"Listado de familias en las que se agrupan las diferentes operaciones estadÌsticas"
+         "description":"Listado de familias en las que se agrupan las diferentes operaciones estad√≠sticas"
       },
       "Family":{
          "type":"object",
@@ -209,7 +209,7 @@
                }
             }
          ],
-         "description":"Familia de operaciones estadÌsticas"
+         "description":"Familia de operaciones estad√≠sticas"
       },
       "FreqColls":{
          "type":"object",
@@ -230,7 +230,7 @@
                }
             }
          ],
-         "description":"Frecuencias de recolecciÛn de los datos."
+         "description":"Frecuencias de recolecci√≥n de los datos."
       },
       "GeographicGranularities":{
          "type":"object",
@@ -251,7 +251,7 @@
                }
             }
          ],
-         "description":"Granularidades geogr·ficas."
+         "description":"Granularidades geogr√°ficas."
       },
       "InformationSuppliers":{
          "type":"object",
@@ -272,7 +272,7 @@
                }
             }
          ],
-         "description":"Organizaciones obligadas a suministrar informaciÛn para la elaboraciÛn de la operaciÛn estadÌstica."
+         "description":"Organizaciones obligadas a suministrar informaci√≥n para la elaboraci√≥n de la operaci√≥n estad√≠stica."
       },
       "Instance":{
          "type":"object",
@@ -613,7 +613,7 @@
                }
             }
          ],
-         "description":"La instancia de operaciÛn estadÌstica es cada una de las realizaciones de una misma operaciÛn estadÌstica. Las instancias pueden ser de dos tipos: SERIE o SECCI”N. Las instancias de tipo serie proveen informaciÛn de una serie temporal completa y la instancia acaba cuando se produce una rotura de la serie. Las instancias de tipo secciÛn proveen informaciÛn de un ˙nico instante de tiempo."
+         "description":"La instancia de operaci√≥n estad√≠stica es cada una de las realizaciones de una misma operaci√≥n estad√≠stica. Las instancias pueden ser de dos tipos: SERIE o SECCI√ìN. Las instancias de tipo serie proveen informaci√≥n de una serie temporal completa y la instancia acaba cuando se produce una rotura de la serie. Las instancias de tipo secci√≥n proveen informaci√≥n de un √∫nico instante de tiempo."
       },
       "InstanceTypes":{
          "type":"object",
@@ -655,7 +655,7 @@
                }
             }
          ],
-         "description":"Listados de instancias de operaciones estadÌsticas."
+         "description":"Listados de instancias de operaciones estad√≠sticas."
       },
       "LegalActs":{
          "type":"object",
@@ -676,7 +676,7 @@
                }
             }
          ],
-         "description":"Leyes u otro tipo de convenios (formales o informales) que otorgan reponsabilidad y autoridad al organismo para la recolecciÛn, procesado y diseminaciÛn de la estadÌstica."
+         "description":"Leyes u otro tipo de convenios (formales o informales) que otorgan reponsabilidad y autoridad al organismo para la recolecci√≥n, procesado y diseminaci√≥n de la estad√≠stica."
       },
       "Measures":{
          "type":"object",
@@ -718,7 +718,7 @@
                }
             }
          ],
-         "description":"Tipos de oficialidad que se le puede asignar a una operaciÛn estadÌstica."
+         "description":"Tipos de oficialidad que se le puede asignar a una operaci√≥n estad√≠stica."
       },
       "Operation":{
          "type":"object",
@@ -975,7 +975,7 @@
                }
             }
          ],
-         "description":"Conjunto de actividades, incluidas las preparatorias, que conducen a la obtenciÛn y/o difusiÛn de resultados estadÌsticos sobre un determinado sector o tema o territorio. TambiÈn se incluyen en el ·mbito de esta definiciÛn los trabajos de infraestructura y de normalizaciÛn estadÌstica que posibilitan la coordinaciÛn, homogeneizaciÛn e integraciÛn de las estadÌsticas, asÌ como la recopilaciÛn de resultados y la confecciÛn de sÌntesis."
+         "description":"Conjunto de actividades, incluidas las preparatorias, que conducen a la obtenci√≥n y/o difusi√≥n de resultados estad√≠sticos sobre un determinado sector o tema o territorio. Tambi√©n se incluyen en el √°mbito de esta definici√≥n los trabajos de infraestructura y de normalizaci√≥n estad√≠stica que posibilitan la coordinaci√≥n, homogeneizaci√≥n e integraci√≥n de las estad√≠sticas, as√≠ como la recopilaci√≥n de resultados y la confecci√≥n de s√≠ntesis."
       },
       "Operations":{
          "type":"object",
@@ -996,7 +996,7 @@
                }
             }
          ],
-         "description":"Listado de operaciones estadÌsticas."
+         "description":"Listado de operaciones estad√≠sticas."
       },
       "Producers":{
          "type":"object",
@@ -1017,7 +1017,7 @@
                }
             }
          ],
-         "description":"Listado de organismos que colaboran en la producciÛn de la estadÌstica."
+         "description":"Listado de organismos que colaboran en la producci√≥n de la estad√≠stica."
       },
       "Publishers":{
          "type":"object",
@@ -1038,7 +1038,7 @@
                }
             }
          ],
-         "description":"Listado de organismos que difunden los resultados de la operaciÛn estadÌstica."
+         "description":"Listado de organismos que difunden los resultados de la operaci√≥n estad√≠stica."
       },
       "RegionalContributors":{
          "type":"object",
@@ -1059,7 +1059,7 @@
                }
             }
          ],
-         "description":"Organismos regionales colaboradores de la operaciÛn."
+         "description":"Organismos regionales colaboradores de la operaci√≥n."
       },
       "RegionalResponsibles":{
          "type":"object",
@@ -1080,7 +1080,7 @@
                }
             }
          ],
-         "description":"Organismos regionales responsables de la operaciÛn."
+         "description":"Organismos regionales responsables de la operaci√≥n."
       },
       "SecondarySubjectAreas":{
          "type":"object",
@@ -1101,7 +1101,7 @@
                }
             }
          ],
-         "description":"¡reas tem·ticas secundarias relacionadas con la operaciÛn."
+         "description":"√Åreas tem√°ticas secundarias relacionadas con la operaci√≥n."
       },
       "StatConcDefs":{
          "type":"object",
@@ -1122,7 +1122,7 @@
                }
             }
          ],
-         "description":"Listado de conceptos que se manejan en la operaciÛn."
+         "description":"Listado de conceptos que se manejan en la operaci√≥n."
       },
       "StatisticalOperationSources":{
          "type":"object",
@@ -1143,7 +1143,7 @@
                }
             }
          ],
-         "description":"Fuentes usadas para la elaboraciÛn de la operaciÛn estadÌstica."
+         "description":"Fuentes usadas para la elaboraci√≥n de la operaci√≥n estad√≠stica."
       },
       "StatisticalOperationTypes":{
          "type":"object",
@@ -1164,7 +1164,7 @@
                }
             }
          ],
-         "description":"Tipos de operaciones estadÌsticas."
+         "description":"Tipos de operaciones estad√≠sticas."
       },
       "StatisticalUnits":{
          "type":"object",
@@ -1185,7 +1185,7 @@
                }
             }
          ],
-         "description":"Unidades b·sicas de observaciÛn estadÌstica para las que se proporcionan los datos."
+         "description":"Unidades b√°sicas de observaci√≥n estad√≠stica para las que se proporcionan los datos."
       },
       "Status":{
          "type":"string",
@@ -1196,7 +1196,7 @@
             "PRODUCTION",
             "OUT_OF_PRINT"
          ],
-         "description":"Estado de la operaciÛn estadÌstica."
+         "description":"Estado de la operaci√≥n estad√≠stica."
       },
       "TemporalGranularities":{
          "type":"object",
@@ -1217,7 +1217,7 @@
                }
             }
          ],
-         "description":"Granularidades temporales que contemplan los datos de la operaciÛn estadÌstica."
+         "description":"Granularidades temporales que contemplan los datos de la operaci√≥n estad√≠stica."
       },
       "UpdateFrequencies":{
          "type":"object",
@@ -1238,7 +1238,7 @@
                }
             }
          ],
-         "description":"Frecuencias de acualizaciÛn de los datos."
+         "description":"Frecuencias de acualizaci√≥n de los datos."
       },
       "ChildLinks":{
          "type":"object",
@@ -1282,7 +1282,7 @@
                }
             }
          ],
-         "description":"Texto en m˙ltiples lenguajes."
+         "description":"Texto en m√∫ltiples lenguajes."
       },
       "Item":{
          "type":"object",
@@ -1506,7 +1506,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Permite obtener todos los posibles tipos de orÌgenes de datos disponibles para las operaciones estadÌsticas.",
+            "description":"Permite obtener todos los posibles tipos de or√≠genes de datos disponibles para las operaciones estad√≠sticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
             "produces":[
                "application/xml"
@@ -1526,7 +1526,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1539,7 +1539,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Permite obtener el listado de operaciones estadÌsticas existentes en el inventario.",
+            "description":"Permite obtener el listado de operaciones estad√≠sticas existentes en el inventario.",
             "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
             "produces":[
                "application/xml"
@@ -1549,25 +1549,25 @@
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"N˙mero m·ximo de resultados a obtener"
+                  "description":"N√∫mero m√°ximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. N˙mero a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. N√∫mero a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite ordenar la lista de resultados seg˙n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+                  "description":"Permite ordenar la lista de resultados seg√∫n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite realizar una b˙squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lÛgicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaciÛn que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
+                  "description":"Permite realizar una b√∫squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores l√≥gicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaci√≥n que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
                }
             ],
             "responses":{
@@ -1582,7 +1582,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1595,7 +1595,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Permite obtener el listado de familias estadÌsticas en las que se engloba una operaciÛn en concreto.",
+            "description":"Permite obtener el listado de familias estad√≠sticas en las que se engloba una operaci√≥n en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
             "produces":[
                "application/xml"
@@ -1605,7 +1605,7 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la operaciÛn estadÌstica"
+                  "description":"Identificador de la operaci√≥n estad√≠stica"
                }
             ],
             "responses":{
@@ -1620,7 +1620,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1633,7 +1633,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Permite obtener una instancia en particular de una operaciÛn estadÌstica.",
+            "description":"Permite obtener una instancia en particular de una operaci√≥n estad√≠stica.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
             "produces":[
                "application/xml"
@@ -1649,7 +1649,7 @@
                   "name":"operationId",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la operaciÛn estadÌstica"
+                  "description":"Identificador de la operaci√≥n estad√≠stica"
                }
             ],
             "responses":{
@@ -1664,7 +1664,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1677,7 +1677,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadÌsticas.",
+            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estad√≠sticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
             "produces":[
                "application/xml"
@@ -1697,7 +1697,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1710,7 +1710,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Permite obtener el listado de instancias relacionadas con una operaciÛn estadÌstica en concreto.",
+            "description":"Permite obtener el listado de instancias relacionadas con una operaci√≥n estad√≠stica en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
             "produces":[
                "application/xml"
@@ -1720,31 +1720,31 @@
                   "name":"operationId",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la operaciÛn."
+                  "description":"Identificador de la operaci√≥n."
                },
                {
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"N˙mero m·ximo de resultados a obtener"
+                  "description":"N√∫mero m√°ximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Deplazamiento. N˙mero a partir del cual se comienzan a obtener los resultados."
+                  "description":"Deplazamiento. N√∫mero a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite ordenar la lista de resultados seg˙n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+                  "description":"Permite ordenar la lista de resultados seg√∫n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite realizar una b˙squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN e INVENTORY_DATE.<br/>\r\n Los operadores lÛgicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaciÛn que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
+                  "description":"Permite realizar una b√∫squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DATA_DESCRIPTION, GEOGRAPHIC_GRANULARITY_URN, TEMPORAL_GRANULARITY_URN e INVENTORY_DATE.<br/>\r\n Los operadores l√≥gicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaci√≥n que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Instance1\" AND DATA_DESCRIPTION EQ \"DataDescription1\") OR (ACRONYM EQ \"Instance1\")"
                }
             ],
             "responses":{
@@ -1759,7 +1759,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1772,7 +1772,7 @@
             "tags":[
                "Familias"
             ],
-            "description":"Permite obtener el listado de familias de operaciones estadÌsticas.",
+            "description":"Permite obtener el listado de familias de operaciones estad√≠sticas.",
             "operationId":"resource_StatisticalOperationsV1_0_findFamilies_GET",
             "produces":[
                "application/xml"
@@ -1782,25 +1782,25 @@
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"N˙mero m·ximo de resultados a obtener"
+                  "description":"N√∫mero m√°ximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. N˙mero a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. N√∫mero a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite ordenar la lista de resultados seg˙n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+                  "description":"Permite ordenar la lista de resultados seg√∫n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite realizar una b˙squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DESCRIPTION e INVENTORY_DATE.<br/>\r\n Los operadores lÛgicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaciÛn que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Family1\" AND ACRONYM EQ \"Family1\") OR (DESCRIPTION IS_NOT_NULL)"
+                  "description":"Permite realizar una b√∫squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, DESCRIPTION e INVENTORY_DATE.<br/>\r\n Los operadores l√≥gicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaci√≥n que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"Family1\" AND ACRONYM EQ \"Family1\") OR (DESCRIPTION IS_NOT_NULL)"
                }
             ],
             "responses":{
@@ -1815,7 +1815,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1828,7 +1828,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadÌsticas.",
+            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estad√≠sticas.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
             "produces":[
                "application/xml"
@@ -1848,7 +1848,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1871,31 +1871,31 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la familia estadÌstica"
+                  "description":"Identificador de la familia estad√≠stica"
                },
                {
                   "name":"limit",
                   "in":"query",
                   "type":"string",
-                  "description":"N˙mero m·ximo de resultados a obtener"
+                  "description":"N√∫mero m√°ximo de resultados a obtener"
                },
                {
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. N˙mero a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. N√∫mero a partir del cual se comienzan a obtener los resultados."
                },
                {
                   "name":"orderBy",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite ordenar la lista de resultados seg˙n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
+                  "description":"Permite ordenar la lista de resultados seg√∫n un determinado metadato. El orden se especifica mediante un metadato y el sentido del orden (operador) que se le quiere aplicar.<br/>\r\n Los posibles operadores son ASC y DESC.<br/>\r\n El metadato que se puede usar es ID. <br/>Ejemplos:<br/>\r\n- ID ASC<br/>\r\n- ID DESC"
                },
                {
                   "name":"query",
                   "in":"query",
                   "type":"string",
-                  "description":"Permite realizar una b˙squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores lÛgicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaciÛn que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
+                  "description":"Permite realizar una b√∫squeda sobre los resultados. <br/>\r\n Los metadatos sobre los que se puede buscar son: ID, URN, TITLE, ACRONYM, SUBJECT_AREA_URN, SECONDARY_SUBJECT_AREA_URN, DESCRIPTION, STATISTICAL_OPERATION_TYPE_ID, OFFICIALITY_TYPE_ID, IS_INDICATORS_SYSTEM, PRODUCER_URN, CURRENTLY_ACTIVE, STATUS, PUBLISHER_URN e INVENTORY_DATE.<br/>\r\n Los operadores l√≥gicos que se permite usar son: AND y OR.  <br/>\r\n Los operadores de comparaci√≥n que se permite usar son: EQ, IEQ, LIKE, ILIKE, NE, LT, LE, GT, GE, IS_NULL, IS_NOT_NULL e IN.  <br/>\r\n Ejemplos: <br/>\r\n- ID LIKE \"E303\" <br/>\r\n- (ID LIKE \"E303\" AND CONTACT_URN LIKE \"urn:contact:1\") OR (CONTACT_URN EQ \"urn:contact:2\")"
                }
             ],
             "responses":{
@@ -1910,7 +1910,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1923,7 +1923,7 @@
             "tags":[
                "Operaciones"
             ],
-            "description":"Permite obtener una operaciÛn estadÌstica en concreto.",
+            "description":"Permite obtener una operaci√≥n estad√≠stica en concreto.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOperationById_GET",
             "produces":[
                "application/xml"
@@ -1933,7 +1933,7 @@
                   "name":"id",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la operaciÛn estadÌstica"
+                  "description":"Identificador de la operaci√≥n estad√≠stica"
                }
             ],
             "responses":{
@@ -1948,7 +1948,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -1961,7 +1961,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Permite obtener todos los mÈtodos de recolecciÛn de datos existentes.",
+            "description":"Permite obtener todos los m√©todos de recolecci√≥n de datos existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCollMethods_GET",
             "produces":[
                "application/xml"
@@ -1981,7 +1981,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -2014,7 +2014,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -2052,7 +2052,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
@@ -2065,7 +2065,7 @@
             "tags":[
                "Listados de valores"
             ],
-            "description":"Permite obtener todos los tipos de operaciones estadÌsticas existentes.",
+            "description":"Permite obtener todos los tipos de operaciones estad√≠sticas existentes.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationTypes_GET",
             "produces":[
                "application/xml"
@@ -2085,7 +2085,7 @@
                   "description":"Success"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es v·lido."
+                  "description":"No aceptable. El formato solicitado no es v√°lido."
                },
                "500":{
                   "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
