@@ -17,6 +17,7 @@ import org.siemac.metamac.core.common.util.GeneratorUrnUtils;
 import org.siemac.metamac.statistical.operations.core.domain.Family;
 import org.siemac.metamac.statistical.operations.core.domain.FamilyRepository;
 import org.siemac.metamac.statistical.operations.core.domain.Instance;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceProperties;
 import org.siemac.metamac.statistical.operations.core.domain.InstanceRepository;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationRepository;
@@ -524,7 +525,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         instance.setProcStatus(ProcStatusEnum.DRAFT);
 
         // Validations
-        validateInstanceCodeUnique(ctx, instance.getCode(), null);
+        validateInstanceCodeUnique(ctx, instance, null);
         CheckMandatoryMetadataUtil.checkCreateInstance(instance);
 
         // Save instance
@@ -544,7 +545,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         Operation operation = instance.getOperation();
         if (ProcStatusEnum.DRAFT.equals(instance.getProcStatus())) {
             instance.setUrn(GeneratorUrnUtils.generateSiemacStatisticalOperationInstanceUrn(operation.getCode(), instance.getCode()));
-            validateInstanceCodeUnique(ctx, instance.getCode(), instance.getId());
+            validateInstanceCodeUnique(ctx, instance, instance.getId());
             CheckMandatoryMetadataUtil.checkCreateInstance(instance);
         }
 
@@ -737,8 +738,16 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         }
     }
 
-    private void validateInstanceCodeUnique(ServiceContext ctx, String code, Long actualId) throws MetamacException {
-        List<ConditionalCriteria> condition = criteriaFor(Instance.class).withProperty(org.siemac.metamac.statistical.operations.core.domain.InstanceProperties.code()).ignoreCaseEq(code).build();
+    private void validateInstanceCodeUnique(ServiceContext ctx, Instance instance, Long actualId) throws MetamacException {
+
+        String code = instance.getCode();
+
+        // @formatter:off
+        List<ConditionalCriteria> condition = criteriaFor(Instance.class)
+                                                .withProperty(InstanceProperties.code()).ignoreCaseEq(code)
+                                                .and()
+                                                .withProperty(InstanceProperties.operation().code()).eq(instance.getOperation().getCode()).build();
+        // @formatter:on
 
         List<Instance> instances = findInstanceByCondition(ctx, condition);
 
@@ -758,5 +767,4 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
             }
         }
     }
-
 }
