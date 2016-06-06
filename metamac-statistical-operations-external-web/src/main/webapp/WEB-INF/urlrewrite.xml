@@ -4,14 +4,14 @@
 <urlrewrite use-query-string="true">
 	<rule>
 		<from>/apis/operations/latest/</from>
-		<to type="redirect">/operations/v1.0/</to>
+		<to type="redirect">%{context-path}/v1.0/</to>
 	</rule>
 	<rule>
-		<from>/apis/operations/latest</from>
-		<to type="redirect">/operations/v1.0/</to>
+		<from>/apis/operations/latest$</from>
+		<to type="redirect">%{context-path}/v1.0/</to>
 	</rule>
 	<rule>
-		<from>^/apis/operations/v1.0$</from>
-		<to type="redirect">/operations/v1.0/</to>
+		<from>/apis/operations/v1.0$</from>
+		<to type="redirect">%{context-path}/v1.0/</to>
 	</rule>
 </urlrewrite>
