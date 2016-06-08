@@ -13,8 +13,8 @@ class StatisticalOperationsRewriteMatch extends AbstractRewriteMatch {
     private ConfigurationService configurationService = null;
 
     @Override
-    protected String getApiPrefix() {
-        return "operations";
+    protected String[] getAcceptedApiPrefixes() {
+        return new String[]{"operations"};
     }
 
     @Override
