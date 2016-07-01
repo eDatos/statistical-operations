@@ -39,7 +39,7 @@ public class ClientModule extends AbstractPresenterModule {
         install(new DefaultModule(OperationsPlaceManager.class));
 
         // Constants
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.familyListPage);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.operationListPage);
 
         // Gate keeper
         bind(LoggedInGatekeeper.class).in(Singleton.class);
