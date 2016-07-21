@@ -140,70 +140,70 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Tipo del recurso.",
                      "type":"string"
                   },
                   "acronym":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Acrónimo de la familia de operaciones.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "description":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de la familia de operaciones.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificador del recurso.",
                      "type":"string"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Fecha en la que se hace pública la familia de operaciones por primera vez.",
                      "type":"string"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nombre de la familia de operaciones.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al recurso padre de la API.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al propio recurso.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"urn del recurso.",
                      "type":"string"
                   }
                }
@@ -285,329 +285,329 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Tipo del recurso.",
                      "type":"string"
                   },
                   "accuracyOverall":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Evaluación de la exactitud de un conjunto de datos o de un dominio de análisis. Proporciona un resumen de las principales fuentes de error y una evaluación de la posibilidad de sesgo (signo y orden de magnitud ) para cada indicador clave en términos cuantitativos o cualitativos.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "acronym":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Acrónimo de la instancia de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "adjustment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de los procedimientos estadísticos utilizados para el ajuste de las series de datos (como métodos de ajuste estacional, descomposición de series de tiempo u otros métodos similares).",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "basePeriod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Período utilizado como base de un número de índice, o al que se refiere una serie constante.",
                      "type":"string"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "classSystems":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de las clasificaciones utilizadas en la instancia de la operación. Las clasificaciones identificadas se vinculan con las distribuidas en la API structural-resources de e-Semántica.",
                      "$ref":"#/definitions/ClassSystems"
                   },
                   "classSystemsDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enumeración y descripción de las clasificacoines utilizadas.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "coherInternal":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del grado de coherencia de los datos dentro de la instancia estadísticas y con los de otras instancias de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "coherXDom":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del grado de coherencia de los datos con los de otras operaciones estadísticas del mismo dominio de análisis.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "collMethod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Método principal de recogida de datos.",
                      "$ref":"#/definitions/Item"
                   },
                   "comment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Observaciones y notas sobre la instancia estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "completeness":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de la medida en que todas los datos que se necesitan son aportados por la instancia estadística. Proporciona información sobre la exhaustividad en comparación con los reglamentos y directrices pertinentes.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataCompilation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del proceso de recolección y  tratamiento de datos (por ejemplo: método de muestreo, validación e imputación, tratamieto de la falta de respuesta, ponderación y calibración, uso de modelos, etc. ).",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Describe, de una manera fácilmente comprensible, los principales datos e indicadores difundidos. Esta breve descripción debe ser entendida inmediatamente y fácilmente por los usuarios.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataValidation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de los procedimientos de comprobación y validación de los datos recolectados.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "docMethod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción metodológica y referencias a documentos metodológicos disponibles. Indicar la disponibilidad de importantes documentos metodológicos, documentos de síntesis u otros manuales importantes.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "freqColls":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Frecuencia de recogida de los datos (mensual, trimestral, anual, bianual, quinquenal, cada 10 años, etc.).",
                      "$ref":"#/definitions/FreqColls"
                   },
                   "geographicComparability":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del grado en que las estadísticas son comparables entre zonas geográficas.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "geographicGranularity":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nivel más bajo de agregación territorial utilizado en la difusión de los datos.",
                      "$ref":"#/definitions/GeographicGranularities"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificador del recurso.",
                      "type":"string"
                   },
                   "informationSuppliers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Entidades obligadas a suministrar información.",
                      "$ref":"#/definitions/InformationSuppliers"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Fecha en la que se hace pública la instancia estadística por primera vez.",
                      "type":"string"
                   },
                   "measures":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Conceptos de medida utilizados en la instancia de la operación.",
                      "$ref":"#/definitions/Measures"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nombre de la instancia de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "nonsamplingErr":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción y medida de los errores ajenos al muestreo.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al recurso padre de la API.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "predecessor":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de la instancia de operación predecesora, si la hubiera.",
                      "$ref":"#/definitions/Resource"
                   },
                   "punctuality":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción, medida y explicación del lapso de tiempo entre la fecha de difusión real de los datos y la fecha programada.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityAssmnt":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Valoración global de la calidad de los datos.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityAssure":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de las acciones para asegurar la calidad de los datos.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityDoc":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación y descripción de la documentación sobre los procedimientos aplicados en la gestión y evaluación de la calidad de los datos.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "samplingErr":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción y medida de los errores de muestreo.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al propio recurso.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "statConcDefs":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de los conceptos utilizados en la instancia de la operación. Los conceptos identificados se vinculan con los distribuidos en la API structural-resources de e-Semántica.",
                      "$ref":"#/definitions/StatConcDefs"
                   },
                   "statConcDefsDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enumeración y descripción de los conceptos y definiciones utilizados.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "statisticalOperation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de la operación estadística a la que se asocia la instancia.",
                      "$ref":"#/definitions/Resource"
                   },
                   "statisticalOperationSource":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Forma de recogida de datos.",
                      "$ref":"#/definitions/Item"
                   },
                   "statisticalPopulation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de la población objetivo de análisis.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "statisticalUnits":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de las unidades de análisis.",
                      "$ref":"#/definitions/StatisticalUnits"
                   },
                   "successor":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de la instancia de operación sucesora, si la hubiera.",
                      "$ref":"#/definitions/Resource"
                   },
                   "temporalComparability":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del grado en que las estadísticas son comparables o pueden conciliarse a lo largo del tiempo. Información sobre la longitud de las series comparables, los períodos de referencia en los que se producen roturas de la serie, las razones de las pausas y los tratamientos asociados.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "temporalGranularity":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificación de los periodos de tiempo o fechas de referencia mínima para los datos publicados.",
                      "$ref":"#/definitions/TemporalGranularities"
                   },
                   "timeliness":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del tiempo transcurrido entre la difusión de los datos y el evento o fenómeno que describen.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"urn del recurso.",
                      "type":"string"
                   },
                   "userNeeds":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de los usuarios y sus respectivas necesidades con respecto a los datos de la instancia estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "userSat":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción de las medidas para determinar la satisfacción de los usuarios.",
                      "$ref":"#/definitions/InternationalString"
                   }
                }
@@ -729,7 +729,7 @@
                   "kind":{
                      "xml":{
                         "attribute":true,
-                        "namespace":""
+                        "namespace":"Tipo del recurso."
                      },
                      "description":"",
                      "type":"string"
@@ -738,238 +738,238 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Acrónimo de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "comment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Observaciones y notas sobre la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "confidentialityDataTreatment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Reglas utilizadas en el tratamiento de los datos con el fin de garantizar el secreto estadístico.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "confidentialityPolicy":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Medidas legislativas u otros procedimientos formales que regulan la divulgación de datos sujetos a secreto estadístico.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "contact":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Organización de contacto para los datos o metadatos de la operación estadística.",
                      "$ref":"#/definitions/Resource"
                   },
                   "currentInstance":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Instancia actual, normalmente será la última instancia pública.",
                      "$ref":"#/definitions/Resource"
                   },
                   "currentlyActive":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Indica si la operación estadística está actualmente en uso o no.",
                      "type":"boolean"
                   },
                   "dataSharings":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Mecanismos o procedimientos asociados a la operación estadística para el intercambio de datos y la coordinación entre los organismos vinculados a la misma.",
                      "$ref":"#/definitions/DataSharings"
                   },
                   "description":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción detallada de la operación detallada y de los objetivos específicos que se pretenden alcanzar.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificador del recurso.",
                      "type":"string"
                   },
                   "indicatorSystem":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Indica si una operación estadística genera un sistema de indicadores. La información del sistema de indicadores asociado se puede consultar en la API indicators.",
                      "type":"boolean"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Fecha en la que se hace pública la operación estadística por primera vez.",
                      "type":"string"
                   },
                   "legalActs":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Indica que la actividad estadística está cubierta por un acto jurídico o por algún acuerdo formal. Se relacionan los actos jurídicos o acuerdos que asignen responsabilidad o autoridad de una agencia para la recolección, procesamiento y difusión de datos de la operación estadística.",
                      "$ref":"#/definitions/LegalActs"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nombre de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "objective":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Descripción del objetivo general de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "officialityType":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Tipo de oficialidad de la operación estadística.",
                      "$ref":"#/definitions/Item"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al recurso padre de la API.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "producers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Organismos nacionales o regionales responsables de la producción de la operación estadística.",
                      "$ref":"#/definitions/Producers"
                   },
                   "publishers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Organismos regionales responsables de la difusión de datos de la operación estadística.",
                      "$ref":"#/definitions/Publishers"
                   },
                   "regionalContributors":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Organismos regionales colaboradores de la operación estadística.",
                      "$ref":"#/definitions/RegionalContributors"
                   },
                   "regionalResponsibles":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Organismos regionales responsables de la operación a escala regional.",
                      "$ref":"#/definitions/RegionalResponsibles"
                   },
                   "relPolUsAc":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Política de difusión de los datos de la operación, incluyendo información sobre accesos privilegiados.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "releaseCalendar":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Información sobre la disponibilidad de un calendario de difusión de los datos de la operación estadística.",
                      "type":"boolean"
                   },
                   "releaseCalendarAccess":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al calendario de difusión de los datos de la operación estadística.",
                      "type":"string"
                   },
                   "revPolicy":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Politica general de la revisión de datos de la operación estadística.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "revPractice":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Describir las principales revisiones de datos programadas y las posibles revisiones menores.",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "secondarySubjectAreas":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Areas temáticas secundarias en las que está encuadrada la operación.",
                      "$ref":"#/definitions/SecondarySubjectAreas"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al propio recurso.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "statisticalOperationType":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Tipo de operación estadística.",
                      "$ref":"#/definitions/Item"
                   },
                   "status":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Estado de la operación estadística: planificación, diseño, producción o descatalogada",
                      "$ref":"#/definitions/Status"
                   },
                   "subjectArea":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Area temática principal en las que está encuadrada la operación.",
                      "$ref":"#/definitions/Resource"
                   },
                   "updateFrequencies":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Frecuencia con la que se actualizan los datos públicos de la operación estadística.",
                      "$ref":"#/definitions/UpdateFrequencies"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"urn del recurso.",
                      "type":"string"
                   }
                }
@@ -1251,14 +1251,14 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Número total de resultados existentes.",
                      "type":"number"
                   },
                   "childLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
                      "$ref":"#/definitions/ResourceLink"
                   }
                }
@@ -1294,14 +1294,14 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificador del recurso.",
                      "type":"string"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nombre o título del recurso",
                      "$ref":"#/definitions/InternationalString"
                   }
                }
@@ -1320,7 +1320,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la primera página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última.",
                      "type":"string"
                   },
                   "kind":{
@@ -1328,7 +1328,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Tipo del recurso.",
                      "type":"string"
                   },
                   "lastLink":{
@@ -1336,7 +1336,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la última página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última.",
                      "type":"string"
                   },
                   "limit":{
@@ -1344,7 +1344,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Número máximo de resultados a obtener.",
                      "type":"number"
                   },
                   "nextLink":{
@@ -1352,7 +1352,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página siguiente a la que nos encontramos. Si no se muestra es porque no existe siguiente.",
                      "type":"string"
                   },
                   "offset":{
@@ -1360,7 +1360,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados.",
                      "type":"number"
                   },
                   "previousLink":{
@@ -1368,7 +1368,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página anterior a la que nos encontramos. Si no se muestra es porque no existe siguiente.",
                      "type":"string"
                   },
                   "selfLink":{
@@ -1376,7 +1376,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Enlace al propio recurso. Dado un resultado nos permite saber cómo realizar la petición a la API para volver a obtenerlo",
                      "type":"string"
                   },
                   "total":{
@@ -1384,7 +1384,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Número total de resultados existentes.",
                      "type":"number"
                   }
                }
@@ -1429,42 +1429,42 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Tipo del recurso.",
                      "type":"string"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identificador del recurso.",
                      "type":"string"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Nombre o título del recurso",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "nestedId":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Identifificador del recurso en el que se incluyen los identificadores de los recursos de los que hereda. Los distintos identificadores se separan mediante ".".",
                      "type":"string"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Enlace al propio recurso.",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"urn del recurso.",
                      "type":"string"
                   }
                }
@@ -1491,7 +1491,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Tipo del recurso.",
                      "type":"string"
                   }
                }
@@ -1839,7 +1839,7 @@
             "description":"Permite obtener una instancia en particular de una operación estadística.",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
             "produces":[
-               "application/xml"
+               "application/xml"	
             ],
             "parameters":[
                {
