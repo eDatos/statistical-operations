@@ -1276,7 +1276,7 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Texto en múltiples idiomas.",
                      "$ref":"#/definitions/LocalisedString"
                   }
                }
@@ -1403,14 +1403,14 @@
                         "attribute":true,
                         "namespace":"http://www.w3.org/XML/1998/namespace"
                      },
-                     "description":"",
+                     "description":"Idioma para el que se especifica la traducción.",
                      "type":"string"
                   },
                   "(value)":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"",
+                     "description":"Traducción en el idioma especificado.",
                      "type":"string"
                   }
                }
@@ -1483,7 +1483,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"",
+                     "description":"Enlace al recurso.",
                      "type":"string"
                   },
                   "kind":{
