@@ -1450,7 +1450,7 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Identifificador del recurso en el que se incluyen los identificadores de los recursos de los que hereda. Los distintos identificadores se separan mediante ".".",
+                     "description":"Identifificador del recurso en el que se incluyen los identificadores de los recursos de los que hereda. Los distintos identificadores se separan mediante \".\".",
                      "type":"string"
                   },
                   "selfLink":{
