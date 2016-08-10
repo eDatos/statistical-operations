@@ -1,7 +1,7 @@
 {
    "swagger":"2.0",
    "info":{
-      "description":"Las operaciones estadísticas son la unidad básica de planificación de la actividad estadística del Instituto Canario de Estadística (ISTAC). Todos los recursos que se publican guardan relación de manera directa o indirecta con alguna operación. Esta API permite consultar el inventario de operaciones estadísticas del Instituto, las diferencias que existen entre las diferentes realizaciones de una misma operación estadística (instancias) y su agrupación en familias. Asi por ejemplo tenemos que el \"Censo de Población y Viviendas\" es una operación estadística de la que podremos encontrar distintas realizaciones o instanacias (Censo 2011, Censo 2001, Censo 1991, etc) y que podría agruparse con otras operaciones dentro de una famlia \"Estadísticas poblacionales\". Los datos de las operaciones estadísticas y de sus instancias están armonizados con la propuesta de Eurostat para el Sistema Estadístico Europeo y definida en el documento EURO-SDMX Metadata Structure (release 4, December 2014).",
+      "description":"Las operaciones estadísticas son la unidad básica de planificación de la actividad estadística del Instituto Canario de Estadística (ISTAC). Todos los recursos que se publican guardan relación de manera directa o indirecta con alguna operación. Esta API permite consultar el inventario de operaciones estadísticas del Instituto, las diferencias que existen entre las diferentes realizaciones de una misma operación estadística (instancias) y su agrupación en familias. Asi por ejemplo tenemos que el \"Censo de Población y Viviendas\" es una operación estadística de la que podremos encontrar distintas realizaciones o instanacias (Censo 2011, Censo 2001, Censo 1991, etc) y que podría agruparse con otras operaciones dentro de una famlia \"Estadísticas poblacionales\". Los datos de las operaciones estadísticas y de sus instancias están armonizados con la propuesta de Eurostat para el Sistema Estadístico Europeo y definida en el documento EURO-SDMX Metadata Structure (release 4, December 2014)",
       "version":"1.0",
       "title":"API de operaciones estadísticas v1.0"
    },
@@ -43,7 +43,7 @@
                }
             }
          ],
-         "description":"Clasificaciones usadas en la instancia de la operación estadística."
+         "description":"Clasificaciones usadas en la instancia de la operación estadística"
       },
       "CollMethods":{
          "type":"object",
@@ -85,7 +85,7 @@
                }
             }
          ],
-         "description":"Valores aceptados para los tipos de costes asociados a la operación."
+         "description":"Valores aceptados para los tipos de costes asociados a la operación"
       },
       "DataSharings":{
          "type":"object",
@@ -140,70 +140,70 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Tipo del recurso.",
+                     "description":"Tipo del recurso",
                      "type":"string"
                   },
                   "acronym":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Acrónimo de la familia de operaciones.",
+                     "description":"Acrónimo de la familia de operaciones",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "description":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de la familia de operaciones.",
+                     "description":"Descripción de la familia de operaciones",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificador del recurso.",
+                     "description":"Identificador del recurso",
                      "type":"string"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Fecha en la que se hace pública la familia de operaciones por primera vez.",
+                     "description":"Fecha en la que se hace pública la familia de operaciones por primera vez",
                      "type":"string"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Nombre de la familia de operaciones.",
+                     "description":"Nombre de la familia de operaciones",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al recurso padre de la API.",
+                     "description":"Enlace al recurso padre de la API",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al propio recurso.",
+                     "description":"Enlace al propio recurso",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"urn del recurso.",
+                     "description":"urn del recurso",
                      "type":"string"
                   }
                }
@@ -230,7 +230,7 @@
                }
             }
          ],
-         "description":"Frecuencias de recolección de los datos."
+         "description":"Frecuencias de recolección de los datos"
       },
       "GeographicGranularities":{
          "type":"object",
@@ -251,7 +251,7 @@
                }
             }
          ],
-         "description":"Granularidades geográficas."
+         "description":"Granularidades geográficas"
       },
       "InformationSuppliers":{
          "type":"object",
@@ -272,7 +272,7 @@
                }
             }
          ],
-         "description":"Organizaciones obligadas a suministrar información para la elaboración de la operación estadística."
+         "description":"Organizaciones obligadas a suministrar información para la elaboración de la operación estadística"
       },
       "Instance":{
          "type":"object",
@@ -285,335 +285,335 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Tipo del recurso.",
+                     "description":"Tipo del recurso",
                      "type":"string"
                   },
                   "accuracyOverall":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Evaluación de la exactitud de un conjunto de datos o de un dominio de análisis. Proporciona un resumen de las principales fuentes de error y una evaluación de la posibilidad de sesgo (signo y orden de magnitud ) para cada indicador clave en términos cuantitativos o cualitativos.",
+                     "description":"Evaluación de la exactitud de un conjunto de datos o de un dominio de análisis. Proporciona un resumen de las principales fuentes de error y una evaluación de la posibilidad de sesgo (signo y orden de magnitud ) para cada indicador clave en términos cuantitativos o cualitativos",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "acronym":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Acrónimo de la instancia de la operación estadística.",
+                     "description":"Acrónimo de la instancia de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "adjustment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de los procedimientos estadísticos utilizados para el ajuste de las series de datos (como métodos de ajuste estacional, descomposición de series de tiempo u otros métodos similares).",
+                     "description":"Descripción de los procedimientos estadísticos utilizados para el ajuste de las series de datos (como métodos de ajuste estacional, descomposición de series de tiempo u otros métodos similares)",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "basePeriod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Período utilizado como base de un número de índice, o al que se refiere una serie constante.",
+                     "description":"Período utilizado como base de un número de índice, o al que se refiere una serie constante",
                      "type":"string"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "classSystems":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de las clasificaciones utilizadas en la instancia de la operación. Las clasificaciones identificadas se vinculan con las distribuidas en la API structural-resources de e-Semántica.",
+                     "description":"Identificación de las clasificaciones utilizadas en la instancia de la operación. Las clasificaciones identificadas se vinculan con las distribuidas en la API structural-resources de e-Semántica",
                      "$ref":"#/definitions/ClassSystems"
                   },
                   "classSystemsDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enumeración y descripción de las clasificacoines utilizadas.",
+                     "description":"Enumeración y descripción de las clasificacoines utilizadas",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "coherInternal":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del grado de coherencia de los datos dentro de la instancia estadísticas y con los de otras instancias de la operación estadística.",
+                     "description":"Descripción del grado de coherencia de los datos dentro de la instancia estadísticas y con los de otras instancias de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "coherXDom":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del grado de coherencia de los datos con los de otras operaciones estadísticas del mismo dominio de análisis.",
+                     "description":"Descripción del grado de coherencia de los datos con los de otras operaciones estadísticas del mismo dominio de análisis",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "collMethod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Método principal de recogida de datos.",
+                     "description":"Método principal de recogida de datos",
                      "$ref":"#/definitions/Item"
                   },
                   "comment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Observaciones y notas sobre la instancia estadística.",
+                     "description":"Observaciones y notas sobre la instancia estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "completeness":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de la medida en que todas los datos que se necesitan son aportados por la instancia estadística. Proporciona información sobre la exhaustividad en comparación con los reglamentos y directrices pertinentes.",
+                     "description":"Descripción de la medida en que todas los datos que se necesitan son aportados por la instancia estadística. Proporciona información sobre la exhaustividad en comparación con los reglamentos y directrices pertinentes",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataCompilation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del proceso de recolección y  tratamiento de datos (por ejemplo: método de muestreo, validación e imputación, tratamieto de la falta de respuesta, ponderación y calibración, uso de modelos, etc. ).",
+                     "description":"Descripción del proceso de recolección y  tratamiento de datos (por ejemplo: método de muestreo, validación e imputación, tratamieto de la falta de respuesta, ponderación y calibración, uso de modelos, etc. )",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Describe, de una manera fácilmente comprensible, los principales datos e indicadores difundidos. Esta breve descripción debe ser entendida inmediatamente y fácilmente por los usuarios.",
+                     "description":"Describe, de una manera fácilmente comprensible, los principales datos e indicadores difundidos. Esta breve descripción debe ser entendida inmediatamente y fácilmente por los usuarios",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "dataValidation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de los procedimientos de comprobación y validación de los datos recolectados.",
+                     "description":"Descripción de los procedimientos de comprobación y validación de los datos recolectados",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "docMethod":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción metodológica y referencias a documentos metodológicos disponibles. Indicar la disponibilidad de importantes documentos metodológicos, documentos de síntesis u otros manuales importantes.",
+                     "description":"Descripción metodológica y referencias a documentos metodológicos disponibles. Indicar la disponibilidad de importantes documentos metodológicos, documentos de síntesis u otros manuales importantes",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "freqColls":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Frecuencia de recogida de los datos (mensual, trimestral, anual, bianual, quinquenal, cada 10 años, etc.).",
+                     "description":"Frecuencia de recogida de los datos (mensual, trimestral, anual, bianual, quinquenal, cada 10 años, etc.)",
                      "$ref":"#/definitions/FreqColls"
                   },
                   "geographicComparability":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del grado en que las estadísticas son comparables entre zonas geográficas.",
+                     "description":"Descripción del grado en que las estadísticas son comparables entre zonas geográficas",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "geographicGranularity":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Nivel más bajo de agregación territorial utilizado en la difusión de los datos.",
+                     "description":"Nivel más bajo de agregación territorial utilizado en la difusión de los datos",
                      "$ref":"#/definitions/GeographicGranularities"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificador del recurso.",
+                     "description":"Identificador del recurso",
                      "type":"string"
                   },
                   "informationSuppliers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Entidades obligadas a suministrar información.",
+                     "description":"Entidades obligadas a suministrar información",
                      "$ref":"#/definitions/InformationSuppliers"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Fecha en la que se hace pública la instancia estadística por primera vez.",
+                     "description":"Fecha en la que se hace pública la instancia estadística por primera vez",
                      "type":"string"
                   },
                   "measures":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Conceptos de medida utilizados en la instancia de la operación.",
+                     "description":"Conceptos de medida utilizados en la instancia de la operación",
                      "$ref":"#/definitions/Measures"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Nombre de la instancia de la operación estadística.",
+                     "description":"Nombre de la instancia de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "nonsamplingErr":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción y medida de los errores ajenos al muestreo.",
+                     "description":"Descripción y medida de los errores ajenos al muestreo",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al recurso padre de la API.",
+                     "description":"Enlace al recurso padre de la API",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "predecessor":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de la instancia de operación predecesora, si la hubiera.",
+                     "description":"Identificación de la instancia de operación predecesora, si la hubiera",
                      "$ref":"#/definitions/Resource"
                   },
                   "punctuality":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción, medida y explicación del lapso de tiempo entre la fecha de difusión real de los datos y la fecha programada.",
+                     "description":"Descripción, medida y explicación del lapso de tiempo entre la fecha de difusión real de los datos y la fecha programada",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityAssmnt":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Valoración global de la calidad de los datos.",
+                     "description":"Valoración global de la calidad de los datos",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityAssure":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de las acciones para asegurar la calidad de los datos.",
+                     "description":"Descripción de las acciones para asegurar la calidad de los datos",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "qualityDoc":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación y descripción de la documentación sobre los procedimientos aplicados en la gestión y evaluación de la calidad de los datos.",
+                     "description":"Identificación y descripción de la documentación sobre los procedimientos aplicados en la gestión y evaluación de la calidad de los datos",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "samplingErr":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción y medida de los errores de muestreo.",
+                     "description":"Descripción y medida de los errores de muestreo",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al propio recurso.",
+                     "description":"Enlace al propio recurso",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "statConcDefs":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de los conceptos utilizados en la instancia de la operación. Los conceptos identificados se vinculan con los distribuidos en la API structural-resources de e-Semántica.",
+                     "description":"Identificación de los conceptos utilizados en la instancia de la operación. Los conceptos identificados se vinculan con los distribuidos en la API structural-resources de e-Semántica",
                      "$ref":"#/definitions/StatConcDefs"
                   },
                   "statConcDefsDescription":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enumeración y descripción de los conceptos y definiciones utilizados.",
+                     "description":"Enumeración y descripción de los conceptos y definiciones utilizados",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "statisticalOperation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de la operación estadística a la que se asocia la instancia.",
+                     "description":"Identificación de la operación estadística a la que se asocia la instancia",
                      "$ref":"#/definitions/Resource"
                   },
                   "statisticalOperationSource":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Forma de recogida de datos.",
+                     "description":"Forma de recogida de datos",
                      "$ref":"#/definitions/Item"
                   },
                   "statisticalPopulation":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de la población objetivo de análisis.",
+                     "description":"Descripción de la población objetivo de análisis",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "statisticalUnits":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de las unidades de análisis.",
+                     "description":"Identificación de las unidades de análisis",
                      "$ref":"#/definitions/StatisticalUnits"
                   },
                   "successor":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de la instancia de operación sucesora, si la hubiera.",
+                     "description":"Identificación de la instancia de operación sucesora, si la hubiera",
                      "$ref":"#/definitions/Resource"
                   },
                   "temporalComparability":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del grado en que las estadísticas son comparables o pueden conciliarse a lo largo del tiempo. Información sobre la longitud de las series comparables, los períodos de referencia en los que se producen roturas de la serie, las razones de las pausas y los tratamientos asociados.",
+                     "description":"Descripción del grado en que las estadísticas son comparables o pueden conciliarse a lo largo del tiempo. Información sobre la longitud de las series comparables, los períodos de referencia en los que se producen roturas de la serie, las razones de las pausas y los tratamientos asociados",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "temporalGranularity":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificación de los periodos de tiempo o fechas de referencia mínima para los datos publicados.",
+                     "description":"Identificación de los periodos de tiempo o fechas de referencia mínima para los datos publicados",
                      "$ref":"#/definitions/TemporalGranularities"
                   },
                   "timeliness":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del tiempo transcurrido entre la difusión de los datos y el evento o fenómeno que describen.",
+                     "description":"Descripción del tiempo transcurrido entre la difusión de los datos y el evento o fenómeno que describen",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"urn del recurso.",
+                     "description":"urn del recurso",
                      "type":"string"
                   },
                   "userNeeds":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de los usuarios y sus respectivas necesidades con respecto a los datos de la instancia estadística.",
+                     "description":"Descripción de los usuarios y sus respectivas necesidades con respecto a los datos de la instancia estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "userSat":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción de las medidas para determinar la satisfacción de los usuarios.",
+                     "description":"Descripción de las medidas para determinar la satisfacción de los usuarios",
                      "$ref":"#/definitions/InternationalString"
                   }
                }
             }
          ],
-         "description":"La instancia de operación estadística es cada una de las realizaciones de una misma operación estadística. Las instancias pueden ser de dos tipos: SERIE o SECCIÓN. Las instancias de tipo serie proveen información de una serie temporal completa y la instancia acaba cuando se produce una rotura de la serie. Las instancias de tipo sección proveen información de un único instante de tiempo."
+         "description":"La instancia de operación estadística es cada una de las realizaciones de una misma operación estadística. Las instancias pueden ser de dos tipos: SERIE o SECCIÓN. Las instancias de tipo serie proveen información de una serie temporal completa y la instancia acaba cuando se produce una rotura de la serie. Las instancias de tipo sección proveen información de un único instante de tiempo"
       },
       "InstanceTypes":{
          "type":"object",
@@ -655,7 +655,7 @@
                }
             }
          ],
-         "description":"Listados de instancias de operaciones estadísticas."
+         "description":"Listados de instancias de operaciones estadísticas"
       },
       "LegalActs":{
          "type":"object",
@@ -676,7 +676,7 @@
                }
             }
          ],
-         "description":"Leyes u otro tipo de convenios (formales o informales) que otorgan reponsabilidad y autoridad al organismo para la recolección, procesado y diseminación de la estadística."
+         "description":"Leyes u otro tipo de convenios (formales o informales) que otorgan reponsabilidad y autoridad al organismo para la recolección, procesado y diseminación de la estadística"
       },
       "Measures":{
          "type":"object",
@@ -697,7 +697,7 @@
                }
             }
          ],
-         "description":"Unidades en las que se miden los datos."
+         "description":"Unidades en las que se miden los datos"
       },
       "OfficialityTypes":{
          "type":"object",
@@ -718,7 +718,7 @@
                }
             }
          ],
-         "description":"Tipos de oficialidad que se le puede asignar a una operación estadística."
+         "description":"Tipos de oficialidad que se le puede asignar a una operación estadística"
       },
       "Operation":{
          "type":"object",
@@ -729,7 +729,7 @@
                   "kind":{
                      "xml":{
                         "attribute":true,
-                        "namespace":"Tipo del recurso."
+                        "namespace":"Tipo del recurso"
                      },
                      "description":"",
                      "type":"string"
@@ -738,210 +738,210 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Acrónimo de la operación estadística.",
+                     "description":"Acrónimo de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "childLinks":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual",
                      "$ref":"#/definitions/ChildLinks"
                   },
                   "comment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Observaciones y notas sobre la operación estadística.",
+                     "description":"Observaciones y notas sobre la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "confidentialityDataTreatment":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Reglas utilizadas en el tratamiento de los datos con el fin de garantizar el secreto estadístico.",
+                     "description":"Reglas utilizadas en el tratamiento de los datos con el fin de garantizar el secreto estadístico",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "confidentialityPolicy":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Medidas legislativas u otros procedimientos formales que regulan la divulgación de datos sujetos a secreto estadístico.",
+                     "description":"Medidas legislativas u otros procedimientos formales que regulan la divulgación de datos sujetos a secreto estadístico",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "contact":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Organización de contacto para los datos o metadatos de la operación estadística.",
+                     "description":"Organización de contacto para los datos o metadatos de la operación estadística",
                      "$ref":"#/definitions/Resource"
                   },
                   "currentInstance":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Instancia actual, normalmente será la última instancia pública.",
+                     "description":"Instancia actual, normalmente será la última instancia pública",
                      "$ref":"#/definitions/Resource"
                   },
                   "currentlyActive":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Indica si la operación estadística está actualmente en uso o no.",
+                     "description":"Indica si la operación estadística está actualmente en uso o no",
                      "type":"boolean"
                   },
                   "dataSharings":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Mecanismos o procedimientos asociados a la operación estadística para el intercambio de datos y la coordinación entre los organismos vinculados a la misma.",
+                     "description":"Mecanismos o procedimientos asociados a la operación estadística para el intercambio de datos y la coordinación entre los organismos vinculados a la misma",
                      "$ref":"#/definitions/DataSharings"
                   },
                   "description":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción detallada de la operación detallada y de los objetivos específicos que se pretenden alcanzar.",
+                     "description":"Descripción detallada de la operación detallada y de los objetivos específicos que se pretenden alcanzar",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Identificador del recurso.",
+                     "description":"Identificador del recurso",
                      "type":"string"
                   },
                   "indicatorSystem":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Indica si una operación estadística genera un sistema de indicadores. La información del sistema de indicadores asociado se puede consultar en la API indicators.",
+                     "description":"Indica si una operación estadística genera un sistema de indicadores. La información del sistema de indicadores asociado se puede consultar en la API indicators",
                      "type":"boolean"
                   },
                   "inventoryDate":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Fecha en la que se hace pública la operación estadística por primera vez.",
+                     "description":"Fecha en la que se hace pública la operación estadística por primera vez",
                      "type":"string"
                   },
                   "legalActs":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Indica que la actividad estadística está cubierta por un acto jurídico o por algún acuerdo formal. Se relacionan los actos jurídicos o acuerdos que asignen responsabilidad o autoridad de una agencia para la recolección, procesamiento y difusión de datos de la operación estadística.",
+                     "description":"Indica que la actividad estadística está cubierta por un acto jurídico o por algún acuerdo formal. Se relacionan los actos jurídicos o acuerdos que asignen responsabilidad o autoridad de una agencia para la recolección, procesamiento y difusión de datos de la operación estadística",
                      "$ref":"#/definitions/LegalActs"
                   },
                   "name":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Nombre de la operación estadística.",
+                     "description":"Nombre de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "objective":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Descripción del objetivo general de la operación estadística.",
+                     "description":"Descripción del objetivo general de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "officialityType":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Tipo de oficialidad de la operación estadística.",
+                     "description":"Tipo de oficialidad de la operación estadística",
                      "$ref":"#/definitions/Item"
                   },
                   "parentLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al recurso padre de la API.",
+                     "description":"Enlace al recurso padre de la API",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "producers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Organismos nacionales o regionales responsables de la producción de la operación estadística.",
+                     "description":"Organismos nacionales o regionales responsables de la producción de la operación estadística",
                      "$ref":"#/definitions/Producers"
                   },
                   "publishers":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Organismos regionales responsables de la difusión de datos de la operación estadística.",
+                     "description":"Organismos regionales responsables de la difusión de datos de la operación estadística",
                      "$ref":"#/definitions/Publishers"
                   },
                   "regionalContributors":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Organismos regionales colaboradores de la operación estadística.",
+                     "description":"Organismos regionales colaboradores de la operación estadística",
                      "$ref":"#/definitions/RegionalContributors"
                   },
                   "regionalResponsibles":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Organismos regionales responsables de la operación a escala regional.",
+                     "description":"Organismos regionales responsables de la operación a escala regional",
                      "$ref":"#/definitions/RegionalResponsibles"
                   },
                   "relPolUsAc":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Política de difusión de los datos de la operación, incluyendo información sobre accesos privilegiados.",
+                     "description":"Política de difusión de los datos de la operación, incluyendo información sobre accesos privilegiados",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "releaseCalendar":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Información sobre la disponibilidad de un calendario de difusión de los datos de la operación estadística.",
+                     "description":"Información sobre la disponibilidad de un calendario de difusión de los datos de la operación estadística",
                      "type":"boolean"
                   },
                   "releaseCalendarAccess":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al calendario de difusión de los datos de la operación estadística.",
+                     "description":"Enlace al calendario de difusión de los datos de la operación estadística",
                      "type":"string"
                   },
                   "revPolicy":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Politica general de la revisión de datos de la operación estadística.",
+                     "description":"Politica general de la revisión de datos de la operación estadística",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "revPractice":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Describir las principales revisiones de datos programadas y las posibles revisiones menores.",
+                     "description":"Describir las principales revisiones de datos programadas y las posibles revisiones menores",
                      "$ref":"#/definitions/InternationalString"
                   },
                   "secondarySubjectAreas":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Areas temáticas secundarias en las que está encuadrada la operación.",
+                     "description":"Areas temáticas secundarias en las que está encuadrada la operación",
                      "$ref":"#/definitions/SecondarySubjectAreas"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Enlace al propio recurso.",
+                     "description":"Enlace al propio recurso",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "statisticalOperationType":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Tipo de operación estadística.",
+                     "description":"Tipo de operación estadística",
                      "$ref":"#/definitions/Item"
                   },
                   "status":{
@@ -955,27 +955,27 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Area temática principal en las que está encuadrada la operación.",
+                     "description":"Area temática principal en las que está encuadrada la operación",
                      "$ref":"#/definitions/Resource"
                   },
                   "updateFrequencies":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"Frecuencia con la que se actualizan los datos públicos de la operación estadística.",
+                     "description":"Frecuencia con la que se actualizan los datos públicos de la operación estadística",
                      "$ref":"#/definitions/UpdateFrequencies"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/statistical-operations/v1.0/domain"
                      },
-                     "description":"urn del recurso.",
+                     "description":"urn del recurso",
                      "type":"string"
                   }
                }
             }
          ],
-         "description":"Conjunto de actividades, incluidas las preparatorias, que conducen a la obtención y/o difusión de resultados estadísticos sobre un determinado sector o tema o territorio. También se incluyen en el ámbito de esta definición los trabajos de infraestructura y de normalización estadística que posibilitan la coordinación, homogeneización e integración de las estadísticas, así como la recopilación de resultados y la confección de síntesis."
+         "description":"Conjunto de actividades, incluidas las preparatorias, que conducen a la obtención y/o difusión de resultados estadísticos sobre un determinado sector o tema o territorio. También se incluyen en el ámbito de esta definición los trabajos de infraestructura y de normalización estadística que posibilitan la coordinación, homogeneización e integración de las estadísticas, así como la recopilación de resultados y la confección de síntesis"
       },
       "Operations":{
          "type":"object",
@@ -996,7 +996,7 @@
                }
             }
          ],
-         "description":"Listado de operaciones estadísticas."
+         "description":"Listado de operaciones estadísticas"
       },
       "Producers":{
          "type":"object",
@@ -1017,7 +1017,7 @@
                }
             }
          ],
-         "description":"Listado de organismos que colaboran en la producción de la estadística."
+         "description":"Listado de organismos que colaboran en la producción de la estadística"
       },
       "Publishers":{
          "type":"object",
@@ -1038,7 +1038,7 @@
                }
             }
          ],
-         "description":"Listado de organismos que difunden los resultados de la operación estadística."
+         "description":"Listado de organismos que difunden los resultados de la operación estadística"
       },
       "RegionalContributors":{
          "type":"object",
@@ -1059,7 +1059,7 @@
                }
             }
          ],
-         "description":"Organismos regionales colaboradores de la operación."
+         "description":"Organismos regionales colaboradores de la operación"
       },
       "RegionalResponsibles":{
          "type":"object",
@@ -1080,7 +1080,7 @@
                }
             }
          ],
-         "description":"Organismos regionales responsables de la operación."
+         "description":"Organismos regionales responsables de la operación"
       },
       "SecondarySubjectAreas":{
          "type":"object",
@@ -1101,7 +1101,7 @@
                }
             }
          ],
-         "description":"Áreas temáticas secundarias relacionadas con la operación."
+         "description":"Áreas temáticas secundarias relacionadas con la operación"
       },
       "StatConcDefs":{
          "type":"object",
@@ -1122,7 +1122,7 @@
                }
             }
          ],
-         "description":"Listado de conceptos que se manejan en la operación."
+         "description":"Listado de conceptos que se manejan en la operación"
       },
       "StatisticalOperationSources":{
          "type":"object",
@@ -1143,7 +1143,7 @@
                }
             }
          ],
-         "description":"Fuentes usadas para la elaboración de la operación estadística."
+         "description":"Fuentes usadas para la elaboración de la operación estadística"
       },
       "StatisticalOperationTypes":{
          "type":"object",
@@ -1164,7 +1164,7 @@
                }
             }
          ],
-         "description":"Tipos de operaciones estadísticas."
+         "description":"Tipos de operaciones estadísticas"
       },
       "StatisticalUnits":{
          "type":"object",
@@ -1185,7 +1185,7 @@
                }
             }
          ],
-         "description":"Unidades básicas de observación estadística para las que se proporcionan los datos."
+         "description":"Unidades básicas de observación estadística para las que se proporcionan los datos"
       },
       "Status":{
          "type":"string",
@@ -1196,7 +1196,7 @@
             "PRODUCTION",
             "OUT_OF_PRINT"
          ],
-         "description":"Estado de la operación estadística."
+         "description":"Estado de la operación estadística"
       },
       "TemporalGranularities":{
          "type":"object",
@@ -1217,7 +1217,7 @@
                }
             }
          ],
-         "description":"Granularidades temporales que contemplan los datos de la operación estadística."
+         "description":"Granularidades temporales que contemplan los datos de la operación estadística"
       },
       "UpdateFrequencies":{
          "type":"object",
@@ -1238,7 +1238,7 @@
                }
             }
          ],
-         "description":"Frecuencias de acualización de los datos."
+         "description":"Frecuencias de acualización de los datos"
       },
       "ChildLinks":{
          "type":"object",
@@ -1251,20 +1251,20 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Número total de resultados existentes.",
+                     "description":"Número total de resultados existentes",
                      "type":"number"
                   },
                   "childLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Recurso de la API al que se puede acceder desde el recurso actual.",
+                     "description":"Recurso de la API al que se puede acceder desde el recurso actual",
                      "$ref":"#/definitions/ResourceLink"
                   }
                }
             }
          ],
-         "description":"Recursos a los que se puede acceder desde el presente recurso."
+         "description":"Recursos a los que se puede acceder desde el presente recurso"
       },
       "InternationalString":{
          "type":"object",
@@ -1276,13 +1276,13 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Texto en múltiples idiomas.",
+                     "description":"Texto en múltiples idiomas",
                      "$ref":"#/definitions/LocalisedString"
                   }
                }
             }
          ],
-         "description":"Texto en múltiples lenguajes."
+         "description":"Texto en múltiples lenguajes"
       },
       "Item":{
          "type":"object",
@@ -1294,7 +1294,7 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Identificador del recurso.",
+                     "description":"Identificador del recurso",
                      "type":"string"
                   },
                   "name":{
@@ -1320,7 +1320,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la primera página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última.",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la primera página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última",
                      "type":"string"
                   },
                   "kind":{
@@ -1328,7 +1328,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Tipo del recurso.",
+                     "description":"Tipo del recurso",
                      "type":"string"
                   },
                   "lastLink":{
@@ -1336,7 +1336,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la última página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última.",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la última página. Si no se muestra es porque ya estamos en ella. Tener en cuenta que cuando sólo existe una página, no existirá ni primera ni última",
                      "type":"string"
                   },
                   "limit":{
@@ -1344,7 +1344,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Número máximo de resultados a obtener.",
+                     "description":"Número máximo de resultados a obtener",
                      "type":"number"
                   },
                   "nextLink":{
@@ -1352,7 +1352,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página siguiente a la que nos encontramos. Si no se muestra es porque no existe siguiente.",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página siguiente a la que nos encontramos. Si no se muestra es porque no existe siguiente",
                      "type":"string"
                   },
                   "offset":{
@@ -1360,7 +1360,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados.",
+                     "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados",
                      "type":"number"
                   },
                   "previousLink":{
@@ -1368,7 +1368,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página anterior a la que nos encontramos. Si no se muestra es porque no existe siguiente.",
+                     "description":"Dado que se trata de un resultado páginado, este enlace nos permite desplazarnos a la página anterior a la que nos encontramos. Si no se muestra es porque no existe siguiente",
                      "type":"string"
                   },
                   "selfLink":{
@@ -1384,7 +1384,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Número total de resultados existentes.",
+                     "description":"Número total de resultados existentes",
                      "type":"number"
                   }
                }
@@ -1403,20 +1403,20 @@
                         "attribute":true,
                         "namespace":"http://www.w3.org/XML/1998/namespace"
                      },
-                     "description":"Idioma para el que se especifica la traducción.",
+                     "description":"Idioma para el que se especifica la traducción",
                      "type":"string"
                   },
                   "(value)":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Traducción en el idioma especificado.",
+                     "description":"Traducción en el idioma especificado",
                      "type":"string"
                   }
                }
             }
          ],
-         "description":"Texto en un idioma en particular."
+         "description":"Texto en un idioma en particular"
       },
       "Resource":{
          "type":"object",
@@ -1429,14 +1429,14 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Tipo del recurso.",
+                     "description":"Tipo del recurso",
                      "type":"string"
                   },
                   "id":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Identificador del recurso.",
+                     "description":"Identificador del recurso",
                      "type":"string"
                   },
                   "name":{
@@ -1450,21 +1450,21 @@
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Identifificador del recurso en el que se incluyen los identificadores de los recursos de los que hereda. Los distintos identificadores se separan mediante \".\".",
+                     "description":"Identifificador del recurso en el que se incluyen los identificadores de los recursos de los que hereda. Los distintos identificadores se separan mediante \".\"",
                      "type":"string"
                   },
                   "selfLink":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"Enlace al propio recurso.",
+                     "description":"Enlace al propio recurso",
                      "$ref":"#/definitions/ResourceLink"
                   },
                   "urn":{
                      "xml":{
                         "namespace":"http://www.siemac.org/metamac/rest/common/v1.0/domain"
                      },
-                     "description":"urn del recurso.",
+                     "description":"urn del recurso",
                      "type":"string"
                   }
                }
@@ -1483,7 +1483,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Enlace al recurso.",
+                     "description":"Enlace al recurso",
                      "type":"string"
                   },
                   "kind":{
@@ -1491,7 +1491,7 @@
                         "attribute":true,
                         "namespace":""
                      },
-                     "description":"Tipo del recurso.",
+                     "description":"Tipo del recurso",
                      "type":"string"
                   }
                }
@@ -1506,7 +1506,7 @@
             "tags":[
                "Familias de operaciones"
             ],
-            "description":"Permite obtener el listado de familias de operaciones estadísticas.",
+            "description":"Permite obtener el listado de familias de operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_findFamilies_GET",
             "produces":[
                "application/xml"
@@ -1522,7 +1522,7 @@
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados"
                },
                {
                   "name":"orderBy",
@@ -1546,16 +1546,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1565,7 +1565,7 @@
             "tags":[
                "Familias de operaciones"
             ],
-            "description":"Permite obtener una familia en particular.",
+            "description":"Permite obtener una familia en particular",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamilyById_GET",
             "produces":[
                "application/xml"
@@ -1587,16 +1587,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1606,7 +1606,7 @@
             "tags":[
                "Familias de operaciones"
             ],
-            "description":"Permite obtener todas las operaciones que forman parte de una determina familia.",
+            "description":"Permite obtener todas las operaciones que forman parte de una determina familia",
             "operationId":"resource_StatisticalOperationsV1_0_findOperationsByFamily_GET",
             "produces":[
                "application/xml"
@@ -1628,7 +1628,7 @@
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados"
                },
                {
                   "name":"orderBy",
@@ -1652,16 +1652,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1671,7 +1671,7 @@
             "tags":[
                "Operaciones estadísticas"
             ],
-            "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario.",
+            "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario",
             "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
             "produces":[
                "application/xml"
@@ -1687,7 +1687,7 @@
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+                  "description":"Desplazamiento. Número a partir del cual se comienzan a obtener los resultados"
                },
                {
                   "name":"orderBy",
@@ -1711,16 +1711,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1730,7 +1730,7 @@
             "tags":[
                "Operaciones estadísticas"
             ],
-            "description":"Permite obtener una operación estadística en concreto.",
+            "description":"Permite obtener una operación estadística en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOperationById_GET",
             "produces":[
                "application/xml"
@@ -1752,16 +1752,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1771,7 +1771,7 @@
             "tags":[
                "Operaciones estadísticas"
             ],
-            "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto.",
+            "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
             "produces":[
                "application/xml"
@@ -1781,7 +1781,7 @@
                   "name":"operationId",
                   "in":"path",
                   "type":"string",
-                  "description":"Identificador de la operación."
+                  "description":"Identificador de la operación"
                },
                {
                   "name":"limit",
@@ -1793,7 +1793,7 @@
                   "name":"offset",
                   "in":"query",
                   "type":"string",
-                  "description":"Deplazamiento. Número a partir del cual se comienzan a obtener los resultados."
+                  "description":"Deplazamiento. Número a partir del cual se comienzan a obtener los resultados"
                },
                {
                   "name":"orderBy",
@@ -1817,16 +1817,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1836,7 +1836,7 @@
             "tags":[
                "Operaciones estadísticas"
             ],
-            "description":"Permite obtener una instancia en particular de una operación estadística.",
+            "description":"Permite obtener una instancia en particular de una operación estadística",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
             "produces":[
                "application/xml"	
@@ -1864,16 +1864,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1883,7 +1883,7 @@
             "tags":[
                "Operaciones estadísticas"
             ],
-            "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto.",
+            "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
             "produces":[
                "application/xml"
@@ -1905,16 +1905,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1924,7 +1924,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas.",
+            "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
             "produces":[
                "application/xml"
@@ -1941,16 +1941,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1960,7 +1960,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas.",
+            "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
             "produces":[
                "application/xml"
@@ -1977,16 +1977,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -1996,7 +1996,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas.",
+            "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
             "produces":[
                "application/xml"
@@ -2013,16 +2013,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -2032,7 +2032,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener todos los métodos de recolección de datos existentes.",
+            "description":"Permite obtener todos los métodos de recolección de datos existentes",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCollMethods_GET",
             "produces":[
                "application/xml"
@@ -2049,16 +2049,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -2068,7 +2068,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener todos los tipos de instancias de operaciones que existen.",
+            "description":"Permite obtener todos los tipos de instancias de operaciones que existen",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceTypes_GET",
             "produces":[
                "application/xml"
@@ -2085,16 +2085,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
@@ -2104,7 +2104,7 @@
             "tags":[
                "Tablas de valores auxiliares"
             ],
-            "description":"Permite obtener todos los tipos de operaciones estadísticas existentes.",
+            "description":"Permite obtener todos los tipos de operaciones estadísticas existentes",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationTypes_GET",
             "produces":[
                "application/xml"
@@ -2121,16 +2121,16 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente."
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
-                  "description":"No aceptable. El formato solicitado no es válido."
+                  "description":"No aceptable. El formato solicitado no es válido"
                },
                "500":{
-                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado."
+                  "description":"Error interno del servidor. Se ha producido un error que impide que se obtenga el recurso solicitado"
                },
                "503":{
-                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal."
+                  "description":"Servicio no disponible. Indica que actualmente el servidor no está disponible y por tanto, la solicitud no puede procesarse. El error puede deberse a una sobrecarga temporal o a labores de mantenimiento del servidor. Se trata de una situación temporal"
                }
             }
          }
