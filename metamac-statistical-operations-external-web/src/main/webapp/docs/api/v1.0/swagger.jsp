@@ -1,7 +1,7 @@
 {
    "swagger":"2.0",
    "info":{
-      "description":"Las operaciones estadísticas son el elemento principal sobre el que se define toda la actividad estadística del organismo. Todos los recursos que se publican en el organismo guardan relación de manera directa o indirecta con la operación estadística. La API de operaciones estadísticas permite consultar el inventario de operaciones estadísticas del organismo, las diferencias que existen entre las diferentes realizaciones de una misma operación estadística (instancias) y su agrupación en familias.",
+      "description":"Las operaciones estadísticas son la unidad básica de planificación de la actividad estadística del Instituto Canario de Estadística (ISTAC). Todos los recursos que se publican guardan relación de manera directa o indirecta con alguna operación. Esta API permite consultar el inventario de operaciones estadísticas del Instituto, las diferencias que existen entre las diferentes realizaciones de una misma operación estadística (instancias) y su agrupación en familias. Asi por ejemplo tenemos que el \"Censo de Población y Viviendas\" es una operación estadística de la que podremos encontrar distintas realizaciones o instanacias (Censo 2011, Censo 2001, Censo 1991, etc) y que podría agruparse con otras operaciones dentro de una famlia \"Estadísticas poblacionales\". Los datos de las operaciones estadísticas y de sus instancias están armonizados con la propuesta de Eurostat para el Sistema Estadístico Europeo y definida en el documento EURO-SDMX Metadata Structure (release 4, December 2014).",
       "version":"1.0",
       "title":"API de operaciones estadísticas v1.0"
    },
