@@ -49,6 +49,6 @@ ssh deploy@estadisticas.arte-consultores.com <<EOF
     sudo chown -R metamac.metamac /servers/metamac
     sudo service metamac01 start
     checkURL "http://estadisticas.arte-consultores.com/statistical-operations-internal" "metamac01"
-    checkURL "http://estadisticas.arte-consultores.com/statistical-operations/latest" "metamac01"
+    checkURL "http://estadisticas.arte-consultores.com/statistical-operations" "metamac01"
 
 EOF
