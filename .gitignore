@@ -2,8 +2,8 @@
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css
-/target/www/**
-environment-local.xml
+target/
+environment-LOCAL.xml
 
 ######################
 # Node
@@ -32,7 +32,7 @@ environment-local.xml
 *~.nib
 local.properties
 .classpath
-/**/.settings/**
+.settings/
 .loadpath
 /src/main/resources/rebel.xml
 
