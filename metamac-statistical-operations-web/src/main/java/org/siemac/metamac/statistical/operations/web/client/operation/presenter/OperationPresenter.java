@@ -68,6 +68,7 @@ import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCrit
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -97,14 +98,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler {
 
-    private final DispatchAsync   dispatcher;
-    private final PlaceManager    placeManager;
+    private final DispatchAsync dispatcher;
+    private final PlaceManager placeManager;
 
-    private OperationDto          operationDto;
+    private OperationDto operationDto;
     private List<InstanceBaseDto> instanceBaseDtos;
-    private List<FamilyBaseDto>   familyBaseDtos;
+    private List<FamilyBaseDto> familyBaseDtos;
 
-    public static final Object    TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)
@@ -214,7 +215,16 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onClick(ClickEvent event) {
                 if (getView().validate()) {
-                    saveOperation(getView().getOperation(operationDto));
+                    // See: METAMAC-2516
+                    // Two invokes to getXXXDto() is needed for Chrome, please don't remove this two call fix.
+                    getView().getOperation(operationDto);
+                    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+
+                        @Override
+                        public void execute() {
+                            saveOperation(getView().getOperation(operationDto));
+                        }
+                    });
                 }
             }
         }));

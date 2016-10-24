@@ -25,6 +25,7 @@ import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyResult;
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -48,13 +49,13 @@ import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 
 public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyListView, FamilyListPresenter.FamiliesListProxy> implements FamilyListUiHandlers {
 
-    public final static int     FAMILY_LIST_FIRST_RESULT          = 0;
-    public final static int     FAMILY_LIST_MAX_RESULTS           = 30;
+    public final static int FAMILY_LIST_FIRST_RESULT = 0;
+    public final static int FAMILY_LIST_MAX_RESULTS = 30;
 
     private final DispatchAsync dispatcher;
-    private final PlaceManager  placeManager;
+    private final PlaceManager placeManager;
 
-    public static final Object  TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.familyListPage)
@@ -122,7 +123,16 @@ public class FamilyListPresenter extends Presenter<FamilyListPresenter.FamilyLis
             @Override
             public void onClick(ClickEvent event) {
                 if (getView().validate()) {
-                    saveFamily(getView().getFamily());
+                    // See: METAMAC-2516
+                    // Two invokes to getXXXDto() is needed for Chrome, please don't remove this two call fix.
+                    getView().getFamily();
+                    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+
+                        @Override
+                        public void execute() {
+                            saveFamily(getView().getFamily());
+                        }
+                    });
                 }
             }
         }));

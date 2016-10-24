@@ -49,6 +49,7 @@ import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCrit
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
@@ -72,12 +73,12 @@ import com.smartgwt.client.widgets.events.HasClickHandlers;
 public class InstancePresenter extends Presenter<InstancePresenter.InstanceView, InstancePresenter.InstanceProxy> implements InstanceUiHandlers, UpdateOperationsListsHandler {
 
     private final DispatchAsync dispatcher;
-    private final PlaceManager  placeManager;
+    private final PlaceManager placeManager;
 
-    private OperationBaseDto    operationBaseDto;
-    private InstanceDto         instanceDto;
+    private OperationBaseDto operationBaseDto;
+    private InstanceDto instanceDto;
 
-    public static final Object  TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.instancePage)
@@ -133,7 +134,16 @@ public class InstancePresenter extends Presenter<InstancePresenter.InstanceView,
             @Override
             public void onClick(ClickEvent event) {
                 if (getView().validate()) {
-                    saveInstance(getView().getInstance(instanceDto));
+                    // See: METAMAC-2516
+                    // Two invokes to getXXXDto() is needed for Chrome, please don't remove this two call fix.
+                    getView().getInstance(instanceDto);
+                    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+
+                        @Override
+                        public void execute() {
+                            saveInstance(getView().getInstance(instanceDto));
+                        }
+                    });
                 }
             }
         }));
