@@ -51,7 +51,7 @@ public class SharedSecurityUtils {
 
     public static Boolean isAnyStatisticalOperationsRole(MetamacPrincipal metamacPrincipal) {
         return isAdministrador(metamacPrincipal) || isTecnicoPlanificacion(metamacPrincipal) || isTecnicoApoyoPlanificacion(metamacPrincipal) || isTecnicoDifusion(metamacPrincipal)
-                || isTecnicoApoyoDifusion(metamacPrincipal) || isTecnicoProduccion(metamacPrincipal) || isTecnicoApoyoProduccion(metamacPrincipal);
+                || isTecnicoApoyoDifusion(metamacPrincipal) || isTecnicoProduccion(metamacPrincipal) || isTecnicoApoyoProduccion(metamacPrincipal) || isLector(metamacPrincipal);
     }
 
     public static Boolean isTecnicoPlanificacion(MetamacPrincipal metamacPrincipal) {
@@ -78,4 +78,7 @@ public class SharedSecurityUtils {
         return isRoleInAccesses(metamacPrincipal, StatisticalOperationsRoleEnum.TECNICO_APOYO_PRODUCCION);
     }
 
+    public static Boolean isLector(MetamacPrincipal metamacPrincipal) {
+        return isRoleInAccesses(metamacPrincipal, StatisticalOperationsRoleEnum.LECTOR);
+    }
 }
