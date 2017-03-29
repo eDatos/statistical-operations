@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>APIs de recursos estructurales</title>
+  <title>APIs de operaciones estadísticas</title>
  
   <link href="<%=WebUtils.getFavicon()%>" rel="shortcut icon"/>
   
@@ -27,7 +27,7 @@
     </c:if>
     
     <div class="version-list">
-       <h1>APIs de recursos estructurales</h1>
+       <h1>APIs de operaciones estadísticas</h1>
        <h2>Versiones</h2>
        <ul>
            <li>
