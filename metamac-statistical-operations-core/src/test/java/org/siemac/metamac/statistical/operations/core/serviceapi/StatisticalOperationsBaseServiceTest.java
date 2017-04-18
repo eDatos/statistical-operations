@@ -1,5 +1,12 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
+import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks.mockExternalItem;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,15 +46,6 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-
-import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsMocks.mockExternalItem;
 
 /**
  * Spring based transactional test with DbUnit support.
@@ -828,7 +826,7 @@ public class StatisticalOperationsBaseServiceTest extends StatisticalOperationsB
         statisticalOperationsBaseService.publishInternallyOperation(getServiceContextAdministrador(), operation.getId());
 
         Instance instance = statisticalOperationsBaseService.createInstance(getServiceContextAdministrador(), operation.getId(), createInstance());
-        instance.setBasePeriod("2005Q1");
+        instance.setBasePeriod("2005-Q1");
         statisticalOperationsBaseService.updateInstance(getServiceContextAdministrador(), instance);
     }
 
