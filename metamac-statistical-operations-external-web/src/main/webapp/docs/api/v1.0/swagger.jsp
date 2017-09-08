@@ -1511,7 +1511,7 @@
             "description":"Permite obtener el listado de familias de operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_findFamilies_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1570,7 +1570,7 @@
             "description":"Permite obtener una familia en particular",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamilyById_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1611,7 +1611,7 @@
             "description":"Permite obtener todas las operaciones que forman parte de una determina familia",
             "operationId":"resource_StatisticalOperationsV1_0_findOperationsByFamily_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1676,7 +1676,7 @@
             "description":"Permite obtener el listado de operaciones estadísticas existentes en el inventario",
             "operationId":"resource_StatisticalOperationsV1_0_findOperations_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1735,7 +1735,7 @@
             "description":"Permite obtener una operación estadística en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOperationById_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1776,7 +1776,7 @@
             "description":"Permite obtener el listado de instancias relacionadas con una operación estadística en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_findInstances_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1841,7 +1841,7 @@
             "description":"Permite obtener una instancia en particular de una operación estadística",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceById_GET",
             "produces":[
-               "application/xml"	
+               "application/xml", "application/json"	
             ],
             "parameters":[
                {
@@ -1888,7 +1888,7 @@
             "description":"Permite obtener el listado de familias estadísticas en las que se engloba una operación en concreto",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveFamiliesByOperation_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
                {
@@ -1929,7 +1929,7 @@
             "description":"Permite obtener todos los posibles tipos de orígenes de datos disponibles para las operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationSources_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 
@@ -1965,7 +1965,7 @@
             "description":"Permite obtener todos los tipos de oficialidad que se le pueden asignar a las diferentes operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveOfficialityTypes_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 
@@ -2001,7 +2001,7 @@
             "description":"Permite obtener el listado de todos los tipos de costes disponibles para las operaciones estadísticas",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCosts_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 
@@ -2037,7 +2037,7 @@
             "description":"Permite obtener todos los métodos de recolección de datos existentes",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveCollMethods_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 
@@ -2073,7 +2073,7 @@
             "description":"Permite obtener todos los tipos de instancias de operaciones que existen",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveInstanceTypes_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 
@@ -2109,7 +2109,7 @@
             "description":"Permite obtener todos los tipos de operaciones estadísticas existentes",
             "operationId":"resource_StatisticalOperationsV1_0_retrieveStatisticalOperationTypes_GET",
             "produces":[
-               "application/xml"
+               "application/xml", "application/json"
             ],
             "parameters":[
 

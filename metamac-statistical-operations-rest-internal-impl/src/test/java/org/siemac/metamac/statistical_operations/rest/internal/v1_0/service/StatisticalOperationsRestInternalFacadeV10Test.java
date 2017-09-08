@@ -193,6 +193,36 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
 
     @Test
+    public void testRetrieveOperationByIdJsonWithoutJaxbTransformation() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveOperationByIdJsonWithoutJaxbTransformationWithJsonSufix() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + ".json";
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+
+    @Test
+    public void testRetrieveOperationByIdJsonWithoutJaxbTransformationWithTypeParameter() throws Exception {
+
+        String requestUri = getRequestUriRetrieveOperationById(OPERATION_1) + "?_type=json";
+        InputStream responseExpected = StatisticalOperationsRestInternalFacadeV10Test.class.getResourceAsStream("/responses/retrieveOperationById.id1.json");
+
+        // Request and validate
+        testRequestWithoutJaxbTransformation(requestUri, APPLICATION_JSON, Status.OK, responseExpected);
+    }
+
+    @Test
     public void testRetrieveOperationByIdErrorNotExistsXml() throws Exception {
         try {
             getStatisticalOperationsRestInternalFacadeClientXml().retrieveOperationById(NOT_EXISTS);
@@ -219,7 +249,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
     }
 
     @Test
-    public void testRetrieveOperationByIdJsonNonAcceptable() throws Exception {
+    public void testRetrieveOperationByIdJsonOk() throws Exception {
 
         String requestUri = getRequestUriRetrieveOperationById(OPERATION_1);
 
@@ -227,7 +257,7 @@ public class StatisticalOperationsRestInternalFacadeV10Test extends MetamacRestB
         WebClient webClient = WebClient.create(requestUri).accept("application/json");
         Response response = webClient.get();
 
-        assertEquals(Status.NOT_ACCEPTABLE.getStatusCode(), response.getStatus());
+        assertEquals(Status.OK.getStatusCode(), response.getStatus());
     }
 
     @Test
