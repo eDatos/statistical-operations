@@ -41,79 +41,19 @@ public class StatisticalOperationsMocks extends MetamacMocks {
         return target;
     }
 
-    /**
-     * Mock an InternationalString with two locales
-     */
-    public static InternationalString mockInternationalString(String locale01, String label01, String locale02, String label02) {
-        InternationalString target = new InternationalString();
-        LocalisedString localisedString01 = new LocalisedString();
-        localisedString01.setLocale(locale01);
-        localisedString01.setLabel(label01);
-        target.addText(localisedString01);
-
-        LocalisedString localisedString02 = new LocalisedString();
-        localisedString02.setLocale(locale02);
-        localisedString02.setLabel(label02);
-        target.addText(localisedString02);
-        return target;
-    }
 
     // -----------------------------------------------------------------
     // EXTERNAL ITEM
     // -----------------------------------------------------------------
-
-    public static ExternalItem mockStatisticalOperationItem() {
-        String code = mockCode();
-        return mockStatisticalOperationItem(code);
-    }
-
-    public static ExternalItem mockStatisticalOperationItem(String code) {
-        return mockStatisticalOperationAppExternalItem(code, mockStatisticalOperationUrn(code), TypeExternalArtefactsEnum.STATISTICAL_OPERATION);
-    }
-
-    public static ExternalItem mockStatisticalOperationInstanceItem() {
-        String code = mockCode();
-        return mockStatisticalOperationAppExternalItem(code, mockStatisticalOperationInstanceUrn(code), TypeExternalArtefactsEnum.STATISTICAL_OPERATION_INSTANCE);
-    }
 
     public static ExternalItem mockAgencyExternalItem() {
         String code = mockCode();
         return mockSrmAppExternalItem(code, mockAgencyUrn(code), TypeExternalArtefactsEnum.AGENCY);
     }
 
-    public static ExternalItem mockOrganizationUnitExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockOrganizationUnitUrn(code), TypeExternalArtefactsEnum.ORGANISATION_UNIT);
-    }
-
-    public static ExternalItem mockConceptExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockConceptUrn(code), TypeExternalArtefactsEnum.CONCEPT);
-    }
-
-    public static ExternalItem mockConceptSchemeExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockConceptSchemeUrn(code), TypeExternalArtefactsEnum.CONCEPT_SCHEME);
-    }
-
-    public static ExternalItem mockCodeListSchemeExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockCodeListUrn(code), TypeExternalArtefactsEnum.CODELIST);
-    }
-
     public static ExternalItem mockCodeExternalItem() {
         String code = mockCode();
         return mockSrmAppExternalItem(code, mockCodeUrn(code), TypeExternalArtefactsEnum.CODE);
-    }
-
-    public static ExternalItem mockDsdExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockDsdUrn(code), TypeExternalArtefactsEnum.DATASTRUCTURE);
-    }
-
-    public static ExternalItem mockDimensionExternalItem() {
-        String code = mockCode();
-        return mockSrmAppExternalItem(code, mockDimensionUrn(code), TypeExternalArtefactsEnum.DIMENSION);
     }
 
     public static ExternalItem mockExternalItem(String code, String uri, String urn, String urnProvider, TypeExternalArtefactsEnum type) {
@@ -137,10 +77,6 @@ public class StatisticalOperationsMocks extends MetamacMocks {
     // -----------------------------------------------------------------
     // PRIVATE
     // -----------------------------------------------------------------
-
-    private static ExternalItem mockStatisticalOperationAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
-        return mockExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, null, type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
-    }
 
     private static ExternalItem mockSrmAppExternalItem(String code, String urn, TypeExternalArtefactsEnum type) {
         return mockExternalItem(code, CoreCommonConstants.API_LATEST_WITH_SLASHES + code, urn, urn + ":provider", type, mockInternationalString(), CoreCommonConstants.URL_SEPARATOR + code);
