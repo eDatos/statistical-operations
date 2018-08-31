@@ -25,8 +25,6 @@ import org.siemac.metamac.web.common.client.widgets.actions.PaginatedAction;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.smartgwt.client.types.Autofit;
-import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
@@ -111,7 +109,6 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
             }
         });
         familyListGrid.getListGrid().setAutoFitMaxRecords(FamilyListPresenter.FAMILY_LIST_MAX_RESULTS);
-        familyListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
 
         familyListGrid.getListGrid().setFields(ResourceListFieldUtils.getFamilyFields());
         familyListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
@@ -132,13 +129,11 @@ public class FamilyListViewImpl extends ViewWithUiHandlers<FamilyListUiHandlers>
             }
         });
 
-        VLayout subPanel = new VLayout();
-        subPanel.setOverflow(Overflow.SCROLL);
-        subPanel.addMember(listGridToolStrip);
-        subPanel.addMember(searchSectionStack);
-        subPanel.addMember(familyListGrid);
+        familyListGrid.setHeight100();
 
-        panel.addMember(subPanel);
+        panel.addMember(listGridToolStrip);
+        panel.addMember(searchSectionStack);
+        panel.addMember(familyListGrid);
     }
 
     @Override

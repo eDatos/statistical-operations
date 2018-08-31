@@ -26,8 +26,6 @@ import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.smartgwt.client.types.Autofit;
-import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.Visibility;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.fields.events.FormItemClickHandler;
@@ -98,8 +96,8 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (StringUtils.equals(event.getKeyName(), CommonWebConstants.ENTER_KEY)) {
-                    getUiHandlers()
-                            .retrieveOperationList(OperationListPresenter.OPERATION_LIST_FIRST_RESULT, OperationListPresenter.OPERATION_LIST_MAX_RESULTS, searchSectionStack.getSearchCriteria());
+                    getUiHandlers().retrieveOperationList(OperationListPresenter.OPERATION_LIST_FIRST_RESULT, OperationListPresenter.OPERATION_LIST_MAX_RESULTS,
+                            searchSectionStack.getSearchCriteria());
                 }
             }
         });
@@ -114,7 +112,6 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             }
         });
         operationListGrid.getListGrid().setAutoFitMaxRecords(OperationListPresenter.OPERATION_LIST_MAX_RESULTS);
-        operationListGrid.getListGrid().setAutoFitData(Autofit.VERTICAL);
         operationListGrid.getListGrid().setFields(ResourceListFieldUtils.getOperationFields());
         operationListGrid.getListGrid().addSelectionChangedHandler(new SelectionChangedHandler() {
 
@@ -134,13 +131,11 @@ public class OperationListViewImpl extends ViewWithUiHandlers<OperationListUiHan
             }
         });
 
-        VLayout subPanel = new VLayout();
-        subPanel.setOverflow(Overflow.SCROLL);
-        subPanel.addMember(listGridToolStrip);
-        subPanel.addMember(searchSectionStack);
-        subPanel.addMember(operationListGrid);
+        operationListGrid.setHeight100();
 
-        panel.addMember(subPanel);
+        panel.addMember(listGridToolStrip);
+        panel.addMember(searchSectionStack);
+        panel.addMember(operationListGrid);
     }
 
     @Override

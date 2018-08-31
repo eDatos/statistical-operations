@@ -550,6 +550,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 familyListGrid.addData(RecordUtils.getFamilyRecord(familyBaseDto));
             }
         }
+        familyListGrid.setAutoFitMaxRecords(familyBaseDtos.size());
     }
 
     private void setOperation(OperationDto operationDto) {

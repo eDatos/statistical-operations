@@ -401,6 +401,7 @@ public class FamilyViewImpl extends ViewWithUiHandlers<FamilyUiHandlers> impleme
                 operationListGrid.addData(RecordUtils.getOperationRecord(operationBaseDto));
             }
         }
+        operationListGrid.setAutoFitMaxRecords(operationBaseDtos.size());
     }
 
     @Override
