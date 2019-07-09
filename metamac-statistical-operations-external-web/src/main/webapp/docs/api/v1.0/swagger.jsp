@@ -1654,7 +1654,7 @@
                   "headers":{
 
                   },
-                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
+                  "description":"Éxito. Indica que la petición ha sido resuelta correctamente"
                },
                "406":{
                   "description":"No aceptable. El formato solicitado no es válido"
