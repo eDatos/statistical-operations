@@ -36,6 +36,10 @@ public class StreamMessagingServiceImpl<K, V extends SpecificRecordBase> impleme
 
     @Override
     public void sendMessage(Operation operation) throws MetamacException {
+        if (operation == null) {
+            return;
+        }
+
         OperationAvro operationAvro = operationAvroMapper.toAvro(operation);
         String key = operation.getUrn();
 
