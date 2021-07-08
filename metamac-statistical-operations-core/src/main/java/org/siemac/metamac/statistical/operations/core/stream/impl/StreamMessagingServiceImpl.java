@@ -7,15 +7,13 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
-import org.siemac.metamac.statistical.operations.core.stream.KafkaMessageService;
+import org.siemac.metamac.statistical.operations.core.stream.StreamMessagingService;
 import org.siemac.metamac.statistical.operations.core.stream.mappers.Do2AvroMapper;
 import org.siemac.metamac.statistical.operations.core.stream.messages.OperationAvro;
 import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;
 import org.siemac.metamac.statistical.operations.web.server.stream.KafkaCustomProducer;
 import org.siemac.metamac.statistical.operations.web.server.stream.MessageBase;
 import org.siemac.metamac.statistical.operations.web.server.stream.ProducerBase;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
@@ -26,9 +24,7 @@ import static org.siemac.edatos.core.common.constants.shared.ConfigurationConsta
 import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_SCHEMA_REGISTRY_URL;
 
 @Component
-public class KafkaMessageServiceImpl<K, V extends SpecificRecordBase> implements KafkaMessageService, ApplicationListener<ContextClosedEvent> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaMessageServiceImpl.class);
-
+public class StreamMessagingServiceImpl<K, V extends SpecificRecordBase> implements StreamMessagingService, ApplicationListener<ContextClosedEvent> {
     @Autowired
     private StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
 
@@ -39,7 +35,7 @@ public class KafkaMessageServiceImpl<K, V extends SpecificRecordBase> implements
     private ProducerBase<K, V> producer;
 
     @Override
-    public void sendMessage(Operation operation) {
+    public void sendMessage(Operation operation) throws MetamacException {
         OperationAvro operationAvro = operationAvroMapper.toAvro(operation);
         String key = operation.getUrn();
 
@@ -57,12 +53,8 @@ public class KafkaMessageServiceImpl<K, V extends SpecificRecordBase> implements
         return producer;
     }
 
-    private void sendMessage(MessageBase<K, V> message, String topic) {
-        try {
-            getProducer().sendMessage(message, topic);
-        } catch (MetamacException e) {
-            LOGGER.error("Could not send Kafka message", e); // TODO(EDATOS-3380): what to do?
-        }
+    private void sendMessage(MessageBase<K, V> message, String topic) throws MetamacException {
+        getProducer().sendMessage(message, topic);
     }
 
     private Properties getProducerProperties() throws MetamacException {

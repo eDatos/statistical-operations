@@ -26,11 +26,11 @@ import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 
 public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements ProducerBase<K, V> {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaCustomProducer.class);
     private static final int KAFKA_TIMEOUT = 500;
     private static final String[] MANDATORY_SETTINGS = {KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, ProducerConfig.BOOTSTRAP_SERVERS_CONFIG};
     private static final Map<String, Object> DEFAULT_SETTINGS;
+
     private final KafkaProducer<K, V> producer;
 
     static {
@@ -39,7 +39,7 @@ public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements Pro
         DEFAULT_SETTINGS.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
         DEFAULT_SETTINGS.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 5000); // Time to wait if Kafka cluster is down or buffer is full
         DEFAULT_SETTINGS.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 10485760); // 10 MB, note: The Broker has: message.max.bytes=10485760 (10MB)
-    };
+    }
 
     public KafkaCustomProducer(Properties props) throws MetamacException {
         super();
@@ -87,5 +87,4 @@ public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements Pro
             producer.close(Duration.ZERO);
         }
     }
-
 }
