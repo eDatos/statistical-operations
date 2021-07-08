@@ -1,0 +1,22 @@
+{
+    "namespace": "org.siemac.metamac.statistical.operations.core.stream.messages",
+    "type": "record",
+    "name": "FamilyAvro",
+    "fields": [
+        {"name": "code", "type": "string"},
+        {"name": "urn", "type": "string"},
+        {"name": "internalInventoryDate", "type": ["null", "DatetimeAvro"]},
+        {"name": "inventoryDate", "type": ["null", "DatetimeAvro"]},
+        {"name": "updateDate", "type": ["null", "DatetimeAvro"]},
+        {"name": "uuid", "type": "string"},
+        {"name": "createdDate", "type": ["null", "DatetimeAvro"]},
+        {"name": "createdBy", "type": ["null", "string"]},
+        {"name": "lastUpdated", "type": ["null", "DatetimeAvro"]},
+        {"name": "lastUpdatedBy", "type": ["null", "string"]},
+        {"name": "version", "type": "long"},
+        {"name": "title", "type": "InternationalStringAvro"},
+        {"name": "acronym", "type": ["null", "InternationalStringAvro"]},
+        {"name": "description", "type": ["null", "InternationalStringAvro"]},
+        {"name": "procStatus", "type": "ProcStatusEnumAvro"}
+    ]
+}
