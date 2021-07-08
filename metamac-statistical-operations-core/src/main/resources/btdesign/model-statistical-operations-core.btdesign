@@ -405,6 +405,8 @@ Application StatisticalOperations {
        		
        		"Last update to optimistic locking"
 			DateTimeTZ updateDate nullable;
+
+			- @StreamMessageStatusEnum streamMessageStatus;
        		
 			Repository OperationRepository {
 				findById;
