@@ -27,6 +27,7 @@ public class ExternalItemDo2AvroMapper implements Do2AvroMapper<ExternalItem, Ex
                                .setManagementAppUrl(source.getManagementAppUrl())
                                .setType(typeExternalArtifactsDo2AvroMapper.toAvro(source.getType()))
                                .setTitle(internationalStringDo2AvroMapper.toAvro(source.getTitle()))
+                               .setSelfLink(null) // TODO(EDATOS-3380): what to do with this?
                                .build();
     }
 }

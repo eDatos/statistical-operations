@@ -4,9 +4,7 @@
     "type": "enum",
     "symbols": [
         "DRAFT",
-        "PRODUCTION_VALIDATION",
-        "DIFFUSION_VALIDATION",
-        "VALIDATION_REJECTED",
-        "PUBLISHED"
+        "PUBLISH_INTERNALLY",
+        "PUBLISH_EXTERNALLY"
     ]
 }
