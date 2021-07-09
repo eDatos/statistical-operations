@@ -15,7 +15,7 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
     protected ToolStripButton publishExternally;
     protected ToolStripButton lifeCycleReSendStreamMessage;
 
-    protected ProcStatusEnum  status;
+    protected ProcStatusEnum status;
 
     public BasePublicationMainFormLayout() {
         super();
@@ -73,10 +73,12 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
         return lifeCycleReSendStreamMessage;
     }
 
+    @Override
     public void setEditionMode() {
         super.setEditionMode();
         publishInternally.hide();
         publishExternally.hide();
+        lifeCycleReSendStreamMessage.hide();
     }
 
 }
