@@ -1,6 +1,5 @@
 package org.siemac.metamac.statistical.operations.web.server.stream;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -22,13 +21,15 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
+
+import static io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG;
 
 public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements ProducerBase<K, V> {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaCustomProducer.class);
     private static final int KAFKA_TIMEOUT = 500;
-    private static final String[] MANDATORY_SETTINGS = {KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, ProducerConfig.BOOTSTRAP_SERVERS_CONFIG};
+    private static final String[] MANDATORY_SETTINGS = {SCHEMA_REGISTRY_URL_CONFIG, BOOTSTRAP_SERVERS_CONFIG};
     private static final Map<String, Object> DEFAULT_SETTINGS;
 
     private final KafkaProducer<K, V> producer;
@@ -75,8 +76,10 @@ public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements Pro
     }
 
     private Properties fillMissingDefaultProperties(Properties props) {
-        for (Map.Entry<String, Object> entry : DEFAULT_SETTINGS.entrySet()) {
-            props.computeIfAbsent(entry.getKey(), key -> props.put(key, DEFAULT_SETTINGS.get(key)));
+        for (Object key : DEFAULT_SETTINGS.keySet()) {
+            if (!props.containsKey(key)) {
+                props.put(key, DEFAULT_SETTINGS.get(key));
+            }
         }
         return props;
     }
@@ -84,7 +87,7 @@ public class KafkaCustomProducer<K, V extends SpecificRecordBase> implements Pro
     @Override
     public void close() {
         if (null != producer) {
-            producer.close(Duration.ZERO);
+            producer.close(0, TimeUnit.MILLISECONDS);
         }
     }
 }

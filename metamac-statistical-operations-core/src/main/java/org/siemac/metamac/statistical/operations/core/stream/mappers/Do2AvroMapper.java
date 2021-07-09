@@ -3,8 +3,6 @@ package org.siemac.metamac.statistical.operations.core.stream.mappers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @param <D> Domain entity
@@ -17,6 +15,11 @@ public interface Do2AvroMapper<D, A> {
         if (source == null) {
             return new ArrayList<>();
         }
-        return source.stream().map(this::toAvro).collect(Collectors.toList());
+        List<A> list = new ArrayList<>();
+        for (D d : source) {
+            A a = toAvro(d);
+            list.add(a);
+        }
+        return list;
     }
 }

@@ -9,6 +9,7 @@ import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperations
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.stream.StreamMessagingService;
 import org.siemac.metamac.statistical.operations.core.stream.mappers.Do2AvroMapper;
+import org.siemac.metamac.statistical.operations.core.stream.mappers.impl.OperationDo2AvroMapper;
 import org.siemac.metamac.statistical.operations.core.stream.messages.OperationAvro;
 import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;
 import org.siemac.metamac.statistical.operations.web.server.stream.KafkaCustomProducer;
@@ -29,7 +30,7 @@ public class StreamMessagingServiceImpl<K, V extends SpecificRecordBase> impleme
     private StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
 
     @Autowired
-    private Do2AvroMapper<Operation, OperationAvro> operationAvroMapper;
+    private OperationDo2AvroMapper operationAvroMapper;
 
     private static final String CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
     private ProducerBase<K, V> producer;
