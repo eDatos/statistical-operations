@@ -14,11 +14,6 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 *Se deberá realizar primero la actualización de la versión 1.0.0 a la 2.0.0 y luego desde la 2.0.0 a la 3.0.0*
 
-## 0.0.0 a 1.7.1
-
-* El proceso de actualizaciones entre versiones para versiones anteriores a la 1.7.1 está definido en "Metamac - Manual
-  de instalación.doc"
-
 ## 1.7.1 a x.y.z
 
 * Es necesario ejecutar el script SQL contenido en la carpeta
@@ -26,3 +21,8 @@ actualización de la versión 1.0.0 a la 2.0.0.*
   etc/changes-from-release/x.y.z/db/statistical-operations/$BD/20210708_add-column-stream-message-status-to-tb_operations.sql
   ```
   donde `$DBMS` se corresponde con el sistema de gestión de base de datos que esté utilizando.
+
+## 0.0.0 a 1.7.1
+
+* El proceso de actualizaciones entre versiones para versiones anteriores a la 1.7.1 está definido en "Metamac - Manual
+  de instalación.doc"
