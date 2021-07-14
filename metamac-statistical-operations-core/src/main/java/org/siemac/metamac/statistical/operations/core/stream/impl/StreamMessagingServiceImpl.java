@@ -8,7 +8,6 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.stream.StreamMessagingService;
-import org.siemac.metamac.statistical.operations.core.stream.mappers.Do2AvroMapper;
 import org.siemac.metamac.statistical.operations.core.stream.mappers.impl.OperationDo2AvroMapper;
 import org.siemac.metamac.statistical.operations.core.stream.messages.OperationAvro;
 import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;

@@ -47,5 +47,8 @@
         
         <!-- WEB -->
         <jstl.version>1.2</jstl.version>
+
+        <!-- AVRO -->
+        <avro.version>1.9.2</avro.version>
     </properties>
 </project>
