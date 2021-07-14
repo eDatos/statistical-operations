@@ -14,6 +14,7 @@ import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;
 import org.siemac.metamac.statistical.operations.web.server.stream.KafkaCustomProducer;
 import org.siemac.metamac.statistical.operations.web.server.stream.MessageBase;
 import org.siemac.metamac.statistical.operations.web.server.stream.ProducerBase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.stereotype.Component;
@@ -26,16 +27,13 @@ import static org.siemac.edatos.core.common.constants.shared.ConfigurationConsta
 public class StreamMessagingServiceImpl implements StreamMessagingService, ApplicationListener<ContextClosedEvent> {
     private static final String CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
 
-    private final StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
-    private final OperationDo2AvroMapper operationAvroMapper;
+    @Autowired
+    private StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
+
+    @Autowired
+    private OperationDo2AvroMapper operationAvroMapper;
 
     private ProducerBase<Object, SpecificRecordBase> producer;
-
-    public StreamMessagingServiceImpl(StatisticalOperationsConfigurationService statisticalOperationsConfigurationService,
-        OperationDo2AvroMapper operationAvroMapper) {
-        this.statisticalOperationsConfigurationService = statisticalOperationsConfigurationService;
-        this.operationAvroMapper = operationAvroMapper;
-    }
 
     @Override
     public void sendMessage(Operation operation) throws MetamacException {
