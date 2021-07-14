@@ -14,7 +14,6 @@ import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;
 import org.siemac.metamac.statistical.operations.web.server.stream.KafkaCustomProducer;
 import org.siemac.metamac.statistical.operations.web.server.stream.MessageBase;
 import org.siemac.metamac.statistical.operations.web.server.stream.ProducerBase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.stereotype.Component;
@@ -24,15 +23,19 @@ import static org.siemac.edatos.core.common.constants.shared.ConfigurationConsta
 import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_SCHEMA_REGISTRY_URL;
 
 @Component
-public class StreamMessagingServiceImpl<K, V extends SpecificRecordBase> implements StreamMessagingService, ApplicationListener<ContextClosedEvent> {
-    @Autowired
-    private StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
-
-    @Autowired
-    private OperationDo2AvroMapper operationAvroMapper;
-
+public class StreamMessagingServiceImpl implements StreamMessagingService, ApplicationListener<ContextClosedEvent> {
     private static final String CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
-    private ProducerBase<K, V> producer;
+
+    private final StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
+    private final OperationDo2AvroMapper operationAvroMapper;
+
+    private ProducerBase<Object, SpecificRecordBase> producer;
+
+    public StreamMessagingServiceImpl(StatisticalOperationsConfigurationService statisticalOperationsConfigurationService,
+        OperationDo2AvroMapper operationAvroMapper) {
+        this.statisticalOperationsConfigurationService = statisticalOperationsConfigurationService;
+        this.operationAvroMapper = operationAvroMapper;
+    }
 
     @Override
     public void sendMessage(Operation operation) throws MetamacException {
@@ -43,22 +46,21 @@ public class StreamMessagingServiceImpl<K, V extends SpecificRecordBase> impleme
         OperationAvro operationAvro = operationAvroMapper.toAvro(operation);
         String key = operation.getUrn();
 
-        // FIXME(EDATOS-3380): Unchecked casts???????????
-        @SuppressWarnings("unchecked") MessageBase<K, V> message = new AvroMessage<>((K) key, (V) operationAvro);
+        MessageBase<Object, SpecificRecordBase> message = new AvroMessage<>(key, operationAvro);
         String topic = statisticalOperationsConfigurationService.retrieveKafkaTopicOperationsPublication();
 
         sendMessage(message, topic);
     }
 
-    private ProducerBase<K, V> getProducer() throws MetamacException {
+    private void sendMessage(MessageBase<Object, SpecificRecordBase> message, String topic) throws MetamacException {
+        getProducer().sendMessage(message, topic);
+    }
+
+    private ProducerBase<Object, SpecificRecordBase> getProducer() throws MetamacException {
         if (producer == null) {
             producer = new KafkaCustomProducer<>(getProducerProperties());
         }
         return producer;
-    }
-
-    private void sendMessage(MessageBase<K, V> message, String topic) throws MetamacException {
-        getProducer().sendMessage(message, topic);
     }
 
     private Properties getProducerProperties() throws MetamacException {

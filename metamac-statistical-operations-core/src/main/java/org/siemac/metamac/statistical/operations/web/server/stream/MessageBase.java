@@ -1,6 +1,8 @@
 package org.siemac.metamac.statistical.operations.web.server.stream;
 
-public abstract class MessageBase<K, V> {
+import org.apache.avro.specific.SpecificRecordBase;
+
+public abstract class MessageBase<K, V extends SpecificRecordBase> {
 
     protected K key;
     protected V content;
