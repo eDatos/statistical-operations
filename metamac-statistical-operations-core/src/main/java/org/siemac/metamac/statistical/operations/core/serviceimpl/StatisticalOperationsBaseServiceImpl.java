@@ -29,10 +29,10 @@ import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType
 import org.siemac.metamac.statistical.operations.core.exception.FamilyNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.InstanceNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.OperationNotFoundException;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.CheckMandatoryMetadataUtil;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.StatisticalOperationsValidationUtils;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.ValidationUtil;
-import org.siemac.metamac.statistical.operations.core.stream.StreamMessagingServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -455,7 +455,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         operation.setInventoryDate(new DateTime());
 
         // Send operation
-        streamMessagingServiceFacade.sendOperation(operation);
+        streamMessagingServiceFacade.sendMessage(ctx, operation);
 
         // Save
         return updateOperation(ctx, operation);

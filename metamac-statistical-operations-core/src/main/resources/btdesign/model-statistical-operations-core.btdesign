@@ -91,18 +91,29 @@ Application StatisticalOperations {
        		@InstanceDto publishExternallyInstance(Long instanceId) throws MetamacException;
        		@OperationBaseDto findOperationForInstance(Long instanceId) throws MetamacException;
 	   }
-		
+
+		Service StreamMessagingServiceFacade {
+		    > @StreamMessagingService
+		    sendMessage(@Operation operation) throws MetamacException;
+		    resendAllPendingAndFailedMessages() throws MetamacException;
+		}
 		
 		// ----------------------------------------------------------------
 		// 							SERVICES
-		// ----------------------------------------------------------------  
+		// ----------------------------------------------------------------
+
+		Service StreamMessagingService {
+		    > @StatisticalOperationsBaseService
+		    sendMessage(@Operation operation) throws MetamacException;
+		    resendAllPendingAndFailedMessages() throws MetamacException;
+		}
 
 		"Provides access to STATISTICAL OPERAETIONS Base Artefacts"
  		Service StatisticalOperationsBaseService {
  			> @FamilyRepository
  			> @OperationRepository
  			> @InstanceRepository
-			
+
        		"Family" 
        		@Family findFamilyById(Long id) throws MetamacException;
        		@Family findFamilyByCode(String code) throws MetamacException;
