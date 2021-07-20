@@ -12,4 +12,5 @@ public interface NoticesRestInternalService {
 
     void createNotificationForPublishExternallyOperation(ServiceContext serviceContext, OperationDto operation) throws MetamacWebException;
 
+    void createErrorOnStreamMessagingService(ServiceContext currentServiceContext, OperationDto action) throws MetamacWebException;
 }
