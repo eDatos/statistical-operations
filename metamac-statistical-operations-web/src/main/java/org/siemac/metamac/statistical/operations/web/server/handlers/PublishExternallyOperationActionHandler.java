@@ -1,9 +1,7 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
-import org.siemac.metamac.core.common.exception.CommonServiceExceptionType;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.core.common.exception.MetamacExceptionItemBuilder;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
@@ -15,8 +13,6 @@ import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
 import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +20,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
 public class PublishExternallyOperationActionHandler extends SecurityActionHandler<PublishExternallyOperationAction, PublishExternallyOperationResult> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PublishExternallyOperationActionHandler.class);
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -42,26 +37,14 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-        OperationDto operationToPublish;
-        OperationDto operationPublished;
+        OperationDto operationPublished = null;
 
         try {
-            operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            OperationDto operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             checkExternalItemsAreExternallyPublished(serviceContext, operationToPublish);
+            operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
-        }
-
-        try {
-            operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-        } catch (MetamacException metamacException) {
-            try {
-                noticesRestInternalService.createErrorOnStreamMessagingService(ServiceContextHolder.getCurrentServiceContext(), operationToPublish);
-            } catch (Exception exception) {
-                LOGGER.error("Could not send notice about external publication error", exception);
-                metamacException.getExceptionItems().add(MetamacExceptionItemBuilder.metamacExceptionItem().withCommonServiceExceptionType(CommonServiceExceptionType.REST_API_NOTICES_ERROR_SENDING_NOTIFICATION).withMessageParameters(exception.getMessage()).build());
-            }
-            throw WebExceptionUtils.createMetamacWebException(metamacException);
         }
 
         try {
