@@ -1,5 +1,6 @@
 package org.siemac.metamac.statistical.operations.core.serviceimpl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,6 +14,7 @@ import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.siemac.metamac.statistical.operations.core.stream.mappers.impl.OperationDo2AvroMapper;
 import org.siemac.metamac.statistical.operations.core.stream.messages.OperationAvro;
 import org.siemac.metamac.statistical.operations.web.server.stream.AvroMessage;
@@ -48,14 +50,15 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
     private ProducerBase<Object, SpecificRecordBase> producer;
 
     @Override
-    public void sendMessage(ServiceContext ctx, Operation operation) throws MetamacException {
+    public SendStreamMessageResult sendMessage(ServiceContext ctx, Operation operation) {
         try {
             updateMessageStatus(operation, StreamMessageStatusEnum.PENDING);
             sendOperation(operation);
             updateMessageStatus(operation, StreamMessageStatusEnum.SENT);
+            return new SendStreamMessageResult(operation.getStreamMessageStatus(), null);
         } catch (MetamacException e) {
             updateMessageStatus(operation, StreamMessageStatusEnum.FAILED);
-            throw new MetamacException(e, ServiceExceptionType.UNABLE_TO_SEND_STREAM_MESSAGING_TO_STREAM_MESSAGING_SERVER);
+            return new SendStreamMessageResult(operation.getStreamMessageStatus(), Collections.singletonList(new MetamacException(e, ServiceExceptionType.UNABLE_TO_SEND_STREAM_MESSAGING_TO_STREAM_MESSAGING_SERVER)));
         }
     }
 

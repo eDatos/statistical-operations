@@ -39,8 +39,12 @@ import org.siemac.metamac.statistical.operations.core.mapper.MetamacCriteria2Scu
 import org.siemac.metamac.statistical.operations.core.mapper.SculptorCriteria2MetamacCriteriaMapper;
 import org.siemac.metamac.statistical.operations.core.security.SecurityUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of StatisticalOperationsServiceFacade.
@@ -62,6 +66,9 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
 
     @Autowired
     private StatisticalOperationsListsService      statisticalOperationsListsService;
+
+    @Autowired
+    private StreamMessagingServiceFacade streamMessagingServiceFacade;
 
     public StatisticalOperationsServiceFacadeImpl() {
     }
@@ -557,7 +564,9 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
-    public OperationDto publishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+    public PublishExternallyOperationResult publishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+        PublishExternallyOperationResult result = new PublishExternallyOperationResult();
+
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
         checkAccessOperationById(ctx, operationId, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
@@ -567,9 +576,14 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
 
         // Transform to Dto
         OperationDto operationDto = operationToDto(ctx, operation);
+        result.setContent(operationDto);
+
+        // Send operation
+        SendStreamMessageResult sendStreamMessageResult = streamMessagingServiceFacade.sendMessage(ctx, operation);
+        result.getExceptions().addAll(sendStreamMessageResult.getExceptions());
 
         // Return
-        return operationDto;
+        return result;
     }
 
     @Override

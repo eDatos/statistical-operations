@@ -53,9 +53,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
     @Autowired
     private InstanceRepository instanceRepository;
 
-    @Autowired
-    private StreamMessagingServiceFacade streamMessagingServiceFacade;
-
 
     public StatisticalOperationsBaseServiceImpl() {
     }
@@ -453,9 +450,6 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
 
         // Fill metadata
         operation.setInventoryDate(new DateTime());
-
-        // Send operation
-        streamMessagingServiceFacade.sendMessage(ctx, operation);
 
         // Save
         return updateOperation(ctx, operation);
