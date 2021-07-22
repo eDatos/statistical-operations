@@ -5,7 +5,7 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalService;
+import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationResult;
@@ -28,7 +28,7 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     private ExternalItemValidator              externalItemValidator;
 
     @Autowired
-    private NoticesRestInternalService         noticesRestInternalService;
+    private NoticesRestInternalFacade          noticesRestInternalFacade;
 
     public PublishExternallyOperationActionHandler() {
         super(PublishExternallyOperationAction.class);
@@ -37,28 +37,44 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-        OperationDto operationPublished = null;
+        org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationResult result;
 
         try {
             OperationDto operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
             checkExternalItemsAreExternallyPublished(serviceContext, operationToPublish);
-            operationPublished = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            result = statisticalOperationsServiceFacade.publishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
 
-        try {
-            noticesRestInternalService.createNotificationForPublishExternallyOperation(serviceContext, operationPublished);
-        } catch (MetamacWebException e) {
-            return new PublishExternallyOperationResult(operationPublished, e);
+        MetamacWebException metamacWebException = null;
+        if (!result.isOk()) {
+            MetamacException e = result.getExceptions().get(0);
+            result.getExceptions().remove(0);
+            if (!result.getExceptions().isEmpty()) {
+                for (MetamacException exception : result.getExceptions()) {
+                    e.getExceptionItems().addAll(exception.getExceptionItems());
+                }
+            }
+            metamacWebException = WebExceptionUtils.createMetamacWebException(e);
         }
 
-        return new PublishExternallyOperationResult(operationPublished, null);
+        try {
+            noticesRestInternalFacade.createNotificationForPublishExternallyOperation(serviceContext, result.getContent());
+        } catch (MetamacWebException e) {
+            if (metamacWebException == null) {
+                metamacWebException = e;
+            } else {
+                metamacWebException.getWebExceptionItems().addAll(e.getWebExceptionItems());
+            }
+        }
+
+        return new PublishExternallyOperationResult(result.getContent(), metamacWebException);
     }
 
     /**
      * Check that all the external items of an {@link OperationDto} are externally published
-     * 
+     *
      * @param operationDto
      * @throws MetamacWebException
      */

@@ -30,8 +30,8 @@ import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component(NoticesRestInternalService.BEAN_ID)
-public class NoticesRestInternalFacadeImpl implements NoticesRestInternalService {
+@Component(NoticesRestInternalFacade.BEAN_ID)
+public class NoticesRestInternalFacadeImpl implements NoticesRestInternalFacade {
 
     @Autowired
     private RestApiLocator                    restApiLocator;
