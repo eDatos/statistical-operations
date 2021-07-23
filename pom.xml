@@ -39,14 +39,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.ws</groupId>
-                <artifactId>spring-oxm-tiger</artifactId>
-                <version>${spring-oxm-tiger.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>
