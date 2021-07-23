@@ -14,15 +14,25 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 *Se deberá realizar primero la actualización de la versión 1.0.0 a la 2.0.0 y luego desde la 2.0.0 a la 3.0.0*
 
-## 1.7.1 a x.y.z
+## 2.5.1 a x.y.z
 
 * Es necesario ejecutar el script SQL contenido en la carpeta
   ```shell
   etc/changes-from-release/x.y.z/db/statistical-operations/$BD/20210708_add-column-stream-message-status-to-tb_operations.sql
   ```
   donde `$DBMS` se corresponde con el sistema de gestión de base de datos que esté utilizando.
+* Se debe modificar el fichero logback-indicators-internal-web.xml para añadir la siguiente entrada justo después del
+  inicio del tag configuration. La siguiente entrada configura un filtro a nivel de logs que evita que se emitan
+  mensajes de logs duplicados de forma indefinida a los que la nueva versión de Kafka es propenso.
+  ```xml
+   <turboFilter class="org.siemac.edatos.core.common.util.ExpiringDuplicateMessageFilter">
+      <allowedRepetitions>5</allowedRepetitions>
+      <cacheSize>500</cacheSize>
+      <expireAfterWriteSeconds>900</expireAfterWriteSeconds>
+  </turboFilter>
+  ```
 
-## 0.0.0 a 1.7.1
+## 0.0.0 a 2.5.1
 
 * El proceso de actualizaciones entre versiones para versiones anteriores a la 1.7.1 está definido en "Metamac - Manual
   de instalación.doc"
