@@ -1,9 +1,11 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
@@ -53,7 +55,11 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
         MetamacWebException operationException = null;
         if (!result.isOk()) {
             MetamacException e = result.getMainException();
-            e.getExceptionItems().addAll(result.getSecondaryExceptions().stream().flatMap(exception -> exception.getExceptionItems().stream()).collect(Collectors.toList()));
+            List<MetamacExceptionItem> list = new ArrayList<>();
+            for (MetamacException exception : result.getSecondaryExceptions()) {
+                list.addAll(exception.getExceptionItems());
+            }
+            e.getExceptionItems().addAll(list);
             operationException = WebExceptionUtils.createMetamacWebException(e);
             try {
                 noticesRestInternalFacade.createNotificationForStreamError(serviceContext, result.getContent());
