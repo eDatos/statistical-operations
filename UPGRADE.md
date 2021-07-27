@@ -18,7 +18,7 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 * Es necesario ejecutar el script SQL contenido en la carpeta
   ```shell
-  etc/changes-from-release/x.y.z/db/statistical-operations/$BD/20210708_add-column-stream-message-status-to-tb_operations.sql
+  etc/changes-from-release/2.5.1/db/statistical-operations/$BD/20210708_add-column-stream-message-status-to-tb_operations.sql
   ```
   donde `$DBMS` se corresponde con el sistema de gestión de base de datos que esté utilizando.
 * Se debe modificar el fichero logback-indicators-internal-web.xml para añadir la siguiente entrada justo después del
