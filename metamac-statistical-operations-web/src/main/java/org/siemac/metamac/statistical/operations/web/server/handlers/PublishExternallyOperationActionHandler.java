@@ -5,6 +5,7 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult;
 import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.server.rest.serviceapi.ExternalItemValidator;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
@@ -37,7 +38,7 @@ public class PublishExternallyOperationActionHandler extends SecurityActionHandl
     @Override
     public PublishExternallyOperationResult executeSecurityAction(PublishExternallyOperationAction action) throws ActionException {
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-        org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationResult result;
+        PublishExternallyOperationServiceResult result;
 
         try {
             OperationDto operationToPublish = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());

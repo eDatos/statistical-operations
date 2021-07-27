@@ -6,12 +6,12 @@ import java.util.List;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 
-public class PublishExternallyOperationResult extends Result<OperationDto> implements Serializable {
-    public PublishExternallyOperationResult() {
+public class PublishExternallyOperationServiceResult extends Result<OperationDto> implements Serializable {
+    public PublishExternallyOperationServiceResult() {
         super();
     }
 
-    public PublishExternallyOperationResult(OperationDto content, List<MetamacException> exceptions) {
+    public PublishExternallyOperationServiceResult(OperationDto content, List<MetamacException> exceptions) {
         super(content, exceptions);
     }
 }

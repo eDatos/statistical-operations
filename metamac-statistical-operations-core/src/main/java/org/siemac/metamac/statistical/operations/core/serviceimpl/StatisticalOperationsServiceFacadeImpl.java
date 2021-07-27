@@ -40,11 +40,10 @@ import org.siemac.metamac.statistical.operations.core.mapper.SculptorCriteria2Me
 import org.siemac.metamac.statistical.operations.core.security.SecurityUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
-import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of StatisticalOperationsServiceFacade.
@@ -564,8 +563,8 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
-    public PublishExternallyOperationResult publishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
-        PublishExternallyOperationResult result = new PublishExternallyOperationResult();
+    public PublishExternallyOperationServiceResult publishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+        PublishExternallyOperationServiceResult result = new PublishExternallyOperationServiceResult();
 
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
