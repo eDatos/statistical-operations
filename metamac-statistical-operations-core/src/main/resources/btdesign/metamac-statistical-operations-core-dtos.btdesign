@@ -120,6 +120,7 @@ Application StatisticalOperationsDto {
             - @InternationalStringDto notes nullable;
 
             Long optimisticLockingVersion;
+            - @StreamMessageStatusEnum streamMessageStatus;
         }
 
         "Dto for OperationBaseDto"
@@ -141,6 +142,7 @@ Application StatisticalOperationsDto {
             - @StatusEnum status nullable;
             
             JAVADATE internalInventoryDate nullable;
+            - @StreamMessageStatusEnum streamMessageStatus;
         }
 
         "Dto for InstanceDto"

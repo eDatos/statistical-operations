@@ -1,0 +1,10 @@
+{
+    "namespace": "org.siemac.metamac.statistical.operations.core.stream.messages",
+    "name": "ProcStatusEnumAvro",
+    "type": "enum",
+    "symbols": [
+        "DRAFT",
+        "PUBLISH_INTERNALLY",
+        "PUBLISH_EXTERNALLY"
+    ]
+}

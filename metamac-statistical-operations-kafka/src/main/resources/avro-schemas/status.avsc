@@ -1,0 +1,11 @@
+{
+    "namespace": "org.siemac.metamac.statistical.operations.core.stream.messages",
+    "name": "StatusEnumAvro",
+    "type": "enum",
+    "symbols": [
+        "PLANNING",
+        "DESIGN",
+        "PRODUCTION",
+        "OUT_OF_PRINT"
+    ]
+}
