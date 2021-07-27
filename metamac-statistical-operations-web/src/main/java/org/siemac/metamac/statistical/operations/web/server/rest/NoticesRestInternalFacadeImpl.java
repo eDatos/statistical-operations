@@ -16,6 +16,7 @@ import org.siemac.metamac.rest.notices.v1_0.domain.Message;
 import org.siemac.metamac.rest.notices.v1_0.domain.Notice;
 import org.siemac.metamac.rest.notices.v1_0.domain.ResourceInternal;
 import org.siemac.metamac.rest.notices.v1_0.domain.enume.MetamacApplicationsEnum;
+import org.siemac.metamac.rest.notices.v1_0.domain.enume.MetamacRolesEnum;
 import org.siemac.metamac.rest.notices.v1_0.domain.utils.MessageBuilder;
 import org.siemac.metamac.rest.notices.v1_0.domain.utils.NoticeBuilder;
 import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
@@ -57,7 +58,13 @@ public class NoticesRestInternalFacadeImpl implements NoticesRestInternalFacade 
         ResourceInternal resource = this.operationDtoToResourceInternal(ctx, operation);
         ResourceInternal[] noticeResource = {resource};
 
-        this.createNotification(ctx, ServiceNoticeAction.OPERATION_PUBLISH_EXTERNALLY, ServiceNoticeMessage.OPERATION_PUBLISH_EXTERNALLY_OK, noticeResource);
+        this.createPublicationNotification(ctx, ServiceNoticeAction.OPERATION_PUBLISH_EXTERNALLY, ServiceNoticeMessage.OPERATION_PUBLISH_EXTERNALLY_OK, noticeResource);
+    }
+
+    @Override
+    public void createNotificationForStreamError(ServiceContext ctx, OperationDto operation) throws MetamacWebException {
+        ResourceInternal[] resourceInternal = {operationDtoToResourceInternal(ctx, operation)};
+        createErrorOnStreamMessagingNotification(ctx, resourceInternal);
     }
 
     @Override
@@ -65,10 +72,10 @@ public class NoticesRestInternalFacadeImpl implements NoticesRestInternalFacade 
         ResourceInternal resource = this.operationDtoToResourceInternal(ctx, operation);
         ResourceInternal[] noticeResource = {resource};
 
-        this.createNotification(ctx, ServiceNoticeAction.OPERATION_PUBLISH_INTERNALLY, ServiceNoticeMessage.OPERATION_PUBLISH_INTERNALLY_OK, noticeResource);
+        this.createPublicationNotification(ctx, ServiceNoticeAction.OPERATION_PUBLISH_INTERNALLY, ServiceNoticeMessage.OPERATION_PUBLISH_INTERNALLY_OK, noticeResource);
     }
 
-    private void createNotification(ServiceContext ctx, String actionCode, String messageCode, ResourceInternal[] resources) throws MetamacWebException {
+    private void createPublicationNotification(ServiceContext ctx, String actionCode, String messageCode, ResourceInternal[] resources) throws MetamacWebException {
         Locale locale = ServiceContextUtils.getLocale(ctx);
         String subject = LocaleUtil.getMessageForCode(actionCode, locale);
         String localisedMessage = LocaleUtil.getMessageForCode(messageCode, locale);
@@ -83,8 +90,28 @@ public class NoticesRestInternalFacadeImpl implements NoticesRestInternalFacade 
 				.withSendingUser(ctx.getUserId()).withSubject(subject).build();
 		// @formatter:on
 
-        Response response = this.restApiLocator.getNoticesRestInternalFacadeV10().createNotice(notification);
-        this.restExceptionUtils.checkSendNotificationRestResponseAndThrowErrorIfApplicable(ctx, response);
+        Response response = restApiLocator.getNoticesRestInternalFacadeV10().createNotice(notification);
+        restExceptionUtils.checkSendNotificationRestResponseAndThrowErrorIfApplicable(ctx, response);
+    }
+
+    private void createErrorOnStreamMessagingNotification(ServiceContext ctx, ResourceInternal[] resources) throws MetamacWebException {
+        Locale locale = ServiceContextUtils.getLocale(ctx);
+        String subject = LocaleUtil.getMessageForCode(ServiceNoticeAction.STREAM_MESSAGE_SEND, locale);
+        String localisedMessage = LocaleUtil.getMessageForCode(ServiceNoticeMessage.STREAM_MESSAGE_SEND_ERROR, locale);
+        String sendingApp = MetamacApplicationsEnum.GESTOR_OPERACIONES.getName();
+
+        // @formatter:off
+		Message message = MessageBuilder.message().withText(localisedMessage)
+				.withResources(resources).build();
+
+		Notice notification = NoticeBuilder.notification()
+				.withMessages(message).withSendingApplication(sendingApp)
+				.withSendingUser(ctx.getUserId()).withSubject(subject)
+                .withRoles(MetamacRolesEnum.ADMINISTRADOR).build();
+		// @formatter:on
+
+        Response response = restApiLocator.getNoticesRestInternalFacadeV10().createNotice(notification);
+        restExceptionUtils.checkSendNotificationRestResponseAndThrowErrorIfApplicable(ctx, response);
     }
 
     private ResourceInternal operationDtoToResourceInternal(ServiceContext ctx, OperationDto operationDto) {

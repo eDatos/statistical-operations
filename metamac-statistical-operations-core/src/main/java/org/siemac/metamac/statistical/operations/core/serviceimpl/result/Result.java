@@ -7,18 +7,15 @@ import org.siemac.metamac.core.common.exception.MetamacException;
 
 public abstract class Result<T> {
     T content;
-    List<MetamacException> exceptions;
+    final List<MetamacException> exceptions = new ArrayList<>();
 
     protected Result() {
-        exceptions = new ArrayList<>();
     }
 
     protected Result(T content, List<MetamacException> exceptions) {
         this.content = content;
         if (exceptions != null) {
-            this.exceptions = exceptions;
-        } else {
-            this.exceptions = new ArrayList<>();
+            this.exceptions.addAll(exceptions);
         }
     }
 
@@ -35,7 +32,16 @@ public abstract class Result<T> {
     }
 
     public void setExceptions(List<MetamacException> exceptions) {
-        this.exceptions = exceptions;
+        this.exceptions.clear();
+        this.exceptions.addAll(exceptions);
+    }
+
+    public MetamacException getMainException() {
+        return exceptions.isEmpty() ? null : exceptions.get(0);
+    }
+
+    public List<MetamacException> getSecondaryExceptions() {
+        return exceptions.isEmpty() ? new ArrayList<>() : exceptions.subList(1, exceptions.size());
     }
 
     public void addException(MetamacException exception) {
