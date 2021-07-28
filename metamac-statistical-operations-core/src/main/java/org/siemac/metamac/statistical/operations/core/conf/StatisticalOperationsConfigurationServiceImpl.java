@@ -3,9 +3,7 @@ package org.siemac.metamac.statistical.operations.core.conf;
 import org.siemac.metamac.core.common.conf.ConfigurationServiceImpl;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.constants.StatisticalOperationsConfigurationConstants;
-import org.springframework.stereotype.Component;
 
-@Component
 public class StatisticalOperationsConfigurationServiceImpl extends ConfigurationServiceImpl implements StatisticalOperationsConfigurationService {
 
     @Override
