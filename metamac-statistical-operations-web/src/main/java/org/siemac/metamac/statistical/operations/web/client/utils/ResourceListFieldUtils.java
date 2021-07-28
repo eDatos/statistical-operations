@@ -2,13 +2,13 @@ package org.siemac.metamac.statistical.operations.web.client.utils;
 
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
-import com.smartgwt.client.types.Alignment;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.FamilyDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.InstanceDS;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
 import org.siemac.metamac.web.common.client.utils.ListGridUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
 
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
 
 public class ResourceListFieldUtils {
@@ -48,8 +48,6 @@ public class ResourceListFieldUtils {
         CustomListGridField acronym = new CustomListGridField(OperationDS.ACRONYM, getConstants().operationAcronym());
         acronym.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
-        CustomListGridField lifeCycleStatisticalResourceStreamMsgStatus = new CustomListGridField(OperationDS.PUBLICATION_STREAM_STATUS, getConstants().lifeCycleStatisticalResourceStreamMsgStatus());
-
         CustomListGridField subjectArea = new CustomListGridField(OperationDS.SUBJECT_AREA, getConstants().operationSubjectArea());
         subjectArea.setShowIfCondition(ListGridUtils.getFalseListGridFieldIfFunction());
 
@@ -80,8 +78,8 @@ public class ResourceListFieldUtils {
         publicationStreamStatus.setType(ListGridFieldType.IMAGE);
         publicationStreamStatus.setAlign(Alignment.CENTER);
 
-
-        return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status, publicationStreamStatus};
+        return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status,
+                publicationStreamStatus};
     }
 
     public static CustomListGridField[] getInstanceFields() {

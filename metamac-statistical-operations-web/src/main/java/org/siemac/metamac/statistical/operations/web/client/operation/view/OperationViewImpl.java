@@ -8,12 +8,7 @@ import java.util.List;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
-import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
-import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.*;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -26,18 +21,8 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS
 import org.siemac.metamac.statistical.operations.web.client.operation.presenter.OperationPresenter;
 import org.siemac.metamac.statistical.operations.web.client.operation.view.handlers.OperationUiHandlers;
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
-import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
-import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
-import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
-import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
-import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
-import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
+import org.siemac.metamac.statistical.operations.web.client.utils.*;
+import org.siemac.metamac.statistical.operations.web.client.widgets.*;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
@@ -50,21 +35,8 @@ import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.actions.search.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalItemLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchExternalItemLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSingleCommonConfigurationItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.*;
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.*;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
 import org.siemac.metamac.web.common.client.widgets.windows.search.SearchMultipleExternalItemPaginatedWindow;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
@@ -96,73 +68,73 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
-    public static final int                           FAMILY_LIST_MAX_RESULTS = 17;
+    public static final int FAMILY_LIST_MAX_RESULTS = 17;
 
-    private VLayout                                   panel;
+    private VLayout panel;
 
-    private OperationMainFormLayout                   mainFormLayout;
+    private OperationMainFormLayout mainFormLayout;
 
-    private OperationDto                              operationDto;
+    private OperationDto operationDto;
 
     // IDENTIFIERS
-    private GroupDynamicForm                          identifiersForm;
-    private GroupDynamicForm                          identifiersEditionForm;
+    private GroupDynamicForm identifiersForm;
+    private GroupDynamicForm identifiersEditionForm;
 
     // CONTENT CLASSIFIERS
-    private GroupDynamicForm                          contentClassifiersForm;
-    private GroupDynamicForm                          contentClassifiersEditionForm;
+    private GroupDynamicForm contentClassifiersForm;
+    private GroupDynamicForm contentClassifiersEditionForm;
 
     // CONTENT DESCRIPTORS
-    private GroupDynamicForm                          contentViewForm;
-    private GroupDynamicForm                          contentEditionForm;
+    private GroupDynamicForm contentViewForm;
+    private GroupDynamicForm contentEditionForm;
 
     // CLASS DESCRIPTORS
-    private GroupDynamicForm                          classForm;
-    private GroupDynamicForm                          classDescriptorsEditionForm;
-    private CustomSelectItem                          surveyType;
-    private CustomSelectItem                          officialityType;
-    private CustomCheckboxItem                        indSystem;
+    private GroupDynamicForm classForm;
+    private GroupDynamicForm classDescriptorsEditionForm;
+    private CustomSelectItem surveyType;
+    private CustomSelectItem officialityType;
+    private CustomCheckboxItem indSystem;
 
     // PRODUCTION DESCRIPTORS
-    private GroupDynamicForm                          productionDescriptorsForm;
-    private GroupDynamicForm                          productionDescriptorsEditionForm;
-    private CustomCheckboxItem                        currentlyActiveItem;
-    private CustomSelectItem                          statusItem;
+    private GroupDynamicForm productionDescriptorsForm;
+    private GroupDynamicForm productionDescriptorsEditionForm;
+    private CustomCheckboxItem currentlyActiveItem;
+    private CustomSelectItem statusItem;
 
     // DIFUSSION AND PUBLICATION
-    private GroupDynamicForm                          diffusionForm;
-    private GroupDynamicForm                          diffusionEditionForm;
-    private CustomCheckboxItem                        releaseCalendar;
-    private CustomTextItem                            releaseCalendarAccess;
+    private GroupDynamicForm diffusionForm;
+    private GroupDynamicForm diffusionEditionForm;
+    private CustomCheckboxItem releaseCalendar;
+    private CustomTextItem releaseCalendarAccess;
 
     // LEGAL ACTS
-    private GroupDynamicForm                          legalActsForm;
-    private GroupDynamicForm                          legalActsEditionForm;
+    private GroupDynamicForm legalActsForm;
+    private GroupDynamicForm legalActsEditionForm;
 
     // ANNOTATIONS
-    private GroupDynamicForm                          annotationsViewForm;
-    private GroupDynamicForm                          annotationsEditionForm;
+    private GroupDynamicForm annotationsViewForm;
+    private GroupDynamicForm annotationsEditionForm;
 
     // INSTANCES
 
-    private ListGridToolStrip                         instanceListGridToolStrip;
-    private CustomListGrid                            instanceListGrid;
-    private InstancesOrderFormLayout                  instancesOrderFormLayout;
+    private ListGridToolStrip instanceListGridToolStrip;
+    private CustomListGrid instanceListGrid;
+    private InstancesOrderFormLayout instancesOrderFormLayout;
     // Instance modal window
-    private ModalWindow                               newInstanceWindow;
-    private NewInstanceForm                           newInstanceForm;
+    private ModalWindow newInstanceWindow;
+    private NewInstanceForm newInstanceForm;
 
     // FAMILIES
 
-    private ToolStrip                                 familiesToolStrip;
-    private ToolStripButton                           editFamiliesToolStripButton;
-    private BaseCustomListGrid                        familyListGrid;
+    private ToolStrip familiesToolStrip;
+    private ToolStripButton editFamiliesToolStripButton;
+    private BaseCustomListGrid familyListGrid;
     private SearchMultipleExternalItemPaginatedWindow windowToAddFamiliesToOperation;
 
-    private List<FamilyBaseDto>                       familyBaseDtos;
+    private List<FamilyBaseDto> familyBaseDtos;
 
-    private List<SurveyTypeDto>                       surveyTypeDtos;
-    private List<OfficialityTypeDto>                  officialityTypeDtos;
+    private List<SurveyTypeDto> surveyTypeDtos;
+    private List<OfficialityTypeDto> officialityTypeDtos;
 
     public OperationViewImpl() {
         super();
@@ -570,7 +542,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.TITLE, getConstants().operationTitle());
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.ACRONYM, getConstants().operationAcronym());
         ViewTextItem urn = new ViewTextItem(OperationDS.URN, getConstants().operationUrn());
-        identifiersForm.setFields(identifier, title, acronym, urn);
+        ViewTextItem publicationStreamStatus = new ViewTextItem(OperationDS.PUBLICATION_STREAM_STATUS, getConstants().lifeCycleStatisticalResourceStreamMsgStatus());
+        publicationStreamStatus.setWidth(20);
+
+        identifiersForm.setFields(identifier, title, acronym, urn, publicationStreamStatus);
 
         // Content Classifiers
         contentClassifiersForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -834,6 +809,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersForm.setValue(OperationDS.TITLE, operationDto.getTitle());
         identifiersForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersForm.setValue(OperationDS.URN, operationDto.getUrn());
+        identifiersForm.getItem(OperationDS.PUBLICATION_STREAM_STATUS).setIcons(CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
 
         // CONTENT CLASSIFIERS
 
@@ -851,8 +827,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 operationDto.getSurveyType() == null ? "" : CommonWebUtils.getElementName(operationDto.getSurveyType().getIdentifier(), operationDto.getSurveyType().getDescription()));
         classForm.setValue(OperationDS.OFFICIALITY_TYPE,
                 operationDto.getOfficialityType() == null ? "" : CommonWebUtils.getElementName(operationDto.getOfficialityType().getIdentifier(), operationDto.getOfficialityType().getDescription()));
-        classForm.setValue(OperationDS.INDICATOR_SYSTEM, (operationDto.getIndicatorSystem() != null && operationDto.getIndicatorSystem()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon
-                .getConstants().no());
+        classForm.setValue(OperationDS.INDICATOR_SYSTEM,
+                (operationDto.getIndicatorSystem() != null && operationDto.getIndicatorSystem()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
 
         // PRODUCTION DESCRIPTORS
 
@@ -861,9 +837,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ((ExternalItemListItem) productionDescriptorsForm.getItem(OperationDS.REG_CONTRIBUTOR)).setExternalItems(operationDto.getRegionalContributor());
         productionDescriptorsForm.setValue(OperationDS.CREATED_DATE, operationDto.getCreatedDate());
         productionDescriptorsForm.setValue(OperationDS.INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
-        productionDescriptorsForm.setValue(OperationDS.CURRENTLY_ACTIVE, (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive())
-                ? MetamacWebCommon.getConstants().yes()
-                : MetamacWebCommon.getConstants().no());
+        productionDescriptorsForm.setValue(OperationDS.CURRENTLY_ACTIVE,
+                (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
         productionDescriptorsForm.setValue(OperationDS.STATUS, CommonUtils.getStatusName(operationDto.getStatus()));
         productionDescriptorsForm.setValue(OperationDS.PROC_STATUS, CommonUtils.getProcStatusName(operationDto.getProcStatus()));
 
@@ -874,9 +849,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionForm.setValue(OperationDS.COMMON_METADATA, operationDto.getCommonMetadata());
 
         diffusionForm.setValue(OperationDS.RE_POL_US_AC, operationDto.getRelPolUsAc());
-        diffusionForm.setValue(OperationDS.RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar())
-                ? MetamacWebCommon.getConstants().yes()
-                : MetamacWebCommon.getConstants().no());
+        diffusionForm.setValue(OperationDS.RELEASE_CALENDAR,
+                (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
         diffusionForm.setValue(OperationDS.RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
 
         ((ExternalItemListItem) diffusionForm.getItem(OperationDS.UPDATE_FREQUENCY)).setExternalItems(operationDto.getUpdateFrequency());
@@ -1025,6 +999,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return mainFormLayout.getPublishExternally();
     }
 
+    @Override
+    public HasClickHandlers getReSendStreamMessageOperation() {
+        return mainFormLayout.getLifeCycleReSendStreamMessage();
+    }
+
     /**
      * Select Instance in ListGrid
      * 
@@ -1080,8 +1059,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private boolean canOperationCodeBeEdited() {
         // Operation code can be edited only when ProcStatus is DRAFT
-        return (productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(
-                productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW)));
+        return (productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW) != null
+                && ProcStatusEnum.DRAFT.toString().equals(productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW)));
     }
 
     public boolean isOperationInternallyPublished() {
@@ -1107,8 +1086,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(), result
-                    .getExternalItemDtos().size(), result.getTotalResults());
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
@@ -1137,8 +1116,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItems(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result
-                    .getExternalItemDtos().size(), result.getTotalResults());
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());

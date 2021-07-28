@@ -10,27 +10,8 @@ import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.criteria.SculptorCriteria;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
-import org.siemac.metamac.statistical.operations.core.domain.Cost;
-import org.siemac.metamac.statistical.operations.core.domain.Family;
-import org.siemac.metamac.statistical.operations.core.domain.Instance;
-import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
-import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
-import org.siemac.metamac.statistical.operations.core.domain.Operation;
-import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
-import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
-import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
-import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
-import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.domain.*;
+import org.siemac.metamac.statistical.operations.core.dto.*;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.statistical.operations.core.mapper.Do2DtoMapper;
@@ -41,6 +22,7 @@ import org.siemac.metamac.statistical.operations.core.security.SecurityUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendStreamMessageOperationServiceResult;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,10 +34,10 @@ import org.springframework.stereotype.Service;
 public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperationsServiceFacadeImplBase {
 
     @Autowired
-    private Do2DtoMapper                           do2DtoMapper;
+    private Do2DtoMapper do2DtoMapper;
 
     @Autowired
-    private Dto2DoMapper                           dto2DoMapper;
+    private Dto2DoMapper dto2DoMapper;
 
     @Autowired
     private MetamacCriteria2SculptorCriteriaMapper metamacCriteria2SculptorCriteriaMapper;
@@ -64,7 +46,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     private SculptorCriteria2MetamacCriteriaMapper sculptorCriteria2MetamacCriteriaMapper;
 
     @Autowired
-    private StatisticalOperationsListsService      statisticalOperationsListsService;
+    private StatisticalOperationsListsService statisticalOperationsListsService;
 
     @Autowired
     private StreamMessagingServiceFacade streamMessagingServiceFacade;
@@ -76,6 +58,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
      * Dependences
      **************************************************************************/
 
+    @Override
     protected StatisticalOperationsListsService getStatisticalOperationsListsService() {
         return statisticalOperationsListsService;
     }
@@ -586,6 +569,20 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
+    public ReSendStreamMessageOperationServiceResult republishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+        ReSendStreamMessageOperationServiceResult result = new ReSendStreamMessageOperationServiceResult();
+
+        Operation operation = getStatisticalOperationsBaseService().findOperationById(ctx, operationId);
+
+        // Send operation
+        SendStreamMessageResult sendStreamMessageResult = streamMessagingServiceFacade.sendMessage(ctx, operation);
+        result.getExceptions().addAll(sendStreamMessageResult.getExceptions());
+
+        // Return
+        return result;
+    }
+
+    @Override
     public List<FamilyBaseDto> findFamiliesForOperation(ServiceContext ctx, Long operationId) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
@@ -698,6 +695,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     /**
      * Upgrade the order of the instances of an operation. You must provide a list of id sorted oldest to newest
      */
+    @Override
     public List<InstanceBaseDto> updateInstancesOrder(ServiceContext ctx, Long operationId, List<Long> instancesIdList) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION,

@@ -71,6 +71,7 @@ Application StatisticalOperations {
        		@OperationDto findOperationByUrn(String urn) throws MetamacException;
        		@OperationDto publishInternallyOperation(Long operationId) throws MetamacException;
        		org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult publishExternallyOperation(Long operationId) throws MetamacException;
+       		org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendStreamMessageOperationServiceResult republishExternallyOperation(Long operationId) throws MetamacException;
        		List<@FamilyBaseDto> findFamiliesForOperation(Long operationId) throws MetamacException;
        		List<@InstanceBaseDto> findInstancesForOperation(Long operationId) throws MetamacException;
        		List<@FamilyBaseDto> addFamilyForOperation(Long operationId, Long familyId) throws MetamacException;

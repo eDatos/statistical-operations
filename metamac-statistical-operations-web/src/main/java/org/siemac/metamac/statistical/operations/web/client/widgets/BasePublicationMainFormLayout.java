@@ -52,7 +52,7 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
         lifeCycleReSendStreamMessage.setShowRollOver(true);
         lifeCycleReSendStreamMessage.setShowDisabled(true);
         lifeCycleReSendStreamMessage.setShowDown(true);
-        lifeCycleReSendStreamMessage.setTitleStyle("republishButton");
+        lifeCycleReSendStreamMessage.setTitleStyle("publishButton");
         lifeCycleReSendStreamMessage.setIcon(GlobalResources.RESOURCE.reload().getURL());
 
         getToolStrip().addButton(lifeCycleReSendStreamMessage);

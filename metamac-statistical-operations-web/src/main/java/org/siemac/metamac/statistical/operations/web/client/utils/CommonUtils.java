@@ -14,8 +14,11 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
+import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 
+import com.smartgwt.client.widgets.form.fields.FormItemIcon;
 import com.smartgwt.client.widgets.form.validator.LengthRangeValidator;
 
 public class CommonUtils {
@@ -155,4 +158,22 @@ public class CommonUtils {
         lengthRangeValidator.setMax(StatisticalOperationsWebConstants.OPERATION_CODE_MAX_LENGTH);
         return lengthRangeValidator;
     }
+
+    // STATUS KAFKA MESSAGE OPERATIONS
+
+    public static FormItemIcon getPublicationStreamStatusIcon(StreamMessageStatusEnum status) {
+        if (status == null) {
+            return null;
+        }
+        FormItemIcon icon = new FormItemIcon();
+        if (StreamMessageStatusEnum.FAILED.equals(status)) {
+            icon.setSrc(GlobalResources.RESOURCE.error().getURL());
+        } else if (StreamMessageStatusEnum.PENDING.equals(status)) {
+            icon.setSrc(GlobalResources.RESOURCE.pending().getURL());
+        } else if (StreamMessageStatusEnum.SENT.equals(status)) {
+            icon.setSrc(GlobalResources.RESOURCE.success().getURL());
+        }
+        return icon;
+    }
+
 }

@@ -1,5 +1,8 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
+import static org.junit.Assert.*;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,12 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.siemac.metamac.common.test.utils.DirtyDatabase;
 import org.siemac.metamac.common.test.utils.MetamacMocks;
-import org.siemac.metamac.core.common.criteria.MetamacCriteria;
-import org.siemac.metamac.core.common.criteria.MetamacCriteriaDisjunctionRestriction;
-import org.siemac.metamac.core.common.criteria.MetamacCriteriaPaginator;
-import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction;
+import org.siemac.metamac.core.common.criteria.*;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaPropertyRestriction.OperationType;
-import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.criteria.shared.MetamacCriteriaOrder;
 import org.siemac.metamac.core.common.criteria.shared.MetamacCriteriaOrder.OrderTypeEnum;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
@@ -24,23 +23,8 @@ import org.siemac.metamac.core.common.dto.LocalisedStringDto;
 import org.siemac.metamac.core.common.ent.domain.ExternalItemRepository;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.criteria.FamilyCriteriaPropertyEnum;
-import org.siemac.metamac.statistical.operations.core.criteria.InstanceCriteriaOrderEnum;
-import org.siemac.metamac.statistical.operations.core.criteria.InstanceCriteriaPropertyEnum;
-import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaOrderEnum;
-import org.siemac.metamac.statistical.operations.core.criteria.OperationCriteriaPropertyEnum;
-import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
-import org.siemac.metamac.statistical.operations.core.dto.CostDto;
-import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
-import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
-import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
-import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
-import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.criteria.*;
+import org.siemac.metamac.statistical.operations.core.dto.*;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
@@ -56,14 +40,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
-
 /**
  * Spring based transactional test with DbUnit support.
  */
@@ -78,7 +54,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     @Autowired
-    protected ExternalItemRepository             externalItemRepository;
+    protected ExternalItemRepository externalItemRepository;
 
     /**************************************************************************
      * Survey Type
@@ -2303,6 +2279,11 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         } catch (MetamacException e) {
             assertEquals(ServiceExceptionType.INVALID_PROC_STATUS.getCode(), e.getExceptionItems().get(0).getCode());
         }
+    }
+
+    @Override
+    public void testRepublishExternallyOperation() throws Exception {
+
     }
 
     @Override

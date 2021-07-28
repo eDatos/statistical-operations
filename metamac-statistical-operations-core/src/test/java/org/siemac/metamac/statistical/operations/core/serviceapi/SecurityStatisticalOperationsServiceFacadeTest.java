@@ -1,5 +1,9 @@
 package org.siemac.metamac.statistical.operations.core.serviceapi;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +30,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import static org.siemac.metamac.statistical.operations.core.utils.mocks.StatisticalOperationsDtoMocks.mockExternalItemDto;
-
 /**
  * Spring based transactional test with DbUnit support.
  */
@@ -42,9 +41,11 @@ import static org.siemac.metamac.statistical.operations.core.utils.mocks.Statist
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
-    private static final String                  OOEE_CODE_C0025A = "C0025A";
+    private static final String OOEE_CODE_C0025A = "C0025A";
     @Autowired
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
+    @Autowired
+    protected StreamMessagingServiceFacade streamMessagingServiceFacade;
 
     @Override
     @Test
@@ -889,6 +890,10 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
         statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationId);
 
+    }
+
+    @Override
+    public void testRepublishExternallyOperation() throws Exception {
     }
 
     @Test
