@@ -70,7 +70,7 @@ Application StatisticalOperations {
        		@OperationDto findOperationByCode(String code) throws MetamacException;
        		@OperationDto findOperationByUrn(String urn) throws MetamacException;
        		@OperationDto publishInternallyOperation(Long operationId) throws MetamacException;
-       		@OperationDto publishExternallyOperation(Long operationId) throws MetamacException;
+       		org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult publishExternallyOperation(Long operationId) throws MetamacException;
        		List<@FamilyBaseDto> findFamiliesForOperation(Long operationId) throws MetamacException;
        		List<@InstanceBaseDto> findInstancesForOperation(Long operationId) throws MetamacException;
        		List<@FamilyBaseDto> addFamilyForOperation(Long operationId, Long familyId) throws MetamacException;
@@ -91,18 +91,29 @@ Application StatisticalOperations {
        		@InstanceDto publishExternallyInstance(Long instanceId) throws MetamacException;
        		@OperationBaseDto findOperationForInstance(Long instanceId) throws MetamacException;
 	   }
-		
+
+		Service StreamMessagingServiceFacade {
+		    > @StreamMessagingService
+		    org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult sendMessage(@Operation operation);
+		    resendAllPendingAndFailedMessages() throws MetamacException;
+		}
 		
 		// ----------------------------------------------------------------
 		// 							SERVICES
-		// ----------------------------------------------------------------  
+		// ----------------------------------------------------------------
+
+		Service StreamMessagingService {
+		    > @StatisticalOperationsBaseService
+		    org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult sendMessage(@Operation operation);
+		    resendAllPendingAndFailedMessages() throws MetamacException;
+		}
 
 		"Provides access to STATISTICAL OPERAETIONS Base Artefacts"
  		Service StatisticalOperationsBaseService {
  			> @FamilyRepository
  			> @OperationRepository
  			> @InstanceRepository
-			
+
        		"Family" 
        		@Family findFamilyById(Long id) throws MetamacException;
        		@Family findFamilyByCode(String code) throws MetamacException;
@@ -405,6 +416,8 @@ Application StatisticalOperations {
        		
        		"Last update to optimistic locking"
 			DateTimeTZ updateDate nullable;
+
+			- @StreamMessageStatusEnum streamMessageStatus;
        		
 			Repository OperationRepository {
 				findById;

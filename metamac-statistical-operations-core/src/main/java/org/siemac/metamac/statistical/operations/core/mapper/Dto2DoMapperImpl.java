@@ -383,6 +383,9 @@ public class Dto2DoMapperImpl extends BaseDto2DoMapperImpl implements Dto2DoMapp
         // Optimistic locking: Update "update date" attribute to force update of the root entity in order to increase attribute "version"
         target.setUpdateDate(new DateTime());
 
+        // KAFKA STREAM STATUS
+        target.setStreamMessageStatus(source.getStreamMessageStatus());
+
         return target;
     }
 

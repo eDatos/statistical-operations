@@ -23,11 +23,13 @@ import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationRepository;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionParameters;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.exception.FamilyNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.InstanceNotFoundException;
 import org.siemac.metamac.statistical.operations.core.exception.OperationNotFoundException;
+import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.CheckMandatoryMetadataUtil;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.StatisticalOperationsValidationUtils;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.utils.ValidationUtil;
@@ -43,11 +45,14 @@ import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCrit
 public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsBaseServiceImplBase {
 
     @Autowired
-    private FamilyRepository    familyRepository;
+    private FamilyRepository familyRepository;
+
     @Autowired
     private OperationRepository operationRepository;
+
     @Autowired
-    private InstanceRepository  instanceRepository;
+    private InstanceRepository instanceRepository;
+
 
     public StatisticalOperationsBaseServiceImpl() {
     }
@@ -333,6 +338,7 @@ public class StatisticalOperationsBaseServiceImpl extends StatisticalOperationsB
         operation.setProcStatus(ProcStatusEnum.DRAFT);
         operation.setStatus(StatusEnum.PLANNING);
         operation.setCurrentlyActive(Boolean.FALSE);
+        operation.setStreamMessageStatus(StreamMessageStatusEnum.PENDING);
 
         // Validations
         validateOperationCodeUnique(ctx, operation.getCode(), null);
