@@ -15,6 +15,13 @@
     <name>METAMAC :: STATISTICAL OPERATIONS :: CORE</name>
 
     <dependencies>
+        <!-- STATISTICAL-OPERATIONS -->
+        <dependency>
+            <groupId>org.siemac.metamac.metamac-statistical-operations</groupId>
+            <artifactId>metamac-statistical-operations-kafka</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- METAMAC -->
         <dependency>
             <groupId>org.siemac.metamac.metamac-sso</groupId>

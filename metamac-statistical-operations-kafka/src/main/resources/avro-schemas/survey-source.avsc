@@ -1,0 +1,9 @@
+{
+    "namespace": "org.siemac.metamac.statistical.operations.core.stream.messages",
+    "type": "record",
+    "name": "SurveySourceAvro",
+    "fields": [
+        {"name": "identifier", "type": ["null", "string"]},
+        {"name": "description", "type": ["null", "InternationalStringAvro"]}
+    ]
+}

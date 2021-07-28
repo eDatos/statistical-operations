@@ -4,7 +4,7 @@ import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalService;
+import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
 import org.siemac.metamac.web.common.server.ServiceContextHolder;
@@ -24,7 +24,7 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     @Autowired
-    private NoticesRestInternalService         noticesRestInternalService;
+    private NoticesRestInternalFacade noticesRestInternalFacade;
 
     public PublishInternallyOperationActionHandler() {
         super(PublishInternallyOperationAction.class);
@@ -42,7 +42,7 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
         }
 
         try {
-            noticesRestInternalService.createNotificationForPublishInternallyOperation(serviceContext, operationPublished);
+            noticesRestInternalFacade.createNotificationForPublishInternallyOperation(serviceContext, operationPublished);
         } catch (MetamacWebException e) {
             return new PublishInternallyOperationResult(operationPublished, e);
         }
