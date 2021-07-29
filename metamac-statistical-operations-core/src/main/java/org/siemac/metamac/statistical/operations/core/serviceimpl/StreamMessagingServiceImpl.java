@@ -8,8 +8,8 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteria;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
+import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.conf.StatisticalOperationsConfigurationService;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
@@ -42,7 +42,7 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
     private static final String CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
 
     @Autowired
-    private StatisticalOperationsConfigurationService statisticalOperationsConfigurationService;
+    private ConfigurationService configurationService;
 
     @Autowired
     private OperationDo2AvroMapper operationAvroMapper;
@@ -110,7 +110,7 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
         String key = operation.getUrn();
 
         MessageBase<Object, SpecificRecordBase> message = new AvroMessage<>(key, operationAvro);
-        String topic = statisticalOperationsConfigurationService.retrieveKafkaTopicOperationsPublication();
+        String topic = configurationService.retrieveKafkaTopicOperationsPublication();
 
         sendMessageToTopic(message, topic);
     }
@@ -129,7 +129,7 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
     private Properties getProducerProperties() throws MetamacException {
         Properties props = new Properties();
 
-        String bootstrapServers = statisticalOperationsConfigurationService.retrieveProperty(KAFKA_BOOTSTRAP_SERVERS);
+        String bootstrapServers =   configurationService.retrieveProperty(KAFKA_BOOTSTRAP_SERVERS);
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 
         props.put(ProducerConfig.CLIENT_ID_CONFIG, CONSUMER_QUERY_1_NAME);
@@ -138,7 +138,7 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
         props.put(ProducerConfig.RETRIES_CONFIG, 10);
         props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
 
-        String kafkaSchemaRegistryUrl = statisticalOperationsConfigurationService.retrieveProperty(KAFKA_SCHEMA_REGISTRY_URL);
+        String kafkaSchemaRegistryUrl = configurationService.retrieveProperty(KAFKA_SCHEMA_REGISTRY_URL);
         props.put(SCHEMA_REGISTRY_URL_CONFIG, kafkaSchemaRegistryUrl);
 
         return props;
