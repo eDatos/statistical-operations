@@ -12,6 +12,7 @@ import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
@@ -67,9 +68,13 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
         LOGGER.debug("Checking if there are failed or pending operations waiting to be sent trough Kafka...");
         // @formatter:off
         List<ConditionalCriteria> criteria = criteriaFor(Operation.class)
-            .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.PENDING)
-            .or()
-            .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.FAILED)
+            .lbrace()
+                .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.PENDING)
+                .or()
+                .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.FAILED)
+            .rbrace()
+            .and()
+            .withProperty(OperationProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY)
             .build();
         // @formatter:on
         List<Operation> operations = getStatisticalOperationsBaseService().findOperationByCondition(ctx, criteria);
