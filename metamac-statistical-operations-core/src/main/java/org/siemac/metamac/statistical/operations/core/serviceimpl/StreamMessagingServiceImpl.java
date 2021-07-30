@@ -12,6 +12,7 @@ import org.siemac.metamac.core.common.conf.ConfigurationService;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.domain.Operation;
 import org.siemac.metamac.statistical.operations.core.domain.OperationProperties;
+import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.core.error.ServiceExceptionType;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
@@ -24,9 +25,15 @@ import org.siemac.metamac.statistical.operations.web.server.stream.ProducerBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import static io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
 import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
@@ -46,6 +53,10 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
 
     @Autowired
     private OperationDo2AvroMapper operationAvroMapper;
+
+    @Autowired
+    @Qualifier("txManager")
+    private PlatformTransactionManager platformTransactionManager;
 
     private ProducerBase<Object, SpecificRecordBase> producer;
 
@@ -67,22 +78,36 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
         LOGGER.debug("Checking if there are failed or pending operations waiting to be sent trough Kafka...");
         // @formatter:off
         List<ConditionalCriteria> criteria = criteriaFor(Operation.class)
-            .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.PENDING)
-            .or()
-            .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.FAILED)
+            .lbrace()
+                .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.PENDING)
+                .or()
+                .withProperty(OperationProperties.streamMessageStatus()).eq(StreamMessageStatusEnum.FAILED)
+            .rbrace()
+            .and()
+            .withProperty(OperationProperties.procStatus()).eq(ProcStatusEnum.PUBLISH_EXTERNALLY)
             .build();
         // @formatter:on
         List<Operation> operations = getStatisticalOperationsBaseService().findOperationByCondition(ctx, criteria);
-        int sentOperations = 0;
         if (operations.isEmpty()) {
             LOGGER.debug("There aren't any operations to be sent through Kafka");
         } else {
             LOGGER.info("{} operations are going to be sent through Kafka", operations.size());
+            int sentOperations = 0;
             for (Operation operation : operations) {
                 try {
                     LOGGER.debug("Sending operation with code '{}'", operation.getCode());
-                    sendMessage(ctx, operation);
-                    sentOperations++;
+                    SendStreamMessageResult result = getTransactionTemplate().execute(new MetamacExceptionTransactionCallback<SendStreamMessageResult>() {
+
+                        @Override
+                        protected SendStreamMessageResult doInMetamacTransaction(TransactionStatus status) {
+                            return sendMessage(ctx, operation);
+                        }
+                    });
+                    if (result.isOk()) {
+                        sentOperations++;
+                    } else {
+                        LOGGER.warn("An error occurred while trying to send through Kafka the operation with code '{}'", operation.getCode(), result.getMainException());
+                    }
                 } catch (Exception e) {
                     LOGGER.warn("An error occurred while trying to send through Kafka the operation with code '{}'", operation.getCode(), e);
                 }
@@ -129,7 +154,7 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
     private Properties getProducerProperties() throws MetamacException {
         Properties props = new Properties();
 
-        String bootstrapServers =   configurationService.retrieveProperty(KAFKA_BOOTSTRAP_SERVERS);
+        String bootstrapServers = configurationService.retrieveProperty(KAFKA_BOOTSTRAP_SERVERS);
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 
         props.put(ProducerConfig.CLIENT_ID_CONFIG, CONSUMER_QUERY_1_NAME);
@@ -152,4 +177,21 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
         }
     }
 
+    private TransactionTemplate getTransactionTemplate() {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(platformTransactionManager);
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        return transactionTemplate;
+    }
+
+    abstract static class MetamacExceptionTransactionCallback<T> implements TransactionCallback<T> {
+        public final T doInTransaction(TransactionStatus status) {
+            try {
+                return doInMetamacTransaction(status);
+            } catch (MetamacException e) {
+                throw new RuntimeException("Error in transactional method", e);
+            }
+        }
+
+        protected abstract T doInMetamacTransaction(TransactionStatus status) throws MetamacException;
+    }
 }
