@@ -8,7 +8,12 @@ import java.util.List;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
-import org.siemac.metamac.statistical.operations.core.dto.*;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
@@ -68,73 +73,73 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
-    public static final int FAMILY_LIST_MAX_RESULTS = 17;
+    public static final int                           FAMILY_LIST_MAX_RESULTS = 17;
 
-    private VLayout panel;
+    private VLayout                                   panel;
 
-    private OperationMainFormLayout mainFormLayout;
+    private OperationMainFormLayout                   mainFormLayout;
 
-    private OperationDto operationDto;
+    private OperationDto                              operationDto;
 
     // IDENTIFIERS
-    private GroupDynamicForm identifiersForm;
-    private GroupDynamicForm identifiersEditionForm;
+    private GroupDynamicForm                          identifiersForm;
+    private GroupDynamicForm                          identifiersEditionForm;
 
     // CONTENT CLASSIFIERS
-    private GroupDynamicForm contentClassifiersForm;
-    private GroupDynamicForm contentClassifiersEditionForm;
+    private GroupDynamicForm                          contentClassifiersForm;
+    private GroupDynamicForm                          contentClassifiersEditionForm;
 
     // CONTENT DESCRIPTORS
-    private GroupDynamicForm contentViewForm;
-    private GroupDynamicForm contentEditionForm;
+    private GroupDynamicForm                          contentViewForm;
+    private GroupDynamicForm                          contentEditionForm;
 
     // CLASS DESCRIPTORS
-    private GroupDynamicForm classForm;
-    private GroupDynamicForm classDescriptorsEditionForm;
-    private CustomSelectItem surveyType;
-    private CustomSelectItem officialityType;
-    private CustomCheckboxItem indSystem;
+    private GroupDynamicForm                          classForm;
+    private GroupDynamicForm                          classDescriptorsEditionForm;
+    private CustomSelectItem                          surveyType;
+    private CustomSelectItem                          officialityType;
+    private CustomCheckboxItem                        indSystem;
 
     // PRODUCTION DESCRIPTORS
-    private GroupDynamicForm productionDescriptorsForm;
-    private GroupDynamicForm productionDescriptorsEditionForm;
-    private CustomCheckboxItem currentlyActiveItem;
-    private CustomSelectItem statusItem;
+    private GroupDynamicForm                          productionDescriptorsForm;
+    private GroupDynamicForm                          productionDescriptorsEditionForm;
+    private CustomCheckboxItem                        currentlyActiveItem;
+    private CustomSelectItem                          statusItem;
 
     // DIFUSSION AND PUBLICATION
-    private GroupDynamicForm diffusionForm;
-    private GroupDynamicForm diffusionEditionForm;
-    private CustomCheckboxItem releaseCalendar;
-    private CustomTextItem releaseCalendarAccess;
+    private GroupDynamicForm                          diffusionForm;
+    private GroupDynamicForm                          diffusionEditionForm;
+    private CustomCheckboxItem                        releaseCalendar;
+    private CustomTextItem                            releaseCalendarAccess;
 
     // LEGAL ACTS
-    private GroupDynamicForm legalActsForm;
-    private GroupDynamicForm legalActsEditionForm;
+    private GroupDynamicForm                          legalActsForm;
+    private GroupDynamicForm                          legalActsEditionForm;
 
     // ANNOTATIONS
-    private GroupDynamicForm annotationsViewForm;
-    private GroupDynamicForm annotationsEditionForm;
+    private GroupDynamicForm                          annotationsViewForm;
+    private GroupDynamicForm                          annotationsEditionForm;
 
     // INSTANCES
 
-    private ListGridToolStrip instanceListGridToolStrip;
-    private CustomListGrid instanceListGrid;
-    private InstancesOrderFormLayout instancesOrderFormLayout;
+    private ListGridToolStrip                         instanceListGridToolStrip;
+    private CustomListGrid                            instanceListGrid;
+    private InstancesOrderFormLayout                  instancesOrderFormLayout;
     // Instance modal window
-    private ModalWindow newInstanceWindow;
-    private NewInstanceForm newInstanceForm;
+    private ModalWindow                               newInstanceWindow;
+    private NewInstanceForm                           newInstanceForm;
 
     // FAMILIES
 
-    private ToolStrip familiesToolStrip;
-    private ToolStripButton editFamiliesToolStripButton;
-    private BaseCustomListGrid familyListGrid;
+    private ToolStrip                                 familiesToolStrip;
+    private ToolStripButton                           editFamiliesToolStripButton;
+    private BaseCustomListGrid                        familyListGrid;
     private SearchMultipleExternalItemPaginatedWindow windowToAddFamiliesToOperation;
 
-    private List<FamilyBaseDto> familyBaseDtos;
+    private List<FamilyBaseDto>                       familyBaseDtos;
 
-    private List<SurveyTypeDto> surveyTypeDtos;
-    private List<OfficialityTypeDto> officialityTypeDtos;
+    private List<SurveyTypeDto>                       surveyTypeDtos;
+    private List<OfficialityTypeDto>                  officialityTypeDtos;
 
     public OperationViewImpl() {
         super();

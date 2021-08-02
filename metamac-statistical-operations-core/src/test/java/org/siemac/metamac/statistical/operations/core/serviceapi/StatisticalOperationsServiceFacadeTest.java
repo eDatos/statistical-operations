@@ -54,7 +54,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     @Autowired
-    protected ExternalItemRepository externalItemRepository;
+    protected ExternalItemRepository             externalItemRepository;
 
     /**************************************************************************
      * Survey Type
@@ -2283,7 +2283,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Override
     public void testRepublishExternallyOperation() throws Exception {
-
+        // TODO - NO TEST
     }
 
     @Override

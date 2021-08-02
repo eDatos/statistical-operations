@@ -11,7 +11,18 @@ import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.criteria.SculptorCriteria;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.statistical.operations.core.domain.*;
-import org.siemac.metamac.statistical.operations.core.dto.*;
+import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
+import org.siemac.metamac.statistical.operations.core.dto.CostDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveySourceDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatisticalOperationsRoleEnum;
 import org.siemac.metamac.statistical.operations.core.mapper.Do2DtoMapper;
@@ -34,10 +45,10 @@ import org.springframework.stereotype.Service;
 public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperationsServiceFacadeImplBase {
 
     @Autowired
-    private Do2DtoMapper do2DtoMapper;
+    private Do2DtoMapper                           do2DtoMapper;
 
     @Autowired
-    private Dto2DoMapper dto2DoMapper;
+    private Dto2DoMapper                           dto2DoMapper;
 
     @Autowired
     private MetamacCriteria2SculptorCriteriaMapper metamacCriteria2SculptorCriteriaMapper;
@@ -46,10 +57,10 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     private SculptorCriteria2MetamacCriteriaMapper sculptorCriteria2MetamacCriteriaMapper;
 
     @Autowired
-    private StatisticalOperationsListsService statisticalOperationsListsService;
+    private StatisticalOperationsListsService      statisticalOperationsListsService;
 
     @Autowired
-    private StreamMessagingServiceFacade streamMessagingServiceFacade;
+    private StreamMessagingServiceFacade           streamMessagingServiceFacade;
 
     public StatisticalOperationsServiceFacadeImpl() {
     }

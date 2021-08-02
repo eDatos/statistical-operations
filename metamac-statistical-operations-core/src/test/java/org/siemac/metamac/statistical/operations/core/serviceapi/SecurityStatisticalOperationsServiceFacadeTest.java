@@ -41,11 +41,11 @@ import org.springframework.transaction.annotation.Transactional;
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalOperationsBaseTest implements StatisticalOperationsServiceFacadeTestBase {
 
-    private static final String OOEE_CODE_C0025A = "C0025A";
+    private static final String                  OOEE_CODE_C0025A = "C0025A";
     @Autowired
     protected StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
     @Autowired
-    protected StreamMessagingServiceFacade streamMessagingServiceFacade;
+    protected StreamMessagingServiceFacade       streamMessagingServiceFacade;
 
     @Override
     @Test
@@ -894,6 +894,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
 
     @Override
     public void testRepublishExternallyOperation() throws Exception {
+        // TODO - NO TEST
     }
 
     @Test
