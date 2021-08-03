@@ -3,9 +3,11 @@ package org.siemac.metamac.statistical.operations.web.client.utils;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.google.gwt.resources.client.ImageResource;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
@@ -23,7 +25,14 @@ import com.smartgwt.client.widgets.form.validator.LengthRangeValidator;
 
 public class CommonUtils {
 
-    private static LinkedHashMap<String, String> statusEnumHashMap;
+    private static LinkedHashMap<String, String>                         statusEnumHashMap;
+
+    private static final EnumMap<StreamMessageStatusEnum, ImageResource> ICON_STREAM_MESSAGE_STATUS = new EnumMap(StreamMessageStatusEnum.class);
+    static {
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.FAILED, GlobalResources.RESOURCE.error());
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.PENDING, GlobalResources.RESOURCE.pending());
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.SENT, GlobalResources.RESOURCE.success());
+    }
 
     public static LinkedHashMap<String, String> getStatusEnumHashMap() {
         if (statusEnumHashMap == null) {
@@ -166,13 +175,8 @@ public class CommonUtils {
             return null;
         }
         FormItemIcon icon = new FormItemIcon();
-        if (StreamMessageStatusEnum.FAILED.equals(status)) {
-            icon.setSrc(GlobalResources.RESOURCE.error().getURL());
-        } else if (StreamMessageStatusEnum.PENDING.equals(status)) {
-            icon.setSrc(GlobalResources.RESOURCE.pending().getURL());
-        } else if (StreamMessageStatusEnum.SENT.equals(status)) {
-            icon.setSrc(GlobalResources.RESOURCE.success().getURL());
-        }
+        icon.setSrc(ICON_STREAM_MESSAGE_STATUS.get(status).getURL());
+
         return icon;
     }
 
