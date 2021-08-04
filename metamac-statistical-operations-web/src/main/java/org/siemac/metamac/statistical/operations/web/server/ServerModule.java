@@ -29,11 +29,47 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.ValidateTic
 
 import org.siemac.metamac.statistical.operations.web.server.handlers.external.GetCommonMetadataConfigurationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.external.GetExternalResourcesActionHandler;
-import org.siemac.metamac.statistical.operations.web.shared.*;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteFamilyListAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateFamilyOperationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
+
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
-import org.siemac.metamac.web.common.server.handlers.*;
-import org.siemac.metamac.web.common.shared.*;
+import org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler;
+import org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler;
+import org.siemac.metamac.web.common.server.handlers.GetNavigationBarUrlActionHandler;
+import org.siemac.metamac.web.common.server.handlers.LoadConfigurationPropertiesActionHandler;
+import org.siemac.metamac.web.common.server.handlers.MockCASUserActionHandler;
+
+import org.siemac.metamac.web.common.shared.ValidateTicketAction;
+import org.siemac.metamac.web.common.shared.GetLoginPageUrlAction;
+import org.siemac.metamac.web.common.shared.CloseSessionAction;
+import org.siemac.metamac.web.common.shared.GetNavigationBarUrlAction;
+import org.siemac.metamac.web.common.shared.LoadConfigurationPropertiesAction;
+import org.siemac.metamac.web.common.shared.MockCASUserAction;
+
 import org.springframework.stereotype.Component;
 
 import com.gwtplatform.dispatch.server.spring.HandlerModule;

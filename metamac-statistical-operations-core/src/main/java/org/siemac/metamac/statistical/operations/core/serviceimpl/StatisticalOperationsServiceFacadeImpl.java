@@ -10,7 +10,16 @@ import org.siemac.metamac.core.common.criteria.MetamacCriteria;
 import org.siemac.metamac.core.common.criteria.MetamacCriteriaResult;
 import org.siemac.metamac.core.common.criteria.SculptorCriteria;
 import org.siemac.metamac.core.common.exception.MetamacException;
-import org.siemac.metamac.statistical.operations.core.domain.*;
+import org.siemac.metamac.statistical.operations.core.domain.SurveyType;
+import org.siemac.metamac.statistical.operations.core.domain.Cost;
+import org.siemac.metamac.statistical.operations.core.domain.CollMethod;
+import org.siemac.metamac.statistical.operations.core.domain.OfficialityType;
+import org.siemac.metamac.statistical.operations.core.domain.SurveySource;
+import org.siemac.metamac.statistical.operations.core.domain.InstanceType;
+import org.siemac.metamac.statistical.operations.core.domain.Family;
+import org.siemac.metamac.statistical.operations.core.domain.Operation;
+import org.siemac.metamac.statistical.operations.core.domain.Instance;
+
 import org.siemac.metamac.statistical.operations.core.dto.CollMethodDto;
 import org.siemac.metamac.statistical.operations.core.dto.CostDto;
 import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;

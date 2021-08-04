@@ -11,7 +11,14 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
 import org.siemac.metamac.core.common.util.shared.UrnUtils;
-import org.siemac.metamac.statistical.operations.core.dto.*;
+
+import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.FamilyBaseDto;
+import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
+import org.siemac.metamac.statistical.operations.core.dto.InstanceDto;
+import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+
 import org.siemac.metamac.statistical.operations.navigation.shared.NameTokens;
 import org.siemac.metamac.statistical.operations.navigation.shared.PlaceRequestParams;
 import org.siemac.metamac.statistical.operations.web.client.LoggedInGatekeeper;
@@ -28,8 +35,38 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.handl
 import org.siemac.metamac.statistical.operations.web.client.presenter.MainPagePresenter;
 import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
-import org.siemac.metamac.statistical.operations.web.shared.*;
-import org.siemac.metamac.statistical.operations.web.shared.external.*;
+
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.SaveOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListResult;
+import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.DeleteInstanceListResult;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateOperationFamiliesResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListResult;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
+import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderResult;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListResult;
+import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
+
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsResult;
+import org.siemac.metamac.statistical.operations.web.shared.external.RestWebCriteriaUtils;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
+import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesResult;
+
 import org.siemac.metamac.web.common.client.events.ShowMessageEvent;
 import org.siemac.metamac.web.common.client.utils.WaitingAsyncCallbackHandlingError;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
@@ -45,8 +82,19 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.*;
-import com.gwtplatform.mvp.client.proxy.*;
+
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.gwtplatform.mvp.client.annotations.TitleFunction;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.Place;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.events.HasClickHandlers;
@@ -60,14 +108,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler {
 
-    private final DispatchAsync dispatcher;
-    private final PlaceManager placeManager;
+    private final DispatchAsync   dispatcher;
+    private final PlaceManager    placeManager;
 
-    private OperationDto operationDto;
+    private OperationDto          operationDto;
     private List<InstanceBaseDto> instanceBaseDtos;
-    private List<FamilyBaseDto> familyBaseDtos;
+    private List<FamilyBaseDto>   familyBaseDtos;
 
-    public static final Object TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object    TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)
