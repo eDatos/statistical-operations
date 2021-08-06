@@ -895,6 +895,7 @@ public class SecurityStatisticalOperationsServiceFacadeTest extends StatisticalO
     @Override
     public void testRepublishExternallyOperation() throws Exception {
         // NO TEST
+        // In any test method where 'statisticalOperationsServiceFacade.publishExternallyOperation' is called, the same functionality is checked. Sending a message to Kafka
     }
 
     @Test
