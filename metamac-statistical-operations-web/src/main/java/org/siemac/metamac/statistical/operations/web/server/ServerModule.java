@@ -26,7 +26,7 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateFamil
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateInstancesOrderActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.UpdateOperationFamiliesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.ValidateTicketActionHandler;
-
+import org.siemac.metamac.web.common.server.handlers.LoadConfigurationPropertiesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.external.GetCommonMetadataConfigurationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.external.GetExternalResourcesActionHandler;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
@@ -54,13 +54,13 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyIns
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.UpdateInstancesOrderAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
-
+import org.siemac.metamac.web.common.shared.MockCASUserAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetCommonMetadataConfigurationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.external.GetExternalResourcesAction;
 import org.siemac.metamac.web.common.server.handlers.CloseSessionActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetLoginPageUrlActionHandler;
 import org.siemac.metamac.web.common.server.handlers.GetNavigationBarUrlActionHandler;
-import org.siemac.metamac.web.common.server.handlers.LoadConfigurationPropertiesActionHandler;
+
 import org.siemac.metamac.web.common.server.handlers.MockCASUserActionHandler;
 
 import org.siemac.metamac.web.common.shared.ValidateTicketAction;
@@ -68,7 +68,6 @@ import org.siemac.metamac.web.common.shared.GetLoginPageUrlAction;
 import org.siemac.metamac.web.common.shared.CloseSessionAction;
 import org.siemac.metamac.web.common.shared.GetNavigationBarUrlAction;
 import org.siemac.metamac.web.common.shared.LoadConfigurationPropertiesAction;
-import org.siemac.metamac.web.common.shared.MockCASUserAction;
 
 import org.springframework.stereotype.Component;
 

@@ -1,10 +1,25 @@
 package org.siemac.metamac.statistical.operations.web.client.operation.view;
 
-import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.types.SortDirection;
+import com.smartgwt.client.types.Visibility;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.events.HasClickHandlers;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.FormItemIfFunction;
+import com.smartgwt.client.widgets.form.fields.FormItem;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
+import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionEvent;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStrip;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.core.common.enume.domain.TypeExternalArtefactsEnum;
 import org.siemac.metamac.core.common.util.shared.StringUtils;
@@ -28,18 +43,16 @@ import org.siemac.metamac.statistical.operations.web.client.operation.view.handl
 import org.siemac.metamac.statistical.operations.web.client.resources.GlobalResources;
 import org.siemac.metamac.statistical.operations.web.client.utils.ClientSecurityUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.OperationsListUtils;
-import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.PlaceRequestUtils;
+import org.siemac.metamac.statistical.operations.web.client.utils.RecordUtils;
 import org.siemac.metamac.statistical.operations.web.client.utils.RequiredFieldUtils;
-
+import org.siemac.metamac.statistical.operations.web.client.utils.ResourceListFieldUtils;
 import org.siemac.metamac.statistical.operations.web.client.widgets.InstancesOrderFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ListGridToolStrip;
 import org.siemac.metamac.statistical.operations.web.client.widgets.ModalWindow;
-import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.statistical.operations.web.client.widgets.NewInstanceForm;
-
+import org.siemac.metamac.statistical.operations.web.client.widgets.OperationMainFormLayout;
 import org.siemac.metamac.web.common.client.MetamacWebCommon;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 import org.siemac.metamac.web.common.client.utils.CustomRequiredValidator;
@@ -52,24 +65,21 @@ import org.siemac.metamac.web.common.client.widgets.CustomListGridSectionStack;
 import org.siemac.metamac.web.common.client.widgets.TitleLabel;
 import org.siemac.metamac.web.common.client.widgets.actions.search.SearchPaginatedAction;
 import org.siemac.metamac.web.common.client.widgets.form.GroupDynamicForm;
-
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomCheckboxItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalItemLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.CustomLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomSelectItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.CustomTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.ExternalItemLinkItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageRichTextEditorItem;
-
+import org.siemac.metamac.web.common.client.widgets.form.fields.MultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.RequiredTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.ViewMultiLanguageTextItem;
+import org.siemac.metamac.web.common.client.widgets.form.fields.ViewTextItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.ExternalItemListItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchExternalItemLinkItem;
-import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSingleCommonConfigurationItem;
 import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmItemLinkItemWithSchemeFilterItem;
-
+import org.siemac.metamac.web.common.client.widgets.form.fields.external.SearchSrmListItemWithSchemeFilterItem;
 import org.siemac.metamac.web.common.client.widgets.handlers.CustomLinkItemNavigationClickHandler;
 import org.siemac.metamac.web.common.client.widgets.windows.search.SearchMultipleExternalItemPaginatedWindow;
 import org.siemac.metamac.web.common.shared.criteria.CommonConfigurationRestCriteria;
@@ -78,26 +88,10 @@ import org.siemac.metamac.web.common.shared.criteria.SrmExternalResourceRestCrit
 import org.siemac.metamac.web.common.shared.criteria.SrmItemRestCriteria;
 import org.siemac.metamac.web.common.shared.domain.ExternalItemsResult;
 
-import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.smartgwt.client.types.Overflow;
-import com.smartgwt.client.types.SortDirection;
-import com.smartgwt.client.types.Visibility;
-import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
-import com.smartgwt.client.widgets.events.HasClickHandlers;
-import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.FormItemIfFunction;
-import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.smartgwt.client.widgets.grid.events.HasRecordClickHandlers;
-import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
-import com.smartgwt.client.widgets.grid.events.SelectionEvent;
-import com.smartgwt.client.widgets.layout.SectionStackSection;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.toolbar.ToolStrip;
-import com.smartgwt.client.widgets.toolbar.ToolStripButton;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getConstants;
 
 public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> implements OperationPresenter.OperationView {
 
