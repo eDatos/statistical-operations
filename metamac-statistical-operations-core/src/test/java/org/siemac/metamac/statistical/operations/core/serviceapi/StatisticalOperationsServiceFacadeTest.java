@@ -2307,7 +2307,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
     @Override
     public void testRepublishExternallyOperation() throws Exception {
-        // TODO - NO TEST
+        // NO TEST
     }
 
     @Override
