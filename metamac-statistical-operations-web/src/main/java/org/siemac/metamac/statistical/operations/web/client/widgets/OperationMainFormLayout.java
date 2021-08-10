@@ -35,6 +35,7 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
             publishInternally.hide();
             publishExternally.hide();
         }
+        lifeCycleReSendStreamMessage.show();
     }
 
     public void setViewMode() {
@@ -53,5 +54,4 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
             publishExternally.show();
         }
     }
-
 }

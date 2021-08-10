@@ -8,6 +8,7 @@ import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS
 import org.siemac.metamac.web.common.client.utils.ListGridUtils;
 import org.siemac.metamac.web.common.client.widgets.CustomListGridField;
 
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
 
 public class ResourceListFieldUtils {
@@ -73,7 +74,12 @@ public class ResourceListFieldUtils {
 
         CustomListGridField status = new CustomListGridField(OperationDS.STATUS, getConstants().operationStatus());
 
-        return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status};
+        CustomListGridField publicationStreamStatus = new CustomListGridField(OperationDS.PUBLISH_MSG_STATUS_KAFKA, getConstants().operationPublicationStreamStatus());
+        publicationStreamStatus.setType(ListGridFieldType.IMAGE);
+        publicationStreamStatus.setAlign(Alignment.CENTER);
+
+        return new CustomListGridField[]{code, urn, title, acronym, subjectArea, surveyType, officialityType, indicatorsSystem, createdDate, internalInventoryDate, currentlyActive, procStatus, status,
+                publicationStreamStatus};
     }
 
     public static CustomListGridField[] getInstanceFields() {

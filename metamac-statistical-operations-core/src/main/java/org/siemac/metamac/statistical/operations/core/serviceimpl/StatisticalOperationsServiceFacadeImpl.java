@@ -41,6 +41,7 @@ import org.siemac.metamac.statistical.operations.core.security.SecurityUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendStreamMessageOperationServiceResult;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     private StatisticalOperationsListsService      statisticalOperationsListsService;
 
     @Autowired
-    private StreamMessagingServiceFacade streamMessagingServiceFacade;
+    private StreamMessagingServiceFacade           streamMessagingServiceFacade;
 
     public StatisticalOperationsServiceFacadeImpl() {
     }
@@ -76,6 +77,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
      * Dependences
      **************************************************************************/
 
+    @Override
     protected StatisticalOperationsListsService getStatisticalOperationsListsService() {
         return statisticalOperationsListsService;
     }
@@ -586,6 +588,20 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
+    public ReSendStreamMessageOperationServiceResult republishExternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+        ReSendStreamMessageOperationServiceResult result = new ReSendStreamMessageOperationServiceResult();
+
+        Operation operation = getStatisticalOperationsBaseService().findOperationById(ctx, operationId);
+
+        // Send operation
+        SendStreamMessageResult sendStreamMessageResult = streamMessagingServiceFacade.sendMessage(ctx, operation);
+        result.getExceptions().addAll(sendStreamMessageResult.getExceptions());
+
+        // Return
+        return result;
+    }
+
+    @Override
     public List<FamilyBaseDto> findFamiliesForOperation(ServiceContext ctx, Long operationId) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.ANY_ROLE_ALLOWED);
@@ -698,6 +714,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     /**
      * Upgrade the order of the instances of an operation. You must provide a list of id sorted oldest to newest
      */
+    @Override
     public List<InstanceBaseDto> updateInstancesOrder(ServiceContext ctx, Long operationId, List<Long> instancesIdList) throws MetamacException {
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION, StatisticalOperationsRoleEnum.TECNICO_APOYO_PLANIFICACION,

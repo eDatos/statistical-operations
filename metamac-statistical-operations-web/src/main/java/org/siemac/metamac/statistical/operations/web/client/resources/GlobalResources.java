@@ -58,4 +58,12 @@ public interface GlobalResources extends ClientBundle {
     @Source("images/unpublish_externally.png")
     ImageResource unpublishExternally();
 
+    @ImageOptions(repeatStyle = RepeatStyle.Both)
+    @Source("images/reload.png")
+    ImageResource reload();
+
+    @ImageOptions(repeatStyle = RepeatStyle.Both)
+    @Source("images/pending_publication.png")
+    ImageResource pending();
+
 }

@@ -13,8 +13,9 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
 
     protected ToolStripButton publishInternally;
     protected ToolStripButton publishExternally;
+    protected ToolStripButton lifeCycleReSendStreamMessage;
 
-    protected ProcStatusEnum  status;
+    protected ProcStatusEnum status;
 
     public BasePublicationMainFormLayout() {
         super();
@@ -45,8 +46,19 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
         publishExternally.setTitleStyle("publishButton");
         publishExternally.setIcon(GlobalResources.RESOURCE.publishExternally().getURL());
 
+        lifeCycleReSendStreamMessage = new ToolStripButton(OperationsWeb.getConstants().lifeCycleReSendStreamMessage());
+        lifeCycleReSendStreamMessage.setVisibility(Visibility.HIDDEN);
+        lifeCycleReSendStreamMessage.setWidth(150);
+        lifeCycleReSendStreamMessage.setShowRollOver(true);
+        lifeCycleReSendStreamMessage.setShowDisabled(true);
+        lifeCycleReSendStreamMessage.setShowDown(true);
+        lifeCycleReSendStreamMessage.setTitleStyle("publishButton");
+        lifeCycleReSendStreamMessage.setIcon(GlobalResources.RESOURCE.reload().getURL());
+
+        getToolStrip().addButton(lifeCycleReSendStreamMessage);
         getToolStrip().addButton(publishInternally);
         getToolStrip().addButton(publishExternally);
+
     }
 
     public HasClickHandlers getPublishInternally() {
@@ -57,10 +69,16 @@ public class BasePublicationMainFormLayout extends InternationalMainFormLayout {
         return publishExternally;
     }
 
+    public HasClickHandlers getLifeCycleReSendStreamMessage() {
+        return lifeCycleReSendStreamMessage;
+    }
+
+    @Override
     public void setEditionMode() {
         super.setEditionMode();
         publishInternally.hide();
         publishExternally.hide();
+        lifeCycleReSendStreamMessage.hide();
     }
 
 }

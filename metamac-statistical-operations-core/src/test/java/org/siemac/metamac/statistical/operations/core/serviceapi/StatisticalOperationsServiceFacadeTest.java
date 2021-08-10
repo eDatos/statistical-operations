@@ -2306,6 +2306,12 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     }
 
     @Override
+    public void testRepublishExternallyOperation() throws Exception {
+        // NO TEST
+        // In any test method where 'statisticalOperationsServiceFacade.publishExternallyOperation' is called, the same functionality is checked. Sending a message to Kafka
+    }
+
+    @Override
     @Test
     @Transactional
     public void testFindFamiliesForOperation() throws MetamacException {

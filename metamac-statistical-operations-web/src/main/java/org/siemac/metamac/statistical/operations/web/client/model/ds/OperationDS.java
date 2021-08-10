@@ -12,6 +12,7 @@ public class OperationDS extends DataSource {
     public static final String CODE_VIEW                  = "op-code-view";       // Not mapped in DTO
     public static final String TITLE                      = "op-title";
     public static final String ACRONYM                    = "op-acron";
+    public static final String PUBLICATION_STREAM_STATUS  = "op-publication-stream-status";
     // CONTENT CLASSIFIERS
     public static final String SUBJECT_AREA               = "op-subjectItem";
     public static final String SECONDARY_SUBJECT_AREAS    = "op-subjetc-secon";
@@ -44,6 +45,7 @@ public class OperationDS extends DataSource {
     public static final String REV_POLICY                 = "op-rev-pol";
     public static final String REV_PRACTICE               = "op-rev-pract";
     public static final String COMMON_METADATA            = "op-com-met";
+    public static final String PUBLISH_MSG_STATUS_KAFKA   = "op-publish-msg-kafka";
     // LEGAL ACTS
     public static final String SPECIFIC_LEGAL_ACTS        = "op-spe-legal-acts";
     public static final String SPECIFIC_DATA_SHARING      = "op-spe-data-shar";
