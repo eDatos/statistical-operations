@@ -1,5 +1,9 @@
 package org.siemac.metamac.statistical.operations.core.serviceimpl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.fornax.cartridges.sculptor.framework.domain.PagedResult;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.criteria.MetamacCriteria;
@@ -41,10 +45,6 @@ import org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendS
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Implementation of StatisticalOperationsServiceFacade.
