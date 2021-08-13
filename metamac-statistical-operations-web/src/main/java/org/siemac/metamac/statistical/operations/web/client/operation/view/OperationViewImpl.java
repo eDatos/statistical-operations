@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
@@ -837,7 +838,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersForm.setValue(OperationDS.TITLE, operationDto.getTitle());
         identifiersForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersForm.setValue(OperationDS.URN, operationDto.getUrn());
-        identifiersForm.getItem(OperationDS.PUBLICATION_STREAM_STATUS).setIcons(CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
+        identifiersForm.getItem(OperationDS.PUBLICATION_STREAM_STATUS)
+                .setIcons(operationDto.getStreamMessageStatus() == StreamMessageStatusEnum.PENDING ? null : CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
 
         // CONTENT CLASSIFIERS
 

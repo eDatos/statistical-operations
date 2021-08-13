@@ -99,6 +99,6 @@ public class OperationRecord extends ListGridRecord {
     }
 
     public void setPublicationStreamStatus(StreamMessageStatusEnum status) {
-        setAttribute(OperationDS.PUBLISH_MSG_STATUS_KAFKA, CommonUtils.getPublicationStreamStatusIcon(status));
+        setAttribute(OperationDS.PUBLISH_MSG_STATUS_KAFKA, status == StreamMessageStatusEnum.PENDING ? null : CommonUtils.getPublicationStreamStatusIcon(status));
     }
 }
