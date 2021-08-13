@@ -547,7 +547,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Set operation procStatus
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         statisticalOperationsServiceFacade.addOperationForFamily(getServiceContextAdministrador(), familyDto.getId(), operationDto.getId());
 
@@ -915,8 +915,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
         operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
-        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
-        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId()).getContent();
+        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId()).getContent();
 
         familyDto011 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
         familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
@@ -960,8 +960,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
         operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
-        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
-        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId()).getContent();
+        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId()).getContent();
 
         familyDto011 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
         familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
@@ -1086,7 +1086,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Create operation with ProcStatus PUBLISH_EXTERNALLY
         OperationDto operationDto = createOperationDtoForInternalPublishing();
         operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto);
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         assertNotNull(operationDto.getInternalInventoryDate());
         assertEquals(ProcStatusEnum.PUBLISH_INTERNALLY, operationDto.getProcStatus());
 
@@ -1119,7 +1119,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Create operation with ProcStatus PUBLISH_EXTERNALLY
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         assertNotNull(operationDto.getInternalInventoryDate());
         assertNotNull(operationDto.getInventoryDate());
@@ -1697,7 +1697,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
         // Set PUBLISH_INTERNALLY procStatus
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Delete operation with an incorrect procStatus
         try {
@@ -1721,7 +1721,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
         // Set PUBLISH_INTERNALLY procStatus
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Delete operation with an incorrect procStatus
@@ -2116,8 +2116,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
         operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
-        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
-        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId()).getContent();
+        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId()).getContent();
 
         familyDto011 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
         familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
@@ -2161,8 +2161,8 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         operationDto01a = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01a);
         operationDto01b = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), operationDto01b);
-        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId());
-        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId());
+        operationDto01a = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01a.getId()).getContent();
+        operationDto01b = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto01b.getId()).getContent();
 
         familyDto011 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto011);
         familyDto012 = statisticalOperationsServiceFacade.createFamily(getServiceContextAdministrador(), familyDto012);
@@ -2266,7 +2266,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Validations
         assertNotNull(operationDto.getInternalInventoryDate());
@@ -2285,7 +2285,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         int operationsBefore = statisticalOperationsServiceFacade.findAllOperations(getServiceContextAdministrador()).size();
 
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Validations
@@ -2338,7 +2338,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         assertNotNull(operationDto);
 
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
@@ -2440,7 +2440,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
         Long operationId = operationDto.getId();
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto persistedIstanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationId, createInstanceDto());
@@ -2462,7 +2462,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         try {
@@ -2483,7 +2483,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testUpdateInstance() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
@@ -2542,7 +2542,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testUpdateInstanceWithExternalItem() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDtoWithGeographicGranularity());
@@ -2573,7 +2573,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testUpdateInstancesOrder() throws Exception {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         InstanceDto instance01 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
         InstanceDto instance02 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
@@ -2621,7 +2621,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     @Transactional
     public void testUpdateInstanceOptimisticLockingError() throws Exception {
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         Long id = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto()).getId();
 
         // Retrieve instance - session 1
@@ -2660,7 +2660,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testDeleteInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
@@ -2684,7 +2684,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testCheckInstancesOrderAfterRemoveInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance 01
         InstanceDto instance01 = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
@@ -2873,7 +2873,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testDeleteInstanceInternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         int instancesBeforeCreateInstance = statisticalOperationsServiceFacade.findAllInstances(getServiceContextAdministrador()).size();
 
@@ -2904,7 +2904,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testDeleteInstanceExternallyPublished() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
@@ -3385,7 +3385,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testFindInstanceById() throws MetamacException {
         // Create instance
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
 
         InstanceDto instanceRetrieved = statisticalOperationsServiceFacade.findInstanceById(getServiceContextAdministrador(), instanceDto.getId());
@@ -3400,7 +3400,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testFindInstanceByCode() throws Exception {
         // Create instance
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
 
         InstanceDto instanceRetrieved = statisticalOperationsServiceFacade.findInstanceByCode(getServiceContextAdministrador(), instanceDto.getCode());
@@ -3415,7 +3415,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testFindInstanceByUrn() throws Exception {
         // Create instance
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());
 
         InstanceDto instanceRetrieved = statisticalOperationsServiceFacade.findInstanceByUrn(getServiceContextAdministrador(), instanceDto.getUrn());
@@ -3433,7 +3433,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
 
         // Create a PUBLISH_INTERNALLY Operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         assertTrue(ProcStatusEnum.PUBLISH_INTERNALLY.equals(operationDto.getProcStatus()));
 
         // Create instance
@@ -3462,7 +3462,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testPublishExternallyInstance() throws MetamacException {
         // Create a PUBLISH_EXTERNALLY Operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         operationDto = statisticalOperationsServiceFacade.publishExternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
         assertTrue(ProcStatusEnum.PUBLISH_EXTERNALLY.equals(operationDto.getProcStatus()));
 
@@ -3498,7 +3498,7 @@ public class StatisticalOperationsServiceFacadeTest extends StatisticalOperation
     public void testFindOperationForInstance() throws MetamacException {
         // Create operation
         OperationDto operationDto = statisticalOperationsServiceFacade.createOperation(getServiceContextAdministrador(), createOperationDtoForInternalPublishing());
-        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId());
+        operationDto = statisticalOperationsServiceFacade.publishInternallyOperation(getServiceContextAdministrador(), operationDto.getId()).getContent();
 
         // Create instance
         InstanceDto instanceDto = statisticalOperationsServiceFacade.createInstance(getServiceContextAdministrador(), operationDto.getId(), createInstanceDto());

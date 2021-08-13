@@ -41,6 +41,7 @@ import org.siemac.metamac.statistical.operations.core.security.SecurityUtils;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsListsService;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StreamMessagingServiceFacade;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishExternallyOperationServiceResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishInternallyOperationServiceResult;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendStreamMessageOperationServiceResult;
 import org.siemac.metamac.statistical.operations.core.serviceimpl.result.SendStreamMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -549,7 +550,9 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
     }
 
     @Override
-    public OperationDto publishInternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+    public PublishInternallyOperationServiceResult publishInternallyOperation(ServiceContext ctx, Long operationId) throws MetamacException {
+        PublishInternallyOperationServiceResult result = new PublishInternallyOperationServiceResult();
+
         // Security
         SecurityUtils.checkServiceOperationAllowed(ctx, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
         checkAccessOperationById(ctx, operationId, StatisticalOperationsRoleEnum.TECNICO_PLANIFICACION);
@@ -560,8 +563,12 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
         // Transform to Dto
         OperationDto operationDto = operationToDto(ctx, operation);
 
+        // Send operation
+        SendStreamMessageResult sendStreamMessageResult = streamMessagingServiceFacade.sendMessage(ctx, operation);
+        result.getExceptions().addAll(sendStreamMessageResult.getExceptions());
+
         // Return
-        return operationDto;
+        return result;
     }
 
     @Override
