@@ -13,6 +13,4 @@ public interface NoticesRestInternalFacade {
     void createNotificationForPublishExternallyOperation(ServiceContext serviceContext, OperationDto operation) throws MetamacWebException;
 
     void createNotificationForStreamError(ServiceContext serviceContext, OperationDto operation) throws MetamacWebException;
-
-    void createNotificationForReSendStreamMessageOperation(ServiceContext ctx, OperationDto operation) throws MetamacWebException;
 }

@@ -60,16 +60,6 @@ public class ReSendStreamMessageOperationActionHandler extends SecurityActionHan
             }
         }
 
-        try {
-            noticesRestInternalFacade.createNotificationForReSendStreamMessageOperation(serviceContext, result.getContent());
-        } catch (MetamacWebException e) {
-            if (operationException == null) {
-                operationException = e;
-            } else {
-                operationException.getWebExceptionItems().addAll(e.getWebExceptionItems());
-            }
-        }
-
         return new ReSendStreamMessageOperationResult(result.getContent(), operationException);
     }
 

@@ -839,7 +839,7 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersForm.setValue(OperationDS.URN, operationDto.getUrn());
         identifiersForm.getItem(OperationDS.PUBLICATION_STREAM_STATUS)
-                .setIcons(operationDto.getStreamMessageStatus() == StreamMessageStatusEnum.PENDING ? null : CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
+                .setIcons(StreamMessageStatusEnum.PENDING.equals(operationDto.getStreamMessageStatus()) ? null : CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
 
         // CONTENT CLASSIFIERS
 
