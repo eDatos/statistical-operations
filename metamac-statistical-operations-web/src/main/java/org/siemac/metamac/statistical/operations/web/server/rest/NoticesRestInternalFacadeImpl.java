@@ -62,6 +62,14 @@ public class NoticesRestInternalFacadeImpl implements NoticesRestInternalFacade 
     }
 
     @Override
+    public void createNotificationForReSendStreamMessageOperation(ServiceContext ctx, OperationDto operation) throws MetamacWebException {
+        ResourceInternal resource = this.operationDtoToResourceInternal(ctx, operation);
+        ResourceInternal[] noticeResource = {resource};
+
+        this.createPublicationNotification(ctx, ServiceNoticeAction.STREAM_MESSAGE_SEND, ServiceNoticeMessage.STREAM_MESSAGE_SEND_OK, noticeResource);
+    }
+
+    @Override
     public void createNotificationForStreamError(ServiceContext ctx, OperationDto operation) throws MetamacWebException {
         ResourceInternal[] resourceInternal = {operationDtoToResourceInternal(ctx, operation)};
         createErrorOnStreamMessagingNotification(ctx, resourceInternal);
