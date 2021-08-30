@@ -1,9 +1,14 @@
 package org.siemac.metamac.statistical.operations.web.server.handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
+import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishInternallyOperationServiceResult;
 import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalFacade;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
@@ -24,7 +29,7 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
 
     @Autowired
-    private NoticesRestInternalFacade noticesRestInternalFacade;
+    private NoticesRestInternalFacade          noticesRestInternalFacade;
 
     public PublishInternallyOperationActionHandler() {
         super(PublishInternallyOperationAction.class);
@@ -33,21 +38,38 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
     @Override
     public PublishInternallyOperationResult executeSecurityAction(PublishInternallyOperationAction action) throws ActionException {
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-        OperationDto operationPublished = null;
+        PublishInternallyOperationServiceResult result;
 
         try {
-            operationPublished = statisticalOperationsServiceFacade.publishInternallyOperation(serviceContext, action.getOperationId());
+            OperationDto operationPublished = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
+            result = statisticalOperationsServiceFacade.publishInternallyOperation(serviceContext, action.getOperationId());
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
 
-        try {
-            noticesRestInternalFacade.createNotificationForPublishInternallyOperation(serviceContext, operationPublished);
-        } catch (MetamacWebException e) {
-            return new PublishInternallyOperationResult(operationPublished, e);
+        MetamacWebException operationException = null;
+        if (!result.isOk()) {
+            MetamacException e = result.getMainException();
+            List<MetamacExceptionItem> list = new ArrayList<>();
+            for (MetamacException exception : result.getSecondaryExceptions()) {
+                list.addAll(exception.getExceptionItems());
+            }
+            e.getExceptionItems().addAll(list);
+            operationException = WebExceptionUtils.createMetamacWebException(e);
+            try {
+                noticesRestInternalFacade.createNotificationForStreamError(serviceContext, result.getContent());
+            } catch (MetamacWebException noticeException) {
+                operationException.getWebExceptionItems().addAll(noticeException.getWebExceptionItems());
+            }
         }
 
-        return new PublishInternallyOperationResult(operationPublished, null);
+        try {
+            noticesRestInternalFacade.createNotificationForPublishInternallyOperation(serviceContext, result.getContent());
+        } catch (MetamacWebException e) {
+            return new PublishInternallyOperationResult(result.getContent(), e);
+        }
+
+        return new PublishInternallyOperationResult(result.getContent(), null);
     }
 
     @Override

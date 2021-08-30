@@ -1,5 +1,10 @@
 package org.siemac.metamac.statistical.operations.core.serviceimpl;
 
+import static io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
+import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
+import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_BOOTSTRAP_SERVERS;
+import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_SCHEMA_REGISTRY_URL;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -35,28 +40,24 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import static io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
-import static org.fornax.cartridges.sculptor.framework.accessapi.ConditionalCriteriaBuilder.criteriaFor;
-import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_BOOTSTRAP_SERVERS;
-import static org.siemac.edatos.core.common.constants.shared.ConfigurationConstants.KAFKA_SCHEMA_REGISTRY_URL;
-
 /**
  * Implementation of StreamMessagingService.
  */
 @Service("streamMessagingService")
 public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase implements ApplicationListener<ContextClosedEvent> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StreamMessagingServiceImpl.class);
-    private static final String CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
+
+    private static final Logger                      LOGGER                = LoggerFactory.getLogger(StreamMessagingServiceImpl.class);
+    private static final String                      CONSUMER_QUERY_1_NAME = "statistical_operations_producer_1";
 
     @Autowired
-    private ConfigurationService configurationService;
+    private ConfigurationService                     configurationService;
 
     @Autowired
-    private OperationDo2AvroMapper operationAvroMapper;
+    private OperationDo2AvroMapper                   operationAvroMapper;
 
     @Autowired
     @Qualifier("txManager")
-    private PlatformTransactionManager platformTransactionManager;
+    private PlatformTransactionManager               platformTransactionManager;
 
     private ProducerBase<Object, SpecificRecordBase> producer;
 
@@ -69,7 +70,8 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
             return new SendStreamMessageResult(operation.getStreamMessageStatus(), null);
         } catch (MetamacException e) {
             updateMessageStatus(operation, StreamMessageStatusEnum.FAILED);
-            return new SendStreamMessageResult(operation.getStreamMessageStatus(), Collections.singletonList(new MetamacException(e, ServiceExceptionType.UNABLE_TO_SEND_STREAM_MESSAGING_TO_STREAM_MESSAGING_SERVER)));
+            return new SendStreamMessageResult(operation.getStreamMessageStatus(),
+                    Collections.singletonList(new MetamacException(e, ServiceExceptionType.UNABLE_TO_SEND_STREAM_MESSAGING_TO_STREAM_MESSAGING_SERVER)));
         }
     }
 
@@ -184,6 +186,8 @@ public class StreamMessagingServiceImpl extends StreamMessagingServiceImplBase i
     }
 
     abstract static class MetamacExceptionTransactionCallback<T> implements TransactionCallback<T> {
+
+        @Override
         public final T doInTransaction(TransactionStatus status) {
             try {
                 return doInMetamacTransaction(status);

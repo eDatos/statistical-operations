@@ -11,10 +11,10 @@ import com.gwtplatform.dispatch.annotation.Out;
 public class ReSendStreamMessageOperation {
 
     @In(1)
-    Long operationId;
+    Long                operationId;
 
     @Out(1)
-    OperationDto operationSaved;
+    OperationDto        operationSaved;
 
     @Out(2)
     MetamacWebException notificationException;
