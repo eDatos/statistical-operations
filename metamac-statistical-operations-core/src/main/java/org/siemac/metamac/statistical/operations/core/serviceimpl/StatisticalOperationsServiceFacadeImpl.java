@@ -562,6 +562,7 @@ public class StatisticalOperationsServiceFacadeImpl extends StatisticalOperation
 
         // Transform to Dto
         OperationDto operationDto = operationToDto(ctx, operation);
+        result.setContent(operationDto);
 
         // Send operation
         SendStreamMessageResult sendStreamMessageResult = streamMessagingServiceFacade.sendMessage(ctx, operation);
