@@ -3,6 +3,7 @@ package org.siemac.metamac.statistical.operations.web.client.utils;
 import static org.siemac.metamac.statistical.operations.web.client.OperationsWeb.getCoreMessages;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -14,13 +15,24 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
+import org.siemac.metamac.web.common.client.resources.GlobalResources;
 
+import com.google.gwt.resources.client.ImageResource;
+import com.smartgwt.client.widgets.form.fields.FormItemIcon;
 import com.smartgwt.client.widgets.form.validator.LengthRangeValidator;
 
 public class CommonUtils {
 
-    private static LinkedHashMap<String, String> statusEnumHashMap;
+    private static LinkedHashMap<String, String>                         statusEnumHashMap;
+
+    private static final EnumMap<StreamMessageStatusEnum, ImageResource> ICON_STREAM_MESSAGE_STATUS = new EnumMap(StreamMessageStatusEnum.class);
+    static {
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.FAILED, GlobalResources.RESOURCE.errorSmart());
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.PENDING, GlobalResources.RESOURCE.warn());
+        ICON_STREAM_MESSAGE_STATUS.put(StreamMessageStatusEnum.SENT, GlobalResources.RESOURCE.success());
+    }
 
     public static LinkedHashMap<String, String> getStatusEnumHashMap() {
         if (statusEnumHashMap == null) {
@@ -155,4 +167,17 @@ public class CommonUtils {
         lengthRangeValidator.setMax(StatisticalOperationsWebConstants.OPERATION_CODE_MAX_LENGTH);
         return lengthRangeValidator;
     }
+
+    // STATUS KAFKA MESSAGE OPERATIONS
+
+    public static FormItemIcon getPublicationStreamStatusIcon(StreamMessageStatusEnum status) {
+        if (status == null) {
+            return null;
+        }
+        FormItemIcon icon = new FormItemIcon();
+        icon.setSrc(ICON_STREAM_MESSAGE_STATUS.get(status).getURL());
+
+        return icon;
+    }
+
 }

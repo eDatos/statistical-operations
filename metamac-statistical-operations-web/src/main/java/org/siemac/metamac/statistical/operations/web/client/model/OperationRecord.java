@@ -4,7 +4,9 @@ import org.siemac.metamac.core.common.dto.ExternalItemDto;
 import org.siemac.metamac.statistical.operations.core.dto.OfficialityTypeDto;
 import org.siemac.metamac.statistical.operations.core.dto.OperationBaseDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.model.ds.OperationDS;
+import org.siemac.metamac.statistical.operations.web.client.utils.CommonUtils;
 import org.siemac.metamac.web.common.client.resources.GlobalResources;
 import org.siemac.metamac.web.common.client.utils.CommonWebUtils;
 
@@ -94,5 +96,9 @@ public class OperationRecord extends ListGridRecord {
 
     public void setCurrentlyActive(String value) {
         setAttribute(OperationDS.CURRENTLY_ACTIVE, value);
+    }
+
+    public void setPublicationStreamStatus(StreamMessageStatusEnum status) {
+        setAttribute(OperationDS.PUBLISH_MSG_STATUS_KAFKA, StreamMessageStatusEnum.PENDING.equals(status) ? null : CommonUtils.getPublicationStreamStatusIcon(status));
     }
 }

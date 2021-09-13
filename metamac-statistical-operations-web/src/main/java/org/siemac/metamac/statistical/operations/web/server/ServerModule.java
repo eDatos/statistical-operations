@@ -6,18 +6,19 @@ import org.siemac.metamac.statistical.operations.web.server.handlers.DeleteOpera
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyAndOperationsActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetFamilyPaginatedListActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.GetHelpUrlActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetInstanceListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationAndInstancesActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationPaginatedListActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.GetOperationsListsActionHandler;
-import org.siemac.metamac.statistical.operations.web.server.handlers.GetHelpUrlActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishExternallyOperationActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishInternallyFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishInternallyInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.PublishInternallyOperationActionHandler;
+import org.siemac.metamac.statistical.operations.web.server.handlers.ReSendStreamMessageOperationActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.SaveFamilyActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.SaveInstanceActionHandler;
 import org.siemac.metamac.statistical.operations.web.server.handlers.SaveOperationActionHandler;
@@ -33,18 +34,19 @@ import org.siemac.metamac.statistical.operations.web.shared.DeleteOperationListA
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyAndOperationsAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetFamilyPaginatedListAction;
+import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetInstanceListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationAndInstancesAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationPaginatedListAction;
 import org.siemac.metamac.statistical.operations.web.shared.GetOperationsListsAction;
-import org.siemac.metamac.statistical.operations.web.shared.GetHelpUrlAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveFamilyAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
@@ -99,6 +101,7 @@ public class ServerModule extends HandlerModule {
         bindHandler(UpdateOperationFamiliesAction.class, UpdateOperationFamiliesActionHandler.class);
         bindHandler(PublishInternallyOperationAction.class, PublishInternallyOperationActionHandler.class);
         bindHandler(PublishExternallyOperationAction.class, PublishExternallyOperationActionHandler.class);
+        bindHandler(ReSendStreamMessageOperationAction.class, ReSendStreamMessageOperationActionHandler.class);
 
         // Instances
         bindHandler(SaveInstanceAction.class, SaveInstanceActionHandler.class);

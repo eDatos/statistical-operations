@@ -28,15 +28,19 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
         if (ProcStatusEnum.DRAFT.equals(status)) {
             showPublishInternallyButton();
             publishExternally.hide();
+            lifeCycleReSendStreamMessage.hide();
         } else if (ProcStatusEnum.PUBLISH_INTERNALLY.equals(status)) {
             publishInternally.hide();
             showPublishExternallyButton();
+            lifeCycleReSendStreamMessage.show();
         } else if (ProcStatusEnum.PUBLISH_EXTERNALLY.equals(status)) {
             publishInternally.hide();
             publishExternally.hide();
+            lifeCycleReSendStreamMessage.show();
         }
     }
 
+    @Override
     public void setViewMode() {
         super.setViewMode();
         updateVisibility();
@@ -53,5 +57,4 @@ public class OperationMainFormLayout extends BasePublicationMainFormLayout {
             publishExternally.show();
         }
     }
-
 }

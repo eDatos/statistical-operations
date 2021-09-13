@@ -5,13 +5,13 @@
 -- Añade nueva columna a la tabla de operaciones que determina el estado de transmisión a través de Kafka
 
 ALTER TABLE TB_OPERATIONS
-ADD STREAM_MESSAGE_STATUS VARCHAR(255);
+ADD STREAM_MESSAGE_STATUS VARCHAR2(255 CHAR);
 
 -- 'Update' statement without 'where' updates all table rows at once
 UPDATE TB_OPERATIONS
 SET STREAM_MESSAGE_STATUS = 'PENDING';
 
 ALTER TABLE TB_OPERATIONS
-MODIFY STREAM_MESSAGE_STATUS VARCHAR(255) NOT NULL;
+MODIFY STREAM_MESSAGE_STATUS VARCHAR2(255 CHAR) NOT NULL;
 
 commit;

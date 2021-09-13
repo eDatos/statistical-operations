@@ -6,12 +6,11 @@ import java.util.List;
 import org.fornax.cartridges.sculptor.framework.errorhandling.ServiceContext;
 import org.siemac.metamac.core.common.exception.MetamacException;
 import org.siemac.metamac.core.common.exception.MetamacExceptionItem;
-import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.serviceapi.StatisticalOperationsServiceFacade;
-import org.siemac.metamac.statistical.operations.core.serviceimpl.result.PublishInternallyOperationServiceResult;
+import org.siemac.metamac.statistical.operations.core.serviceimpl.result.ReSendStreamMessageOperationServiceResult;
 import org.siemac.metamac.statistical.operations.web.server.rest.NoticesRestInternalFacade;
-import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
-import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationResult;
 import org.siemac.metamac.web.common.server.ServiceContextHolder;
 import org.siemac.metamac.web.common.server.handlers.SecurityActionHandler;
 import org.siemac.metamac.web.common.server.utils.WebExceptionUtils;
@@ -19,11 +18,10 @@ import org.siemac.metamac.web.common.shared.exception.MetamacWebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.gwtplatform.dispatch.server.ExecutionContext;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 @Component
-public class PublishInternallyOperationActionHandler extends SecurityActionHandler<PublishInternallyOperationAction, PublishInternallyOperationResult> {
+public class ReSendStreamMessageOperationActionHandler extends SecurityActionHandler<ReSendStreamMessageOperationAction, ReSendStreamMessageOperationResult> {
 
     @Autowired
     private StatisticalOperationsServiceFacade statisticalOperationsServiceFacade;
@@ -31,18 +29,17 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
     @Autowired
     private NoticesRestInternalFacade          noticesRestInternalFacade;
 
-    public PublishInternallyOperationActionHandler() {
-        super(PublishInternallyOperationAction.class);
+    public ReSendStreamMessageOperationActionHandler() {
+        super(ReSendStreamMessageOperationAction.class);
     }
 
     @Override
-    public PublishInternallyOperationResult executeSecurityAction(PublishInternallyOperationAction action) throws ActionException {
+    public ReSendStreamMessageOperationResult executeSecurityAction(ReSendStreamMessageOperationAction action) throws ActionException {
         ServiceContext serviceContext = ServiceContextHolder.getCurrentServiceContext();
-        PublishInternallyOperationServiceResult result;
+        ReSendStreamMessageOperationServiceResult result;
 
         try {
-            OperationDto operationPublished = statisticalOperationsServiceFacade.findOperationById(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
-            result = statisticalOperationsServiceFacade.publishInternallyOperation(serviceContext, action.getOperationId());
+            result = statisticalOperationsServiceFacade.republishExternallyOperation(ServiceContextHolder.getCurrentServiceContext(), action.getOperationId());
         } catch (MetamacException e) {
             throw WebExceptionUtils.createMetamacWebException(e);
         }
@@ -63,17 +60,7 @@ public class PublishInternallyOperationActionHandler extends SecurityActionHandl
             }
         }
 
-        try {
-            noticesRestInternalFacade.createNotificationForPublishInternallyOperation(serviceContext, result.getContent());
-        } catch (MetamacWebException e) {
-            return new PublishInternallyOperationResult(result.getContent(), e);
-        }
-
-        return new PublishInternallyOperationResult(result.getContent(), null);
-    }
-
-    @Override
-    public void undo(PublishInternallyOperationAction action, PublishInternallyOperationResult result, ExecutionContext context) throws ActionException {
+        return new ReSendStreamMessageOperationResult(result.getContent(), operationException);
     }
 
 }

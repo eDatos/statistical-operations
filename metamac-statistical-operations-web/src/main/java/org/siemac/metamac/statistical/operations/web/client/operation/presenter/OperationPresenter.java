@@ -47,6 +47,8 @@ import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOpe
 import org.siemac.metamac.statistical.operations.web.shared.PublishExternallyOperationResult;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationAction;
 import org.siemac.metamac.statistical.operations.web.shared.PublishInternallyOperationResult;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationAction;
+import org.siemac.metamac.statistical.operations.web.shared.ReSendStreamMessageOperationResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceAction;
 import org.siemac.metamac.statistical.operations.web.shared.SaveInstanceResult;
 import org.siemac.metamac.statistical.operations.web.shared.SaveOperationAction;
@@ -98,14 +100,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             UpdateOperationsListsHandler,
             UpdateCommonMetadataHandler {
 
-    private final DispatchAsync dispatcher;
-    private final PlaceManager placeManager;
+    private final DispatchAsync   dispatcher;
+    private final PlaceManager    placeManager;
 
-    private OperationDto operationDto;
+    private OperationDto          operationDto;
     private List<InstanceBaseDto> instanceBaseDtos;
-    private List<FamilyBaseDto> familyBaseDtos;
+    private List<FamilyBaseDto>   familyBaseDtos;
 
-    public static final Object TYPE_SetContextAreaContentToolBar = new Object();
+    public static final Object    TYPE_SetContextAreaContentToolBar = new Object();
 
     @ProxyCodeSplit
     @NameToken(NameTokens.operationPage)
@@ -136,6 +138,8 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
         HasClickHandlers getPublishOperationInternally();
 
         HasClickHandlers getPublishOperationExternally();
+
+        HasClickHandlers getReSendStreamMessageOperation();
 
         void setOperationsLists(List<SurveyTypeDto> surveyTypeDtos, List<OfficialityTypeDto> officialityTypeDtos);
 
@@ -260,6 +264,14 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
             @Override
             public void onClick(ClickEvent event) {
                 publishOperationExternally();
+            }
+        }));
+
+        registerHandler(getView().getReSendStreamMessageOperation().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                reSendStreamMessageOperation();
             }
         }));
     }
@@ -436,6 +448,22 @@ public class OperationPresenter extends Presenter<OperationPresenter.OperationVi
                     ShowMessageEvent.fireWarningMessageWithError(OperationPresenter.this, getMessages().operationExternallyPublishedWithNotificationError(), result.getNotificationException());
                 } else {
                     ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationExternallyPublished());
+                }
+            }
+        });
+    }
+
+    private void reSendStreamMessageOperation() {
+        dispatcher.execute(new ReSendStreamMessageOperationAction(operationDto.getId()), new WaitingAsyncCallbackHandlingError<ReSendStreamMessageOperationResult>(this) {
+
+            @Override
+            public void onWaitSuccess(ReSendStreamMessageOperationResult result) {
+                retrieveOperation(operationDto.getCode());
+
+                if (result.getNotificationException() != null) {
+                    ShowMessageEvent.fireWarningMessageWithError(OperationPresenter.this, getMessages().operationlifeCycleReSendStreamMessageError(), result.getNotificationException());
+                } else {
+                    ShowMessageEvent.fireSuccessMessage(OperationPresenter.this, getMessages().operationlifeCycleReSendStreamMessagePublished());
                 }
             }
         });

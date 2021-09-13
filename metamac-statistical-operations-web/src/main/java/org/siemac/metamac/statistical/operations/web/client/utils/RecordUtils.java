@@ -69,6 +69,7 @@ public class RecordUtils {
         record.setCurrentlyActive(CommonWebUtils.getBooleanValueAsString(operationBaseDto.getCurrentlyActive()));
         record.setProcStatus(CommonUtils.getProcStatusName(operationBaseDto.getProcStatus()));
         record.setStatus(CommonUtils.getStatusName(operationBaseDto.getStatus()));
+        record.setPublicationStreamStatus(operationBaseDto.getStreamMessageStatus());
         record.setOperationBaseDto(operationBaseDto);
         return record;
     }
@@ -86,9 +87,8 @@ public class RecordUtils {
         record.setUrn(instanceDto.getUrn());
         record.setTitle(getLocalisedString(instanceDto.getTitle()));
         record.setAcronym(getLocalisedString(instanceDto.getAcronym()));
-        record.setInstaceType(instanceDto.getInstanceType() != null
-                ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription())
-                : null);
+        record.setInstaceType(
+                instanceDto.getInstanceType() != null ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription()) : null);
         record.setCreatedDate(DateUtils.getFormattedDate(instanceDto.getCreatedDate()));
         record.setInternalInventoryDate(DateUtils.getFormattedDate(instanceDto.getInternalInventoryDate()));
         record.setProcStatus(CommonUtils.getProcStatusName(instanceDto.getProcStatus()));
@@ -109,9 +109,8 @@ public class RecordUtils {
         record.setUrn(instanceDto.getUrn());
         record.setTitle(getLocalisedString(instanceDto.getTitle()));
         record.setAcronym(getLocalisedString(instanceDto.getAcronym()));
-        record.setInstaceType(instanceDto.getInstanceType() != null
-                ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription())
-                : null);
+        record.setInstaceType(
+                instanceDto.getInstanceType() != null ? CommonWebUtils.getElementName(instanceDto.getInstanceType().getIdentifier(), instanceDto.getInstanceType().getDescription()) : null);
         record.setCreatedDate(DateUtils.getFormattedDate(instanceDto.getCreatedDate()));
         record.setInternalInventoryDate(DateUtils.getFormattedDate(instanceDto.getInternalInventoryDate()));
         record.setProcStatus(CommonUtils.getProcStatusName(instanceDto.getProcStatus()));

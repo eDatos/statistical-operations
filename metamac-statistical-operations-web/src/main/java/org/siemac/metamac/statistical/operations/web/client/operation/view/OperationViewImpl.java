@@ -16,6 +16,7 @@ import org.siemac.metamac.statistical.operations.core.dto.OperationDto;
 import org.siemac.metamac.statistical.operations.core.dto.SurveyTypeDto;
 import org.siemac.metamac.statistical.operations.core.enume.domain.ProcStatusEnum;
 import org.siemac.metamac.statistical.operations.core.enume.domain.StatusEnum;
+import org.siemac.metamac.statistical.operations.core.enume.domain.StreamMessageStatusEnum;
 import org.siemac.metamac.statistical.operations.web.client.OperationsWeb;
 import org.siemac.metamac.statistical.operations.web.client.constants.StatisticalOperationsWebConstants;
 import org.siemac.metamac.statistical.operations.web.client.enums.ToolStripButtonEnum;
@@ -570,7 +571,10 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ViewMultiLanguageTextItem title = new ViewMultiLanguageTextItem(OperationDS.TITLE, getConstants().operationTitle());
         ViewMultiLanguageTextItem acronym = new ViewMultiLanguageTextItem(OperationDS.ACRONYM, getConstants().operationAcronym());
         ViewTextItem urn = new ViewTextItem(OperationDS.URN, getConstants().operationUrn());
-        identifiersForm.setFields(identifier, title, acronym, urn);
+        ViewTextItem publicationStreamStatus = new ViewTextItem(OperationDS.PUBLICATION_STREAM_STATUS, getConstants().lifeCycleStatisticalResourceStreamMsgStatus());
+        publicationStreamStatus.setWidth(20);
+
+        identifiersForm.setFields(identifier, title, acronym, urn, publicationStreamStatus);
 
         // Content Classifiers
         contentClassifiersForm = new GroupDynamicForm(getConstants().operationContentClassifiers());
@@ -834,6 +838,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         identifiersForm.setValue(OperationDS.TITLE, operationDto.getTitle());
         identifiersForm.setValue(OperationDS.ACRONYM, operationDto.getAcronym());
         identifiersForm.setValue(OperationDS.URN, operationDto.getUrn());
+        identifiersForm.getItem(OperationDS.PUBLICATION_STREAM_STATUS)
+                .setIcons(StreamMessageStatusEnum.PENDING.equals(operationDto.getStreamMessageStatus()) ? null : CommonUtils.getPublicationStreamStatusIcon(operationDto.getStreamMessageStatus()));
 
         // CONTENT CLASSIFIERS
 
@@ -851,8 +857,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
                 operationDto.getSurveyType() == null ? "" : CommonWebUtils.getElementName(operationDto.getSurveyType().getIdentifier(), operationDto.getSurveyType().getDescription()));
         classForm.setValue(OperationDS.OFFICIALITY_TYPE,
                 operationDto.getOfficialityType() == null ? "" : CommonWebUtils.getElementName(operationDto.getOfficialityType().getIdentifier(), operationDto.getOfficialityType().getDescription()));
-        classForm.setValue(OperationDS.INDICATOR_SYSTEM, (operationDto.getIndicatorSystem() != null && operationDto.getIndicatorSystem()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon
-                .getConstants().no());
+        classForm.setValue(OperationDS.INDICATOR_SYSTEM,
+                (operationDto.getIndicatorSystem() != null && operationDto.getIndicatorSystem()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
 
         // PRODUCTION DESCRIPTORS
 
@@ -861,9 +867,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         ((ExternalItemListItem) productionDescriptorsForm.getItem(OperationDS.REG_CONTRIBUTOR)).setExternalItems(operationDto.getRegionalContributor());
         productionDescriptorsForm.setValue(OperationDS.CREATED_DATE, operationDto.getCreatedDate());
         productionDescriptorsForm.setValue(OperationDS.INTERNAL_INVENTORY_DATE, operationDto.getInternalInventoryDate());
-        productionDescriptorsForm.setValue(OperationDS.CURRENTLY_ACTIVE, (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive())
-                ? MetamacWebCommon.getConstants().yes()
-                : MetamacWebCommon.getConstants().no());
+        productionDescriptorsForm.setValue(OperationDS.CURRENTLY_ACTIVE,
+                (operationDto.getCurrentlyActive() != null && operationDto.getCurrentlyActive()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
         productionDescriptorsForm.setValue(OperationDS.STATUS, CommonUtils.getStatusName(operationDto.getStatus()));
         productionDescriptorsForm.setValue(OperationDS.PROC_STATUS, CommonUtils.getProcStatusName(operationDto.getProcStatus()));
 
@@ -874,9 +879,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         diffusionForm.setValue(OperationDS.COMMON_METADATA, operationDto.getCommonMetadata());
 
         diffusionForm.setValue(OperationDS.RE_POL_US_AC, operationDto.getRelPolUsAc());
-        diffusionForm.setValue(OperationDS.RELEASE_CALENDAR, (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar())
-                ? MetamacWebCommon.getConstants().yes()
-                : MetamacWebCommon.getConstants().no());
+        diffusionForm.setValue(OperationDS.RELEASE_CALENDAR,
+                (operationDto.getReleaseCalendar() != null && operationDto.getReleaseCalendar()) ? MetamacWebCommon.getConstants().yes() : MetamacWebCommon.getConstants().no());
         diffusionForm.setValue(OperationDS.RELEASE_CALENDAR_ACCESS, operationDto.getReleaseCalendarAccess());
 
         ((ExternalItemListItem) diffusionForm.getItem(OperationDS.UPDATE_FREQUENCY)).setExternalItems(operationDto.getUpdateFrequency());
@@ -1025,6 +1029,11 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
         return mainFormLayout.getPublishExternally();
     }
 
+    @Override
+    public HasClickHandlers getReSendStreamMessageOperation() {
+        return mainFormLayout.getLifeCycleReSendStreamMessage();
+    }
+
     /**
      * Select Instance in ListGrid
      * 
@@ -1080,8 +1089,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
 
     private boolean canOperationCodeBeEdited() {
         // Operation code can be edited only when ProcStatus is DRAFT
-        return (productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW) != null && ProcStatusEnum.DRAFT.toString().equals(
-                productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW)));
+        return (productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW) != null
+                && ProcStatusEnum.DRAFT.toString().equals(productionDescriptorsEditionForm.getValue(OperationDS.PROC_STATUS_VIEW)));
     }
 
     public boolean isOperationInternallyPublished() {
@@ -1107,8 +1116,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItemSchemes(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(), result
-                    .getExternalItemDtos().size(), result.getTotalResults());
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setFilterResources(result.getExternalItemDtos(), result.getFirstResult(),
@@ -1137,8 +1146,8 @@ public class OperationViewImpl extends ViewWithUiHandlers<OperationUiHandlers> i
     @Override
     public void setItems(String formItemName, ExternalItemsResult result) {
         if (StringUtils.equals(OperationDS.SUBJECT_AREA, formItemName)) {
-            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result
-                    .getExternalItemDtos().size(), result.getTotalResults());
+            ((SearchSrmItemLinkItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(),
+                    result.getExternalItemDtos().size(), result.getTotalResults());
 
         } else if (StringUtils.equals(OperationDS.SECONDARY_SUBJECT_AREAS, formItemName)) {
             ((SearchSrmListItemWithSchemeFilterItem) contentClassifiersEditionForm.getItem(formItemName)).setResources(result.getExternalItemDtos(), result.getFirstResult(), result.getTotalResults());
